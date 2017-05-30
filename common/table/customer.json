@@ -1,0 +1,32 @@
+{
+  "widgets": [
+    {
+      "label": "Customers",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "email": {
+      "search": "text"
+    },
+    "profilePic":{
+      "display": false
+    },
+    "firstName": {
+      "search": "text"
+    },
+    "lastName": {
+      "search": "text"
+    },
+    "added": {
+      "search": "date",
+      "date": true
+    }
+  }
+}

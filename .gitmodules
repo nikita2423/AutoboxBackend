@@ -1,0 +1,45 @@
+[submodule "common/plugins/aboutUs"]
+	path = common/plugins/aboutUs
+	url = https://github.com/snaphy-plugin-2/aboutus-plugin.git
+[submodule "common/plugins/automata"]
+	path = common/plugins/automata
+	url = https://github.com/snaphy-plugin-2/automata-plugin.git
+[submodule "common/plugins/cache"]
+	path = common/plugins/cache
+	url = https://github.com/snaphy-plugin-2/cachePlugin.git
+[submodule "common/plugins/dashboard"]
+	path = common/plugins/dashboard
+	url = https://github.com/snaphy-plugin-2/dashboard-plugin.git
+[submodule "common/plugins/detailView"]
+	path = common/plugins/detailView
+	url = https://github.com/snaphy-plugin-2/detailView.git
+[submodule "common/plugins/footer"]
+	path = common/plugins/footer
+	url = https://github.com/snaphy-plugin-2/footer-plugin.git
+[submodule "common/plugins/formlyTemplate"]
+	path = common/plugins/formlyTemplate
+	url = https://github.com/snaphy-plugin-2/formlyTemplate.git
+[submodule "common/plugins/jqueryValidate"]
+	path = common/plugins/jqueryValidate
+	url = https://github.com/snaphy-plugin-2/jquery-validate-plugin.git
+[submodule "common/plugins/login"]
+	path = common/plugins/login
+	url = https://github.com/snaphy-plugin-2/login-plugin.git
+[submodule "common/plugins/robustAutomata"]
+	path = common/plugins/robustAutomata
+	url = https://github.com/snaphy-plugin-2/robust-automata.git
+[submodule "common/plugins/JqueryValidate"]
+	path = common/plugins/JqueryValidate
+	url = https://github.com/snaphy-plugin-2/jquery-validate-plugin.git
+[submodule "common/plugins/socket"]
+	path = common/plugins/socket
+	url = https://github.com/snaphy-plugin-2/socket.git
+[submodule "common/plugins/email"]
+	path = common/plugins/email
+	url = https://github.com/snaphy-plugin-2/email.git
+[submodule "common/plugins/multilogin"]
+	path = common/plugins/multilogin
+	url = https://github.com/snaphy-plugin-2/multilogin-plugin.git
+[submodule "common/plugins/pushService"]
+	path = common/plugins/pushService
+	url = git@github.com:snaphy-plugin-2/pushService.git

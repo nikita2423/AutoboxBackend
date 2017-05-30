@@ -1,0 +1,20 @@
+{
+  "name": "adminEmail",
+  "base": "Email",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "staff",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

@@ -1,0 +1,13 @@
+{
+  "name": "installation",
+  "base": "Installation",
+  "properties": {
+  	"status":{
+  		"type":"string"
+  	}
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

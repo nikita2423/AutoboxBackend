@@ -1,0 +1,19 @@
+{
+  "header":{
+    "display": true
+  },
+  "container":{
+
+  },
+
+  "main":{
+    "class":[]
+  },
+  "routes":[
+    {
+      "routeExposure": "/",
+      "state": "root",
+      "activate": true
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "validationsBackend": {
+    "rules": {
+      "username": {
+        "required": true,
+        "minlength": "3"
+      },
+      "firstName": {
+        "required": true,
+        "minlength": "3"
+      },
+      "LastName": {
+        "required": true,
+        "minlength": "3"
+      },
+      "password": {
+        "required": true,
+        "minlength": "5"
+      },
+      "email": {
+        "required": true
+      }
+    },
+    "messages": {
+      "username": {
+        "required": "Username is required",
+        "minlength": "Minimum permitted length is atleast 3"
+      },
+      "password": {
+        "required": "Password is required",
+        "minlength": "Password must be of atleast 5 characters"
+      },
+      "email": {
+        "required": "Email is required."
+      },
+      "firstName": {
+        "required": "First Name is required",
+        "minlength": "Minimum permitted length is atleast 3"
+      },
+      "LastName": {
+        "required": "Last Name is required",
+        "minlength": "Minimum permitted length is atleast 3"
+      }
+    }
+  },
+  "complexValidation": {}
+}

@@ -1,0 +1,15 @@
+{
+  "name": "email",
+  "routeExposure": "/email",
+  "activate": true,
+  "mailConfig": [{
+    "emailModel": "adminEmail",
+    "emailLabel": "Send Info",
+    "label": "Send Mail To Users",
+    "from": "'Test User' <test@snaphy.com>",
+    "assosiatedUsers": ["Customer", "Employee"],
+    "templates": {
+    }
+  }],
+  "pluginDependencies": {}
+}

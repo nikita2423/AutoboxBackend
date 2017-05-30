@@ -1,0 +1,12 @@
+{
+  "js": {
+  },
+  "moduleDependencies":{},
+  "settings": ["/pushService/admin-panel-setting.js"],
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [],
+    "footerHook":[]
+  }
+}

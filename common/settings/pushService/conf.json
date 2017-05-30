@@ -1,0 +1,17 @@
+{
+  "name": "pushService",
+  "routeExposure": "/pushService",
+  "pluginDepedencies": {
+
+  },
+  "PUSH_SERVICE_ID": "UNIQUE_PUSH_SERVICE_ID",
+  "USER_ID": "snaphy",
+  "APP_NAME": "PUSH_APP_NAME",
+  "GCM_SERVER_API_KEY" : "GCM_SERVER_KEY",
+  "APPLE_SETTINGS":{
+    "apnsCertData":"",
+    "apnsKeyData": ""
+  },
+  "activate": true,
+  "services": {}
+}

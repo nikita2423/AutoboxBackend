@@ -1,0 +1,52 @@
+{
+  "tables": {
+    "username": {
+      "search": "text",
+      "onClick": {
+        "state": "dashboard",
+        "params": {
+          "username": "username"
+        }
+      }
+    },
+    "email": {
+      "search": "text"
+    },
+    "firstName": {
+      "search": "text"
+    },
+    "lastName": {
+      "search": "text"
+    },
+    "employeeDetailsId": {
+      "display": false
+    },
+    "added": {
+      "search": "date",
+      "date": true
+    }
+  },
+  "filters": {},
+  "widgets": [
+    {
+      "label": "Employee Added",
+      "icon": "si-users",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "date"
+      }
+    },
+    {
+      "label": "Employee Added Today",
+      "icon": "si-speedometer",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$today",
+        "where": {},
+        "dateProp": "date"
+      }
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "email",
+  "version": "2.0.0",
+  "dependencies": {
+  
+  },
+  "devDependencies": {
+    
+  },
+  "appPath": "client",
+  "moduleName": "email"
+}

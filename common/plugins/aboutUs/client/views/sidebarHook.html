@@ -1,0 +1,13 @@
+<ul  ng-controller="aboutUsControl" class="nav-main">
+  <!--  <li class="nav-main-heading"><span class="sidebar-mini-hide">{{companyName | uppercase}} INFO</span></li>-->
+    <li>
+        <a snaphy-load-nav class="nav-submenu"  style="cursor:pointer;"><i class="fa fa-send"></i>
+            <span class="sidebar-mini-hide">System Info</span>
+        </a>
+        <ul>
+            <li ng-repeat="info in companyInfoList">
+                <a ui-sref="{{info | lowercase}}">{{info | uppercase}}</a>
+            </li>
+        </ul>
+    </li>
+</ul>

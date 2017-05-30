@@ -1,0 +1,17 @@
+{
+    "name": "email",
+    "version": "2.0.0",
+    "main": "backend",
+    "description": "Plugin for simplyfying email sending.",
+    "author": "Robins Gupta",
+    "authorEmail": "robinskumar73@gmail.com",
+    "dependencies": {
+        "ejs": "^2.3.4"
+    },
+    "optionalDependencies": {},
+    "repository": {
+        "type": "",
+        "url": ""
+    },
+    "devDependencies": {}
+}

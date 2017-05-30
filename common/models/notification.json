@@ -1,0 +1,16 @@
+{
+  "name": "notification",
+  "base": "Notification",
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "sendMessage"
+    }
+  ],
+  "methods": {}
+}

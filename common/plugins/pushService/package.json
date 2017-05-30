@@ -1,0 +1,20 @@
+{
+  "name": "pushService",
+  "version": "2.0.0",
+  "main": "backend",
+  "description": "A plugin for adding push service",
+  "author": "Robins Gupta",
+  "authorEmail": "robinskumar73@gmail.com",
+
+  "dependencies": {
+    "loopback-component-push": "^3.0.0"
+  },
+  "optionalDependencies": {},
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "devDependencies": {
+
+  }
+}

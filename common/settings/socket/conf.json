@@ -1,0 +1,27 @@
+{
+  "name": "socket",
+  "description": "Real time data management with socket.io",
+  "routeExposure": "/socket",
+  "debug": true,
+  "onStart": {
+    "connection": {
+      "message": "A new Node is connected."
+    },
+    "disconnect": {
+      "message": "A Node has been disconnected."
+    }
+  },
+  "listen": [
+    {
+      "collection": "Customer"
+    }
+  ],
+
+  "methods":{
+    "POST":"POST",
+    "PUT": "PUT",
+    "DELETE": "DELETE"
+  },
+  "activate": true,
+  "pluginDependencies": {}
+}

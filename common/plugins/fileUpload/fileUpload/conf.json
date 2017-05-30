@@ -1,0 +1,39 @@
+{
+  "name": "fileUpload",
+  "version": "2.0.0",
+  "activate": true,
+  "routeExposure": "/fileUpload",
+  "cdn": {
+    "amazon": {
+      "container": "AMAZON_CONTAINER_NAME",
+      "keyPairId": "AMAZON_KEY_PAIR_ID",
+      "url": "CLOUD_FRONT_URL"
+    }
+  },
+  "fileDefaultModel": "AmazonImage",
+  "config": [
+    {
+      "fileModel": "AmazonImage",
+      "containerModel": "container",
+      "fileDataSource": "Image",
+      "defaultContainer": "AMAZON_CONTAINER_NAME",
+      "createInitContainer": [
+        "AMAZON_CONTAINER_NAME"
+      ],
+      "fileProp": [
+        {
+          "type": "image",
+          "size": 102400,
+          "bind": true,
+          "thumbPrefix": {
+            "thumb": {
+              "height": "122px",
+              "width": "200px"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "pluginDependencies": {}
+}

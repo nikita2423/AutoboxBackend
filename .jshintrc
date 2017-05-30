@@ -1,0 +1,11 @@
+{
+  "undef": true,
+  "unused": true,
+  "globals": {
+    "angular": false,
+    "$": false,
+    "JQuery": false,
+    "console": false,
+    "module": false
+  }
+}

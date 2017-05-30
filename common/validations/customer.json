@@ -1,0 +1,23 @@
+{
+  "validationsBackend": {
+    "rules": {
+      "firstName": {
+        "required": true,
+        "minlength": "3"
+      },
+      "email": {
+        "email":true
+      }
+    },
+    "messages": {
+      "email": {
+        "email": "Email must be valid."
+      },
+      "firstName": {
+        "required": "First Name is required",
+        "minlength": "Minimum permitted length is atleast 3"
+      }
+    }
+  },
+  "complexValidation": {}
+}
