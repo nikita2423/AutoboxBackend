@@ -83,6 +83,17 @@ Example
 3. To check log on the server in realtime `pm2 logs`
 
 
+
+7. How to update settings of plugins.
+    a. Go to `common/settings`
+    b. Each folder will corresponds to a plugin setting with same name of plugin.
+    c. Each folder will contain following files.
+        1. `admin-panel-settings.js` //Contains all settings required for front-end side of admin panel.
+        2. `conf.json` //Contains All the settings user can access from backend using `packageObj.settingName` inside `backend` folder.
+        3. `database.json` //Contains all the model necessary for the current plugin. Accessed using `databaseObj.databaseKeyName`.
+        4. `static.json`  //Contains all the static files and their assosiation link. You can also add hooks here too.
+
+
 ##How to update email brandzoomr Email
 1. Change configuration in these files
     `server/datasources.json`  
@@ -104,7 +115,7 @@ Example
                     "secure": true,
                     "port": 465,
                     "auth": {
-                      "user": "brandzoomr@snaphy.com",
+                      "user": "test@snaphy.com",
                       "pass": "123456789"
                     }
                   }
@@ -115,30 +126,13 @@ Example
 2. Open file `conf.json` in folder `settings/email/` now update the following.   
     ```
         {     
-            "from": "'Brand Zoomr' <brandzoomr@snaphy.com>"       
+            "from": "'FirstName LastName' <test@snaphy.com>"
         }
-    ```
-3. Open file `admin-panel-setting.js` in folder `settings/brand/`  
-    Here, update the `customerCare` value
-    ```
-    var settings = {
-      ...
-      "customerCare": "info@brandzoomr.com"
-    };
-    ```
-    
-3. Open file `conf.json` in folder `settings/brandLogin/` now update the following 
-    Here, update the `companyMail` value
-    ```
-    {
-      ...
-      "companyMail": "brandzoomr@snaphy.com",
-    }
     ```
 
 ###To clone the Module
 ```
-git clone --recurse-submodules git_repo_link
+git clone --recurse-submodules https://github.com/snaphy-plugin-2/demo.git
 #After go to project root folder.
 git submodule init 
 git submodule update
