@@ -84,6 +84,7 @@ Example
 
 
 
+
 7. How to update settings of plugins.
     a. Go to `common/settings`
     b. Each folder will corresponds to a plugin setting with same name of plugin.
