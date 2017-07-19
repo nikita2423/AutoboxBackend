@@ -75,5 +75,29 @@
   "push": {
     "dataSource": "push",
     "public": true
+  },
+  "Country": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "City": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Brand": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "CarModel": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Fuel": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Trim": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

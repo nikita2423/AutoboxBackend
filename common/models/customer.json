@@ -42,6 +42,7 @@
     },
     "email": {
       "type": "string",
+      "required": true,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -99,7 +100,7 @@
         }
       }
     },
-    "googleRefreshToken":{
+    "googleRefreshToken": {
       "type": "string"
     }
   },

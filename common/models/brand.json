@@ -1,0 +1,47 @@
+{
+  "name": "Brand",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true
+    },
+    "trending": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "brandNumber": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "object",
+      "required": true
+    },
+    "added": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "updated": {
+      "type": "date",
+      "defaultFn": "now"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
