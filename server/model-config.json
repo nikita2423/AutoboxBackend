@@ -99,5 +99,93 @@
   "Trim": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "GearBox": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Color": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Car": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "BreakdownCategory": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Breakdown": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "EmergencyCategory": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Emergency": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "VehicleDetail": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "CustomerMessage": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Workshop": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Showroom": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Dealer": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "ServiceBooking": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "CustomerQuote": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "QuoteReply": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Feedback": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "ServiceType": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Area": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "OldTradeCar": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Offer": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Bank": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "ServiceHistory": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

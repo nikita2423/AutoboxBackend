@@ -1,0 +1,72 @@
+{
+  "name": "Workshop",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "dealershipName": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true
+    },
+    "consultantName": {
+      "type": "string",
+      "required": true
+    },
+    "contactNumber": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "latlong": {
+      "type": "geopoint",
+      "required": true
+    },
+    "address": {
+      "type": "string",
+      "required": true
+    },
+    "landline": {
+      "type": "string"
+    },
+    "image": {
+      "type": "object",
+      "required": true
+    },
+    "timings": {
+      "type": "object",
+      "required": true
+    },
+    "managerImage": {
+      "type": "object"
+    },
+    "workshopNumber": {
+      "type": "string",
+      "required": true
+    },
+    "added": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "updated": {
+      "type": "date",
+      "defaultFn": "now"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

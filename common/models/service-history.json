@@ -1,0 +1,39 @@
+{
+  "name": "ServiceHistory",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "dateOfBooking": {
+      "type": "date",
+      "required": true
+    },
+    "mileageCompleted": {
+      "type": "number",
+      "required": true
+    },
+    "charges": {
+      "type": "number",
+      "required": true
+    },
+    "added": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "updated": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

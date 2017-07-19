@@ -1,0 +1,70 @@
+{
+  "name": "CustomerQuote",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "ownershipType": {
+      "type": "string",
+      "required": true
+    },
+    "registerCity": {
+      "type": "string",
+      "required": true
+    },
+    "isFinance": {
+      "type": "boolean",
+      "required": true
+    },
+    "isInsurance": {
+      "type": "boolean"
+    },
+    "isOldVehicleTrade": {
+      "type": "boolean",
+      "required": true
+    },
+    "quoteType": {
+      "type": "string",
+      "required": true
+    },
+    "soldViaAutobox": {
+      "type": "boolean",
+      "required": true
+    },
+    "gpsTracker": {
+      "type": "boolean",
+      "required": true
+    },
+    "dashCamera": {
+      "type": "boolean",
+      "required": true
+    },
+    "testDrive": {
+      "type": "boolean",
+      "required": true
+    },
+    "quoteNumber": {
+      "type": "string",
+      "required": true
+    },
+    "added": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "updated": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

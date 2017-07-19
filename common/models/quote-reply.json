@@ -1,0 +1,69 @@
+{
+  "name": "QuoteReply",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "exShowroomPrice": {
+      "type": "number",
+      "required": true
+    },
+    "exchaneBonus": {
+      "type": "number",
+      "required": true
+    },
+    "insurance": {
+      "type": "number"
+    },
+    "specialDiscount": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "rtoRegistration": {
+      "type": "string",
+      "required": true
+    },
+    "loyaltyBonus": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "miscCharges": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "gst": {
+      "type": "number",
+      "required": true
+    },
+    "roadPrice": {
+      "type": "number",
+      "required": true
+    },
+    "replyNumber": {
+      "type": "string",
+      "required": true
+    },
+    "added": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "updated": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

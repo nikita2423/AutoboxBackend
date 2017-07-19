@@ -1,5 +1,5 @@
 {
-  "name": "Customer",
+  "name": "Dealer",
   "base": "User",
   "idInjection": true,
   "options": {
@@ -11,65 +11,26 @@
   "properties": {
     "firstName": {
       "type": "string",
-      "required": true,
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "container": "customerBox",
-          "type": "text",
-          "label": "Enter first name",
-          "id": "CustomerFirstName",
-          "inline": true,
-          "colSize": "col-xs-6",
-          "priority": 10
-        }
-      }
+      "required": true
     },
     "lastName": {
+      "type": "string"
+    },
+    "email": {
       "type": "string",
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "container": "customerBox",
-          "type": "text",
-          "label": "Enter lastName",
-          "id": "CustomerSurName",
-          "inline": true,
-          "colSize": "col-xs-6",
-          "priority": 9
-        }
-      }
+      "required": true
     },
     "status": {
       "type": "string",
       "required": true
     },
-    "email": {
+    "contact": {
       "type": "string",
-      "required": true,
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "container": "customerBox",
-          "type": "email",
-          "label": "Enter customer email",
-          "id": "CustomerEmail",
-          "priority": 8
-        }
-      }
+      "required": true
     },
-    "username": {
+    "dealerNumber": {
       "type": "string",
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "container": "customerBox",
-          "type": "text",
-          "label": "Enter customer username",
-          "id": "CustomerUsername",
-          "priority": 8
-        }
-      }
+      "required": true
     },
     "added": {
       "type": "date",
@@ -83,40 +44,10 @@
       "type": "date",
       "required": true,
       "defaultFn": "now"
-    },
-    "registrationId": {
-      "type": "string",
-      "required": false
-    },
-    "profilePic": {
-      "type": "object",
-      "template": {
-        "type": "singleFileUpload",
-        "templateOptions": {
-          "label": "Add profile pic",
-          "containerName": "AMAZON_CONTAINER_NAME",
-          "containerModel": "Container",
-          "bind": true,
-          "fileDataSource": "Image",
-          "onImageUpdate": {
-            "deletePrevious": true
-          }
-        }
-      }
-    },
-    "googleRefreshToken": {
-      "type": "string"
     }
   },
   "validations": [],
-  "relations": {
-    "facebookAccessToken": {
-      "type": "hasMany",
-      "model": "FacebookAccessToken",
-      "foreignKey": "",
-      "onCascadeDelete": true
-    }
-  },
+  "relations": {},
   "acls": [
     {
       "accessType": "*",

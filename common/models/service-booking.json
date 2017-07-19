@@ -1,0 +1,42 @@
+{
+  "name": "ServiceBooking",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "serviceDate": {
+      "type": "date",
+      "required": true
+    },
+    "comments": {
+      "type": "string"
+    },
+    "vehiclePickup": {
+      "type": "boolean",
+      "required": true
+    },
+    "bookingNumber": {
+      "type": "string",
+      "required": true
+    },
+    "added": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "updated": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
