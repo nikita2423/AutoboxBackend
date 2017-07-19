@@ -24,7 +24,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "city": {
+      "type": "belongsTo",
+      "model": "City",
+      "foreignKey": ""
+    },
+    "country": {
+      "type": "belongsTo",
+      "model": "Country",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

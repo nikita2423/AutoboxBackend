@@ -64,7 +64,28 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "car": {
+      "type": "belongsTo",
+      "model": "Car",
+      "foreignKey": ""
+    },
+    "brand": {
+      "type": "belongsTo",
+      "model": "Brand",
+      "foreignKey": ""
+    },
+    "carModel": {
+      "type": "belongsTo",
+      "model": "CarModel",
+      "foreignKey": ""
+    },
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

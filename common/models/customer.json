@@ -115,6 +115,26 @@
       "model": "FacebookAccessToken",
       "foreignKey": "",
       "onCascadeDelete": true
+    },
+    "city": {
+      "type": "belongsTo",
+      "model": "City",
+      "foreignKey": ""
+    },
+    "country": {
+      "type": "belongsTo",
+      "model": "Country",
+      "foreignKey": ""
+    },
+    "workshop": {
+      "type": "belongsTo",
+      "model": "Workshop",
+      "foreignKey": ""
+    },
+    "colors": {
+      "type": "hasMany",
+      "model": "Color",
+      "foreignKey": ""
     }
   },
   "acls": [

@@ -47,7 +47,33 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "area": {
+      "type": "belongsTo",
+      "model": "Area",
+      "foreignKey": ""
+    },
+    "city": {
+      "type": "belongsTo",
+      "model": "City",
+      "foreignKey": ""
+    },
+    "brand": {
+      "type": "belongsTo",
+      "model": "Brand",
+      "foreignKey": ""
+    },
+    "showroom": {
+      "type": "belongsTo",
+      "model": "Showroom",
+      "foreignKey": ""
+    },
+    "workshop": {
+      "type": "belongsTo",
+      "model": "Workshop",
+      "foreignKey": ""
+    }
+  },
   "acls": [
     {
       "accessType": "*",

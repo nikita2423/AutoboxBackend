@@ -33,7 +33,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    },
+    "serviceBooking": {
+      "type": "belongsTo",
+      "model": "ServiceBooking",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

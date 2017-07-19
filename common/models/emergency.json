@@ -36,7 +36,23 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "city": {
+      "type": "belongsTo",
+      "model": "City",
+      "foreignKey": ""
+    },
+    "area": {
+      "type": "belongsTo",
+      "model": "Area",
+      "foreignKey": ""
+    },
+    "emergencyCategory": {
+      "type": "belongsTo",
+      "model": "EmergencyCategory",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

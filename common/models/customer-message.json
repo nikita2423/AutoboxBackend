@@ -39,7 +39,23 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    },
+    "dealer": {
+      "type": "belongsTo",
+      "model": "Dealer",
+      "foreignKey": ""
+    },
+    "customerQuote": {
+      "type": "belongsTo",
+      "model": "CustomerQuote",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

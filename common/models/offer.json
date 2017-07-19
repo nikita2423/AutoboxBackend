@@ -37,7 +37,28 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "city": {
+      "type": "belongsTo",
+      "model": "City",
+      "foreignKey": ""
+    },
+    "area": {
+      "type": "belongsTo",
+      "model": "Area",
+      "foreignKey": ""
+    },
+    "brand": {
+      "type": "belongsTo",
+      "model": "Brand",
+      "foreignKey": ""
+    },
+    "dealer": {
+      "type": "belongsTo",
+      "model": "Dealer",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

@@ -36,7 +36,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "serviceType": {
+      "type": "belongsTo",
+      "model": "ServiceType",
+      "foreignKey": ""
+    },
+    "workshop": {
+      "type": "belongsTo",
+      "model": "Workshop",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

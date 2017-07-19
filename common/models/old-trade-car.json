@@ -25,7 +25,28 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "city": {
+      "type": "belongsTo",
+      "model": "City",
+      "foreignKey": ""
+    },
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    },
+    "carModel": {
+      "type": "belongsTo",
+      "model": "CarModel",
+      "foreignKey": ""
+    },
+    "brand": {
+      "type": "belongsTo",
+      "model": "Brand",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }
