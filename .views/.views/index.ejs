@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<!--[if IE 9]>         <html class="ie9 no-focus"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-focus"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <title><%= title %></title>
+
+        <meta name="description" content="<%= description %>">
+        <meta name="author" content="<%= author %>">
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+
+        <!-- Icons -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="<%= staticRoute %>/assets/img/favicons/favicon.png">
+        <link rel="icon" type="image/png" href="<%= staticRoute %>/assets/img/favicons/favicon-16x16.png" sizes="16x16">
+        <link rel="icon" type="image/png" href="<%= staticRoute %>/assets/img/favicons/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="<%= staticRoute %>/assets/img/favicons/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/png" href="<%= staticRoute %>/assets/img/favicons/favicon-160x160.png" sizes="160x160">
+        <link rel="icon" type="image/png" href="<%= staticRoute %>/assets/img/favicons/favicon-192x192.png" sizes="192x192">
+
+        <link rel="apple-touch-icon" sizes="57x57" href="<%= staticRoute %>/assets/img/favicons/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="<%= staticRoute %>/assets/img/favicons/apple-touch-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="<%= staticRoute %>/assets/img/favicons/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="<%= staticRoute %>/assets/img/favicons/apple-touch-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="<%= staticRoute %>/assets/img/favicons/apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="<%= staticRoute %>/assets/img/favicons/apple-touch-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="<%= staticRoute %>/assets/img/favicons/apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="<%= staticRoute %>/assets/img/favicons/apple-touch-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="<%= staticRoute %>/assets/img/favicons/apple-touch-icon-180x180.png">
+        <!-- END Icons -->
+
+        <!-- Stylesheets -->
+        <!-- Web fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
+
+        <!-- build:css(.tmp) styles/main.css -->
+        <!-- MY STYLE PLACED HERE-->
+        <!--Now loop to get all required plugins css from the server.-->
+        <% for (var style in pluginStyles) {
+		  if (pluginStyles.hasOwnProperty(style)) { %>
+        <!-- PLUGIN CSS: MODULE CSS ID: <%= pluginStyles[style] %>-->
+		    <link rel="stylesheet"  href="<%= style %>">
+		  <%}
+		}%>
+        <!-- endbuild -->
+
+        <!-- OneUI CSS framework -->
+        <link rel="stylesheet" id="css-main" href="<%= staticRoute %>/assets/css/oneui.min.css">
+        <link rel="stylesheet" href="<%= staticRoute %>/style/snaphy.css">
+    </head>
+
+    <%
+    //Add all the global variables here..
+    //Defigning some variables..
+    var showHeader = true;
+
+
+
+    %>
+
+
+<body ng-app="<%= module %>" ng-controller="bodyCtrl" >
+        <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script><![endif]-->
+
+        <%
+          if(state === "root"){
+        %>
+            <!--Load Page Container only if `defaultTemplate` variable is true-->
+            <!-- Page Container -->
+            <div
+                    ng-if="templateEnabled()"
+                    id="page-container"
+                    snaphy-load-template
+                    ng-class="templateSettings.container.class"
+                    class="sidebar-l sidebar-o side-scroll header-navbar-fixed ">
+
+              <%
+                  //Checking for aside bar availaibility
+                if(templateSettings){
+                    if(templateSettings.asidebar){
+                        if(templateSettings.asidebar.display){
+
+              %>
+                            <!-- Side Overlay-->
+                            <aside id="side-overlay" snaphy-load-template>
+                                <!-- Side Overlay Scroll Container -->
+                                <div id="side-overlay-scroll">
+                                    <!-- Side Header -->
+                                    <div style="padding-left: 10px;" class="side-header side-content">
+                                        <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
+                                        <button class="btn btn-default pull-right" type="button" data-toggle="layout" data-action="side_overlay_close">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                        <span>
+                                            <span class="font-w600 push-10-l">ACTIVITY CONSOLE</span>
+                                        </span>
+                                    </div>
+                                    <!-- END Side Header -->
+                                    <!-- Side Content -->
+                                    <div class="side-content remove-padding-t">
+                                        <!-- ASIDEBAR HOOK -->
+                                        <% asidebarHook.forEach(function(asideLink) { %>
+                                        <!-- Custom Plugins headers.. -->
+                                        <div snaphy-load-template ng-include="'<%= asideLink %>'"></div>
+                                        <% }); %>
+                                    </div>
+                                </div>
+
+                            </aside><!-- END Side Overlay -->
+             <%
+                        }
+                    }
+                }
+             %>
+
+              <!-- Sidebar -->
+              <nav id="sidebar" snaphy-load-template >
+                <!-- Sidebar Scroll Container -->
+                <div id="sidebar-scroll" >
+                  <!-- Sidebar Content -->
+                  <!-- Adding .sidebar-mini-hide to an element will hide it when the sidebar is in mini mode -->
+                    <div class="sidebar-content">
+                        <div class="side-content">
+                            <!-- SIDEBAR HOOK -->
+                            <%
+                                sidebarHook.forEach(function(sidebarLink) {
+                            %>
+                                <!-- Custom Plugins sidebar headers.. -->
+                                <span snaphy-load-template ng-include="'<%= sidebarLink %>'"></span>
+                            <% }); %>
+                        </div><!-- END Side Content -->
+                    </div><!-- Sidebar Content -->
+                </div><!-- END Sidebar Scroll Container -->
+
+
+                </nav>
+                <!-- END Sidebar -->
+
+
+                <% include ./partials/header %>
+
+                <!-- Main Container -->
+                <main ui-view  ng-class="templateSettings.main.class" id="main-container"></main>
+                <!-- END Main Container -->
+
+                <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix" >
+                  <% include ./partials/footer %>
+                </footer>
+
+            </div> <!--End Template enabled-->
+            <!-- END Page Container -->
+
+
+            <!--ONLY load this template if the default template is not needed for-example for login plugin..-->
+            <div ui-view ng-if="!templateEnabled()">
+
+            </div>
+
+
+            <footer ng-if="!templateEnabled()">
+                <% include ./partials/footer %>
+              <!-- Login Footer -->
+              <div class="push-10-t text-center animated fadeInUp">
+                  <small class="text-muted font-w600"><span class="js-year-copy"></span> &copy; <%= module %> <%= version %> </small>
+              </div>
+            </footer>
+        <%}else{%>
+            <!--For Other routes exposure.-->
+            <div ui-view>
+
+            </div>
+        <%}%>
+
+        <!-- OneUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
+        <script src="<%= staticRoute %>/assets/js/oneui.min.js"></script>
+        <!-- Adding notifications -->
+        <script src="<%= staticRoute %>/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js"></script>
+
+
+
+        <!-- build:js(.) scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="<%= staticRoute %>/bower_components/api-check/dist/api-check.js"></script>
+        <script src="<%= staticRoute %>/bower_components/angular/angular.js"></script>
+        <script src="<%= staticRoute %>/bower_components/angular-formly/dist/formly.min.js"></script>
+        <script src="<%= staticRoute %>/bower_components/angular-animate/angular-animate.js"></script>
+        <script src="<%= staticRoute %>/bower_components/angular-messages/angular-messages.js"></script>
+        <script src="<%= staticRoute %>/bower_components/angular-resource/angular-resource.js"></script>
+        <script src="<%= staticRoute %>/bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="<%= staticRoute %>/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
+
+        <% for (var angularModules in moduleDependencies) {
+		      if (moduleDependencies.hasOwnProperty(angularModules)) { %>
+		        <!--Angular module Plugin Module Id: <%= moduleDependencies[angularModules] %>-->
+            <script src="<%= angularModules %>"></script>
+		      <%}
+        }%>
+
+        <!--Including the global script file. All global scripts file are defined in this file.-->
+        <% include ./partials/footerScripts %>
+
+        <!--Always put it below the footer script insertion-->
+        <!--ADDING THE SETTINGS FILE.-->
+        <%
+        if(clientSettings){
+          clientSettings.forEach(function(settings) {
+        %>
+            <script src="<%= settings %>"></script>
+        <%
+          });
+        }
+        %>
+
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="<%= staticRoute %>/scripts/controllers/bodyCtrl.js"></script>
+        <script src="<%= staticRoute %>/scripts/directives/templateLoad.js"></script>
+        <script src="<%= staticRoute %>/scripts/services/templateService.js"></script>
+        <script src="<%= staticRoute %>/scripts/config/config.js"></script>
+        <% for (var script in pluginScripts) {
+    		  if (pluginScripts.hasOwnProperty(script)) { %>
+    		    <!--JS PLUGIN MODULE ID: <%= pluginScripts[script] %> -->
+            <script src="<%= script %>"></script>
+    		  <%}
+    		}%>
+        <!-- endbuild -->
+    </body>
+</html>

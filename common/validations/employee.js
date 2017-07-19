@@ -25,6 +25,7 @@ module.exports = ( Employee, server, helper) => {
         if(instance.username){
             instance.username = instance.username.toLowerCase().trim();
         }
+        next();
     });
 };
 

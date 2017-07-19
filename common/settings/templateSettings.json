@@ -2,12 +2,15 @@
   "header":{
     "display": true
   },
+  "asidebar":{
+    "display": true
+  },
   "container":{
-
+    "class": []
   },
 
   "main":{
-    "class":[]
+    "class":["main-container"]
   },
   "routes":[
     {

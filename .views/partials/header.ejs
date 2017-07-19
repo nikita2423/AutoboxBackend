@@ -21,12 +21,30 @@ if(templateSettings){
             </button>
         </li>
         <li class="hidden-xs hidden-sm">
-
             <button class="btn btn-default" data-toggle="layout" data-action="sidebar_mini_toggle" type="button">
                 <i class="fa fa-ellipsis-v"></i>
             </button>
         </li>
     </ul>
+    <%
+        //Checking for aside bar availaibility
+    if(templateSettings){
+        if(templateSettings.asidebar){
+            if(templateSettings.asidebar.display){
+
+    %>
+        <ul class="nav-header pull-right">
+            <li class="hidden-xs hidden-sm">
+                <button class="btn btn-default" data-toggle="layout" data-action="side_overlay_toggle" type="button">
+                    <i class="fa fa-tasks"></i>
+                </button>
+            </li>
+        </ul>
+    <%
+            }
+        }
+    }
+    %>
     <!-- END Header Navigation Left -->
 
     <!-- HEADER HOOK -->

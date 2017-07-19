@@ -76,16 +76,40 @@
                     ng-class="templateSettings.container.class"
                     class="sidebar-l sidebar-o side-scroll header-navbar-fixed ">
 
-                <!-- Side Overlay-->
-              <aside id="side-overlay" snaphy-load-template>
-                <!-- ASIDEBAR HOOK -->
-                <% asidebarHook.forEach(function(asideLink) { %>
-                <!-- Custom Plugins headers.. -->
-                <div snaphy-load-template ng-include="'<%= asideLink %>'"></div>
-                <% }); %>
+              <%
+                  //Checking for aside bar availaibility
+                if(templateSettings){
+                    if(templateSettings.asidebar){
+                        if(templateSettings.asidebar.display){
 
-              </aside>
-              <!-- END Side Overlay -->
+              %>
+                            <!-- Side Overlay-->
+                            <aside id="side-overlay" snaphy-load-template>
+                                <!-- Side Overlay Scroll Container -->
+                                <div id="side-overlay-scroll">
+                                    <!-- Side Header -->
+                                    <div class="side-header side-content">
+                                        <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
+                                        <button class="btn btn-default pull-right" type="button" data-toggle="layout" data-action="side_overlay_close">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <!-- END Side Header -->
+                                </div>
+                                <!-- Side Content -->
+                                <div class="side-content remove-padding-t">
+                                    <!-- ASIDEBAR HOOK -->
+                                    <% asidebarHook.forEach(function(asideLink) { %>
+                                    <!-- Custom Plugins headers.. -->
+                                    <div snaphy-load-template ng-include="'<%= asideLink %>'"></div>
+                                    <% }); %>
+                                </div>
+                            </aside><!-- END Side Overlay -->
+             <%
+                        }
+                    }
+                }
+             %>
 
               <!-- Sidebar -->
               <nav id="sidebar" snaphy-load-template >

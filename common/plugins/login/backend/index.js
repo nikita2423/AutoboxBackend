@@ -18,8 +18,7 @@ module.exports = function(server, databaseObj, helper, packageObj) {
              */
             //Now adding user to the method..
             User.create(adminUserModel)
-                .then(function(err, users) {
-                    if (err) throw err;
+                .then(function(users) {
                     //Now add role..
                     addRole(Role, users);
                 })
