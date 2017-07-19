@@ -8,11 +8,29 @@
   "properties": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter name",
+          "id": "colorName"
+        }
+      }
     },
     "colorCode": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Color Code",
+          "id": "colorCode"
+        }
+      }
     },
     "status": {
       "type": "string",

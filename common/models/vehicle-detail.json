@@ -8,11 +8,29 @@
   "properties": {
     "registrationNumber": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Registration Number",
+          "id": "registration Number"
+        }
+      }
     },
     "registeredName": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Registered Name",
+          "id": "registeredName"
+        }
+      }
     },
     "added": {
       "type": "date",
@@ -32,22 +50,62 @@
     "car": {
       "type": "belongsTo",
       "model": "Car",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Car",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCar",
+        "hide": false,
+        "label": "Add Car"
+      }
     },
     "showroom": {
       "type": "belongsTo",
       "model": "Showroom",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add ShowRoom",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddShowRoom",
+        "hide": false,
+        "label": "Add ShowRoom"
+      }
     },
     "workshop": {
       "type": "belongsTo",
       "model": "Workshop",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Workshop",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddWorkshop",
+        "hide": false,
+        "label": "Add Workshop"
+      }
     },
     "customer": {
       "type": "belongsTo",
       "model": "Customer",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Customer",
+        "searchProp": "email",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCustomer",
+        "hide": false,
+        "label": "Add Customer"
+      }
     }
   },
   "acls": [],

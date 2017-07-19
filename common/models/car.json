@@ -8,7 +8,16 @@
   "properties": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter name",
+          "id": "carName"
+        }
+      }
     },
     "status": {
       "type": "string",
@@ -36,26 +45,81 @@
     "brand": {
       "type": "belongsTo",
       "model": "Brand",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Brand",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddBrand",
+        "hide": false,
+        "label": "Add Brand"
+      }
     },
     "carModel": {
       "type": "belongsTo",
       "model": "CarModel",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Car Model",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCarModel",
+        "hide": false,
+        "label": "Add Car Model"
+      }
     },
     "fuel": {
       "type": "belongsTo",
       "model": "Fuel",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Fuel",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddFuel",
+        "hide": false,
+        "label": "Add Fuel"
+      }
     },
     "trim": {
       "type": "belongsTo",
       "model": "Trim",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Trim",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddTrim",
+        "hide": false,
+        "label": "Add Trim"
+      }
     },
     "gearBox": {
       "type": "belongsTo",
       "model": "GearBox",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add GearBox",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddGearBox",
+        "hide": false,
+        "label": "Add GearBox"
+      }
+    },
+    "colors": {
+      "type": "hasMany",
+      "model": "Color",
       "foreignKey": ""
     }
   },

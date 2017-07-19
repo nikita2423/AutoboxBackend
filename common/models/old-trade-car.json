@@ -8,7 +8,16 @@
   "properties": {
     "registeredCity": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Registered City",
+          "id": "registeredCity"
+        }
+      }
     },
     "added": {
       "type": "date",
@@ -29,22 +38,62 @@
     "city": {
       "type": "belongsTo",
       "model": "City",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add City",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCity",
+        "hide": false,
+        "label": "Add City"
+      }
     },
     "customer": {
       "type": "belongsTo",
       "model": "Customer",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Customer",
+        "searchProp": "email",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCustomer",
+        "hide": false,
+        "label": "Add Customer"
+      }
     },
     "carModel": {
       "type": "belongsTo",
       "model": "CarModel",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Car Model",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddModel",
+        "hide": false,
+        "label": "Add Car Model"
+      }
     },
     "brand": {
       "type": "belongsTo",
       "model": "Brand",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Brand",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddBrand",
+        "hide": false,
+        "label": "Add Brand"
+      }
     }
   },
   "acls": [],

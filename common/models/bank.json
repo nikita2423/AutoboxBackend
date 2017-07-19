@@ -8,15 +8,42 @@
   "properties": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter name",
+          "id": "bankName"
+        }
+      }
     },
     "branchName": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Branch Name",
+          "id": "branchName"
+        }
+      }
     },
     "ifscCode": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter IFSC Code",
+          "id": "ifscCode"
+        }
+      }
     },
     "added": {
       "type": "date",
@@ -37,7 +64,17 @@
     "area": {
       "type": "belongsTo",
       "model": "Area",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Area",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddArea",
+        "hide": false,
+        "label": "Add Area"
+      }
     }
   },
   "acls": [],

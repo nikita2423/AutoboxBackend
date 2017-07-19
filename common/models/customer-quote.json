@@ -12,18 +12,54 @@
     },
     "registerCity": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Register City",
+          "id": "registerCity"
+        }
+      }
     },
     "isFinance": {
       "type": "boolean",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "boolean",
+          "priority": 3,
+          "label": "Finance",
+          "id": "finance"
+        }
+      }
     },
     "isInsurance": {
-      "type": "boolean"
+      "type": "boolean",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "boolean",
+          "priority": 3,
+          "label": "Insurance",
+          "id": "insurance"
+        }
+      }
     },
     "isOldVehicleTrade": {
       "type": "boolean",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "boolean",
+          "priority": 3,
+          "label": "Old Vehicle Trade",
+          "id": "oldVehicleTrade"
+        }
+      }
     },
     "quoteType": {
       "type": "string",
@@ -68,22 +104,62 @@
     "car": {
       "type": "belongsTo",
       "model": "Car",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Car",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCar",
+        "hide": false,
+        "label": "Add Car"
+      }
     },
     "brand": {
       "type": "belongsTo",
       "model": "Brand",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Old Trade Car Brand",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddBrand",
+        "hide": false,
+        "label": "Add Old Trade Car Brand"
+      }
     },
     "carModel": {
       "type": "belongsTo",
       "model": "CarModel",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Old Trade Car Model",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCarModel",
+        "hide": false,
+        "label": "Add Old Trade Car Model"
+      }
     },
     "customer": {
       "type": "belongsTo",
       "model": "Customer",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Customer",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCustomer",
+        "hide": false,
+        "label": "Add Customer"
+      }
     }
   },
   "acls": [],

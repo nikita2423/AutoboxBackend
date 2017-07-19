@@ -8,7 +8,16 @@
   "properties": {
     "dealershipName": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "DealerShip Name",
+          "id": "dealershipName"
+        }
+      }
     },
     "status": {
       "type": "string",
@@ -16,37 +25,133 @@
     },
     "consultantName": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Consultant Name",
+          "id": "consultantName"
+        }
+      }
     },
     "contactNumber": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Contact",
+          "id": "contact"
+        }
+      }
     },
     "email": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "email",
+          "priority": 3,
+          "label": "Email",
+          "id": "email"
+        }
+      }
     },
     "latlong": {
       "type": "geopoint",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "type": "input",
+              "key": "lat",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter latitude",
+                "id": "latitude"
+              }
+            },
+            {
+              "type": "input",
+              "key": "lng",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter longitude",
+                "id": "longitude"
+              }
+            }
+          ]
+        }
+      }
     },
     "address": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Address",
+          "id": "address"
+        }
+      }
     },
     "landline": {
-      "type": "string"
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Landline",
+          "id": ";landline"
+        }
+      }
     },
     "image": {
       "type": "object",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "singleFileUpload",
+        "templateOptions": {
+          "label": "Add Workshop Image",
+          "containerName": "AMAZON_CONTAINER_NAME",
+          "containerModel": "Container",
+          "bind": true,
+          "fileDataSource": "Image",
+          "onImageUpdate": {
+            "deletePrevious": true
+          }
+        }
+      }
     },
     "timings": {
       "type": "object",
       "required": true
     },
     "managerImage": {
-      "type": "object"
+      "type": "object",
+      "template": {
+        "type": "singleFileUpload",
+        "templateOptions": {
+          "label": "Add Manager Image",
+          "containerName": "AMAZON_CONTAINER_NAME",
+          "containerModel": "Container",
+          "bind": true,
+          "fileDataSource": "Image",
+          "onImageUpdate": {
+            "deletePrevious": true
+          }
+        }
+      }
     },
     "workshopNumber": {
       "type": "string",
@@ -70,7 +175,17 @@
     "area": {
       "type": "belongsTo",
       "model": "Area",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Area",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddArea",
+        "hide": false,
+        "label": "Add Area"
+      }
     }
   },
   "acls": [],

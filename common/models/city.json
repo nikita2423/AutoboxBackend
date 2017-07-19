@@ -8,7 +8,16 @@
   "properties": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter name",
+          "id": "cityName"
+        }
+      }
     },
     "status": {
       "type": "string",
@@ -32,7 +41,17 @@
     "country": {
       "type": "belongsTo",
       "model": "Country",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Country",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCountry",
+        "hide": false,
+        "label": "Add Country"
+      }
     }
   },
   "acls": [],

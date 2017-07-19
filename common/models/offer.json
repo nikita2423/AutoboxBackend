@@ -8,11 +8,29 @@
   "properties": {
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter title",
+          "id": "offerTitle"
+        }
+      }
     },
     "description": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter description",
+          "id": "offerDescription"
+        }
+      }
     },
     "status": {
       "type": "string",
@@ -20,7 +38,16 @@
     },
     "expiredOn": {
       "type": "date",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "date",
+          "priority": 3,
+          "label": "Enter Date of Expiry",
+          "id": "dateOfExpiry"
+        }
+      }
     },
     "added": {
       "type": "date",
@@ -41,22 +68,62 @@
     "city": {
       "type": "belongsTo",
       "model": "City",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add City",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCity",
+        "hide": false,
+        "label": "Add City"
+      }
     },
     "area": {
       "type": "belongsTo",
       "model": "Area",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Area",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddArea",
+        "hide": false,
+        "label": "Add Area"
+      }
     },
     "brand": {
       "type": "belongsTo",
       "model": "Brand",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Brand",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddBrand",
+        "hide": false,
+        "label": "Add Brand"
+      }
     },
     "dealer": {
       "type": "belongsTo",
       "model": "Dealer",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Dealer",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddDealer",
+        "hide": false,
+        "label": "Add Dealer"
+      }
     }
   },
   "acls": [],

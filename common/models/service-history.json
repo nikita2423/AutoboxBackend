@@ -8,15 +8,42 @@
   "properties": {
     "dateOfBooking": {
       "type": "date",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "date",
+          "priority": 3,
+          "label": "Enter Service Date",
+          "id": "serviceDate"
+        }
+      }
     },
     "mileageCompleted": {
       "type": "number",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "number",
+          "priority": 3,
+          "label": "Mileage Completed",
+          "id": "mileageCompleted"
+        }
+      }
     },
     "charges": {
       "type": "number",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "number",
+          "priority": 3,
+          "label": "Charges",
+          "id": "charges"
+        }
+      }
     },
     "added": {
       "type": "date",
@@ -37,12 +64,17 @@
     "customer": {
       "type": "belongsTo",
       "model": "Customer",
-      "foreignKey": ""
-    },
-    "serviceBooking": {
-      "type": "belongsTo",
-      "model": "ServiceBooking",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Customer",
+        "searchProp": "email",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCustomer",
+        "hide": false,
+        "label": "Add Customer"
+      }
     }
   },
   "acls": [],

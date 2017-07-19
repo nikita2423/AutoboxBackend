@@ -11,14 +11,41 @@
   "properties": {
     "firstName": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter First Name",
+          "id": "firstName"
+        }
+      }
     },
     "lastName": {
-      "type": "string"
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Last Name",
+          "id": "lastName"
+        }
+      }
     },
     "email": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "email",
+          "label": "Enter Dealer email",
+          "id": "dealerEmail",
+          "priority": 8
+        }
+      }
     },
     "status": {
       "type": "string",
@@ -26,7 +53,16 @@
     },
     "contact": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "label": "Enter Contact Number",
+          "id": "dealerContact",
+          "priority": 8
+        }
+      }
     },
     "dealerNumber": {
       "type": "string",
@@ -51,27 +87,77 @@
     "area": {
       "type": "belongsTo",
       "model": "Area",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Area",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddArea",
+        "hide": false,
+        "label": "Add Area"
+      }
     },
     "city": {
       "type": "belongsTo",
       "model": "City",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add City",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCity",
+        "hide": false,
+        "label": "Add City"
+      }
     },
     "brand": {
       "type": "belongsTo",
       "model": "Brand",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Brand",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddBrand",
+        "hide": false,
+        "label": "Add Brand"
+      }
     },
     "showroom": {
       "type": "belongsTo",
       "model": "Showroom",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Showroom",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddShowroom",
+        "hide": false,
+        "label": "Add Showroom"
+      }
     },
     "workshop": {
       "type": "belongsTo",
       "model": "Workshop",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Workshop",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddWorkshop",
+        "hide": false,
+        "label": "Add Workshop"
+      }
     }
   },
   "acls": [

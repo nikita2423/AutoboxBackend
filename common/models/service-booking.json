@@ -8,14 +8,41 @@
   "properties": {
     "serviceDate": {
       "type": "date",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "date",
+          "priority": 3,
+          "label": "Enter Service Date",
+          "id": "serviceDate"
+        }
+      }
     },
     "comments": {
-      "type": "string"
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Comment",
+          "id": "comments"
+        }
+      }
     },
     "vehiclePickup": {
       "type": "boolean",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "boolean",
+          "priority": 3,
+          "label": "Vehicle Pick Up",
+          "id": "vehiclePickUp"
+        }
+      }
     },
     "bookingNumber": {
       "type": "string",
@@ -40,12 +67,32 @@
     "serviceType": {
       "type": "belongsTo",
       "model": "ServiceType",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Service Type",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddServiceType",
+        "hide": false,
+        "label": "Add Service Type"
+      }
     },
     "workshop": {
       "type": "belongsTo",
       "model": "Workshop",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Workshop",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddWorkshop",
+        "hide": false,
+        "label": "Add Workshop"
+      }
     }
   },
   "acls": [],

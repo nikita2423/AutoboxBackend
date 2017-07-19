@@ -119,22 +119,47 @@
     "city": {
       "type": "belongsTo",
       "model": "City",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add City",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCity",
+        "hide": false,
+        "label": "Add City"
+      }
     },
     "country": {
       "type": "belongsTo",
       "model": "Country",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Country",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCountry",
+        "hide": false,
+        "label": "Add Country"
+      }
     },
     "workshop": {
       "type": "belongsTo",
       "model": "Workshop",
-      "foreignKey": ""
-    },
-    "colors": {
-      "type": "hasMany",
-      "model": "Color",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Workshop",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddWorkshop",
+        "hide": false,
+        "label": "Add Workshop"
+      }
     }
   },
   "acls": [
