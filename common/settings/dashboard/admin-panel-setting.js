@@ -5,7 +5,7 @@
 /*jslint browser: true*/
 var settings = {
   "homeState" : "dashboard",
-  "companyName" : "Snaphy",
+  "companyName" : "AutoBox",
   "loginEnabled": true
 };
 

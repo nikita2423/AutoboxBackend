@@ -1,0 +1,19 @@
+{
+  "css": {
+    "/autobox/style/autobox.css": "autoboxCss"
+  },
+  "js": {
+    "/autobox/scripts/routes/autobox.js": "autoboxRoute",
+    "/autobox/scripts/controllers/autobox.js": "autoboxController"
+  },
+  "moduleDependencies":{
+
+  },
+  "settings": ["/autobox/admin-panel-setting.js"],
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [],
+    "footerHook":[]
+  }
+}

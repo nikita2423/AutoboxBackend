@@ -11,7 +11,35 @@ var settings = {
   "routePrefixName" : "data",
   loadDatabases: [
       "Employee",
-      "Customer"
+      "Customer",
+      "Area",
+      "Bank",
+      "Brand",
+      "Breakdown",
+      "BreakdownCategory",
+      "Car",
+      "CarModel",
+      "City",
+      "Color",
+      "Country",
+      "CustomerMessage",
+      "CustomerQuote",
+      "Dealer",
+      "Emergency",
+      "EmergencyCategory",
+      "Feedback",
+      "Fuel",
+      "GearBox",
+      "Offer",
+      "OldTradeCar",
+      "QuoteReply",
+      "ServiceBooking",
+      "ServiceHistory",
+      "ServiceType",
+      "Showroom",
+      "Trim",
+      "VehicleDetail",
+      "Workshop"
   ]
 };
 

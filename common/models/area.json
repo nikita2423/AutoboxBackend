@@ -7,7 +7,16 @@
   },
   "properties": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 2,
+          "label": "Enter name",
+          "id": "areaName"
+        }
+      }
     },
     "added": {
       "type": "date",
@@ -28,12 +37,32 @@
     "city": {
       "type": "belongsTo",
       "model": "City",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add City",
+        "searchProp": "name",
+        "priority": 11,
+        "search": true,
+        "create": false,
+        "id": "AddCity",
+        "hide": false,
+        "label": "Add City"
+      }
     },
     "country": {
       "type": "belongsTo",
       "model": "Country",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Country",
+        "searchProp": "name",
+        "priority": 11,
+        "search": true,
+        "create": false,
+        "id": "AddCountry",
+        "hide": false,
+        "label": "Add Country"
+      }
     }
   },
   "acls": [],

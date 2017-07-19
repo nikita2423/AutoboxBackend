@@ -1,0 +1,7 @@
+{
+  "name": "autobox",
+  "description": "Plugin to handle all autobox logic",
+  "routeExposure": "/autobox",
+  "activate": true,
+  "pluginDependencies": {}
+}
