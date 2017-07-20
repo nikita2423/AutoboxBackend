@@ -21,7 +21,20 @@
     },
     "status": {
       "type": "string",
-      "required": true
+      "required": true,
+      "default": "active",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Status of GearBox",
+          "id": "gearboxStatus",
+          "priority": 6,
+          "options": [
+            "active",
+            "inactive"
+          ]
+        }
+      }
     },
     "gearboxNumber": {
       "type": "string",

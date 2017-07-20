@@ -1,0 +1,59 @@
+{
+  "validationsBackend": {
+    "rules": {
+      "name": {
+        "required": true,
+        "minlength": "2",
+        "maxlength": "500"
+      },
+      "latlong": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "contactNumber": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "city": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "area": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "emergencyCategory": {
+        "required": true,
+        "valueNotEquals": ""
+      }
+    },
+    "messages": {
+      "name": {
+        "required": "Area Name is required",
+        "minlength": "Length should be atleast 2",
+        "maxlength": "Length can't exceed 500"
+      },
+      "latlong": {
+        "required": "Latlong is required",
+        "valueNotEquals": "LatLong can't be blank"
+      },
+      "contactNumber": {
+        "required": "Contact is required",
+        "valueNotEquals": "Contact can't be blank"
+      },
+      "city": {
+        "required": "City is required",
+        "valueNotEquals": "City can't be blank"
+      },
+      "area": {
+        "required": "Area is required",
+        "valueNotEquals": "Area can't be blank"
+      },
+      "emergencyCategory": {
+        "required": "Emergency Category is required",
+        "valueNotEquals": "Emergency category can't be blank"
+      }
+    }
+  },
+  "complexValidation": {}
+}

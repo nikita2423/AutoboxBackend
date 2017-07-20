@@ -21,7 +21,20 @@
     },
     "status": {
       "type": "string",
-      "required": true
+      "required": true,
+      "default": "active",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Status of Showroom",
+          "id": "showroomStatus",
+          "priority": 6,
+          "options": [
+            "active",
+            "inactive"
+          ]
+        }
+      }
     },
     "salesConsultantName": {
       "type": "string",

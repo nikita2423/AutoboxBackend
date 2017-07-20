@@ -34,7 +34,20 @@
     },
     "status": {
       "type": "string",
-      "required": true
+      "required": true,
+      "default": "active",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Status of Offer",
+          "id": "offerStatus",
+          "priority": 6,
+          "options": [
+            "active",
+            "inactive"
+          ]
+        }
+      }
     },
     "expiredOn": {
       "type": "date",

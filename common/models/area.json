@@ -8,6 +8,7 @@
   "properties": {
     "name": {
       "type": "string",
+      "required": true,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -15,6 +16,19 @@
           "priority": 3,
           "label": "Enter name",
           "id": "areaName"
+        }
+      }
+    },
+    "pincode": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Pincode",
+          "id": "pincode"
         }
       }
     },

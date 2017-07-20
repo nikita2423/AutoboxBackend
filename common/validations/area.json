@@ -1,0 +1,35 @@
+{
+  "validationsBackend": {
+    "rules": {
+      "name": {
+        "required": true,
+        "minlength": "2",
+        "maxlength": "500"
+      },
+      "city": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "country": {
+        "required": true,
+        "valueNotEquals": ""
+      }
+    },
+    "messages": {
+      "name": {
+        "required": "Area Name is required",
+        "minlength": "Length should be atleast 2",
+        "maxlength": "Length can't exceed 500"
+      },
+      "city": {
+        "required": "City is required",
+        "valueNotEquals": "City can't be blank"
+      },
+      "country": {
+        "required": "Country is required",
+        "valueNotEquals": "Country can't be blank"
+      }
+    }
+  },
+  "complexValidation": {}
+}

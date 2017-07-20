@@ -1,0 +1,67 @@
+{
+  "validationsBackend": {
+    "rules": {
+      "name": {
+        "required": true,
+        "minlength": "2",
+        "maxlength": "500"
+      },
+      "contactNumber": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "latlong": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "area": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "brand": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "breakdownCategory": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "city": {
+        "required": true,
+        "valueNotEquals": ""
+      }
+    },
+    "messages": {
+      "name": {
+        "required": "Breakdown Name is required",
+        "minlength": "Length should be atleast 2",
+        "maxlength": "Length can't exceed 500"
+      },
+      "contactNumber": {
+        "required": "Contact is required",
+        "valueNotEquals": "Contact can't be blank"
+      },
+      "latlong": {
+        "required": "Latlong is required",
+        "valueNotEquals": "LatLong can't be blank"
+      },
+      "area": {
+        "required": "Area is required",
+        " valueNotEquals": "Area can't be blank"
+      },
+      "brand": {
+        "required": "Brand is required",
+        "valueNotEquals": "Brand can't be blank"
+      },
+      "breakdownCategory": {
+        "required": "Breakdown Category is required",
+        "valueNotEquals": "Breakdown Category can't be blank"
+      },
+      "city": {
+        "required": "City is required",
+        "valueNotEquals": "City can't be blank"
+      }
+    }
+  },
+  "complexValidation": {}
+}

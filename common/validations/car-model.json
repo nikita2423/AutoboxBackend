@@ -1,0 +1,19 @@
+{
+  "validationsBackend": {
+    "rules": {
+      "name": {
+        "required": true,
+        "minlength": "2",
+        "maxlength": "200"
+      }
+    },
+    "messages": {
+      "name": {
+        "required": "Model Name is required",
+        "minlength": "Length should be atleast 2",
+        "maxlength": "Length can't exceed 200"
+      }
+    }
+  },
+  "complexValidation": {}
+}
