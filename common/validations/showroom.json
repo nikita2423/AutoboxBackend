@@ -1,0 +1,63 @@
+{
+  "validationsBackend": {
+    "rules": {
+      "name": {
+        "required": true,
+        "minlength": "2",
+        "maxlength": "500"
+      },
+      "salesConsultantName": {
+        "required": true,
+        "minlength": "3",
+        "maxlength": "200"
+      },
+      "contactNumber": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "email": {
+        "required": true,
+        "email": true
+      },
+      "address": {
+        "required": true,
+        "minlength":3,
+        "maxlength":500
+      },
+      "area": {
+        "required": true,
+        "valueNotEquals": ""
+      }
+    },
+    "messages": {
+      "name": {
+        "required": "Name is required",
+        "minlength": "Length should be atleast 2",
+        "maxlength": "Length can't exceed 200"
+      },
+      "salesConsultantName": {
+        "required": "Sales Consultant Name is required",
+        "minlength": "Length should be atleast 3",
+        "maxlength": "Length can't exceed 200"
+      },
+      "contactNumber": {
+        "required": "Contact Number is required",
+        "valueNotEquals": "Contact can't be empty"
+      },
+      "email": {
+        "required": "Email is required",
+        "email": "Enter valid email address"
+      },
+      "address": {
+        "required": "Address is required",
+        "minlength": "Length should be atleast 3",
+        "maxlength": "Length can't exceed 500"
+      },
+      "area": {
+        "required": "Contact Number is required",
+        "valueNotEquals": "Area can't be empty"
+      }
+    }
+  },
+  "complexValidation": {}
+}

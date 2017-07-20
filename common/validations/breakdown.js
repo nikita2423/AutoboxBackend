@@ -31,8 +31,9 @@ module.exports = (Breakdown, server, helper) =>
             }
         }
 
-
-
+        if(!instance.latlong){
+            return next(new Error("latlong is required"));
+        }
 
         if(!instance.areaId){
             return next(new Error("Area is required"));

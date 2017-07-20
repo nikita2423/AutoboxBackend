@@ -1,0 +1,27 @@
+{
+  "validationsBackend": {
+    "rules": {
+      "name": {
+        "required": true,
+        "minlength": "2",
+        "maxlength": "200"
+      },
+      "colorCode": {
+        "required": true,
+        "valueNotEquals": ""
+      }
+    },
+    "messages": {
+      "name": {
+        "required": "Name is required",
+        "minlength": "Length should be atleast 2",
+        "maxlength": "Length can't exceed 200"
+      },
+      "colorCode": {
+        "required": "Color Code is required",
+        "valueNotEquals": "Color Code can't be empty"
+      }
+    }
+  },
+  "complexValidation": {}
+}

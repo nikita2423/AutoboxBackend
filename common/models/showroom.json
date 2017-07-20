@@ -120,7 +120,6 @@
     },
     "landline": {
       "type": "string",
-      "required": true,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -161,6 +160,35 @@
           "onImageUpdate": {
             "deletePrevious": true
           }
+        }
+      }
+    },
+    "timings": {
+      "type": "object",
+      "required": true,
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "type": "input",
+              "key": "opening",
+              "templateOptions": {
+                "type": "time",
+                "label": "Opening Timing",
+                "id": "opening"
+              }
+            },
+            {
+              "type": "input",
+              "key": "closing",
+              "templateOptions": {
+                "type": "time",
+                "label": "Closing Timing",
+                "id": "closing"
+              }
+            }
+          ]
         }
       }
     },

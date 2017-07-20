@@ -32,7 +32,7 @@
         }
       }
     },
-    "latLong": {
+    "latlong": {
       "type": "geopoint",
       "required": true,
       "template": {
