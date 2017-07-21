@@ -8,62 +8,46 @@
   "properties": {
     "ownershipType": {
       "type": "string",
-      "required": true
-    },
-    "registerCity": {
-      "type": "string",
       "required": true,
       "template": {
-        "type": "input",
+        "type": "selectString",
         "templateOptions": {
-          "type": "text",
-          "priority": 3,
-          "label": "Enter Register City",
-          "id": "registerCity"
+          "label": "OwnershipType",
+          "id": "ownershipType",
+          "priority": 6,
+          "options": [
+            "individual",
+            "corporate"
+          ]
         }
       }
     },
     "isFinance": {
       "type": "boolean",
-      "required": true,
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "boolean",
-          "priority": 3,
-          "label": "Finance",
-          "id": "finance"
-        }
-      }
+      "required": true
     },
     "isInsurance": {
-      "type": "boolean",
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "boolean",
-          "priority": 3,
-          "label": "Insurance",
-          "id": "insurance"
-        }
-      }
+      "type": "boolean"
     },
     "isOldVehicleTrade": {
       "type": "boolean",
-      "required": true,
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "boolean",
-          "priority": 3,
-          "label": "Old Vehicle Trade",
-          "id": "oldVehicleTrade"
-        }
-      }
+      "required": true
     },
     "quoteType": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Quote Type",
+          "id": "quotetype",
+          "priority": 6,
+          "options": [
+            "q",
+            "t"
+          ]
+        }
+      }
     },
     "soldViaAutobox": {
       "type": "boolean",
@@ -159,6 +143,21 @@
         "id": "AddCustomer",
         "hide": false,
         "label": "Add Customer"
+      }
+    },
+    "city": {
+      "type": "belongsTo",
+      "model": "City",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Register City",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "registercity",
+        "hide": false,
+        "label": "Add Register City"
       }
     }
   },

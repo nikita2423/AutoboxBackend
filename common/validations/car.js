@@ -4,13 +4,6 @@
 module.exports = (Car, server, helper) =>
 {
     Car.validatesUniquenessOf('carNumber');
-    const {
-        isLength,
-        trim,
-        isEmail,
-        normalizeEmail
-    } = require('validator');
-    const _ = require('lodash');
     const {validate} = require("../helper/usefullMethods");
     const STATUS = ["active", "inactive"];
 

@@ -1,0 +1,38 @@
+{
+  "validationsBackend": {
+    "rules": {
+      "title": {
+        "required": true,
+        "minlength": "3",
+        "maxlength": "500"
+      },
+      "description": {
+        "required": true,
+        "minlength": "3",
+        "maxlength": "100"
+      },
+      "expiredOn": {
+        "required": true,
+        "valueNotEquals": ""
+      }
+    },
+    "messages": {
+      "title": {
+        "required": "Title is required",
+        "minlength": "Minimum length permitted is 3",
+        "maxlength": "Maximum length permitted is 500"
+      },
+      "subject": {
+        "required": "Description is required",
+        "minlength": "Minimum length permitted is 3",
+        "maxlength": "Maximum length permitted is 1000"
+      },
+      "expiredOn": {
+        "required": "Expiry Date is required",
+        "valueNotEquals": "Expiry Date can't be blank"
+      }
+
+    }
+  },
+  "complexValidation": {}
+}

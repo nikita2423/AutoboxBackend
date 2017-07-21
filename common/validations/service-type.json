@@ -1,0 +1,20 @@
+{
+  "validationsBackend": {
+    "rules": {
+      "name": {
+        "required": true,
+        "minlength": "3",
+        "maxlength": "200"
+      }
+    },
+    "messages": {
+      "name": {
+        "required": "Title is required",
+        "minlength": "Minimum length permitted is 3",
+        "maxlength": "Maximum length permitted is 200"
+      }
+
+    }
+  },
+  "complexValidation": {}
+}

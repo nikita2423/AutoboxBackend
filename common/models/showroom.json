@@ -107,7 +107,6 @@
     "address": {
       "type": "string",
       "required": true,
-      "required": true,
       "template": {
         "type": "input",
         "templateOptions": {

@@ -1,0 +1,68 @@
+{
+  "validationsBackend": {
+    "rules": {
+      "exShowroomPrice": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "exchangeBonus": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "rtoRegistration": {
+        "required": true,
+        "minlength": "3",
+        "maxlength": "100"
+      },
+      "gst": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "roadPrice": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "customerQuote": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "dealer": {
+        "required": true,
+        "valueNotEquals": ""
+      }
+    },
+    "messages": {
+      "exShowroomPrice": {
+        "required": "ExShowroom Price is required",
+        "valueNotEquals": "ExShowroom Price can't be blank"
+      },
+      "exchangeBonus": {
+        "required": "Exchange Bonus is required",
+        "valueNotEquals": "Exchange Bonus can't be blank"
+      },
+      "rtoRegistration": {
+        "required": "RTO Registration is required",
+        "minlength": "Minimum length permitted is 3",
+        "maxlength": "Maximum length permitted is 100"
+      },
+      "gst": {
+        "required": "GST is required",
+        "valueNotEquals": "GST can't be blank"
+      },
+      "roadPrice": {
+        "required": "GST is required",
+        "valueNotEquals": "Road Price can't be blank"
+      },
+      "customerQuote": {
+        "required": "GST is required",
+        "valueNotEquals": "GST can't be blank"
+      },
+      "dealer": {
+        "required": "Dealer is required",
+        "valueNotEquals": "Dealer can't be blank"
+      }
+
+    }
+  },
+  "complexValidation": {}
+}

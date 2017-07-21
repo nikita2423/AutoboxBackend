@@ -7,17 +7,7 @@
   },
   "properties": {
     "registeredCity": {
-      "type": "string",
-      "required": true,
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "text",
-          "priority": 3,
-          "label": "Enter Registered City",
-          "id": "registeredCity"
-        }
-      }
+      "type": "string"
     },
     "added": {
       "type": "date",
@@ -40,14 +30,14 @@
       "model": "City",
       "foreignKey": "",
       "templateOptions": {
-        "btnText": "Add City",
+        "btnText": "Add Register City",
         "searchProp": "name",
         "priority": 2,
         "search": true,
         "create": false,
         "id": "AddCity",
         "hide": false,
-        "label": "Add City"
+        "label": "Add Register City"
       }
     },
     "customer": {
