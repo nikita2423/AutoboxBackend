@@ -35,7 +35,7 @@ const validate = function(instance, currentInstance, prop){
     if(instance[prop] === undefined){
         if(currentInstance){
             if(!currentInstance[prop]){
-                return false
+                return false;
             }
         }else{
             return false;

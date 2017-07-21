@@ -4,7 +4,8 @@
 module.exports = (Color, server, helper) =>
 {
     Color.validatesUniquenessOf('name');
-    Color.validatesUniquenessOf('colorCode');
+    //Color.validatesUniquenessOf('colorCode');
+    const {validate} = require("../helper/usefullMethods");
     const {
         isLength,
         trim
@@ -32,9 +33,10 @@ module.exports = (Color, server, helper) =>
             }
         }
 
-        if(!instance.colorCode){
+        if(!validate(instance, currentInstance, 'colorCode')){
             return next(new Error("Color Code is required"));
         }
+
 
         if(instance.status){
             instance.status = instance.status.toString().toLowerCase().trim();

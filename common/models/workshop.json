@@ -148,7 +148,32 @@
     },
     "timings": {
       "type": "object",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "type": "input",
+              "key": "opening",
+              "templateOptions": {
+                "type": "time",
+                "label": "Opening Timing",
+                "id": "opening"
+              }
+            },
+            {
+              "type": "input",
+              "key": "closing",
+              "templateOptions": {
+                "type": "time",
+                "label": "Closing Timing",
+                "id": "closing"
+              }
+            }
+          ]
+        }
+      }
     },
     "managerImage": {
       "type": "object",

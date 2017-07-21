@@ -30,18 +30,54 @@
         }
       }
     },
-    "type": {
-      "type": "string",
-      "required": true
-    },
     "userType": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Type of user",
+          "id": "userType",
+          "priority": 6,
+          "options": [
+            "dealer",
+            "customer"
+          ]
+        }
+      }
+    },
+    "type": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Message Type",
+          "id": "type",
+          "priority": 6,
+          "options": [
+            "call",
+            "message"
+          ]
+        }
+      }
     },
     "status": {
       "type": "string",
       "required": true,
-      "default": "pending"
+      "default": "pending",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Contact Status",
+          "id": "status",
+          "priority": 6,
+          "options": [
+            "pending",
+            "contacted"
+          ]
+        }
+      }
     },
     "added": {
       "type": "date",
@@ -69,6 +105,7 @@
         "search": true,
         "create": false,
         "id": "AddCustomer",
+        "load": true,
         "hide": false,
         "label": "Add Customer"
       }
@@ -84,6 +121,7 @@
         "search": true,
         "create": false,
         "id": "AddDealer",
+        "load": true,
         "hide": false,
         "label": "Add Dealer"
       }
@@ -98,6 +136,7 @@
         "priority": 2,
         "search": true,
         "create": false,
+        "load": true,
         "id": "AddCustomerQuote",
         "hide": false,
         "label": "Add Customer Quote"

@@ -1,9 +1,12 @@
-module.exports = ( Customer, server, helper) => {
+/**
+ * Created by nikita on 21/7/17.
+ */
+module.exports = ( Dealer, server, helper) => {
     const SECRET_KEY = "BRANDZOOMR_PASSWORD_@!%#_SNAPHY";
     //AppUser.validatesUniquenessOf('email');
     //Remove email verification..
     //delete AppUser.validations.email;
-    Customer.validatesUniquenessOf('email');
+    Dealer.validatesUniquenessOf('email');
     const {
         isLength,
         trim,
@@ -11,9 +14,10 @@ module.exports = ( Customer, server, helper) => {
         normalizeEmail
     } = require('validator');
     const _ = require('lodash');
+    const {validate} = require("../helper/usefullMethods");
     const STATUS = ["active", "inactive"];
 
-    Customer.observe("before save", function(ctx, next){
+    Dealer.observe("before save", function(ctx, next){
         const instance = ctx.instance || ctx.data;
         const currentInstance = ctx.currentInstance;
         //Adding password
@@ -22,7 +26,7 @@ module.exports = ( Customer, server, helper) => {
         if(ctx.isNewInstance){
             instance.added = new Date();
             instance.updated = new Date();
-            instance.customerNumber = Math.floor(100000000 + Math.random() * 900000000);
+            instance.dealerNumber = Math.floor(100000000 + Math.random() * 900000000);
         }else{
             instance.updated = new Date();
         }
@@ -62,19 +66,25 @@ module.exports = ( Customer, server, helper) => {
                 return next(new Error("Email must be valid"));
             }
         }
-
-        if(!instance.cityId){
-            return next(new Error("City is required"));
+        if(!validate(instance, currentInstance, 'brandId')){
+            return next(new Error("Brand is required"));
         }
 
-        if(!instance.countryId){
-            return next(new Error("Country is required"));
+        if(!validate(instance, currentInstance, 'showroomId')){
+            return next(new Error("Showroom is required"));
         }
 
-        if(!instance.workshopId){
+        if(!validate(instance, currentInstance, 'workshopId')){
             return next(new Error("Workshop is required"));
         }
 
+        if(!validate(instance, currentInstance, 'areaId')){
+            return next(new Error("Area is required"));
+        }
+
+        if(!validate(instance, currentInstance, 'cityId')){
+            return next(new Error("City is required"));
+        }
 
         next();
     });

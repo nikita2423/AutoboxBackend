@@ -1,12 +1,12 @@
 {
   "validationsBackend": {
     "rules": {
-      "name": {
+      "dealershipName": {
         "required": true,
-        "minlength": 2,
+        "minlength": 3,
         "maxlength": 200
       },
-      "salesConsultantName": {
+      "consultantName": {
         "required": true,
         "minlength": 3,
         "maxlength": 200
@@ -30,13 +30,13 @@
       }
     },
     "messages": {
-      "name": {
-        "required": "Name is required",
+      "dealershipName": {
+        "required": "Dealership Name is required",
         "minlength": "Length should be atleast 2",
         "maxlength": "Length can't exceed 200"
       },
-      "salesConsultantName": {
-        "required": "Sales Consultant Name is required",
+      "consultantName": {
+        "required": "Consultant Name is required",
         "minlength": "Length should be atleast 3",
         "maxlength": "Length can't exceed 200"
       },
@@ -54,7 +54,7 @@
         "maxlength": "Length can't exceed 500"
       },
       "area": {
-        "required": "Contact Number is required",
+        "required": "Area is required",
         "valueNotEquals": "Area can't be empty"
       }
     }

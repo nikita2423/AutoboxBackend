@@ -1,9 +1,9 @@
 /**
  * Created by nikita on 20/7/17.
  */
-module.exports = (Showroom, server, helper) =>
+module.exports = (Workshop, server, helper) =>
 {
-    Showroom.validatesUniquenessOf('showroomNumber');
+    Workshop.validatesUniquenessOf('workshopNumber');
     const {
         isLength,
         trim,
@@ -13,40 +13,40 @@ module.exports = (Showroom, server, helper) =>
     const _ = require('lodash');
     const STATUS = ["active", "inactive"];
 
-    Showroom.observe("before save", function(ctx, next){
+    Workshop.observe("before save", function(ctx, next){
         const instance = ctx.instance || ctx.data;
         const currentInstance = ctx.currentInstance;
 
         if(ctx.isNewInstance){
             instance.added = new Date();
             instance.updated = new Date();
-            instance.showroomNumber = Math.floor(100000000 + Math.random() * 900000000);
+            instance.workshopNumber = Math.floor(100000000 + Math.random() * 900000000);
         }else{
             instance.updated = new Date();
         }
 
 
-        if(instance.name){
-            instance.name = toTitleCase(instance.name.toString().trim());
-            const check = isLength(instance.name, {min: 2, max: 500});
+        if(instance.dealershipName){
+            instance.dealershipName = toTitleCase(instance.dealershipName.toString().trim());
+            const check = isLength(instance.dealershipName, {min: 2, max: 200});
             if(!check){
-                return next(new Error("Showroom Name cannot exceed more than 500 words"));
+                return next(new Error("Dealership Name cannot exceed more than 500 words"));
             }
         }
 
-        if(instance.salesConsultantName){
-            instance.salesConsultantName = toTitleCase(instance.salesConsultantName.toString().trim());
-            const check = isLength(instance.salesConsultantName, {min:3, max:200});
+        if(instance.consultantName){
+            instance.consultantName = toTitleCase(instance.consultantName.toString().trim());
+            const check = isLength(instance.consultantName, {min:3, max:200});
             if(!check){
-                return next(new Error("Sales Consultant Name should be between 3 to 200"));
+                return next(new Error("Consultant Name should be between 3 to 200"));
             }
         }
 
         if(instance.address){
             instance.address = toTitleCase(instance.address.toString().trim());
-            const check = isLength(instance.address, {min:3, max:200});
+            const check = isLength(instance.address, {min:3, max:500});
             if(!check){
-                return next(new Error("Address should be between 3 to 200"));
+                return next(new Error("Address should be between 3 to 500"));
             }
         }
 
@@ -95,4 +95,5 @@ module.exports = (Showroom, server, helper) =>
         return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
     }
 };
+
 

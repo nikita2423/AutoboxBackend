@@ -1,0 +1,50 @@
+{
+  "validationsBackend": {
+    "rules": {
+      "brand": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "carModel": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "fuel": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "trim": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "gearBox": {
+        "required": true,
+        "valueNotEquals": ""
+      }
+    },
+    "messages": {
+      "brand": {
+        "required": "Brand is required",
+        "valueNotEquals": "Brand can't be blank"
+      },
+      "carModel": {
+        "required": "Car Model is required",
+        "valueNotEquals": "Brand can't be blank"
+      },
+      "fuel": {
+        "required": "Fuel is required",
+        "valueNotEquals": "Brand can't be blank"
+      },
+      "trim": {
+        "required": "Trim is required",
+        "valueNotEquals": "Brand can't be blank"
+      },
+      "gearBox": {
+        "required": "GearBox is required",
+        "valueNotEquals": "Brand can't be blank"
+      }
+
+    }
+  },
+  "complexValidation": {}
+}

@@ -1,0 +1,66 @@
+{
+  "validationsBackend": {
+    "rules": {
+      "message": {
+        "minlength": "3",
+        "maxlength": "1000"
+      },
+      "subject": {
+        "minlength": "3",
+        "maxlength": "500"
+      },
+      "customer": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "dealer": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "customerQuote": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "type": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "userType": {
+        "required": true,
+        "valueNotEquals": ""
+      }
+    },
+    "messages": {
+      "message": {
+        "minlength": "Minimum length permitted is 3",
+        "maxlength": "Maximum length permitted is 1000"
+      },
+      "subject": {
+        "minlength": "Minimum length permitted is 3",
+        "maxlength": "Maximum length permitted is 500"
+      },
+      "customer": {
+        "required": "Customer is required",
+        "valueNotEquals": "Customer can't be blank"
+      },
+      "dealer": {
+        "required": "Dealer is required",
+        "valueNotEquals": "Dealer can't be blank"
+      },
+      "customerQuote": {
+        "required": "Customer Quote is required",
+        "valueNotEquals": "Customer Quote can't be blank"
+      },
+      "type": {
+        "required": "ContactType is required",
+        "valueNotEquals": "Contact Type can't be blank"
+      },
+      "userType": {
+        "required": "UserType is required",
+        "valueNotEquals": "User Type can't be blank"
+      }
+
+    }
+  },
+  "complexValidation": {}
+}

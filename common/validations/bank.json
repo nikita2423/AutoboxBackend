@@ -1,0 +1,47 @@
+{
+  "validationsBackend": {
+    "rules": {
+      "name": {
+        "required": true,
+        "minlength": "2",
+        "maxlength": "200"
+      },
+      "branchName": {
+        "required": true,
+        "minlength": "3",
+        "maxlength": "500"
+      },
+      "ifscCode": {
+        "required": true,
+        "minlength": "3",
+        "maxlength": "50"
+      },
+      "area": {
+        "required": true,
+        "valueNotEquals": ""
+      }
+    },
+    "messages": {
+      "name": {
+        "required": "Bank Name is required",
+        "minlength": "Length should be atleast 2",
+        "maxlength": "Length can't exceed 200"
+      },
+      "branchName": {
+        "required": "Branch Name is required",
+        "minlength": "Length should be atleast 3",
+        "maxlength": "Length can't exceed 500"
+      },
+      "ifscCode": {
+        "required": "IFSC Code is required",
+        "minlength": "Length should be atleast 3",
+        "maxlength": "Length can't exceed 50"
+      },
+      "area": {
+        "required": "Area is required",
+        "valueNotEquals": "Area can't be blank"
+      }
+    }
+  },
+  "complexValidation": {}
+}

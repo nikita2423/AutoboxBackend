@@ -215,6 +215,23 @@ var addForeignKeyToData = function(relationType, modelRelationSchema, relationNa
                 removeParams[foreignKey] = true;
             }
         }       
+    }else if(relationType === "hasAndBelongsToMany"){
+        var foreignKeyName = relationName + "_";
+        var relationData = dataObj[relationName];
+        dataObj[foreignKeyName] = {};
+        if(relationData){
+            if(relationData.length){
+                relationData.forEach(function (relation) {
+                    if(relation){
+                        dataObj[foreignKeyName][relation.id] = true;
+                    }
+                });
+            }else{
+                removeParams[foreignKeyName] = true;
+            }
+        }else{
+            removeParams[foreignKeyName] = true;
+        }
     }
 };
 

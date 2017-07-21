@@ -63,7 +63,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "cars": {
+      "type": "hasAndBelongsToMany",
+      "model": "Car",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

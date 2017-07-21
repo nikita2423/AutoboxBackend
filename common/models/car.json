@@ -8,7 +8,6 @@
   "properties": {
     "name": {
       "type": "string",
-      "required": true,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -21,11 +20,24 @@
     },
     "status": {
       "type": "string",
-      "required": true
+      "required": true,
+      "default": "active",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Status of Car",
+          "id": "brandStatus",
+          "priority": 6,
+          "options": [
+            "active",
+            "inactive"
+          ]
+        }
+      }
     },
     "carNumber": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "added": {
       "type": "date",
@@ -52,6 +64,7 @@
         "priority": 2,
         "search": true,
         "create": false,
+        "load": true,
         "id": "AddBrand",
         "hide": false,
         "label": "Add Brand"
@@ -67,6 +80,7 @@
         "priority": 2,
         "search": true,
         "create": false,
+        "load": true,
         "id": "AddCarModel",
         "hide": false,
         "label": "Add Car Model"
@@ -81,6 +95,7 @@
         "searchProp": "name",
         "priority": 2,
         "search": true,
+        "load": true,
         "create": false,
         "id": "AddFuel",
         "hide": false,
@@ -96,6 +111,7 @@
         "searchProp": "name",
         "priority": 2,
         "search": true,
+        "load": true,
         "create": false,
         "id": "AddTrim",
         "hide": false,
@@ -111,6 +127,7 @@
         "searchProp": "name",
         "priority": 2,
         "search": true,
+        "load": true,
         "create": false,
         "id": "AddGearBox",
         "hide": false,
@@ -118,9 +135,20 @@
       }
     },
     "colors": {
-      "type": "hasMany",
+      "type": "hasAndBelongsToMany",
       "model": "Color",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Colors",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "load": true,
+        "id": "AddColors",
+        "hide": false,
+        "label": "Add Colors"
+      }
     }
   },
   "acls": [],

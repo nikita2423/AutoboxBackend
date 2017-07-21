@@ -14,7 +14,7 @@
         "required": true,
         "email":true
       },
-      "phone": {
+      "contact": {
         "required": true,
         "valueNotEquals": ""
       },
@@ -22,11 +22,19 @@
         "required": true,
         "valueNotEquals": ""
       },
-      "country": {
+      "area": {
         "required": true,
         "valueNotEquals": ""
       },
       "workshop": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "showroom": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "brand": {
         "required": true,
         "valueNotEquals": ""
       }
@@ -45,7 +53,7 @@
         "required": "Email is required",
         "email": "Email must be valid."
       },
-      "phone": {
+      "contact": {
         "required": "Phone Number is required",
         "valueNotEquals": "Enter your phone Number"
       },
@@ -53,13 +61,21 @@
         "required": "City is required",
         "valueNotEquals": "Enter the city"
       },
-      "country": {
-        "required": "Country is required",
-        "valueNotEquals": "Enter the Country"
+      "area": {
+        "required": "Area is required",
+        "valueNotEquals": "Enter the Area"
       },
       "workshop": {
         "required": "Workshop is required",
         "valueNotEquals": "Enter the Workshop"
+      },
+      "showroom": {
+        "required": "Showroom is required",
+        "valueNotEquals": "Enter the Showroom"
+      },
+      "brand": {
+        "required": "Brand is required",
+        "valueNotEquals": "Enter the Brand"
       }
     }
   },
