@@ -33,7 +33,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "breakdowns": {
+      "type": "hasMany",
+      "model": "Breakdown",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

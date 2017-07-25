@@ -6016,33 +6016,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
-            // INTERNAL. Use Customer.colors.findById() instead.
-            "prototype$__findById__colors": {
-              params: {
-                'fk': '@fk',
-              },
-              url: urlBase + "/Customers/:id/colors/:fk",
-              method: "GET",
-            },
-
-            // INTERNAL. Use Customer.colors.destroyById() instead.
-            "prototype$__destroyById__colors": {
-              params: {
-                'fk': '@fk',
-              },
-              url: urlBase + "/Customers/:id/colors/:fk",
-              method: "DELETE",
-            },
-
-            // INTERNAL. Use Customer.colors.updateById() instead.
-            "prototype$__updateById__colors": {
-              params: {
-                'fk': '@fk',
-              },
-              url: urlBase + "/Customers/:id/colors/:fk",
-              method: "PUT",
-            },
-
             // INTERNAL. Use Customer.workshop() instead.
             "prototype$__get__workshop": {
               url: urlBase + "/Customers/:id/workshop",
@@ -6208,31 +6181,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use Customer.facebookAccessToken.count() instead.
             "prototype$__count__facebookAccessToken": {
               url: urlBase + "/Customers/:id/facebookAccessToken/count",
-              method: "GET",
-            },
-
-            // INTERNAL. Use Customer.colors() instead.
-            "prototype$__get__colors": {
-              isArray: true,
-              url: urlBase + "/Customers/:id/colors",
-              method: "GET",
-            },
-
-            // INTERNAL. Use Customer.colors.create() instead.
-            "prototype$__create__colors": {
-              url: urlBase + "/Customers/:id/colors",
-              method: "POST",
-            },
-
-            // INTERNAL. Use Customer.colors.destroyAll() instead.
-            "prototype$__delete__colors": {
-              url: urlBase + "/Customers/:id/colors",
-              method: "DELETE",
-            },
-
-            // INTERNAL. Use Customer.colors.count() instead.
-            "prototype$__count__colors": {
-              url: urlBase + "/Customers/:id/colors/count",
               method: "GET",
             },
 
@@ -7803,307 +7751,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.city = function() {
           var TargetResource = $injector.get("City");
           var action = TargetResource["::get::Customer::city"];
-          return action.apply(R, arguments);
-        };
-    /**
-     * @ngdoc object
-     * @name lbServices.Customer.colors
-     * @header lbServices.Customer.colors
-     * @object
-     * @description
-     *
-     * The object `Customer.colors` groups methods
-     * manipulating `Color` instances related to `Customer`.
-     *
-     * Call {@link lbServices.Customer#colors Customer.colors()}
-     * to query all related instances.
-     */
-
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Customer#colors
-             * @methodOf lbServices.Customer
-             *
-             * @description
-             *
-             * Queries colors of Customer.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *  - `id` – `{*}` - User id
-             *
-             *  - `filter` – `{object=}` -
-             *
-             * @param {function(Array.<Object>,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Array.<Object>} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * <em>
-             * (The remote method definition does not provide any description.
-             * This usually means the response is a `Color` object.)
-             * </em>
-             */
-        R.colors = function() {
-          var TargetResource = $injector.get("Color");
-          var action = TargetResource["::get::Customer::colors"];
-          return action.apply(R, arguments);
-        };
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Customer.colors#count
-             * @methodOf lbServices.Customer.colors
-             *
-             * @description
-             *
-             * Counts colors of Customer.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *  - `id` – `{*}` - User id
-             *
-             *  - `where` – `{object=}` - Criteria to match model instances
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `count` – `{number=}` -
-             */
-        R.colors.count = function() {
-          var TargetResource = $injector.get("Color");
-          var action = TargetResource["::count::Customer::colors"];
-          return action.apply(R, arguments);
-        };
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Customer.colors#create
-             * @methodOf lbServices.Customer.colors
-             *
-             * @description
-             *
-             * Creates a new instance in colors of this model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *  - `id` – `{*}` - User id
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method expects a subset of model properties as request parameters.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * <em>
-             * (The remote method definition does not provide any description.
-             * This usually means the response is a `Color` object.)
-             * </em>
-             */
-        R.colors.create = function() {
-          var TargetResource = $injector.get("Color");
-          var action = TargetResource["::create::Customer::colors"];
-          return action.apply(R, arguments);
-        };
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Customer.colors#createMany
-             * @methodOf lbServices.Customer.colors
-             *
-             * @description
-             *
-             * Creates a new instance in colors of this model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *  - `id` – `{*}` - User id
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method expects a subset of model properties as request parameters.
-             *
-             * @param {function(Array.<Object>,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Array.<Object>} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * <em>
-             * (The remote method definition does not provide any description.
-             * This usually means the response is a `Color` object.)
-             * </em>
-             */
-        R.colors.createMany = function() {
-          var TargetResource = $injector.get("Color");
-          var action = TargetResource["::createMany::Customer::colors"];
-          return action.apply(R, arguments);
-        };
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Customer.colors#destroyAll
-             * @methodOf lbServices.Customer.colors
-             *
-             * @description
-             *
-             * Deletes all colors of this model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *  - `id` – `{*}` - User id
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * This method returns no data.
-             */
-        R.colors.destroyAll = function() {
-          var TargetResource = $injector.get("Color");
-          var action = TargetResource["::delete::Customer::colors"];
-          return action.apply(R, arguments);
-        };
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Customer.colors#destroyById
-             * @methodOf lbServices.Customer.colors
-             *
-             * @description
-             *
-             * Delete a related item by id for colors.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *  - `id` – `{*}` - User id
-             *
-             *  - `fk` – `{*}` - Foreign key for colors
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * This method returns no data.
-             */
-        R.colors.destroyById = function() {
-          var TargetResource = $injector.get("Color");
-          var action = TargetResource["::destroyById::Customer::colors"];
-          return action.apply(R, arguments);
-        };
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Customer.colors#findById
-             * @methodOf lbServices.Customer.colors
-             *
-             * @description
-             *
-             * Find a related item by id for colors.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *  - `id` – `{*}` - User id
-             *
-             *  - `fk` – `{*}` - Foreign key for colors
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * <em>
-             * (The remote method definition does not provide any description.
-             * This usually means the response is a `Color` object.)
-             * </em>
-             */
-        R.colors.findById = function() {
-          var TargetResource = $injector.get("Color");
-          var action = TargetResource["::findById::Customer::colors"];
-          return action.apply(R, arguments);
-        };
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Customer.colors#updateById
-             * @methodOf lbServices.Customer.colors
-             *
-             * @description
-             *
-             * Update a related item by id for colors.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *  - `id` – `{*}` - User id
-             *
-             *  - `fk` – `{*}` - Foreign key for colors
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method expects a subset of model properties as request parameters.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * <em>
-             * (The remote method definition does not provide any description.
-             * This usually means the response is a `Color` object.)
-             * </em>
-             */
-        R.colors.updateById = function() {
-          var TargetResource = $injector.get("Color");
-          var action = TargetResource["::updateById::Customer::colors"];
           return action.apply(R, arguments);
         };
 
@@ -14041,6 +13688,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use CustomerQuote.city() instead.
+            "::get::CustomerQuote::city": {
+              url: urlBase + "/CustomerQuotes/:id/city",
+              method: "GET",
+            },
+
             // INTERNAL. Use Area.city() instead.
             "::get::Area::city": {
               url: urlBase + "/Areas/:id/city",
@@ -18250,6 +17903,85 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
           { 'id': '@id' },
           {
 
+            // INTERNAL. Use Color.cars.findById() instead.
+            "prototype$__findById__cars": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Colors/:id/cars/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Color.cars.destroyById() instead.
+            "prototype$__destroyById__cars": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Colors/:id/cars/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Color.cars.updateById() instead.
+            "prototype$__updateById__cars": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Colors/:id/cars/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Color.cars.link() instead.
+            "prototype$__link__cars": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Colors/:id/cars/rel/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Color.cars.unlink() instead.
+            "prototype$__unlink__cars": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Colors/:id/cars/rel/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Color.cars.exists() instead.
+            "prototype$__exists__cars": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Colors/:id/cars/rel/:fk",
+              method: "HEAD",
+            },
+
+            // INTERNAL. Use Color.cars() instead.
+            "prototype$__get__cars": {
+              isArray: true,
+              url: urlBase + "/Colors/:id/cars",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Color.cars.create() instead.
+            "prototype$__create__cars": {
+              url: urlBase + "/Colors/:id/cars",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Color.cars.destroyAll() instead.
+            "prototype$__delete__cars": {
+              url: urlBase + "/Colors/:id/cars",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Color.cars.count() instead.
+            "prototype$__count__cars": {
+              url: urlBase + "/Colors/:id/cars/count",
+              method: "GET",
+            },
+
             /**
              * @ngdoc method
              * @name lbServices.Color#create
@@ -18787,6 +18519,86 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.Color#__connect__cars
+             * @methodOf lbServices.Color
+             *
+             * @description
+             *
+             * Connect two hasAndBelongMany Data together...
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `id` – `{*=}` - PersistedModel id
+             *
+             *  - `fk` – `{*=}` - Foreign key for cuisines
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Color` object.)
+             * </em>
+             */
+            "__connect__cars": {
+              url: urlBase + "/Colors/__connect__cars",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Color#__disconnect__cars
+             * @methodOf lbServices.Color
+             *
+             * @description
+             *
+             * Connect two hasAndBelongMany Data together...
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `id` – `{*=}` - PersistedModel id
+             *
+             *  - `fk` – `{*=}` - Foreign key for cuisines
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Color` object.)
+             * </em>
+             */
+            "__disconnect__cars": {
+              url: urlBase + "/Colors/__disconnect__cars",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
              * @name lbServices.Color#getDetailSchema
              * @methodOf lbServices.Color
              *
@@ -18859,62 +18671,89 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            // INTERNAL. Use Customer.colors.findById() instead.
-            "::findById::Customer::colors": {
+            // INTERNAL. Use Car.colors.findById() instead.
+            "::findById::Car::colors": {
               params: {
                 'fk': '@fk',
               },
-              url: urlBase + "/Customers/:id/colors/:fk",
+              url: urlBase + "/Cars/:id/colors/:fk",
               method: "GET",
             },
 
-            // INTERNAL. Use Customer.colors.destroyById() instead.
-            "::destroyById::Customer::colors": {
+            // INTERNAL. Use Car.colors.destroyById() instead.
+            "::destroyById::Car::colors": {
               params: {
                 'fk': '@fk',
               },
-              url: urlBase + "/Customers/:id/colors/:fk",
+              url: urlBase + "/Cars/:id/colors/:fk",
               method: "DELETE",
             },
 
-            // INTERNAL. Use Customer.colors.updateById() instead.
-            "::updateById::Customer::colors": {
+            // INTERNAL. Use Car.colors.updateById() instead.
+            "::updateById::Car::colors": {
               params: {
                 'fk': '@fk',
               },
-              url: urlBase + "/Customers/:id/colors/:fk",
+              url: urlBase + "/Cars/:id/colors/:fk",
               method: "PUT",
             },
 
-            // INTERNAL. Use Customer.colors() instead.
-            "::get::Customer::colors": {
-              isArray: true,
-              url: urlBase + "/Customers/:id/colors",
-              method: "GET",
+            // INTERNAL. Use Car.colors.link() instead.
+            "::link::Car::colors": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Cars/:id/colors/rel/:fk",
+              method: "PUT",
             },
 
-            // INTERNAL. Use Customer.colors.create() instead.
-            "::create::Customer::colors": {
-              url: urlBase + "/Customers/:id/colors",
-              method: "POST",
-            },
-
-            // INTERNAL. Use Customer.colors.createMany() instead.
-            "::createMany::Customer::colors": {
-              isArray: true,
-              url: urlBase + "/Customers/:id/colors",
-              method: "POST",
-            },
-
-            // INTERNAL. Use Customer.colors.destroyAll() instead.
-            "::delete::Customer::colors": {
-              url: urlBase + "/Customers/:id/colors",
+            // INTERNAL. Use Car.colors.unlink() instead.
+            "::unlink::Car::colors": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Cars/:id/colors/rel/:fk",
               method: "DELETE",
             },
 
-            // INTERNAL. Use Customer.colors.count() instead.
-            "::count::Customer::colors": {
-              url: urlBase + "/Customers/:id/colors/count",
+            // INTERNAL. Use Car.colors.exists() instead.
+            "::exists::Car::colors": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Cars/:id/colors/rel/:fk",
+              method: "HEAD",
+            },
+
+            // INTERNAL. Use Car.colors() instead.
+            "::get::Car::colors": {
+              isArray: true,
+              url: urlBase + "/Cars/:id/colors",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Car.colors.create() instead.
+            "::create::Car::colors": {
+              url: urlBase + "/Cars/:id/colors",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Car.colors.createMany() instead.
+            "::createMany::Car::colors": {
+              isArray: true,
+              url: urlBase + "/Cars/:id/colors",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Car.colors.destroyAll() instead.
+            "::delete::Car::colors": {
+              url: urlBase + "/Cars/:id/colors",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Car.colors.count() instead.
+            "::count::Car::colors": {
+              url: urlBase + "/Cars/:id/colors/count",
               method: "GET",
             },
           }
@@ -19059,6 +18898,416 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         */
         R.modelName = "Color";
 
+    /**
+     * @ngdoc object
+     * @name lbServices.Color.cars
+     * @header lbServices.Color.cars
+     * @object
+     * @description
+     *
+     * The object `Color.cars` groups methods
+     * manipulating `Car` instances related to `Color`.
+     *
+     * Call {@link lbServices.Color#cars Color.cars()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Color#cars
+             * @methodOf lbServices.Color
+             *
+             * @description
+             *
+             * Queries cars of Color.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Car` object.)
+             * </em>
+             */
+        R.cars = function() {
+          var TargetResource = $injector.get("Car");
+          var action = TargetResource["::get::Color::cars"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Color.cars#count
+             * @methodOf lbServices.Color.cars
+             *
+             * @description
+             *
+             * Counts cars of Color.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.cars.count = function() {
+          var TargetResource = $injector.get("Car");
+          var action = TargetResource["::count::Color::cars"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Color.cars#create
+             * @methodOf lbServices.Color.cars
+             *
+             * @description
+             *
+             * Creates a new instance in cars of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Car` object.)
+             * </em>
+             */
+        R.cars.create = function() {
+          var TargetResource = $injector.get("Car");
+          var action = TargetResource["::create::Color::cars"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Color.cars#createMany
+             * @methodOf lbServices.Color.cars
+             *
+             * @description
+             *
+             * Creates a new instance in cars of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Car` object.)
+             * </em>
+             */
+        R.cars.createMany = function() {
+          var TargetResource = $injector.get("Car");
+          var action = TargetResource["::createMany::Color::cars"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Color.cars#destroyAll
+             * @methodOf lbServices.Color.cars
+             *
+             * @description
+             *
+             * Deletes all cars of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.cars.destroyAll = function() {
+          var TargetResource = $injector.get("Car");
+          var action = TargetResource["::delete::Color::cars"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Color.cars#destroyById
+             * @methodOf lbServices.Color.cars
+             *
+             * @description
+             *
+             * Delete a related item by id for cars.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for cars
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.cars.destroyById = function() {
+          var TargetResource = $injector.get("Car");
+          var action = TargetResource["::destroyById::Color::cars"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Color.cars#exists
+             * @methodOf lbServices.Color.cars
+             *
+             * @description
+             *
+             * Check the existence of cars relation to an item by id.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for cars
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Car` object.)
+             * </em>
+             */
+        R.cars.exists = function() {
+          var TargetResource = $injector.get("Car");
+          var action = TargetResource["::exists::Color::cars"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Color.cars#findById
+             * @methodOf lbServices.Color.cars
+             *
+             * @description
+             *
+             * Find a related item by id for cars.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for cars
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Car` object.)
+             * </em>
+             */
+        R.cars.findById = function() {
+          var TargetResource = $injector.get("Car");
+          var action = TargetResource["::findById::Color::cars"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Color.cars#link
+             * @methodOf lbServices.Color.cars
+             *
+             * @description
+             *
+             * Add a related item by id for cars.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for cars
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Car` object.)
+             * </em>
+             */
+        R.cars.link = function() {
+          var TargetResource = $injector.get("Car");
+          var action = TargetResource["::link::Color::cars"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Color.cars#unlink
+             * @methodOf lbServices.Color.cars
+             *
+             * @description
+             *
+             * Remove the cars relation to an item by id.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for cars
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.cars.unlink = function() {
+          var TargetResource = $injector.get("Car");
+          var action = TargetResource["::unlink::Color::cars"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Color.cars#updateById
+             * @methodOf lbServices.Color.cars
+             *
+             * @description
+             *
+             * Update a related item by id for cars.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for cars
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Car` object.)
+             * </em>
+             */
+        R.cars.updateById = function() {
+          var TargetResource = $injector.get("Car");
+          var action = TargetResource["::updateById::Color::cars"];
+          return action.apply(R, arguments);
+        };
 
 
         return R;
@@ -19118,6 +19367,85 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use Car.gearBox() instead.
             "prototype$__get__gearBox": {
               url: urlBase + "/Cars/:id/gearBox",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Car.colors.findById() instead.
+            "prototype$__findById__colors": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Cars/:id/colors/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Car.colors.destroyById() instead.
+            "prototype$__destroyById__colors": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Cars/:id/colors/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Car.colors.updateById() instead.
+            "prototype$__updateById__colors": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Cars/:id/colors/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Car.colors.link() instead.
+            "prototype$__link__colors": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Cars/:id/colors/rel/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Car.colors.unlink() instead.
+            "prototype$__unlink__colors": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Cars/:id/colors/rel/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Car.colors.exists() instead.
+            "prototype$__exists__colors": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Cars/:id/colors/rel/:fk",
+              method: "HEAD",
+            },
+
+            // INTERNAL. Use Car.colors() instead.
+            "prototype$__get__colors": {
+              isArray: true,
+              url: urlBase + "/Cars/:id/colors",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Car.colors.create() instead.
+            "prototype$__create__colors": {
+              url: urlBase + "/Cars/:id/colors",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Car.colors.destroyAll() instead.
+            "prototype$__delete__colors": {
+              url: urlBase + "/Cars/:id/colors",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Car.colors.count() instead.
+            "prototype$__count__colors": {
+              url: urlBase + "/Cars/:id/colors/count",
               method: "GET",
             },
 
@@ -19658,6 +19986,86 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.Car#__connect__colors
+             * @methodOf lbServices.Car
+             *
+             * @description
+             *
+             * Connect two hasAndBelongMany Data together...
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `id` – `{*=}` - PersistedModel id
+             *
+             *  - `fk` – `{*=}` - Foreign key for cuisines
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Car` object.)
+             * </em>
+             */
+            "__connect__colors": {
+              url: urlBase + "/Cars/__connect__colors",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Car#__disconnect__colors
+             * @methodOf lbServices.Car
+             *
+             * @description
+             *
+             * Connect two hasAndBelongMany Data together...
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `id` – `{*=}` - PersistedModel id
+             *
+             *  - `fk` – `{*=}` - Foreign key for cuisines
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Car` object.)
+             * </em>
+             */
+            "__disconnect__colors": {
+              url: urlBase + "/Cars/__disconnect__colors",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
              * @name lbServices.Car#getDetailSchema
              * @methodOf lbServices.Car
              *
@@ -19728,6 +20136,92 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             "getModelRelationSchema": {
               url: urlBase + "/Cars/getModelRelationSchema",
               method: "POST",
+            },
+
+            // INTERNAL. Use Color.cars.findById() instead.
+            "::findById::Color::cars": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Colors/:id/cars/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Color.cars.destroyById() instead.
+            "::destroyById::Color::cars": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Colors/:id/cars/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Color.cars.updateById() instead.
+            "::updateById::Color::cars": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Colors/:id/cars/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Color.cars.link() instead.
+            "::link::Color::cars": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Colors/:id/cars/rel/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Color.cars.unlink() instead.
+            "::unlink::Color::cars": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Colors/:id/cars/rel/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Color.cars.exists() instead.
+            "::exists::Color::cars": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Colors/:id/cars/rel/:fk",
+              method: "HEAD",
+            },
+
+            // INTERNAL. Use Color.cars() instead.
+            "::get::Color::cars": {
+              isArray: true,
+              url: urlBase + "/Colors/:id/cars",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Color.cars.create() instead.
+            "::create::Color::cars": {
+              url: urlBase + "/Colors/:id/cars",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Color.cars.createMany() instead.
+            "::createMany::Color::cars": {
+              isArray: true,
+              url: urlBase + "/Colors/:id/cars",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Color.cars.destroyAll() instead.
+            "::delete::Color::cars": {
+              url: urlBase + "/Colors/:id/cars",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Color.cars.count() instead.
+            "::count::Color::cars": {
+              url: urlBase + "/Colors/:id/cars/count",
+              method: "GET",
             },
 
             // INTERNAL. Use VehicleDetail.car() instead.
@@ -20063,6 +20557,416 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
           var action = TargetResource["::get::Car::gearBox"];
           return action.apply(R, arguments);
         };
+    /**
+     * @ngdoc object
+     * @name lbServices.Car.colors
+     * @header lbServices.Car.colors
+     * @object
+     * @description
+     *
+     * The object `Car.colors` groups methods
+     * manipulating `Color` instances related to `Car`.
+     *
+     * Call {@link lbServices.Car#colors Car.colors()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Car#colors
+             * @methodOf lbServices.Car
+             *
+             * @description
+             *
+             * Queries colors of Car.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Color` object.)
+             * </em>
+             */
+        R.colors = function() {
+          var TargetResource = $injector.get("Color");
+          var action = TargetResource["::get::Car::colors"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Car.colors#count
+             * @methodOf lbServices.Car.colors
+             *
+             * @description
+             *
+             * Counts colors of Car.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.colors.count = function() {
+          var TargetResource = $injector.get("Color");
+          var action = TargetResource["::count::Car::colors"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Car.colors#create
+             * @methodOf lbServices.Car.colors
+             *
+             * @description
+             *
+             * Creates a new instance in colors of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Color` object.)
+             * </em>
+             */
+        R.colors.create = function() {
+          var TargetResource = $injector.get("Color");
+          var action = TargetResource["::create::Car::colors"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Car.colors#createMany
+             * @methodOf lbServices.Car.colors
+             *
+             * @description
+             *
+             * Creates a new instance in colors of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Color` object.)
+             * </em>
+             */
+        R.colors.createMany = function() {
+          var TargetResource = $injector.get("Color");
+          var action = TargetResource["::createMany::Car::colors"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Car.colors#destroyAll
+             * @methodOf lbServices.Car.colors
+             *
+             * @description
+             *
+             * Deletes all colors of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.colors.destroyAll = function() {
+          var TargetResource = $injector.get("Color");
+          var action = TargetResource["::delete::Car::colors"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Car.colors#destroyById
+             * @methodOf lbServices.Car.colors
+             *
+             * @description
+             *
+             * Delete a related item by id for colors.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for colors
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.colors.destroyById = function() {
+          var TargetResource = $injector.get("Color");
+          var action = TargetResource["::destroyById::Car::colors"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Car.colors#exists
+             * @methodOf lbServices.Car.colors
+             *
+             * @description
+             *
+             * Check the existence of colors relation to an item by id.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for colors
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Color` object.)
+             * </em>
+             */
+        R.colors.exists = function() {
+          var TargetResource = $injector.get("Color");
+          var action = TargetResource["::exists::Car::colors"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Car.colors#findById
+             * @methodOf lbServices.Car.colors
+             *
+             * @description
+             *
+             * Find a related item by id for colors.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for colors
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Color` object.)
+             * </em>
+             */
+        R.colors.findById = function() {
+          var TargetResource = $injector.get("Color");
+          var action = TargetResource["::findById::Car::colors"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Car.colors#link
+             * @methodOf lbServices.Car.colors
+             *
+             * @description
+             *
+             * Add a related item by id for colors.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for colors
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Color` object.)
+             * </em>
+             */
+        R.colors.link = function() {
+          var TargetResource = $injector.get("Color");
+          var action = TargetResource["::link::Car::colors"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Car.colors#unlink
+             * @methodOf lbServices.Car.colors
+             *
+             * @description
+             *
+             * Remove the colors relation to an item by id.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for colors
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.colors.unlink = function() {
+          var TargetResource = $injector.get("Color");
+          var action = TargetResource["::unlink::Car::colors"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Car.colors#updateById
+             * @methodOf lbServices.Car.colors
+             *
+             * @description
+             *
+             * Update a related item by id for colors.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for colors
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Color` object.)
+             * </em>
+             */
+        R.colors.updateById = function() {
+          var TargetResource = $injector.get("Color");
+          var action = TargetResource["::updateById::Car::colors"];
+          return action.apply(R, arguments);
+        };
 
 
         return R;
@@ -20094,6 +20998,58 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         urlBase + "/BreakdownCategories/:id",
           { 'id': '@id' },
           {
+
+            // INTERNAL. Use BreakdownCategory.breakdowns.findById() instead.
+            "prototype$__findById__breakdowns": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/BreakdownCategories/:id/breakdowns/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use BreakdownCategory.breakdowns.destroyById() instead.
+            "prototype$__destroyById__breakdowns": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/BreakdownCategories/:id/breakdowns/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use BreakdownCategory.breakdowns.updateById() instead.
+            "prototype$__updateById__breakdowns": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/BreakdownCategories/:id/breakdowns/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use BreakdownCategory.breakdowns() instead.
+            "prototype$__get__breakdowns": {
+              isArray: true,
+              url: urlBase + "/BreakdownCategories/:id/breakdowns",
+              method: "GET",
+            },
+
+            // INTERNAL. Use BreakdownCategory.breakdowns.create() instead.
+            "prototype$__create__breakdowns": {
+              url: urlBase + "/BreakdownCategories/:id/breakdowns",
+              method: "POST",
+            },
+
+            // INTERNAL. Use BreakdownCategory.breakdowns.destroyAll() instead.
+            "prototype$__delete__breakdowns": {
+              url: urlBase + "/BreakdownCategories/:id/breakdowns",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use BreakdownCategory.breakdowns.count() instead.
+            "prototype$__count__breakdowns": {
+              url: urlBase + "/BreakdownCategories/:id/breakdowns/count",
+              method: "GET",
+            },
 
             /**
              * @ngdoc method
@@ -20851,6 +21807,307 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         */
         R.modelName = "BreakdownCategory";
 
+    /**
+     * @ngdoc object
+     * @name lbServices.BreakdownCategory.breakdowns
+     * @header lbServices.BreakdownCategory.breakdowns
+     * @object
+     * @description
+     *
+     * The object `BreakdownCategory.breakdowns` groups methods
+     * manipulating `Breakdown` instances related to `BreakdownCategory`.
+     *
+     * Call {@link lbServices.BreakdownCategory#breakdowns BreakdownCategory.breakdowns()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BreakdownCategory#breakdowns
+             * @methodOf lbServices.BreakdownCategory
+             *
+             * @description
+             *
+             * Queries breakdowns of BreakdownCategory.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Breakdown` object.)
+             * </em>
+             */
+        R.breakdowns = function() {
+          var TargetResource = $injector.get("Breakdown");
+          var action = TargetResource["::get::BreakdownCategory::breakdowns"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BreakdownCategory.breakdowns#count
+             * @methodOf lbServices.BreakdownCategory.breakdowns
+             *
+             * @description
+             *
+             * Counts breakdowns of BreakdownCategory.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.breakdowns.count = function() {
+          var TargetResource = $injector.get("Breakdown");
+          var action = TargetResource["::count::BreakdownCategory::breakdowns"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BreakdownCategory.breakdowns#create
+             * @methodOf lbServices.BreakdownCategory.breakdowns
+             *
+             * @description
+             *
+             * Creates a new instance in breakdowns of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Breakdown` object.)
+             * </em>
+             */
+        R.breakdowns.create = function() {
+          var TargetResource = $injector.get("Breakdown");
+          var action = TargetResource["::create::BreakdownCategory::breakdowns"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BreakdownCategory.breakdowns#createMany
+             * @methodOf lbServices.BreakdownCategory.breakdowns
+             *
+             * @description
+             *
+             * Creates a new instance in breakdowns of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Breakdown` object.)
+             * </em>
+             */
+        R.breakdowns.createMany = function() {
+          var TargetResource = $injector.get("Breakdown");
+          var action = TargetResource["::createMany::BreakdownCategory::breakdowns"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BreakdownCategory.breakdowns#destroyAll
+             * @methodOf lbServices.BreakdownCategory.breakdowns
+             *
+             * @description
+             *
+             * Deletes all breakdowns of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.breakdowns.destroyAll = function() {
+          var TargetResource = $injector.get("Breakdown");
+          var action = TargetResource["::delete::BreakdownCategory::breakdowns"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BreakdownCategory.breakdowns#destroyById
+             * @methodOf lbServices.BreakdownCategory.breakdowns
+             *
+             * @description
+             *
+             * Delete a related item by id for breakdowns.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for breakdowns
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.breakdowns.destroyById = function() {
+          var TargetResource = $injector.get("Breakdown");
+          var action = TargetResource["::destroyById::BreakdownCategory::breakdowns"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BreakdownCategory.breakdowns#findById
+             * @methodOf lbServices.BreakdownCategory.breakdowns
+             *
+             * @description
+             *
+             * Find a related item by id for breakdowns.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for breakdowns
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Breakdown` object.)
+             * </em>
+             */
+        R.breakdowns.findById = function() {
+          var TargetResource = $injector.get("Breakdown");
+          var action = TargetResource["::findById::BreakdownCategory::breakdowns"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BreakdownCategory.breakdowns#updateById
+             * @methodOf lbServices.BreakdownCategory.breakdowns
+             *
+             * @description
+             *
+             * Update a related item by id for breakdowns.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for breakdowns
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Breakdown` object.)
+             * </em>
+             */
+        R.breakdowns.updateById = function() {
+          var TargetResource = $injector.get("Breakdown");
+          var action = TargetResource["::updateById::BreakdownCategory::breakdowns"];
+          return action.apply(R, arguments);
+        };
 
 
         return R;
@@ -21514,6 +22771,65 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             "getModelRelationSchema": {
               url: urlBase + "/Breakdowns/getModelRelationSchema",
               method: "POST",
+            },
+
+            // INTERNAL. Use BreakdownCategory.breakdowns.findById() instead.
+            "::findById::BreakdownCategory::breakdowns": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/BreakdownCategories/:id/breakdowns/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use BreakdownCategory.breakdowns.destroyById() instead.
+            "::destroyById::BreakdownCategory::breakdowns": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/BreakdownCategories/:id/breakdowns/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use BreakdownCategory.breakdowns.updateById() instead.
+            "::updateById::BreakdownCategory::breakdowns": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/BreakdownCategories/:id/breakdowns/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use BreakdownCategory.breakdowns() instead.
+            "::get::BreakdownCategory::breakdowns": {
+              isArray: true,
+              url: urlBase + "/BreakdownCategories/:id/breakdowns",
+              method: "GET",
+            },
+
+            // INTERNAL. Use BreakdownCategory.breakdowns.create() instead.
+            "::create::BreakdownCategory::breakdowns": {
+              url: urlBase + "/BreakdownCategories/:id/breakdowns",
+              method: "POST",
+            },
+
+            // INTERNAL. Use BreakdownCategory.breakdowns.createMany() instead.
+            "::createMany::BreakdownCategory::breakdowns": {
+              isArray: true,
+              url: urlBase + "/BreakdownCategories/:id/breakdowns",
+              method: "POST",
+            },
+
+            // INTERNAL. Use BreakdownCategory.breakdowns.destroyAll() instead.
+            "::delete::BreakdownCategory::breakdowns": {
+              url: urlBase + "/BreakdownCategories/:id/breakdowns",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use BreakdownCategory.breakdowns.count() instead.
+            "::count::BreakdownCategory::breakdowns": {
+              url: urlBase + "/BreakdownCategories/:id/breakdowns/count",
+              method: "GET",
             },
           }
         );
@@ -29216,12 +30532,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/ServiceBookings/getModelRelationSchema",
               method: "POST",
             },
-
-            // INTERNAL. Use ServiceHistory.serviceBooking() instead.
-            "::get::ServiceHistory::serviceBooking": {
-              url: urlBase + "/ServiceHistories/:id/serviceBooking",
-              method: "GET",
-            },
           }
         );
 
@@ -29489,6 +30799,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use CustomerQuote.customer() instead.
             "prototype$__get__customer": {
               url: urlBase + "/CustomerQuotes/:id/customer",
+              method: "GET",
+            },
+
+            // INTERNAL. Use CustomerQuote.city() instead.
+            "prototype$__get__city": {
+              url: urlBase + "/CustomerQuotes/:id/city",
               method: "GET",
             },
 
@@ -30396,6 +31712,42 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.customer = function() {
           var TargetResource = $injector.get("Customer");
           var action = TargetResource["::get::CustomerQuote::customer"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.CustomerQuote#city
+             * @methodOf lbServices.CustomerQuote
+             *
+             * @description
+             *
+             * Fetches belongsTo relation city.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `City` object.)
+             * </em>
+             */
+        R.city = function() {
+          var TargetResource = $injector.get("City");
+          var action = TargetResource["::get::CustomerQuote::city"];
           return action.apply(R, arguments);
         };
 
@@ -36588,12 +37940,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
-            // INTERNAL. Use ServiceHistory.serviceBooking() instead.
-            "prototype$__get__serviceBooking": {
-              url: urlBase + "/ServiceHistories/:id/serviceBooking",
-              method: "GET",
-            },
-
             /**
              * @ngdoc method
              * @name lbServices.ServiceHistory#create
@@ -37378,42 +38724,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.customer = function() {
           var TargetResource = $injector.get("Customer");
           var action = TargetResource["::get::ServiceHistory::customer"];
-          return action.apply(R, arguments);
-        };
-
-            /**
-             * @ngdoc method
-             * @name lbServices.ServiceHistory#serviceBooking
-             * @methodOf lbServices.ServiceHistory
-             *
-             * @description
-             *
-             * Fetches belongsTo relation serviceBooking.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *  - `id` – `{*}` - PersistedModel id
-             *
-             *  - `refresh` – `{boolean=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * <em>
-             * (The remote method definition does not provide any description.
-             * This usually means the response is a `ServiceBooking` object.)
-             * </em>
-             */
-        R.serviceBooking = function() {
-          var TargetResource = $injector.get("ServiceBooking");
-          var action = TargetResource["::get::ServiceHistory::serviceBooking"];
           return action.apply(R, arguments);
         };
 
