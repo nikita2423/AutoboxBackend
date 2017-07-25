@@ -14,6 +14,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         fetchDealerDetailsMethod();
         saveTrendingBrandMethod();
         findAllBreakdownMethod();
+        fetchNearestServiceCenterMethod();
+        findAllEmergenciesMethod();
+        fetchDealersForBrandMethod();
+        saveVehicleDetailsMethod();
     };
 
     const findAllBrandMethod = function(){
@@ -197,9 +201,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
 
     const findAllBreakdownMethod = function(){
-        const BreakdownCategory = databaseObj.BreakdownCategory;
-        BreakdownCategory.findAll = findAllBreakdown;
-        BreakdownCategory.remoteMethod("findAllBreakdown", {
+        const Breakdown = databaseObj.Breakdown;
+        Breakdown.findAll = findAllBreakdown;
+        Breakdown.remoteMethod("findAllBreakdown", {
             accepts: [
                 {
                     arg: 'ctx',
@@ -217,6 +221,107 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             ],
             returns: {
                 arg: "breakdownList", type: "array", root: true
+            }
+        });
+    };
+
+
+    const fetchNearestServiceCenterMethod = function(){
+        const Breakdown = databaseObj.Breakdown;
+        Breakdown.fetchNearestServiceCenter = fetchNearestServiceCenter;
+        Breakdown.remoteMethod("fetchNearestServiceCenter", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                  arg: "brandId", type: "string"
+                },
+                {
+                    arg: "lat", type: "number"
+                },
+                {
+                    arg: "lang", type: "number"
+                }
+            ],
+            returns: {
+                arg: "breakdown", type: "Breakdown", root: true
+            }
+        });
+    };
+
+    const findAllEmergenciesMethod = function(){
+        const Emergency = databaseObj.Emergency;
+        Emergency.findAll = findAllEmergencies;
+        Emergency.remoteMethod("findAll", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "lat", type: "number"
+                },
+                {
+                    arg: "lang", type: "number"
+                }
+            ],
+            returns: {
+                arg: "emergencyList", type: "array", root: true
+            }
+        });
+    };
+
+    const fetchDealersForBrandMethod = function(){
+      const Dealer = databaseObj.Dealer;
+      Dealer.fetchDealersForBrand = fetchDealersForBrand;
+      Dealer.remoteMethod("fetchDealersForBrand", {
+          accepts: [
+              {
+                  arg: 'ctx',
+                  type: 'object',
+                  http: {
+                      source: 'context'
+                  }
+              },
+              {
+                  arg: "brandId", type: "string"
+              },
+              {
+                  arg:"lastDate", type: "string"
+              }
+          ],
+          returns: {
+              arg: "dealerList", type: "object", root: true
+          }
+      });
+    };
+
+    const saveVehicleDetailsMethod = function(){
+        const VehicleDetail = databaseObj.VehicleDetail;
+        VehicleDetail.saveVehicleDetails = saveVehicleDetails;
+        VehicleDetail.remoteMethod("saveVehicleDetails", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "vehicleDetailObj", type: "object"
+                }
+            ],
+            returns: {
+                arg: "vehicleDetailObj", type: "VehicleDetail", root: true
             }
         });
     };
@@ -672,22 +777,291 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         }
     };
 
-
+    /**
+     * To fetch breakdown nearest to current location
+     * @param ctx
+     * @param lat
+     * @param lang
+     * @param callback
+     * @returns {*}
+     */
     const findAllBreakdown = function(ctx, lat, lang, callback){
         const request = ctx.req;
-        var lastDate = "";
-        var cutomerLatLong;
+        var customerLatLong;
+        const breakdownList =[];
         if(request.accessToken){
             if(request.accessToken.userId){
                 const BreakdownCategory = databaseObj.BreakdownCategory;
-                cutomerLatLong = new Geolocation(lat, lang);
-                const filter = {
-                    include: {
-                        relation: "breakdown"
-                    }
-                }
+                customerLatLong = new Geolocation(lat, lang);
+                BreakdownCategory.find()
+                    .then(function(breakdownCategoryList){
+                        if(breakdownCategoryList){
+                            return Promise.all(
+                                breakdownCategoryList.forEach(function(breakdownCategory){
+                                    if(breakdownCategory){
+                                        const categoryId = breakdownCategory.id;
+                                        const Breakdown = databaseObj.Breakdown;
+                                        Breakdown.find({
+                                            limit:1,
+                                            where: {
+                                                breakdownCategoryId : categoryId,
+                                                latlong : {
+                                                    near: customerLatLong,
+                                                    maxDistance: 10,
+                                                    unit: 'kilometers'
+                                                }
+                                            },
+                                            include: ["breakdownCategory"]
+                                        })
+                                            .then(function(breakdown){
+                                                if(breakdown){
+                                                    breakdownList.push(breakdown);
+                                                }
+                                            })
+                                    }else{
+                                        callback(new Error("Breakdown Category not found"));
+                                    }
+                                })
+                            )
+                        }
+                    })
+
+                    .then(function(breakdownList){
+                        if(breakdownList){
+                            callback(null, breakdownList);
+                        }else{
+                            callback(null, []);
+                        }
+                    })
+
+                    .catch(function (error) {
+                        if(error){
+                            callback(error);
+                        }
+                    })
+            }else{
+                return callback(new Error("User not valid"));
             }
+        } else{
+            return callback(new Error("User not valid"));
         }
+    };
+
+    /**
+     * to find the nearest service centre
+     * @param ctx
+     * @param lat
+     * @param lang
+     * @param brandId
+     * @param callback
+     * @returns {*}
+     */
+    const fetchNearestServiceCenter = function(ctx, lat, lang, brandId, callback){
+        const request = ctx.req;
+        var lastDate = "";
+        var customerLatLong;
+        if(request.accessToken){
+            if(request.accessToken.userId){
+                const BreakdownCategory = databaseObj.BreakdownCategory;
+                customerLatLong = new Geolocation(lat, lang);
+                const filter = {
+                    where:{
+                        name:"Service Center"
+                    }
+                };
+                BreakdownCategory.find(filter)
+                    .then(function(breakdownCategory){
+                        if(breakdownCategory){
+                            const categoryId = breakdownCategory.id;
+                            const Breakdown = databaseObj.Breakdown;
+                            return Breakdown.find({
+                                limit: 1,
+                                where: {
+                                    breakdownCategoryId: categoryId,
+                                    latlong : {
+                                        near: customerLatLong,
+                                        maxDistance: 10,
+                                        unit: 'kilometers'
+                                    }
+                                }
+                            })
+                        }
+                    })
+                    .then(function(breakdown){
+                        if(breakdown){
+                            callback(null, breakdown);
+                        } else{
+                            callback(new Error("ServiceCenter not found"));
+                        }
+                    })
+                    .catch(function(error){
+                        callback(error);
+                    })
+
+            } else{
+                return callback(new Error("User not valid"));
+            }
+        } else{
+            return callback(new Error("User not valid"));
+        }
+
+    };
+
+    /**
+     * to fetch all the emergencies
+     * @param ctx
+     * @param lat
+     * @param lang
+     * @param callback
+     * @returns {*}
+     */
+    const findAllEmergencies = function(ctx, lat, lang, callback){
+      const request = ctx.req;
+        var customerLatLong;
+        const emergencyList =[];
+        if(request.accessToken){
+            if(request.accessToken.userId){
+                const EmergencyCategory = databaseObj.EmergencyCategory;
+                customerLatLong = new Geolocation(lat, lang);
+                EmergencyCategory.find()
+                    .then(function(emergencyCategoryList){
+                        if(emergencyCategoryList){
+                            return Promise.all(
+                                emergencyCategoryList.forEach(function(emergencyCategory){
+                                    if(emergencyCategory){
+                                        const categoryId = emergencyCategory.id;
+                                        const Emergency = databaseObj.Emergency;
+                                        Emergency.find({
+                                            limit:1,
+                                            where: {
+                                                emergencyCategoryId : categoryId,
+                                                latlong : {
+                                                    near: customerLatLong,
+                                                    maxDistance: 10,
+                                                    unit: 'kilometers'
+                                                }
+                                            },
+                                            include: ["emergencyCategory"]
+                                        })
+                                            .then(function(emergency){
+                                                if(emergency){
+                                                    emergencyList.push(emergency);
+                                                }
+                                            })
+                                    }else{
+                                        callback(new Error("Emergency Category not found"));
+                                    }
+                                })
+                            )
+                        }
+                    })
+
+                    .then(function(emergencyList){
+                        if(emergencyList){
+                            callback(null, emergencyList);
+                        }else{
+                            callback(null, []);
+                        }
+                    })
+
+                    .catch(function (error) {
+                        if(error){
+                            callback(error);
+                        }
+                    })
+            }else{
+                return callback(new Error("User not valid"));
+            }
+        } else{
+            return callback(new Error("User not valid"));
+        }
+    };
+
+    /**
+     * To fetch a list of dealers corresponding to brand
+     * @param ctx
+     * @param brandId
+     * @param lastDate
+     * @param callback
+     * @returns {*}
+     */
+    const fetchDealersForBrand = function(ctx, brandId, lastDate, callback){
+      const request = ctx.req;
+      if(request.accessToken){
+          if(request.accessToken.userId){
+              const Dealer = databaseObj.Dealer;
+              Dealer.find({
+                  where: {
+                      brandId: brandId,
+                      status: "active",
+                      added:{
+                          lt: lastDate
+                      }
+                  }
+              })
+                  .then(function(dealerList){
+                      if(dealerList){
+                          if(dealerList.length){
+                              const dealer = dealerList[dealerList.length - 1];
+                              lastDate = dealer.added;
+                          }
+                      }
+
+                      callback(null, {
+                          dealerList: dealerList,
+                          cursor: lastDate
+                      })
+                  })
+
+                  .catch(function(error){
+                      callback(error);
+                  })
+          }else{
+              return callback(new Error("User not valid"));
+          }
+      } else{
+          return callback(new Error("User not valid"));
+      }
+    };
+
+    /**
+     * to save the vehicle detail of the customer
+     * @param ctx
+     * @param vehicleDetailObj
+     * @param callback
+     * @returns {*}
+     */
+    const saveVehicleDetails = function(ctx, vehicleDetailObj, callback){
+      const request = ctx.req;
+      if(request.accessToken){
+          if(request.accessToken.userId){
+              const customerId = request.accessToken.userId;
+              const VehicleDetail = databaseObj.VehicleDetail;
+              VehicleDetail.create({
+                  workshopName: vehicleDetailObj.workshopName,
+                  showroomName: vehicleDetailObj.showroomName,
+                  registeredName: vehicleDetailObj.registeredName,
+                  registrationNumber: vehicleDetailObj.registrationNumber,
+                  showroomId: vehicleDetailObj.showroomId,
+                  workshopId: vehicleDetailObj.workshopId,
+                  customerId: vehicleDetailObj.customerId
+              })
+                  .then(function(vehicleDetailObj){
+                      if(vehicleDetailObj){
+                          callback(null, vehicleDetailObj);
+                      } else{
+                          callback(new Error("Vehicle Detail can't be saved"));
+                      }
+                  })
+                  .catch(function(error){
+                      callback(error);
+                  })
+          }else{
+              return callback(new Error("User not valid"));
+          }
+      } else{
+          return callback(new Error("User not valid"));
+      }
     };
 
     return {
