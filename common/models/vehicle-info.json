@@ -1,0 +1,49 @@
+{
+  "name": "VehicleInfo",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "color": {
+      "type": "belongsTo",
+      "model": "Color",
+      "foreignKey": ""
+    },
+    "brand": {
+      "type": "belongsTo",
+      "model": "Brand",
+      "foreignKey": ""
+    },
+    "carModel": {
+      "type": "belongsTo",
+      "model": "CarModel",
+      "foreignKey": ""
+    },
+    "trim": {
+      "type": "belongsTo",
+      "model": "Trim",
+      "foreignKey": ""
+    },
+    "gearBox": {
+      "type": "belongsTo",
+      "model": "GearBox",
+      "foreignKey": ""
+    },
+    "fuel": {
+      "type": "belongsTo",
+      "model": "Fuel",
+      "foreignKey": ""
+    },
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

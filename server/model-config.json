@@ -187,5 +187,9 @@
   "ServiceHistory": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "VehicleInfo": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

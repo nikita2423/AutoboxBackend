@@ -18,6 +18,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         findAllEmergenciesMethod();
         fetchDealersForBrandMethod();
         saveVehicleDetailsMethod();
+        sendMessageMethod();
+        fetchServiceTypeMethod();
+        createServiceBookingMethod();
+        createCustomerQuoteMethod();
+        findAllCustomerQuoteMethod();
+        fetchQuoteReplyFromDealerMethod();
+        sendFeedbackMethod();
+        addServiceMethod();
     };
 
     const findAllBrandMethod = function(){
@@ -325,6 +333,162 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
         });
     };
+
+    const sendMessageMethod = function(){
+        const CustomerMessage = databaseObj.CustomerMessage;
+        CustomerMessage.sendMessage = sendMessage;
+        CustomerMessage.remoteMethod("sendMessage", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "customerMessageObj", type: "object"
+                }
+            ],
+            returns: {
+                arg: "response", type: "object", root: true
+            }
+        });
+    };
+
+    const fetchServiceTypeMethod = function(){
+        const ServiceType = databaseObj.ServiceType;
+        ServiceType.fetchServiceType = fetchServiceType;
+        ServiceType.remoteMethod("fetchServiceType", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "filter", type: "object"
+                }
+            ],
+            returns: {
+                arg: "serviceList", type: "object", root: true
+            }
+        });
+    };
+
+    const createServiceBookingMethod = function(){
+        const ServiceBooking = databaseObj.ServiceBooking;
+        ServiceBooking.createServiceBooking = createServiceBooking;
+        ServiceBooking.remoteMethod("createServiceBooking", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "serviceBookingObj", type: "object"
+                }
+            ],
+            returns: {
+                arg: "serviceBookingObj", type: "ServiceBooking", root: true
+            }
+        });
+    };
+
+
+    const createCustomerQuoteMethod = function(){
+        const CustomerQuote = databaseObj.CustomerQuote;
+        CustomerQuote.createCustomerQuote = createCustomerQuote;
+        CustomerQuote.remoteMethod("createCustomerQuote", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "customerQuoteObj", type: "object"
+                }
+            ],
+            returns: {
+                arg: "customerQuoteObj", type: "CustomerQuote", root: true
+            }
+        });
+    };
+
+    const findAllCustomerQuoteMethod = function(){
+        const CustomerQuote = databaseObj.CustomerQuote;
+        CustomerQuote.findAll = findAllCustomerQuote;
+        CustomerQuote.remoteMethod("findAll", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "filter", type: "object"
+                }
+            ],
+            returns: {
+                arg: "customerQuoteList", type: "array", root: true
+            }
+        });
+    };
+
+    const fetchQuoteReplyFromDealerMethod = function(){
+        const QuoteReply = databaseObj.QuoteReply;
+        QuoteReply.fetchQuoteReplyFromDealer = fetchQuoteReplyFromDealer;
+        QuoteReply.remoteMethod("fetchQuoteReplyFromDealer", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "filter", type: "object"
+                }
+            ],
+            returns: {
+                arg: "quoteReplyList", type: "object", root: true
+            }
+        });
+    };
+
+    const sendFeedbackMethod = function(){
+        const Feedback = databaseObj.Feedback;
+        Feedback.sendFeedback = sendFeedback;
+        Feedback.remoteMethod("sendFeedback", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "feedbackObj", type: "object"
+                }
+            ],
+            returns: {
+                arg: "response", type: "object", root: true
+            }
+        });
+    };
+    
 
     /**
      * To fetch all the Brands
@@ -1044,7 +1208,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                   registrationNumber: vehicleDetailObj.registrationNumber,
                   showroomId: vehicleDetailObj.showroomId,
                   workshopId: vehicleDetailObj.workshopId,
-                  customerId: vehicleDetailObj.customerId
+                  customerId: customerId
               })
                   .then(function(vehicleDetailObj){
                       if(vehicleDetailObj){
@@ -1063,6 +1227,309 @@ module.exports = function( server, databaseObj, helper, packageObj) {
           return callback(new Error("User not valid"));
       }
     };
+
+    /**
+     * To send the message to dealer/customer related to quote
+     * @param ctx
+     * @param customerMessageObj
+     * @param callback
+     * @returns {*}
+     */
+    const sendMessage = function(ctx, customerMessageObj, callback){
+      const request = ctx.req;
+      if(!customerMessageObj){
+          return callback(new Error("Invalid Arguments"));
+      } else{
+          if(request.accessToken){
+              if(request.accessToken.userId){
+                  const customerId = request.accessToken.userId;
+                  const CustomerMessage = databaseObj.CustomerMessage;
+                  CustomerMessage.create({
+                      subject: customerMessageObj.subject,
+                      message: customerMessageObj.message,
+                      type: customerMessageObj.type,
+                      userType: customerMessageObj.userType,
+                      dealerId: customerMessageObj.dealerId,
+                      customerId: customerId,
+                      customerQuoteId: customerMessageObj.customerQuoteId
+                  })
+                      .then(function(customerMessage){
+                          if(customerMessage){
+                              callback(null, {
+                                  "response": "success"
+                              })
+                          }
+                      })
+                      .catch(function(error){
+                          callback(error);
+                      })
+              } else{
+                  return callback(new Error("User not valid"));
+              }
+          } else{
+              return callback(new Error("User not valid"));
+          }
+      }
+
+    };
+
+    /**
+     * To fetch the type of service
+     * @param ctx
+     * @param filter
+     * @param callback
+     * @returns {*}
+     */
+    const fetchServiceType = function(ctx, filter, callback){
+        const request = ctx.req;
+        var lastDate;
+        if(!filter){
+            return callback(new Error("Wrong arguments"));
+        }else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const ServiceType = databaseObj.ServiceType;
+                    ServiceType.find(filter)
+                        .then(function(serviceTypeList){
+                            if(serviceTypeList){
+                                if(serviceTypeList.length){
+                                    const serviceType = serviceTypeList[serviceTypeList.length - 1];
+                                    lastDate = serviceType.added;
+                                }
+                            }
+                            callback(null, {
+                                serviceTypeList: serviceTypeList,
+                                cursor: lastDate
+                            })
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+                }else{
+                    return callback(new Error("User not valid"));
+                }
+            } else{
+                return callback(new Error("User not valid"));
+            }
+        }
+    };
+
+    /**
+     * to create the service booking
+     * @param ctx
+     * @param serviceBookingObj
+     * @param callback
+     * @returns {*}
+     */
+    const createServiceBooking = function(ctx, serviceBookingObj, callback){
+      const request = ctx.req;
+      if(!serviceBookingObj){
+          return callback(new Error("Invalid Arguments"));
+      } else{
+          if(request.accessToken){
+              if(request.accessToken.userId){
+                  const customerId = request.accessToken.userId;
+                  const ServiceBooking = databaseObj.ServiceBooking;
+                  ServiceBooking.create({
+                      serviceDate: serviceBookingObj.serviceDate,
+                      comments: serviceBookingObj.comments,
+                      vehiclePickUp: serviceBookingObj.vehiclePickUp,
+                      serviceTypeId: serviceBookingObj.serviceTypeId,
+                      workshopId: serviceBookingObj.workshopId,
+                      customerId: customerId
+                  })
+                      .then(function(serviceBooking){
+                          if(serviceBooking){
+                              callback(null, serviceBooking);
+                          }
+                      })
+                      .catch(function(error){
+                          callback(error);
+                      })
+              } else{
+                  return callback(new Error("User not valid"));
+              }
+          } else{
+              return callback(new Error("User not valid"));
+          }
+      }
+    };
+
+    /**
+     * to create the customer quote
+     * @param ctx
+     * @param customerQuoteObj
+     * @param callback
+     * @returns {*}
+     */
+    const createCustomerQuote = function(ctx, customerQuoteObj, callback){
+      const request = ctx.req;
+      if(!customerQuoteObj){
+          return callback(new Error("Invalid Arguments"));
+      }else{
+          if(request.accessToken){
+              if(request.accessToken.userId){
+                  const customerId = request.accessToken.userId;
+                  const CustomerQuote = databaseObj.CustomerQuote;
+                  CustomerQuote.create({
+                      carId: customerQuoteObj.carId,
+                      cityId: customerQuoteObj.cityId,
+                      ownershipType: customerQuoteObj.ownershipType,
+                      isFinance: customerQuoteObj.isFinance,
+                      isInsurance: customerQuoteObj.isInsurance,
+                      isOldVehicleTrade: customerQuoteObj.isOldVehicleTrade,
+                      brandId: customerQuoteObj.brandId,
+                      modelId: customerQuoteObj.modelId,
+                      quoteType: customerQuoteObj.quoteType,
+                      customerId: customerId,
+                      soldViaAutobox: customerQuoteObj.soldViaAutobox,
+                      gpsTracker: customerQuoteObj.gpsTracker,
+                      dashCamera: customerQuoteObj.dashCamera,
+                      testDrive: customerQuoteObj.testDrive
+                  })
+
+                      .then(function(customerQuote){
+                          if(customerQuote){
+                              callback(null, customerQuote);
+                          }
+                      })
+
+                      .catch(function (error) {
+                          callback(error);
+                      })
+              } else{
+                  return callback(new Error("User not valid"));
+              }
+          }else{
+              return callback(new Error("User not valid"));
+          }
+      }
+    };
+
+    /**
+     * To fetch all the customer quote
+     * @param ctx
+     * @param filter
+     * @param callback
+     * @returns {*}
+     */
+    const findAllCustomerQuote = function(ctx, filter, callback){
+      const request = ctx.req;
+      if(!filter){
+          return callback(new Error("Invalid Arguments"));
+      }else{
+          if(request.accessToken){
+              if(request.accessToken.userId){
+                  const customerId = request.accessToken.userId;
+                  const CustomerQuote = databaseObj.CustomerQuote;
+                  CustomerQuote.find({
+                       where:{
+                           customerId:customerId
+                       },
+                      include:[{
+                           relation: "vehicleInfo",
+                           scope: {
+                               include: ["color", "brand", "carModel", "trim", "gearBox", "fuel"]
+                           }
+                      }]
+                  })
+
+                      .then(function(customerQuoteList){
+                          if(customerQuoteList){
+                              if(customerQuoteList.length){
+                                  callback(null, customerQuoteList);
+                              }
+                          }
+                      })
+                      .catch(function(error){
+                          callback(error);
+                      })
+              }
+          }
+      }
+    };
+
+    /**
+     * to fetch all the quote reply from the dealer corresponding to customerQuoteID
+     * @param ctx
+     * @param filter
+     * @param callback
+     * @returns {*}
+     */
+    const fetchQuoteReplyFromDealer = function(ctx, filter, callback){
+        const request = ctx.req;
+        let lastDate;
+        if(!filter){
+            return callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    if(filter){
+                        if(filter.where){
+                            if(filter.where.added){
+                                if(!filter.where.added.lt){
+                                    filter.where.added.lt = new Date();
+                                }
+                            }
+                        }
+                    }
+                    const QuoteReply = databaseObj.QuoteReply;
+                    QuoteReply.find(filter)
+                        .then(function(quoteReplyList){
+                            if(quoteReplyList){
+                                if(quoteReplyList.length){
+                                    const quoteReply = quoteReplyList[quoteReplyList.length - 1];
+                                    lastDate = quoteReply.added;
+                                }
+                            }
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+
+                } else{
+                    return callback(new Error("User not valid"));
+                }
+            } else{
+                return callback(new Error("User not valid"));
+            }
+        }
+    };
+
+    const sendFeedback = function(ctx, feedbackObj, callback){
+      const request = ctx.req;
+      if(!feedbackObj){
+          return callback(new Error("Invalid Arguments"));
+      } else{
+          if(request.accessToken){
+              if(request.accessToken.userId){
+                  const userId = request.accessToken.userId;
+                  const Feedback = databaseObj.Feedback;
+                  Feedback.create({
+                      subject: feedbackObj.subject,
+                      message: feedbackObj.message,
+                      customerId: userId,
+                      dealerId: feedbackObj.dealerId
+                  })
+
+                      .then(function(feedbackObj){
+                          if(feedbackObj){
+                              callback(null, {"response": "success"});
+                          }
+                      })
+                      .catch(function(error){
+                          callback(error);
+                      })
+              } else{
+                  return callback(new Error("User not valid"));
+              }
+          } else{
+              return callback(new Error("User not valid"));
+          }
+      }
+    };
+
+
 
     return {
         init: init
