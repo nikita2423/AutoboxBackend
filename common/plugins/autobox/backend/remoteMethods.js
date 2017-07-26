@@ -26,6 +26,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         fetchQuoteReplyFromDealerMethod();
         sendFeedbackMethod();
         addServiceMethod();
+        findAllServiceMethod();
     };
 
     const findAllBrandMethod = function(){
@@ -488,8 +489,51 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
         });
     };
-    
 
+    const addServiceMethod = function(){
+        const ServiceHistory = databaseObj.ServiceHistory;
+        ServiceHistory.addService = addService;
+        ServiceHistory.remoteMethod("addService", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "serviceObj", type: "object"
+                }
+            ],
+            returns: {
+                arg: "serviceObj", type: "object", root: true
+            }
+        });
+    };
+
+
+    const findAllServiceMethod = function(){
+      const ServiceHistory = databaseObj.ServiceHistory;
+      ServiceHistory.findAll = findAllService;
+      ServiceHistory.remoteMethod("findAll", {
+          accepts: [
+              {
+                  arg: 'ctx',
+                  type: 'object',
+                  http: {
+                      source: 'context'
+                  }
+              },
+              {
+                  arg: "filter", type: "object"
+              }
+          ],
+          returns: {
+              arg: "serviceList", type: "object", root: true
+          }
+      });
+    };
     /**
      * To fetch all the Brands
      * @param ctx
@@ -1496,6 +1540,13 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         }
     };
 
+    /**
+     * To send the feedback to the dealer
+     * @param ctx
+     * @param feedbackObj
+     * @param callback
+     * @returns {*}
+     */
     const sendFeedback = function(ctx, feedbackObj, callback){
       const request = ctx.req;
       if(!feedbackObj){
@@ -1522,6 +1573,102 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       })
               } else{
                   return callback(new Error("User not valid"));
+              }
+          } else{
+              return callback(new Error("User not valid"));
+          }
+      }
+    };
+
+    /**
+     * to add the service for customer.
+     * @param ctx
+     * @param serviceObj
+     * @param callback
+     * @returns {*}
+     */
+    const addService = function(ctx, serviceObj, callback){
+        const request = ctx.req;
+        if(!serviceObj){
+            return callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const customerId = request.accessToken.userId;
+                    const ServiceHistory = databaseObj.ServiceHistory;
+                    ServiceHistory.create( {
+                        dateOfBooking: serviceObj.dateOfBooking,
+                        mileageCompleted: serviceObj.mileageCompleted,
+                        charges: serviceObj.charges,
+                        customerId: customerId
+
+                    })
+                        .then(function(serviceObj){
+                           if(serviceObj){
+                               callback(null, serviceObj);
+                           }
+                        })
+                    .catch(function(error){
+                        callback(error);
+                    })
+                } else{
+                    return callback(new Error("User not valid"));
+                }
+            } else{
+                return callback(new Error("User not valid"));
+            }
+        }
+    };
+
+    /**
+     * To find All the services booked by customer
+     * @param ctx
+     * @param filter
+     * @param callback
+     * @returns {*}
+     */
+    const findAllService = function(ctx, filter, callback){
+      const request = ctx.req;
+      let lastDate;
+      if(!filter){
+          return callback(new Error("Invalid Arguments"));
+      } else{
+          if(request.accessToken){
+              if(request.accessToken.userId){
+                  const customerId = request.accessToken.userId;
+                  if(filter){
+                      if(filter.where){
+                          if(filter.where.added){
+                              if(!filter.where.added.lt){
+                                  filter.where.added.lt = new Date();
+                              }
+                          }
+                      }
+                  }
+                  if(!filter.where.customerId){
+                      filter.where.customerId = customerId;
+                  }
+                  const ServiceHistory = databaseObj.ServiceHistory;
+                  ServiceHistory.find(filter)
+                      .then(function(serviceHistoryList){
+                          if(serviceHistoryList){
+                              if(serviceHistoryList.length){
+                                  const serviceHistory = serviceHistoryList[serviceHistoryList.length - 1];
+                                  lastDate = serviceHistory.added;
+                              }
+                          }
+                          callback(null, {
+                              serviceHistoryList: serviceHistoryList,
+                              cursor: lastDate
+                          });
+                      })
+                      .catch(function(error){
+                          callback(error);
+                      })
+
+                  } else{
+                  return callback(new Error("User not valid"));
+
               }
           } else{
               return callback(new Error("User not valid"));
