@@ -35,9 +35,6 @@ module.exports = (Vehicledetail, server, helper) =>
             return next(new Error("Registration Number is required"));
         }
 
-        if(!validate(instance, currentInstance, "carId")){
-            return next(new Error("Car is required"));
-        }
 
         if(!validate(instance, currentInstance, "showroomId")){
             return next(new Error("Showroom is required"));
@@ -50,6 +47,8 @@ module.exports = (Vehicledetail, server, helper) =>
         if(!validate(instance, currentInstance, "customerId")){
             return next(new Error("Customer is required"));
         }
+
+        next();
 
     });
 

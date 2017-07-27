@@ -27,12 +27,12 @@ module.exports = (Feedback, server, helper) =>
           instance.subject = _.capitalize(trim(instance.subject));
           const check = isLength(instance.subject, {min:3, max:200});
           if(!check){
-              return next(new Error("Subject length shoud be between 3 to 200"));
+              return next(new Error("Subject length should be between 3 to 200"));
           }
       }
 
       if(instance.message){
-          instance.message = _.capitalize(tirm(instance.message));
+          instance.message = _.capitalize(trim(instance.message));
           const check = isLength(instance.message, {min:3, max:500});
           if(!check){
               return next(new Error("Message length should be between 3 to 500"));

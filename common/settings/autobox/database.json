@@ -27,5 +27,6 @@
   "ServiceType": "ServiceType",
   "Showroom": "Showroom",
   "VehicleDetail": "VehicleDetail",
-  "Workshop": "Workshop"
+  "Workshop": "Workshop",
+  "VehicleInfo": "VehicleInfo"
 }

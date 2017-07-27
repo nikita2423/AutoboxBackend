@@ -159,6 +159,11 @@
         "hide": false,
         "label": "Add Register City"
       }
+    },
+    "vehicleInfo": {
+      "type": "belongsTo",
+      "model": "VehicleInfo",
+      "foreignKey": ""
     }
   },
   "acls": [],

@@ -33,8 +33,8 @@ module.exports = (Customerquote, server, helper) =>
            }
        }
 
-       if(!validate(instance, currentInstance, "carId")){
-           return next(new Error("Car is required"));
+       if(!validate(instance, currentInstance, "vehicleInfoId")){
+           return next(new Error("Vehicle Info is required"));
        }
 
        if(!validate(instance, currentInstance, "cityId")){

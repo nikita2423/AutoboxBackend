@@ -27,9 +27,9 @@ module.exports = (Servicehistory, server, helper) =>
             return next(new Error("Customer is required"));
         }
 
-        if(!validate(instance, currentInstance, "serviceBookingId")){
+     /*   if(!validate(instance, currentInstance, "serviceBookingId")){
             return next(new Error("Service Booking is required"));
-        }
+        }*/
 
         next();
     });
