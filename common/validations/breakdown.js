@@ -39,9 +39,9 @@ module.exports = (Breakdown, server, helper) =>
             return next(new Error("Area is required"));
         }
 
-        if(!instance.brandId){
+      /*  if(!instance.brandId){
             return next(new Error("Brand is required"));
-        }
+        }*/
 
         if(!instance.breakdownCategoryId){
             return next(new Error("Breakdown Category Number is required"));

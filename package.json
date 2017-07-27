@@ -10,7 +10,7 @@
   "dependencies": {
     "async": "^1.5.2",
     "aws-cloudfront-sign": "^2.1.2",
-    "bluebird": "^3.4.7",
+    "bluebird": "^3.5.0",
     "chalk": "^1.0.0",
     "commander": "^2.9.0",
     "compression": "^1.6.2",

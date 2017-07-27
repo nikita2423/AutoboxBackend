@@ -6,6 +6,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     const GeoPoint = require("geopoint");
     const _ = require("lodash");
+    const Promise = require("bluebird");
 
     var init = function(){
         findAllBrandMethod();
@@ -215,7 +216,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const findAllBreakdownMethod = function(){
         const Breakdown = databaseObj.Breakdown;
         Breakdown.findAll = findAllBreakdown;
-        Breakdown.remoteMethod("findAllBreakdown", {
+        Breakdown.remoteMethod("findAll", {
             accepts: [
                 {
                     arg: 'ctx',
@@ -947,18 +948,19 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         const request = ctx.req;
         var customerLatLong;
         const breakdownList =[];
-        if(request.accessToken){
-            if(request.accessToken.userId){
+        let promises = [];
+       /* if(request.accessToken){
+            if(request.accessToken.userId){*/
                 const BreakdownCategory = databaseObj.BreakdownCategory;
-                customerLatLong = new GeoPoint(lat, lang);
+                customerLatLong = [lat, lang];
                 BreakdownCategory.find()
                     .then(function(breakdownCategoryList){
                         if(breakdownCategoryList){
-                            return Promise.all(
                                 breakdownCategoryList.forEach(function(breakdownCategory){
                                     if(breakdownCategory){
                                         const categoryId = breakdownCategory.id;
                                         const Breakdown = databaseObj.Breakdown;
+                                        promises.push(
                                         Breakdown.find({
                                             limit:1,
                                             where: {
@@ -976,33 +978,40 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                     breakdownList.push(breakdown);
                                                 }
                                             })
+                                    );
+
+
                                     }else{
                                         callback(new Error("Breakdown Category not found"));
                                     }
-                                })
-                            )
+                                });
+                            Promise.all(promises).then(function(){
+                                callback(null, breakdownList);
+                            })
                         }
                     })
 
+
+/*
                     .then(function(breakdownList){
                         if(breakdownList){
                             callback(null, breakdownList);
                         }else{
                             callback(null, []);
                         }
-                    })
+                    })*/
 
                     .catch(function (error) {
                         if(error){
                             callback(error);
                         }
                     })
-            }else{
+          /*  }else{
                 return callback(new Error("User not valid"));
             }
         } else{
             return callback(new Error("User not valid"));
-        }
+        }*/
     };
 
     /**
@@ -1014,17 +1023,17 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @param callback
      * @returns {*}
      */
-    const fetchNearestServiceCenter = function(ctx, lat, lang, brandId, callback){
+    const fetchNearestServiceCenter = function(ctx, brandId, lat, lang, callback){
         const request = ctx.req;
         var lastDate = "";
         var customerLatLong;
-        if(request.accessToken){
-            if(request.accessToken.userId){
+       // if(request.accessToken){
+            //if(request.accessToken.userId){
                 const BreakdownCategory = databaseObj.BreakdownCategory;
-                customerLatLong = new GeoPoint(lat, lang);
+                customerLatLong = [lat, lang];
                 const filter = {
                     where:{
-                        name:"Service Center"
+                        name:"Nearest Service Center"
                     }
                 };
                 BreakdownCategory.find(filter)
@@ -1040,7 +1049,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                         near: customerLatLong,
                                         maxDistance: 10,
                                         unit: 'kilometers'
-                                    }
+                                    },
+                                    brandId: brandId
                                 }
                             })
                         }
@@ -1056,12 +1066,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         callback(error);
                     })
 
-            } else{
+          /*  } else{
                 return callback(new Error("User not valid"));
             }
         } else{
             return callback(new Error("User not valid"));
-        }
+        }*/
 
     };
 
