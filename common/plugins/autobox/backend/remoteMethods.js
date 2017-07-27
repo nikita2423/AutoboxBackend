@@ -4,6 +4,9 @@
 "use strict";
 module.exports = function( server, databaseObj, helper, packageObj) {
 
+    const GeoPoint = require("geopoint");
+    const _ = require("lodash");
+
     var init = function(){
         findAllBrandMethod();
         findAllModelsMethod();
@@ -52,9 +55,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
     const findAllModelsMethod = function(){
-      const Car = databaseObj.Car;
-      Car.findAllModels = findAllModels;
-      Car.remoteMethod("findAllModels", {
+      const CarModel = databaseObj.CarModel;
+      CarModel.findAllModels = findAllModels;
+      CarModel.remoteMethod("findAllModels", {
          accepts: [
              {
                  arg: 'ctx',
@@ -92,7 +95,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 }
             ],
             returns:{
-                arg:"fuelList", type: "Object", root: true
+                arg:"fuelList", type: "array", root: true
             }
         });
     };
@@ -115,7 +118,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 }
             ],
             returns:{
-                arg:"gearboxList", type: "Object", root: true
+                arg:"gearboxList", type: "array", root: true
             }
         });
     };
@@ -543,10 +546,11 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      */
     const findAllBrands = function(ctx, filter, callback){
         const request = ctx.req;
-        var lastDate = "";
-        if(request.accessToken){
-            if(request.accessToken.userId){
+        let lastDate;
+        //if(request.accessToken){
+            //if(request.accessToken.userId){
                   const Brand = databaseObj.Brand;
+                  filter = filter || {};
                   filter.where = filter.where || {};
                   if(filter){
                       if(filter.where){
@@ -577,12 +581,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                          callback(error);
                       });
 
-            } else{
+         /*   } else{
                 return callback(new Error("User not valid"));
             }
         } else{
             return callback(new Error("User not valid"));
-        }
+        }*/
     };
 
 
@@ -595,11 +599,11 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      */
     const findAllModels = function(ctx, filter, callback){
         const request = ctx.req;
-        var lastDate = "";
+        let lastDate;
         const carIdList = [];
-        if(request.accessToken){
-            if(request.accessToken.userId){
-                const Car = databaseObj.Car;
+        //if(request.accessToken){
+            //if(request.accessToken.userId){
+                const CarModel = databaseObj.CarModel;
                 filter = filter || {};
                 filter.where = filter.where || {};
                 if(filter){
@@ -609,29 +613,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         }
                     }
                 }
-                filter.fields.id = true;
-                Car.find(filter)
-                    .then(function(carList) {
-                        if (carList) {
-                            if (carList.length) {
-                                carList.forEach(function (car) {
-                                    carIdList.push(car.id);
-                                });
-                                const CarModel = databaseObj.CarModel;
-                                return CarModel.find({
-                                    where: {
-                                        inq: carIdList
-                                    },
-                                    limit: 7,
-                                    order: "added DESC",
-                                    added: {
-                                        lt: lastDate
-                                    }
-                                });
-                            }
-                        }
-                    })
-                    .then(function (carModelList) {
+                if(filter.where.added){
+                    if(!filter.where.added.lt){
+                        filter.where.added.lt = new Date();
+                    }
+                }
+
+                CarModel.find(filter)
+                    .then(function(carModelList){
                         if(carModelList){
                             if(carModelList.length){
                                 const carModel = carModelList[carModelList.length - 1];
@@ -643,15 +632,16 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             cursor: lastDate
                         });
                     })
-                        .catch(function (error) {
-                            callback(null, error);
-                        });
-                } else{
+                    .catch(function(error){
+                        callback(error);
+                    })
+
+            /*    } else{
                 return callback(new Error("User not valid"));
                 }
             } else{
             return callback(new Error("User not valid"));
-        }
+        }*/
     };
 
     /**
@@ -664,9 +654,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const findAllFuel = function(ctx, filter, callback){
         const request = ctx.req;
         var lastDate = "";
-        const carIdList = [];
-        if(request.accessToken){
-            if(request.accessToken.userId){
+        let uniqueFuelList = [];
+        //if(request.accessToken){
+            //if(request.accessToken.userId){
                 const Car = databaseObj.Car;
                 filter = filter || {};
                 filter.where = filter.where || {};
@@ -677,49 +667,27 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         }
                     }
                 }
-                filter.fields.id = true;
+                //filter.fields.id = true;
+                filter.include = ["fuel"];
                 Car.find(filter)
-                    .then(function(carList) {
-                        if (carList) {
-                            if (carList.length) {
-                                carList.forEach(function (car) {
-                                    carIdList.push(car.id);
-                                });
-                                const Fuel = databaseObj.Fuel;
-                                return Fuel.find({
-                                    where: {
-                                        inq: carIdList
-                                    },
-                                    limit: 7,
-                                    order: "added DESC",
-                                    added: {
-                                        lt: lastDate
-                                    }
-                                });
+                    .then(function(carList){
+                        if(carList){
+                            if(carList.length){
+                                uniqueFuelList = _.uniqBy(carList, 'fuelId');
                             }
                         }
+                        callback(null, uniqueFuelList);
                     })
-                    .then(function (fuelList) {
-                        if(fuelList){
-                            if(fuelList.length){
-                                const carModel = fuelList[fuelList.length - 1];
-                                lastDate = carModel.added;
-                            }
-                        }
-                        callback(null,{
-                            fuelList: fuelList,
-                            cursor: lastDate
-                        });
+
+                    .catch(function(error){
+                        callback(error);
                     })
-                    .catch(function (error) {
-                        callback(null, error);
-                    });
-            } else{
+           /* } else{
                 return callback(new Error("User not valid"));
             }
         } else{
             return callback(new Error("User not valid"));
-        }
+        }*/
     };
 
     /**
@@ -731,10 +699,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      */
     const findAllGearbox = function(ctx, filter, callback){
         const request = ctx.req;
-        var lastDate = "";
-        const carIdList = [];
-        if(request.accessToken){
-            if(request.accessToken.userId){
+        let lastDate ;
+        let uniqueGearBoxList = [];
+       // if(request.accessToken){
+            //if(request.accessToken.userId){
                 const Car = databaseObj.Car;
                 filter = filter || {};
                 filter.where = filter.where || {};
@@ -745,49 +713,26 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         }
                     }
                 }
-                filter.fields.id = true;
+               filter.include = ["gearBox"];
                 Car.find(filter)
                     .then(function(carList) {
                         if (carList) {
                             if (carList.length) {
-                                carList.forEach(function (car) {
-                                    carIdList.push(car.id);
-                                });
-                                const GearBox = databaseObj.GearBox;
-                                return GearBox.find({
-                                    where: {
-                                        inq: carIdList
-                                    },
-                                    limit: 7,
-                                    order: "added DESC",
-                                    added: {
-                                        lt: lastDate
-                                    }
-                                });
+                               uniqueGearBoxList = _.uniqBy(carList, 'gearBoxId');
                             }
                         }
+                        callback(null, uniqueGearBoxList);
                     })
-                    .then(function (gearboxList) {
-                        if(gearboxList){
-                            if(gearboxList.length){
-                                const carModel = gearboxList[gearboxList.length - 1];
-                                lastDate = carModel.added;
-                            }
-                        }
-                        callback(null,{
-                            gearboxList: gearboxList,
-                            cursor: lastDate
-                        });
-                    })
+
                     .catch(function (error) {
                         callback(null, error);
                     });
-            } else{
+           /* } else{
                 return callback(new Error("User not valid"));
             }
         } else{
             return callback(new Error("User not valid"));
-        }
+        }*/
     };
 
     /**
@@ -799,10 +744,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      */
     const findAllTrim = function(ctx, filter, callback){
         const request = ctx.req;
-        var lastDate = "";
+        let lastDate;
         const carIdList = [];
-        if(request.accessToken){
-            if(request.accessToken.userId){
+       // if(request.accessToken){
+         //   if(request.accessToken.userId){
                 const Car = databaseObj.Car;
                 filter = filter || {};
                 filter.where = filter.where || {};
@@ -813,49 +758,40 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         }
                     }
                 }
-                filter.fields.id = true;
+                if(!filter.order){
+                    filter.order = "added DESC";
+                }
+                if(filter.where.added){
+                    if(!filter.where.added.lt){
+                        filter.where.added.lt = new Date();
+                    }
+                }
+                filter.include = ["trim"];
+                //filter.fields.id = true;
                 Car.find(filter)
                     .then(function(carList) {
                         if (carList) {
                             if (carList.length) {
-                                carList.forEach(function (car) {
-                                    carIdList.push(car.id);
-                                });
-                                const Trim = databaseObj.Trim;
-                                return Trim.find({
-                                    where: {
-                                        inq: carIdList
-                                    },
-                                    limit: 7,
-                                    order: "added DESC",
-                                    added: {
-                                        lt: lastDate
-                                    }
-                                });
+                                const car = carList[carList.length - 1];
+                                lastDate = car.added;
                             }
                         }
-                    })
-                    .then(function (trimList) {
-                        if(trimList){
-                            if(trimList.length){
-                                const carModel = trimList[trimList.length - 1];
-                                lastDate = carModel.added;
-                            }
-                        }
-                        callback(null,{
-                            trimList: trimList,
+
+                        callback(null, {
+                            carList: carList,
                             cursor: lastDate
                         });
                     })
+
                     .catch(function (error) {
                         callback(null, error);
                     });
-            } else{
+          /*  } else{
                 return callback(new Error("User not valid"));
             }
         } else{
             return callback(new Error("User not valid"));
-        }
+        }*/
     };
 
     /**
@@ -869,9 +805,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       const request = ctx.req;
         var lastDate = "";
         const carIdList = [];
-      if(request.accessToken){
-          if(request.accessToken.userId){
-              const userId = request.accessToken.userId;
+      //if(request.accessToken){
+          //if(request.accessToken.userId){
+              //const userId = request.accessToken.userId;
               const Car = databaseObj.Car;
               filter = filter || {};
               filter.where = filter.where || {};
@@ -882,15 +818,26 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       }
                   }
               }
-              filter.fields.id = true;
-              Car.findOne(filter)
+              //filter.fields.id = true;
+              filter.include = ["colors"];
+
+
+               Car.findOne(filter)
+                   .then(function(car){
+                       if(car){
+                           callback(null, car);
+                       } else{
+                           callback(new Error("Car not present"));
+                       }
+                   })
+              /*Car.findOne(filter)
                   .then(function(car){
                       if(car){
-                          const carId = car.id;
+                          var carId = car.id;
                           const Color = databaseObj.Color;
                           return Color.find({
                               where:{
-                                  carId: carId
+                                  cars_: {carId:true}
                               },
                               limit: 7,
                               order: "added DESC",
@@ -913,13 +860,16 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                          colorList: colorList,
                          cursor: lastDate
                      })
-                  });
-          } else{
+                  })*/
+              .catch(function(error){
+                  callback(error);
+        });
+        /*  } else{
               return callback(new Error("User not valid"));
           }
       } else{
           return callback(new Error("User not valid"));
-      }
+      }*/
     };
 
 
@@ -933,8 +883,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const fetchDealerDetail = function(ctx, dealerId, callback){
       const request = ctx.req;
       var lastDate = "";
-      if(request.accessToken){
-          if(request.accessToken.userId){
+      //if(request.accessToken){
+          //if(request.accessToken.userId){
               const Dealer = databaseObj.Dealer;
               Dealer.findById(dealerId)
                   .then(function(dealer){
@@ -947,12 +897,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                   .catch(function (error) {
                       callback(error);
                   })
-          }else{
+          /*}else{
               return callback(new Error("User not valid"));
           }
       } else{
           return callback(new Error("User not valid"));
-      }
+      }*/
     };
 
     /**
@@ -963,8 +913,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      */
     const saveTrendingBrand = function(ctx, brandId, callback){
         const request = ctx.req;
-        if(request.accessToken){
-            if(request.accessToken.userId){
+       // if(request.accessToken){
+            //if(request.accessToken.userId){
                 const Brand = databaseObj.Brand;
                 Brand.findById(brandId)
                     .then(function(brand){
@@ -977,12 +927,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     .catch(function(error){
                         callback(error);
                     })
-            } else{
+        /*    } else{
                 return callback(new Error("User not valid"));
             }
         } else{
             return callback(new Error("User not valid"));
-        }
+        }*/
     };
 
     /**
@@ -1000,7 +950,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         if(request.accessToken){
             if(request.accessToken.userId){
                 const BreakdownCategory = databaseObj.BreakdownCategory;
-                customerLatLong = new Geolocation(lat, lang);
+                customerLatLong = new GeoPoint(lat, lang);
                 BreakdownCategory.find()
                     .then(function(breakdownCategoryList){
                         if(breakdownCategoryList){
@@ -1071,7 +1021,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         if(request.accessToken){
             if(request.accessToken.userId){
                 const BreakdownCategory = databaseObj.BreakdownCategory;
-                customerLatLong = new Geolocation(lat, lang);
+                customerLatLong = new GeoPoint(lat, lang);
                 const filter = {
                     where:{
                         name:"Service Center"
@@ -1130,7 +1080,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         if(request.accessToken){
             if(request.accessToken.userId){
                 const EmergencyCategory = databaseObj.EmergencyCategory;
-                customerLatLong = new Geolocation(lat, lang);
+                customerLatLong = new GeoPoint(lat, lang);
                 EmergencyCategory.find()
                     .then(function(emergencyCategoryList){
                         if(emergencyCategoryList){

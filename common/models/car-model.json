@@ -71,7 +71,24 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "brand": {
+      "type": "belongsTo",
+      "model": "Brand",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Brand",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "load": true,
+        "id": "AddBrand",
+        "hide": false,
+        "label": "Add Brand"
+      }
+    }
+  },
   "acls": [],
   "methods": {}
 }

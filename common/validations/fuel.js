@@ -4,7 +4,6 @@
 module.exports = (Fuel, server, helper) =>
 {
     Fuel.validatesUniquenessOf('name');
-    Fuel.validatesUniquenessOf('fuelNumber');
     const {
         isLength,
         trim
