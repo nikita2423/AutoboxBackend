@@ -31,6 +31,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         sendFeedbackMethod();
         addServiceMethod();
         findAllServiceMethod();
+        fetchWorkshopForBrandMethod();
+        fetchShowroomForBrandMethod();
     };
 
     const findAllBrandMethod = function(){
@@ -313,6 +315,56 @@ module.exports = function( server, databaseObj, helper, packageObj) {
           ],
           returns: {
               arg: "dealerList", type: "object", root: true
+          }
+      });
+    };
+
+    const fetchWorkshopForBrandMethod = function(){
+      const Workshop = databaseObj.Workshop;
+      Workshop.fetchWorkshopForBrand = fetchWorkshopForBrand;
+      Workshop.remoteMethod("fetchWorkshopForBrand", {
+          accepts: [
+              {
+                  arg: 'ctx',
+                  type: 'object',
+                  http: {
+                      source: 'context'
+                  }
+              },
+              {
+                  arg: "brandId", type: "string"
+              },
+              {
+                  arg:"lastDate", type: "string"
+              }
+          ],
+          returns: {
+              arg: "workshopList", type: "object", root: true
+          }
+      });
+    };
+
+    const fetchShowroomForBrandMethod = function(){
+      const Showroom = databaseObj.Showroom;
+      Showroom.fetchShowroomForBrand= fetchShowroomForBrand;
+      Showroom.remoteMethod("fetchShowroomForBrand", {
+          accepts: [
+              {
+                  arg: 'ctx',
+                  type: 'object',
+                  http: {
+                      source: 'context'
+                  }
+              },
+              {
+                  arg: "brandId", type: "string"
+              },
+              {
+                  arg:"lastDate", type: "string"
+              }
+          ],
+          returns: {
+              arg: "showroomList", type: "object", root: true
           }
       });
     };
@@ -1182,6 +1234,100 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       } else{
           return callback(new Error("User not valid"));
       }
+    };
+
+    /**
+     * to fetch the list of workshop corresponding to brand
+     * @param ctx
+     * @param brandId
+     * @param lastDate
+     * @param callback
+     * @returns {*}
+     */
+    const fetchWorkshopForBrand = function(ctx, brandId, lastDate, callback){
+        const request = ctx.req;
+        if(request.accessToken){
+            if(request.accessToken.userId){
+                const Workshop = databaseObj.Workshop;
+                Workshop.find({
+                    where: {
+                        brandId: brandId,
+                        status: "active",
+                        added:{
+                            lt: lastDate
+                        }
+                    }
+                })
+                    .then(function(workshopList){
+                        if(workshopList){
+                            if(workshopList.length){
+                                const workshop = workshopList[workshopList.length - 1];
+                                lastDate = workshop.added;
+                            }
+                        }
+
+                        callback(null, {
+                            workshopList: workshopList,
+                            cursor: lastDate
+                        })
+                    })
+
+                    .catch(function(error){
+                        callback(error);
+                    })
+            }else{
+                return callback(new Error("User not valid"));
+            }
+        } else{
+            return callback(new Error("User not valid"));
+        }
+    };
+
+    /**
+     * to fetch the list of showroom corresponding to brand
+     * @param ctx
+     * @param brandId
+     * @param lastDate
+     * @param callback
+     * @returns {*}
+     */
+    const fetchShowroomForBrand = function(ctx, brandId, lastDate, callback){
+        const request = ctx.req;
+        if(request.accessToken){
+            if(request.accessToken.userId){
+                const Showroom = databaseObj.Showroom;
+                Showroom.find({
+                    where: {
+                        brandId: brandId,
+                        status: "active",
+                        added:{
+                            lt: lastDate
+                        }
+                    }
+                })
+                    .then(function(showroomList){
+                        if(showroomList){
+                            if(showroomList.length){
+                                const showroom = showroomList[showroomList.length - 1];
+                                lastDate = showroom.added;
+                            }
+                        }
+
+                        callback(null, {
+                            showroomList: showroomList,
+                            cursor: lastDate
+                        })
+                    })
+
+                    .catch(function(error){
+                        callback(error);
+                    })
+            }else{
+                return callback(new Error("User not valid"));
+            }
+        } else{
+            return callback(new Error("User not valid"));
+        }
     };
 
     /**
