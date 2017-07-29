@@ -194,7 +194,21 @@
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "ALLOW"
+      "permission": "DENY"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "requestOTP"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "loginWithCode"
     },
     {
       "accessType": "*",
@@ -271,6 +285,7 @@
       "principalId": "$authenticated",
       "permission": "ALLOW"
     }
+
   ],
   "methods": {}
 }
