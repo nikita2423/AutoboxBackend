@@ -224,6 +224,11 @@
         "hide": false,
         "label": "Add Area"
       }
+    },
+    "brand": {
+      "type": "belongsTo",
+      "model": "Brand",
+      "foreignKey": ""
     }
   },
   "acls": [],
