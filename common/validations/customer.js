@@ -52,7 +52,7 @@ module.exports = ( Customer, server, helper) => {
             }
         }
 
-        if(instance.email){
+       /* if(instance.email){
             instance.email = trim(instance.email);
             //Sanitize an Email..
             instance.email = normalizeEmail(instance.email);
@@ -61,9 +61,9 @@ module.exports = ( Customer, server, helper) => {
             if(!check){
                 return next(new Error("Email must be valid"));
             }
-        }
+        }*/
 
-        if(!instance.cityId){
+       /* if(!instance.cityId){
             return next(new Error("City is required"));
         }
 
@@ -73,7 +73,7 @@ module.exports = ( Customer, server, helper) => {
 
         if(!instance.workshopId){
             return next(new Error("Workshop is required"));
-        }
+        }*/
 
 
         next();

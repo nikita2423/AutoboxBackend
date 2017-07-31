@@ -33,6 +33,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         findAllServiceMethod();
         fetchWorkshopForBrandMethod();
         fetchShowroomForBrandMethod();
+        findAllVehiclesMethod();
     };
 
     const findAllBrandMethod = function(){
@@ -593,6 +594,28 @@ module.exports = function( server, databaseObj, helper, packageObj) {
           }
       });
     };
+
+    const findAllVehiclesMethod = function(){
+        const VehicleInfo = databaseObj.VehicleInfo;
+        VehicleInfo.findAll = findAllVehicles;
+        VehicleInfo.remoteMethod("findAll", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "filter", type: "object"
+                }
+            ],
+            returns: {
+                arg: "vehiclesList", type: "object", root: true
+            }
+        })
+    };
     /**
      * To fetch all the Brands
      * @param ctx
@@ -612,6 +635,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       if(filter.where){
                           if(!filter.where.status){
                               filter.where.status = "active";
+                          }
+                      }
+                  }
+
+                  if(filter.where){
+                      if(filter.where.added){
+                          if(!filter.where.added.lt){
+                              filter.where.added.lt = new Date();
                           }
                       }
                   }
@@ -1800,6 +1831,67 @@ module.exports = function( server, databaseObj, helper, packageObj) {
           } else{
               return callback(new Error("User not valid"));
           }*/
+      }
+    };
+
+
+    /**
+     * To find all the vehicles belongs to the customer
+     * @param ctx
+     * @param filter
+     * @param callback
+     * @returns {*}
+     */
+    const findAllVehicles = function(ctx, filter, callback){
+      const request = ctx.req;
+      let lastDate;
+      if(!filter){
+          return callback(new Error("Invalid Arguments"));
+      } else {
+          if (request.accessToken) {
+              if (request.accessToken.userId) {
+                  const customerId = request.accessToken.userId;
+                  const VehicleInfo = databaseObj.VehicleInfo;
+                  filter = filter || {};
+                  filter.where = filter.where || {};
+                  if(filter){
+                      if(filter.where){
+                          if(filter.where.added){
+                              if(!filter.where.added.lt){
+                                  filter.where.added.lt = new Date();
+                              }
+                          }
+                      }
+                  }
+
+                  if(filter.where){
+                      if(!filter.where.customerId){
+                          filter.where.customerId = customerId;
+                      }
+                  }
+
+                  VehicleInfo.find(filter)
+                      .then(function(vehicleInfoList){
+                          if(vehicleInfoList){
+                              if(vehicleInfoList.length){
+                                  const vehicleInfo = vehicleInfoList[vehicleInfoList.length - 1];
+                                  lastDate = vehicleInfo.added;
+                              }
+                          }
+                          callback(null, {
+                              vehicleInfoList: vehicleInfoList,
+                              cursor: lastDate
+                          })
+                      })
+                      .catch(function(error){
+                          callback(error);
+                      })
+              } else{
+                  return callback(new Error("User not valid"));
+              }
+          } else{
+              return callback(new Error("User not valid"));
+          }
       }
     };
 

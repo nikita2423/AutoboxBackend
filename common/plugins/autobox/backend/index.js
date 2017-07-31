@@ -55,13 +55,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 				}
 			],
             returns: {
-                arg: 'status', type: 'string', root: true,
+                arg: 'accessToken', type: 'object', root: true,
                 description:
                 'The response body contains properties of the AccessToken created on login.\n' +
                 'Depending on the value of `include` parameter, the body may contain ' +
                 'additional properties:\n\n' +
                 '  - `user` - `{User}` - Data of the currently logged in user. (`include=user`)\n\n'
-            }
+            },
+            http: {verb: 'post'}
 
         });
 	};
@@ -116,12 +117,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         if(codeValidates){
         	//create Access Token..
             console.log("success");
-			/*createAccessToken(phoneNumber, function(error){
-				if(error){
-					callback(error);
-				}
-            });*/
-            callback(null, "success");
+			createAccessToken(phoneNumber,callback);
+
 
 		} else{
         	console.log("Token not matches");
@@ -130,21 +127,46 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 	};
 
 
-/*	const createAccessToken = function(phoneNumber, callback){
+	const createAccessToken = function(phoneNumber, callback){
 		const Customer = databaseObj.Customer;
+		let customerInstance;
 		Customer.findOne({
 			where:{
 				phoneNumber: phoneNumber
 			}
 		})
 			.then(function(customer){
-				if(customer){
-					//Do not create AccessToken
+				if(!customer){
+					return Customer.create({
+                        phoneNumber : phoneNumber,
+						email: "demo@gmail.com"
+                    });
 				} else{
-
+					/*customerInstance = customer;
+					return customer.createAccessToken(31536000);*/
+                    //Do not create AccessToken
 				}
 			})
-	}*/
+			.then(function(customer){
+				if(customer){
+					customerInstance = customer;
+					return customer.createAccessToken(31536000);
+				}
+			})
+
+			.then(function(token){
+				if(token) {
+                    token.__data.user = customerInstance;
+                    console.log(token);
+                    callback(null, token);
+                }else{
+					callback(null,{});
+				}
+			})
+			.catch(function(error){
+				callback(error);
+			});
+	};
 
 
 	//return all the methods that you wish to provide user to extend this plugin.
