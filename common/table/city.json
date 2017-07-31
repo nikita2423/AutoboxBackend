@@ -1,0 +1,44 @@
+{
+  "widgets": [
+    {
+      "label": "City",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "added": {
+      "search":"date",
+      "date": true
+    },
+    "status": {
+      "tag": {
+        "inactive": "label-warning",
+        "active": "label-success"
+      },
+      "search": "select",
+      "options": [
+        "active",
+        "inactive"
+      ]
+    },
+    "name": {
+      "search": "text"
+    },
+    "country_name":{
+      "label": "Country",
+      "search": "text"
+    },
+    "country_status": {
+      "display": false
+    },
+    "country_added": {
+      "display": false
+    }
+  }
+}

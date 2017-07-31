@@ -1,0 +1,37 @@
+{
+  "widgets": [
+    {
+      "label": "Brand",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "added": {
+      "search": "date",
+      "date": true
+    },
+    "status": {
+      "tag": {
+        "inactive": "label-warning",
+        "active": "label-success"
+      },
+      "search": "select",
+      "options": [
+        "active",
+        "inactive"
+      ]
+    },
+    "image": {
+      "display": false
+    },
+    "name": {
+      "search": "text"
+    }
+  }
+}

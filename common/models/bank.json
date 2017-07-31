@@ -32,7 +32,7 @@
         }
       }
     },
-    "ifscCode": {
+    "ifsCode": {
       "type": "string",
       "required": true,
       "template": {

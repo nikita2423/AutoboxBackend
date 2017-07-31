@@ -1,0 +1,42 @@
+{
+  "widgets": [
+    {
+      "label": "Bank",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "name": {
+      "search": "text"
+    },
+    "branchName":{
+      "search": "text",
+      "label": "Branch"
+    },
+    "ifsCode":{
+      "search": "text",
+      "label": "IFSCode"
+    },
+    "added": {
+      "date": true,
+      "search": "date"
+    },
+    "area_pincode": {
+      "label": "Pincode",
+      "search": "text"
+    },
+    "area_name": {
+      "label": "Area",
+      "search": "text"
+    },
+    "area_added": {
+      "display": false
+    }
+  }
+}

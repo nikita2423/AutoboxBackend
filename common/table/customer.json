@@ -18,15 +18,95 @@
     "profilePic":{
       "display": false
     },
+    "phoneNumber": {
+      "display": false,
+      "label": "Mobile"
+    },
     "firstName": {
-      "search": "text"
+      "search": "text",
+      "label": "Name"
+    },
+    "status":{
+      "tag": {
+        "inactive": "label-warning",
+        "active": "label-success"
+      },
+      "search": "select",
+      "options": [
+        "active",
+        "inactive"
+      ]
     },
     "lastName": {
-      "search": "text"
+      "search": "text",
+      "display": false
+    },
+    "username": {
+      "display": false
     },
     "added": {
       "search": "date",
       "date": true
+    },
+    "city_name": {
+      "label": "City",
+      "search": "text"
+    },
+    "city_added": {
+      "display": false
+    },
+    "city_status": {
+      "display": false
+    },
+    "country_name": {
+      "label": "Country",
+      "search": "text"
+    },
+    "country_status": {
+      "display": false
+    },
+    "country_added": {
+      "display": false
+    },
+    "workshop_dealershipName": {
+      "label": "Workshop",
+      "search": "text"
+    },
+    "workshop_status": {
+      "display": false
+    },
+    "workshop_consultantName": {
+      "display": false
+    },
+    "workshop_contactNumber": {
+      "display": false
+    },
+    "workshop_email": {
+      "display": false
+    },
+    "workshop_latlong": {
+      "display": false
+    },
+    "workshop_address": {
+      "display": false
+    },
+    "workshop_image": {
+      "display": false
+    },
+    "workshop_timings": {
+      "display": false
+    },
+    "workshop_added": {
+      "display": false
+    },
+    "workshop_status": {
+      "display": false
+    },
+    "workshop_landline": {
+      "display": false
+    },
+    "workshop_managerImage": {
+      "display": false
     }
   }
 }

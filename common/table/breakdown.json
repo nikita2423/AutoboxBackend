@@ -1,0 +1,70 @@
+{
+  "widgets": [
+    {
+      "label": "Breakdown",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "name": {
+      "search": "text"
+    },
+    "contactNumber": {
+      "label": "Contact"
+    },
+    "latlong": {
+      "display": false
+    },
+    "added": {
+      "search": "date",
+      "date": true
+    },
+    "area_name": {
+      "display": false
+    },
+    "area_pincode": {
+      "display": false
+    },
+    "brand_name": {
+      "display": false
+    },
+    "brand_added": {
+      "display": false
+    },
+    "brand_image": {
+      "display": false
+    },
+    "brand_Status": {
+      "display": false
+    },
+    "area_added": {
+      "display": false
+    },
+    "city_name": {
+      "search" : "text",
+      "label": "City"
+    },
+    "city_added": {
+      "display": false
+    },
+    "city_status": {
+      "display": false
+    },
+    "brand_status": {
+      "display": false
+    },
+    "breakdownCategory_name": {
+      "label": "Category",
+      "search": "text"
+    },
+    "breakdownCategory_added": {
+      "display": false
+    }
+  }
+}

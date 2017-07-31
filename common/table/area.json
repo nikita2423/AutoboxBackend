@@ -1,0 +1,46 @@
+{
+  "widgets": [
+    {
+      "label": "Customers",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "name": {
+      "search": "text"
+    },
+    "pincode": {
+      "search": "text"
+    },
+    "added": {
+      "search": "date",
+      "date": true
+    },
+    "city_name": {
+      "label": "City",
+      "search": "text"
+    },
+    "city_status":{
+      "display": false
+    },
+    "city_added": {
+      "display": false
+    },
+    "country_added": {
+      "display": false
+    },
+    "country_status": {
+      "display": false
+    },
+    "country_name": {
+      "label": "Country",
+      "search": "text"
+    }
+  }
+}

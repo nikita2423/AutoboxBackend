@@ -1,0 +1,103 @@
+{
+  "widgets": [
+    {
+      "label": "Cars",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "name": {
+      "search": "text",
+      "display": false
+    },
+    "status": {
+      "tag": {
+        "inactive": "label-warning",
+        "active": "label-success"
+      },
+      "search": "select",
+      "options": [
+        "active",
+        "inactive"
+      ]
+    },
+    "added": {
+      "search": "date",
+      "date": true
+    },
+    "brand_name": {
+      "label": "Brand",
+      "search": "text"
+      },
+    "brand_image": {
+      "display": false
+    },
+    "brand_status": {
+      "display": false
+    },
+    "brand_added": {
+      "display": false
+    },
+    "carModel_name": {
+      "label": "Model",
+      "search": "text"
+    },
+    "carModel_image": {
+      "display": false
+    },
+    "carModel_added": {
+      "display": false
+    },
+    "carModel_status": {
+      "display": false
+    },
+    "fuel_added": {
+      "display": false
+    },
+    "fuel_name": {
+      "label": "Fuel",
+      "search": false
+    },
+    "fuel_status": {
+      "display": false
+    },
+    "gearBox_name": {
+      "label": "GearBox",
+      "search": "text"
+    },
+    "gearBox_added": {
+      "display": false
+    },
+    "gearBox_status": {
+      "display": false
+    },
+    "trim_name": {
+      "label": "Variant",
+      "search": "text"
+    },
+    "trim_added":{
+      "display":false
+    },
+    "trim_status": {
+      "display": false
+    },
+    "colors_name": {
+      "display": false
+    },
+    "colors_colorCode": {
+      "display": false
+    },
+    "colors_added": {
+      "display": false
+    },
+    "colors_status": {
+      "display": false
+    }
+  }
+}

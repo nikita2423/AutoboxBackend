@@ -1,0 +1,23 @@
+{
+  "widgets": [
+    {
+      "label": "Breakdown Category",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "name": {
+      "search": "text"
+    },
+    "added": {
+      "search": "date",
+      "date": true
+    }
+  }
+}
