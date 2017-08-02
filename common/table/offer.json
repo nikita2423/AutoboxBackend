@@ -1,0 +1,93 @@
+{
+  "widgets": [
+    {
+      "label": "Old Trade cars",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "added": {
+      "search": "date",
+      "date": true
+    },
+    "title":{
+      "search": "text"
+    },
+    "description": {
+      "display": false
+    },
+    "status": {
+      "tag": {
+        "inactive": "label-warning",
+        "active": "label-success"
+      },
+      "search": "select",
+      "options": [
+        "active",
+        "inactive"
+      ]
+    },
+    "expiredOn": {
+      "date": true,
+      "search": "date",
+      "label": "Expiry Date"
+    },
+    "city_added": {
+      "display": false
+    },
+    "city_name": {
+      "display": false
+    },
+    "city_status": {
+      "display": false
+    },
+    "area_name": {
+      "display": false
+    },
+    "area_pincode": {
+      "display":false
+    },
+    "area_added": {
+      "display": false
+    },
+    "area_status": {
+      "display": false
+    },
+    "brand_added": {
+      "display": false
+    },
+    "brand_image": {
+      "display": false
+    },
+    "brand_name": {
+      "display": false
+    },
+    "brand_status": {
+      "display": false
+    },
+    "dealer_added": {
+      "display": false
+    },
+    "dealer_firstName": {
+      "display": false
+    },
+    "dealer_lastName": {
+      "display": false
+    },
+    "dealer_email": {
+      "display":false
+    },
+    "dealer_status": {
+      "display": false
+    },
+    "dealer_contact": {
+      "display": false
+    }
+  }
+}

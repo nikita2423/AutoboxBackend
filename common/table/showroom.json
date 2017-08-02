@@ -1,0 +1,84 @@
+{
+  "widgets": [
+    {
+      "label": "Showrooms",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+
+  "tables": {
+    "name": {
+      "search": true
+    },
+    "status": {
+      "tag": {
+        "inactive": "label-warning",
+        "active": "label-success"
+      },
+      "search": "select",
+      "options": [
+        "active",
+        "inactive"
+      ]
+    },
+    "salesConsultantName": {
+      "label": "Sales Consultant",
+      "search": "text"
+    },
+    "contactNumber": {
+      "label": "Contact",
+      "search": "text"
+    },
+    "email": {
+      "search": "text"
+    },
+    "latlong": {
+      "display": false
+    },
+    "landline": {
+      "display": false
+    },
+    "image": {
+      "display": false
+    },
+    "managerImage": {
+      "display": false
+    },
+    "timings": {
+      "display": false
+    },
+    "added": {
+      "search": "date",
+      "date": true
+    },
+    "area_name": {
+      "label": "Area",
+      "search": "text"
+    },
+    "area_pincode": {
+      "display": false
+    },
+    "area_added": {
+      "display": false
+    },
+    "brand_name": {
+      "label": "Brand",
+      "search": "text"
+    },
+    "brand_status": {
+      "display": false
+    },
+    "brand_added": {
+      "display": false
+    },
+    "brand_image": {
+      "display": false
+    }
+  }
+}

@@ -1,7 +1,7 @@
 {
   "widgets": [
     {
-      "label": "Models",
+      "label": "Colors",
       "icon": "si-bar-chart",
       "fetchLocally": true,
       "propObj": {
@@ -15,12 +15,12 @@
     "name": {
       "search": "text"
     },
+    "colorCode": {
+      "search": "text"
+    },
     "added": {
       "search": "date",
       "date": true
-    },
-    "image": {
-      "display": false
     },
     "status": {
       "tag": {
@@ -32,19 +32,6 @@
         "active",
         "inactive"
       ]
-    },
-    "brand_name": {
-      "label": "Brand",
-      "search": "text"
-    },
-    "brand_status": {
-      "display": false
-    },
-    "brand_image": {
-      "display": false
-    },
-    "brand_added": {
-      "display": false
     }
   }
 }

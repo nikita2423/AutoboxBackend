@@ -1,0 +1,86 @@
+{
+  "widgets": [
+    {
+      "label": "Workshops",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "dealershipName": {
+      "label": "Name",
+      "search": "text"
+    },
+    "status": {
+      "tag": {
+        "inactive": "label-warning",
+        "active": "label-success"
+      },
+      "search": "select",
+      "options": [
+        "active",
+        "inactive"
+      ]
+    },
+    "consultantName": {
+      "display": false
+    },
+    "contactNumber": {
+      "label": "Contact",
+      "search": "text"
+    },
+    "email": {
+      "search": "text"
+    },
+    "latlong": {
+      "display": false
+    },
+    "address": {
+      "display": false
+    },
+    "landline": {
+      "display": false
+    },
+    "timings": {
+      "display": false
+    },
+    "image": {
+      "display": false
+    },
+    "managerImage": {
+      "display": false
+    },
+    "added": {
+      "search": "date",
+      "date": true
+    },
+    "brand_name": {
+      "label": "Brand",
+      "search": "text"
+    },
+    "brand_status": {
+      "display": "false"
+    },
+    "brand_added": {
+      "display": false
+    },
+    "brand_image": {
+      "display": false
+    },
+    "area_name": {
+      "label": "Area",
+      "search": "text"
+    },
+    "area_pincode": {
+      "display": false
+    },
+    "area_added": {
+      "display": false
+    }
+  }
+}

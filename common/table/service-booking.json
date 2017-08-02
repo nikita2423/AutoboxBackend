@@ -1,0 +1,79 @@
+{
+  "widgets": [
+    {
+      "label": "Service Bookings",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "serviceDate": {
+      "label": "Service date",
+      "search": "date",
+      "date": true
+    },
+    "added": {
+      "search": "date",
+      "date": true
+    },
+    "comments": {
+      "display": false
+    },
+    "vehiclePickup": {
+      "label": "Vehicle Pickup",
+      "search": "text"
+    },
+    "serviceType_name": {
+      "label": "Service Type",
+      "search": "text"
+    },
+    "serviceType_status": {
+      "display": false
+    },
+    "serviceType_added": {
+      "display": false
+    },
+    "workshop_dealershipName": {
+      "label": "Workshop",
+      "search": "text"
+    },
+    "workshop_added": {
+      "display": false
+    },
+    "workshop_status": {
+      "display": false
+    },
+    "workshop_consultantName": {
+      "display": false
+    },
+    "workshop_contactNumber": {
+      "display": false
+    },
+    "workshop_latlong": {
+      "display": false
+    },
+    "workshop_email": {
+      "display": false
+    },
+    "workshop_address":{
+      "display": false
+    },
+    "workshop_landline": {
+      "display": false
+    },
+    "workshop_image": {
+      "display": false
+    },
+    "workshop_timings": {
+      "display": false
+    },
+    "workshop_managerImage": {
+      "display": false
+    }
+  }
+}

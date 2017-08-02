@@ -1,0 +1,58 @@
+{
+  "widgets": [
+    {
+      "label": "Services",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "dateOfBooking": {
+      "search": "date",
+      "date": true,
+      "label": "Booking Date"
+    },
+    "mileageCompleted": {
+      "search": "number",
+      "label": "Mileage Completed"
+    },
+    "charges": {
+      "search": "number",
+      "label": "Charges"
+    },
+    "added": {
+      "search": "date",
+      "date": true
+    },
+    "customer_firstName": {
+      "label": "Customer",
+      "search": "text"
+    },
+    "customer_lastName": {
+      "display": false
+    },
+    "customer_username": {
+      "display": false
+    },
+    "customer_phoneNumber": {
+      "display": false
+    },
+    "customer_email": {
+      "display": false
+    },
+    "customer_status": {
+      "display": false
+    },
+    "customer_added": {
+      "display": false
+    },
+    "customer_profilePic": {
+      "display": false
+    }
+  }
+}

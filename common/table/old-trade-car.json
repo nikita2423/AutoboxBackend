@@ -1,0 +1,83 @@
+{
+  "widgets": [
+    {
+      "label": "Old Trade cars",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+
+  "tables": {
+    "added": {
+      "search": "date",
+      "date": true
+    },
+    "city_added": {
+      "display": false
+    },
+    "city_name": {
+      "label": "City",
+      "search": "text"
+    },
+    "city_status": {
+      "display": false
+    },
+    "customer_firstName": {
+      "label": "Customer",
+      "search": "text"
+    },
+    "customer_lastName": {
+      "display" : false
+    },
+    "customer_email": {
+      "label": "Email",
+      "search": "text"
+    },
+    "customer_username": {
+      "display": false
+    },
+    "customer_profilePic":{
+      "display": false
+    },
+    "customer_added": {
+      "display":false
+    },
+    "customer_status": {
+      "display": false
+    },
+    "customer_phoneNumber": {
+      "display": false
+    },
+    "carModel_name":{
+      "label": "Model",
+      "search": true
+    },
+    "carModel_added": {
+      "display": false
+    },
+    "carModel_status": {
+      "display": false
+    },
+    "carModel_image": {
+      "display": false
+    },
+    "brand_image": {
+      "display": false
+    },
+    "brand_name": {
+      "label": "Brand",
+      "search": "text"
+    },
+    "brand_status": {
+      "display": false
+    },
+    "brand_added": {
+      "display": false
+    }
+  }
+}

@@ -73,50 +73,15 @@
   },
   "validations": [],
   "relations": {
-    "car": {
-      "type": "belongsTo",
-      "model": "Car",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Car",
-        "searchProp": "name",
-        "priority": 2,
-        "search": true,
-        "create": false,
-        "id": "AddCar",
-        "hide": false,
-        "label": "Add Car"
-      }
-    },
     "showroom": {
       "type": "belongsTo",
       "model": "Showroom",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add ShowRoom",
-        "searchProp": "name",
-        "priority": 2,
-        "search": true,
-        "create": false,
-        "id": "AddShowRoom",
-        "hide": false,
-        "label": "Add ShowRoom"
-      }
+      "foreignKey": ""
     },
     "workshop": {
       "type": "belongsTo",
       "model": "Workshop",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Workshop",
-        "searchProp": "name",
-        "priority": 2,
-        "search": true,
-        "create": false,
-        "id": "AddWorkshop",
-        "hide": false,
-        "label": "Add Workshop"
-      }
+      "foreignKey": ""
     },
     "customer": {
       "type": "belongsTo",

@@ -1,0 +1,80 @@
+{
+  "widgets": [
+    {
+      "label": "QuoteReplies",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "exShowroomPrice": {
+      "label": "ExShowroom Price",
+      "search": "number"
+    },
+    "exchangeBonus": {
+      "label": "Exchange Bonus",
+      "search": "number"
+    },
+    "insurance": {
+      "display": false
+    },
+    "specialDiscount": {
+      "label": "Special Discount",
+      "search": "number"
+    },
+    "rtoRegistration": {
+      "label": "RTO Registration",
+      "search": "text"
+    },
+    "loyaltyBonus": {
+      "label": "Loyalty Bonus",
+      "search": "number"
+    },
+    "miscCharges": {
+      "display": false
+    },
+    "gst": {
+      "display": false
+    },
+    "roadPrice": {
+      "label": "Road Price",
+      "search": "number"
+    },
+    "added": {
+      "search": "date",
+      "date": true
+    },
+    "dealer_added": {
+      "display": false
+    },
+    "dealer_firstName": {
+      "display": false
+    },
+    "dealer_lastName": {
+      "display": false
+    },
+    "dealer_email": {
+      "display": false
+    },
+    "dealer_status": {
+      "display": false
+    },
+    "dealer_contact": {
+      "display": false
+    },
+    "customerQuote_ownershipType": {
+      "display": false
+    },
+    "customerQuote_quoteType": {
+      "display": false
+    },
+    "customerQuote_added": {
+      "display": false
+    }
+  }
+}

@@ -1,7 +1,7 @@
 {
   "widgets": [
     {
-      "label": "Models",
+      "label": "Countries",
       "icon": "si-bar-chart",
       "fetchLocally": true,
       "propObj": {
@@ -19,9 +19,6 @@
       "search": "date",
       "date": true
     },
-    "image": {
-      "display": false
-    },
     "status": {
       "tag": {
         "inactive": "label-warning",
@@ -32,19 +29,6 @@
         "active",
         "inactive"
       ]
-    },
-    "brand_name": {
-      "label": "Brand",
-      "search": "text"
-    },
-    "brand_status": {
-      "display": false
-    },
-    "brand_image": {
-      "display": false
-    },
-    "brand_added": {
-      "display": false
     }
   }
 }

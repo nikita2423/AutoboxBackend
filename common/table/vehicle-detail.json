@@ -1,0 +1,36 @@
+{
+  "widgets": [
+    {
+      "label": "Vehicle Details",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "added": {
+      "search": "date",
+      "date": true
+    },
+    "registrationNumber": {
+      "label": "Registration No.",
+      "search": "text"
+    },
+    "registeredName": {
+      "label": "Registered Name",
+      "search": "text"
+    },
+    "showroomName": {
+      "label": "Showroom",
+      "search": "text"
+    },
+    "workshopName": {
+      "label": "Workshop",
+      "search": "text"
+    }
+  }
+}

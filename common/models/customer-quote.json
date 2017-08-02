@@ -85,21 +85,6 @@
   },
   "validations": [],
   "relations": {
-    "car": {
-      "type": "belongsTo",
-      "model": "Car",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Car",
-        "searchProp": "name",
-        "priority": 2,
-        "search": true,
-        "create": false,
-        "id": "AddCar",
-        "hide": false,
-        "label": "Add Car"
-      }
-    },
     "brand": {
       "type": "belongsTo",
       "model": "Brand",
