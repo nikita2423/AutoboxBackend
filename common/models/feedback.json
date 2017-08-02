@@ -7,11 +7,29 @@
   },
   "properties": {
     "subject": {
-      "type": "string"
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Subject",
+          "id": "feedbackSubject"
+        }
+      }
     },
     "message": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Message",
+          "id": "feedbackMessage"
+        }
+      }
     },
     "added": {
       "type": "date",
@@ -32,12 +50,32 @@
     "customer": {
       "type": "belongsTo",
       "model": "Customer",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Customer",
+        "searchProp": "email",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCustomer",
+        "hide": false,
+        "label": "Add Customer"
+      }
     },
     "dealer": {
       "type": "belongsTo",
       "model": "Dealer",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Dealer",
+        "searchProp": "email",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddDealer",
+        "hide": false,
+        "label": "Add Dealer"
+      }
     }
   },
   "acls": [],

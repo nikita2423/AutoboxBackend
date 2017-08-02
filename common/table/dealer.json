@@ -1,0 +1,150 @@
+{
+  "widgets": [
+    {
+      "label": "Dealers",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+
+  "tables": {
+    "added": {
+      "date": true,
+      "search": "date"
+    },
+    "firstName": {
+      "label": "Name",
+      "search": "text"
+    },
+    "lastName": {
+      "display": false
+    },
+    "email": {
+      "search": "text"
+    },
+    "status": {
+      "tag": {
+        "inactive": "label-warning",
+        "active": "label-success"
+      },
+      "search": "select",
+      "options": [
+        "active",
+        "inactive"
+      ]
+    },
+    "contact": {
+      "search": "text"
+    },
+    "area_pincode": {
+      "display": false
+    },
+    "area_name": {
+      "display": false
+    },
+    "area_added": {
+      "display": false
+    },
+    "city_name": {
+      "label": "City",
+      "search": "text"
+    },
+    "city_added": {
+      "display": false
+    },
+    "city_status": {
+      "display": false
+    },
+    "brand_added": {
+      "display": false
+    },
+    "brand_name": {
+      "label": "Brand",
+      "search": "text"
+    },
+    "brand_status": {
+      "display" : false
+    },
+    "brand_image": {
+      "display": false
+    },
+    "showroom_added": {
+      "display": false
+    },
+    "showroom_name": {
+      "label": "Showroom",
+      "search": "text"
+    },
+    "showroom_status": {
+      "display": false
+    },
+    "showroom_salesConsultantName": {
+      "display": false
+    },
+    "showroom_contactNumber":{
+      "display": false
+    },
+    "showroom_email": {
+      "display": false
+    },
+    "showroom_latlong": {
+      "display": false
+    },
+    "showroom_address": {
+      "display": false
+    },
+    "showroom_landline": {
+      "display": false
+    },
+    "showroom_image": {
+      "display": false
+    },
+    "showroom_managerImage": {
+      "display": false
+    },
+    "showroom_timings": {
+      "display": false
+    },
+    "workshop_added": {
+      "display": false
+    },
+    "workshop_dealershipName": {
+      "display": false
+    },
+    "workshop_status": {
+      "display":false
+    },
+    "workshop_consultantName": {
+      "display": false
+    },
+    "workshop_latlong": {
+      "display": false
+    },
+    "workshop_timings": {
+      "display": false
+    },
+    "workshop_address": {
+      "display": false
+    },
+    "workshop_image": {
+      "display": false
+    },
+    "workshop_managerImage": {
+      "display": false
+    },
+    "workshop_email": {
+      "display": false
+    },
+    "workshop_contactNumber": {
+      "display": false
+    },
+    "workshop_landline": {
+      "display": false
+    }
+  }
+}

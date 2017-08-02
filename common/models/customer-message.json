@@ -52,7 +52,7 @@
       "template": {
         "type": "selectString",
         "templateOptions": {
-          "label": "Message Type",
+          "label": "Type",
           "id": "type",
           "priority": 6,
           "options": [

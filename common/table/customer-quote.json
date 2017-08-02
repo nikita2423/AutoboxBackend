@@ -1,0 +1,210 @@
+{
+  "widgets": [
+    {
+      "label": "Customer Quotes",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+
+  "tables": {
+    "added": {
+      "date": true,
+      "search": "date"
+    },
+    "quoteType": {
+      "tag": {
+        "q": "label-primary",
+        "t": "label-warning"
+      },
+      "search": "select",
+      "options": [
+        "q",
+        "t"
+      ]
+    },
+    "customer_firstName": {
+      "label": "Customer",
+      "search": "text"
+    },
+    "customer_lastName": {
+      "display": false
+    },
+    "customer_email": {
+      "display": false
+    },
+    "customer_username": {
+      "display": false
+    },
+    "customer_phoneNumber": {
+      "label": "Mobile",
+      "search": "text"
+    },
+    "customer_profilePic": {
+      "display": false
+    },
+    "customer_added": {
+      "display": false
+    },
+    "vehicleInfo_added": {
+      "display": false
+    },
+    "vehicleInfo_vehicleModel": {
+      "label": "Model",
+      "search": "text"
+    },
+    "vehicleInfo_fuelType": {
+      "label": "Fuel",
+      "search": "text"
+    },
+    "vehicleInfo_vehicleTrim": {
+      "label": "Trim",
+      "search": "text"
+    },
+    "vehicleInfo_vehicleGearbox": {
+      "label": "Gearbox",
+      "search": "text"
+    },
+    "vehicleInfo_vehicleColor":{
+      "label": "Color",
+      "search": "text"
+    },
+    "ownershipType": {
+      "tag": {
+        "individual": "label-success",
+        "corporate": "label-danger"
+      },
+      "search": "select",
+      "options": [
+        "individual",
+        "corporate"
+      ],
+      "label": "Ownership"
+    },
+    "isOldVehicleTrade": {
+      "tag": {
+        "yes": "label-primary",
+        "no": "label-danger"
+      },
+      "search": "select",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "label": "Trade In"
+    },
+    "soldViaAutobox": {
+      "tag": {
+        "yes": "label-primary",
+        "no": "label-danger"
+      },
+      "search": "select",
+      "options": [
+        "yes",
+        "no"
+      ]
+    },
+    "isInsurance": {
+      "tag": {
+        "yes": "label-primary",
+        "no": "label-danger"
+      },
+      "search": "select",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "label": "Insurance"
+    },
+    "isFinance": {
+      "tag": {
+        "yes": "label-primary",
+        "no": "label-danger"
+      },
+      "search": "select",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "label": "Finance"
+    },
+    "quoteNumber": {
+      "label": "Quote",
+      "search": "text"
+    },
+    "gpsTracker": {
+      "tag": {
+        "yes": "label-primary",
+        "no": "label-danger"
+      },
+      "search": "select",
+      "options": [
+        "yes",
+        "no"
+      ]
+    },
+    "dashCamera": {
+      "tag": {
+        "yes": "label-primary",
+        "no": "label-danger"
+      },
+      "search": "select",
+      "options": [
+        "yes",
+        "no"
+      ]
+    },
+    "testDrive": {
+      "tag": {
+        "yes": "label-primary",
+        "no": "label-danger"
+      },
+      "search": "select",
+      "options": [
+        "yes",
+        "no"
+      ]
+    },
+    "brand_added": {
+      "display": false
+    },
+    "brand_status": {
+      "display": false
+    },
+    "brand_image": {
+      "display": false
+    },
+    "brand_name": {
+      "display": false
+    },
+    "carModel_added": {
+      "display": false
+    },
+    "carModel_status": {
+      "display": false
+    },
+    "carModel_image": {
+      "display": false
+    },
+    "carModel_name":{
+      "display": false
+    },
+    "city_added": {
+      "display": false
+    },
+    "city_name": {
+      "display": false
+    },
+    "city_status": {
+      "display": false
+    },
+    "customer_status": {
+      "display": false
+    }
+  }
+}

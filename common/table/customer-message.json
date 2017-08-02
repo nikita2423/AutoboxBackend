@@ -12,6 +12,119 @@
     }
   ],
   "tables": {
-
+     "customer_firstName": {
+       "search": "text",
+       "label": "FirstName"
+     },
+    "customer_lastName": {
+      "search": "text",
+      "label": "LastName"
+    },
+    "customer_added": {
+      "display": false
+    },
+    "customer_status": {
+      "display": false
+    },
+    "customer_email":{
+      "display":false
+    },
+    "customer_phoneNumber": {
+      "label": "Mobile",
+      "search": "text"
+    },
+    "customer_username": {
+      "display": false
+    },
+    "type": {
+      "tag": {
+        "call": "label-primary",
+        "message": "label-warning"
+      },
+      "search": "select",
+      "options": [
+        "call",
+        "message"
+      ]
+    },
+    "added": {
+      "date": true,
+      "search": "date",
+      "label": "Date"
+    },
+    "status": {
+      "tag": {
+        "pending": "label-danger",
+        "contacted": "label-success"
+      },
+      "search": "select",
+      "options": [
+        "pending",
+        "contacted"
+      ]
+    },
+    "message": {
+      "search": "text"
+    },
+    "subject": {
+      "display": false
+    },
+    "userType": {
+      "display": false
+    },
+    "dealer_firstName": {
+      "display": false
+    },
+    "dealer_lastName": {
+      "display": false
+    },
+    "dealer_status": {
+      "display": false
+    },
+    "dealer_added": {
+      "display": false
+    },
+    "dealer_email": {
+      "display": false
+    },
+    "dealer_contact": {
+      "display": false
+    },
+    "customerQuote_ownershipType": {
+      "display": false
+    },
+    "customerQuote_isFinance": {
+      "display": false
+    },
+    "customerQuote_isInsurance": {
+      "display": false
+    },
+    "customerQuote_isOldVehicleTrade": {
+      "display": false
+    },
+    "customerQuote_quoteType": {
+      "display": false
+    },
+    "customerQuote_soldViaAutobox": {
+      "display":false
+    },
+    "customerQuote_gpsTracker": {
+      "display": false
+    },
+    "customerQuote_dashCamera": {
+      "display": false
+    },
+    "customerQuote_testDrive": {
+      "display": false
+    },
+    "customerQuote_quoteNumber": {
+      "display": false
+    },
+    "customerQuote_added": {
+      "display": false
+    },
+    "customer_profilePic": {
+      "display": false
+    }
   }
 }

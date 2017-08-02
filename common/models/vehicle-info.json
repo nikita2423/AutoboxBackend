@@ -5,7 +5,73 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "vehicleModel": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Model",
+          "id": "carModel"
+        }
+      }
+    },
+    "fuelType": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Fuel Type",
+          "id": "fuelType"
+        }
+      }
+    },
+    "vehicleTrim": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Trim",
+          "id": "vehicleTrim"
+        }
+      }
+    },
+    "vehicleGearbox": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Gearbox",
+          "id": "vehicleGearbox"
+        }
+      }
+    },
+    "vehicleColor": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Color",
+          "id": "vehicleColor"
+        }
+      }
+    }
+  },
   "validations": [],
   "relations": {
     "color": {

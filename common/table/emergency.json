@@ -1,0 +1,58 @@
+{
+  "widgets": [
+    {
+      "label": "Emergencies",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+
+  "tables": {
+    "added": {
+      "date": true,
+      "search": "date"
+    },
+    "name": {
+      "search": "text"
+    },
+    "contactNumber": {
+      "search": "text",
+      "label": "Contact"
+    },
+    "latlong": {
+      "display": false
+    },
+    "city_added": {
+      "display": false
+    },
+    "city_status": {
+      "display": false
+    },
+    "city_name": {
+      "search": "text",
+      "label": "City"
+    },
+    "area_added": {
+     "display": false
+    },
+    "area_pincode": {
+      "display": false
+    },
+    "area_name": {
+      "label" : "Area",
+      "search": "text"
+    },
+    "emergencyCategory_added": {
+      "display": false
+    },
+    "emergencyCategory_name": {
+      "label": "Category",
+      "search": "text"
+    }
+  }
+}

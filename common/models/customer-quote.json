@@ -24,14 +24,53 @@
     },
     "isFinance": {
       "type": "boolean",
-      "required": true
+      "required": true,
+      "default": "no",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Finance",
+          "id": "isFinance",
+          "priority": 6,
+          "options": [
+            "yes",
+            "no"
+          ]
+        }
+      }
     },
     "isInsurance": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": "no",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Insurance",
+          "id": "isInsurance",
+          "priority": 6,
+          "options": [
+            "yes",
+            "no"
+          ]
+        }
+      }
     },
     "isOldVehicleTrade": {
       "type": "boolean",
-      "required": true
+      "required": true,
+      "default": "no",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Trade In",
+          "id": "tradeIn",
+          "priority": 6,
+          "options": [
+            "yes",
+            "no"
+          ]
+        }
+      }
     },
     "quoteType": {
       "type": "string",
@@ -51,23 +90,84 @@
     },
     "soldViaAutobox": {
       "type": "boolean",
-      "required": true
+      "required": true,
+      "default": "no",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Sold Via Autobox",
+          "id": "soldViaAutobox",
+          "priority": 6,
+          "options": [
+            "yes",
+            "no"
+          ]
+        }
+      }
     },
     "gpsTracker": {
       "type": "boolean",
-      "required": true
+      "required": true,
+      "default": "no",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "GPS Tracker",
+          "id": "gpsTracker",
+          "priority": 6,
+          "options": [
+            "yes",
+            "no"
+          ]
+        }
+      }
     },
     "dashCamera": {
       "type": "boolean",
-      "required": true
+      "required": true,
+      "default": "no",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Dash Camera",
+          "id": "dashCamera",
+          "priority": 6,
+          "options": [
+            "yes",
+            "no"
+          ]
+        }
+      }
     },
     "testDrive": {
       "type": "boolean",
-      "required": true
+      "required": true,
+      "default": "no",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Test Drive",
+          "id": "testDrive",
+          "priority": 6,
+          "options": [
+            "yes",
+            "no"
+          ]
+        }
+      }
     },
     "quoteNumber": {
       "type": "string",
-      "required": true
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Quote Number",
+          "id": "quoteNumber"
+        }
+      }
     },
     "added": {
       "type": "date",
@@ -148,7 +248,18 @@
     "vehicleInfo": {
       "type": "belongsTo",
       "model": "VehicleInfo",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Vehicle",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "vehicleInfo",
+        "hide": false,
+        "label": "Add Vehicle"
+      }
+
     }
   },
   "acls": [],

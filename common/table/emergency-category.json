@@ -1,0 +1,24 @@
+{
+  "widgets": [
+    {
+      "label": "Emergency Categories",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+
+  "tables": {
+    "added": {
+      "date": true,
+      "search": "text"
+    },
+    "name": {
+      "search": "text"
+    }
+  }
+}

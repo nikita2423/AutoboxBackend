@@ -1,0 +1,35 @@
+{
+  "widgets": [
+    {
+      "label": "Fuels",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+
+  "tables": {
+    "added": {
+      "date": true,
+      "search": "date"
+    },
+    "name": {
+      "search": "text"
+    },
+    "status": {
+      "tag": {
+        "inactive": "label-warning",
+        "active": "label-success"
+      },
+      "search": "select",
+      "options": [
+        "active",
+        "inactive"
+      ]
+    }
+  }
+}
