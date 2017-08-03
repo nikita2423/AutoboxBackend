@@ -3,5 +3,6 @@
   "description": "Plugin to handle all autobox logic",
   "routeExposure": "/autobox",
   "activate": true,
-  "pluginDependencies": {}
+  "pluginDependencies": {},
+  "companyName": "Autobox"
 }

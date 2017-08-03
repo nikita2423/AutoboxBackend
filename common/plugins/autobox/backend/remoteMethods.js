@@ -7,7 +7,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const GeoPoint = require("geopoint");
     const _ = require("lodash");
     const Promise = require("bluebird");
-
+    const moment = require("moment");
     var init = function(){
         findAllBrandMethod();
         findAllModelsMethod();
@@ -60,8 +60,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     const findAllModelsMethod = function(){
       const CarModel = databaseObj.CarModel;
-      CarModel.findAllModels = findAllModels;
-      CarModel.remoteMethod("findAllModels", {
+      CarModel.findAll = findAllModels;
+      CarModel.remoteMethod("findAll", {
          accepts: [
              {
                  arg: 'ctx',
@@ -1515,7 +1515,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                   const customerId = "";
                   const ServiceBooking = databaseObj.ServiceBooking;
                   ServiceBooking.create({
-                      serviceDate: serviceBookingObj.serviceDate,
+                      serviceDate: moment(serviceBookingObj.serviceDate, "DD/MM/YYYY"),
                       comments: serviceBookingObj.comments,
                       vehiclePickup: serviceBookingObj.vehiclePickup,
                       serviceTypeId: serviceBookingObj.serviceTypeId,
@@ -1678,6 +1678,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             }
                         }
                     }
+                    filter.include = ["dealer"];
                     const QuoteReply = databaseObj.QuoteReply;
                     QuoteReply.find(filter)
                         .then(function(quoteReplyList){
@@ -1687,6 +1688,11 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                     lastDate = quoteReply.added;
                                 }
                             }
+
+                            callback(null, {
+                                quoteReplyList: quoteReplyList,
+                                cursor: lastDate
+                            })
                         })
                         .catch(function(error){
                             callback(error);
@@ -1758,7 +1764,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     const customerId = "";
                     const ServiceHistory = databaseObj.ServiceHistory;
                     ServiceHistory.create( {
-                        dateOfBooking: serviceObj.dateOfBooking,
+                        dateOfBooking: moment(serviceObj.dateOfBooking, "DD/MM/YYYY"),
                         mileageCompleted: serviceObj.mileageCompleted,
                         charges: serviceObj.charges,
                         customerId: customerId

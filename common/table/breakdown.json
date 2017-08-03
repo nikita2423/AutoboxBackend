@@ -16,7 +16,8 @@
       "search": "text"
     },
     "contactNumber": {
-      "label": "Contact"
+      "label": "Contact",
+      "search": "text"
     },
     "latlong": {
       "display": false

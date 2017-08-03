@@ -62,7 +62,7 @@
     },
     "fuel_name": {
       "label": "Fuel",
-      "search": false
+      "search": "text"
     },
     "fuel_status": {
       "display": false
