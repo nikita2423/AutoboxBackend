@@ -15,6 +15,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 	 */
 
     const remoteMethods = require("./remoteMethods")(server, databaseObj, helper, packageObj);
+    const pushNotification = require("./pushNotification")(server, databaseObj, helper, packageObj);
 
     var speakeasy = require("speakeasy");
     var secret = speakeasy.generateSecret({length: 20});
@@ -22,6 +23,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 		requestOtpMethod();
 		loginWithCodeMethod();
         remoteMethods.init();
+        pushNotification.init();
 	};
 
 

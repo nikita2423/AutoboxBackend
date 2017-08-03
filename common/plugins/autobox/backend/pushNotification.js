@@ -42,7 +42,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                            var from = packageObj.companyName;
                            var message = quoteNotificationFormat(name, type, title, id);
                            if(customerQuoteObj.customer.registrationId){
-                               sendNotification(server, message, customerQuoteObj.customer.registrationId, from, function(){
+                               sendNotification(server, message, customerQuoteObj.customer.registrationId, from, function(error){
                                    if(error){
                                        console.log(error);
                                    } else{
