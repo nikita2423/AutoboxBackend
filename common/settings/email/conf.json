@@ -6,9 +6,15 @@
     "emailModel": "adminEmail",
     "emailLabel": "Send Info",
     "label": "Send Mail To Users",
-    "from": "'Test User' <test@snaphy.com>",
+    "from": "'Autobox' <test@snaphy.com>",
     "assosiatedUsers": ["Customer", "Employee"],
     "templates": {
+      "successfulRegistrationForCustomer": {
+        "name":"successfulRegistrationForCustomer",
+        "label":"On Successfully Registered",
+        "templatePath": "../../plugins/autobox/backend/email/customer/customer_registration.ejs",
+        "display": false
+      }
     }
   }],
   "pluginDependencies": {}

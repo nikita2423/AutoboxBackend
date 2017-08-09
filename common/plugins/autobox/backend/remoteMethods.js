@@ -8,6 +8,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const _ = require("lodash");
     const Promise = require("bluebird");
     const moment = require("moment");
+    const process = require("process");
+    const emailPlugin = helper.loadPlugin("email");
     var init = function(){
         findAllBrandMethod();
         findAllModelsMethod();
@@ -34,6 +36,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         fetchWorkshopForBrandMethod();
         fetchShowroomForBrandMethod();
         findAllVehiclesMethod();
+        saveCustomerMethod();
+        onCustomerSaved();
     };
 
     const findAllBrandMethod = function(){
@@ -615,6 +619,30 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 arg: "vehiclesList", type: "object", root: true
             }
         })
+    };
+
+
+    const saveCustomerMethod = function(){
+        const Customer = databaseObj.Customer;
+        Customer.saveCustomer = saveCustomer;
+        Customer.remoteMethod("saveCustomer", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "customerObj", type: "object"
+                }
+            ],
+            returns: {
+                arg: "customerObj", type: "Customer", root: true
+            }
+
+        });
     };
     /**
      * To fetch all the Brands
@@ -1899,6 +1927,106 @@ module.exports = function( server, databaseObj, helper, packageObj) {
               return callback(new Error("User not valid"));
           }
       }
+    };
+
+
+    const saveCustomer = function(ctx, customerObj, callback){
+      const request = ctx.req;
+      if(!customerObj){
+          return callback(new Error("Invalid Arguments"));
+      } else{
+          if(request.accessToken){
+              if(request.accessToken.userId){
+                  const customerId = request.accessToken.userId;
+                  const Customer = databaseObj.Customer;
+                  Customer.findById(customerId)
+                      .then(function(customer){
+                          if(customer){
+                              return Customer.upsert({
+                                  firstName : customerObj.firstName,
+                                  lastName : customerObj.lastName,
+                                  email : customerObj.email,
+                                  cityId : customerObj.cityId,
+                                  countryId : customerObj.countryId,
+                                  workshopId : customerObj.workshopId,
+                                  phoneNumber: customerObj.phoneNumber,
+                                  id: customerId,
+                                  status: "active",
+                                  added: customer.added
+
+                              });
+                          } else{
+                              callback(new Error("Customer not found"));
+                          }
+                      })
+                      .then(function(customer){
+                          if(customer){
+                              callback(null, customer);
+                          } else{
+                              callback(new Error("Customer cannot be updated"));
+                          }
+                      })
+                      .catch(function(error){
+                          callback(error);
+                      })
+              } else{
+                  callback(new Error("User not valid"));
+              }
+          } else{
+              callback(new Error("User not valid"));
+          }
+      }
+    };
+
+
+    const onCustomerSaved = function(){
+        const Customer = databaseObj.Customer;
+        Customer.observe("after save", function(ctx, next){
+            const instance = ctx.instance;
+            const customerObj = instance.toJSON();
+            process.nextTick(function(){
+                databaseObj.City.findById(customerObj.cityId)
+                    .then(function(city){
+                        if(city){
+                            customerObj.city = city;
+                            customerObj.cityName = city.name;
+                             return databaseObj.Country.findById(customerObj.countryId)
+                        }
+                    })
+                    .then(function(country){
+                        if(country){
+                            customerObj.country = country;
+                            customerObj.countryName = country.name;
+                            return databaseObj.Workshop.findById(customerObj.workshopId)
+                        }
+                    })
+                    .then(function(workshop){
+                        if(workshop){
+                            customerObj.workshop = workshop;
+                            customerObj.serviceCenter = workshop.dealershipName;
+                        }
+                    })
+                    .then(function(){
+                        const subject = packageObj.customer.subject;
+                        const to = [];
+                        const from = packageObj.from;
+                        to.push(customerObj.email);
+                        emailPlugin.adminEmail.successfulRegistrationForCustomer(from, to, subject, customerObj, function (err, send) {
+                            if(err){
+                                console.log(err);
+                            } else{
+                                console.log("Email send Successfully");
+                            }
+                        })
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                    })
+
+
+            });
+            next();
+        })
     };
 
 

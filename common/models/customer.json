@@ -39,6 +39,15 @@
         }
       }
     },
+    "cityName": {
+      "type": "string"
+    },
+    "countryName": {
+      "type": "string"
+    },
+    "serviceCenter": {
+      "type": "string"
+    },
     "status": {
       "type": "string",
       "required": true,
@@ -282,6 +291,13 @@
       "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "saveCustomer"
     }
   ],
   "methods": {}

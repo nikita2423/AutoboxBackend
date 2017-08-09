@@ -4,5 +4,9 @@
   "routeExposure": "/autobox",
   "activate": true,
   "pluginDependencies": {},
-  "companyName": "Autobox"
+  "companyName": "Autobox",
+  "from": "Autobox <test@snaphy.com>",
+  "customer": {
+    "subject": "Registered Successfully"
+  }
 }
