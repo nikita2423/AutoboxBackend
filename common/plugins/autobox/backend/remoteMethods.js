@@ -104,7 +104,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 }
             ],
             returns:{
-                arg:"fuelList", type: "array", root: true
+                arg:"fuelList", type: ["Car"], root: true
             }
         });
     };
@@ -127,7 +127,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 }
             ],
             returns:{
-                arg:"gearboxList", type: "array", root: true
+                arg:"gearboxList", type: ["Car"], root: true
             }
         });
     };
@@ -241,7 +241,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 }
             ],
             returns: {
-                arg: "breakdownList", type: "array", root: true
+                arg: "breakdownList", type: ["Breakdown"], root: true
             }
         });
     };
@@ -295,7 +295,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 }
             ],
             returns: {
-                arg: "emergencyList", type: "array", root: true
+                arg: "emergencyList", type: ["Emergency"], root: true
             }
         });
     };
@@ -506,7 +506,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 }
             ],
             returns: {
-                arg: "customerQuoteList", type: "array", root: true
+                arg: "customerQuoteList", type: ["CustomerQuote"], root: true
             }
         });
     };

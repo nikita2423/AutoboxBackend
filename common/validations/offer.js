@@ -13,6 +13,13 @@ module.exports = (Offer, server, helper) =>
     const _ = require('lodash');
 
     const STATUS = ["active", "expired"];
+    var schedule = require('node-schedule');
+    const moment = require("moment");
+
+    const alarmManager =  {
+        "dailyHour": 0,
+        "dailyMinutes": 1
+    };
 
     Offer.observe("before save", function(ctx, next){
         const instance = ctx.instance || ctx.data;
@@ -47,12 +54,45 @@ module.exports = (Offer, server, helper) =>
                 return next(new Error("Status is not valid"));
             }
         }
-
-        if(!validate(instance, currentInstance, "cityId") && !validate(instance, currentInstance, "areaId") && !validate(instance, currentInstance, "brandId")){
-            return next(new Error("City or Area or Brand is required"));
+        if(ctx.isNewInstance) {
+            if (!validate(instance, currentInstance, "cityId") && !validate(instance, currentInstance, "areaId") && !validate(instance, currentInstance, "brandId")) {
+                return next(new Error("City or Area or Brand is required"));
+            }
         }
-
         next();
 
     });
+
+
+    var checkOfferExpiry = function(){
+        var rule = new schedule.RecurrenceRule();
+        rule.hour = alarmManager.dailyHour || 0;
+        rule.minute = alarmManager.dailyMinutes || 1;
+
+        var job = schedule.scheduleJob(rule, function(){
+            console.log("Waking up to check the expiry of offers");
+            var yesterday = moment().subtract(1, 'days');
+            var where = {
+                status: "active",
+                expiredOn: {
+                    lt: moment.utc(yesterday)
+                }
+            };
+
+            Offer.updateAll(where, {
+                status: "expired"
+            }, function(error, info){
+                if(error){
+                    console.log(error);
+                } else{
+                    console.log(info);
+                }
+            });
+
+
+
+        });
+    };
+
+    checkOfferExpiry();
 };

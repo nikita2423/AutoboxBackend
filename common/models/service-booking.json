@@ -85,13 +85,28 @@
       "foreignKey": "",
       "templateOptions": {
         "btnText": "Add Workshop",
-        "searchProp": "name",
+        "searchProp": "dealershipName",
         "priority": 2,
         "search": true,
         "create": false,
         "id": "AddWorkshop",
         "hide": false,
         "label": "Add Workshop"
+      }
+    },
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Customer",
+        "searchProp": "email",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCustomer",
+        "hide": false,
+        "label": "Add Customer"
       }
     }
   },

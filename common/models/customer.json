@@ -297,7 +297,10 @@
       "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW",
-      "property": ["saveCustomer", "onCompletePurchase"]
+      "property": [
+        "saveCustomer",
+        "onCompletePurchase"
+      ]
     }
   ],
   "methods": {}

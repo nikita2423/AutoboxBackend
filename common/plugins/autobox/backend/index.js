@@ -118,12 +118,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
         if(codeValidates){
         	//create Access Token..
-            console.log("success");
+            //console.log("success");
 			createAccessToken(phoneNumber,callback);
 
 
 		} else{
-        	console.log("Token not matches");
+        	//console.log("Token not matches");
         	callback(new Error("Code not matches"));
 		}
 	};
