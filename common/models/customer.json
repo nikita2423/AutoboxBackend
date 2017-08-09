@@ -39,6 +39,11 @@
         }
       }
     },
+    "registerStatus": {
+      "type": "string",
+      "default": "notregistered",
+      "required": true
+    },
     "cityName": {
       "type": "string"
     },

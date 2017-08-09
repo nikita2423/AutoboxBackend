@@ -52,6 +52,7 @@ module.exports = ( Customer, server, helper) => {
             }
         }
 
+
        /* if(instance.email){
             instance.email = trim(instance.email);
             //Sanitize an Email..
@@ -74,9 +75,27 @@ module.exports = ( Customer, server, helper) => {
         if(!instance.workshopId){
             return next(new Error("Workshop is required"));
         }*/
+      if(instance.firstName){
+          Customer.findById(instance.id)
+              .then(function(customer){
+                  if(customer){
+                      if(customer.firstName){
+                          instance.registerStatus = "registered";
+                          next();
+                      } else{
+                          instance.registerStatus = "notregistered";
+                          next();
+                      }
+                  }
+              })
+              .catch(function(error){
+                  next(error);
+              });
+      } else{
+          next();
+      }
 
 
-        next();
     });
 
 

@@ -99,47 +99,50 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         Customer.observe("after save", function(ctx, next){
             const instance = ctx.instance;
             const customerObj = instance.toJSON();
-            process.nextTick(function(){
-                databaseObj.City.findById(customerObj.cityId)
-                    .then(function(city){
-                        if(city){
-                            customerObj.city = city;
-                            customerObj.cityName = city.name;
-                            return databaseObj.Country.findById(customerObj.countryId)
-                        }
-                    })
-                    .then(function(country){
-                        if(country){
-                            customerObj.country = country;
-                            customerObj.countryName = country.name;
-                            return databaseObj.Workshop.findById(customerObj.workshopId)
-                        }
-                    })
-                    .then(function(workshop){
-                        if(workshop){
-                            customerObj.workshop = workshop;
-                            customerObj.serviceCenter = workshop.dealershipName;
-                        }
-                    })
-                    .then(function(){
-                        const subject = packageObj.customer.subject;
-                        const to = [];
-                        const from = packageObj.from;
-                        to.push(customerObj.email);
-                        emailPlugin.adminEmail.successfulRegistrationForCustomer(from, to, subject, customerObj, function (err, send) {
-                            if(err){
-                                console.log(err);
-                            } else{
-                                console.log("Email send Successfully");
+            if(customerObj.registerStatus === "notregistered" && !ctx.isNewInstance){
+                process.nextTick(function(){
+                    databaseObj.City.findById(customerObj.cityId)
+                        .then(function(city){
+                            if(city){
+                                customerObj.city = city;
+                                customerObj.cityName = city.name;
+                                return databaseObj.Country.findById(customerObj.countryId)
                             }
+                        })
+                        .then(function(country){
+                            if(country){
+                                customerObj.country = country;
+                                customerObj.countryName = country.name;
+                                return databaseObj.Workshop.findById(customerObj.workshopId)
+                            }
+                        })
+                        .then(function(workshop){
+                            if(workshop){
+                                customerObj.workshop = workshop;
+                                customerObj.serviceCenter = workshop.dealershipName;
+                            }
+                        })
+                        .then(function(){
+                            const subject = packageObj.customer.subject;
+                            const to = [];
+                            const from = packageObj.from;
+                            to.push(customerObj.email);
+                            emailPlugin.adminEmail.successfulRegistrationForCustomer(from, to, subject, customerObj, function (err, send) {
+                                if(err){
+                                    console.log(err);
+                                } else{
+                                    console.log("Email send Successfully");
+                                }
+                            });
+                        })
+                        .catch(function(error){
+                            console.log(error);
                         });
-                    })
-                    .catch(function(error){
-                        console.log(error);
-                    });
 
 
-            });
+                });
+            }
+
             next();
         });
     };
