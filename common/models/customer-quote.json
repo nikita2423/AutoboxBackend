@@ -105,6 +105,10 @@
         }
       }
     },
+    "purchaseStatus": {
+      "type": "string",
+      "default": "notpurchased"
+    },
     "gpsTracker": {
       "type": "boolean",
       "required": true,

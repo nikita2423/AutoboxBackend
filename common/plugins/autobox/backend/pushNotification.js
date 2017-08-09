@@ -161,10 +161,15 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                   databaseObj.CustomerQuote.findById(customerQuoteId)
                       .then(function(customerQuote){
                           if(customerQuote){
-                              customerQuoteObj = customerQuote;
-                              return databaseObj.Customer.findById(customerId);
+                              return customerQuote.updateAttribute("purchaseStatus", "purchased");
                           } else{
                               callback(new Error("Customer Quote cannot be found"));
+                          }
+                      })
+                      .then(function(customerQuote){
+                          if(customerQuote){
+                              customerQuoteObj = customerQuote;
+                              return databaseObj.Customer.findById(customerId);
                           }
                       })
                       .then(function(customer){
