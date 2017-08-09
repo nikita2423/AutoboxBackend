@@ -14,6 +14,12 @@
         "label":"On Successfully Registered",
         "templatePath": "../../plugins/autobox/backend/email/customer/customer_registration.ejs",
         "display": false
+      },
+      "onCompletePurchaseForCustomer": {
+        "name": "onCompletePurchaseForCustomer",
+        "label": "On Complete Purchase",
+        "templatePath": "../../plugins/autobox/backend/email/customer/customer_complete_purchase.ejs",
+        "display": false
       }
     }
   }],

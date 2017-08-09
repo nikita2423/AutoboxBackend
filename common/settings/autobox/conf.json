@@ -7,6 +7,7 @@
   "companyName": "Autobox",
   "from": "Autobox <test@snaphy.com>",
   "customer": {
-    "subject": "Registered Successfully"
+    "subject": "Registered Successfully",
+    "subject_complete_purchase": "Congratulations For New Purchase"
   }
 }

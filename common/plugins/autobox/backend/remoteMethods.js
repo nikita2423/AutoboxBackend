@@ -9,7 +9,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const Promise = require("bluebird");
     const moment = require("moment");
     const process = require("process");
-    const emailPlugin = helper.loadPlugin("email");
+
     var init = function(){
         findAllBrandMethod();
         findAllModelsMethod();
@@ -37,7 +37,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         fetchShowroomForBrandMethod();
         findAllVehiclesMethod();
         saveCustomerMethod();
-        onCustomerSaved();
+
+
     };
 
     const findAllBrandMethod = function(){
@@ -1635,6 +1636,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       }
     };
 
+
+
+
     /**
      * To fetch all the customer quote
      * @param ctx
@@ -1979,55 +1983,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
 
-    const onCustomerSaved = function(){
-        const Customer = databaseObj.Customer;
-        Customer.observe("after save", function(ctx, next){
-            const instance = ctx.instance;
-            const customerObj = instance.toJSON();
-            process.nextTick(function(){
-                databaseObj.City.findById(customerObj.cityId)
-                    .then(function(city){
-                        if(city){
-                            customerObj.city = city;
-                            customerObj.cityName = city.name;
-                             return databaseObj.Country.findById(customerObj.countryId)
-                        }
-                    })
-                    .then(function(country){
-                        if(country){
-                            customerObj.country = country;
-                            customerObj.countryName = country.name;
-                            return databaseObj.Workshop.findById(customerObj.workshopId)
-                        }
-                    })
-                    .then(function(workshop){
-                        if(workshop){
-                            customerObj.workshop = workshop;
-                            customerObj.serviceCenter = workshop.dealershipName;
-                        }
-                    })
-                    .then(function(){
-                        const subject = packageObj.customer.subject;
-                        const to = [];
-                        const from = packageObj.from;
-                        to.push(customerObj.email);
-                        emailPlugin.adminEmail.successfulRegistrationForCustomer(from, to, subject, customerObj, function (err, send) {
-                            if(err){
-                                console.log(err);
-                            } else{
-                                console.log("Email send Successfully");
-                            }
-                        })
-                    })
-                    .catch(function(error){
-                        console.log(error);
-                    })
 
-
-            });
-            next();
-        })
-    };
 
 
 

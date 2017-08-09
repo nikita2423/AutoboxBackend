@@ -221,7 +221,7 @@
       "foreignKey": "",
       "templateOptions": {
         "btnText": "Add Customer",
-        "searchProp": "name",
+        "searchProp": "email",
         "priority": 2,
         "search": true,
         "create": false,
