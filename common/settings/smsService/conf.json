@@ -1,0 +1,23 @@
+{
+  "name": "smsService",
+  "version": "2.0.0",
+  "activate": true,
+  "services": {},
+  "routeExposure": "/smsService",
+  "provider":{
+    "active": "_msg91",
+    "settings": {
+      "nexmo": {
+        "apiKey": "xxxxxx",
+        "apiSecret": "xxxxxxx",
+        "from": "SenderName"
+      },
+      "msg91": {
+        "authKey": "XXXXX",
+        "sender": "XXXX",
+        "route": "4",
+        "country": "0"
+      }
+    }
+  }
+}
