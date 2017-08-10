@@ -1,0 +1,149 @@
+{
+  "name": "Sos",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "contact1": {
+      "type": "object",
+      "required": true,
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "priority": 13,
+          "fields": [
+            {
+              "key": "firstContactName",
+              "type": "input",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter First Contact Name",
+                "priority": 12,
+                "id": "firstContactName",
+                "colSize": "col-xs-4",
+                "inline": true
+              }
+            },
+            {
+              "key": "firstContactNo",
+              "type": "input",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter First Contact Number",
+                "priority": 11,
+                "id": "firstContactNo",
+                "inline": true,
+                "colSize": "col-xs-4"
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    "contact2": {
+      "type": "object",
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "priority": 13,
+          "fields": [
+            {
+              "key": "secondContactName",
+              "type": "input",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter Second Contact Name",
+                "priority": 12,
+                "id": "secondContactName",
+                "colSize": "col-xs-4",
+                "inline": true
+              }
+            },
+            {
+              "key": "secondContactNo",
+              "type": "input",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter Second Contact Number",
+                "priority": 11,
+                "id": "secondContactNo",
+                "inline": true,
+                "colSize": "col-xs-4"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "contact3": {
+      "type": "object",
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "priority": 13,
+          "fields": [
+            {
+              "key": "thirdContactName",
+              "type": "input",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter Third Contact Name",
+                "priority": 12,
+                "id": "thirdContactName",
+                "colSize": "col-xs-4",
+                "inline": true
+              }
+            },
+            {
+              "key": "thirdContactNo",
+              "type": "input",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter Third Contact Number",
+                "priority": 11,
+                "id": "thirdContactNo",
+                "inline": true,
+                "colSize": "col-xs-4"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "added": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "updated": {
+      "type": "date",
+      "defaultFn": "now"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Customer",
+        "searchProp": "email",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCustomer",
+        "hide": false,
+        "label": "Add Customer"
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

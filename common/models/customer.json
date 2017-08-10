@@ -41,8 +41,8 @@
     },
     "registerStatus": {
       "type": "string",
-      "default": "notregistered",
-      "required": true
+      "required": true,
+      "default": "notregistered"
     },
     "cityName": {
       "type": "string"

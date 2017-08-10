@@ -191,5 +191,9 @@
   "VehicleInfo": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "Sos": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

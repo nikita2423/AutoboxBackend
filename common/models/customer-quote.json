@@ -109,6 +109,9 @@
       "type": "string",
       "default": "notpurchased"
     },
+    "purchaseDate": {
+      "type": "date"
+    },
     "gpsTracker": {
       "type": "boolean",
       "required": true,

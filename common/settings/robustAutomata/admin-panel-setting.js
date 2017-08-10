@@ -37,6 +37,7 @@ var settings = {
       "ServiceHistory",
       "ServiceType",
       "Showroom",
+      "Sos",
       "Trim",
       "VehicleDetail",
       "Workshop"

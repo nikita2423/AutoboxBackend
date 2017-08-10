@@ -13,6 +13,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         sendCreateQuoteNotification();
         onCustomerSaved();
         onCompletePurchaseMethod();
+        sendSOSRequestMethod();
     };
 
 
@@ -30,6 +31,26 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 },
                 {
                     arg: "customerQuoteId", type: "string"
+                }
+            ],
+            returns:{
+                arg: "response", type: "Object", root: true
+            }
+        });
+    };
+
+
+    const sendSOSRequestMethod = function(){
+        const Sos = databaseObj.Sos;
+        Sos.sendSOSRequest = sendSOSRequest;
+        Sos.remoteMethod('sendSOSRequest', {
+            accepts:[
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
                 }
             ],
             returns:{
@@ -206,6 +227,32 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                           callback(error);
                       });
               }
+          }
+      }
+    };
+
+
+    const sendSOSRequest = function(ctx, callback){
+      const request = ctx.req;
+      if(request.accessToken){
+          if(request.accessToken.userId){
+              const customerId = request.accessToken.userId;
+              const Sos = databaseObj.Sos;
+              Sos.findOne({
+                  where: {
+                      customerId : customerId
+                  }
+              })
+              .then(function(sos){
+                  if(sos){
+                      //send sms to three contacts
+                      console.log("send sms");
+                  }
+              })
+                  .catch(function(error){
+                      callback(error);
+                  });
+
           }
       }
     };

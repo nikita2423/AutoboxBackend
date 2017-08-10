@@ -1,0 +1,45 @@
+{
+  "widgets": [
+    {
+      "label": "SOS",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "added": {
+      "search": "date",
+      "date": true
+    },
+    "customer_added": {
+      "display": false
+    },
+    "customer_firstName": {
+      "label": "Customer",
+      "search": "text"
+    },
+    "customer_lastName": {
+      "display": false
+    },
+    "customer_profilePic": {
+      "display": false
+    },
+    "customer_status": {
+      "display": false
+    },
+    "customer_username": {
+      "display": false
+    },
+    "customer_email": {
+      "display": false
+    },
+    "customer_phoneNumber": {
+      "display": false
+    }
+  }
+}

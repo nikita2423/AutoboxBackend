@@ -171,7 +171,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 }
             ],
             returns:{
-                arg:"colorsList", type: "Object", root: true
+                arg:"colorsList", type: "Car", root: true
             }
         });
     };
@@ -1306,8 +1306,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      */
     const fetchWorkshopForBrand = function(ctx, brandId, lastDate, callback){
         const request = ctx.req;
-        if(request.accessToken){
-            if(request.accessToken.userId){
+        lastDate = !lastDate ? new Date() : new Date(lastDate);
+       // if(request.accessToken){
+           // if(request.accessToken.userId){
                 const Workshop = databaseObj.Workshop;
                 Workshop.find({
                     where: {
@@ -1335,12 +1336,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     .catch(function(error){
                         callback(error);
                     })
-            }else{
+            /*}else{
                 return callback(new Error("User not valid"));
             }
         } else{
             return callback(new Error("User not valid"));
-        }
+        }*/
     };
 
     /**

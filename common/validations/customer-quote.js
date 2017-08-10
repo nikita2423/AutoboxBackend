@@ -4,8 +4,12 @@
 module.exports = (Customerquote, server, helper) =>
 {
     const {validate} = require("../helper/usefullMethods");
+    const schedule = require('node-schedule');
+    const moment = require('moment');
+    const push = helper.loadPlugin("pushService");
     const OWNERSHIPTYPE = ["individual", "corporate"];
     const QUOTETYPE = ["q", "t"];
+
 
    Customerquote.observe("before save", function(ctx,next){
        const instance = ctx.instance || ctx.data;
@@ -46,8 +50,77 @@ module.exports = (Customerquote, server, helper) =>
        }
 
        next();
-
-
-
    });
+
+   var sendNotificationAfterVehiclePurchase = function(){
+       var rule = new schedule.RecurrenceRule();
+       rule.dayOfWeek = 4;
+       rule.hour = 4;
+       var job = schedule.scheduleJob(rule, function(){
+           console.log("Waking up to send the vehicle filling notification");
+           var filter = {};
+           filter.where = {};
+           if(filter.where){
+               if(!filter.where.purchaseStatus){
+                   filter.where.purchaseStatus = "purchased";
+               }
+               if(!filter.where.purchaseDate){
+                   filter.where.purchaseDate = {};
+                   if(!filter.where.purchaseDate.lt){
+                       filter.where.purchaseDate.lt = moment().subtract(3, 'w');
+                   }
+               }
+           }
+           Customerquote.find(filter)
+               .then(function(customerQuoteList){
+                   if(customerQuoteList){
+                       if(customerQuoteList.length){
+                           customerQuoteList.forEach(function(quote){
+                               if(quote){
+                                   if(quote.customer){
+                                       if(quote.customer.registrationId){
+                                           //send the notification to customer
+                                           var name = quote.customer.firstName;
+                                           var lastName = quote.customer.lastName? quote.customer.lastName: "";
+                                           name = name + " " + lastName;
+                                           var from = "Autobox";
+                                           var title = "Please fill out your vehicle Details";
+                                           var type = "VehicleDetails";
+                                           var message = pushMessageFormat(name, type, title, quote.id);
+                                           sendNotification(server, message, quote.customer.registrationId, from, function(error){
+                                               if(error){
+                                                   console.log(error);
+                                               } else{
+                                                   console.log("Push Notification send Successfully for vehicle details");
+                                               }
+                                           });
+                                       }
+                                   }
+                               }
+                           });
+                       }
+                   }
+               })
+               .catch(function(error){
+                   console.log(error);
+               });
+       });
+   };
+
+    sendNotificationAfterVehiclePurchase();
+
+    var sendNotification = function(app, message, registrationId, from, callback){
+        push.push(app, message, registrationId, from, callback);
+    };
+
+    var pushMessageFormat = function(to, type, title, customerQuoteId){
+        var message = {
+            to : to,
+            type: type,
+            title: title,
+            customerQuoteId: customerQuoteId
+        };
+        return JSON.stringify(message);
+    };
+
 };
