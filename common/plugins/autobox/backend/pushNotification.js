@@ -8,6 +8,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const process = require("process");
     const push = helper.loadPlugin("pushService");
     const emailPlugin = helper.loadPlugin("email");
+    const send = helper.loadPlugin("smsService");
+    const Promise = require("bluebird");
 
     var init = function(){
         sendCreateQuoteNotification();
@@ -127,7 +129,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             if(city){
                                 customerObj.city = city;
                                 customerObj.cityName = city.name;
-                                return databaseObj.Country.findById(customerObj.countryId)
+                                return databaseObj.Country.findById(customerObj.countryId);
                             }
                         })
                         .then(function(country){
@@ -246,15 +248,89 @@ module.exports = function( server, databaseObj, helper, packageObj) {
               .then(function(sos){
                   if(sos){
                       //send sms to three contacts
-                      console.log("send sms");
+                      sendMessage(sos, function(error){
+                          if(error){
+                              callback(error);
+                          } else{
+                              callback(null, {
+                                  response: "success"
+                              });
+                          }
+                      });
                   }
               })
                   .catch(function(error){
                       callback(error);
                   });
 
+          } else{
+              callback(new Error("User not valid"));
           }
+      } else{
+          callback(new Error("User not valid"));
       }
+    };
+
+
+    const sendMessage = function(sos, callback){
+        if(sos.contact1){
+            if(sos.contact1.firstContactNo){
+                var number = sos.contact1.firstContactNo.toString();
+                var message = "Contact as soon as possible";
+                send.send(message, number, function(error){
+                    if(error){
+                        console.log("Unable to send request to first contact");
+                    } else{
+                        console.log("Request send to first contact successfully");
+                        if(!sos.contact2 && !sos.contact3){
+                            callback(null, {
+                                response: "success"
+                            });
+                        }
+                    }
+                });
+
+                if(sos.contact2){
+                    if(sos.contact2.secondContactNo){
+                        var number2 = sos.contact2.secondContactNo.toString();
+                        var message2 = "Contact as soon as possible";
+                        send.send(message2, number2, function(error){
+                            if(error){
+                                console.log("Unable to send request to second contact");
+                            } else{
+                                console.log("Request send to second contact successfully");
+                                if(!sos.contact3){
+                                    callback(null, {
+                                        response: "success"
+                                    });
+                                }
+                            }
+                        });
+                    }
+                }
+
+                if(sos.contact3){
+                    if(sos.contact3.thirdContactNo){
+                        var number3 = sos.contact3.thirdContactNo.toString();
+                        var message3 = "Contact as soon as possible";
+                        send.send(message3, number3, function(){
+                            if(error){
+                                console.log("Unable to send request to third contact");
+                            } else{
+                                console.log("Request send to third contact successfully");
+                                callback(null, {
+                                    response: "success"
+                                });
+                            }
+                        });
+                    }
+                }
+            } else{
+                callback(new Error("Cannot find any number to contact"));
+            }
+        } else{
+            callback(new Error("Cannot find any number to contact"));
+        }
     };
 
     const sendNotification = function(app, message, registrationId, from, callback){
