@@ -1,0 +1,60 @@
+{
+  "name": "SoldViaAutobox",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "type": {
+      "type": "string",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Select Vehicle Type",
+          "id": "vehicleType",
+          "priority": 6,
+          "options": [
+            "car",
+            "bike"
+          ]
+        }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "vehicleInfo": {
+      "type": "belongsTo",
+      "model": "VehicleInfo",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add VehicleInfo",
+        "searchProp": "vehicleModel",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddVehicleInfo",
+        "hide": false,
+        "label": "Add VehicleInfo"
+      }
+    },
+    "dealer": {
+      "type": "belongsTo",
+      "model": "Dealer",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Dealer",
+        "searchProp": "email",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddDealer",
+        "hide": false,
+        "label": "Add Dealer"
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

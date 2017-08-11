@@ -1,7 +1,7 @@
 {
   "widgets": [
     {
-      "label": "Customers",
+      "label": "Area",
       "icon": "si-bar-chart",
       "fetchLocally": true,
       "propObj": {

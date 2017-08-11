@@ -203,5 +203,9 @@
   "Faq": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "SoldViaAutobox": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

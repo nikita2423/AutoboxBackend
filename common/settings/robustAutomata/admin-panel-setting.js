@@ -39,9 +39,11 @@ var settings = {
       "ServiceHistory",
       "ServiceType",
       "Showroom",
+      "SoldViaAutobox",
       "Sos",
       "Trim",
       "VehicleDetail",
+      "VehicleInfo",
       "Workshop"
   ]
 };
