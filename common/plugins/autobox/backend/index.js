@@ -18,7 +18,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const pushNotification = require("./pushNotification")(server, databaseObj, helper, packageObj);
 
     var speakeasy = require("speakeasy");
-    var secret = speakeasy.generateSecret({length: 20});
+    const SendOtp = require('sendotp');
+	var secret = speakeasy.generateSecret({length: 20});
+
+    const sendOtp = new SendOtp(packageObj.msgAuthKey);
+
+
 	var init = function(){
 		requestOtpMethod();
 		loginWithCodeMethod();
@@ -85,8 +90,20 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             digits: 4,
             step: 55
         });
+
+
         console.log('Sending code for verification process : ' + code);
-        callback(null, "Success");
+        sendOtp.send(phoneNumber.toString(), packageObj.senderId, code.toString(), function (error, data, response) {
+        	if(error){
+        		console.log(error);
+        		callback(error);
+			} else{
+                console.log(data, response);
+                callback(null, "Success");
+			}
+
+        });
+
 
 	};
 

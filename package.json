@@ -49,6 +49,7 @@
     "quickthumb": "0.0.12",
     "request": "^2.79.0",
     "s3": "^4.4.0",
+    "sendotp": "^1.2.7",
     "serve-favicon": "^2.0.1",
     "socket.io": "^1.7.2",
     "speakeasy": "^2.0.0",

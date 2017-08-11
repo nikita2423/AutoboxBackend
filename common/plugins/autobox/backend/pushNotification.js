@@ -16,6 +16,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         onCustomerSaved();
         onCompletePurchaseMethod();
         sendSOSRequestMethod();
+        onOfferCreate();
     };
 
 
@@ -60,6 +61,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
         });
     };
+
 
     /**
      * send Notification after Customer Quote is created
@@ -333,6 +335,117 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         }
     };
 
+
+    const onOfferCreate = function(){
+      const Offer= databaseObj.Offer;
+      Offer.observe("after save", function(ctx, next){
+          const instance = ctx.instance;
+          const offerObj = instance.toJSON();
+          if(ctx.isNewInstance){
+              const eventType = "Offer";
+              const title = offerObj.title;
+              const instanceId = offerObj.id;
+              process.nextTick(function(){
+                  databaseObj.City.findOne(offerObj.cityId)
+                      .then(function(city){
+                          if(city){
+                              sendPushToAllCustomer(server, databaseObj, packageObj, eventType, title, city, instanceId, push);
+                          }
+                      })
+                      .catch(function(error){
+                         next(error);
+                      });
+              });
+          }
+
+          next();
+      });
+    };
+
+
+    const sendPushToAllCustomer = function(server, databaseObj, packageObj, eventType, title, city, instanceId, push){
+        var skip = 0;
+        var limit = 10;
+        const findCustomerList = function (skip) {
+            //find customer..
+            findCustomer(server, databaseObj, packageObj, city, skip, limit, function (err, list, cursor) {
+                if (err) {
+                    reject(error);
+                } else {
+                    if (cursor === null) {
+                        //Stop all data
+                        //send push
+                        sendNotificationToCustomerList(list, instanceId, eventType, title);
+                    } else {
+                        sendNotificationToCustomerList(list, instanceId, eventType, title);
+                        //Recursive call..
+                        findCustomerList(cursor);
+                    }//else
+                }//else
+            }); //findCustomer
+        }; //findCustomerList
+        findCustomerList(skip);
+    };
+
+
+    const sendNotificationToCustomerList = function (customerList, offerId, eventType, title) {
+        //send push..
+        //and recursive call..
+        //send push
+        customerList.forEach(function (customer) {
+            var name = customer.firstName;
+            var lastName = customer.lastName ? customer.lastName : "";
+            name = name + " " + lastName;
+            var message = getOfferMessageObject(name, eventType, title, offerId);
+            if (customer.registrationId) {
+                //app, message, registrationId, from, callback
+                //Now send push..
+                sendNotification(server, message, customer.registrationId, packageObj.companyName, function (err) {
+                    if (err) {
+                        console.error(error);
+                    } else {
+                        console.log("Offer has been send Successfully");
+                    }
+                });
+            }
+        });
+    };
+
+
+
+    const findCustomer = function(server, databaseObj, packageObj, city, skip, limit, callback){
+      const Customer = databaseObj.Customer;
+      var cityId = city.id;
+      var filter = {
+          skip: skip,
+          limit : limit,
+          where : {
+              cityId: cityId
+          }
+      };
+
+      Customer.find(filter, function(error, instanceList){
+          if(error){
+              callback(error);
+          } else{
+              if(instanceList){
+                  if(instanceList.length < limit){
+                      //All data are fetched
+                      callback(null, instanceList, null);
+                  } else{
+                      callback(null, instanceList, skip + limit);
+                  }
+              } else{
+                  callback(error);
+              }
+          }
+
+      });
+    };
+
+
+
+
     const sendNotification = function(app, message, registrationId, from, callback){
         push.push(app, message, registrationId, from, callback);
     };
@@ -344,6 +457,18 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             type : type,
             title : title,
             id : customerQuoteId
+        };
+
+        return JSON.stringify(message);
+    };
+
+
+    var getOfferMessageObject = function(to, eventType, title, offerId){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            id : offerId
         };
 
         return JSON.stringify(message);

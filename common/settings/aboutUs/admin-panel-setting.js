@@ -7,7 +7,7 @@
 //This is the setting file of the plugin..TO be configured according to the user needs..
 var settings = {
   "defaultTemplate": true,
-  "companyInfo": ["t&c", "about us", "faqs"],
+  "companyInfo": ["t&c", "about us", "privacy policy"],
   "companyName": "Snaphy"
 
 };

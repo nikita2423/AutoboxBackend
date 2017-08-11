@@ -5,6 +5,8 @@
   "activate": true,
   "pluginDependencies": {},
   "companyName": "Autobox",
+  "msgAuthKey": "169390A6seo9UTfz69598d4606",
+  "senderId": "AUTOBX",
   "from": "Autobox <test@snaphy.com>",
   "customer": {
     "subject": "Registered Successfully",

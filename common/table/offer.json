@@ -42,7 +42,9 @@
       "display": false
     },
     "city_name": {
-      "display": false
+      "display": true,
+      "label": "City",
+      "search": "text"
     },
     "city_status": {
       "display": false
