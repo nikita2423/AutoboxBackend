@@ -28,6 +28,7 @@ var settings = {
       "Dealer",
       "Emergency",
       "EmergencyCategory",
+      "Faq",
       "Feedback",
       "Fuel",
       "GearBox",

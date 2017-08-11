@@ -1,0 +1,29 @@
+{
+  "validationsBackend": {
+    "rules": {
+      "question": {
+        "required": true,
+        "minlength": "3",
+        "maxlength": "500"
+      },
+      "answer": {
+        "required": true,
+        "minlength": "3",
+        "maxlength": "1000"
+      }
+    },
+    "messages": {
+      "question": {
+        "required": "Question is required",
+        "minlength": "Length should be atleast 3",
+        "maxlength": "Length can't exceed 500"
+      },
+      "answer": {
+        "required": "Answer is required",
+        "minlength": "Length should be atleast 3",
+        "maxlength": "Length can't exceed 1000"
+      }
+    }
+  },
+  "complexValidation": {}
+}

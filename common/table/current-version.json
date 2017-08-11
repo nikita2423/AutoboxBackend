@@ -1,16 +1,5 @@
 {
-  "widgets": [
-    {
-      "label": "Countries",
-      "icon": "si-bar-chart",
-      "fetchLocally": true,
-      "propObj": {
-        "type": "$allTime",
-        "where": {},
-        "dateProp": "added"
-      }
-    }
-  ],
+
   "tables": {
     "versionCode": {
       "label": "Version Code",

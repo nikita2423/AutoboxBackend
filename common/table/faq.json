@@ -1,0 +1,28 @@
+{
+  "widgets": [
+    {
+      "label": "FAQ",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "added": {
+      "date": true,
+      "search": "date"
+    },
+    "question": {
+      "search": "text",
+      "label": "Question"
+    },
+    "answer": {
+      "search": "text",
+      "label": "Answer"
+    }
+  }
+}
