@@ -1,6 +1,7 @@
 /**
  * Created by nikita on 20/7/17.
  */
+'use strict'
 module.exports = (Showroom, server, helper) =>
 {
     Showroom.validatesUniquenessOf('showroomNumber');
