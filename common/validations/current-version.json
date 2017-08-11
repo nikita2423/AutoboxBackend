@@ -1,0 +1,15 @@
+{
+  "validationsBackend": {
+    "rules": {
+      "versionCode": {
+        "required": true
+      }
+    },
+    "messages": {
+      "versionCode": {
+        "required": "Version Code is required"
+      }
+    }
+  },
+  "complexValidation": {}
+}

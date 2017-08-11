@@ -42,7 +42,6 @@
         }
       }
     },
-
     "contact2": {
       "type": "object",
       "template": {

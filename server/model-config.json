@@ -195,5 +195,13 @@
   "Sos": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "CurrentVersion": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Faq": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

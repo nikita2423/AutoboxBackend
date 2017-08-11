@@ -22,6 +22,7 @@ var settings = {
       "City",
       "Color",
       "Country",
+      "CurrentVersion",
       "CustomerMessage",
       "CustomerQuote",
       "Dealer",
