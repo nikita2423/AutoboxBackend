@@ -1,0 +1,14 @@
+{
+  "name": "dealerLogin",
+  "description": "To handle dealer login",
+  "routeExposure": "/dealerLogin",
+  "activate": true,
+  "load":{
+    "dealerPanel": true,
+    "root": false
+  },
+  "roles":{
+    "serviceLoggedUser": "Dealer"
+  },
+  "pluginDependencies": {}
+}

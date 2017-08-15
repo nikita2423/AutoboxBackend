@@ -1,0 +1,22 @@
+{
+  "css": {
+    "/dealer/style/dealerLogin.css": "dealerLoginCss"
+  },
+  "js": {
+    "/dealer/scripts/routes/dealerLogin.js": "dealerLoginRoute",
+    "/dealer/scripts/controllers/login.js": "dealerLoginController",
+    "/serviceLogin/scripts/controllers/forgotPass.js": "dealerForgotPassController",
+    "/serviceLogin/scripts/controllers/register.js": "dealerRegisterController",
+    "/serviceLogin/scripts/services/dealerLogin.js": "dealerLoginService"
+  },
+  "moduleDependencies":{
+    "/static/bower_components/angular-permission/dist/angular-permission.js": "permission"
+  },
+  "settings": ["/dealerLogin/admin-panel-setting.js"],
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [],
+    "footerHook":[]
+  }
+}

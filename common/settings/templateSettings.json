@@ -17,6 +17,11 @@
       "routeExposure": "/",
       "state": "root",
       "activate": true
+    },
+    {
+      "routeExposure": "/dealer",
+      "state": "dealerPanel",
+      "activate": true
     }
   ]
 }

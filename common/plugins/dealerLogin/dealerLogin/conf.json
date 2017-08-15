@@ -1,0 +1,7 @@
+{
+  "name": "dealerLogin",
+  "description": "To handle the dealer login",
+  "routeExposure": "/dealer",
+  "activate": true,
+  "pluginDependencies": {}
+}

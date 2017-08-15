@@ -1,0 +1,19 @@
+{
+  "css": {
+    "/dealer/style/dealerLogin.css": "dealerLoginCss"
+  },
+  "js": {
+    "/dealer/scripts/routes/dealerLogin.js": "dealerLoginRoute",
+    "/dealer/scripts/controllers/dealerLogin.js": "dealerLoginController"
+  },
+  "moduleDependencies":{
+
+  },
+  "settings": ["/dealer/admin-panel-setting.js"],
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [],
+    "footerHook":[]
+  }
+}
