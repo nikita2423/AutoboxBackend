@@ -2,6 +2,10 @@
   "name": "email",
   "routeExposure": "/email",
   "activate": true,
+  "load":{
+    "root": true,
+    "dealerPanel": true
+  },
   "mailConfig": [{
     "emailModel": "adminEmail",
     "emailLabel": "Send Info",

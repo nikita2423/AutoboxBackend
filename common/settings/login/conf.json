@@ -5,7 +5,7 @@
   "activate": true,
   "load":{
     "root": true,
-    "brand": false
+    "dealerPanel": false
   },
   "routeExposure": "/login",
   "adminRole": "admin",

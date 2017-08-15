@@ -3,6 +3,10 @@
   "description": "Plugin for allowing server side processing of datatable making it more robust",
   "version": "2.0.0",
   "activate": true,
+  "load":{
+    "root": true,
+    "dealerPanel": true
+  },
   "routeExposure": "/robustAutomata",
   "pluginDependencies": {
     "dashboard": "^2.0.0",

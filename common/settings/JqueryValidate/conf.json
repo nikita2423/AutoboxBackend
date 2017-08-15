@@ -5,7 +5,8 @@
   "routeExposure": "/jqueryValidate",
   "activate": true,
   "load":{
-    "root": true
+    "root": true,
+    "dealerPanel": true
   },
   "pluginDepedencies": {}
 }

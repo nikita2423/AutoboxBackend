@@ -3,6 +3,10 @@
   "description": "Plugin for adding different template support for formly",
   "version": "2.0.0",
   "activate": true,
+  "load":{
+    "root": true,
+    "dealerPanel": true
+  },
   "routeExposure": "/formlyTemplate",
   "pluginDependencies": {}
 }

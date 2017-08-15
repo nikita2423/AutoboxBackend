@@ -2,6 +2,10 @@
   "name": "smsService",
   "version": "2.0.0",
   "activate": true,
+  "load":{
+    "root": true,
+    "dealerPanel": false
+  },
   "services": {},
   "routeExposure": "/smsService",
   "provider":{

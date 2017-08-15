@@ -3,7 +3,8 @@
   "routeExposure": "/dashboard",
   "activate": true,
   "load":{
-    "root":true
+    "root":true,
+    "dealerPanel": true
   },
   "services": {},
   "pluginDependencies": {
