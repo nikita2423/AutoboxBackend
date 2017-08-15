@@ -1,6 +1,9 @@
 'use strict';
 /*jslint browser: true*/
 /*global $, jQuery, $snaphy, angular*/
+
+var loginState  = $snaphy.loadSettings('login', "loginState");
+
 angular.module($snaphy.getModuleName())
   //Routes are defined using ui.routes 
   .config(['$locationProvider', '$stateProvider', '$urlRouterProvider',
@@ -10,10 +13,17 @@ angular.module($snaphy.getModuleName())
 
       $stateProvider
         //Provide routes in this way..
-        .state('dealerPanel', {
+        .state('dashboard', {
           url: '/dealerPanel',
-          templateUrl: '/dealer/views/dealerPanel.html',
-          controller: 'dealerPanelControl'
+          templateUrl: '/dealerPanel/views/dashboard.html',
+          controller: 'dealerPanelControl',
+            //Only allow anonym users here
+            data: {
+                permissions: {
+                    only: [employeeRole],
+                    redirectTo: loginState
+                }
+            }
         });
 
     }]); //config
