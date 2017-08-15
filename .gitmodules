@@ -19,9 +19,6 @@
 [submodule "common/plugins/formlyTemplate"]
 	path = common/plugins/formlyTemplate
 	url = https://github.com/snaphy-plugin-2/formlyTemplate.git
-[submodule "common/plugins/jqueryValidate"]
-	path = common/plugins/jqueryValidate
-	url = https://github.com/snaphy-plugin-2/jquery-validate-plugin.git
 [submodule "common/plugins/login"]
 	path = common/plugins/login
 	url = https://github.com/snaphy-plugin-2/login-plugin.git
