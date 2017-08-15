@@ -9,6 +9,7 @@ var settings = {
   "defaultTemplate": true,
   "tablePanelId": "#automataWidget",
   "routePrefixName" : "data",
+    "onSchemaFetched": "onSchemaFetched",
   loadDatabases: [
       "Employee",
       "Customer",
