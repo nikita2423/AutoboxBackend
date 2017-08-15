@@ -1609,10 +1609,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                   modelId: customerQuoteObj.modelId,
                                   quoteType: customerQuoteObj.quoteType,
                                   customerId: customerId,
-                                  soldViaAutobox: customerQuoteObj.soldViaAutobox,
-                                  gpsTracker: customerQuoteObj.gpsTracker,
-                                  dashCamera: customerQuoteObj.dashCamera,
-                                  testDrive: customerQuoteObj.testDrive
+                                  soldViaAutobox: "no",
+                                  gpsTracker: "no",
+                                  dashCamera: "no",
+                                  testDrive: "no"
                               })
                           } else{
                               callback(new Error("Vehicle not found"));

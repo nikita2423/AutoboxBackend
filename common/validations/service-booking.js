@@ -44,9 +44,11 @@ module.exports = (Servicebooking, server, helper) =>
         if(!validate(instance, currentInstance, "serviceTypeId")){
             return next(new Error("Service Type is required"));
         }
+
         if(!validate(instance, currentInstance, "workshopId")){
             return next(new Error("Workshop is required"));
         }
+
         next();
 
     });
