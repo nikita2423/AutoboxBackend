@@ -19,6 +19,21 @@
         }
       }
     },
+    "vehicleType": {
+      "type": "string",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Select Vehicle Type",
+          "id": "vehicleType",
+          "priority": 6,
+          "options": [
+            "car",
+            "bike"
+          ]
+        }
+      }
+    },
     "fuelType": {
       "type": "string",
       "required": true,

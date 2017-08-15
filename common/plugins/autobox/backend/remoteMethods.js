@@ -389,6 +389,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 },
                 {
                     arg: "vehicleDetailObj", type: "object"
+                },
+                {
+                    arg: "vehicleInfoObj", type: "object"
                 }
             ],
             returns: {
@@ -1398,11 +1401,11 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @param callback
      * @returns {*}
      */
-    const saveVehicleDetails = function(ctx, vehicleDetailObj, callback){
+    const saveVehicleDetails = function(ctx, vehicleDetailObj, vehicleInfoObj, callback){
       const request = ctx.req;
-      //if(request.accessToken){
-          //if(request.accessToken.userId){
-              const customerId = "";
+      if(request.accessToken){
+          if(request.accessToken.userId){
+              const customerId = request.accessToken.userId;
               const VehicleDetail = databaseObj.VehicleDetail;
               VehicleDetail.create({
                   workshopName: vehicleDetailObj.workshopName,
@@ -1415,20 +1418,60 @@ module.exports = function( server, databaseObj, helper, packageObj) {
               })
                   .then(function(vehicleDetailObj){
                       if(vehicleDetailObj){
-                          callback(null, vehicleDetailObj);
+                          return databaseObj.Dealer.findOne({
+                              where: {
+                                  showroomId: vehicleDetailObj.showroomId
+                              }
+                          })
+                          //callback(null, vehicleDetailObj);
                       } else{
                           callback(new Error("Vehicle Detail can't be saved"));
                       }
                   })
+                  .then(function(dealer){
+                      if(dealer){
+                          return databaseObj.SoldViaAutobox.create({
+                              type: vehicleInfoObj.vehicleType,
+                              dealerId: dealer.id,
+                              vehicleInfoId: vehicleInfoObj.id
+
+                          })
+                      } else{
+                          callback(new Error("Dealer not present"));
+                      }
+                  })
+                  .then(function(soldViaAutoboxObj){
+                      if(soldViaAutoboxObj){
+                          databaseObj.CustomerQuote.findOne({
+                              where: {
+                                  customerId : customerId,
+                                  vehicleInfoId : soldViaAutoboxObj.vehicleInfoId
+                              }
+                          })
+                      } else{
+                          callback(new Error("Error in creating SoldViaAutobox"))
+                      }
+                  })
+                  .then(function(customerQuote){
+                      if(customerQuote){
+                           return customerQuote.updateAttribute("soldViaAutobox", "yes")
+                      }else{
+                          callback(new Error("Customer Quote cannot be found"));
+                      }
+                  })
+
+                  .then(function(customerQuote){
+                      callback(null,{"response": "success" });
+                  })
                   .catch(function(error){
                       callback(error);
                   })
-       /*   }else{
+          }else{
               return callback(new Error("User not valid"));
           }
       } else{
           return callback(new Error("User not valid"));
-      }*/
+      }
     };
 
     /**
@@ -1607,6 +1650,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                   isOldVehicleTrade: customerQuoteObj.isOldVehicleTrade,
                                   brandId: customerQuoteObj.brandId,
                                   modelId: customerQuoteObj.modelId,
+                                  trimId: customerQuoteObj.trimId,
                                   quoteType: customerQuoteObj.quoteType,
                                   customerId: customerId,
                                   soldViaAutobox: "no",

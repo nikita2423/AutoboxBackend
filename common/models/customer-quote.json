@@ -266,6 +266,21 @@
         "hide": false,
         "label": "Add Vehicle"
       }
+    },
+    "trim": {
+      "type": "belongsTo",
+      "model": "Trim",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Variant",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "vehicleVariant",
+        "hide": false,
+        "label": "Add Variant"
+      }
     }
   },
   "acls": [],

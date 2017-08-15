@@ -64,6 +64,19 @@
         }
       }
     },
+    "noOfVehicleSold": {
+      "type": "number",
+      "required": true,
+      "default": 0,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "number",
+          "label": "Enter Number Of Vehicles Sold",
+          "id": "vehicleSold"
+        }
+      }
+    },
     "contact": {
       "type": "string",
       "required": true,
