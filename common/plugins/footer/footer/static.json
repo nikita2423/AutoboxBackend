@@ -1,8 +1,0 @@
-{
-  "bodystructure": {
-    "asidebarHook": [],
-    "sidebarHook": [],
-    "headerHook": [],
-    "footerHook":["/footer/views/footer.html"]
-  }
-}
