@@ -7,7 +7,8 @@
     "/robustAutomata/scripts/controllers/robustAutomata.js": "robustAutomataController",
     "/robustAutomata/scripts/services/robustAutomata.js": "robustAutomataServices",
     "/robustAutomata/scripts/filters/robustAutomata.js": "robustAutomataFilters",
-    "/robustAutomata/scripts/directives/robustAutomata.js": "robustAutomataDirectives"
+    "/robustAutomata/scripts/directives/robustAutomata.js": "robustAutomataDirectives",
+    "/robustAutomata/scripts/services/runTimeDatabase.js": "RunTimeDatabase"
   },
   "moduleDependencies": {
     "/static/bower_components/angular-smart-table/dist/smart-table.min.js": "smart-table"

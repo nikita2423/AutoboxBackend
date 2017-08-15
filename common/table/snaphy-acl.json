@@ -1,0 +1,16 @@
+{
+  "tables":{
+    "model": {
+      "display": true,
+      "search": "text",
+      "label": "Model",
+      "onClick": {
+        "state": "detailView",
+        "params": {
+          "model": "SnaphyAcl",
+          "id": "id"
+        }
+      }
+    }
+  }
+}

@@ -88,22 +88,26 @@
                                 <!-- Side Overlay Scroll Container -->
                                 <div id="side-overlay-scroll">
                                     <!-- Side Header -->
-                                    <div class="side-header side-content">
+                                    <div style="padding-left: 10px;" class="side-header side-content">
                                         <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
                                         <button class="btn btn-default pull-right" type="button" data-toggle="layout" data-action="side_overlay_close">
                                             <i class="fa fa-times"></i>
                                         </button>
+                                        <span>
+                                            <span class="font-w600 push-10-l">ACTIVITY CONSOLE</span>
+                                        </span>
                                     </div>
                                     <!-- END Side Header -->
+                                    <!-- Side Content -->
+                                    <div class="side-content remove-padding-t">
+                                        <!-- ASIDEBAR HOOK -->
+                                        <% asidebarHook.forEach(function(asideLink) { %>
+                                        <!-- Custom Plugins headers.. -->
+                                        <div snaphy-load-template ng-include="'<%= asideLink %>'"></div>
+                                        <% }); %>
+                                    </div>
                                 </div>
-                                <!-- Side Content -->
-                                <div class="side-content remove-padding-t">
-                                    <!-- ASIDEBAR HOOK -->
-                                    <% asidebarHook.forEach(function(asideLink) { %>
-                                    <!-- Custom Plugins headers.. -->
-                                    <div snaphy-load-template ng-include="'<%= asideLink %>'"></div>
-                                    <% }); %>
-                                </div>
+
                             </aside><!-- END Side Overlay -->
              <%
                         }
@@ -169,6 +173,18 @@
             </div>
         <%}%>
 
+
+        <script>
+            <%
+            if(staticData){
+            %>
+                    //Load static data ....
+                    window.STATIC_DATA = <%- JSON.stringify(staticData) %>;
+            <%}%>
+
+        </script>
+
+
         <!-- OneUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
         <script src="<%= staticRoute %>/assets/js/oneui.min.js"></script>
         <!-- Adding notifications -->
@@ -210,6 +226,7 @@
           });
         }
         %>
+
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="<%= staticRoute %>/scripts/controllers/bodyCtrl.js"></script>

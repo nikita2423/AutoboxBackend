@@ -17,6 +17,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 	 */
 	var init = function(){
        addRole();
+       checkLogin();
 	};
 
 	//Define a role for dealer..
@@ -62,6 +63,23 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             });
         });
 	};
+
+	const checkLogin = function(){
+	    const Dealer = databaseObj.User;
+	    Dealer.beforeRemote('login', function(ctx, data, next){
+	       const request = ctx.req;
+	       const instance = request.body.email;
+	       Dealer.find()
+               .then(function(dealer){
+                   if(dealer){
+                       next();
+                   }
+               })
+               .catch(function(error){
+                   next(error);
+               });
+        });
+    }
 
 
 	//return all the methods that you wish to provide user to extend this plugin.

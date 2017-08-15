@@ -1,0 +1,53 @@
+{
+  "name": "SnaphyBase",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "scope": {
+    "where": {
+      "is_deleted": false
+    }
+  },
+  "hidden": [
+    "is_deleted"
+  ],
+  "properties": {
+    "is_deleted": {
+      "type": "boolean",
+      "default": false
+    },
+    "added": {
+      "type": "date",
+      "defaultFn": "now"
+    },
+    "updated": {
+      "type": "date",
+      "defaultFn": "now"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getAbsoluteSchema"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "count"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "save"
+    }
+  ],
+  "methods": {}
+}

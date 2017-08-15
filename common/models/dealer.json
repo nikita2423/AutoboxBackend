@@ -34,6 +34,19 @@
         }
       }
     },
+    "password": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "password",
+          "label": "Enter Password",
+          "priority": 7,
+          "id": "password"
+        }
+      }
+    },
     "email": {
       "type": "string",
       "required": true,
@@ -285,6 +298,12 @@
       "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "fetchDealersForBrand"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "login"
     }
   ],
   "methods": {}

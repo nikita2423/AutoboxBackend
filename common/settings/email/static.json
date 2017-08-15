@@ -1,15 +1,12 @@
 {
   "css":{},
   "js": {
-    "/email/scripts/routes/email.js": "emailRoute",
-    "/email/scripts/controllers/email.js": "emailController",
-    "/email/scripts/directives/email.js": "emailDirectives"
   },
   "moduleDependencies": {},
-  "settings": ["/email/admin-panel-setting.js"],
+  "settings": [],
   "bodystructure": {
     "asidebarHook": [],
-    "sidebarHook": ["/email/views/sidebarHook.html"],
+    "sidebarHook": [],
     "headerHook": [],
     "footerHook": []
   }

@@ -1,13 +1,12 @@
 {
   "css": {
-    "/dealer/style/dealerLogin.css": "dealerLoginCss"
+    "/dealerLogin/style/dealerLogin.css": "dealerLoginCss"
   },
   "js": {
-    "/dealer/scripts/routes/dealerLogin.js": "dealerLoginRoute",
-    "/dealer/scripts/controllers/login.js": "dealerLoginController",
-    "/serviceLogin/scripts/controllers/forgotPass.js": "dealerForgotPassController",
-    "/serviceLogin/scripts/controllers/register.js": "dealerRegisterController",
-    "/serviceLogin/scripts/services/dealerLogin.js": "dealerLoginService"
+    "/dealerLogin/scripts/routes/dealerLogin.js": "dealerLoginRoute",
+    "/dealerLogin/scripts/controllers/login.js": "dealerLoginController",
+    "/dealerLogin/scripts/controllers/register.js": "dealerRegisterController",
+    "/dealerLogin/scripts/services/dealerLogin.js": "dealerLoginService"
   },
   "moduleDependencies":{
     "/static/bower_components/angular-permission/dist/angular-permission.js": "permission"

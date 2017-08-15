@@ -4,7 +4,7 @@
   "activate": true,
   "load":{
     "root":true,
-    "dealerPanel": true
+    "dealerPanel": false
   },
   "loadDatabases": [
     "Employee",

@@ -1,0 +1,138 @@
+{
+  "name": "SnaphyAcl",
+  "base": "SnaphyBase",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "added": {
+      "type": "date",
+      "default": "now"
+    },
+    "updated": {
+      "type": "date",
+      "default": "now"
+    },
+    "model": {
+      "type": "string",
+      "required": true,
+      "description": "Model name.",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Add Model",
+          "priority": 10,
+          "id": "read_permission_snaphy",
+          "options": [
+            "Employee",
+            "Retailer",
+            "QrCode",
+            "QrCodeGroup",
+            "Department",
+            "Product",
+            "Category",
+            "SubCategory1",
+            "SubCategory2",
+            "RetailerTransaction",
+            "City",
+            "ContactUs",
+            "SnaphyAcl"
+          ]
+        }
+      }
+    },
+    "read": {
+      "type": "string",
+      "description": "allow|deny",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Add Read Permission",
+          "id": "read_permission_snaphy",
+          "options": [
+            "allow",
+            "deny"
+          ]
+        }
+      }
+    },
+    "create": {
+      "type": "string",
+      "description": "allow|deny",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Add Create Permission",
+          "id": "create_permission_snaphy",
+          "options": [
+            "allow",
+            "deny"
+          ]
+        }
+      }
+    },
+    "edit": {
+      "type": "string",
+      "description": "allow|deny",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Add Edit Permission",
+          "id": "edit_permission_snaphy",
+          "options": [
+            "allow",
+            "deny"
+          ]
+        }
+      }
+    },
+    "delete": {
+      "type": "string",
+      "description": "allow|deny",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Add Delete Permission",
+          "id": "delete_permission_snaphy",
+          "options": [
+            "allow",
+            "deny"
+          ]
+        }
+      }
+    },
+    "role": {
+      "type": "string",
+      "description": "Name of role having this permission.",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Add Role to permission",
+          "priority": 9,
+          "id": "role_permission_snaphy",
+          "options": [
+            "Admin",
+            "DepartmentEmployee",
+            "DepartmentAdmin"
+          ]
+        }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "snaphyAclProps": {
+      "type": "hasMany",
+      "model": "SnaphyAclProp",
+      "foreignKey": ""
+    },
+    "snaphyAclRelations": {
+      "type": "hasMany",
+      "model": "SnaphyAclRelation",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

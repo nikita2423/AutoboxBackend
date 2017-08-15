@@ -2,7 +2,7 @@
  * Created by nikita on 21/7/17.
  */
 module.exports = ( Dealer, server, helper) => {
-    const SECRET_KEY = "BRANDZOOMR_PASSWORD_@!%#_SNAPHY";
+    //const SECRET_KEY = "BRANDZOOMR_PASSWORD_@!%#_SNAPHY";
     //AppUser.validatesUniquenessOf('email');
     //Remove email verification..
     //delete AppUser.validations.email;
@@ -21,7 +21,7 @@ module.exports = ( Dealer, server, helper) => {
         const instance = ctx.instance || ctx.data;
         const currentInstance = ctx.currentInstance;
         //Adding password
-        instance.password = SECRET_KEY;
+        //instance.password = SECRET_KEY;
 
         if(ctx.isNewInstance){
             instance.added = new Date();

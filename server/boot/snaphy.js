@@ -5,6 +5,7 @@ const join = path.join;
 module.exports = function(server) {
   const chalk = require('chalk');
   const loopback = require('loopback');
+  const Promise  = require('bluebird');
   const helper   = require(__dirname + '/../../common/helper')(server);
   const config   = require(__dirname + '/../config.json');
   const STATIC_PATH = '/static';
@@ -42,60 +43,92 @@ module.exports = function(server) {
   //Load the required plugins script and styles in the memory..
   /**
    * Loads plugins accorsing to priority list..
+   * @param req
    * @param data
    * @param state active state name
    * @returns {*}
      */
-  const loadPluginsData = function(data, state){
-    //get the list of plugins..
-    const pluginList = helper.getDirectories(__dirname + '/../../common/plugins');
-    //object to check the list of plugin which has been loaded already..
-    const done = {};
-    //first load the plugins according to priority list..
-    if(PLUGIN_PRIORITY){
-      for(let i=0; i< PLUGIN_PRIORITY.length; i++){
-          let pluginName = PLUGIN_PRIORITY[i];
-        //Only run if not already processed..
-        if(!done[pluginName]){
-          //Add to done list..
-          done[pluginName] = true;
-          loadPluginToState(pluginName, data, state);
-        }
-      }
-    }
+  const loadPluginsData = function(req, data, state){
+      return new Promise(function (resolve, reject) {
+          //get the list of plugins..
+          const pluginList = helper.getDirectories(__dirname + '/../../common/plugins');
+          //object to check the list of plugin which has been loaded already..
+          const done = {};
+          const promiseList = [];
+          //first load the plugins according to priority list..
+          if(PLUGIN_PRIORITY){
+              for(let i=0; i< PLUGIN_PRIORITY.length; i++){
+                  let pluginName = PLUGIN_PRIORITY[i];
+                  //Only run if not already processed..
+                  if(!done[pluginName]){
+                      //Add to done list..
+                      done[pluginName] = true;
+                      promiseList.push(loadPluginToState(req, pluginName, data, state));
+                  }
+              }
+          }
 
-    for(let i=0; i< pluginList.length; i++){
-      let pluginName = pluginList[i];
-      //Only run if not already processed..
-      if(!done[pluginName]){
-          //Add to done list..
-          done[pluginName] = true;
-          loadPluginToState(pluginName, data, state);
-      }
-    }//for loop
+          for(let i=0; i< pluginList.length; i++){
+              let pluginName = pluginList[i];
+              //Only run if not already processed..
+              if(!done[pluginName]){
+                  //Add to done list..
+                  done[pluginName] = true;
+                  promiseList.push(loadPluginToState(req, pluginName, data, state));
+              }
+          }//for loop
 
-    return data;
+          Promise.all(promiseList)
+              .then(function () {
+                  resolve(data);
+              })
+              .catch(function (error) {
+                    console.log(error);
+                    reject(error);
+              });
+      });
   };
 
     /**
      * Load plugin to state wise..load if state is permitted else unload..it..
-      */
-  const loadPluginToState = function(pluginName, data, state){
-        //Get the settings of the plugin..
-        const {confPath} = helper.getSettingPath(pluginName);
-        if(confPath){
-            const pluginSettings = helper.readPackageJsonFile(confPath);
-            if(pluginSettings.activate){
-                if(pluginSettings.load){
-                    if(pluginSettings.load[state]){
+     */
+  const loadPluginToState = function(req, pluginName, data, state){
+        return new Promise(function (resolve, reject) {
+            //Get the settings of the plugin..
+            const {confPath} = helper.getSettingPath(pluginName);
+            if(confPath){
+                const pluginSettings = helper.readPackageJsonFile(confPath);
+                if(pluginSettings.activate){
+                    if(pluginSettings.load){
+                        if(pluginSettings.load[state]){
+                            loadPlugin(data, pluginName);
+                            loadPluginsStaticData(req, pluginName, data, state)
+                                .then(function () {
+                                    resolve()
+                                })
+                                .catch(function (error) {
+                                    reject(error);
+                                });
+                        }else{
+                            resolve();
+                        }
+                    }else{
                         loadPlugin(data, pluginName);
+                        loadPluginsStaticData(req, pluginName, data, state)
+                            .then(function () {
+                                resolve()
+                            })
+                            .catch(function (error) {
+                                reject(error);
+                            });
                     }
                 }else{
-                    loadPlugin(data, pluginName);
+                    resolve();
                 }
+            }else{
+                resolve();
             }
-        }
-
+        });
   };
 
 
@@ -246,6 +279,8 @@ module.exports = function(server) {
             sidebarHook:[],
             headerHook:[],
             footerHook:[],
+            ///Static data to be stored as window object..
+            staticData:{},
             //For mapping the defined database in the plugins..
             databaseObj:{},
             staticRoute: apiRoot,
@@ -253,6 +288,38 @@ module.exports = function(server) {
             templateSettings:{}
         };
         return data;
+    };
+
+
+    /**
+     * Load plugins global data. and store it in as window object.
+     * @param req
+     * @param pluginName
+     * @param data
+     * @param state
+     */
+    const loadPluginsStaticData = function(req, pluginName, data, state){
+        return new Promise(function (resolve, reject) {
+            const pluginData = helper.loadPlugin(pluginName);
+            if(pluginData){
+                if(pluginData.getStaticData){
+                    data.staticData = data.staticData || {};
+                    pluginData.getStaticData(req, state, data.staticData)
+                        .then(function (staticData) {
+                            resolve();
+                        })
+                        .catch(function (error) {
+                            console.error("Got error fetching plugin static data.");
+                            console.error(error);
+                            reject(error);
+                        });
+                }else{
+                    resolve();
+                }
+            }else{
+                resolve();
+            }
+        });
     };
 
 
@@ -272,14 +339,20 @@ module.exports = function(server) {
                         //Now load the route..
                         server.get(route.routeExposure, function(req, res) {
                             var data = initData();
-                            data = loadPluginsData(data, route.state);
                             data = loadAppData(data);
                             data = fetchTemplateSettings(data);
                             data.state = route.state;
                             //remove route prop from data..for safe..
                             delete data.templateSettings.route;
+                            loadPluginsData(req, data, route.state)
+                                .then(function () {
+                                    res.render('index', data);
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                    res.status(500).send(error);
+                                });
 
-                            res.render('index', data);
                         });
 
                         server.once('started', function() {

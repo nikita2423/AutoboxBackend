@@ -95,7 +95,6 @@ angular.module($snaphy.getModuleName())
                     modelService.find({
                         filter: filter
                     }, function(values){
-                        console.log(values);
                         if(values){
                             $scope.options.templateOptions.options = $scope.options.templateOptions.options || [];
                             var valueKey = $scope.options.templateOptions.model.value;

@@ -1,15 +1,15 @@
 {
   "css": {
-    "/dealer/style/dealerPanel.css": "dealerPanelCss"
+    "/dealerPanel/style/dealerPanel.css": "dealerPanelCss"
   },
   "js": {
-    "/dealer/scripts/routes/dealerPanel.js": "dealerPanelRoute",
-    "/dealer/scripts/controllers/dealerPanel.js": "dealerPanelController"
+    "/dealerPanel/scripts/routes/dealerPanel.js": "dealerPanelRoute",
+    "/dealerPanel/scripts/controllers/dealerPanel.js": "dealerPanelController"
   },
   "moduleDependencies":{
 
   },
-  "settings": ["/dealer/admin-panel-setting.js"],
+  "settings": ["/dealerPanel/admin-panel-setting.js"],
   "bodystructure": {
     "asidebarHook": [],
     "sidebarHook": [],

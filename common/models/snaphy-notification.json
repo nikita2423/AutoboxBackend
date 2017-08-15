@@ -1,0 +1,48 @@
+{
+  "name": "SnaphyNotification",
+  "base": "SnaphyBase",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string"
+    },
+    "onClick": {
+      "type": "object",
+      "description": "Triggers on click action or url",
+      "structure": {
+        "url": "full url or path",
+        "target": "blank|sames"
+      }
+    },
+    "options":{
+      "type": "object",
+      "required": false,
+      "description": "where query to be used as a filter."
+    },
+    "added": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now"
+    },
+    "updated": {
+      "type": "date",
+      "defaultFn": "now"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "description": "read|unread"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

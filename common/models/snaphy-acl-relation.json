@@ -1,0 +1,47 @@
+{
+  "name": "SnaphyAclRelation",
+  "base": "SnaphyBase",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "relation": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "label": "Enter relation name",
+          "priority": 10,
+          "id": "aclRelationName"
+        }
+      }
+    },
+    "execute": {
+      "type": "string",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Add Relation Permission",
+          "id": "execute_permission_snaphy",
+          "options": [
+            "allow",
+            "deny"
+          ]
+        }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "snaphyAcl": {
+      "type": "belongsTo",
+      "model": "SnaphyAcl",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

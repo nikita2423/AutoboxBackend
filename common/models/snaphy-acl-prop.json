@@ -1,0 +1,62 @@
+{
+  "name": "SnaphyAclProp",
+  "base": "SnaphyBase",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "label": "Enter property name",
+          "priority": 10,
+          "id": "aclPropName"
+        }
+      }
+    },
+    "read": {
+      "type": "string",
+      "default": "write",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Add Read Permission",
+          "id": "read_permission_snaphy",
+          "options": [
+            "allow",
+            "deny"
+          ]
+        }
+      }
+    },
+    "write": {
+      "type": "string",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Add Write Permission",
+          "id": "write_permission_snaphy",
+          "options": [
+            "allow",
+            "deny"
+          ]
+        }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "snaphyAcl": {
+      "type": "belongsTo",
+      "model": "SnaphyAcl",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

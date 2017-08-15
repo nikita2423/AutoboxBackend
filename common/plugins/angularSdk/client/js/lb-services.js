@@ -4578,6 +4578,45 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.Employee#getAuthorisedRoles
+             * @methodOf lbServices.Employee
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `roles` – `{string=}` -
+             */
+            "getAuthorisedRoles": {
+              url: urlBase + "/Employees/getAuthorisedRoles",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
              * @name lbServices.Employee#getSchema
              * @methodOf lbServices.Employee
              *
@@ -17534,6 +17573,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use CustomerQuote.trim() instead.
+            "::get::CustomerQuote::trim": {
+              url: urlBase + "/CustomerQuotes/:id/trim",
+              method: "GET",
+            },
+
             // INTERNAL. Use VehicleInfo.trim() instead.
             "::get::VehicleInfo::trim": {
               url: urlBase + "/VehicleInfos/:id/trim",
@@ -26211,6 +26256,8 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              *  - `vehicleDetailObj` – `{object=}` -
              *
+             *  - `vehicleInfoObj` – `{object=}` -
+             *
              * @param {function(Object,Object)=} successCb
              *   Success callback with two arguments: `value`, `responseHeaders`.
              *
@@ -32096,6 +32143,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use CustomerQuote.trim() instead.
+            "prototype$__get__trim": {
+              url: urlBase + "/CustomerQuotes/:id/trim",
+              method: "GET",
+            },
+
             // INTERNAL. Use CustomerQuote.vehicleInfo() instead.
             "prototype$__get__vehicleInfo": {
               url: urlBase + "/CustomerQuotes/:id/vehicleInfo",
@@ -33093,6 +33146,42 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.city = function() {
           var TargetResource = $injector.get("City");
           var action = TargetResource["::get::CustomerQuote::city"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.CustomerQuote#trim
+             * @methodOf lbServices.CustomerQuote
+             *
+             * @description
+             *
+             * Fetches belongsTo relation trim.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Trim` object.)
+             * </em>
+             */
+        R.trim = function() {
+          var TargetResource = $injector.get("Trim");
+          var action = TargetResource["::get::CustomerQuote::trim"];
           return action.apply(R, arguments);
         };
 
@@ -44739,6 +44828,4836 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.dealer = function() {
           var TargetResource = $injector.get("Dealer");
           var action = TargetResource["::get::SoldViaAutobox::dealer"];
+          return action.apply(R, arguments);
+        };
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.SnaphyBase
+ * @header lbServices.SnaphyBase
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `SnaphyBase` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "SnaphyBase",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/SnaphyBases/:id",
+          { 'id': '@id' },
+          {
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#create
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyBase` object.)
+             * </em>
+             */
+            "create": {
+              url: urlBase + "/SnaphyBases",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#createMany
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyBase` object.)
+             * </em>
+             */
+            "createMany": {
+              isArray: true,
+              url: urlBase + "/SnaphyBases",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#upsert
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyBase` object.)
+             * </em>
+             */
+            "upsert": {
+              url: urlBase + "/SnaphyBases",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#exists
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/SnaphyBases/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#findById
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Find a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyBase` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/SnaphyBases/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#find
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyBase` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/SnaphyBases",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#findOne
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyBase` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/SnaphyBases/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#updateAll
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+            "updateAll": {
+              url: urlBase + "/SnaphyBases/update",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#deleteById
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyBase` object.)
+             * </em>
+             */
+            "deleteById": {
+              url: urlBase + "/SnaphyBases/:id",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#count
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/SnaphyBases/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#prototype$updateAttributes
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Update attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyBase` object.)
+             * </em>
+             */
+            "prototype$updateAttributes": {
+              url: urlBase + "/SnaphyBases/:id",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#createChangeStream
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Create a change stream.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `changes` – `{ReadableStream=}` -
+             */
+            "createChangeStream": {
+              url: urlBase + "/SnaphyBases/change-stream",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#getSchema
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Send the schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getSchema": {
+              url: urlBase + "/SnaphyBases/getSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#getAbsoluteSchema
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Send the absolute schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getAbsoluteSchema": {
+              url: urlBase + "/SnaphyBases/getAbsoluteSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#save
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Remote method for saving data with its depedencies
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `schema` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `data` – `{object=}` -
+             */
+            "save": {
+              url: urlBase + "/SnaphyBases/save",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#getDetailSchema
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Get the detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getDetailSchema": {
+              url: urlBase + "/SnaphyBases/getDetailSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#getModelRelationSchema
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Get the relation detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getModelRelationSchema": {
+              url: urlBase + "/SnaphyBases/getModelRelationSchema",
+              method: "POST",
+            },
+          }
+        );
+
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#updateOrCreate
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyBase` object.)
+             * </em>
+             */
+        R["updateOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#update
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+        R["update"] = R["updateAll"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#destroyById
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyBase` object.)
+             * </em>
+             */
+        R["destroyById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyBase#removeById
+             * @methodOf lbServices.SnaphyBase
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyBase` object.)
+             * </em>
+             */
+        R["removeById"] = R["deleteById"];
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.SnaphyBase#modelName
+        * @propertyOf lbServices.SnaphyBase
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `SnaphyBase`.
+        */
+        R.modelName = "SnaphyBase";
+
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.SnaphyNotification
+ * @header lbServices.SnaphyNotification
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `SnaphyNotification` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "SnaphyNotification",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/SnaphyNotifications/:id",
+          { 'id': '@id' },
+          {
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#create
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyNotification` object.)
+             * </em>
+             */
+            "create": {
+              url: urlBase + "/SnaphyNotifications",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#createMany
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyNotification` object.)
+             * </em>
+             */
+            "createMany": {
+              isArray: true,
+              url: urlBase + "/SnaphyNotifications",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#upsert
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyNotification` object.)
+             * </em>
+             */
+            "upsert": {
+              url: urlBase + "/SnaphyNotifications",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#exists
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/SnaphyNotifications/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#findById
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Find a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyNotification` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/SnaphyNotifications/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#find
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyNotification` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/SnaphyNotifications",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#findOne
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyNotification` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/SnaphyNotifications/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#updateAll
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+            "updateAll": {
+              url: urlBase + "/SnaphyNotifications/update",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#deleteById
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyNotification` object.)
+             * </em>
+             */
+            "deleteById": {
+              url: urlBase + "/SnaphyNotifications/:id",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#count
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/SnaphyNotifications/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#prototype$updateAttributes
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Update attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyNotification` object.)
+             * </em>
+             */
+            "prototype$updateAttributes": {
+              url: urlBase + "/SnaphyNotifications/:id",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#createChangeStream
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Create a change stream.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `changes` – `{ReadableStream=}` -
+             */
+            "createChangeStream": {
+              url: urlBase + "/SnaphyNotifications/change-stream",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#getSchema
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Send the schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getSchema": {
+              url: urlBase + "/SnaphyNotifications/getSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#getAbsoluteSchema
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Send the absolute schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getAbsoluteSchema": {
+              url: urlBase + "/SnaphyNotifications/getAbsoluteSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#save
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Remote method for saving data with its depedencies
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `schema` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `data` – `{object=}` -
+             */
+            "save": {
+              url: urlBase + "/SnaphyNotifications/save",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#getDetailSchema
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Get the detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getDetailSchema": {
+              url: urlBase + "/SnaphyNotifications/getDetailSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#getModelRelationSchema
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Get the relation detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getModelRelationSchema": {
+              url: urlBase + "/SnaphyNotifications/getModelRelationSchema",
+              method: "POST",
+            },
+          }
+        );
+
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#updateOrCreate
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyNotification` object.)
+             * </em>
+             */
+        R["updateOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#update
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+        R["update"] = R["updateAll"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#destroyById
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyNotification` object.)
+             * </em>
+             */
+        R["destroyById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyNotification#removeById
+             * @methodOf lbServices.SnaphyNotification
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyNotification` object.)
+             * </em>
+             */
+        R["removeById"] = R["deleteById"];
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.SnaphyNotification#modelName
+        * @propertyOf lbServices.SnaphyNotification
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `SnaphyNotification`.
+        */
+        R.modelName = "SnaphyNotification";
+
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.SnaphyAcl
+ * @header lbServices.SnaphyAcl
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `SnaphyAcl` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "SnaphyAcl",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/SnaphyAcls/:id",
+          { 'id': '@id' },
+          {
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclProps.findById() instead.
+            "prototype$__findById__snaphyAclProps": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclProps/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclProps.destroyById() instead.
+            "prototype$__destroyById__snaphyAclProps": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclProps/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclProps.updateById() instead.
+            "prototype$__updateById__snaphyAclProps": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclProps/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclRelations.findById() instead.
+            "prototype$__findById__snaphyAclRelations": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclRelations/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclRelations.destroyById() instead.
+            "prototype$__destroyById__snaphyAclRelations": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclRelations/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclRelations.updateById() instead.
+            "prototype$__updateById__snaphyAclRelations": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclRelations/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclProps() instead.
+            "prototype$__get__snaphyAclProps": {
+              isArray: true,
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclProps",
+              method: "GET",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclProps.create() instead.
+            "prototype$__create__snaphyAclProps": {
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclProps",
+              method: "POST",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclProps.destroyAll() instead.
+            "prototype$__delete__snaphyAclProps": {
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclProps",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclProps.count() instead.
+            "prototype$__count__snaphyAclProps": {
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclProps/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclRelations() instead.
+            "prototype$__get__snaphyAclRelations": {
+              isArray: true,
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclRelations",
+              method: "GET",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclRelations.create() instead.
+            "prototype$__create__snaphyAclRelations": {
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclRelations",
+              method: "POST",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclRelations.destroyAll() instead.
+            "prototype$__delete__snaphyAclRelations": {
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclRelations",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclRelations.count() instead.
+            "prototype$__count__snaphyAclRelations": {
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclRelations/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#create
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAcl` object.)
+             * </em>
+             */
+            "create": {
+              url: urlBase + "/SnaphyAcls",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#createMany
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAcl` object.)
+             * </em>
+             */
+            "createMany": {
+              isArray: true,
+              url: urlBase + "/SnaphyAcls",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#upsert
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAcl` object.)
+             * </em>
+             */
+            "upsert": {
+              url: urlBase + "/SnaphyAcls",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#exists
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/SnaphyAcls/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#findById
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Find a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAcl` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/SnaphyAcls/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#find
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAcl` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/SnaphyAcls",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#findOne
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAcl` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/SnaphyAcls/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#updateAll
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+            "updateAll": {
+              url: urlBase + "/SnaphyAcls/update",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#deleteById
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAcl` object.)
+             * </em>
+             */
+            "deleteById": {
+              url: urlBase + "/SnaphyAcls/:id",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#count
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/SnaphyAcls/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#prototype$updateAttributes
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Update attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAcl` object.)
+             * </em>
+             */
+            "prototype$updateAttributes": {
+              url: urlBase + "/SnaphyAcls/:id",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#createChangeStream
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Create a change stream.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `changes` – `{ReadableStream=}` -
+             */
+            "createChangeStream": {
+              url: urlBase + "/SnaphyAcls/change-stream",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#getSchema
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Send the schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getSchema": {
+              url: urlBase + "/SnaphyAcls/getSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#getAbsoluteSchema
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Send the absolute schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getAbsoluteSchema": {
+              url: urlBase + "/SnaphyAcls/getAbsoluteSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#save
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Remote method for saving data with its depedencies
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `schema` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `data` – `{object=}` -
+             */
+            "save": {
+              url: urlBase + "/SnaphyAcls/save",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#getDetailSchema
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Get the detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getDetailSchema": {
+              url: urlBase + "/SnaphyAcls/getDetailSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#getModelRelationSchema
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Get the relation detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getModelRelationSchema": {
+              url: urlBase + "/SnaphyAcls/getModelRelationSchema",
+              method: "POST",
+            },
+
+            // INTERNAL. Use SnaphyAclProp.snaphyAcl() instead.
+            "::get::SnaphyAclProp::snaphyAcl": {
+              url: urlBase + "/SnaphyAclProps/:id/snaphyAcl",
+              method: "GET",
+            },
+
+            // INTERNAL. Use SnaphyAclRelation.snaphyAcl() instead.
+            "::get::SnaphyAclRelation::snaphyAcl": {
+              url: urlBase + "/SnaphyAclRelations/:id/snaphyAcl",
+              method: "GET",
+            },
+          }
+        );
+
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#updateOrCreate
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAcl` object.)
+             * </em>
+             */
+        R["updateOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#update
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+        R["update"] = R["updateAll"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#destroyById
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAcl` object.)
+             * </em>
+             */
+        R["destroyById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#removeById
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAcl` object.)
+             * </em>
+             */
+        R["removeById"] = R["deleteById"];
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.SnaphyAcl#modelName
+        * @propertyOf lbServices.SnaphyAcl
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `SnaphyAcl`.
+        */
+        R.modelName = "SnaphyAcl";
+
+    /**
+     * @ngdoc object
+     * @name lbServices.SnaphyAcl.snaphyAclProps
+     * @header lbServices.SnaphyAcl.snaphyAclProps
+     * @object
+     * @description
+     *
+     * The object `SnaphyAcl.snaphyAclProps` groups methods
+     * manipulating `SnaphyAclProp` instances related to `SnaphyAcl`.
+     *
+     * Call {@link lbServices.SnaphyAcl#snaphyAclProps SnaphyAcl.snaphyAclProps()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#snaphyAclProps
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Queries snaphyAclProps of SnaphyAcl.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclProp` object.)
+             * </em>
+             */
+        R.snaphyAclProps = function() {
+          var TargetResource = $injector.get("SnaphyAclProp");
+          var action = TargetResource["::get::SnaphyAcl::snaphyAclProps"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl.snaphyAclProps#count
+             * @methodOf lbServices.SnaphyAcl.snaphyAclProps
+             *
+             * @description
+             *
+             * Counts snaphyAclProps of SnaphyAcl.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.snaphyAclProps.count = function() {
+          var TargetResource = $injector.get("SnaphyAclProp");
+          var action = TargetResource["::count::SnaphyAcl::snaphyAclProps"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl.snaphyAclProps#create
+             * @methodOf lbServices.SnaphyAcl.snaphyAclProps
+             *
+             * @description
+             *
+             * Creates a new instance in snaphyAclProps of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclProp` object.)
+             * </em>
+             */
+        R.snaphyAclProps.create = function() {
+          var TargetResource = $injector.get("SnaphyAclProp");
+          var action = TargetResource["::create::SnaphyAcl::snaphyAclProps"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl.snaphyAclProps#createMany
+             * @methodOf lbServices.SnaphyAcl.snaphyAclProps
+             *
+             * @description
+             *
+             * Creates a new instance in snaphyAclProps of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclProp` object.)
+             * </em>
+             */
+        R.snaphyAclProps.createMany = function() {
+          var TargetResource = $injector.get("SnaphyAclProp");
+          var action = TargetResource["::createMany::SnaphyAcl::snaphyAclProps"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl.snaphyAclProps#destroyAll
+             * @methodOf lbServices.SnaphyAcl.snaphyAclProps
+             *
+             * @description
+             *
+             * Deletes all snaphyAclProps of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.snaphyAclProps.destroyAll = function() {
+          var TargetResource = $injector.get("SnaphyAclProp");
+          var action = TargetResource["::delete::SnaphyAcl::snaphyAclProps"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl.snaphyAclProps#destroyById
+             * @methodOf lbServices.SnaphyAcl.snaphyAclProps
+             *
+             * @description
+             *
+             * Delete a related item by id for snaphyAclProps.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             *  - `fk` – `{*}` - Foreign key for snaphyAclProps
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.snaphyAclProps.destroyById = function() {
+          var TargetResource = $injector.get("SnaphyAclProp");
+          var action = TargetResource["::destroyById::SnaphyAcl::snaphyAclProps"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl.snaphyAclProps#findById
+             * @methodOf lbServices.SnaphyAcl.snaphyAclProps
+             *
+             * @description
+             *
+             * Find a related item by id for snaphyAclProps.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             *  - `fk` – `{*}` - Foreign key for snaphyAclProps
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclProp` object.)
+             * </em>
+             */
+        R.snaphyAclProps.findById = function() {
+          var TargetResource = $injector.get("SnaphyAclProp");
+          var action = TargetResource["::findById::SnaphyAcl::snaphyAclProps"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl.snaphyAclProps#updateById
+             * @methodOf lbServices.SnaphyAcl.snaphyAclProps
+             *
+             * @description
+             *
+             * Update a related item by id for snaphyAclProps.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             *  - `fk` – `{*}` - Foreign key for snaphyAclProps
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclProp` object.)
+             * </em>
+             */
+        R.snaphyAclProps.updateById = function() {
+          var TargetResource = $injector.get("SnaphyAclProp");
+          var action = TargetResource["::updateById::SnaphyAcl::snaphyAclProps"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.SnaphyAcl.snaphyAclRelations
+     * @header lbServices.SnaphyAcl.snaphyAclRelations
+     * @object
+     * @description
+     *
+     * The object `SnaphyAcl.snaphyAclRelations` groups methods
+     * manipulating `SnaphyAclRelation` instances related to `SnaphyAcl`.
+     *
+     * Call {@link lbServices.SnaphyAcl#snaphyAclRelations SnaphyAcl.snaphyAclRelations()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl#snaphyAclRelations
+             * @methodOf lbServices.SnaphyAcl
+             *
+             * @description
+             *
+             * Queries snaphyAclRelations of SnaphyAcl.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclRelation` object.)
+             * </em>
+             */
+        R.snaphyAclRelations = function() {
+          var TargetResource = $injector.get("SnaphyAclRelation");
+          var action = TargetResource["::get::SnaphyAcl::snaphyAclRelations"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl.snaphyAclRelations#count
+             * @methodOf lbServices.SnaphyAcl.snaphyAclRelations
+             *
+             * @description
+             *
+             * Counts snaphyAclRelations of SnaphyAcl.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.snaphyAclRelations.count = function() {
+          var TargetResource = $injector.get("SnaphyAclRelation");
+          var action = TargetResource["::count::SnaphyAcl::snaphyAclRelations"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl.snaphyAclRelations#create
+             * @methodOf lbServices.SnaphyAcl.snaphyAclRelations
+             *
+             * @description
+             *
+             * Creates a new instance in snaphyAclRelations of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclRelation` object.)
+             * </em>
+             */
+        R.snaphyAclRelations.create = function() {
+          var TargetResource = $injector.get("SnaphyAclRelation");
+          var action = TargetResource["::create::SnaphyAcl::snaphyAclRelations"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl.snaphyAclRelations#createMany
+             * @methodOf lbServices.SnaphyAcl.snaphyAclRelations
+             *
+             * @description
+             *
+             * Creates a new instance in snaphyAclRelations of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclRelation` object.)
+             * </em>
+             */
+        R.snaphyAclRelations.createMany = function() {
+          var TargetResource = $injector.get("SnaphyAclRelation");
+          var action = TargetResource["::createMany::SnaphyAcl::snaphyAclRelations"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl.snaphyAclRelations#destroyAll
+             * @methodOf lbServices.SnaphyAcl.snaphyAclRelations
+             *
+             * @description
+             *
+             * Deletes all snaphyAclRelations of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.snaphyAclRelations.destroyAll = function() {
+          var TargetResource = $injector.get("SnaphyAclRelation");
+          var action = TargetResource["::delete::SnaphyAcl::snaphyAclRelations"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl.snaphyAclRelations#destroyById
+             * @methodOf lbServices.SnaphyAcl.snaphyAclRelations
+             *
+             * @description
+             *
+             * Delete a related item by id for snaphyAclRelations.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             *  - `fk` – `{*}` - Foreign key for snaphyAclRelations
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.snaphyAclRelations.destroyById = function() {
+          var TargetResource = $injector.get("SnaphyAclRelation");
+          var action = TargetResource["::destroyById::SnaphyAcl::snaphyAclRelations"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl.snaphyAclRelations#findById
+             * @methodOf lbServices.SnaphyAcl.snaphyAclRelations
+             *
+             * @description
+             *
+             * Find a related item by id for snaphyAclRelations.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             *  - `fk` – `{*}` - Foreign key for snaphyAclRelations
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclRelation` object.)
+             * </em>
+             */
+        R.snaphyAclRelations.findById = function() {
+          var TargetResource = $injector.get("SnaphyAclRelation");
+          var action = TargetResource["::findById::SnaphyAcl::snaphyAclRelations"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAcl.snaphyAclRelations#updateById
+             * @methodOf lbServices.SnaphyAcl.snaphyAclRelations
+             *
+             * @description
+             *
+             * Update a related item by id for snaphyAclRelations.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             *  - `fk` – `{*}` - Foreign key for snaphyAclRelations
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclRelation` object.)
+             * </em>
+             */
+        R.snaphyAclRelations.updateById = function() {
+          var TargetResource = $injector.get("SnaphyAclRelation");
+          var action = TargetResource["::updateById::SnaphyAcl::snaphyAclRelations"];
+          return action.apply(R, arguments);
+        };
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.SnaphyAclProp
+ * @header lbServices.SnaphyAclProp
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `SnaphyAclProp` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "SnaphyAclProp",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/SnaphyAclProps/:id",
+          { 'id': '@id' },
+          {
+
+            // INTERNAL. Use SnaphyAclProp.snaphyAcl() instead.
+            "prototype$__get__snaphyAcl": {
+              url: urlBase + "/SnaphyAclProps/:id/snaphyAcl",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#create
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclProp` object.)
+             * </em>
+             */
+            "create": {
+              url: urlBase + "/SnaphyAclProps",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#createMany
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclProp` object.)
+             * </em>
+             */
+            "createMany": {
+              isArray: true,
+              url: urlBase + "/SnaphyAclProps",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#upsert
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclProp` object.)
+             * </em>
+             */
+            "upsert": {
+              url: urlBase + "/SnaphyAclProps",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#exists
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/SnaphyAclProps/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#findById
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Find a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclProp` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/SnaphyAclProps/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#find
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclProp` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/SnaphyAclProps",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#findOne
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclProp` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/SnaphyAclProps/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#updateAll
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+            "updateAll": {
+              url: urlBase + "/SnaphyAclProps/update",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#deleteById
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclProp` object.)
+             * </em>
+             */
+            "deleteById": {
+              url: urlBase + "/SnaphyAclProps/:id",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#count
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/SnaphyAclProps/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#prototype$updateAttributes
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Update attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclProp` object.)
+             * </em>
+             */
+            "prototype$updateAttributes": {
+              url: urlBase + "/SnaphyAclProps/:id",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#createChangeStream
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Create a change stream.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `changes` – `{ReadableStream=}` -
+             */
+            "createChangeStream": {
+              url: urlBase + "/SnaphyAclProps/change-stream",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#getSchema
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Send the schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getSchema": {
+              url: urlBase + "/SnaphyAclProps/getSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#getAbsoluteSchema
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Send the absolute schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getAbsoluteSchema": {
+              url: urlBase + "/SnaphyAclProps/getAbsoluteSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#save
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Remote method for saving data with its depedencies
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `schema` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `data` – `{object=}` -
+             */
+            "save": {
+              url: urlBase + "/SnaphyAclProps/save",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#getDetailSchema
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Get the detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getDetailSchema": {
+              url: urlBase + "/SnaphyAclProps/getDetailSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#getModelRelationSchema
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Get the relation detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getModelRelationSchema": {
+              url: urlBase + "/SnaphyAclProps/getModelRelationSchema",
+              method: "POST",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclProps.findById() instead.
+            "::findById::SnaphyAcl::snaphyAclProps": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclProps/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclProps.destroyById() instead.
+            "::destroyById::SnaphyAcl::snaphyAclProps": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclProps/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclProps.updateById() instead.
+            "::updateById::SnaphyAcl::snaphyAclProps": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclProps/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclProps() instead.
+            "::get::SnaphyAcl::snaphyAclProps": {
+              isArray: true,
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclProps",
+              method: "GET",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclProps.create() instead.
+            "::create::SnaphyAcl::snaphyAclProps": {
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclProps",
+              method: "POST",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclProps.createMany() instead.
+            "::createMany::SnaphyAcl::snaphyAclProps": {
+              isArray: true,
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclProps",
+              method: "POST",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclProps.destroyAll() instead.
+            "::delete::SnaphyAcl::snaphyAclProps": {
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclProps",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclProps.count() instead.
+            "::count::SnaphyAcl::snaphyAclProps": {
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclProps/count",
+              method: "GET",
+            },
+          }
+        );
+
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#updateOrCreate
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclProp` object.)
+             * </em>
+             */
+        R["updateOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#update
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+        R["update"] = R["updateAll"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#destroyById
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclProp` object.)
+             * </em>
+             */
+        R["destroyById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#removeById
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclProp` object.)
+             * </em>
+             */
+        R["removeById"] = R["deleteById"];
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.SnaphyAclProp#modelName
+        * @propertyOf lbServices.SnaphyAclProp
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `SnaphyAclProp`.
+        */
+        R.modelName = "SnaphyAclProp";
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclProp#snaphyAcl
+             * @methodOf lbServices.SnaphyAclProp
+             *
+             * @description
+             *
+             * Fetches belongsTo relation snaphyAcl.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAcl` object.)
+             * </em>
+             */
+        R.snaphyAcl = function() {
+          var TargetResource = $injector.get("SnaphyAcl");
+          var action = TargetResource["::get::SnaphyAclProp::snaphyAcl"];
+          return action.apply(R, arguments);
+        };
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.SnaphyAclRelation
+ * @header lbServices.SnaphyAclRelation
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `SnaphyAclRelation` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "SnaphyAclRelation",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/SnaphyAclRelations/:id",
+          { 'id': '@id' },
+          {
+
+            // INTERNAL. Use SnaphyAclRelation.snaphyAcl() instead.
+            "prototype$__get__snaphyAcl": {
+              url: urlBase + "/SnaphyAclRelations/:id/snaphyAcl",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#create
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclRelation` object.)
+             * </em>
+             */
+            "create": {
+              url: urlBase + "/SnaphyAclRelations",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#createMany
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclRelation` object.)
+             * </em>
+             */
+            "createMany": {
+              isArray: true,
+              url: urlBase + "/SnaphyAclRelations",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#upsert
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclRelation` object.)
+             * </em>
+             */
+            "upsert": {
+              url: urlBase + "/SnaphyAclRelations",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#exists
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/SnaphyAclRelations/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#findById
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Find a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclRelation` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/SnaphyAclRelations/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#find
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclRelation` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/SnaphyAclRelations",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#findOne
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclRelation` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/SnaphyAclRelations/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#updateAll
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+            "updateAll": {
+              url: urlBase + "/SnaphyAclRelations/update",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#deleteById
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclRelation` object.)
+             * </em>
+             */
+            "deleteById": {
+              url: urlBase + "/SnaphyAclRelations/:id",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#count
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/SnaphyAclRelations/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#prototype$updateAttributes
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Update attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclRelation` object.)
+             * </em>
+             */
+            "prototype$updateAttributes": {
+              url: urlBase + "/SnaphyAclRelations/:id",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#createChangeStream
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Create a change stream.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `changes` – `{ReadableStream=}` -
+             */
+            "createChangeStream": {
+              url: urlBase + "/SnaphyAclRelations/change-stream",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#getSchema
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Send the schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getSchema": {
+              url: urlBase + "/SnaphyAclRelations/getSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#getAbsoluteSchema
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Send the absolute schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getAbsoluteSchema": {
+              url: urlBase + "/SnaphyAclRelations/getAbsoluteSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#save
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Remote method for saving data with its depedencies
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `schema` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `data` – `{object=}` -
+             */
+            "save": {
+              url: urlBase + "/SnaphyAclRelations/save",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#getDetailSchema
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Get the detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getDetailSchema": {
+              url: urlBase + "/SnaphyAclRelations/getDetailSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#getModelRelationSchema
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Get the relation detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getModelRelationSchema": {
+              url: urlBase + "/SnaphyAclRelations/getModelRelationSchema",
+              method: "POST",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclRelations.findById() instead.
+            "::findById::SnaphyAcl::snaphyAclRelations": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclRelations/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclRelations.destroyById() instead.
+            "::destroyById::SnaphyAcl::snaphyAclRelations": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclRelations/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclRelations.updateById() instead.
+            "::updateById::SnaphyAcl::snaphyAclRelations": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclRelations/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclRelations() instead.
+            "::get::SnaphyAcl::snaphyAclRelations": {
+              isArray: true,
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclRelations",
+              method: "GET",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclRelations.create() instead.
+            "::create::SnaphyAcl::snaphyAclRelations": {
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclRelations",
+              method: "POST",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclRelations.createMany() instead.
+            "::createMany::SnaphyAcl::snaphyAclRelations": {
+              isArray: true,
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclRelations",
+              method: "POST",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclRelations.destroyAll() instead.
+            "::delete::SnaphyAcl::snaphyAclRelations": {
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclRelations",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use SnaphyAcl.snaphyAclRelations.count() instead.
+            "::count::SnaphyAcl::snaphyAclRelations": {
+              url: urlBase + "/SnaphyAcls/:id/snaphyAclRelations/count",
+              method: "GET",
+            },
+          }
+        );
+
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#updateOrCreate
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclRelation` object.)
+             * </em>
+             */
+        R["updateOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#update
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+        R["update"] = R["updateAll"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#destroyById
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclRelation` object.)
+             * </em>
+             */
+        R["destroyById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#removeById
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAclRelation` object.)
+             * </em>
+             */
+        R["removeById"] = R["deleteById"];
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.SnaphyAclRelation#modelName
+        * @propertyOf lbServices.SnaphyAclRelation
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `SnaphyAclRelation`.
+        */
+        R.modelName = "SnaphyAclRelation";
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SnaphyAclRelation#snaphyAcl
+             * @methodOf lbServices.SnaphyAclRelation
+             *
+             * @description
+             *
+             * Fetches belongsTo relation snaphyAcl.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - SnaphyBase id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SnaphyAcl` object.)
+             * </em>
+             */
+        R.snaphyAcl = function() {
+          var TargetResource = $injector.get("SnaphyAcl");
+          var action = TargetResource["::get::SnaphyAclRelation::snaphyAcl"];
           return action.apply(R, arguments);
         };
 

@@ -34,9 +34,12 @@ if(templateSettings){
 
     %>
         <ul class="nav-header pull-right">
-            <li class="hidden-xs hidden-sm">
-                <button class="btn btn-default" data-toggle="layout" data-action="side_overlay_toggle" type="button">
-                    <i class="fa fa-tasks"></i>
+            <!--Checkout bodyCtrl.js for more info.-->
+            <!--Notification valiable is defined in rootscope so that any plugin can also modify it.-->
+            <li  class="hidden-xs hidden-sm">
+                <button ng-class="notification.main.class" class="btn" data-toggle="layout" data-action="side_overlay_toggle" type="button">
+                    <i class="fa fa-bell-o "></i>
+                    <span ng-cloak="" ng-if="notification.unread.total" ng-bind="notification.unread.total" class="badge push-5-l"></span>
                 </button>
             </li>
         </ul>
