@@ -439,7 +439,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 }
             ],
             returns: {
-                arg: "serviceList", type: "object", root: true
+                arg: "serviceList", type: ["ServiceType"], root: true
             }
         });
     };
@@ -1535,7 +1535,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
           /*  if(request.accessToken){
                 if(request.accessToken.userId){*/
                     const ServiceType = databaseObj.ServiceType;
-                    filter = filter || {};
+                   /* filter = filter || {};
                     filter.where = filter.where || {};
                     if(filter){
                         if(filter.where){
@@ -1545,19 +1545,20 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 }
                             }
                         }
-                    }
+                    }*/
                     ServiceType.find(filter)
                         .then(function(serviceTypeList){
                             if(serviceTypeList){
                                 if(serviceTypeList.length){
-                                    const serviceType = serviceTypeList[serviceTypeList.length - 1];
-                                    lastDate = serviceType.added;
+                                    /*const serviceType = serviceTypeList[serviceTypeList.length - 1];
+                                    lastDate = serviceType.added;*/
                                 }
                             }
-                            callback(null, {
+                            callback(null, serviceTypeList);
+                          /*  callback(null, {
                                 serviceTypeList: serviceTypeList,
                                 cursor: lastDate
-                            })
+                            })*/
                         })
                         .catch(function(error){
                             callback(error);

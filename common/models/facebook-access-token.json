@@ -30,7 +30,7 @@
   },
   "validations": [],
   "relations": {
-    "appUser": {
+    "customer": {
       "type": "belongsTo",
       "model": "AppUser",
       "foreignKey": "userId"
