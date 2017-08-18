@@ -23,12 +23,15 @@ module.exports = (Customerquote, server, helper) =>
            instance.updated = new Date();
        }
 
-       if(instance.ownershipType){
-           instance.ownershipType = instance.ownershipType.toString().toLowerCase().trim();
-           if(OWNERSHIPTYPE.indexOf(instance.ownershipType) === -1){
-               return next(new Error("OwnershipType is not valid"));
+       if(instance.quoteType === "q"){
+           if(instance.ownershipType){
+               instance.ownershipType = instance.ownershipType.toString().toLowerCase().trim();
+               if(OWNERSHIPTYPE.indexOf(instance.ownershipType) === -1){
+                   return next(new Error("OwnershipType is not valid"));
+               }
            }
        }
+
 
        if(instance.quoteType){
            instance.quoteType = instance.quoteType.toString().toLowerCase().trim();
@@ -40,10 +43,12 @@ module.exports = (Customerquote, server, helper) =>
        if(!validate(instance, currentInstance, "vehicleInfoId")){
            return next(new Error("Vehicle Info is required"));
        }
-
-       if(!validate(instance, currentInstance, "cityId")){
-           return next(new Error("Register City is required"));
+       if(instance.quoteType === "q"){
+           if(!validate(instance, currentInstance, "cityId")){
+               return next(new Error("Register City is required"));
+           }
        }
+
 
        if(!validate(instance, currentInstance, "customerId")){
            return next(new Error("Customer is required"));

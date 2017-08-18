@@ -37,7 +37,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         fetchShowroomForBrandMethod();
         findAllVehiclesMethod();
         saveCustomerMethod();
-
+        storeSOSDataMethod();
+        createTestDriveQuoteMethod();
 
     };
 
@@ -648,6 +649,51 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
         });
     };
+
+    const storeSOSDataMethod = function(){
+        const Sos = databaseObj.Sos;
+        Sos.storeSosData = storeSosData;
+        Sos.remoteMethod("storeSosData", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "sosObj", type: "object"
+                }
+            ],
+            returns: {
+                arg: "response", type: "object", root: true
+            }
+        });
+
+    };
+
+    const createTestDriveQuoteMethod = function(){
+        const CustomerQuote = databaseObj.CustomerQuote;
+        CustomerQuote.createTestDriveQuote = createTestDriveQuote;
+        CustomerQuote.remoteMethod("createTestDriveQuote", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "vehicleInfoObj", type: "object"
+                }
+            ],
+            returns: {
+                arg: "customerQuoteObj", type: "CustomerQuote", root: true
+            }
+        })
+    }
     /**
      * To fetch all the Brands
      * @param ctx
@@ -658,8 +704,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const findAllBrands = function(ctx, filter, callback){
         const request = ctx.req;
         let lastDate;
-        //if(request.accessToken){
-            //if(request.accessToken.userId){
+        if(request.accessToken){
+            if(request.accessToken.userId){
                   const Brand = databaseObj.Brand;
                   filter = filter || {};
                   filter.where = filter.where || {};
@@ -700,12 +746,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                          callback(error);
                       });
 
-         /*   } else{
+            } else{
                 return callback(new Error("User not valid"));
             }
         } else{
             return callback(new Error("User not valid"));
-        }*/
+        }
     };
 
 
@@ -720,8 +766,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         const request = ctx.req;
         let lastDate;
         const carIdList = [];
-        //if(request.accessToken){
-            //if(request.accessToken.userId){
+        if(request.accessToken){
+            if(request.accessToken.userId){
                 const CarModel = databaseObj.CarModel;
                 filter = filter || {};
                 filter.where = filter.where || {};
@@ -755,12 +801,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         callback(error);
                     })
 
-            /*    } else{
+                } else{
                 return callback(new Error("User not valid"));
                 }
             } else{
             return callback(new Error("User not valid"));
-        }*/
+        }
     };
 
     /**
@@ -774,8 +820,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         const request = ctx.req;
         var lastDate = "";
         let uniqueFuelList = [];
-        //if(request.accessToken){
-            //if(request.accessToken.userId){
+        if(request.accessToken){
+            if(request.accessToken.userId){
                 const Car = databaseObj.Car;
                 filter = filter || {};
                 filter.where = filter.where || {};
@@ -801,12 +847,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     .catch(function(error){
                         callback(error);
                     })
-           /* } else{
+            } else{
                 return callback(new Error("User not valid"));
             }
         } else{
             return callback(new Error("User not valid"));
-        }*/
+        }
     };
 
     /**
@@ -820,8 +866,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         const request = ctx.req;
         let lastDate ;
         let uniqueGearBoxList = [];
-       // if(request.accessToken){
-            //if(request.accessToken.userId){
+        if(request.accessToken){
+            if(request.accessToken.userId){
                 const Car = databaseObj.Car;
                 filter = filter || {};
                 filter.where = filter.where || {};
@@ -846,12 +892,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     .catch(function (error) {
                         callback(null, error);
                     });
-           /* } else{
+            } else{
                 return callback(new Error("User not valid"));
             }
         } else{
             return callback(new Error("User not valid"));
-        }*/
+        }
     };
 
     /**
@@ -865,8 +911,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         const request = ctx.req;
         let lastDate;
         const carIdList = [];
-       // if(request.accessToken){
-         //   if(request.accessToken.userId){
+        if(request.accessToken){
+            if(request.accessToken.userId){
                 const Car = databaseObj.Car;
                 filter = filter || {};
                 filter.where = filter.where || {};
@@ -905,12 +951,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     .catch(function (error) {
                         callback(null, error);
                     });
-          /*  } else{
+            } else{
                 return callback(new Error("User not valid"));
             }
         } else{
             return callback(new Error("User not valid"));
-        }*/
+        }
     };
 
     /**
@@ -924,8 +970,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       const request = ctx.req;
         var lastDate = "";
         const carIdList = [];
-      //if(request.accessToken){
-          //if(request.accessToken.userId){
+      if(request.accessToken){
+          if(request.accessToken.userId){
               //const userId = request.accessToken.userId;
               const Car = databaseObj.Car;
               filter = filter || {};
@@ -983,12 +1029,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
               .catch(function(error){
                   callback(error);
         });
-        /*  } else{
+          } else{
               return callback(new Error("User not valid"));
           }
       } else{
           return callback(new Error("User not valid"));
-      }*/
+      }
     };
 
 
@@ -1002,8 +1048,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const fetchDealerDetail = function(ctx, dealerId, callback){
       const request = ctx.req;
       var lastDate = "";
-      //if(request.accessToken){
-          //if(request.accessToken.userId){
+      if(request.accessToken){
+          if(request.accessToken.userId){
               const Dealer = databaseObj.Dealer;
               Dealer.findById(dealerId)
                   .then(function(dealer){
@@ -1016,12 +1062,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                   .catch(function (error) {
                       callback(error);
                   })
-          /*}else{
+          }else{
               return callback(new Error("User not valid"));
           }
       } else{
           return callback(new Error("User not valid"));
-      }*/
+      }
     };
 
     /**
@@ -1032,8 +1078,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      */
     const saveTrendingBrand = function(ctx, brandId, callback){
         const request = ctx.req;
-       // if(request.accessToken){
-            //if(request.accessToken.userId){
+        if(request.accessToken){
+            if(request.accessToken.userId){
                 const Brand = databaseObj.Brand;
                 Brand.findById(brandId)
                     .then(function(brand){
@@ -1046,12 +1092,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     .catch(function(error){
                         callback(error);
                     })
-        /*    } else{
+            } else{
                 return callback(new Error("User not valid"));
             }
         } else{
             return callback(new Error("User not valid"));
-        }*/
+        }
     };
 
     /**
@@ -1067,8 +1113,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         var customerLatLong;
         const breakdownList =[];
         let promises = [];
-       /* if(request.accessToken){
-            if(request.accessToken.userId){*/
+        if(request.accessToken){
+            if(request.accessToken.userId){
                 const BreakdownCategory = databaseObj.BreakdownCategory;
                 customerLatLong = [lat, lang];
                 BreakdownCategory.find()
@@ -1113,12 +1159,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             callback(error);
                         }
                     })
-          /*  }else{
+            }else{
                 return callback(new Error("User not valid"));
             }
         } else{
             return callback(new Error("User not valid"));
-        }*/
+        }
     };
 
     /**
@@ -1134,8 +1180,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         const request = ctx.req;
         var lastDate = "";
         var customerLatLong;
-       // if(request.accessToken){
-            //if(request.accessToken.userId){
+        if(request.accessToken){
+            if(request.accessToken.userId){
                 const BreakdownCategory = databaseObj.BreakdownCategory;
                 customerLatLong = [lat, lang];
                 const filter = {
@@ -1173,12 +1219,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         callback(error);
                     })
 
-          /*  } else{
+            } else{
                 return callback(new Error("User not valid"));
             }
         } else{
             return callback(new Error("User not valid"));
-        }*/
+        }
 
     };
 
@@ -1195,8 +1241,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         var customerLatLong;
         let emergencyList =[];
         let promises = [];
-        /*if(request.accessToken){
-            if(request.accessToken.userId){*/
+        if(request.accessToken){
+            if(request.accessToken.userId){
                 const EmergencyCategory = databaseObj.EmergencyCategory;
                 customerLatLong = [lat, lang];
                 EmergencyCategory.find()
@@ -1244,12 +1290,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             callback(error);
                         }
                     })
-           /* }else{
+            }else{
                 return callback(new Error("User not valid"));
             }
         } else{
             return callback(new Error("User not valid"));
-        }*/
+        }
     };
 
     /**
@@ -1310,8 +1356,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const fetchWorkshopForBrand = function(ctx, brandId, lastDate, callback){
         const request = ctx.req;
         lastDate = !lastDate ? new Date() : new Date(lastDate);
-       // if(request.accessToken){
-           // if(request.accessToken.userId){
+        if(request.accessToken){
+            if(request.accessToken.userId){
                 const Workshop = databaseObj.Workshop;
                 Workshop.find({
                     where: {
@@ -1339,12 +1385,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     .catch(function(error){
                         callback(error);
                     })
-            /*}else{
+            }else{
                 return callback(new Error("User not valid"));
             }
         } else{
             return callback(new Error("User not valid"));
-        }*/
+        }
     };
 
     /**
@@ -1486,9 +1532,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       if(!customerMessageObj){
           return callback(new Error("Invalid Arguments"));
       } else{
-          //if(request.accessToken){
-              //if(request.accessToken.userId){
-                  const customerId = "";
+          if(request.accessToken){
+              if(request.accessToken.userId){
+                  const customerId = request.accessToken.userId;
                   const CustomerMessage = databaseObj.CustomerMessage;
                   CustomerMessage.create({
                       subject: customerMessageObj.subject,
@@ -1509,12 +1555,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       .catch(function(error){
                           callback(error);
                       })
-            /*  } else{
+              } else{
                   return callback(new Error("User not valid"));
               }
           } else{
               return callback(new Error("User not valid"));
-          }*/
+          }
       }
 
     };
@@ -1532,8 +1578,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         if(!filter){
             return callback(new Error("Wrong arguments"));
         }else{
-          /*  if(request.accessToken){
-                if(request.accessToken.userId){*/
+            if(request.accessToken){
+                if(request.accessToken.userId){
                     const ServiceType = databaseObj.ServiceType;
                    /* filter = filter || {};
                     filter.where = filter.where || {};
@@ -1563,12 +1609,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         .catch(function(error){
                             callback(error);
                         })
-                /*}else{
+                }else{
                     return callback(new Error("User not valid"));
                 }
             } else{
                 return callback(new Error("User not valid"));
-            }*/
+            }
         }
     };
 
@@ -1584,9 +1630,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       if(!serviceBookingObj){
           return callback(new Error("Invalid Arguments"));
       } else{
-          //if(request.accessToken){
-              //if(request.accessToken.userId){
-                  const customerId = "";
+          if(request.accessToken){
+              if(request.accessToken.userId){
+                  const customerId = request.accessToken.userId;
                   const ServiceBooking = databaseObj.ServiceBooking;
                   ServiceBooking.create({
                       serviceDate: moment(serviceBookingObj.serviceDate, "DD/MM/YYYY"),
@@ -1604,12 +1650,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       .catch(function(error){
                           callback(error);
                       })
-           /*   } else{
+              } else{
                   return callback(new Error("User not valid"));
               }
           } else{
               return callback(new Error("User not valid"));
-          }*/
+          }
       }
     };
 
@@ -1625,9 +1671,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       if(!customerQuoteObj){
           return callback(new Error("Invalid Arguments"));
       }else{
-          //if(request.accessToken){
-             // if(request.accessToken.userId){
-                  const customerId = "";
+          if(request.accessToken){
+              if(request.accessToken.userId){
+                  const customerId = request.accessToken.userId;
                   const VehicleInfo = databaseObj.VehicleInfo;
                   VehicleInfo.create({
                       colorId : vehicleInfoObj.colorId,
@@ -1636,7 +1682,15 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       trimId: vehicleInfoObj.trimId,
                       customerId: customerId,
                       gearBoxId: vehicleInfoObj.gearBoxId,
-                      fuelId: vehicleInfoObj.fuelId
+                      fuelId: vehicleInfoObj.fuelId,
+                      vehicleModel: vehicleInfoObj.vehicleModel,
+                      vehicleType: "car",
+                      quoteType : "q",
+                      fuelType: vehicleInfoObj.fuelType,
+                      vehicleTrim: vehicleInfoObj.vehicleTrim,
+                      vehicleBrand: vehicleInfoObj.vehicleBrand,
+                      vehicleGearbox : vehicleInfoObj.vehicleGearbox,
+                      vehicleColor: vehicleInfoObj.vehicleColor
                   })
                       .then(function(vehicleInfoObj){
                           if(vehicleInfoObj){
@@ -1650,7 +1704,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                   isInsurance: customerQuoteObj.isInsurance,
                                   isOldVehicleTrade: customerQuoteObj.isOldVehicleTrade,
                                   brandId: customerQuoteObj.brandId,
-                                  modelId: customerQuoteObj.modelId,
+                                  carModelId: customerQuoteObj.carModelId,
                                   trimId: customerQuoteObj.trimId,
                                   quoteType: customerQuoteObj.quoteType,
                                   customerId: customerId,
@@ -1673,16 +1727,67 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       .catch(function (error) {
                           callback(error);
                       })
-          /*    } else{
+              } else{
                   return callback(new Error("User not valid"));
               }
           }else{
               return callback(new Error("User not valid"));
-          }*/
+          }
       }
     };
 
 
+    const createTestDriveQuote = function(ctx, vehicleInfoObj, callback){
+        const request = ctx.req;
+        if(!vehicleInfoObj){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const customerId = request.accessToken.userId;
+                    const VehicleInfo = databaseObj.VehicleInfo;
+                    VehicleInfo.create({
+                        brandId: vehicleInfoObj.brandId,
+                        carModelId: vehicleInfoObj.carModelId,
+                        trimId: vehicleInfoObj.trimId,
+                        customerId: customerId,
+                        gearBoxId: vehicleInfoObj.gearBoxId,
+                        fuelId: vehicleInfoObj.fuelId,
+                        vehicleModel: vehicleInfoObj.vehicleModel,
+                        vehicleType: "car",
+                        quoteType : "t",
+                        fuelType: vehicleInfoObj.fuelType,
+                        vehicleTrim: vehicleInfoObj.vehicleTrim,
+                        vehicleBrand: vehicleInfoObj.vehicleBrand,
+                        vehicleGearbox : vehicleInfoObj.vehicleGearbox
+                    })
+                        .then(function(vehicleInfo){
+                            const vehicleInfoId = vehicleInfo.id;
+                            const CustomerQuote = databaseObj.CustomerQuote;
+                            return CustomerQuote.create({
+                                vehicleInfoId: vehicleInfoId,
+                                quoteType: "t",
+                                customerId: customerId
+                            })
+                        })
+
+                        .then(function(customerQuote){
+                            if(customerQuote){
+                                callback(null, customerQuote);
+                            }
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
 
 
     /**
@@ -1697,13 +1802,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       if(!filter){
           return callback(new Error("Invalid Arguments"));
       }else{
-          //if(request.accessToken){
-              //if(request.accessToken.userId){
-                  const customerId = "";
+          if(request.accessToken){
+              if(request.accessToken.userId){
+                  const customerId = request.accessToken.userId;
                   const CustomerQuote = databaseObj.CustomerQuote;
                   CustomerQuote.find({
                        where:{
-                           customerId:customerId
+                           customerId:customerId,
+                           quoteType: "q"
                        },
                       include:[{
                            relation: "vehicleInfo",
@@ -1723,12 +1829,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       .catch(function(error){
                           callback(error);
                       })
-             /* } else {
+              } else {
                   return callback(new Error("User not valid"));
               }
           } else{
               return callback(new Error("User not valid"));
-          }*/
+          }
       }
     };
 
@@ -1797,9 +1903,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       if(!feedbackObj){
           return callback(new Error("Invalid Arguments"));
       } else{
-          //if(request.accessToken){
-              //if(request.accessToken.userId){
-                  const userId = "";
+          if(request.accessToken){
+              if(request.accessToken.userId){
+                  const userId = request.accessToken.userId;
                   const Feedback = databaseObj.Feedback;
                   Feedback.create({
                       subject: feedbackObj.subject,
@@ -1816,12 +1922,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       .catch(function(error){
                           callback(error);
                       })
-             /* } else{
+              } else{
                   return callback(new Error("User not valid"));
               }
           } else{
               return callback(new Error("User not valid"));
-          }*/
+          }
       }
     };
 
@@ -1837,9 +1943,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         if(!serviceObj){
             return callback(new Error("Invalid Arguments"));
         } else{
-            //if(request.accessToken){
-                //if(request.accessToken.userId){
-                    const customerId = "";
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const customerId = request.accessToken.userId;
                     const ServiceHistory = databaseObj.ServiceHistory;
                     ServiceHistory.create( {
                         dateOfBooking: moment(serviceObj.dateOfBooking, "DD/MM/YYYY"),
@@ -1856,12 +1962,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     .catch(function(error){
                         callback(error);
                     })
-            /*    } else{
+                } else{
                     return callback(new Error("User not valid"));
                 }
             } else{
                 return callback(new Error("User not valid"));
-            }*/
+            }
         }
     };
 
@@ -1878,9 +1984,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       if(!filter){
           return callback(new Error("Invalid Arguments"));
       } else{
-          //if(request.accessToken){
-              //if(request.accessToken.userId){
-                  const customerId = "";
+          if(request.accessToken){
+              if(request.accessToken.userId){
+                  const customerId = request.accessToken.userId;
                   if(filter){
                       if(filter.where){
                           if(filter.where.added){
@@ -1909,12 +2015,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                           callback(error);
                       })
 
-            /*      } else{
+                  } else{
                   return callback(new Error("User not valid"));
               }
           } else{
               return callback(new Error("User not valid"));
-          }*/
+          }
       }
     };
 
@@ -1997,12 +2103,13 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                   lastName : customerObj.lastName,
                                   email : customerObj.email,
                                   cityId : customerObj.cityId,
-                                  countryId : customerObj.countryId,
+                                  countryName : customerObj.countryName,
                                   workshopId : customerObj.workshopId,
                                   phoneNumber: customerObj.phoneNumber,
                                   id: customerId,
                                   status: "active",
-                                  added: customer.added
+                                  added: customer.added,
+                                  sosStatus : "incomplete"
 
                               });
                           } else{
@@ -2026,6 +2133,45 @@ module.exports = function( server, databaseObj, helper, packageObj) {
               callback(new Error("User not valid"));
           }
       }
+    };
+
+
+    const storeSosData = function(ctx, sosObj, callback){
+        const request = ctx.req;
+        if(!sosObj){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const customerId = request.accessToken.userId;
+                    const Sos = databaseObj.Sos;
+                    const contact2 =  sosObj.contact2? sosObj.contact2 : {};
+                    const contact3 = sosObj.contact3? sosObj.contact3 : {};
+                    Sos.create({
+                        contact1: sosObj.contact1,
+                        contact2: contact2,
+                        contact3: contact3,
+                        customerId : customerId
+                    })
+                        .then(function(sos){
+                            if(sos){
+                                return databaseObj.Customer.findById(customerId);
+                                //callback(null, sosObj);
+                            }
+                        })
+                        .then(function(customer){
+                            return customer.updateAttribute("sosStatus", "complete");
+                        })
+                        .then(function(customer){
+                            callback(null, {response: "success"});
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+
+                }
+            }
+        }
     };
 
 

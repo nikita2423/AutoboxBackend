@@ -161,6 +161,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 						email: "demo@gmail.com"
                     });
 				} else{
+					return customer.updateAttribute("phoneNumber", phoneNumber);
 					/*customerInstance = customer;
 					return customer.createAccessToken(31536000);*/
                     //Do not create AccessToken

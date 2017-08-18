@@ -58,9 +58,14 @@
     "city_status": {
       "display": false
     },
-    "country_name": {
+    "countryName": {
       "label": "Country",
       "search": "text"
+    },
+    "country_name": {
+      "label": "Country",
+      "search": "text",
+      "display": false
     },
     "country_status": {
       "display": false

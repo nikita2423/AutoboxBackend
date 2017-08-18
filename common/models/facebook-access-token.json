@@ -32,7 +32,7 @@
   "relations": {
     "customer": {
       "type": "belongsTo",
-      "model": "AppUser",
+      "model": "Customer",
       "foreignKey": "userId"
     }
   },

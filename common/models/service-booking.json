@@ -32,12 +32,12 @@
       }
     },
     "vehiclePickup": {
-      "type": "boolean",
+      "type": "string",
       "required": true,
       "template": {
         "type": "input",
         "templateOptions": {
-          "type": "boolean",
+          "type": "string",
           "priority": 3,
           "label": "Vehicle Pick Up",
           "id": "vehiclePickUp"

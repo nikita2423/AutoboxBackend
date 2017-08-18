@@ -75,7 +75,7 @@
     },
     "vehicleColor": {
       "type": "string",
-      "required": true,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -83,6 +83,34 @@
           "priority": 3,
           "label": "Enter Color",
           "id": "vehicleColor"
+        }
+      }
+    },
+    "vehicleBrand": {
+      "type": "string",
+      "required": false,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Brand",
+          "id": "vehicleBrand"
+        }
+      }
+    },
+    "quoteType": {
+      "type": "string",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Select Quote Type",
+          "id": "quoteType",
+          "priority": 6,
+          "options": [
+            "q",
+            "t"
+          ]
         }
       }
     }

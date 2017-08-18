@@ -42,13 +42,33 @@
     "registerStatus": {
       "type": "string",
       "required": true,
-      "default": "notregistered"
+      "default": "notregistered",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Register Status",
+          "id": "registerStatus",
+          "priority": 6,
+          "options": [
+            "registered",
+            "notregistered"
+          ]
+        }
+      }
     },
     "cityName": {
       "type": "string"
     },
     "countryName": {
-      "type": "string"
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "label": "Country Name",
+          "type": "text",
+          "id": "countryName"
+        }
+      }
     },
     "serviceCenter": {
       "type": "string"
@@ -140,6 +160,23 @@
           "onImageUpdate": {
             "deletePrevious": true
           }
+        }
+      }
+    },
+    "sosStatus": {
+      "type": "string",
+      "required": true,
+      "default": "incomplete",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Sos Status",
+          "id": "incomplete",
+          "priority": 6,
+          "options": [
+            "complete",
+            "incomplete"
+          ]
         }
       }
     },

@@ -124,17 +124,17 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         Customer.observe("after save", function(ctx, next){
             const instance = ctx.instance;
             const customerObj = instance.toJSON();
-            if(customerObj.registerStatus === "notregistered" && !ctx.isNewInstance){
+            if(customerObj.registerStatus === "notregistered" && !ctx.isNewInstance && customerObj.sosStatus === "incomplete"){
                 process.nextTick(function(){
                     databaseObj.City.findById(customerObj.cityId)
                         .then(function(city){
                             if(city){
                                 customerObj.city = city;
                                 customerObj.cityName = city.name;
-                                return databaseObj.Country.findById(customerObj.countryId);
+                                //return databaseObj.Country.findById(customerObj.countryId);
                             }
                         })
-                        .then(function(country){
+                        /*.then(function(country){
                             if(country){
                                 customerObj.country = country;
                                 customerObj.countryName = country.name;
@@ -146,7 +146,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 customerObj.workshop = workshop;
                                 customerObj.serviceCenter = workshop.dealershipName;
                             }
-                        })
+                        })*/
                         .then(function(){
                             const subject = packageObj.customer.subject;
                             const to = [];

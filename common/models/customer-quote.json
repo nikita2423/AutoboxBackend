@@ -8,7 +8,7 @@
   "properties": {
     "ownershipType": {
       "type": "string",
-      "required": true,
+      "required": false,
       "template": {
         "type": "selectString",
         "templateOptions": {
@@ -23,8 +23,8 @@
       }
     },
     "isFinance": {
-      "type": "boolean",
-      "required": true,
+      "type": "string",
+      "required": false,
       "default": "no",
       "template": {
         "type": "selectString",
@@ -40,7 +40,7 @@
       }
     },
     "isInsurance": {
-      "type": "boolean",
+      "type": "string",
       "default": "no",
       "template": {
         "type": "selectString",
@@ -56,8 +56,8 @@
       }
     },
     "isOldVehicleTrade": {
-      "type": "boolean",
-      "required": true,
+      "type": "string",
+      "required": false,
       "default": "no",
       "template": {
         "type": "selectString",
@@ -89,8 +89,8 @@
       }
     },
     "soldViaAutobox": {
-      "type": "boolean",
-      "required": true,
+      "type": "string",
+      "required": false,
       "default": "no",
       "template": {
         "type": "selectString",
@@ -113,8 +113,8 @@
       "type": "date"
     },
     "gpsTracker": {
-      "type": "boolean",
-      "required": true,
+      "type": "string",
+      "required": false,
       "default": "no",
       "template": {
         "type": "selectString",
@@ -130,8 +130,8 @@
       }
     },
     "dashCamera": {
-      "type": "boolean",
-      "required": true,
+      "type": "string",
+      "required": false,
       "default": "no",
       "template": {
         "type": "selectString",
@@ -147,8 +147,8 @@
       }
     },
     "testDrive": {
-      "type": "boolean",
-      "required": true,
+      "type": "string",
+      "required": false,
       "default": "no",
       "template": {
         "type": "selectString",
@@ -165,7 +165,7 @@
     },
     "quoteNumber": {
       "type": "string",
-      "required": true,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
