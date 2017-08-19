@@ -8,7 +8,7 @@
 var settings = {
   "defaultTemplate": true,
   "companyInfo": ["t&c", "about us", "privacy policy"],
-  "companyName": "Snaphy"
+  "companyName": "Autobox"
 
 };
 

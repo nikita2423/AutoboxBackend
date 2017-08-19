@@ -1253,7 +1253,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                         const categoryId = emergencyCategory.id;
                                         const Emergency = databaseObj.Emergency;
                                         promises.push(
-                                        Emergency.find({
+                                        Emergency.findOne({
                                             limit:1,
                                             where: {
                                                 emergencyCategoryId : categoryId,
