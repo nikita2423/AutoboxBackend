@@ -208,7 +208,7 @@
     "dataSource": "mongodb",
     "public": true
   },
-"SnaphyNotification": {
+  "SnaphyNotification": {
     "dataSource": "mongodb",
     "public": true
   },

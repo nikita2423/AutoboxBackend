@@ -21,7 +21,7 @@
         "target": "blank|sames"
       }
     },
-    "options":{
+    "options": {
       "type": "object",
       "required": false,
       "description": "where query to be used as a filter."

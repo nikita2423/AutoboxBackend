@@ -36,9 +36,9 @@ module.exports = (Vehicledetail, server, helper) =>
         }
 
 
-        if(!validate(instance, currentInstance, "showroomId")){
+     /*   if(!validate(instance, currentInstance, "showroomId")){
             return next(new Error("Showroom is required"));
-        }
+        }*/
 
         if(!validate(instance, currentInstance, "workshopId")){
             return next(new Error("Workshop is required"));

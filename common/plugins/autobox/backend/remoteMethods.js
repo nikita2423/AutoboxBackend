@@ -39,6 +39,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         saveCustomerMethod();
         storeSOSDataMethod();
         createTestDriveQuoteMethod();
+        saveNewVehicleMethod();
+        saveExistingVehicleMethod();
 
     };
 
@@ -693,7 +695,58 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 arg: "customerQuoteObj", type: "CustomerQuote", root: true
             }
         })
+    };
+
+    const saveNewVehicleMethod = function(){
+        const VehicleDetail = databaseObj.VehicleDetail;
+        VehicleDetail.saveNewVehicle = saveNewVehicle;
+        VehicleDetail.remoteMethod("saveNewVehicle", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "customerQuoteId", type: "string"
+                },
+                {
+                    arg: "vehicleDetailObj", type: "object"
+                }
+            ],
+            returns: {
+                arg: "vehicleDetailObj", type: "VehicleDetail"
+            }
+        })
     }
+
+
+    const saveExistingVehicleMethod = function(){
+      const VehicleDetail = databaseObj.VehicleDetail;
+      VehicleDetail.saveExistingVehicle = saveExistingVehicle;
+      VehicleDetail.remoteMethod("saveExistingVehicle", {
+          accepts: [
+              {
+                  arg: 'ctx',
+                  type: 'object',
+                  http: {
+                      source: 'context'
+                  }
+              },
+              {
+                  arg: "vehicleInfoObj", type: "object"
+              },
+              {
+                  arg: "vehicleDetailObj", type: "object"
+              }
+          ],
+          returns: {
+              arg: "vehicleDetailObj", type: "VehicleDetail"
+          }
+      })
+    };
     /**
      * To fetch all the Brands
      * @param ctx
@@ -1194,7 +1247,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         if(breakdownCategory){
                             const categoryId = breakdownCategory.id;
                             const Breakdown = databaseObj.Breakdown;
-                            return Breakdown.find({
+                            return Breakdown.findOne({
                                 limit: 1,
                                 where: {
                                     breakdownCategoryId: categoryId,
@@ -1441,13 +1494,124 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
     /**
+     * To save the newly purchased vehicle
+     * @param ctx
+     * @param customerQuoteId
+     * @param vehicleDetailObj
+     * @param callback
+     */
+    const saveNewVehicle = function(ctx, customerQuoteId, vehicleDetailObj, callback){
+        const request = ctx.req;
+        if(!customerQuoteId && !vehicleDetailObj){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                   const customerId = request.accessToken.userId;
+                   const CustomerQuote = databaseObj.CustomerQuote;
+                   CustomerQuote.findById(customerQuoteId)
+                       .then(function(customerQuote){
+                           if(customerQuote){
+                               return databaseObj.VehicleInfo.findById(customerQuote.vehicleInfoId)
+                           }
+                       })
+                       .then(function(vehicleInfo){
+                           if(vehicleInfo){
+                              const VehicleDetail = databaseObj.VehicleDetail;
+                              return VehicleDetail.create({
+                                  workshopName: vehicleDetailObj.workshopName,
+                                  showroomName: vehicleDetailObj.showroomName,
+                                  registeredName: vehicleDetailObj.registeredName,
+                                  registrationNumber: vehicleDetailObj.registrationNumber,
+                                  showroomId: vehicleDetailObj.showroomId,
+                                  workshopId: vehicleDetailObj.workshopId,
+                                  customerId: customerId,
+                                  vehicleInfoId : vehicleInfo.id
+                              })
+                           }
+                       })
+                       .then(function(vehicleDetail){
+                           if(vehicleDetail){
+                               callback(null, vehicleDetail);
+                           }
+                       })
+                       .catch(function(error){
+                           callback(error);
+                       })
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+
+    };
+
+    const saveExistingVehicle = function(ctx, vehicleInfoObj, vehicleDetailObj, callback){
+      const request = ctx.req;
+      if(!vehicleInfo && !vehicleDetailObj){
+          callback(new Error("Invalid Arguments"));
+      } else{
+          if(request.accessToken){
+              if(request.accessToken.userId){
+                  const customerId = request.accessToken.userId;
+                  const VehicleInfo = databaseObj.VehicleInfo;
+                  VehicleInfo.create({
+                      colorId : vehicleInfoObj.colorId,
+                      brandId: vehicleInfoObj.brandId,
+                      carModelId: vehicleInfoObj.carModelId,
+                      trimId: vehicleInfoObj.trimId,
+                      customerId: customerId,
+                      gearBoxId: vehicleInfoObj.gearBoxId,
+                      fuelId: vehicleInfoObj.fuelId,
+                      vehicleModel: vehicleInfoObj.vehicleModel,
+                      vehicleType: "car",
+                      quoteType : "q",
+                      fuelType: vehicleInfoObj.fuelType,
+                      vehicleTrim: vehicleInfoObj.vehicleTrim,
+                      vehicleBrand: vehicleInfoObj.vehicleBrand,
+                      vehicleGearbox : vehicleInfoObj.vehicleGearbox,
+                      vehicleColor: vehicleInfoObj.vehicleColor
+                  })
+                      .then(function(vehicleInfo){
+                          if(vehicleInfo){
+                              const VehicleDetail = databaseObj.VehicleDetail;
+                              return VehicleDetail.create({
+                                  workshopName: vehicleDetailObj.workshopName,
+                                  registeredName: vehicleDetailObj.registeredName,
+                                  registrationNumber: vehicleDetailObj.registrationNumber,
+                                  workshopId: vehicleDetailObj.workshopId,
+                                  customerId: customerId,
+                                  vehicleInfoId : vehicleInfo.id
+                              })
+                          }
+                      })
+                      .then(function(vehicleDetail){
+                          if(vehicleDetail){
+                              callback(null, vehicleDetail);
+                          }
+                      })
+                      .catch(function(error){
+                          callback(error);
+                      })
+              } else{
+                  callback(new Error("User not valid"));
+              }
+          } else{
+              callback(new Error("User not valid"));
+          }
+      }
+    };
+
+    /**
      * to save the vehicle detail of the customer
      * @param ctx
      * @param vehicleDetailObj
      * @param callback
      * @returns {*}
      */
-    const saveVehicleDetails = function(ctx, vehicleDetailObj, vehicleInfoObj, callback){
+   /* const saveVehicleDetails = function(ctx, vehicleDetailObj, vehicleInfoObj, callback){
       const request = ctx.req;
       if(request.accessToken){
           if(request.accessToken.userId){
@@ -1518,7 +1682,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       } else{
           return callback(new Error("User not valid"));
       }
-    };
+    };*/
 
     /**
      * To send the message to dealer/customer related to quote
