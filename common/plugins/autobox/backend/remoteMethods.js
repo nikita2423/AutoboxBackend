@@ -607,9 +607,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
     const findAllVehiclesMethod = function(){
-        const VehicleInfo = databaseObj.VehicleInfo;
-        VehicleInfo.findAll = findAllVehicles;
-        VehicleInfo.remoteMethod("findAll", {
+        const VehicleDetail = databaseObj.VehicleDetail;
+        VehicleDetail.findAll = findAllVehicles;
+        VehicleDetail.remoteMethod("findAll", {
             accepts: [
                 {
                     arg: 'ctx',
@@ -779,7 +779,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                   }
 
                   if(!filter.order){
-                      filter.order = ['added DESC', 'trending DESC'];
+                      filter.order = ['trending DESC'];
                   }
 
                   Brand.find(filter)
@@ -1178,14 +1178,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                         const categoryId = breakdownCategory.id;
                                         const Breakdown = databaseObj.Breakdown;
                                         promises.push(
-                                        Breakdown.find({
+                                        Breakdown.findOne({
                                             limit:1,
                                             where: {
                                                 breakdownCategoryId : categoryId,
                                                 latlong : {
-                                                    near: customerLatLong,
-                                                    maxDistance: 10,
-                                                    unit: 'kilometers'
+                                                    near: customerLatLong
                                                 }
                                             },
                                             include: ["breakdownCategory"]
@@ -1456,6 +1454,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      */
     const fetchShowroomForBrand = function(ctx, brandId, lastDate, callback){
         const request = ctx.req;
+        lastDate = !lastDate ? new Date() : new Date(lastDate);
         if(request.accessToken){
             if(request.accessToken.userId){
                 const Showroom = databaseObj.Showroom;
@@ -1550,7 +1549,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     const saveExistingVehicle = function(ctx, vehicleInfoObj, vehicleDetailObj, callback){
       const request = ctx.req;
-      if(!vehicleInfo && !vehicleDetailObj){
+      if(!vehicleInfoObj && !vehicleDetailObj){
           callback(new Error("Invalid Arguments"));
       } else{
           if(request.accessToken){
@@ -1611,7 +1610,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @param callback
      * @returns {*}
      */
-   /* const saveVehicleDetails = function(ctx, vehicleDetailObj, vehicleInfoObj, callback){
+    const saveVehicleDetails = function(ctx, vehicleDetailObj, vehicleInfoObj, callback){
       const request = ctx.req;
       if(request.accessToken){
           if(request.accessToken.userId){
@@ -1682,7 +1681,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       } else{
           return callback(new Error("User not valid"));
       }
-    };*/
+    };
 
     /**
      * To send the message to dealer/customer related to quote
@@ -2205,7 +2204,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
           if (request.accessToken) {
               if (request.accessToken.userId) {
                   const customerId = request.accessToken.userId;
-                  const VehicleInfo = databaseObj.VehicleInfo;
+                  const VehicleDetail = databaseObj.VehicleDetail;
                   filter = filter || {};
                   filter.where = filter.where || {};
                   if(filter){
@@ -2223,17 +2222,18 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                           filter.where.customerId = customerId;
                       }
                   }
+                  filter.include = ["vehicleInfo"];
 
-                  VehicleInfo.find(filter)
-                      .then(function(vehicleInfoList){
-                          if(vehicleInfoList){
-                              if(vehicleInfoList.length){
-                                  const vehicleInfo = vehicleInfoList[vehicleInfoList.length - 1];
-                                  lastDate = vehicleInfo.added;
+                  VehicleDetail.find(filter)
+                      .then(function(vehicleDetailList){
+                          if(vehicleDetailList){
+                              if(vehicleDetailList.length){
+                                  const vehicleDetail = vehicleDetailList[vehicleDetailList.length - 1];
+                                  lastDate = vehicleDetail.added;
                               }
                           }
                           callback(null, {
-                              vehicleInfoList: vehicleInfoList,
+                              vehicleDetailList: vehicleDetailList,
                               cursor: lastDate
                           })
                       })

@@ -228,7 +228,17 @@
     "brand": {
       "type": "belongsTo",
       "model": "Brand",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Brand",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddBrand",
+        "hide": false,
+        "label": "Add Brand"
+      }
     }
   },
   "acls": [],

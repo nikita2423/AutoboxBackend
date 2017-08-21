@@ -34,7 +34,7 @@
     },
     "showroomName": {
       "type": "string",
-      "required": true,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
