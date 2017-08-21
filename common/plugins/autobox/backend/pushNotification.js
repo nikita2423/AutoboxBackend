@@ -78,7 +78,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         .then(function(customer){
                             if(customer) {
                                 customerQuoteObj.customer = customer;
-                                return databaseObj.VehicleInfo.findById(customerQuoteObj.vehicleInfo);
+                                return databaseObj.VehicleInfo.findById(customerQuoteObj.vehicleInfoId);
                             }
                         })
                         .then(function(vehicleInfo){
@@ -95,7 +95,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                            var from = packageObj.companyName;
                            var message = quoteNotificationFormat(name, type, title, id);
                            if(customerQuoteObj.customer.registrationId){
-                               sendNotification(server, message, customerQuoteObj.customer.registrationId, from, function(error){
+                               sendNotification(server, message, customerQuoteObj.customer.id, from, function(error){
                                    if(error){
                                        console.log(error);
                                    } else{
@@ -397,10 +397,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             var lastName = customer.lastName ? customer.lastName : "";
             name = name + " " + lastName;
             var message = getOfferMessageObject(name, eventType, title, offerId);
-            if (customer.registrationId) {
-                //app, message, registrationId, from, callback
+            if (customer.id) {
+                //app, message, id, from, callback
                 //Now send push..
-                sendNotification(server, message, customer.registrationId, packageObj.companyName, function (err) {
+                sendNotification(server, message, customer.id, packageObj.companyName, function (err) {
                     if (err) {
                         console.error(error);
                     } else {
@@ -446,8 +446,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
 
 
-    const sendNotification = function(app, message, registrationId, from, callback){
-        push.push(app, message, registrationId, from, callback);
+    const sendNotification = function(app, message, id, from, callback){
+        //push.push(app, message, id, from, callback);
+        push.notifyByUserId(message, id, from, callback);
     };
 
 
