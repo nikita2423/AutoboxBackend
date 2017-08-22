@@ -11,11 +11,12 @@
   "adminRole": "admin",
   "adminUser": [
     {
-      "username": "test",
-      "email": "testuser@gmail.com",
-      "password": "12345",
-      "firstName": "Test",
-      "lastName": "User"
+      "username": "adminAutobox",
+      "email": "admin@autobox.com",
+      "password": "autobox_admin_2017",
+      "firstName": "Admin",
+      "lastName": "Autobox",
+      "isAdmin": true
     }
   ],
   "pluginDependencies": {
