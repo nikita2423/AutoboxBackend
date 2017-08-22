@@ -51,9 +51,11 @@ if(templateSettings){
     <!-- END Header Navigation Left -->
 
     <!-- HEADER HOOK -->
-    <% headerHook.forEach(function(headerLink) { %>
+    <% headerHook.forEach(function(headerHtml) { %>
     <!-- Custom Plugins headers.. -->
-    <span snaphy-load-template  ng-include="'<%= headerLink %>'"></span>
+    <span snaphy-load-template="">
+        <%- headerHtml %>
+    </span>
     <% }); %>
 </header>
 <!-- END Header -->

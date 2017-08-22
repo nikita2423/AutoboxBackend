@@ -16,7 +16,15 @@
   "settings": ["/robustAutomata/admin-panel-setting.js"],
   "bodystructure": {
     "asidebarHook": [],
-    "sidebarHook": ["/robustAutomata/views/sidebarHook.html"],
+    "sidebarHook": [
+      {
+        "path":"views/sidebarHook.html",
+        "acl":{
+          "allow":[],
+          "reject":[]
+        }
+      }
+    ],
     "headerHook": [],
     "footerHook": []
   }

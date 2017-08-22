@@ -1,5 +1,7 @@
 <!-- Footer hook -->
-<% footerHook.forEach(function(footerLink) { %>
-<!-- Custom Plugins headers.. -->
-<div snaphy-load-template ng-include="'<%= footerLink %>'"></div>
+<% footerHook.forEach(function(footerHtml) { %>
+    <!-- Custom Plugins headers.. -->
+    <div snaphy-load-template="">
+        <%- footerHtml%>
+    </div>
 <% }); %>

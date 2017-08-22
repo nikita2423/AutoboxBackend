@@ -14,7 +14,15 @@
   "settings": ["/aboutUs/admin-panel-setting.js"],
   "bodystructure": {
     "asidebarHook": [],
-    "sidebarHook": ["/aboutUs/views/sidebarHook.html"],
+    "sidebarHook": [
+      {
+        "path":"views/sidebarHook.html",
+        "acl":{
+          "allow":[],
+          "reject":[]
+        }
+      }
+    ],
     "headerHook": [],
     "footerHook": []
   }

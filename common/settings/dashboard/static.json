@@ -6,7 +6,15 @@
   "settings": ["/dashboard/admin-panel-setting.js"],
   "bodystructure": {
     "asidebarHook": [],
-    "sidebarHook": ["/dashboard/views/sidebarHook.html"],
+    "sidebarHook": [
+      {
+        "path":"views/sidebarHook.html",
+        "acl":{
+          "allow":[],
+          "reject":[]
+        }
+      }
+  ],
     "headerHook": []
   }
 }

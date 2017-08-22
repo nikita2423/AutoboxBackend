@@ -101,9 +101,11 @@
                                     <!-- Side Content -->
                                     <div class="side-content remove-padding-t">
                                         <!-- ASIDEBAR HOOK -->
-                                        <% asidebarHook.forEach(function(asideLink) { %>
+                                        <% asidebarHook.forEach(function(asideHtml) { %>
                                         <!-- Custom Plugins headers.. -->
-                                        <div snaphy-load-template ng-include="'<%= asideLink %>'"></div>
+                                        <div snaphy-load-template>
+                                            <%- asideHtml %>
+                                        </div>
                                         <% }); %>
                                     </div>
                                 </div>
@@ -124,11 +126,10 @@
                     <div class="sidebar-content">
                         <div class="side-content">
                             <!-- SIDEBAR HOOK -->
-                            <%
-                                sidebarHook.forEach(function(sidebarLink) {
-                            %>
-                                <!-- Custom Plugins sidebar headers.. -->
-                                <span snaphy-load-template ng-include="'<%= sidebarLink %>'"></span>
+                            <% sidebarHook.forEach(function(sidebarHtml) { %>
+                                <span snaphy-load-template>
+                                    <%- sidebarHtml %>
+                                </span>
                             <% }); %>
                         </div><!-- END Side Content -->
                     </div><!-- Sidebar Content -->

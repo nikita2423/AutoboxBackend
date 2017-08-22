@@ -3,6 +3,14 @@
     "asidebarHook": [],
     "sidebarHook": [],
     "headerHook": [],
-    "footerHook":["/footer/views/footer.html"]
+    "footerHook":[
+      {
+        "path":"views/footer.html",
+        "acl":{
+          "allow":[],
+          "reject":[]
+        }
+      }
+    ]
   }
 }

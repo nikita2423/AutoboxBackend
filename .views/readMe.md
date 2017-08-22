@@ -28,6 +28,25 @@ To write some plugin only for a specific brand add below lines in conf.json file
   },
 ```
 
+
+Blocking a plugin Hooks.
+```
+"bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [
+      {
+        "path":"views/sidebarHook.html",
+        "acl":{
+          "allow":[],//Roles name
+          "reject":["DepartmentEmployee", "DepartmentAdmin"]
+        }
+      }
+    ],
+    "headerHook": [],
+    "footerHook": []
+  }
+```
+
 Here, root and are two different states  serving data.
     
     

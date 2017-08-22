@@ -1,14 +1,16 @@
 const SETTINGS  = require("../../common/settings/conf");
 const path = require("path");
+const fs   = require("fs");
 const join = path.join;
 
 module.exports = function(server) {
-  const chalk = require('chalk');
-  const loopback = require('loopback');
-  const Promise  = require('bluebird');
-  const helper   = require(__dirname + '/../../common/helper')(server);
-  const config   = require(__dirname + '/../config.json');
-  const STATIC_PATH = '/static';
+  const chalk           = require('chalk');
+  const loopback        = require('loopback');
+  const Promise         = require('bluebird');
+  const helper          = require(__dirname + '/../../common/helper')(server);
+  const config          = require(__dirname + '/../config.json');
+  const STATIC_PATH     = '/static';
+  const CLIENT_DIR_NAME = "client";
 
   const {
     PLUGIN_PRIORITY,
@@ -42,7 +44,7 @@ module.exports = function(server) {
 
   //Load the required plugins script and styles in the memory..
   /**
-   * Loads plugins accorsing to priority list..
+   * Loads plugins according to priority list..
    * @param req
    * @param data
    * @param state active state name
@@ -54,7 +56,8 @@ module.exports = function(server) {
           const pluginList = helper.getDirectories(__dirname + '/../../common/plugins');
           //object to check the list of plugin which has been loaded already..
           const done = {};
-          const promiseList = [];
+          const promiseList1 = [];
+          const promiseList2 = [];
           //first load the plugins according to priority list..
           if(PLUGIN_PRIORITY){
               for(let i=0; i< PLUGIN_PRIORITY.length; i++){
@@ -63,7 +66,18 @@ module.exports = function(server) {
                   if(!done[pluginName]){
                       //Add to done list..
                       done[pluginName] = true;
-                      promiseList.push(loadPluginToState(req, pluginName, data, state));
+                      promiseList1.push(new Promise(function (resolve, reject) {
+                          //console.log("\nProcessing Plugin> ", pluginName);
+                          loadPluginToState(req, pluginName, data, state)
+                              .then(function () {
+                                  //console.log("Done Plugin> ", pluginName);
+                                  resolve();
+                              })
+                              .catch(function (error) {
+                                  //console.log("Error Plugin> ", pluginName);
+                                  reject(error);
+                              })
+                      }));
                   }
               }
           }
@@ -74,11 +88,26 @@ module.exports = function(server) {
               if(!done[pluginName]){
                   //Add to done list..
                   done[pluginName] = true;
-                  promiseList.push(loadPluginToState(req, pluginName, data, state));
+                  //promiseList.push(loadPluginToState(req, pluginName, data, state));
+                  promiseList2.push(new Promise(function (resolve, reject) {
+                      //console.log("\nProcessing Plugin> ", pluginName);
+                      loadPluginToState(req, pluginName, data, state)
+                          .then(function () {
+                              //console.log("Done Plugin> ", pluginName);
+                              resolve();
+                          })
+                          .catch(function (error) {
+                              //console.log("Error Plugin> ", pluginName);
+                              reject(error);
+                          })
+                  }));
               }
           }//for loop
 
-          Promise.all(promiseList)
+          Promise.each(promiseList1, function () {})
+              .then(function () {
+                  return Promise.each(promiseList2, function () {});
+              })
               .then(function () {
                   resolve(data);
               })
@@ -88,6 +117,8 @@ module.exports = function(server) {
               });
       });
   };
+
+
 
     /**
      * Load plugin to state wise..load if state is permitted else unload..it..
@@ -101,10 +132,12 @@ module.exports = function(server) {
                 if(pluginSettings.activate){
                     if(pluginSettings.load){
                         if(pluginSettings.load[state]){
-                            loadPlugin(data, pluginName);
-                            loadPluginsStaticData(req, pluginName, data, state)
+                            loadPlugin(req, data, pluginName)
                                 .then(function () {
-                                    resolve()
+                                    return loadPluginsStaticData(req, pluginName, data, state);
+                                })
+                                .then(function () {
+                                    resolve();
                                 })
                                 .catch(function (error) {
                                     reject(error);
@@ -113,10 +146,12 @@ module.exports = function(server) {
                             resolve();
                         }
                     }else{
-                        loadPlugin(data, pluginName);
-                        loadPluginsStaticData(req, pluginName, data, state)
+                        loadPlugin(req, data, pluginName)
                             .then(function () {
-                                resolve()
+                                return loadPluginsStaticData(req, pluginName, data, state);
+                            })
+                            .then(function () {
+                                resolve();
                             })
                             .catch(function (error) {
                                 reject(error);
@@ -132,91 +167,292 @@ module.exports = function(server) {
   };
 
 
-  /**
+
+    /**
+     * Get the roles of the current logged in users..
+     * @param req
+     */
+    const getRoles = function(req){
+        return new Promise(function (resolve, reject) {
+            if(req){
+                if(req.accessToken){
+                    if(req.accessToken.userId){
+                        Role = server.models.Role;
+                        RoleMapping = server.models.RoleMapping;
+                        //bad documentation loopback..
+                        //http://stackoverflow.com/questions/28194961/is-it-possible-to-get-the-current-user-s-roles-accessible-in-a-remote-method-in
+                        //https://github.com/strongloop/loopback/issues/332
+                        var context;
+                        try {
+                            context = {
+                                principalType: RoleMapping.USER,
+                                principalId: req.accessToken.userId
+                            };
+                        } catch (err) {
+                            console.error("Error >> User not logged in. ");
+                            context = {
+                                principalType: RoleMapping.USER,
+                                principalId: null
+                            };
+                        }
+
+                        Role.getRoles(context, function(err, roles) {
+                            if(err){
+                                reject(err);
+                            }else{
+                                resolve(roles);
+                            }
+                        });
+                    }else{
+                        resolve();
+                        //reject(new Error("Request is required"));
+                    }
+                }else{
+                    resolve();
+                    //reject(new Error("Request is required"));
+                }
+            }else{
+                resolve();
+                //reject(new Error("Request is required"));
+            }
+        });
+    };
+
+    /**
+     * Load AsideBar to html data..
+     * @param hookObj
+     * @param roles
+     * @param pluginName
+     * @param dataArr
+     */
+    const loadHook = function (hookObj, roles, pluginName, dataArr) {
+        return new Promise(function (resolve, reject) {
+            /**
+             * Breaking Changes Inserted on Plugins Update in August 20th 2017.
+             */
+            if(hookObj.path){
+                //Check of acl is defined or not..
+                let allow = true;
+                if(hookObj.acl){
+                    if(hookObj.acl.reject){
+                        if(hookObj.acl.reject.length){
+                            if(roles){
+                                for(let i=0; i<roles.length;i++){
+                                    const role = roles[i];
+                                    const isFound = hookObj.acl.reject.indexOf(role);
+                                    if(isFound !== -1){
+                                        //Reject role is present thus reject this group..
+                                        allow = false;
+                                    }
+
+                                    //If any allow is present then allow and break..
+                                    if(hookObj.acl.allow){
+                                        if(hookObj.acl.allow.length){
+                                            const isFound = hookObj.acl.allow.indexOf(role);
+                                            if(isFound !== -1){
+                                                //Reject role is present thus reject this group..
+                                                allow = true;
+                                                break;
+                                                //Break since priority of allow is higher than reject..
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if(allow){
+                    //Add html data to data list..
+                    //data.asidebarHook.push(hookObj);
+                    //First read file..
+                    const pluginPath =  helper.getPluginRootDir(pluginName);
+                    if(pluginPath){
+                        //Add Client folder to path..
+                        const clientPath = path.join(pluginPath, CLIENT_DIR_NAME);
+                        //Now add hook path..
+                        const hookPath = path.join(clientPath, hookObj.path);
+                        //check if path present or not..
+                        if(fs.existsSync(hookPath)){
+                            fs.readFile(hookPath, "utf8", function(err, data) {
+                                if (err) return reject(err);
+                                //console.log("Reading Hook data", data);
+                                dataArr.push(data);
+                                resolve();
+                            });
+                        }else{
+                            reject("Hook Path >" + hookPath + " not found");
+                        }
+                    }else {
+                        reject("Plugin >" + pluginPath + " not found");
+                    }
+                }else{
+                    //Hook not allowed here...
+                    resolve();
+                }
+            }else{
+                reject("Path property not found in hook object", hookObj, "for Plugin >", pluginName);
+            }
+        });
+    };
+
+
+
+    /**
+     * Load hooks to plugins.
+     * @param req
+     * @param pluginStaticFiles
+     * @param pluginName
+     * @param data
+     */
+    const loadHooks = function (req, pluginStaticFiles, pluginName, data) {
+        return new Promise(function (resolve, reject) {
+            if(pluginStaticFiles.bodystructure){
+                const {asidebarHook, sidebarHook, headerHook, footerHook} = pluginStaticFiles.bodystructure;
+                let roleList;
+                getRoles(req)
+                    .then(function (roles) {
+                        roleList = roles;
+                        const promiseList = [];
+                        if(asidebarHook){
+                            for(let i=0; i< asidebarHook.length; i++){
+                                let hookObj = asidebarHook[i];
+                                if(hookObj){
+                                    promiseList.push(loadHook(hookObj, roleList, pluginName, data.asidebarHook));
+                                }
+                            }
+                        }
+                        //Wait to add all aside bar..
+                        return Promise.all(promiseList);
+                    })
+                    .then(function () {
+                        const promiseList = [];
+                        //Load sidebar hook..
+                        if(sidebarHook){
+                            for(let i=0; i< sidebarHook.length; i++){
+                                let hookObj = sidebarHook[i];
+                                if(hookObj){
+                                    promiseList.push(loadHook(hookObj, roleList, pluginName, data.sidebarHook));
+                                }
+                            }
+                        }
+                        //Wait to add all aside bar..
+                        return Promise.all(promiseList);
+                    })
+                    .then(function () {
+                        const promiseList = [];
+                        //Load sidebar hook..
+                        if(headerHook){
+                            for(let i=0; i< headerHook.length; i++){
+                                let hookObj = headerHook[i];
+                                if(hookObj){
+                                    promiseList.push(loadHook(hookObj, roleList, pluginName, data.headerHook));
+                                }
+                            }
+                        }
+                        //Wait to add all aside bar..
+                        return Promise.all(promiseList);
+                    })
+                    .then(function () {
+                        const promiseList = [];
+                        //Load sidebar hook..
+                        if(footerHook){
+                            for(let i=0; i< footerHook.length; i++){
+                                let hookObj = footerHook[i];
+                                if(hookObj){
+                                    promiseList.push(loadHook(hookObj, roleList, pluginName, data.footerHook));
+                                }
+                            }
+                        }
+                        //Wait to add all aside bar..
+                        return Promise.all(promiseList);
+                    })
+                    .then(function () {
+                        resolve();
+                    })
+                    .catch(function (error) {
+                        reject(error);
+                    });
+            }else{
+                resolve();
+            }
+        });
+    };
+
+
+
+
+
+    /**
    * Load the plugin configuration and static file..
+   * @param req
    * @param data
    * @param pluginName
    */
-  const loadPlugin = function(data, pluginName){
-    //Get the settings of the plugin..
-    const {confPath, databasePath, staticPath} = helper.getSettingPath(pluginName);
-    if(confPath){
-      const pluginSettings = helper.readPackageJsonFile(confPath);
-      if(pluginSettings.activate){
-        if(staticPath){
-          const pluginStaticFiles = helper.readPackageJsonFile(staticPath);
-          if(pluginStaticFiles){
-            if (pluginStaticFiles.css) {
-              data.pluginStyles = concatObject(pluginStaticFiles.css, data.pluginStyles);
-            }
-
-            if (pluginStaticFiles.js) {
-              data.pluginScripts = concatObject(pluginStaticFiles.js, data.pluginScripts);
-            }
-
-            //Load module dependencies..
-            if(pluginStaticFiles.moduleDependencies){
-              data.moduleDependencies = concatObject(pluginStaticFiles.moduleDependencies, data.moduleDependencies);
-            }
-
-            //Load module dependencies..
-            if(pluginStaticFiles.settings){
-              const adminPanelSettings = pluginStaticFiles.settings;
-              for(let i=0; i<adminPanelSettings.length; i++){
-                let setting = adminPanelSettings[i];
-                if(setting){
-                  data.clientSettings.push(setting);
-                }
-              }
-            }
-            //Now add hooks..
-            if(pluginStaticFiles.bodystructure){
-              const {asidebarHook, sidebarHook, headerHook, footerHook} = pluginStaticFiles.bodystructure;
-              if(asidebarHook){
-                  for(let i=0; i< asidebarHook.length; i++){
-                      let hook = asidebarHook[i];
-                      if(hook){
-                          data.asidebarHook.push(hook);
-                      }
+  const loadPlugin = function(req, data, pluginName){
+      return new Promise(function (resolve, reject) {
+          //Get the settings of the plugin..
+          const {confPath, databasePath, staticPath} = helper.getSettingPath(pluginName);
+          if(confPath){
+              const pluginSettings = helper.readPackageJsonFile(confPath);
+              if(pluginSettings.activate){
+                  if(databasePath){
+                      const pluginDatabases = helper.readPackageJsonFile(databasePath);
+                      data.databaseObj = getDatabaseObjFormat(pluginName, pluginDatabases, data.databaseObj);
                   }
-              }
 
-              if(sidebarHook){
-                  for(let i=0; i< sidebarHook.length; i++){
-                      let hook = sidebarHook[i];
-                      if(hook){
-                          data.sidebarHook.push(hook);
+                  if(staticPath){
+                      const pluginStaticFiles = helper.readPackageJsonFile(staticPath);
+                      if(pluginStaticFiles){
+                          if (pluginStaticFiles.css) {
+                              data.pluginStyles = concatObject(pluginStaticFiles.css, data.pluginStyles);
+                          }
+
+                          if (pluginStaticFiles.js) {
+                              data.pluginScripts = concatObject(pluginStaticFiles.js, data.pluginScripts);
+                          }
+
+                          //Load module dependencies..
+                          if(pluginStaticFiles.moduleDependencies){
+                              data.moduleDependencies = concatObject(pluginStaticFiles.moduleDependencies, data.moduleDependencies);
+                          }
+
+                          //Load module dependencies..
+                          if(pluginStaticFiles.settings){
+                              const adminPanelSettings = pluginStaticFiles.settings;
+                              for(let i=0; i<adminPanelSettings.length; i++){
+                                  let setting = adminPanelSettings[i];
+                                  if(setting){
+                                      data.clientSettings.push(setting);
+                                  }
+                              }
+                          }
+
+                          /*----------------------------ADDING HOOKS-----------------------------*/
+                          //Now add hooks..
+                          /*EDIT => From 20th August 2017. We don't add path and add html code instead. */
+                          loadHooks(req, pluginStaticFiles, pluginName, data)
+                              .then(function () {
+                                  //console.log("DONE>", pluginName);
+                                  resolve();
+                              })
+                              .catch(function (error) {
+                                  reject(error);
+                              });
+                      }else{
+                          resolve();
                       }
+                  }else{
+                      resolve();
                   }
+              }else{
+                  resolve();
               }
-
-              if(headerHook){
-                  for(let i=0; i< headerHook.length; i++){
-                      let hook = headerHook[i];
-                      if(hook){
-                          data.headerHook.push(hook);
-                      }
-                  }
-              }
-              if(footerHook){
-                  for(let i=0; i< footerHook.length; i++){
-                      let hook = footerHook[i];
-                      if(hook){
-                          data.footerHook.push(hook);
-                      }
-                  }
-              }
-            }
-
-          }//if static file
-        } //if staticPath
-
-        if(databasePath){
-          const pluginDatabases = helper.readPackageJsonFile(databasePath);
-          data.databaseObj = getDatabaseObjFormat(pluginName, pluginDatabases, data.databaseObj);
-        }
-      }//if activate
-    }
+          }else{
+              resolve();
+          }
+      });
   };
 
 

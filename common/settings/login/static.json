@@ -18,7 +18,13 @@
     "asidebarHook": [],
     "sidebarHook": [],
     "headerHook": [
-      "/login/views/headerHook.html"
+      {
+        "path":"views/headerHook.html",
+        "acl":{
+          "allow":[],
+          "reject":[]
+        }
+      }
     ],
     "footerHook": []
   }
