@@ -17,6 +17,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         onCompletePurchaseMethod();
         sendSOSRequestMethod();
         onOfferCreate();
+        onVehicleAddNotification();
     };
 
 
@@ -351,6 +352,53 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         }
     };
 
+    const onVehicleAddNotification = function(){
+        const VehicleDetail = databaseObj.VehicleDetail;
+        VehicleDetail.observe("after save", function(ctx, next){
+            const instance = ctx.instance;
+            const vehicleDetailObj = instance.toJSON();
+            if(ctx.isNewInstance){
+              process.nextTick(function(){
+                  databaseObj.Customer.findById(vehicleDetailObj.customerId)
+                      .then(function(customer){
+                          if(customer){
+                             vehicleDetailObj.customer = customer;
+                             return databaseObj.VehicleInfo.findById(vehicleDetailObj.vehicleInfoId);
+                          }
+                      })
+                      .then(function(vehicleInfo){
+                          if(vehicleInfo){
+                              vehicleDetailObj.vehicleInfo = vehicleInfo;
+                          }
+                      })
+                      .then(function(){
+                          var name = vehicleDetailObj.customer.firstName + " " + vehicleDetailObj.customer.lastName;
+                          const type = "AddVehicle";
+                          const title = "Your Vehicle of Model Name " + vehicleDetailObj.vehicleInfo.vehicleModel + "has been saved successfully!";
+                          const instanceId = vehicleDetailObj.id;
+                          var pushFrom = packageObj.companyName;
+                          const message = addVehicleNotificationFormat(name, type, title, instanceId);
+                          if(vehicleDetailObj.customerId){
+                              sendNotification(server, message, vehicleDetailObj.customerId, pushFrom, function(error){
+                                  if(error){
+                                      console.log(error);
+                                  } else{
+                                      console.log("Push Notification for adding vehicle send Successfully");
+                                  }
+                              });
+                          }
+                      })
+                      .catch(function(error){
+                          console.log(error);
+                      });
+              });
+            }
+
+            next();
+
+        });
+    };
+
 
     const onOfferCreate = function(){
       const Offer= databaseObj.Offer;
@@ -497,6 +545,17 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             type : eventType,
             title : title,
             id : customerId
+        };
+
+        return JSON.stringify(message);
+    };
+
+    var addVehicleNotificationFormat = function(to, eventType, title, vehicleDetailId){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            id : vehicleDetailId
         };
 
         return JSON.stringify(message);
