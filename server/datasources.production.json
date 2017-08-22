@@ -4,15 +4,15 @@
     "connector": "memory"
   },
   "mongodb": {
-    "host": "PRODUCTION_IP_ADDRESS",
+    "host": "127.0.0.1",
     "port": 27017,
-    "database": "PRODUCTION_DATABASE_NAME",
-    "password": "PRODUCTION_DATABASE_PASSWORD",
-    "user": "PRODUCTION_DATABASE_USER",
-    "username": "PRODUCTION_DATABASE_USER",
+    "database": "autobox",
+    "password": "autobox_admin_2017",
+    "user": "autobox_admin",
+    "username": "autobox_admin",
     "name": "mongodb",
     "connector": "mongodb",
-    "connectionTimeout": 18000
+    "connectionTimeout": 16000
   },
   "Image": {
     "name": "Image",

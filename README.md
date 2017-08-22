@@ -5,31 +5,31 @@
 ```
 $ git clone --recurse-submodules https://github.com/snaphy-plugin-2/demo.git
 $ cd demo
-$ git submodule init 
+$ git submodule init
 $ git submodule update
 $ #Install strongloop as global framework
 $ npm install -g strongloop
 $ #install imageMagick for image processing..
-$ sudo apt-get install imageMagick
+$ sudo apt-get install imagemagick
 $ #Use ./install.js i or npm install to install dependencies
 $ ./install i #You can also use "npm install" here
 $ #Use slc run command to run server
-$ slc run 
+$ slc run
 ```
 
-###Dependencies 
+###Dependencies
 1. NODEJS
 2. NPM
-3. MONGODB 
+3. MONGODB
 
-####Requirements for MongoDb Database 
+####Requirements for MongoDb Database
 
 ######For Testing(Development)
-1. You need to install `mongodb` with following credentials. 
+1. You need to install `mongodb` with following credentials.
     * Database: `drugcorner`
     * Username: `robins`
-    * Password: `12345` 
-    
+    * Password: `12345`
+
 2. You can also use your existing database by modifying `server/datasources.json` file  
 Example
 ```
@@ -52,23 +52,23 @@ Example
   ```
   $ use admin //switch to admin database assuming you have already an admin database with password
   $ db.auth('adminUsername', 'adminPassword') //Login to admin database.
-  //Now switch to drugcorner database. 
+  //Now switch to drugcorner database.
   //Create a  user for drugcorner.
-  $ use drugcorner 
+  $ use drugcorner
   $ db.createUser({
        user:"robins",
        pwd:"12345",
        roles:["readWrite"]
     });
   ```
-  
-  
+
+
 4. How to login to admin panel at `http://0.0.0.0:3000|3001`  for production or development respectively .
   * Login with username `test`
   * Enter password as `12345`
-  
-  
-5. How to deploy 
+
+
+5. How to deploy
 0. Install pm2 `sudo npm install pm2 -g`
 1. `$ pm2 deploy ecosystem.json production setup`
 2. `$ pm2 deploy ecosystem.json production deploy`
@@ -135,7 +135,7 @@ Example
 ```
 git clone --recurse-submodules https://github.com/snaphy-plugin-2/demo.git
 #After go to project root folder.
-git submodule init 
+git submodule init
 git submodule update
 ```
 

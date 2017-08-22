@@ -13,11 +13,12 @@
   ],
   "deploy" : {
     "production" : {
-      "user" : "robins",
-      "host" : "162.243.243.185",
+      "user" : "ubuntu",
+      "host" : "ec2-54-254-238-148.ap-southeast-1.compute.amazonaws.com",
+      "key"  : "credentials/autobox.pem",
       "ref"  : "origin/master",
-      "repo" : "GIT_HUB_REPOSITORY",
-      "path" : "SERVER_PROJECT_PATH",
+      "repo" : "git@bitbucket.org:autobox217/autoboxbackend.git",
+      "path" : "/home/ubuntu/production",
       "post-deploy" : "git submodule update --init --recursive; git submodule init; git submodule update; npm install;  sudo apt-get install imageMagick; pm2 startOrRestart ecosystem.json --env production"
     }
   }
