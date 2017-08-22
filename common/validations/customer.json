@@ -21,14 +21,6 @@
       "city": {
         "required": true,
         "valueNotEquals": ""
-      },
-      "country": {
-        "required": true,
-        "valueNotEquals": ""
-      },
-      "workshop": {
-        "required": true,
-        "valueNotEquals": ""
       }
     },
     "messages": {
@@ -52,14 +44,6 @@
       "city": {
         "required": "City is required",
         "valueNotEquals": "Enter the city"
-      },
-      "country": {
-        "required": "Country is required",
-        "valueNotEquals": "Enter the Country"
-      },
-      "workshop": {
-        "required": "Workshop is required",
-        "valueNotEquals": "Enter the Workshop"
       }
     }
   },

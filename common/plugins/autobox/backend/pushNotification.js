@@ -94,7 +94,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                            var id = customerQuoteObj.id;
                            var from = packageObj.companyName;
                            var message = quoteNotificationFormat(name, type, title, id);
-                           if(customerQuoteObj.customer.registrationId){
+                           if(customerQuoteObj.customer.id){
                                sendNotification(server, message, customerQuoteObj.customer.id, from, function(error){
                                    if(error){
                                        console.log(error);
@@ -148,6 +148,22 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             }
                         })*/
                         .then(function(){
+                            var name = customerObj.firstName + " " + customerObj.lastName;
+                            var type = "Profile";
+                            var title = "Welcome to AutoBox!!";
+                            var id = customerObj.id;
+                            var pushFrom = packageObj.companyName;
+                            var message = welcomeMessageFormat(name, type, title, id);
+                            if(customerObj.id) {
+                                sendNotification(server, message, customerObj.id, pushFrom, function (error) {
+                                    if (error) {
+                                        console.log(error);
+                                    } else {
+                                        console.log("Push Notification for profile send successfully!");
+                                    }
+                                });
+                            }
+
                             const subject = packageObj.customer.subject;
                             const to = [];
                             const from = packageObj.from;
@@ -470,6 +486,17 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             type : eventType,
             title : title,
             id : offerId
+        };
+
+        return JSON.stringify(message);
+    };
+
+    var welcomeMessageFormat = function(to, eventType, title, customerId){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            id : customerId
         };
 
         return JSON.stringify(message);
