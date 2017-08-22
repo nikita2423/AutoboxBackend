@@ -2,16 +2,13 @@
   "name": "fileUpload",
   "version": "2.0.0",
   "activate": true,
-  "load":{
-    "root": true,
-    "dealerPanel": false
-  },
   "routeExposure": "/fileUpload",
   "cdn": {
     "amazon": {
-      "container": "AMAZON_CONTAINER_NAME",
-      "keyPairId": "AMAZON_KEY_PAIR_ID",
-      "url": "CLOUD_FRONT_URL"
+      "container": "autoboxsnaphy",
+      "keyPairId": "APKAJVZNP2D3JMIYYARA",
+      "url": "https://d1av9muzv7g8rd.cloudfront.net",
+      "privateKeyFile": "credentials/rsa-APKAJVZNP2D3JMIYYARA.pem"
     }
   },
   "fileDefaultModel": "AmazonImage",
@@ -20,9 +17,9 @@
       "fileModel": "AmazonImage",
       "containerModel": "container",
       "fileDataSource": "Image",
-      "defaultContainer": "AMAZON_CONTAINER_NAME",
+      "defaultContainer": "autoboxsnaphy",
       "createInitContainer": [
-        "AMAZON_CONTAINER_NAME"
+        "autoboxsnaphy"
       ],
       "fileProp": [
         {

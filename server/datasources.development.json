@@ -17,8 +17,8 @@
     "name": "Image",
     "connector": "loopback-component-storage",
     "provider": "amazon",
-    "key": "AMAZON_ACCESS_KEY",
-    "keyId": "AMAZON_SECRET_KEY_ID",
+    "key": "vU8AUmSVC8FC7hnxAgv/nidiLFKdU3OW/DFI7xE4",
+    "keyId": "AKIAJDJMX5CFG443RZBA",
     "maxFileSize": "35485760"
   },
   "GoogleEmail": {

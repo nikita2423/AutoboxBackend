@@ -43,3 +43,6 @@
 [submodule "common/plugins/smsService"]
 	path = common/plugins/smsService
 	url = https://github.com/snaphy-plugin-2/smsService.git
+[submodule "common/plugins/fileUpload"]
+	path = common/plugins/fileUpload
+	url = https://github.com/snaphy-plugin-2/fileUpload.git
