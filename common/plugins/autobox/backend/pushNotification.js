@@ -217,21 +217,32 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       })
                       .then(function(customer){
                           if(customer){
+                              customerQuoteObj.customer = customer;
                               email = customer.email;
                           }
                       })
                       .then(function(){
+                          //Send Notification
+                          const name = customerQuoteObj.customer.firstName + " " + customerQuoteObj.customer.lastName;
+                          const pushFrom = packageObj.companyName;
+                          const type = "CompletePurchase";
+                          const title = "Your Car Purchase is completed successfully!";
+                          const instanceId = customerQuoteObj.id;
+                          const message = completePurchaseNotification(name, type, title, instanceId);
+                          if(customerQuoteObj.customerId){
+                              sendNotification(server, message, customerQuoteObj.customerId, pushFrom, function(error){
+                                 if(error){
+                                     console.log(error);
+                                 } else{
+                                     console.log("Push Notification for Car Purchase has been successfully");
+                                 }
+                              });
+                          }
                          //Send email to customer for further instructions..
                           const subject = packageObj.customer.subject_complete_purchase;
                           const to = [];
                           const from = packageObj.from;
                           to.push(email);
-                         /* if(customerQuoteObj.customer){
-                              if(customerQuoteObj.customer.email){
-                                  to.push(customerQuoteObj.customer.email);
-                              }
-                          }*/
-
                           emailPlugin.adminEmail.onCompletePurchaseForCustomer(from, to, subject,customerQuoteObj, function(err, send){
                              if(err){
                                  console.log(err);
@@ -256,29 +267,52 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     const sendSOSRequest = function(ctx, callback){
       const request = ctx.req;
+      let customerObj;
       if(request.accessToken){
           if(request.accessToken.userId){
               const customerId = request.accessToken.userId;
+              const Customer = databaseObj.Customer;
               const Sos = databaseObj.Sos;
-              Sos.findOne({
-                  where: {
-                      customerId : customerId
-                  }
-              })
-              .then(function(sos){
-                  if(sos){
-                      //send sms to three contacts
-                      sendMessage(sos, function(error){
-                          if(error){
-                              callback(error);
-                          } else{
-                              callback(null, {
-                                  response: "success"
-                              });
-                          }
-                      });
-                  }
-              })
+              Customer.findById(customerId)
+                  .then(function(customer){
+                      if(customer){
+                          customerObj = customer;
+                          return  Sos.findOne({
+                              where: {
+                                  customerId : customerId
+                              }
+                          });
+                      }
+                  })
+                  .then(function(sos){
+                      if(sos){
+                          //send sms to three contacts
+                          sendMessage(sos, function(error){
+                              if(error){
+                                  callback(error);
+                              } else{
+                                  const name = customerObj.firstName + " " + customerObj.lastName;
+                                  const type = "SOS";
+                                  const title = "Request has been successfully sent to all of your contacts";
+                                  const pushFrom = packageObj.companyName;
+                                  const instanceId = sos.id;
+                                  const message = sosNotification(name, type, title, instanceId);
+                                  if(customerId){
+                                      sendNotification(server, message, customerId, pushFrom, function(error){
+                                          if(error){
+                                              console.log(error);
+                                          } else{
+                                              console.log("Push Notification for sos request send successfully!");
+                                          }
+                                      });
+                                  }
+                                  callback(null, {
+                                      response: "success"
+                                  });
+                              }
+                          });
+                      }
+                  })
                   .catch(function(error){
                       callback(error);
                   });
@@ -609,6 +643,28 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             type : eventType,
             title : title,
             id : serviceBookingId
+        };
+
+        return JSON.stringify(message);
+    };
+
+    var completePurchaseNotification = function(to, eventType, title, customerQuoteId){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            id : customerQuoteId
+        };
+
+        return JSON.stringify(message);
+    };
+
+    var sosNotification = function(to, eventType, title, sosId){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            id : sosId
         };
 
         return JSON.stringify(message);
