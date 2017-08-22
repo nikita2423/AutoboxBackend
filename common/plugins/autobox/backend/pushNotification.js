@@ -18,6 +18,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         sendSOSRequestMethod();
         onOfferCreate();
         onVehicleAddNotification();
+        createServiceBookingNotification();
     };
 
 
@@ -400,6 +401,47 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
 
+    const createServiceBookingNotification = function() {
+        const ServiceBooking = databaseObj.ServiceBooking;
+        ServiceBooking.observe("after save", function(ctx, next){
+            const instance = ctx.instance;
+            const serviceBookingObj = instance.toJSON();
+            if(ctx.isNewInstance){
+                process.nextTick(function(){
+                    databaseObj.Customer.findById(serviceBookingObj.customerId)
+                        .then(function(customer){
+                            if(customer){
+                                serviceBookingObj.customer = customer;
+                            }
+                        })
+                        .then(function(){
+                            const to = serviceBookingObj.customer.firstName + " " + serviceBookingObj.customer.lastName;
+                            const type = "ServiceBooking";
+                            const title = "Your Service Booking has been done Successfully";
+                            const instanceId = serviceBookingObj.id;
+                            var pushFrom = packageObj.companyName;
+                            const message = serviceBookingNotificationFormat(to, type, title, instanceId);
+                            if(serviceBookingObj.customerId){
+                                sendNotification(server, message, serviceBookingObj.customerId, pushFrom, function(error){
+                                    if(error){
+                                        console.log(error);
+                                    } else{
+                                        console.log("Push Notification for service booking has been send successfully");
+                                    }
+                                })
+                            }
+
+                        })
+                        .catch(function(error){
+                            console.log(error);
+                        })
+                });
+            }
+            next();
+        });
+    };
+
+
     const onOfferCreate = function(){
       const Offer= databaseObj.Offer;
       Offer.observe("after save", function(ctx, next){
@@ -556,6 +598,17 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             type : eventType,
             title : title,
             id : vehicleDetailId
+        };
+
+        return JSON.stringify(message);
+    };
+
+    var serviceBookingNotificationFormat = function(to, eventType, title, serviceBookingId){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            id : serviceBookingId
         };
 
         return JSON.stringify(message);
