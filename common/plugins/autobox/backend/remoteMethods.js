@@ -1967,6 +1967,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       }else{
           if(request.accessToken){
               if(request.accessToken.userId){
+                  if(!filter.order){
+                      filter.order = "added DESC";
+                  }
                   const customerId = request.accessToken.userId;
                   const CustomerQuote = databaseObj.CustomerQuote;
                   CustomerQuote.find({
@@ -1974,6 +1977,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                            customerId:customerId,
                            quoteType: "q"
                        },
+                       order:"added DESC",
                       include:[{
                            relation: "vehicleInfo",
                            scope: {
@@ -1985,9 +1989,11 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       .then(function(customerQuoteList){
                           if(customerQuoteList){
                               if(customerQuoteList.length){
-                                  callback(null, customerQuoteList);
+
                               }
                           }
+
+                          callback(null, customerQuoteList);
                       })
                       .catch(function(error){
                           callback(error);
