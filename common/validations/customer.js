@@ -3,7 +3,7 @@ module.exports = ( Customer, server, helper) => {
     //AppUser.validatesUniquenessOf('email');
     //Remove email verification..
     //delete AppUser.validations.email;
-    Customer.validatesUniquenessOf('email');
+    Customer.validatesUniquenessOf('phoneNumber');
     const {
         isLength,
         trim,

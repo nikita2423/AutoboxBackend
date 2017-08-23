@@ -58,6 +58,10 @@
         }
       }
     },
+    "status": {
+      "type": "string",
+      "default": "active"
+    },
     "added": {
       "type": "date",
       "required": true,

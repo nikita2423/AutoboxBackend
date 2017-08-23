@@ -41,7 +41,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         createTestDriveQuoteMethod();
         saveNewVehicleMethod();
         saveExistingVehicleMethod();
-
+        deleteVehicleMethod();
+        cancelQuoteMethod();
     };
 
     const findAllBrandMethod = function(){
@@ -720,7 +721,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 arg: "vehicleDetailObj", type: "VehicleDetail"
             }
         })
-    }
+    };
 
 
     const saveExistingVehicleMethod = function(){
@@ -747,6 +748,53 @@ module.exports = function( server, databaseObj, helper, packageObj) {
           }
       })
     };
+
+
+    const deleteVehicleMethod = function(){
+        const VehicleDetail = databaseObj.VehicleDetail;
+        VehicleDetail.deleteVehicle = deleteVehicle;
+        VehicleDetail.remoteMethod("deleteVehicle", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "vehicleDetailId", type: "string"
+                }
+            ],
+            returns: {
+                arg: "response", type: "object"
+            }
+        })
+    };
+
+    const cancelQuoteMethod = function(){
+        const CustomerQuote = databaseObj.CustomerQuote;
+        CustomerQuote.cancelQuote = cancelQuote;
+         CustomerQuote.remoteMethod("cancelQuote", {
+             accepts: [
+                 {
+                     arg: 'ctx',
+                     type: 'object',
+                     http: {
+                         source: 'context'
+                     }
+                 },
+                 {
+                     arg: "customerQuoteId", type: "string"
+                 }
+             ],
+             returns: {
+                 arg: "response", type: "object"
+             }
+         })
+    };
+
+
     /**
      * To fetch all the Brands
      * @param ctx
@@ -1525,7 +1573,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                   showroomId: vehicleDetailObj.showroomId,
                                   workshopId: vehicleDetailObj.workshopId,
                                   customerId: customerId,
-                                  vehicleInfoId : vehicleInfo.id
+                                  vehicleInfoId : vehicleInfo.id,
+                                  status: "active"
                               })
                            }
                        })
@@ -1582,7 +1631,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                   registrationNumber: vehicleDetailObj.registrationNumber,
                                   workshopId: vehicleDetailObj.workshopId,
                                   customerId: customerId,
-                                  vehicleInfoId : vehicleInfo.id
+                                  vehicleInfoId : vehicleInfo.id,
+                                  status: "active"
                               })
                           }
                       })
@@ -2228,6 +2278,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                           filter.where.customerId = customerId;
                       }
                   }
+
+                  if(filter.where){
+                      if(!filter.where.status){
+                          filter.where.status = "active"
+                      }
+                  }
                   filter.include = ["vehicleInfo"];
 
                   VehicleDetail.find(filter)
@@ -2344,8 +2400,67 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         }
     };
 
+    const deleteVehicle = function(ctx, vehicleDetailId, callback){
+      const request = ctx.req;
+      if(!vehicleDetailId){
+          callback(new Error("Invalid Arguments"));
+      } else{
+          if(request.accessToken){
+              if(request.accessToken.userId){
+                  const VehicleDetail = databaseObj.VehicleDetail;
+                  VehicleDetail.findById(vehicleDetailId)
+                      .then(function(vehicleDetail){
+                          if(vehicleDetail){
+                              return vehicleDetail.updateAttribute("status", "inactive");
+                          }
+                      })
+                      .then(function(vehicleDetail){
+                          if(vehicleDetail){
+                              callback(null, {response: "success"});
+                          }
+                      })
+                      .catch(function(error){
+                          callback(error);
+                      })
+              } else{
+                  callback(new Error("User not valid"));
+              }
+          } else{
+              callback(new Error("User not valid"));
+          }
+      }
+    };
 
-
+    const cancelQuote = function(ctx, customerQuoteId, callback){
+        const request = ctx.req;
+        if(!customerQuoteId){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const CustomerQuote = databaseObj.CustomerQuote;
+                    CustomerQuote.findById(customerQuoteId)
+                        .then(function(customerQuote){
+                            if(customerQuote){
+                                return customerQuote.updateAttribute("status", "inactive");
+                            }
+                        })
+                        .then(function(customerQuote){
+                            if(customerQuote){
+                                callback(null, {response: "success"});
+                            }
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
 
 
 
