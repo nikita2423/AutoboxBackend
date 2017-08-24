@@ -31,9 +31,9 @@ module.exports = (Vehicledetail, server, helper) =>
             }
         }
 
-        if(!instance.registrationNumber){
+       /* if(!instance.registrationNumber){
             return next(new Error("Registration Number is required"));
-        }
+        }*/
 
 
      /*   if(!validate(instance, currentInstance, "showroomId")){

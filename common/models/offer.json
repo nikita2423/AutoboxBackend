@@ -74,6 +74,9 @@
       "type": "date",
       "required": true,
       "defaultFn": "now"
+    },
+    "isRead": {
+      "type": "boolean"
     }
   },
   "validations": [],

@@ -188,6 +188,10 @@
       "type": "date",
       "required": true,
       "defaultFn": "now"
+    },
+    "status": {
+      "type": "string",
+      "default": "active"
     }
   },
   "validations": [],

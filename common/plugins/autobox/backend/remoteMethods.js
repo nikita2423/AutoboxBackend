@@ -252,9 +252,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
 
     const fetchNearestServiceCenterMethod = function(){
-        const Breakdown = databaseObj.Breakdown;
-        Breakdown.fetchNearestServiceCenter = fetchNearestServiceCenter;
-        Breakdown.remoteMethod("fetchNearestServiceCenter", {
+        const Workshop = databaseObj.Workshop;
+        Workshop.fetchNearestServiceCenter = fetchNearestServiceCenter;
+        Workshop.remoteMethod("fetchNearestServiceCenter", {
             accepts: [
                 {
                     arg: 'ctx',
@@ -274,7 +274,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 }
             ],
             returns: {
-                arg: "breakdown", type: "Breakdown", root: true
+                arg: "workshop", type: "Workshop", root: true
             }
         });
     };
@@ -1277,6 +1277,40 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      */
     const fetchNearestServiceCenter = function(ctx, brandId, lat, lang, callback){
         const request = ctx.req;
+        var customerLatLong;
+        if(!brandId && !lat && !lang){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const Workshop = databaseObj.Workshop;
+                    customerLatLong = [lat, lang];
+                    Workshop.findOne({
+                        where: {
+                            brandId : brandId,
+                            latlong: {
+                                near : customerLatLong
+                            }
+                        }
+                    })
+                        .then(function(workshop){
+                            if(workshop){
+                                callback(null, workshop);
+                            } else{
+                                callback(null, {});
+                            }
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+       /* const request = ctx.req;
         var lastDate = "";
         var customerLatLong;
         if(request.accessToken){
@@ -1324,7 +1358,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         } else{
             return callback(new Error("User not valid"));
         }
-
+*/
     };
 
     /**
@@ -1924,7 +1958,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                   soldViaAutobox: "no",
                                   gpsTracker: "no",
                                   dashCamera: "no",
-                                  testDrive: "no"
+                                  testDrive: "no",
+                                  status: "active",
+                                  purchaseStatus: "notpurchased"
                               })
                           } else{
                               callback(new Error("Vehicle not found"));
@@ -1980,7 +2016,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             return CustomerQuote.create({
                                 vehicleInfoId: vehicleInfoId,
                                 quoteType: "t",
-                                customerId: customerId
+                                customerId: customerId,
+                                status: "active",
+                                purchaseStatus: "notpurchased"
                             })
                         })
 
@@ -2025,7 +2063,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                   CustomerQuote.find({
                        where:{
                            customerId:customerId,
-                           quoteType: "q"
+                           quoteType: "q",
+                           status: "active",
+                           purchaseStatus: "notpurchased"
                        },
                        order:"added DESC",
                       include:[{
@@ -2284,7 +2324,15 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                           filter.where.status = "active"
                       }
                   }
-                  filter.include = ["vehicleInfo"];
+                  filter.include = [{
+                      relation: "vehicleInfo",
+                      scope: {
+                          include: ["brand", "carModel", "fuel", "gearBox", "trim", "color"]
+                      }
+                  },
+                      {
+                          relation: "workshop"
+                      }];
 
                   VehicleDetail.find(filter)
                       .then(function(vehicleDetailList){

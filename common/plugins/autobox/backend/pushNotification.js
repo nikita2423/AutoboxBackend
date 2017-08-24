@@ -303,12 +303,13 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                               console.log(error);
                                           } else{
                                               console.log("Push Notification for sos request send successfully!");
+                                              callback(null, {
+                                                  response: "success"
+                                              });
                                           }
                                       });
                                   }
-                                  callback(null, {
-                                      response: "success"
-                                  });
+
                               }
                           });
                       }
@@ -334,6 +335,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 send.send(message, number, function(error){
                     if(error){
                         console.log("Unable to send request to first contact");
+                        callback(error);
                     } else{
                         console.log("Request send to first contact successfully");
                         if(!sos.contact2 && !sos.contact3){
@@ -351,6 +353,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         send.send(message2, number2, function(error){
                             if(error){
                                 console.log("Unable to send request to second contact");
+                                callback(error);
                             } else{
                                 console.log("Request send to second contact successfully");
                                 if(!sos.contact3){
@@ -360,6 +363,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 }
                             }
                         });
+                    } else{
+                        callback(null, {});
                     }
                 }
 
@@ -367,9 +372,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     if(sos.contact3.thirdContactNo){
                         var number3 = sos.contact3.thirdContactNo.toString();
                         var message3 = "Contact as soon as possible";
-                        send.send(message3, number3, function(){
+                        send.send(message3, number3, function(error){
                             if(error){
                                 console.log("Unable to send request to third contact");
+                                callback(error);
                             } else{
                                 console.log("Request send to third contact successfully");
                                 callback(null, {
@@ -377,6 +383,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 });
                             }
                         });
+                    } else{
+                        callback(null, {});
                     }
                 }
             } else{

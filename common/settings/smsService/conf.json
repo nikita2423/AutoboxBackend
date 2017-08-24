@@ -9,7 +9,7 @@
   "services": {},
   "routeExposure": "/smsService",
   "provider":{
-    "active": "_msg91",
+    "active": "msg91",
     "settings": {
       "nexmo": {
         "apiKey": "xxxxxx",
@@ -17,8 +17,8 @@
         "from": "SenderName"
       },
       "msg91": {
-        "authKey": "XXXXX",
-        "sender": "XXXX",
+        "authKey": "169390A6seo9UTfz69598d4606",
+        "sender": "AUTOBX",
         "route": "4",
         "country": "0"
       }
