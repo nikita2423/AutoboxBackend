@@ -23,9 +23,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
 
     const onCompletePurchaseMethod = function(){
-        const Customer = databaseObj.Customer;
-        Customer.onCompletePurchase = onCompletePurchase;
-        Customer.remoteMethod("onCompletePurchase", {
+        const CustomerQuote = databaseObj.CustomerQuote;
+        CustomerQuote.onCompletePurchase = onCompletePurchase;
+        CustomerQuote.remoteMethod("onCompletePurchase", {
             accepts:[
                 {
                     arg: 'ctx',
@@ -194,6 +194,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const onCompletePurchase = function(ctx, customerQuoteId, callback){
         let customerQuoteObj;
         let email;
+        let firstName;
+        let lastName;
       if(!customerQuoteId){
           return callback(new Error("Invalid Arguments"));
       }  else{
@@ -217,42 +219,46 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       })
                       .then(function(customer){
                           if(customer){
-                              customerQuoteObj.customer = customer;
+                             // customerQuoteObj.customer = customer;
                               email = customer.email;
+                              firstName = customer.firstName;
+                              lastName = customer.lastName;
                           }
                       })
                       .then(function(){
                           //Send Notification
-                          const name = customerQuoteObj.customer.firstName + " " + customerQuoteObj.customer.lastName;
-                          const pushFrom = packageObj.companyName;
-                          const type = "CompletePurchase";
-                          const title = "Your Car Purchase is completed successfully!";
-                          const instanceId = customerQuoteObj.id;
-                          const message = completePurchaseNotification(name, type, title, instanceId);
-                          if(customerQuoteObj.customerId){
-                              sendNotification(server, message, customerQuoteObj.customerId, pushFrom, function(error){
-                                 if(error){
-                                     console.log(error);
-                                 } else{
-                                     console.log("Push Notification for Car Purchase has been successfully");
-                                 }
+                          process.nextTick(function(){
+                              const name = firstName + " " + lastName;
+                              const pushFrom = packageObj.companyName;
+                              const type = "CompletePurchase";
+                              const title = "Your Car Purchase is completed successfully!";
+                              const instanceId = customerQuoteObj.id;
+                              const message = completePurchaseNotification(name, type, title, instanceId);
+                              if(customerQuoteObj.customerId){
+                                  sendNotification(server, message, customerQuoteObj.customerId, pushFrom, function(error){
+                                      if(error){
+                                          console.log(error);
+                                      } else{
+                                          console.log("Push Notification for Car Purchase has been successfully");
+                                      }
+                                  });
+                              }
+                              //Send email to customer for further instructions..
+                              const subject = packageObj.customer.subject_complete_purchase;
+                              const to = [];
+                              const from = packageObj.from;
+                              to.push(email);
+                              emailPlugin.adminEmail.onCompletePurchaseForCustomer(from, to, subject,customerQuoteObj, function(err, send){
+                                  if(err){
+                                      console.log(err);
+                                  } else{
+                                      console.log("Email send Successfully for complete purchase");
+
+                                  }
                               });
-                          }
-                         //Send email to customer for further instructions..
-                          const subject = packageObj.customer.subject_complete_purchase;
-                          const to = [];
-                          const from = packageObj.from;
-                          to.push(email);
-                          emailPlugin.adminEmail.onCompletePurchaseForCustomer(from, to, subject,customerQuoteObj, function(err, send){
-                             if(err){
-                                 console.log(err);
-                                 callback(err);
-                             } else{
-                                 console.log("Email send Successfully for complete purchase");
-                                 callback(null, {
-                                     response: "success"
-                                 });
-                             }
+                          });
+                          callback(null, {
+                              response: "success"
                           });
 
                       })
@@ -303,12 +309,13 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                               console.log(error);
                                           } else{
                                               console.log("Push Notification for sos request send successfully!");
-                                              callback(null, {
-                                                  response: "success"
-                                              });
+
                                           }
                                       });
                                   }
+                                  callback(null, {
+                                      response: "success"
+                                  });
 
                               }
                           });

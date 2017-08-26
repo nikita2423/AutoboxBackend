@@ -73,6 +73,9 @@
     "updated": {
       "type": "date",
       "defaultFn": "now"
+    },
+    "vehicleType": {
+      "type": "string"
     }
   },
   "validations": [],

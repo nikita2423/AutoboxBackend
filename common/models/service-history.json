@@ -75,6 +75,21 @@
         "hide": false,
         "label": "Add Customer"
       }
+    },
+    "serviceType": {
+      "type": "belongsTo",
+      "model": "ServiceType",
+      "foreignKey": ""
+    },
+    "workshop": {
+      "type": "belongsTo",
+      "model": "Workshop",
+      "foreignKey": ""
+    },
+    "vehicleDetail": {
+      "type": "belongsTo",
+      "model": "VehicleDetail",
+      "foreignKey": ""
     }
   },
   "acls": [],

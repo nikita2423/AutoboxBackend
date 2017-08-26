@@ -43,6 +43,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         saveExistingVehicleMethod();
         deleteVehicleMethod();
         cancelQuoteMethod();
+        findAllOfferMethod();
     };
 
     const findAllBrandMethod = function(){
@@ -510,6 +511,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 },
                 {
                     arg: "filter", type: "object"
+                },
+                {
+                    arg: "status", type: "string"
                 }
             ],
             returns: {
@@ -718,7 +722,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 }
             ],
             returns: {
-                arg: "vehicleDetailObj", type: "VehicleDetail"
+                arg: "vehicleDetailObj", type: "VehicleDetail", root: true
             }
         })
     };
@@ -744,7 +748,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
               }
           ],
           returns: {
-              arg: "vehicleDetailObj", type: "VehicleDetail"
+              arg: "vehicleDetailObj", type: "VehicleDetail", root: true
           }
       })
     };
@@ -767,7 +771,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 }
             ],
             returns: {
-                arg: "response", type: "object"
+                arg: "response", type: "object", root: true
             }
         })
     };
@@ -789,9 +793,31 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                  }
              ],
              returns: {
-                 arg: "response", type: "object"
+                 arg: "response", type: "object", root: true
              }
          })
+    };
+
+    const findAllOfferMethod = function(){
+        const Offer = databaseObj.Offer;
+        Offer.findAll = findAllOffer;
+        Offer.remoteMethod("findAll", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "cityId", type: "string"
+                }
+            ],
+            returns: {
+                arg: "offerList", type: ["Offer"], root: true
+            }
+        })
     };
 
 
@@ -1608,7 +1634,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                   workshopId: vehicleDetailObj.workshopId,
                                   customerId: customerId,
                                   vehicleInfoId : vehicleInfo.id,
-                                  status: "active"
+                                  status: "active",
+                                  vehicleType: "new"
                               })
                            }
                        })
@@ -1666,7 +1693,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                   workshopId: vehicleDetailObj.workshopId,
                                   customerId: customerId,
                                   vehicleInfoId : vehicleInfo.id,
-                                  status: "active"
+                                  status: "active",
+                                  vehicleType: "existing"
                               })
                           }
                       })
@@ -2048,7 +2076,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @param callback
      * @returns {*}
      */
-    const findAllCustomerQuote = function(ctx, filter, callback){
+    const findAllCustomerQuote = function(ctx, filter, status, callback){
       const request = ctx.req;
       if(!filter){
           return callback(new Error("Invalid Arguments"));
@@ -2065,7 +2093,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                            customerId:customerId,
                            quoteType: "q",
                            status: "active",
-                           purchaseStatus: "notpurchased"
+                           purchaseStatus: status
                        },
                        order:"added DESC",
                       include:[{
@@ -2206,11 +2234,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 if(request.accessToken.userId){
                     const customerId = request.accessToken.userId;
                     const ServiceHistory = databaseObj.ServiceHistory;
-                    ServiceHistory.create( {
+                    ServiceHistory.create({
                         dateOfBooking: moment(serviceObj.dateOfBooking, "DD/MM/YYYY"),
                         mileageCompleted: serviceObj.mileageCompleted,
                         charges: serviceObj.charges,
-                        customerId: customerId
+                        customerId: customerId,
+                        workshopId: serviceObj.workshopId,
+                        serviceTypeId: serviceObj.serviceTypeId,
+                        vehicleDetailId : serviceObj.vehicleDetailId
 
                     })
                         .then(function(serviceObj){
@@ -2253,7 +2284,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                   filter.where.added.lt = new Date();
                               }
                           }
+                          if(!filter.customerId){
+                              filter.customerId = customerId;
+                          }
                       }
+
+                      filter.include = ["workshop", "serviceType"];
                   }
 
                   const ServiceHistory = databaseObj.ServiceHistory;
@@ -2378,6 +2414,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                   email : customerObj.email,
                                   cityId : customerObj.cityId,
                                   countryName : customerObj.countryName,
+                                  cityName: customerObj.cityName,
                                   workshopId : customerObj.workshopId,
                                   phoneNumber: customerObj.phoneNumber,
                                   id: customerId,
@@ -2508,6 +2545,40 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 callback(new Error("User not valid"));
             }
         }
+    };
+
+    const findAllOffer = function(ctx, cityId, callback){
+      const request = ctx.req;
+      if(!cityId){
+          callback(new Error("Invalid Arguments"));
+      } else{
+          if(request.accessToken){
+              if(request.accessToken.userId){
+                  const customerId = request.accessToken.userId;
+                  const Offer = databaseObj.Offer;
+                  Offer.find({
+                      where:{
+                          cityId :cityId,
+                          status: "active"
+                      }
+                  })
+                      .then(function(offerList){
+                          if(offerList){
+                              if(offerList.length){
+                                  callback(null, offerList);
+                              }
+                          }
+                      })
+                      .catch(function(error){
+                          callback(error);
+                      })
+              } else{
+                  callback(new Error("User not valid"));
+              }
+          } else{
+              callback(new Error("user not valid"));
+          }
+      }
     };
 
 
