@@ -2606,6 +2606,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
      const offerQuery = function(ctx, offerQueryObj, callback){
+         const request = ctx.req;
          if(!offerQueryObj){
              callback(new Error("Invalid Arguments"));
          } else{
@@ -2613,13 +2614,16 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                  if(request.accessToken.userId){
                      const customerId = request.accessToken.userId;
                      const OfferQuery = databaseObj.OfferQuery;
+                     const subject = offerQueryObj.subject ? offerQueryObj.subject : "";
+                     const message = offerQueryObj.message ? offerQueryObj.message : "";
+                     const customerContact = offerQueryObj.customerContact ? offerQueryObj.customerContact : "";
                      OfferQuery.create({
-                         subject: offerQueryObj.subject ? offerQueryObj.subject : "",
-                         message: offerQueryObj.message ? offerQueryObj.message : "",
-                         customerContact : offerQueryObj.customerContact ? offerQueryObj.customerContact : "",
+                         subject: subject,
+                         message: message,
+                         customerContact : customerContact,
                          dealerId : offerQueryObj.dealerId,
                          customerId : customerId,
-                         queryType : offerQueryObj.quoteType
+                         queryType : offerQueryObj.queryType
                      })
                          .then(function(offerQuery){
                              if(offerQuery){
