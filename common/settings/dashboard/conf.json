@@ -30,6 +30,7 @@
     "Fuel",
     "GearBox",
     "Offer",
+    "OfferQuery",
     "OldTradeCar",
     "QuoteReply",
     "ServiceBooking",

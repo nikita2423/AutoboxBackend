@@ -231,5 +231,9 @@
   "SnaphyAclRelation": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "OfferQuery": {
+    "dataSource": "db",
+    "public": true
   }
 }

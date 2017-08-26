@@ -44,6 +44,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         deleteVehicleMethod();
         cancelQuoteMethod();
         findAllOfferMethod();
+        offerQueryMethod();
     };
 
     const findAllBrandMethod = function(){
@@ -818,6 +819,28 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 arg: "offerList", type: ["Offer"], root: true
             }
         })
+    };
+
+    const offerQueryMethod = function(){
+       const OfferQuery = databaseObj.OfferQuery;
+       OfferQuery.offerQuery = offerQuery;
+       OfferQuery.remoteMethod("offerQuery", {
+           accepts: [
+               {
+                   arg: 'ctx',
+                   type: 'object',
+                   http: {
+                       source: 'context'
+                   }
+               },
+               {
+                   arg: "offerQueryObj", type: "object"
+               }
+           ],
+           returns: {
+               arg: "offerQueryObj", type: "OfferQuery", root: true
+           }
+       })
     };
 
 
@@ -2560,7 +2583,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       where:{
                           cityId :cityId,
                           status: "active"
-                      }
+                      },
+                      include: "dealer"
                   })
                       .then(function(offerList){
                           if(offerList){
@@ -2581,7 +2605,38 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       }
     };
 
-
+     const offerQuery = function(ctx, offerQueryObj, callback){
+         if(!offerQueryObj){
+             callback(new Error("Invalid Arguments"));
+         } else{
+             if(request.accessToken){
+                 if(request.accessToken.userId){
+                     const customerId = request.accessToken.userId;
+                     const OfferQuery = databaseObj.OfferQuery;
+                     OfferQuery.create({
+                         subject: offerQueryObj.subject ? offerQueryObj.subject : "",
+                         message: offerQueryObj.message ? offerQueryObj.message : "",
+                         customerContact : offerQueryObj.customerContact ? offerQueryObj.customerContact : "",
+                         dealerId : offerQueryObj.dealerId,
+                         customerId : customerId,
+                         queryType : offerQueryObj.quoteType
+                     })
+                         .then(function(offerQuery){
+                             if(offerQuery){
+                                 callback(null, offerQuery);
+                             }
+                         })
+                         .catch(function(error){
+                             callback(error);
+                         })
+                 } else{
+                     callback(new Error("User not valid"));
+                 }
+             } else{
+                 callback(new Error("User not valid"));
+             }
+         }
+     };
 
     return {
         init: init

@@ -132,7 +132,7 @@
       "foreignKey": "",
       "templateOptions": {
         "btnText": "Add Dealer",
-        "searchProp": "name",
+        "searchProp": "email",
         "priority": 2,
         "search": true,
         "create": false,
