@@ -2264,7 +2264,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                   Feedback.create({
                       subject: feedbackObj.subject,
                       message: feedbackObj.message,
-                      customerId: userId
+                      customerId: userId,
+                      dealerId: feedbackObj.dealerId
                   })
 
                       .then(function(feedbackObj){
