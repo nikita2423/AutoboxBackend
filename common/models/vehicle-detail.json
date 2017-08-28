@@ -58,6 +58,10 @@
         }
       }
     },
+    "status": {
+      "type": "string",
+      "default": "active"
+    },
     "added": {
       "type": "date",
       "required": true,
@@ -69,6 +73,9 @@
     "updated": {
       "type": "date",
       "defaultFn": "now"
+    },
+    "vehicleType": {
+      "type": "string"
     }
   },
   "validations": [],

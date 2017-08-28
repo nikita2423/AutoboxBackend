@@ -1,0 +1,74 @@
+{
+  "name": "OfferQuery",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "subject": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "label": "Subject",
+          "type": "text",
+          "id": "subject"
+        }
+      }
+    },
+    "message": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "label": "Message",
+          "type": "text",
+          "id": "message"
+        }
+      }
+    },
+    "queryType": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Query Type",
+          "id": "queryType",
+          "priority": 6,
+          "options": [
+            "call",
+            "message"
+          ]
+        }
+      }
+    },
+    "customerContact": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "label": "Customer Contact",
+          "type": "text",
+          "id": "customerContact"
+        }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    },
+    "dealer": {
+      "type": "belongsTo",
+      "model": "Dealer",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
