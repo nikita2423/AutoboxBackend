@@ -1,4 +1,14 @@
 {
+  "settings": {
+    "tables":{
+      "sort":{
+        "added": "DESC"
+      },
+      "beforeLoad":{
+        "brandId": "$user.brandId"
+      }
+    }
+  },
   "widgets": [
     {
       "label": "Customer Quotes",

@@ -20,6 +20,15 @@ angular.module($snaphy.getModuleName())
  Employee Role
  */
     .run(['Permission', 'LoginServices', '$q', '$rootScope', function (Permission, LoginServices,  $q, $rootScope)  {
+
+        LoginServices.addUserDetail.get()
+            .then(function (user) {
+                $rootScope.user = user;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+
         //Define admin role with promise..
         //For more info https://github.com/Narzerus/angular-permission
         Permission.defineRole(employeeRole, function (stateParams) {
