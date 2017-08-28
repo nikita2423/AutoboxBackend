@@ -3,6 +3,10 @@
   "description": "Plugin for representing the detail view of each modal.",
   "routeExposure": "/detailView",
   "activate": true,
+  "load":{
+    "root": true,
+    "dealerPanel": true
+  },
   "pluginDependencies": {
     "dashboard": "^2.0.0",
     "JqueryValidate": "^2.0.0",

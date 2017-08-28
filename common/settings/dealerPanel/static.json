@@ -4,7 +4,8 @@
   },
   "js": {
     "/dealerPanel/scripts/routes/dealerPanel.js": "dealerPanelRoute",
-    "/dealerPanel/scripts/controllers/dealerPanel.js": "dealerPanelController"
+    "/dealerPanel/scripts/controllers/dealerPanel.js": "dealerPanelController",
+    "/dealerPanel/scripts/services/helper.js": "HelperServices"
   },
   "moduleDependencies":{
 
@@ -17,11 +18,19 @@
         "path":"views/sideBarHook.html",
         "acl":{
           "allow":[],
-          "reject":[]
+          "reject":["admin", "Admin"]
         }
       }
     ],
-    "headerHook": [],
+    "headerHook": [
+      {
+        "path":"views/header-hooks.html",
+        "acl":{
+          "allow":[],
+          "reject":["admin", "Admin"]
+        }
+      }
+    ],
     "footerHook":[]
   }
 }

@@ -3,18 +3,12 @@
     <li>
         <div class="btn-group">
             <button class="btn btn-default  dropdown-toggle" data-toggle="dropdown" type="button">
-                Hi! <span ng-bind="user.firstName"></span>
+                Hi, <span ng-bind="user.firstName"> </span> <span ng-bind="user.lastName"></span>
                 <i class="si si-user"></i>
                 <span class="caret"></span>
 
             </button>
             <ul class="dropdown-menu dropdown-menu-right">
-                <!--<li class="divider"></li>
-                <li class="dropdown-header">Profile</li>
-              &lt;!&ndash;  <li>
-                    <snaphy-register></snaphy-register>
-                </li>&ndash;&gt;
-                <li class="divider"></li>-->
                 <li class="dropdown-header">Actions</li>
                 <li>
                     <snaphy-logout></snaphy-logout>

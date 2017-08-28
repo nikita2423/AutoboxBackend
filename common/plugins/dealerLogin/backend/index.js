@@ -84,8 +84,8 @@ module.exports = function(server, databaseObj, helper, packageObj) {
   //handle login hook add signed cookie to users..
   (function () {
       //Run this method only one time..
-      if(!server.userContext){
-          server.userContext = true;
+      if(!server.dealerContext){
+          server.dealerContext = true;
           // on login set access_token cookie with same ttl as loopback's accessToken
           databaseObj.User.afterRemote('login', function setLoginCookie(context, accessToken, next) {
               var res = context.res;
