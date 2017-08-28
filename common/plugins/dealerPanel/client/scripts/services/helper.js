@@ -86,16 +86,12 @@ angular.module($snaphy.getModuleName())
                         if(stateDetail.name){
                             if(settings.get().tabs[key].config.stateName === stateDetail.name){
                                 (function (key) {
-                                    $timeout(function () {
-                                        settings.get().tabs[key].config.active = true;
-                                        settings.get().config.currentActiveTab = key;
-                                    }, 100);
+                                    settings.get().tabs[key].config.active = true;
+                                    settings.get().config.currentActiveTab = key;
                                 })(key);
                             }else{
                                 (function (key) {
-                                    $timeout(function () {
                                         settings.get().tabs[key].config.active = false;
-                                    }, 100)
                                 })(key);
                             }
                         }
@@ -218,32 +214,6 @@ angular.module($snaphy.getModuleName())
                             /*validations: fetchValidationObj('appUser'),*/
                             config: {
                                 stateName: "monthlyReports",
-                                stateOptions: {},
-                                active: false
-                            }
-                        },
-                        settings: {
-                            //Contains the current model detail..
-                            relationDetail: {
-                                //Fetch only those AppUser which belongs to current brand.
-                                "relationName": "appUsers",
-                                "relationType": "hasAndBelongsToMany",
-                                "modelName": "AppUser",
-                                "action":{
-                                    edit: false,
-                                    delete: false,
-                                    create: false
-                                },
-                                "where":{},
-                                beforeSaveHook: []
-                            },
-                            load: function () {
-                                changeTab(settings.tabs.settings);
-                            },
-                            data: {},
-                            /*validations: fetchValidationObj('appUser'),*/
-                            config: {
-                                stateName: "dashboard.settings",
                                 stateOptions: {},
                                 active: false
                             }

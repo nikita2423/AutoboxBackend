@@ -13,11 +13,17 @@ angular.module($snaphy.getModuleName())
         $scope.getActiveTabSettings     = HelperService.getActiveTabSettings;
         $scope.setCurrentState          = HelperService.setCurrentState;
 
+
         $scope.init = function(){
             HelperService.initialize()
                 .then(function (user) {
                     console.log("User loaded successfully");
-                    $scope.setCurrentState();
+                    return $scope.setCurrentState();
+                })
+                .then(function () {
+                    var modelName = $rootScope.settings.tabs[$rootScope.settings.config.currentActiveTab].relationDetail.modelName;
+                    $scope.tableViewInit  = InitTableService.tableViewInit($scope, modelName, null);
+                    $scope.relationDetail = $rootScope.settings.tabs[$rootScope.settings.config.currentActiveTab].relationDetail;
                 })
                 .catch(function (error) {
                     console.error(error);

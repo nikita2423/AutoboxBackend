@@ -28,6 +28,14 @@
       "search": "date"
     },
     "quoteType": {
+      "label": "Query",
+      "style":{
+        "width": "40px",
+        "text-align": "center",
+        "padding-left":"0px",
+        "padding-right":"0px",
+        "padding": "0px !important"
+      },
       "tag": {
         "q": "label-primary",
         "t": "label-warning"
