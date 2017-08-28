@@ -92,7 +92,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         .then(function () {
                            var name = customerQuoteObj.customer.firstName + " " + customerQuoteObj.customer.lastName;
                            var type = "CustomerQuote";
-                           var title = "Your Quote for model " + customerQuoteObj.vehicleInfo.vehicleModel + "has been forwarded to dealers. You can view all the quotes with corresponding dealers on My Quotes Section";
+                           var title = "Your Quote for model " + customerQuoteObj.vehicleInfo.vehicleModel + " has been forwarded to dealers. You can view all the quotes with corresponding dealers on My Quotes Section";
                            var id = customerQuoteObj.id;
                            var from = packageObj.companyName;
                            var message = quoteNotificationFormat(name, type, title, id);
@@ -424,7 +424,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       .then(function(){
                           var name = vehicleDetailObj.customer.firstName + " " + vehicleDetailObj.customer.lastName;
                           const type = "AddVehicle";
-                          const title = "Your Vehicle of Model Name " + vehicleDetailObj.vehicleInfo.vehicleModel + "has been saved successfully!";
+                          const title = "Your Vehicle of Model Name " + vehicleDetailObj.vehicleInfo.vehicleModel + " has been saved successfully!";
                           const instanceId = vehicleDetailObj.id;
                           var pushFrom = packageObj.companyName;
                           const message = addVehicleNotificationFormat(name, type, title, instanceId);

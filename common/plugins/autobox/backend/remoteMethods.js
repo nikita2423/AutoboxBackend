@@ -1657,9 +1657,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                            if(vehicleInfo){
                                vehicleInfoId = vehicleInfo.id;
                                const Insurance = databaseObj.Insurance;
+                               const policyEndDate = insuranceObj.policyEndDate ? moment(insuranceObj.policyEndDate, 'DD/MM/YYYY') : new Date();
                                return Insurance.create({
                                    insuranceProvider: insuranceObj.insuranceProvider,
-                                   policyEndDate: moment(insuranceObj.policyEndDate, 'DD/MM/YYYY'),
+                                   policyEndDate: policyEndDate,
                                    insurancePlanType: insuranceObj.insurancePlanType,
                                    policyNumber:insuranceObj.policyNumber,
                                    vehicleInfoId: vehicleInfoId
@@ -1736,9 +1737,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                           if(vehicleInfo){
                               vehicleInfoId = vehicleInfo.id;
                               const Insurance = databaseObj.Insurance;
+                              const policyEndDate = insuranceObj.policyEndDate ? moment(insuranceObj.policyEndDate, 'DD/MM/YYYY') : new Date();
                               return Insurance.create({
                                   insuranceProvider: insuranceObj.insuranceProvider,
-                                  policyEndDate: moment(insuranceObj.policyEndDate, 'DD/MM/YYYY'),
+                                  policyEndDate: policyEndDate,
                                   insurancePlanType: insuranceObj.insurancePlanType,
                                   policyNumber:insuranceObj.policyNumber,
                                   vehicleInfoId: vehicleInfoId
@@ -2262,8 +2264,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                   Feedback.create({
                       subject: feedbackObj.subject,
                       message: feedbackObj.message,
-                      customerId: userId,
-                      dealerId: feedbackObj.dealerId
+                      customerId: userId
                   })
 
                       .then(function(feedbackObj){

@@ -43,10 +43,10 @@ module.exports = (Feedback, server, helper) =>
           return next(new Error("Customer is required"));
       }
 
-      if(!validate(instance, currentInstance, "dealerId")){
+     /* if(!validate(instance, currentInstance, "dealerId")){
           return next(new Error("Dealer is required"));
       }
-
+*/
       next();
 
   });
