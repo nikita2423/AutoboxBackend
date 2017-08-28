@@ -10,5 +10,15 @@
   "roles":{
     "serviceLoggedUser": "Dealer"
   },
+  "adminUser": [
+    {
+      "username": "test",
+      "email": "test@autobox.com",
+      "password": "12345",
+      "firstName": "Dealer",
+      "lastName": "Autobox",
+      "isAdmin": true
+    }
+  ],
   "pluginDependencies": {}
 }

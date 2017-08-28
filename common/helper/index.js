@@ -30,6 +30,14 @@ module.exports = function(server) {
       PLUGIN_PRIORITY
   } = SETTINGS(server);
 
+    /**
+     * Get the Conf.Js settings file..
+     */
+  function getMainSettings(property) {
+      const val = SETTINGS(server);
+      return val[property];
+  }
+
 
   /**
    * Method for getting all the directores
@@ -443,6 +451,7 @@ module.exports = function(server) {
   helper.getValidationObj = getValidationObj;
   helper.getSettingRootPath = getSettingRootPath;
   helper.getTemplateSettings = getTemplateSettings;
+  helper.getMainSettings = getMainSettings;
 
   return helper;
 };
