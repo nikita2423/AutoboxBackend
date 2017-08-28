@@ -2434,6 +2434,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                   },
                       {
                           relation: "workshop"
+                      },
+                      {
+                          relation: "insurance"
                       }];
 
                   VehicleDetail.find(filter)
