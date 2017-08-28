@@ -1,0 +1,37 @@
+{
+  "name": "Insurance",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "insuranceProvider": {
+      "type": "string"
+    },
+    "policyEndDate": {
+      "type": "date"
+    },
+    "insurancePlanType": {
+      "type": "string"
+    },
+    "policyNumber": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "vehicleInfo": {
+      "type": "belongsTo",
+      "model": "VehicleInfo",
+      "foreignKey": ""
+    },
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

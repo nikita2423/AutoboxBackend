@@ -719,6 +719,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     arg: "customerQuoteId", type: "string"
                 },
                 {
+                    arg: "insuranceObj", type: "object"
+                },
+                {
                     arg: "vehicleDetailObj", type: "object"
                 }
             ],
@@ -743,6 +746,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
               },
               {
                   arg: "vehicleInfoObj", type: "object"
+              },
+              {
+                  arg: "insuranceObj", type: "object"
               },
               {
                   arg: "vehicleDetailObj", type: "object"
@@ -1630,8 +1636,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @param vehicleDetailObj
      * @param callback
      */
-    const saveNewVehicle = function(ctx, customerQuoteId, vehicleDetailObj, callback){
+    const saveNewVehicle = function(ctx, customerQuoteId, insuranceObj, vehicleDetailObj, callback){
         const request = ctx.req;
+        let vehicleInfoId;
+        let insuranceId;
         if(!customerQuoteId && !vehicleDetailObj){
             callback(new Error("Invalid Arguments"));
         } else{
@@ -1647,19 +1655,35 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                        })
                        .then(function(vehicleInfo){
                            if(vehicleInfo){
-                              const VehicleDetail = databaseObj.VehicleDetail;
-                              return VehicleDetail.create({
-                                  workshopName: vehicleDetailObj.workshopName,
-                                  showroomName: vehicleDetailObj.showroomName,
-                                  registeredName: vehicleDetailObj.registeredName,
-                                  registrationNumber: vehicleDetailObj.registrationNumber,
-                                  showroomId: vehicleDetailObj.showroomId,
-                                  workshopId: vehicleDetailObj.workshopId,
-                                  customerId: customerId,
-                                  vehicleInfoId : vehicleInfo.id,
-                                  status: "active",
-                                  vehicleType: "new"
-                              })
+                               vehicleInfoId = vehicleInfo.id;
+                               const Insurance = databaseObj.Insurance;
+                               return Insurance.create({
+                                   insuranceProvider: insuranceObj.insuranceProvider,
+                                   policyEndDate: moment(insuranceObj.policyEndDate, 'DD/MM/YYYY'),
+                                   insurancePlanType: insuranceObj.insurancePlanType,
+                                   policyNumber:insuranceObj.policyNumber,
+                                   vehicleInfoId: vehicleInfoId
+                               });
+
+                           }
+                       })
+                       .then(function(insurance){
+                           if(insurance){
+                               insuranceId = insurance.id;
+                               const VehicleDetail = databaseObj.VehicleDetail;
+                               return VehicleDetail.create({
+                                   workshopName: vehicleDetailObj.workshopName,
+                                   showroomName: vehicleDetailObj.showroomName,
+                                   registeredName: vehicleDetailObj.registeredName,
+                                   registrationNumber: vehicleDetailObj.registrationNumber,
+                                   showroomId: vehicleDetailObj.showroomId,
+                                   workshopId: vehicleDetailObj.workshopId,
+                                   customerId: customerId,
+                                   vehicleInfoId : vehicleInfoId,
+                                   insuranceId: insuranceId,
+                                   status: "active",
+                                   vehicleType: "new"
+                               })
                            }
                        })
                        .then(function(vehicleDetail){
@@ -1680,8 +1704,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     };
 
-    const saveExistingVehicle = function(ctx, vehicleInfoObj, vehicleDetailObj, callback){
+    const saveExistingVehicle = function(ctx, vehicleInfoObj, insuranceObj, vehicleDetailObj, callback){
       const request = ctx.req;
+        let vehicleInfoId;
+        let insuranceId;
       if(!vehicleInfoObj && !vehicleDetailObj){
           callback(new Error("Invalid Arguments"));
       } else{
@@ -1708,6 +1734,21 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                   })
                       .then(function(vehicleInfo){
                           if(vehicleInfo){
+                              vehicleInfoId = vehicleInfo.id;
+                              const Insurance = databaseObj.Insurance;
+                              return Insurance.create({
+                                  insuranceProvider: insuranceObj.insuranceProvider,
+                                  policyEndDate: moment(insuranceObj.policyEndDate, 'DD/MM/YYYY'),
+                                  insurancePlanType: insuranceObj.insurancePlanType,
+                                  policyNumber:insuranceObj.policyNumber,
+                                  vehicleInfoId: vehicleInfoId
+                              });
+
+                          }
+                      })
+                      .then(function(insurance){
+                          if(insurance){
+                              insuranceId = insurance.id;
                               const VehicleDetail = databaseObj.VehicleDetail;
                               return VehicleDetail.create({
                                   workshopName: vehicleDetailObj.workshopName,
@@ -1715,7 +1756,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                   registrationNumber: vehicleDetailObj.registrationNumber,
                                   workshopId: vehicleDetailObj.workshopId,
                                   customerId: customerId,
-                                  vehicleInfoId : vehicleInfo.id,
+                                  vehicleInfoId : vehicleInfoId,
+                                  insuranceId : insuranceId,
                                   status: "active",
                                   vehicleType: "existing"
                               })
