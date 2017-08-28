@@ -5,6 +5,7 @@
   "js": {
     "/dealerLogin/scripts/routes/dealerLogin.js": "dealerLoginRoute",
     "/dealerLogin/scripts/controllers/login.js": "dealerLoginController",
+    "/dealerLogin/scripts/directives/dealerLogin.js": "dealerLoginDirective",
     "/dealerLogin/scripts/controllers/register.js": "dealerRegisterController",
     "/dealerLogin/scripts/services/dealerLogin.js": "dealerLoginService"
   },

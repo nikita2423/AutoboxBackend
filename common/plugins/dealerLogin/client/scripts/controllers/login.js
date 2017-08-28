@@ -46,11 +46,12 @@ angular.module($snaphy.getModuleName())
                         $scope.loginError = false;
                         //Add user detail to the database..
                         LoginServices.addUserDetail.set(userDetail.user);
-                        var $state = $injector.get('$state'),
-                            redirectTo =  $rootScope.previousState.name ?  $rootScope.previousState.name :  LoginServices.redirectOtherWise;
+                        //var $state = $injector.get('$state');
+                            //redirectTo =  $rootScope.previousState.name ?  $rootScope.previousState.name :  LoginServices.redirectOtherWise;
                         //Redirect to the default State..
-                        $state.go(redirectTo);
-
+                        //$state.go(redirectTo);
+                        //Now reload the page after successfull login..
+                        window.location.replace("/dealer");
                     },function(){
                         enableButton();
                         $scope.errorMsg = "Please login by providing correct username and password.";

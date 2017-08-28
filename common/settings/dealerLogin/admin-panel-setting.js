@@ -6,9 +6,9 @@
 /*$snaphy*/
 //This is the setting file of the plugin..TO be configured according to the user needs..
 var settings = {
-  "defaultTemplate": true,
+  "defaultTemplate": false,
     "loginName": "Autobox",
-    "loginTitle": "Welcome, please login.",
+    "loginTitle": "Welcome Dealer, please login.",
     "registerTitle":"Please fill the following details to register.",
     "forgotPasswordTitle": "Please provide your account’s email and we will send you instructions to reset password.",
     "onLoginRedirectState": 'dashboard',
