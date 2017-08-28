@@ -239,5 +239,13 @@
   "Insurance": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "DashCamera": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "GpsTracker": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

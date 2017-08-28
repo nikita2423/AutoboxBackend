@@ -283,15 +283,15 @@
     {
       "principalType": "ROLE",
       "principalId": "$authenticated",
-      "property": "fetchDealersForBrand",
-      "permission": "ALLOW"
+      "permission": "ALLOW",
+      "property": "fetchDealersForBrand"
     },
     {
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$unauthenticated",
-      "property": "login",
-      "permission": "ALLOW"
+      "permission": "ALLOW",
+      "property": "login"
     }
   ],
   "methods": {}

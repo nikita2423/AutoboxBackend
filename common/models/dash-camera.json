@@ -1,0 +1,40 @@
+{
+  "name": "DashCamera",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "quantity": {
+      "type": "number",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "number",
+          "priority": 3,
+          "label": "Quantity",
+          "id": "dashQuantity"
+        }
+      }
+    },
+    "deliveryDate": {
+      "type": "date",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "date",
+          "priority": 3,
+          "label": "Date Of Delivery",
+          "id": "deliveryDate"
+        }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
