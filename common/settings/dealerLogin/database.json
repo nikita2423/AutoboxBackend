@@ -1,4 +1,5 @@
 {
   "User": "Dealer",
-  "Role": "Role"
+  "Role": "Role",
+  "SnaphyACL": "SnaphyAcl"
 }

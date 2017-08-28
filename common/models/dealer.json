@@ -252,13 +252,7 @@
     },
     {
       "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "getSchema"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$everyone",
+      "principalId": "admin",
       "permission": "ALLOW",
       "property": "getAbsoluteSchema"
     },
@@ -270,7 +264,7 @@
     },
     {
       "principalType": "ROLE",
-      "principalId": "$everyone",
+      "principalId": "$admin",
       "permission": "ALLOW",
       "property": "save"
     },
@@ -281,29 +275,23 @@
       "permission": "ALLOW"
     },
     {
-      "accessType": "READ",
       "principalType": "ROLE",
       "principalId": "$authenticated",
-      "permission": "ALLOW"
-    },
-    {
-      "accessType": "READ",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "fetchDealerDetail"
     },
     {
-      "accessType": "READ",
       "principalType": "ROLE",
       "principalId": "$authenticated",
-      "permission": "fetchDealersForBrand"
+      "property": "fetchDealersForBrand",
+      "permission": "ALLOW"
     },
     {
       "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "login"
+      "principalId": "$unauthenticated",
+      "property": "login",
+      "permission": "ALLOW"
     }
   ],
   "methods": {}

@@ -10,16 +10,17 @@ var forgotPassState   = $snaphy.loadSettings('login', "forgotPassState");
 angular.module($snaphy.getModuleName())
 //Define your services here..
 //Service for implementing login related functionality..
-    .factory('LoginServices', ['Database', '$location', 'LoopBackAuth', '$injector', '$q',
-        function(Database, $location, LoopBackAuth, $injector, $q) {
+    .factory('LoginServices', ['Database', '$location', 'LoopBackAuth', '$injector', '$q', "$window",
+        function(Database, $location, LoopBackAuth, $injector, $q, $window) {
             //Set redirect otherwise state name..
             //First use the value from the route/login global routeOtherWise value ....
             var redirectOtherWise_ = redirectOtherWise || 'dashboard';
 
             //get the user service..
             var UserService = Database.getDb('dealerLogin', 'User'),
-                //UserDetail is an object will contain the current logged user info.
-                userDetail = null;
+            SnaphyACL = Database.getDb('dealerLogin', 'SnaphyACL'),
+            //UserDetail is an object will contain the current logged user info.
+            userDetail = null;
 
             /**
              * Method for checking if page is authenticated or not. Fetch the current user info if user is authenticated.
@@ -62,11 +63,13 @@ angular.module($snaphy.getModuleName())
 
 
             /**
-             * Creating memoization method for storing user details....
-             * @type {{get, set}}
+             *  Creating memoization method for storing user details....
+             * @type {{get, getRoles, getACl, set, setRoles, setAcl}}
              */
             var addUserDetail = (function(){
                 var user;
+                var roles;
+                var aclListObj = {};
                 return {
                     /**
                      * Get the user. Returns promise object.
@@ -80,19 +83,104 @@ angular.module($snaphy.getModuleName())
                                 UserService.getCurrent(function(userObj){
                                     //Adding user detail to userService..
                                     addUserDetail.set(userObj);
-                                    resolve(userObj);
+                                    addUserDetail.getRoles()
+                                        .then(function () {
+                                            resolve(userObj);
+                                        })
+                                        .catch(function (error) {
+                                            reject(error);
+                                        });
+
                                 }, function(err){
                                     reject(err);
                                 });
                             }
                         });
                     },
+                    getRoles: function () {
+                        return $q(function (resolve, reject) {
+                            if(roles){
+                                resolve(roles);
+                            }else{
+                                //First check if database is present globally..
+                                var STATIC_DATA = $window.STATIC_DATA;
+                                if(STATIC_DATA.acl){
+                                    roles = STATIC_DATA.acl;
+                                    resolve(roles);
+                                }else{
+                                    UserService.getAuthorisedRoles({}, {}, function (rolesList) {
+                                        if(rolesList){
+                                            if(rolesList.roles.length){
+                                                addUserDetail.setRoles(rolesList.roles);
+                                                resolve(rolesList.roles);
+                                            }else{
+                                                addUserDetail.setRoles(null);
+                                                resolve(null);
+                                            }
+
+                                        }else {
+                                            addUserDetail.setRoles(null);
+                                            resolve(null);
+                                        }
+
+                                    }, function (err) {
+                                        reject(err);
+                                    });
+                                }
+                            }
+                        })
+                    },
+                    getACl: function () {
+                        return $q(function (resolve, reject) {
+                            addUserDetail.getRoles()
+                                .then(function (rolesList) {
+
+                                    if(rolesList){
+                                        if(rolesList.length){
+                                            SnaphyACL.find({
+                                                filter:{
+                                                    where:{
+                                                        role:{
+                                                            inq: rolesList
+                                                        }
+                                                    }
+                                                }
+                                            }, function (aclObjList) {
+                                                aclListObj = {};
+                                                if(aclObjList){
+                                                    if(aclObjList.length){
+                                                        aclObjList.forEach(function (acl) {
+                                                            aclListObj[acl.model] = acl;
+                                                        });
+                                                    }
+                                                }
+                                                addUserDetail.setAcl(aclListObj);
+                                                resolve(aclListObj);
+                                            }, function (error) {
+                                                reject(error);
+                                            });
+                                        }
+                                    }
+                                })
+                                .catch(function (error) {
+                                    console.error(error);
+                                    reject(error);
+                                });
+
+                        })
+                    },
                     set: function(userObj){
                         user = userObj;
+                    },
+                    setRoles: function (roleList) {
+                        roles = roleList;
+                    },
+                    setAcl: function (acl) {
+                        aclListObj = acl;
                     }
                 };
-
             })();
+
 
 
 
@@ -140,6 +228,11 @@ angular.module($snaphy.getModuleName())
 
 
 
+
+            
+
+
+
             /**
              * For logging out
              */
@@ -173,4 +266,3 @@ angular.module($snaphy.getModuleName())
             };
         }//LoginServices
     ]);
-

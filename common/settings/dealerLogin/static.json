@@ -15,7 +15,15 @@
   "bodystructure": {
     "asidebarHook": [],
     "sidebarHook": [],
-    "headerHook": [],
+    "headerHook": [
+      {
+        "path":"views/headerHook.html",
+        "acl":{
+          "allow":[],
+          "reject":[]
+        }
+      }
+    ],
     "footerHook":[]
   }
 }
