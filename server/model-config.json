@@ -235,5 +235,9 @@
   "OfferQuery": {
     "dataSource": "db",
     "public": true
+  },
+  "Insurance": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

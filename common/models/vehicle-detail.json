@@ -99,6 +99,11 @@
       "type": "belongsTo",
       "model": "VehicleInfo",
       "foreignKey": ""
+    },
+    "insurance": {
+      "type": "belongsTo",
+      "model": "Insurance",
+      "foreignKey": ""
     }
   },
   "acls": [],
