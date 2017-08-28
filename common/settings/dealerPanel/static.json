@@ -12,7 +12,15 @@
   "settings": ["/dealerPanel/admin-panel-setting.js"],
   "bodystructure": {
     "asidebarHook": [],
-    "sidebarHook": [],
+    "sidebarHook": [
+      {
+        "path":"views/sideBarHook.html",
+        "acl":{
+          "allow":[],
+          "reject":[]
+        }
+      }
+    ],
     "headerHook": [],
     "footerHook":[]
   }

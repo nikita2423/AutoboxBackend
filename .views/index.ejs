@@ -14,21 +14,6 @@
         <!-- Icons -->
         <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
         <link rel="shortcut icon" href="<%= staticRoute %>/assets/img/favicons/favicon.png">
-        <link rel="icon" type="image/png" href="<%= staticRoute %>/assets/img/favicons/favicon-16x16.png" sizes="16x16">
-        <link rel="icon" type="image/png" href="<%= staticRoute %>/assets/img/favicons/favicon-32x32.png" sizes="32x32">
-        <link rel="icon" type="image/png" href="<%= staticRoute %>/assets/img/favicons/favicon-96x96.png" sizes="96x96">
-        <link rel="icon" type="image/png" href="<%= staticRoute %>/assets/img/favicons/favicon-160x160.png" sizes="160x160">
-        <link rel="icon" type="image/png" href="<%= staticRoute %>/assets/img/favicons/favicon-192x192.png" sizes="192x192">
-
-        <link rel="apple-touch-icon" sizes="57x57" href="<%= staticRoute %>/assets/img/favicons/apple-touch-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="<%= staticRoute %>/assets/img/favicons/apple-touch-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="<%= staticRoute %>/assets/img/favicons/apple-touch-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="<%= staticRoute %>/assets/img/favicons/apple-touch-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="<%= staticRoute %>/assets/img/favicons/apple-touch-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="<%= staticRoute %>/assets/img/favicons/apple-touch-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="<%= staticRoute %>/assets/img/favicons/apple-touch-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="<%= staticRoute %>/assets/img/favicons/apple-touch-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="<%= staticRoute %>/assets/img/favicons/apple-touch-icon-180x180.png">
         <!-- END Icons -->
 
         <!-- Stylesheets -->
@@ -86,7 +71,7 @@
                             <!-- Side Overlay-->
                             <aside id="side-overlay" snaphy-load-template>
                                 <!-- Side Overlay Scroll Container -->
-                                <div id="side-overlay-scroll">
+                                <div  style="width: auto;height: 100%;overflow-y: auto !important;">
                                     <!-- Side Header -->
                                     <div style="padding-left: 10px;" class="side-header side-content">
                                         <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
@@ -169,8 +154,182 @@
             </footer>
         <%}else{%>
             <!--For Other routes exposure.-->
-            <div ui-view>
+            <div>
+                <%
+                        var routeSetting;
+                        var getRouteSettings = function(){
+                            for(var i=0; i<templateSettings.routes.length; i++ ){
+                                var routeSetting_ = templateSettings.routes[i];
+                                if(routeSetting_.state === state){
+                                    //Found
+                                    routeSetting = routeSetting_.settings;
 
+                                    break;
+                                }
+                            }
+                        };
+                        getRouteSettings();
+                 %>
+              <!--Load Page Container only if `defaultTemplate` variable is true-->
+              <!-- Page Container -->
+              <div
+                      ng-if="templateEnabled()"
+                      id="page-container"
+                      snaphy-load-template
+                      ng-class="routeSetting.container.class"
+                      class="sidebar-l sidebar-o side-scroll header-navbar-fixed ">
+                <%
+                    //Checking for aside bar availaibility
+                  if(routeSetting){
+                      if(routeSetting.asidebar){
+                          if(routeSetting.asidebar.display){
+                %>
+                              <!-- Side Overlay-->
+                              <aside id="side-overlay" snaphy-load-template>
+                                  <!-- Side Overlay Scroll Container -->
+                                  <div  style="width: auto;height: 100%;overflow-y: auto !important;">
+                                      <!-- Side Header -->
+                                      <div style="padding-left: 10px;" class="side-header side-content">
+                                          <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
+                                          <button class="btn btn-default pull-right" type="button" data-toggle="layout" data-action="side_overlay_close">
+                                              <i class="fa fa-times"></i>
+                                          </button>
+                                          <span>
+                                              <span class="font-w600 push-10-l">ACTIVITY CONSOLE</span>
+                                          </span>
+                                      </div>
+                                      <!-- END Side Header -->
+                                      <!-- Side Content -->
+                                      <div class="side-content remove-padding-t">
+                                          <!-- ASIDEBAR HOOK -->
+                                          <% asidebarHook.forEach(function(asideHtml) { %>
+                                          <!-- Custom Plugins headers.. -->
+                                          <div snaphy-load-template>
+                                              <%- asideHtml %>
+                                          </div>
+                                          <% }); %>
+                                      </div>
+                                  </div>
+
+                              </aside><!-- END Side Overlay -->
+               <%
+                          }
+                      }
+                  }
+               %>
+
+                <!-- Sidebar -->
+                <nav id="sidebar" snaphy-load-template >
+                  <!-- Sidebar Scroll Container -->
+                  <div id="sidebar-scroll" >
+                    <!-- Sidebar Content -->
+                    <!-- Adding .sidebar-mini-hide to an element will hide it when the sidebar is in mini mode -->
+                      <div class="sidebar-content">
+                          <div class="side-content">
+                              <!-- SIDEBAR HOOK -->
+                              <% sidebarHook.forEach(function(sidebarHtml) { %>
+                                  <span snaphy-load-template>
+                                      <%- sidebarHtml %>
+                                  </span>
+                              <% }); %>
+                          </div><!-- END Side Content -->
+                      </div><!-- Sidebar Content -->
+                  </div><!-- END Sidebar Scroll Container -->
+
+
+                  </nav>
+                  <!-- END Sidebar -->
+
+
+                  <%
+                  if(routeSetting){
+                      if(routeSetting.header){
+                          if(routeSetting.header.display === false){
+                              showHeader = false;
+                          }
+                      }
+                  }
+                  %>
+
+                  <%if(showHeader){ %>
+                  <!-- Header -->
+                  <header id="header-navbar" snaphy-load-template class="content-mini content-mini-full" >
+
+                      <!-- Header Navigation Left -->
+                      <ul class="nav-header pull-left">
+                          <li class="hidden-md hidden-lg">
+
+                              <button class="btn btn-default" data-toggle="layout" data-action="sidebar_toggle"  type="button">
+                                  <i class="fa fa-navicon"></i>
+                              </button>
+                          </li>
+                          <li class="hidden-xs hidden-sm">
+                              <button class="btn btn-default" data-toggle="layout" data-action="sidebar_mini_toggle" type="button">
+                                  <i class="fa fa-ellipsis-v"></i>
+                              </button>
+                          </li>
+                      </ul>
+                      <%
+                          //Checking for aside bar availaibility
+                      if(routeSetting){
+                          if(routeSetting.asidebar){
+                              if(routeSetting.asidebar.display){
+
+                      %>
+                          <ul class="nav-header pull-right">
+                              <!--Checkout bodyCtrl.js for more info.-->
+                              <!--Notification valiable is defined in rootscope so that any plugin can also modify it.-->
+                              <li  class="hidden-xs hidden-sm">
+                                  <button ng-class="notification.main.class" class="btn" data-toggle="layout" data-action="side_overlay_toggle" type="button">
+                                      <i class="fa fa-bell-o "></i>
+                                      <span ng-cloak="" ng-if="notification.unread.total" ng-bind="notification.unread.total" class="badge push-5-l"></span>
+                                  </button>
+                              </li>
+                          </ul>
+                      <%
+                              }
+                          }
+                      }
+                      %>
+                      <!-- END Header Navigation Left -->
+
+                      <!-- HEADER HOOK -->
+                      <% headerHook.forEach(function(headerHtml) { %>
+                      <!-- Custom Plugins headers.. -->
+                      <span snaphy-load-template="">
+                          <%- headerHtml %>
+                      </span>
+                      <% }); %>
+                  </header>
+                  <!-- END Header -->
+                  <% } %>
+                  <!--END OF SHOW HEADER-->
+
+                  <!-- Main Container -->
+                  <main ui-view  ng-class="routeSetting.main.class" id="main-container"></main>
+                  <!-- END Main Container -->
+
+                  <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix" >
+                    <% include ./partials/footer %>
+                  </footer>
+
+              </div> <!--End Template enabled-->
+              <!-- END Page Container -->
+
+
+              <!--ONLY load this template if the default template is not needed for-example for login plugin..-->
+              <div ui-view ng-if="!templateEnabled()">
+
+              </div>
+
+
+              <footer ng-if="!templateEnabled()">
+                  <% include ./partials/footer %>
+                <!-- Login Footer -->
+                <div class="push-10-t text-center animated fadeInUp">
+                    <small class="text-muted font-w600"><span class="js-year-copy"></span> &copy; <%= module %> <%= version %> </small>
+                </div>
+              </footer>
             </div>
         <%}%>
 

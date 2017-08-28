@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "activate": true,
   "load":{
-    "root": true,
+    "root": false,
     "dealerPanel": false
   },
   "services": {},

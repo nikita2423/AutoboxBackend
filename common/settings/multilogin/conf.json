@@ -4,6 +4,10 @@
   "secretKey": "loopback_secret_key",
   "activate": true,
   "services": {},
+  "load":{
+    "root": false,
+    "dealerPanel": false
+  },
   "config":{
     "google":{
       "login":{

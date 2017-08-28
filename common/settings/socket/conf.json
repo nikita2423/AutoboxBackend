@@ -22,6 +22,6 @@
     "PUT": "PUT",
     "DELETE": "DELETE"
   },
-  "activate": true,
+  "activate": false,
   "pluginDependencies": {}
 }

@@ -21,7 +21,21 @@
     {
       "routeExposure": "/dealer",
       "state": "dealerPanel",
-      "activate": true
+      "activate": true,
+      "settings":{
+        "main":{
+          "class":["main-container"]
+        },
+        "header":{
+          "display": true
+        },
+        "asidebar":{
+          "display": false
+        },
+        "container":{
+          "class": []
+        }
+      }
     }
   ]
 }

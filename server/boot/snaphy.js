@@ -292,7 +292,7 @@ module.exports = function(server) {
                     resolve();
                 }
             }else{
-                reject("Path property not found in hook object", hookObj, "for Plugin >", pluginName);
+                reject("Path property not found in hook object in Plugin: " + pluginName +" ", hookObj, "for Plugin >", pluginName);
             }
         });
     };

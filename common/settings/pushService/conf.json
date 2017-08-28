@@ -4,6 +4,10 @@
   "pluginDepedencies": {
 
   },
+  "load":{
+    "root": true,
+    "dealerPanel": false
+  },
   "PUSH_SERVICE_ID": "autobox-snaphy-push-application",
   "USER_ID": "strongloop",
   "APP_NAME": "Autobox",

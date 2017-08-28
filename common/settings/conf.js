@@ -13,10 +13,10 @@ module.exports = (server) => {
   const VALIDATION_PATH = join(__dirname, "../../common/validations");
   const TABLE_PATH = join(__dirname, "../../common/table");
   const SETTING_PATH = join(__dirname, "../../common/settings");
-  
+
 
   //Write all the plugins name whose load priority is to be set...
-  const PLUGIN_PRIORITY = ["cache", "home", "dashboard", "login"];
+  const PLUGIN_PRIORITY = ["cache", "dashboard", "login"];
 
   return {
     NAME,
