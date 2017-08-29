@@ -1,4 +1,22 @@
 <div ng-init="init()">
+   
+    <!-- <div  class="row">
+            <robust-widget-added  ng-cloak class="col-sm-4 col-lg-2"
+            ng-repeat="widget in settings.tabs.dashboard.widgets()"
+            label="{{widget.label}}"
+            model="{{widget.model}}"
+            icon="{{widget.icon}}"
+            prop-obj="widget.propObj"
+            model-values="settings.tabs.dashboard.data"
+            schema="widget.schema">
+            </robust-widget-added>
+    </div> -->
+
+    <div class="col-md-12" style="margin-top:10px;">
+        <span  style="font-weight:bold;font-size:13px;margin-top:2px;">Vehicle Quotation</span>
+        <input class="emailButtonStyle" type="submit" value="SEND EMAIL">
+    </div>
+
     <div ng-if="relationDetail">
         <div  ng-include="'detailView/views/tableView.html'"></div>
     </div>

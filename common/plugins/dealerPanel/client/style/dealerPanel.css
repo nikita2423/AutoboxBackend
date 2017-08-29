@@ -1,1 +1,114 @@
 /*This is a sample css page*/
+
+@font-face {
+    font-family: "tt1018m";
+    src: url(../fonts/tt1018m_.ttf);
+}
+
+#main-container {
+    background-color: #FFFFFF !important;
+    padding-bottom: 30px;
+    padding-top: 35px !important;
+}
+
+.header-navbar-fixed #header-navbar {
+    min-height: 30px;
+    padding: 0px;
+    padding-left: 15px;
+}
+
+.hidden-xs hidden-sm  {
+    display: none;
+}
+
+.companyName {
+    font-family: tt1018m;
+    color: #FFF;
+    opacity: 0.7;
+    font-size: 25px;
+    text-align: center;
+    font-weight: 300;
+}
+
+.header {
+    height: 50px;
+    background-color: #333;
+    width: 100%;
+    color: #FFF;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.textboxStyle {
+    border: none;
+    border-bottom: thin solid #333;
+    background: transparent;
+    margin-top: 20px;
+    width: 90%;
+}
+
+.buttonStyle {
+    border: none;
+    background: #333;
+    float: right;
+    color: white;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 20px;
+}
+
+.emailButtonStyle {
+    border: none;
+    background: #333;
+    float: right;
+    color: #FFF;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 10px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.textAreaStyle {
+    width: 100%;
+    margin-top: 15px;
+    padding: 20px;
+}
+
+.navHeaderText {
+    margin-top: 7px !important;
+}
+
+.inputContainer {
+    margin-top: 50px;
+}
+
+/* Table Style */
+
+@media screen and (min-width: 768px) {
+    .block-content {
+        padding: 0px !important;
+    }
+}
+
+.table>thead:first-child>tr:first-child>th {
+    padding:  0px !important;
+    font-size: 10px !important;
+    text-align: center;
+    background: #F9F9F9;
+}
+
+.select2-container--default .select2-results>.select2-results__options {
+    font-size: 9px;
+}
+
+.select2-container .select2-selection--single {
+    height: 25px;
+}
+
+.content {
+    padding: 0px !important;
+}
+/* Table Style */

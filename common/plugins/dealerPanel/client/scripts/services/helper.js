@@ -15,15 +15,33 @@ angular.module($snaphy.getModuleName())
              */
             var initialize = function(){
                 return $q(function(resolve, reject){
+                    settings.get().config.isUserLoaded = false;
                     if(settings.get()){
                         if(settings.get().config){
                             if(!settings.get().config.employee){
+                                
                                 LoginServices.addUserDetail.get()
                                     .then(function(userObj){
                                         settings.get().config.employee = userObj;
                                         settings.get().config.isUserLoaded = true;
+                                        var workshopService = Database.getDb("dealerPanel", "Workshop");
+                                        return workshopService.findById({id:userObj.workshopId,
+                                            filter:{
+                                                include:{
+                                                    relation: "area",
+                                                    "scope":{
+                                                        fields:["id", "name"]
+                                                    }
+                                                }
+                                            }
+                                        } , function(workshop){
+                                              if(workshop){
+                                                settings.get().config.employee.workshop = workshop;
+                                              }      
+                                        });
                                     })
-                                    .then(function(employee){
+                                    .then(function(workshop){
+                                        
                                         resolve(settings.get().config.employee);
                                     })
                                     .catch(function(err){
@@ -152,14 +170,14 @@ angular.module($snaphy.getModuleName())
                                 return [
                                     //Todays
                                     {
+                                        schema: window.STATIC_DATA.schema.Dealer,
                                         label: "Today New Bookings",
-                                        model: "Booking",
+                                        model: "Dealer",
                                         icon:"si-user-following",
                                         propObj: {
                                             type: "$today",
                                             where:{
-                                                serviceProviderId: settings.config.employee.id,
-                                                status: "processing"
+                                                brandId: settings.config.employee.brandId
                                             },
                                             dateProp: 'added'
                                         }
@@ -174,46 +192,281 @@ angular.module($snaphy.getModuleName())
                             }
                         },
                         monthlyReports: {
+                            load: function () {
+                                changeTab(settings.tabs.monthlyReports);
+                            },
+                            data: {},
+                            title: "Monthly Reports",
                             //Contains the current model detail..
                             relationDetail: {
-                                "relationName": "tourbooking",
-                                "modelName": "Booking",
+                                "relationName": "customerQuoteReport",
+                                "modelName": "CustomerQuote",
                                 "action":{
                                     create: false,
                                     showHeader: false,
                                     delete: false
                                 },
-                                "where":{
-                                    "typeOfPackage": "tourandpackage"
-                                },
                                 beforeSaveHook: [
-                                    //Here data is employee data going to be saved..
+                                    //Here data going to be saved..
                                     function(data){
-                                        //Add brandId to the data object..
-                                        if(data){
-                                            data.serviceProviderId = settings.config.employee.id;
-                                        }
+                                
                                     }
                                 ],
-                                onSchemaFetched:[
+                                /* onSchemaFetched:[
                                     function(schemaObj){
-                                        if(schemaObj){
-                                            if(schemaObj.header){
-                                                removeArrayProperty(schemaObj.header, 'restaurantTime');
-                                            }
-                                        }
                                         //delete schemaObj.header;
                                         return schemaObj;
                                     }
-                                ]
+                                ] */
                             },
-                            load: function () {
-                                changeTab(settings.tabs.tour_booking);
-                            },
-                            data: {},
                             /*validations: fetchValidationObj('appUser'),*/
                             config: {
                                 stateName: "monthlyReports",
+                                stateOptions: {},
+                                active: false
+                            }
+                        },
+                        soldViaAutobox: {
+                            load: function () {
+                                changeTab(settings.tabs.soldViaAutobox);
+                            },
+                            data: {},
+                            title: "Sold via Autobox",
+                            //Contains the current model detail..
+                            relationDetail: {
+                                "relationName": "customerQuoteViaAutobox",
+                                "modelName": "CustomerQuote",
+                                "action":{
+                                    create: false,
+                                    showHeader: false,
+                                    delete: false
+                                },
+                                beforeSaveHook: [
+                                    //Here data going to be saved..
+                                    function(data){
+                                
+                                    }
+                                ],
+                                /* onSchemaFetched:[
+                                    function(schemaObj){
+                                        //delete schemaObj.header;
+                                        return schemaObj;
+                                    }
+                                ] */
+                            },
+                            /*validations: fetchValidationObj('appUser'),*/
+                            config: {
+                                stateName: "soldViaAutobox",
+                                stateOptions: {},
+                                active: false
+                            }
+                        },
+                        customerCallMessage: {
+                            load: function () {
+                                changeTab(settings.tabs.customerCallMessage);
+                            },
+                            data: {},
+                            title: "Customer Call Message",
+                            //Contains the current model detail..
+                            relationDetail: {
+                                "relationName": "customerCallMessage",
+                                "modelName": "CustomerMessage",
+                                "action":{
+                                    create: false,
+                                    showHeader: false,
+                                    delete: false
+                                },
+                                beforeSaveHook: [
+                                    //Here data going to be saved..
+                                    function(data){
+                                
+                                    }
+                                ],
+                                /* onSchemaFetched:[
+                                    function(schemaObj){
+                                        //delete schemaObj.header;
+                                        return schemaObj;
+                                    }
+                                ] */
+                            },
+                            /*validations: fetchValidationObj('appUser'),*/
+                            config: {
+                                stateName: "customerCallMessage",
+                                stateOptions: {},
+                                active: false
+                            }
+                        },
+                        manageWorkshopProfile: {
+                            load: function () {
+                                changeTab(settings.tabs.manageWorkshopProfile);
+                            },
+                            data: {},
+                            title: "Manage Workshop Profile",
+                            //Contains the current model detail..
+                            relationDetail: {
+                                "relationName": "workshop",
+                                "modelName": "Workshop",
+                                "action":{
+                                    create: false,
+                                    showHeader: false,
+                                    delete: false
+                                },
+                                beforeSaveHook: [
+                                    //Here data going to be saved..
+                                    function(data){
+                                
+                                    }
+                                ],
+                                /* onSchemaFetched:[
+                                    function(schemaObj){
+                                        //delete schemaObj.header;
+                                        return schemaObj;
+                                    }
+                                ] */
+                            },
+                            /*validations: fetchValidationObj('appUser'),*/
+                            config: {
+                                stateName: "manageWorkshopProfile",
+                                stateOptions: {},
+                                active: false
+                            }
+                        },
+                        manageShowroomProfile: {
+                            load: function () {
+                                changeTab(settings.tabs.manageShowroomProfile);
+                            },
+                            data: {},
+                            title: "Manage Showroom Profile",
+                            //Contains the current model detail..
+                            relationDetail: {
+                                "relationName": "showroom",
+                                "modelName": "Showroom",
+                                "action":{
+                                    create: false,
+                                    showHeader: false,
+                                    delete: false
+                                },
+                                beforeSaveHook: [
+                                    //Here data going to be saved..
+                                    function(data){
+                                
+                                    }
+                                ],
+                                /* onSchemaFetched:[
+                                    function(schemaObj){
+                                        //delete schemaObj.header;
+                                        return schemaObj;
+                                    }
+                                ] */
+                            },
+                            /*validations: fetchValidationObj('appUser'),*/
+                            config: {
+                                stateName: "manageShowroomProfile",
+                                stateOptions: {},
+                                active: false
+                            }
+                        },
+                        orderGPSTracker: {
+                            load: function () {
+                                changeTab(settings.tabs.orderGPSTracker);
+                            },
+                            data: {},
+                            title: "Manage Showroom Profile",
+                            //Contains the current model detail..
+                            relationDetail: {
+                                "relationName": "orderGpsTracker",
+                                "modelName": "CustomerQuote",
+                                "action":{
+                                    create: false,
+                                    showHeader: false,
+                                    delete: false
+                                },
+                                beforeSaveHook: [
+                                    //Here data going to be saved..
+                                    function(data){
+                                
+                                    }
+                                ],
+                                /* onSchemaFetched:[
+                                    function(schemaObj){
+                                        //delete schemaObj.header;
+                                        return schemaObj;
+                                    }
+                                ] */
+                            },
+                            /*validations: fetchValidationObj('appUser'),*/
+                            config: {
+                                stateName: "orderGPSTracker",
+                                stateOptions: {},
+                                active: false
+                            }
+                        },
+                        orderDashCamera: {
+                            load: function () {
+                                changeTab(settings.tabs.orderDashCamera);
+                            },
+                            data: {},
+                            title: "Manage Showroom Profile",
+                            //Contains the current model detail..
+                            relationDetail: {
+                                "relationName": "orderGpsTracker",
+                                "modelName": "CustomerQuote",
+                                "action":{
+                                    create: false,
+                                    showHeader: false,
+                                    delete: false
+                                },
+                                beforeSaveHook: [
+                                    //Here data going to be saved..
+                                    function(data){
+                                
+                                    }
+                                ],
+                                /* onSchemaFetched:[
+                                    function(schemaObj){
+                                        //delete schemaObj.header;
+                                        return schemaObj;
+                                    }
+                                ] */
+                            },
+                            /*validations: fetchValidationObj('appUser'),*/
+                            config: {
+                                stateName: "orderDashCamera",
+                                stateOptions: {},
+                                active: false
+                            }
+                        },
+                        feedback: {
+                            load: function () {
+                                changeTab(settings.tabs.feedback);
+                            },
+                            data: {},
+                            title: "Feedback and Help",
+                            //Contains the current model detail..
+                            relationDetail: {
+                                "relationName": "feedback",
+                                "modelName": "Feedback",
+                                "action":{
+                                    create: false,
+                                    showHeader: false,
+                                    delete: false
+                                },
+                                beforeSaveHook: [
+                                    //Here data going to be saved..
+                                    function(data){
+                                
+                                    }
+                                ],
+                                /* onSchemaFetched:[
+                                    function(schemaObj){
+                                        //delete schemaObj.header;
+                                        return schemaObj;
+                                    }
+                                ] */
+                            },
+                            /*validations: fetchValidationObj('appUser'),*/
+                            config: {
+                                stateName: "feedback",
                                 stateOptions: {},
                                 active: false
                             }

@@ -55,6 +55,89 @@ angular.module($snaphy.getModuleName())
                     redirectTo: loginState
                 }
             }
-        });
+        })
+
+        //Provide routes in this way..
+        .state('customerCallMessage', {
+            url: '/customerCallMessage',
+            templateUrl: '/dealerPanel/views/customerCallMessage.html',
+            controller: 'dealerPanelControl',
+              //Only allow anonym users here
+              data: {
+                  permissions: {
+                      only: [employeeRole],
+                      redirectTo: loginState
+                  }
+              }
+          })
+          
+          //Provide routes in this way..
+        .state('manageWorkshopProfile', {
+            url: '/manageWorkshopProfile',
+            templateUrl: '/dealerPanel/views/manageProfile.html',
+            controller: 'dealerPanelControl',
+              //Only allow anonym users here
+              data: {
+                  permissions: {
+                      only: [employeeRole],
+                      redirectTo: loginState
+                  }
+              }
+          })
+          
+          //Provide routes in this way..
+        .state('manageShowroomProfile', {
+            url: '/manageShowroomProfile',
+            templateUrl: '/dealerPanel/views/manageProfile.html',
+            controller: 'dealerPanelControl',
+              //Only allow anonym users here
+              data: {
+                  permissions: {
+                      only: [employeeRole],
+                      redirectTo: loginState
+                  }
+              }
+          })
+          
+          //Provide routes in this way..
+        .state('orderGPSTracker', {
+            url: '/orderGPSTracker',
+            templateUrl: '/dealerPanel/views/orderPanel.html',
+            controller: 'dealerPanelControl',
+              //Only allow anonym users here
+              data: {
+                  permissions: {
+                      only: [employeeRole],
+                      redirectTo: loginState
+                  }
+              }
+          })
+          
+          //Provide routes in this way..
+        .state('orderDashCamera', {
+            url: '/orderDashCamera',
+            templateUrl: '/dealerPanel/views/orderPanel.html',
+            controller: 'dealerPanelControl',
+              //Only allow anonym users here
+              data: {
+                  permissions: {
+                      only: [employeeRole],
+                      redirectTo: loginState
+                  }
+              }
+          })
+          
+          .state('feedback', {
+            url: '/feedback',
+            templateUrl: '/dealerPanel/views/feedback.html',
+            controller: 'dealerPanelControl',
+              //Only allow anonym users here
+              data: {
+                  permissions: {
+                      only: [employeeRole],
+                      redirectTo: loginState
+                  }
+              }
+          });
 
     }]); //config

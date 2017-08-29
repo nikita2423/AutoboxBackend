@@ -1,37 +1,42 @@
-<ul>
+<ul style="padding-left:0px;font-size:12px">
 
-  <div class="side-header side-content">
+  <div class="side-header side-content companyName">
     AutoBox
   </div>
   <ul class="nav-main">
     <li>
       <a ng-class="{'active': settings.tabs.dashboard.config.active}" ui-sref="dashboard"><span class="sidebar-mini-hide">Dashboard</span></a>
     </li>
-    <li class="nav-main-heading"><span class="sidebar-mini-hide">Reports</span></li>
+    <li class="nav-main-heading" style="opacity:0.6"><span class="sidebar-mini-hide">Reports</span></li>
     <li>
-      <a ng-class="{'active': settings.tabs.monthlyReports.config.active}" ui-sref="soldViaAutobox"><span class="sidebar-mini-hide">Vehicle Sold via Autobox</span></a>
+      <a ng-class="{'active': settings.tabs.soldViaAutobox.config.active}" ui-sref="soldViaAutobox"><span class="sidebar-mini-hide">Vehicle Sold via Autobox</span></a>
     </li>
     <li>
-      <a ng-class="{'active': settings.tabs.monthlyReports.config.active}" ui-sref="dashboard"><span class="sidebar-mini-hide">Customer Calls/Messages</span></a>
+      <a ng-class="{'active': settings.tabs.customerCallMessage.config.active}" ui-sref="customerCallMessage"><span class="sidebar-mini-hide">Customer Calls/Messages</span></a>
     </li>
     <li>
       <a ng-class="{'active': settings.tabs.monthlyReports.config.active}" ui-sref="monthlyReports"><span class="sidebar-mini-hide">Monthly Reports</span></a>
     </li>
 
-    <li class="nav-main-heading"><span class="sidebar-mini-hide">Profile Management</span></li>
+    <li class="nav-main-heading" style="opacity:0.6"><span class="sidebar-mini-hide">Profile Management</span></li>
     <li>
-      <a href="frontend_home.html"><span class="sidebar-mini-hide">Manage Workshop Profile</a>
+      <a ng-class="{'active': settings.tabs.manageWorkshopProfile.config.active}" ui-sref="manageWorkshopProfile"><span class="sidebar-mini-hide">Manage Workshop Profile</a>
     </li>
     <li>
-      <a href="frontend_home.html"><span class="sidebar-mini-hide">Manage Showroom Profile</span></a>
+      <a ng-class="{'active': settings.tabs.manageShowroomProfile.config.active}" ui-sref="manageShowroomProfile"><span class="sidebar-mini-hide">Manage Showroom Profile</span></a>
     </li>
 
-    <li class="nav-main-heading"><span class="sidebar-mini-hide">Order Management</span></li>
+    <li class="nav-main-heading" style="opacity:0.6"><span class="sidebar-mini-hide">Order Management</span></li>
     <li>
-      <a href="frontend_home.html"><span class="sidebar-mini-hide">Order GPS Tracker</a>
+      <a ng-class="{'active': settings.tabs.orderGPSTracker.config.active}" ui-sref="orderGPSTracker"><span class="sidebar-mini-hide">Order GPS Tracker</a>
     </li>
     <li>
-      <a href="frontend_home.html"><span class="sidebar-mini-hide">Order Dash Camera</span></a>
+      <a ng-class="{'active': settings.tabs.orderDashCamera.config.active}" ui-sref="orderDashCamera"><span class="sidebar-mini-hide">Order Dash Camera</span></a>
+    </li>
+
+    <li class="nav-main-heading" style="opacity:0.6"><span class="sidebar-mini-hide">Feedback</span></li>
+    <li>
+      <a ng-class="{'active': settings.tabs.feedback.config.active}" ui-sref="feedback"><span class="sidebar-mini-hide">Feedback & Help</a>
     </li>
 
   </ul>
