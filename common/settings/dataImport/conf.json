@@ -39,6 +39,210 @@
           ]
         }
       ]
+    },
+    "trim": {
+      "structure": [
+        {
+          "model": "Brand",
+          "properties": [
+            {
+              "sheetColName": "Brand",
+              "modelProperty": "name"
+            }
+          ]
+        },
+        {
+          "model": "CarModel",
+          "properties": [
+            {
+              "sheetColName": "Brand",
+              "modelProperty": "name"
+            }
+          ]
+        },
+        {
+          "model": "Fuel",
+          "properties": [
+            {
+              "sheetColName": "Fuel",
+              "modelProperty": "name"
+            }
+          ]
+        },
+        {
+          "model": "GearBox",
+          "properties": [
+            {
+              "sheetColName": "Gearbox",
+              "modelProperty": "name"
+            }
+          ]
+        },
+        {
+          "model": "Trim",
+          "properties": [
+            {
+              "sheetColName": "Name",
+              "modelProperty": "name"
+            }
+          ]
+        }
+      ]
+    },
+    "Car": {
+      "structure": [
+        {
+          "model": "Brand",
+          "properties": [
+            {
+              "sheetColName": "Brand",
+              "modelProperty": "name"
+            }
+          ]
+        },
+        {
+          "model": "CarModel",
+          "properties":[
+            {
+              "sheetColName": "CarModel",
+              "modelProperty": "name"
+            }
+          ]
+        },
+        {
+          "model": "Fuel",
+          "properties":[
+            {
+              "sheetColName": "Fuel",
+              "modelProperty": "name"
+            }
+          ]
+        },
+        {
+          "model": "GearBox",
+          "properties":[
+            {
+              "sheetColName": "Gearbox",
+              "modelProperty": "name"
+            }
+          ]
+        },
+        {
+          "model": "Trim",
+          "properties": [
+            {
+              "sheetColName": "Trim",
+              "modelProperty": "name"
+            }
+          ]
+        },
+        {
+          "model": "Color",
+          "properties": [
+            {
+              "sheetColName": "Color1",
+              "modelProperty": "name"
+            }
+          ]
+        },
+        {
+          "model": "Color",
+          "properties": [
+            {
+              "sheetColName": "Color2",
+              "modelProperty": "name"
+            }
+          ]
+        },
+        {
+          "model": "Color",
+          "properties": [
+            {
+              "sheetColName": "Color3",
+              "modelProperty": "name"
+            }
+          ]
+        },
+        {
+          "model": "Color",
+          "properties": [
+            {
+              "sheetColName": "Color4",
+              "modelProperty": "name"
+            }
+          ]
+        },
+        {
+          "model": "Color",
+          "properties": [
+            {
+              "sheetColName": "Color5",
+              "modelProperty": "name"
+            }
+          ]
+        },
+        {
+          "model": "Color",
+          "properties": [
+            {
+              "sheetColName": "Color6",
+              "modelProperty": "name"
+            }
+          ]
+        },
+        {
+          "model": "Color",
+          "properties": [
+            {
+              "sheetColName": "Color7",
+              "modelProperty": "name"
+            }
+          ]
+        }
+      ]
+    },
+    "fuel": {
+      "structure":[
+        {
+          "model": "Fuel",
+          "properties": [
+            {
+              "sheetColName": "Name",
+              "modelProperty": "name"
+            }
+          ]
+        }
+      ]
+    },
+    "gearbox": {
+      "structure":[
+        {
+          "model": "GearBox",
+          "properties": [
+            {
+              "sheetColName": "Name",
+              "modelProperty": "name"
+            }
+          ]
+        }
+      ]
+    },
+    "color": {
+      "structure":[
+        {
+          "model": "Color",
+          "properties": [
+            {
+              "sheetColName": "Name",
+              "modelProperty": "name"
+            },
+            {
+              "sheetColName": "ColorCode",
+              "modelProperty": "colorCode"
+            }
+          ]
+        }
+      ]
     }
   }
 }
