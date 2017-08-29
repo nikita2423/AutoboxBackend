@@ -3,6 +3,12 @@
     "name": "db",
     "connector": "memory"
   },
+  "ImportData": {
+    "name": "ImportData",
+    "provider": "filesystem",
+    "root": "/tmp",
+    "connector": "loopback-component-storage"
+  },
   "mongodb": {
     "host": "127.0.0.1",
     "port": 27017,

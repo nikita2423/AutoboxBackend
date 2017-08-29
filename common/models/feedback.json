@@ -76,6 +76,11 @@
         "hide": false,
         "label": "Add Dealer"
       }
+    },
+    "showroom": {
+      "type": "belongsTo",
+      "model": "Showroom",
+      "foreignKey": ""
     }
   },
   "acls": [],
