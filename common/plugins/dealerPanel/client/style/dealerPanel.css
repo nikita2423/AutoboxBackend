@@ -1,1 +1,72 @@
 /*This is a sample css page*/
+
+@font-face {
+    font-family: "tt1018m";
+    src: url(../fonts/tt1018m_.ttf);
+}
+
+#main-container {
+    background-color: #FFFFFF !important;
+    padding-bottom: 30px;
+}
+
+.header-navbar-fixed #header-navbar {
+    min-height: 30px;
+    padding: 0px;
+    padding-left: 15px;
+}
+
+.hidden-xs hidden-sm  {
+    display: none;
+}
+
+.companyName {
+    font-family: tt1018m;
+    color: #FFF;
+    opacity: 0.7;
+    font-size: 25px;
+    text-align: center;
+    font-weight: 300;
+}
+
+.header {
+    height: 50px;
+    background-color: #333;
+    width: 100%;
+    color: #FFF;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.textboxStyle {
+    border: none;
+    border-bottom: thin solid #333;
+    background: transparent;
+    margin-top: 20px;
+    width: 90%;
+}
+
+.buttonStyle {
+    border: none;
+    background: #333;
+    float: right;
+    color: white;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 20px;
+}
+
+.textAreaStyle {
+    width: 100%;
+    margin-top: 15px;
+    padding: 20px;
+}
+
+.navHeaderText {
+    margin-top: 7px !important;
+}
+
+.inputContainer {
+    margin-top: 50px;
+}

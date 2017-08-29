@@ -12,7 +12,7 @@ angular.module($snaphy.getModuleName())
         $rootScope.settings                 = HelperService.settings.get();
         $scope.getActiveTabSettings     = HelperService.getActiveTabSettings;
         $scope.setCurrentState          = HelperService.setCurrentState;
-
+    
 
         $scope.init = function(){
             HelperService.initialize()

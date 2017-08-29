@@ -1,4 +1,16 @@
 <div ng-init="init()">
+   
+    <!-- <div  class="row">
+            <robust-widget-added  ng-cloak class="col-sm-4 col-lg-2"
+            ng-repeat="widget in settings.tabs.dashboard.widgets()"
+            label="{{widget.label}}"
+            model="{{widget.model}}"
+            icon="{{widget.icon}}"
+            prop-obj="widget.propObj"
+            model-values="settings.tabs.dashboard.data"
+            schema="widget.schema">
+            </robust-widget-added>
+    </div> -->
     <div ng-if="relationDetail">
         <div  ng-include="'detailView/views/tableView.html'"></div>
     </div>
