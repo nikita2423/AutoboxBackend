@@ -30,11 +30,7 @@
     "quoteType": {
       "label": "Query",
       "style":{
-        "width": "40px",
-        "text-align": "center",
-        "padding-left":"0px",
-        "padding-right":"0px",
-        "padding": "0px !important"
+        "width": "50px"
       },
       "tag": {
         "q": "label-primary",
@@ -48,6 +44,9 @@
     },
     "customer_firstName": {
       "label": "Customer",
+      "style":{
+        "width": "70px"
+      },
       "search": "text"
     },
     "customer_lastName": {
@@ -61,6 +60,9 @@
     },
     "customer_phoneNumber": {
       "label": "Mobile",
+      "style":{
+        "width": "70px"
+      },
       "search": "text"
     },
     "customer_profilePic": {
@@ -74,22 +76,37 @@
     },
     "vehicleInfo_vehicleModel": {
       "label": "Model",
+      "style":{
+        "width": "70px"
+      },
       "search": "text"
     },
     "vehicleInfo_fuelType": {
-      "label": "Fuel",
+      "label": "Fuel Type",
+      "style":{
+        "width": "70px"
+      },
       "search": "text"
     },
     "vehicleInfo_vehicleTrim": {
       "label": "Trim",
+      "style":{
+        "width": "70px"
+      },
       "search": "text"
     },
     "vehicleInfo_vehicleGearbox": {
       "label": "Gearbox",
+      "style":{
+        "width": "70px"
+      },
       "search": "text"
     },
     "vehicleInfo_vehicleColor":{
       "label": "Color",
+      "style":{
+        "width": "70px"
+      },
       "search": "text"
     },
     "ownershipType": {
@@ -102,7 +119,10 @@
         "individual",
         "corporate"
       ],
-      "label": "Ownership"
+      "label": "Ownership",
+      "style":{
+        "width": "70px"
+      }
     },
     "isOldVehicleTrade": {
       "tag": {
@@ -114,14 +134,21 @@
         "yes",
         "no"
       ],
-      "label": "Trade In"
+      "label": "Trade In",
+      "style":{
+        "width": "70px"
+      }
     },
     "soldViaAutobox": {
       "tag": {
         "yes": "label-primary",
         "no": "label-danger"
       },
+      "style":{
+        "width": "70px"
+      },
       "search": "select",
+      "label" : "Sold via Autobox",
       "options": [
         "yes",
         "no"
@@ -133,6 +160,9 @@
         "no": "label-danger"
       },
       "search": "select",
+      "style":{
+        "width": "70px"
+      },
       "options": [
         "yes",
         "no"
@@ -145,6 +175,9 @@
         "no": "label-danger"
       },
       "search": "select",
+      "style":{
+        "width": "70px"
+      },
       "options": [
         "yes",
         "no"
@@ -153,6 +186,9 @@
     },
     "quoteNumber": {
       "label": "Quote",
+      "style":{
+        "width": "70px"
+      },
       "search": "text"
     },
     "gpsTracker": {
@@ -160,6 +196,10 @@
         "yes": "label-primary",
         "no": "label-danger"
       },
+      "style":{
+        "width": "70px"
+      },
+      "label" : "GPS Tracker",
       "search": "select",
       "options": [
         "yes",
@@ -171,7 +211,11 @@
         "yes": "label-primary",
         "no": "label-danger"
       },
+      "style":{
+        "width": "70px"
+      },
       "search": "select",
+      "label" : "Dash Camera",
       "options": [
         "yes",
         "no"
@@ -182,7 +226,11 @@
         "yes": "label-primary",
         "no": "label-danger"
       },
+      "style":{
+        "width": "70px"
+      },
       "search": "select",
+      "label" : "Test Drive",
       "options": [
         "yes",
         "no"
