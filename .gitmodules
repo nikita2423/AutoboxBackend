@@ -10,9 +10,7 @@
 [submodule "common/plugins/dashboard"]
 	path = common/plugins/dashboard
 	url = https://github.com/snaphy-plugin-2/dashboard-plugin.git
-[submodule "common/plugins/detailView"]
-	path = common/plugins/detailView
-	url = https://github.com/snaphy-plugin-2/detailView.git
+
 [submodule "common/plugins/footer"]
 	path = common/plugins/footer
 	url = https://github.com/snaphy-plugin-2/footer-plugin.git
