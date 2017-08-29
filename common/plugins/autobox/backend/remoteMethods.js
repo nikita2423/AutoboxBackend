@@ -45,6 +45,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         cancelQuoteMethod();
         findAllOfferMethod();
         offerQueryMethod();
+        fetchFeedbackShowroomMethod();
+        fetchSosSettingsMethod();
     };
 
     const findAllBrandMethod = function(){
@@ -847,6 +849,46 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                arg: "offerQueryObj", type: "OfferQuery", root: true
            }
        })
+    };
+
+
+    const fetchFeedbackShowroomMethod = function(){
+        const VehicleDetail = databaseObj.VehicleDetail;
+        VehicleDetail.fetchFeedbackShowroom = fetchFeedbackShowroom;
+        VehicleDetail.remoteMethod("fetchFeedbackShowroom", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                }
+            ],
+            returns: {
+                arg: "showroomList", type: ["VehicleDetail"], root: true
+            }
+        })
+    };
+
+
+    const fetchSosSettingsMethod = function(){
+        const Sos = databaseObj.Sos;
+        Sos.fetchSosSettings = fetchSosSettings;
+        Sos.remoteMethod('fetchSosSettings', {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                }
+            ],
+            returns: {
+                arg: "sosData", type: "Sos", root: true
+            }
+        })
     };
 
 
@@ -2265,7 +2307,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       subject: feedbackObj.subject,
                       message: feedbackObj.message,
                       customerId: userId,
-                      dealerId: feedbackObj.dealerId
+                      showroomId: feedbackObj.showroomId
                   })
 
                       .then(function(feedbackObj){
@@ -2438,6 +2480,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       },
                       {
                           relation: "insurance"
+                      },
+                      {
+                          relation: "showroom"
                       }];
 
                   VehicleDetail.find(filter)
@@ -2688,6 +2733,66 @@ module.exports = function( server, databaseObj, helper, packageObj) {
              }
          }
      };
+
+     const fetchFeedbackShowroom = function(ctx, callback){
+         const request = ctx.req;
+         let showroomList = [];
+         if(request.accessToken){
+             if(request.accessToken.userId){
+                 const customerId = request.accessToken.userId;
+                 const VehicleDetail = databaseObj.VehicleDetail;
+                 VehicleDetail.find({
+                     where: {
+                         customerId : customerId,
+                         vehicleType : "new"
+                     },
+                     include: "showroom"
+                 })
+                     .then(function(vehicleDetailList){
+                         if(vehicleDetailList){
+                             if(vehicleDetailList.length){
+                                 showroomList = _.uniqBy(vehicleDetailList, 'showroomId');
+                             }
+                         }
+                         callback(null, showroomList);
+                     })
+                     .catch(function(error){
+                         callback(error);
+                     })
+             } else{
+                 callback(new Error("User not valid"));
+             }
+         } else{
+             callback(new Error("User not valid"));
+         }
+     };
+
+    const fetchSosSettings = function(ctx, callback){
+        const request = ctx.req;
+        if(request.accessToken){
+            if(request.accessToken.userId){
+                const customerId = request.accessToken.userId;
+                const Sos = databaseObj.Sos;
+                Sos.findOne({
+                    customerId : customerId
+                })
+                    .then(function(sos){
+                        if(sos){
+                            callback(null, sos);
+                        } else{
+                            callback(null, {});
+                        }
+                    })
+                    .catch(function(error){
+                        callback(error);
+                    })
+            } else{
+                callback(new Error("User not valid"));
+            }
+        } else{
+            callback(new Error("User not valid"));
+        }
+    };
 
     return {
         init: init
