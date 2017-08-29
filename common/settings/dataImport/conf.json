@@ -1,0 +1,44 @@
+{
+  "name": "dataImport",
+  "description": "Plugin to import data from excel into database",
+  "routeExposure": "/dataImport",
+  "activate": true,
+  "pluginDependencies": {},
+  "constants":{
+    "sheetColNumber": "sheetColNumber"
+  },
+  "upload":{
+    "containerModel": "ImportData",
+    "fileDataSource": "ImportData"
+  },
+  "worksheet":{
+    "brand":{
+      "structure":[
+        {
+          "model": "Brand",
+          "properties":[
+            {
+              "sheetColName": "Name",
+              "modelProperty":"name",
+              "unique": true
+            }
+          ]
+        }
+      ]
+    },
+    "carmodel": {
+      "structure": [
+        {
+          "model": "CarModel",
+          "properties": [
+            {
+              "sheetColName": "Name",
+              "modelProperty":"name",
+              "unique": true
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -21,6 +21,12 @@
     "keyId": "AKIAJDJMX5CFG443RZBA",
     "maxFileSize": "35485760"
   },
+  "ImportData": {
+    "name": "ImportData",
+    "provider": "filesystem",
+    "root": "/tmp",
+    "connector": "loopback-component-storage"
+  },
   "GoogleEmail": {
     "name": "GoogleEmail",
     "defaultForType": "mail",

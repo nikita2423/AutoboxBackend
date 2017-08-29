@@ -64,6 +64,10 @@
     "dataSource": "mongodb",
     "public": true
   },
+  "ImportData": {
+    "dataSource": "ImportData",
+    "public": true
+  },
   "installation": {
     "dataSource": "mongodb",
     "public": true

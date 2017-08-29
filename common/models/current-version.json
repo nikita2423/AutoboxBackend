@@ -7,7 +7,7 @@
   },
   "properties": {
     "versionCode": {
-      "type": "string",
+      "type": "number",
       "required": true,
       "template": {
         "type": "input",
