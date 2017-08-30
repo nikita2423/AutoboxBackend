@@ -25,7 +25,8 @@
   "tables": {
     "added": {
       "date": true,
-      "search": "date"
+      "search": "date",
+      "display":false
     },
     "quoteType": {
       "label": "Query",
@@ -271,6 +272,36 @@
       "display": false
     },
     "customer_status": {
+      "display": false
+    },
+    "trim_trimNumber" : {
+      "display":false
+    },
+    "trim_status": {
+      "display": false
+    },
+    "trim_added": {
+      "display": false
+    },
+    "trim_name": {
+      "display": false
+    },
+    "vehicleInfo_vehicleType" : {
+      "display":false
+    },
+    "vehicleInfo_vehicleBrand" : {
+      "display":false
+    },
+    "vehicleInfo_quoteType" : {
+      "display":false
+    },
+    "customer_registerStatus": {
+      "display":false
+    },
+    "customer_countryName" : {
+      "display":false
+    },
+    "customer_sosStatus": {
       "display": false
     }
   }

@@ -500,6 +500,8 @@ angular.module($snaphy.getModuleName())
 
             };
 
+            
+
             /**
              * return memoization function..
              * @type {{get, reset}|Function}
