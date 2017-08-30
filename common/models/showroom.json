@@ -238,6 +238,21 @@
         "label": "Add Area"
       }
     },
+    "city": {
+      "type": "belongsTo",
+      "model": "City",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add City",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCity",
+        "hide": false,
+        "label": "Add City"
+      }
+    },
     "brand": {
       "type": "belongsTo",
       "model": "Brand",

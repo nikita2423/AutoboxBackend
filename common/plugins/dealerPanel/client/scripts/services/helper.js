@@ -4,8 +4,8 @@
 (function(){'use strict'})();
 angular.module($snaphy.getModuleName())
 //Define your services here....
-    .factory('HelperService', ['$state', 'LoginServices', '$q', "$timeout", "Database", 'SnaphyTemplate',
-        function($state, LoginServices, $q, $timeout, Database, SnaphyTemplate)
+    .factory('HelperService', ['$state', 'LoginServices', '$q', "$timeout", "Database", 'SnaphyTemplate', 'DetailViewResource',
+        function($state, LoginServices, $q, $timeout, Database, SnaphyTemplate, DetailViewResource)
         {
 
             /**
@@ -279,7 +279,7 @@ angular.module($snaphy.getModuleName())
                                     function(data){
                                 
                                     }
-                                ],
+                                ]
                                 /* onSchemaFetched:[
                                     function(schemaObj){
                                         //delete schemaObj.header;
@@ -384,13 +384,7 @@ angular.module($snaphy.getModuleName())
                                     function(data){
                                 
                                     }
-                                ],
-                                /* onSchemaFetched:[
-                                    function(schemaObj){
-                                        //delete schemaObj.header;
-                                        return schemaObj;
-                                    }
-                                ] */
+                                ]
                             },
                             /*validations: fetchValidationObj('appUser'),*/
                             config: {
@@ -404,34 +398,39 @@ angular.module($snaphy.getModuleName())
                                 changeTab(settings.tabs.manageShowroomProfile);
                             },
                             data: {},
-                            title: "Manage Showroom Profile",
-                            //Contains the current model detail..
+                            form: {},
+                            title: "Showroom Profile",
+                            saveForm: function (formSchema, formData, formModel) {
+                                formModel.brandId = settings.config.employee.brandId;
+                                formModel.areaId = settings.config.employee.areaId;
+                                formModel.cityId = settings.config.employee.cityId;
+                                DetailViewResource.saveForm(formSchema, formData, formModel)
+                                    .then(function (data) {
+
+                                    })
+                                    .catch(function (error) {
+
+                                    });
+                            },
                             relationDetail: {
                                 "relationName": "showroom",
-                                "modelName": "Showroom",
-                                "action":{
-                                    create: false,
-                                    showHeader: false,
-                                    delete: false
-                                },
-                                beforeSaveHook: [
-                                    //Here data going to be saved..
-                                    function(data){
-                                
-                                    }
-                                ],
-                                /* onSchemaFetched:[
-                                    function(schemaObj){
-                                        //delete schemaObj.header;
-                                        return schemaObj;
-                                    }
-                                ] */
+                                "modelName": "Showroom"
                             },
-                            /*validations: fetchValidationObj('appUser'),*/
+                            getShowroomData: getShowroomData,
+                            schema: window.STATIC_DATA.schema.Showroom,
+                            validations: {
+                                rules:{
+
+                                },
+                                messages:{
+
+                                }
+                            },
                             config: {
                                 stateName: "manageShowroomProfile",
                                 stateOptions: {},
-                                active: false
+                                active: false,
+                                tableId: "ShowRoomForm"
                             }
                         },
                         orderGPSTracker: {
@@ -454,13 +453,7 @@ angular.module($snaphy.getModuleName())
                                     function(data){
                                 
                                     }
-                                ],
-                                /* onSchemaFetched:[
-                                    function(schemaObj){
-                                        //delete schemaObj.header;
-                                        return schemaObj;
-                                    }
-                                ] */
+                                ]
                             },
                             /*validations: fetchValidationObj('appUser'),*/
                             config: {
@@ -542,6 +535,29 @@ angular.module($snaphy.getModuleName())
                     }
                 };
                 return settings;
+            };
+
+
+            /**
+             * Get showroom data on start..
+             * @param user
+             * @return {*}
+             */
+            var getShowroomData = function (user) {
+                return $q(function (resolve, reject) {
+                    var showroomService = Database.getDb("dealerPanel", "Showroom");
+                    showroomService.findOne({
+                        brandId: user.brandId,
+                        areaId: user.areaId,
+                        cityId: user.cityId
+                    }, function (data) {
+                        //Copy data..
+                        angular.copy(data, settings.get().tabs.manageShowroomProfile.data);
+                        resolve(data);
+                    }, function (error) {
+                        reject(error);
+                    });
+                });
             };
 
 
