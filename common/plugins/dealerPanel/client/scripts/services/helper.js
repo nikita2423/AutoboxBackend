@@ -41,7 +41,6 @@ angular.module($snaphy.getModuleName())
                                         });
                                     })
                                     .then(function(workshop){
-                                        
                                         resolve(settings.get().config.employee);
                                     })
                                     .catch(function(err){
