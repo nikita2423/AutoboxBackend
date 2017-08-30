@@ -168,16 +168,84 @@ angular.module($snaphy.getModuleName())
                             //List of widgets..
                             widgets: function(){
                                 return [
-                                    //Todays
+                                    //All Time
                                     {
-                                        schema: window.STATIC_DATA.schema.Dealer,
-                                        label: "Today New Bookings",
-                                        model: "Dealer",
+                                        label: "Total quote requested",
+                                        model: "CustomerQuote",
                                         icon:"si-user-following",
                                         propObj: {
-                                            type: "$today",
+                                            type: "$allTime",
                                             where:{
-                                                brandId: settings.config.employee.brandId
+                                                "cityId": "$user.cityId",
+                                                "brandId": "$user.brandId"
+                                            },
+                                            dateProp: 'added'
+                                        }
+                                    },
+                                    {
+                                        label: "Total quote replied",
+                                        model: "QuoteReply",
+                                        icon:"si-user-following",
+                                        propObj: {
+                                            type: "$allTime",
+                                            where:{
+                                                "dealerId": "$user.id"
+                                            },
+                                            dateProp: 'added'
+                                        }
+                                    },
+                                    {
+                                        label: "Total Sold Via Autobox",
+                                        model: "CustomerQuote",
+                                        icon:"si-user-following",
+                                        propObj: {
+                                            type: "$allTime",
+                                            where:{
+                                                "cityId": "$user.cityId",
+                                                "brandId": "$user.brandId",
+                                                "soldViaAutobox": "yes"
+                                            },
+                                            dateProp: 'added'
+                                        }
+                                    },
+                                    {
+                                        label: "Total GPS Tracker",
+                                        model: "CustomerQuote",
+                                        icon:"si-user-following",
+                                        propObj: {
+                                            type: "$allTime",
+                                            where:{
+                                                "cityId": "$user.cityId",
+                                                "brandId": "$user.brandId",
+                                                "gpsTracker": "yes"
+                                            },
+                                            dateProp: 'added'
+                                        }
+                                    },
+                                    {
+                                        label: "Total Dash Camera",
+                                        model: "CustomerQuote",
+                                        icon:"si-user-following",
+                                        propObj: {
+                                            type: "$allTime",
+                                            where:{
+                                                "cityId": "$user.cityId",
+                                                "brandId": "$user.brandId",
+                                                "dashCamera": "yes"
+                                            },
+                                            dateProp: 'added'
+                                        }
+                                    },
+                                    {
+                                        label: "Total Test Drive",
+                                        model: "CustomerQuote",
+                                        icon:"si-user-following",
+                                        propObj: {
+                                            type: "$allTime",
+                                            where:{
+                                                "cityId": "$user.cityId",
+                                                "brandId": "$user.brandId",
+                                                "testDrive": "yes"
                                             },
                                             dateProp: 'added'
                                         }
