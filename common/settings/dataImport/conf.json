@@ -243,6 +243,33 @@
           ]
         }
       ]
+    },
+    "breakdowncategory": {
+      "structure":[
+        {
+          "model": "BreakdownCategory",
+          "properties":[
+            {
+              "sheetColName": "Name",
+              "modelProperty": "name"
+            }
+          ]
+        }
+      ]
+    },
+    "city": {
+      "structure": [
+        {
+          "model":"City",
+          "properties":[
+            {
+              "sheetColName": "Name",
+              "modelProperty": "name"
+            }
+          ]
+        }
+      ]
     }
+
   }
 }
