@@ -92,7 +92,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         .then(function () {
                            var name = customerQuoteObj.customer.firstName + " " + customerQuoteObj.customer.lastName;
                            var type = "CustomerQuote";
-                           var title = "Your Quote for model " + customerQuoteObj.vehicleInfo.vehicleModel + " has been forwarded to dealers. You can view all the quotes with corresponding dealers on My Quotes Section";
+                           var title = "";
+                           if(customerQuoteObj.quoteType === "q"){
+                               title = "Your Quote for model " + customerQuoteObj.vehicleInfo.vehicleModel + " has been forwarded to dealers. You can view all the quotes with corresponding dealers on My Quotes Section";
+                           } else if(customerQuoteObj.quoteType === "t"){
+                               title = "Your Test Drive from " + customerQuoteObj.vehicleInfo.vehicleModel + " has been forwarded to the nearest authorised dealership";
+                           }
                            var id = customerQuoteObj.id;
                            var from = packageObj.companyName;
                            var message = quoteNotificationFormat(name, type, title, id);
@@ -105,8 +110,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                    }
                                });
                            }
-
-
                         })
                         .catch(function(error){
                             console.log(error);

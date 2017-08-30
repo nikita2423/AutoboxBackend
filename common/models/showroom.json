@@ -51,7 +51,7 @@
     },
     "contactNumber": {
       "type": "string",
-      "required": true,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -64,7 +64,7 @@
     },
     "email": {
       "type": "string",
-      "required": true,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -72,6 +72,19 @@
           "priority": 3,
           "label": "Email",
           "id": "email"
+        }
+      }
+    },
+    "generalManagerEmail": {
+      "type": "string",
+      "required": false,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "email",
+          "priority": 3,
+          "label": "GM Email",
+          "id": "gmemail"
         }
       }
     },
@@ -193,7 +206,7 @@
     },
     "showroomNumber": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "added": {
       "type": "date",

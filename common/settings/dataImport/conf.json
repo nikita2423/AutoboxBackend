@@ -269,7 +269,272 @@
           ]
         }
       ]
+    },
+    "breakdown": {
+      "structure": [
+        {
+          "model": "BreakdownCategory",
+          "properties":[
+            {
+              "sheetColName": "Breakdown Category",
+              "modelProperty": "name"
+            }
+          ]
+        },
+        {
+          "model": "Breakdown",
+          "properties": [
+            {
+              "sheetColName": "Name",
+              "modelProperty": "name"
+            },
+            {
+              "sheetColName": "Contact Number",
+              "modelProperty": "contactNumber"
+            },
+            {
+              "sheetColName": "Latitude",
+              "modelProperty": "latitude"
+            },
+            {
+              "sheetColName": "Longitude",
+              "modelProperty": "longitude"
+            }
+          ]
+        },
+        {
+          "model": "City",
+          "properties": [
+            {
+              "sheetColName": "City",
+              "modelProperty": "name"
+            }
+          ]
+        }
+      ]
+    },
+    "emergencycategory": {
+      "structure": [
+        {
+          "model": "EmergencyCategory",
+          "properties": [
+            {
+              "sheetColName": "Name",
+              "modelProperty": "name"
+            }
+          ]
+        }
+      ]
+    },
+    "emergency": {
+      "structure": [
+        {
+          "model": "EmergencyCategory",
+          "properties": [
+            {
+              "sheetColName": "Emergency Category",
+              "modelProperty": "name"
+            }
+          ]
+        },
+        {
+          "model": "Emergency",
+          "properties": [
+            {
+              "sheetColName": "Name",
+              "modelProperty": "name"
+            },
+            {
+              "sheetColName": "ContactNo",
+              "modelProperty": "contactNumber"
+            },
+            {
+              "sheetColName": "Latitude",
+              "modelProperty": "latitude"
+            },
+            {
+              "sheetColName": "Longitude",
+              "modelProperty": "longitude"
+            }
+          ]
+        },
+        {
+          "model": "City",
+          "properties": [
+            {
+              "sheetColName": "City",
+              "modelProperty": "name"
+            }
+          ]
+        }
+      ]
+    },
+    "Service Type Category": {
+      "structure": [
+        {
+          "model": "ServiceType",
+          "properties": [
+            {
+              "sheetColName": "Name",
+              "modelProperty": "name"
+            }
+          ]
+        }
+      ]
+    },
+    "area": {
+      "structure": [
+        {
+          "model": "City",
+          "properties": [
+            {
+              "sheetColName": "City",
+              "modelProperty": "name"
+            }
+          ]
+        },
+        {
+          "model": "Area",
+          "properties": [
+            {
+              "sheetColName": "Area Name",
+              "modelProperty": "name"
+            },
+            {
+              "sheetColName": "Pincode",
+              "modelProperty": "pincode"
+            }
+          ]
+        }
+      ]
+    },
+    "workshop": {
+      "structure": [
+        {
+          "model":"Workshop",
+          "properties": [
+            {
+              "sheetColName": "Dealer Workshop Name",
+              "modelProperty": "dealershipName"
+            },
+            {
+              "sheetColName": "Service Manager Name",
+              "modelProperty": "consultantName"
+            },
+            {
+              "sheetColName": "ContactNo",
+              "modelProperty": "contactNumber"
+            },
+            {
+              "sheetColName": "ContactNo",
+              "modelProperty": "contactNumber"
+            },
+            {
+              "sheetColName": "Email",
+              "modelProperty": "email"
+            },
+            {
+              "sheetColName": "Latitude",
+              "modelProperty": "latitude"
+            },
+            {
+              "sheetColName": "Longitude",
+              "modelProperty": "longitude"
+            },
+            {
+              "sheetColName": "Address",
+              "modelProperty": "address"
+            },
+            {
+              "sheetColName": "Landline",
+              "modelProperty": "landline"
+            },
+            {
+              "sheetColName": "Landline",
+              "modelProperty": "landline"
+            },
+            {
+              "sheetColName": "Open Time",
+              "modelProperty": "openTime"
+            },
+            {
+              "sheetColName": "Close Time",
+              "modelProperty": "closeTime"
+            }
+          ]
+        },
+        {
+          "model": "Area",
+          "properties": [
+            {
+              "sheetColName": "Area",
+              "modelProperty": "name"
+            }
+          ]
+        }
+      ]
+    },
+    "showroom": {
+      "structure": [
+        {
+          "model": "Showroom",
+          "properties": [
+            {
+              "sheetColName": "Showroom Name",
+              "modelProperty": "name"
+            },
+            {
+              "sheetColName": "Sales Consultant Name",
+              "modelProperty": "salesConsultantName"
+            },
+            {
+              "sheetColName": "Contact No",
+              "modelProperty": "contactNumber"
+            },
+            {
+              "sheetColName": "Contact No",
+              "modelProperty": "contactNumber"
+            },
+            {
+              "sheetColName": "GM Email",
+              "modelProperty": "generalManagerEmail"
+            },
+            {
+              "sheetColName": "Email",
+              "modelProperty": "email"
+            },
+            {
+              "sheetColName": "Latitude",
+              "modelProperty": "latitude"
+            },
+            {
+              "sheetColName": "Longitude",
+              "modelProperty": "longitude"
+            },
+            {
+              "sheetColName": "Address",
+              "modelProperty": "address"
+            },
+            {
+              "sheetColName": "Open Time",
+              "modelProperty": "openingTime"
+            },
+            {
+              "sheetColName": "Closed Time",
+              "modelProperty": "closingTime"
+            }
+          ]
+        },
+        {
+          "model": "Area",
+          "properties": [
+            {
+              "sheetColName": "Area",
+              "modelProperty": "name"
+            }
+          ]
+        }
+      ]
     }
-
   }
 }
