@@ -1,4 +1,13 @@
 {
+  "box":{
+    "name":{
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    }
+  },
   "widgets": [
     {
       "label": "Showrooms",

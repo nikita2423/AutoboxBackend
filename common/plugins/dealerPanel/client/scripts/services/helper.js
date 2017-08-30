@@ -4,8 +4,8 @@
 (function(){'use strict'})();
 angular.module($snaphy.getModuleName())
 //Define your services here....
-    .factory('HelperService', ['$state', 'LoginServices', '$q', "$timeout", "Database", 'SnaphyTemplate', 'DetailViewResource',
-        function($state, LoginServices, $q, $timeout, Database, SnaphyTemplate, DetailViewResource)
+    .factory('HelperService', ['$state', 'LoginServices', '$q', "$timeout", "Database", 'SnaphyTemplate', 'DetailViewResource', "$rootScope",
+        function($state, LoginServices, $q, $timeout, Database, SnaphyTemplate, DetailViewResource, $rootScope)
         {
 
             /**
@@ -400,6 +400,15 @@ angular.module($snaphy.getModuleName())
                             data: {},
                             form: {},
                             title: "Showroom Profile",
+                            loadArea: function () {
+                                console.log("Getting loaded");
+                                var val = $rootScope.$broadcast("areaLoaded", {
+                                    where: {
+                                        cityId: settings.config.employee.cityId
+                                    }
+                                });
+                                console.log(val);
+                            },
                             saveForm: function (formSchema, formData, formModel) {
                                 formModel.brandId = settings.config.employee.brandId;
                                 formModel.areaId = settings.config.employee.areaId;
@@ -547,9 +556,14 @@ angular.module($snaphy.getModuleName())
                 return $q(function (resolve, reject) {
                     var showroomService = Database.getDb("dealerPanel", "Showroom");
                     showroomService.findOne({
-                        brandId: user.brandId,
-                        areaId: user.areaId,
-                        cityId: user.cityId
+                        filter:{
+                            where:{
+                                brandId: user.brandId,
+                                areaId: user.areaId,
+                                cityId: user.cityId
+                            },
+                            include:["city", "area", "brand"]
+                        }
                     }, function (data) {
                         //Copy data..
                         angular.copy(data, settings.get().tabs.manageShowroomProfile.data);

@@ -3,8 +3,8 @@
 angular.module($snaphy.getModuleName())
 
 //Controller for dealerPanelControl ..
-.controller('dealerPanelControl', ['$scope', 'HelperService', 'LoginServices', 'InitTableService', '$rootScope',
-    function($scope, HelperService, LoginServices, InitTableService, $rootScope) {
+.controller('dealerPanelControl', ['$scope', 'HelperService', 'LoginServices', 'InitTableService', '$rootScope', "$timeout",
+    function($scope, HelperService, LoginServices, InitTableService, $rootScope, $timeout) {
         //Checking if default templating feature is enabled..
         var defaultTemplate = $snaphy.loadSettings('dealerPanel', "defaultTemplate");
         $snaphy.setDefaultTemplate(defaultTemplate);
@@ -34,6 +34,9 @@ angular.module($snaphy.getModuleName())
                         $scope.relationDetail = $rootScope.settings.tabs[$rootScope.settings.config.currentActiveTab].relationDetail;
                     }
                     if($rootScope.settings.config.currentActiveTab === "manageShowroomProfile"){
+                        $timeout(function(){
+                            $scope.getActiveTabSettings().loadArea();
+                        }, 200);
                         return $scope.getActiveTabSettings().getShowroomData(userObj);
                     }
                 })

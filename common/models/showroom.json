@@ -15,7 +15,42 @@
           "type": "text",
           "priority": 3,
           "label": "Showroom Name",
-          "id": "showroomName"
+          "id": "showroomName",
+          "box": "name",
+          "inline": "true",
+          "colSize": "col-md-4"
+        }
+      }
+    },
+    "salesConsultantName": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Sales Consultant Name",
+          "id": "salesConsultantName",
+          "box": "name",
+          "inline": "true",
+          "colSize": "col-md-4"
+        }
+      }
+    },
+    "contactNumber": {
+      "type": "string",
+      "required": false,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Contact Number",
+          "id": "conatct",
+          "box": "name",
+          "inline": "true",
+          "colSize": "col-md-4"
         }
       }
     },
@@ -33,32 +68,6 @@
             "active",
             "inactive"
           ]
-        }
-      }
-    },
-    "salesConsultantName": {
-      "type": "string",
-      "required": true,
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "text",
-          "priority": 3,
-          "label": "Sales Consultant Name",
-          "id": "salesConsultantName"
-        }
-      }
-    },
-    "contactNumber": {
-      "type": "string",
-      "required": false,
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "text",
-          "priority": 3,
-          "label": "Contact Number",
-          "id": "conatct"
         }
       }
     },
@@ -223,21 +232,6 @@
   },
   "validations": [],
   "relations": {
-    "area": {
-      "type": "belongsTo",
-      "model": "Area",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Area",
-        "searchProp": "name",
-        "priority": 2,
-        "search": true,
-        "create": false,
-        "id": "AddArea",
-        "hide": false,
-        "label": "Add Area"
-      }
-    },
     "city": {
       "type": "belongsTo",
       "model": "City",
@@ -245,12 +239,36 @@
       "templateOptions": {
         "btnText": "Add City",
         "searchProp": "name",
+        "type": "smartSelect",
+        "readOnly": true,
+        "inline": true,
+        "colSize": "col-md-4",
+        "loadWhen": "cityAdded",
+        "acl": {
+          "allow": [],
+          "reject": []
+        },
         "priority": 2,
-        "search": true,
-        "create": false,
         "id": "AddCity",
-        "hide": false,
         "label": "Add City"
+      }
+    },
+    "area": {
+      "type": "belongsTo",
+      "model": "Area",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Area",
+        "searchProp": "name",
+        "type": "smartSelect",
+        "readOnly": false,
+        "inline": true,
+        "colSize": "col-md-4",
+        "loadWhen": "areaLoaded",
+        "acl": {
+          "allow": [],
+          "reject": []
+        }
       }
     },
     "brand": {
@@ -260,11 +278,16 @@
       "templateOptions": {
         "btnText": "Add Brand",
         "searchProp": "name",
-        "priority": 2,
-        "search": true,
-        "create": false,
+        "type": "smartSelect",
+        "readOnly": true,
+        "inline": true,
+        "colSize": "col-md-4",
+        "loadWhen": "dummyBrandAdded",
+        "acl": {
+          "allow": [],
+          "reject": []
+        },
         "id": "AddBrand",
-        "hide": false,
         "label": "Add Brand"
       }
     }
