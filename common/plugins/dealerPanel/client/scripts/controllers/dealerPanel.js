@@ -19,6 +19,11 @@ angular.module($snaphy.getModuleName())
             //fetch data from js
         };
 
+        //workshop initializer
+        $scope.initWorkshop = function() {
+            //do something here
+        };
+
         $scope.init = function(){
             var userObj;
             HelperService.initialize()

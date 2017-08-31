@@ -6,7 +6,6 @@
 }
 
 #main-container {
-    background-color: #FFFFFF !important;
     padding-bottom: 30px;
     padding-top: 35px !important;
 }
@@ -125,3 +124,62 @@
     }
 }
 /* Table Style */
+
+/** Widgets **/
+
+a.block {
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-left: 5px;
+}
+
+td.bg-gray-lighter.border-r {
+    display: none !important;
+}
+
+span.h2  {
+    display: none;
+}
+
+.h2.font-w700.ng-binding {
+    font-size: 18px;
+    padding-top: 5px;
+}
+
+.h6.text-muted.text-uppercase.push-5-t.ng-binding {
+    font-size: 10px;
+    text-transform: capitalize;
+    color: black;
+    padding-bottom: 6px;
+}
+
+.col-sm-4.col-lg-2.ng-scope.ng-isolate-scope {
+    max-width: 150px !important;
+    padding: 0px !important;
+}
+
+.row {
+    margin-left: 1px !important;
+}
+
+header > ul > li > button {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+#header-navbar {
+    padding-left: 0px !important;
+}
+
+.nav-header>li {
+    margin-right: 5px !important;
+}
+
+.nav-header > li > div > button {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+
+
+/** Widgets **/

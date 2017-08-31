@@ -1,3 +1,32 @@
-<div ng-init="init();">
-    Manage Profile
+<div ng-init="init(); initWorkshop();">
+    <!--EDIT DATA-->
+    <!-- Fade In Modal -->
+    <div ng-attr-id="{{getActiveTabSettings().config.tableId}}">
+        <div>
+            <div>
+                <div class="block block-themed block-transparent remove-margin-b">
+                    <div class="block-header bg-primary-dark">
+                        <h3  class="block-title" style="text-transform: uppercase;" ng-bind="getActiveTabSettings().title"></h3>
+                    </div>
+                    <div ng-if="getActiveTabSettings().validations" class="block-content block-content-narrow">
+                        <form name="getActiveTabSettings().form" ng-validate="getActiveTabSettings().validations" novalidate  class="form-horizontal">
+                            <!--Add container class and style related to this..-->
+                            <div ng-class="container.class" ng-style="container.style" ng-repeat="container in getActiveTabSettings().schema.container">
+                                <formly-form model="getActiveTabSettings().data" fields="container.schema" ></formly-form>
+                            </div>
+                        </form>
+                    </div><!--block-content-->
+                </div>
+                <!-- ng disabled removed as now ng-disabled="!enableButton(settings.form)" -->
+                <div class="modal-footer">
+                    <button style="color: #fff;" class="btn btn-sm bg-primary-dark"
+                            ng-click="getActiveTabSettings().saveForm(getActiveTabSettings().schema, getActiveTabSettings().form,  getActiveTabSettings().data, true, getActiveTabSettings().config.tableId)">
+                        <i class="fa fa-save"></i>
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--MODAL-->
 </div>

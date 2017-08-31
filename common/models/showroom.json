@@ -13,7 +13,6 @@
         "type": "input",
         "templateOptions": {
           "type": "text",
-          "priority": 3,
           "label": "Showroom Name",
           "id": "showroomName",
           "box": "name",
@@ -29,7 +28,6 @@
         "type": "input",
         "templateOptions": {
           "type": "text",
-          "priority": 3,
           "label": "Sales Consultant Name",
           "id": "salesConsultantName",
           "box": "name",
@@ -45,29 +43,11 @@
         "type": "input",
         "templateOptions": {
           "type": "text",
-          "priority": 3,
           "label": "Contact Number",
           "id": "conatct",
           "box": "name",
           "inline": "true",
           "colSize": "col-md-4"
-        }
-      }
-    },
-    "status": {
-      "type": "string",
-      "required": true,
-      "default": "active",
-      "template": {
-        "type": "selectString",
-        "templateOptions": {
-          "label": "Status of Showroom",
-          "id": "showroomStatus",
-          "priority": 6,
-          "options": [
-            "active",
-            "inactive"
-          ]
         }
       }
     },
@@ -78,22 +58,12 @@
         "type": "input",
         "templateOptions": {
           "type": "email",
-          "priority": 3,
           "label": "Email",
-          "id": "email"
-        }
-      }
-    },
-    "generalManagerEmail": {
-      "type": "string",
-      "required": false,
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "email",
-          "priority": 3,
-          "label": "GM Email",
-          "id": "gmemail"
+          "id": "email",
+          "box": "email_",
+          "inline": "true",
+          "priority":10,
+          "colSize": "col-md-4"
         }
       }
     },
@@ -110,7 +80,11 @@
               "templateOptions": {
                 "type": "text",
                 "label": "Enter latitude",
-                "id": "latitude"
+                "id": "latitude",
+                "box": "email_",
+                "inline": "true",
+                "colSize": "col-md-4",
+                "priority":10
               }
             },
             {
@@ -119,10 +93,49 @@
               "templateOptions": {
                 "type": "text",
                 "label": "Enter longitude",
-                "id": "longitude"
+                "id": "longitude",
+                "box": "email_",
+                "inline": "true",
+                "colSize": "col-md-4",
+                "priority":10
               }
             }
           ]
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "active",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Status of Showroom",
+          "id": "showroomStatus",
+          "box": "status",
+          "inline": "true",
+          "colSize": "col-md-4",
+          "options": [
+            "active",
+            "inactive"
+          ]
+        }
+      }
+    },
+    
+    "generalManagerEmail": {
+      "type": "string",
+      "required": false,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "email",
+          "label": "GM Email",
+          "box": "status",
+          "inline": "true",
+          "colSize": "col-md-4",
+          "id": "gmemail"
         }
       }
     },
@@ -133,54 +146,11 @@
         "type": "input",
         "templateOptions": {
           "type": "text",
-          "priority": 3,
           "label": "Enter address",
-          "id": "Address"
-        }
-      }
-    },
-    "landline": {
-      "type": "string",
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "text",
-          "priority": 3,
-          "label": "Landline",
-          "id": "landline"
-        }
-      }
-    },
-    "image": {
-      "type": "object",
-      "required": true,
-      "template": {
-        "type": "singleFileUpload",
-        "templateOptions": {
-          "label": "Add Showroom Image",
-          "containerName": "AMAZON_CONTAINER_NAME",
-          "containerModel": "Container",
-          "bind": true,
-          "fileDataSource": "Image",
-          "onImageUpdate": {
-            "deletePrevious": true
-          }
-        }
-      }
-    },
-    "managerImage": {
-      "type": "object",
-      "template": {
-        "type": "singleFileUpload",
-        "templateOptions": {
-          "label": "Add Manager Image",
-          "containerName": "AMAZON_CONTAINER_NAME",
-          "containerModel": "Container",
-          "bind": true,
-          "fileDataSource": "Image",
-          "onImageUpdate": {
-            "deletePrevious": true
-          }
+          "id": "address",
+          "box": "address",
+          "inline": "true",
+          "colSize": "col-md-12"
         }
       }
     },
@@ -197,7 +167,10 @@
               "templateOptions": {
                 "type": "time",
                 "label": "Opening Timing",
-                "id": "opening"
+                "id": "opening",
+                "box": "brand",
+                "inline": "true",
+                "colSize": "col-md-2"
               }
             },
             {
@@ -206,16 +179,74 @@
               "templateOptions": {
                 "type": "time",
                 "label": "Closing Timing",
-                "id": "closing"
+                "id": "closing",
+                "box": "brand",
+                "inline": "true",
+                "colSize": "col-md-2"
               }
             }
           ]
         }
       }
     },
+    "landline": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "label": "Landline",
+          "id": "landline",
+          "box": "brand",
+          "inline": "true",
+          "colSize": "col-md-4"
+        }
+      }
+    },
     "showroomNumber": {
       "type": "string",
       "required": false
+    },
+    "image": {
+      "type": "object",
+      "required": true,
+      "template": {
+        "type": "singleFileUpload",
+        "templateOptions": {
+          "label": "Add Showroom Image",
+          "containerName": "AMAZON_CONTAINER_NAME",
+          "containerModel": "Container",
+          "bind": true,
+          "id":"image",
+          "box": "showroomImage",
+          "inline": "true",
+          "colSize": "col-md-12",
+          "fileDataSource": "Image",
+          "onImageUpdate": {
+            "deletePrevious": true
+          }
+        }
+      }
+    },
+    "managerImage": {
+      "type": "object",
+      "template": {
+        "type": "singleFileUpload",
+        "templateOptions": {
+          "label": "Add Manager Image",
+          "containerName": "AMAZON_CONTAINER_NAME",
+          "containerModel": "Container",
+          "bind": true,
+          "id":"managerImage",
+          "box": "profileImage",
+          "inline": "true",
+          "colSize": "col-md-12",
+          "fileDataSource": "Image",
+          "onImageUpdate": {
+            "deletePrevious": true
+          }
+        }
+      }
     },
     "added": {
       "type": "date",
@@ -283,6 +314,7 @@
         "inline": true,
         "colSize": "col-md-4",
         "loadWhen": "dummyBrandAdded",
+        "box": "brand",
         "acl": {
           "allow": [],
           "reject": []
