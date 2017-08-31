@@ -61,6 +61,7 @@ angular.module($snaphy.getModuleName())
                 });
             };
 
+
             //load a tab
             var changeTab = function(Obj){
                 var options;
