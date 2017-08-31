@@ -8,6 +8,7 @@
 #main-container {
     padding-bottom: 30px;
     padding-top: 35px !important;
+    background-color: #FFF !important;
 }
 
 .header-navbar-fixed #header-navbar {
@@ -180,6 +181,8 @@ header > ul > li > button {
     border: none !important;
 }
 
-
-
 /** Widgets **/
+
+.formly-field-singleFileUpload > div {
+    height: 40px !important;
+}
