@@ -3,7 +3,7 @@
  */
 module.exports = (Color, server, helper) =>
 {
-    Color.validatesUniquenessOf('name');
+    //Color.validatesUniquenessOf('name');
     //Color.validatesUniquenessOf('colorCode');
     const {validate} = require("../helper/usefullMethods");
     const {
@@ -26,16 +26,13 @@ module.exports = (Color, server, helper) =>
 
 
         if(instance.name){
-            instance.name = toTitleCase(instance.name.toString().trim());
+            instance.name = instance.name.toString().trim();
             const check = isLength(instance.name, {min: 2, max: 200});
             if(!check){
                 return next(new Error("Color Name cannot exceed more than 200 words"));
             }
         }
 
-        if(!validate(instance, currentInstance, 'colorCode')){
-            return next(new Error("Color Code is required"));
-        }
 
 
         if(instance.status){

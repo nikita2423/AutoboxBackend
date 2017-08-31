@@ -23,7 +23,7 @@ module.exports = (Emergencycategory, server, helper) =>
         }
 
         if(instance.name){
-            instance.name = toTitleCase(instance.name.toString().trim());
+            instance.name =instance.name.toString().trim();
             const check = isLength(instance.name, {min: 3, max: 500});
             if(!check){
                 return next(new Error("Emergency Category Name cannot exceed more than 500 words"));

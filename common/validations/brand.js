@@ -3,7 +3,7 @@
  */
 module.exports = ( Brand, server, helper) =>
 {
-    Brand.validatesUniquenessOf('name');
+    //Brand.validatesUniquenessOf('name');
     Brand.validatesUniquenessOf('brandNumber');
     const {
         isLength,
@@ -25,10 +25,10 @@ module.exports = ( Brand, server, helper) =>
         }
 
         if(instance.name){
-            instance.name = toTitleCase(instance.name.toString().trim());
+            instance.name =instance.name.toString().trim();
             const check = isLength(instance.name, {min: 2, max: 200});
             if(!check){
-                return next(new Error("City Name cannot exceed more than 200 words"));
+                return next(new Error("Brand Name cannot exceed more than 200 words"));
             }
         }
 

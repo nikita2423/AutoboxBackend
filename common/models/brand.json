@@ -21,7 +21,7 @@
     },
     "status": {
       "type": "string",
-      "required": true,
+      "required": false,
       "default": "active",
       "template": {
         "type": "selectString",
@@ -38,16 +38,16 @@
     },
     "trending": {
       "type": "number",
-      "required": true,
+      "required": false,
       "default": 0
     },
     "brandNumber": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "image": {
       "type": "object",
-      "required": true,
+      "required": false,
       "template": {
         "type": "singleFileUpload",
         "templateOptions": {
@@ -64,7 +64,7 @@
     },
     "added": {
       "type": "date",
-      "required": true,
+      "required": false,
       "defaultFn": "now",
       "template": {
         "type": "dummy"

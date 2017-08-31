@@ -3,7 +3,7 @@
  */
 module.exports = (Gearbox, server, helper) =>
 {
-    Gearbox.validatesUniquenessOf('name');
+   // Gearbox.validatesUniquenessOf('name');
     Gearbox.validatesUniquenessOf('gearboxNumber');
     const {
         isLength,
@@ -26,7 +26,7 @@ module.exports = (Gearbox, server, helper) =>
 
 
         if(instance.name){
-            instance.name = toTitleCase(instance.name.toString().trim());
+            instance.name = instance.name.toString().trim();
             const check = isLength(instance.name, {min: 2, max: 200});
             if(!check){
                 return next(new Error("Gearbox Name cannot exceed more than 200 words"));

@@ -3,7 +3,7 @@
  */
 module.exports = (Area, server, helper) =>
 {
-    Area.validatesUniquenessOf('name');
+    //Area.validatesUniquenessOf('name');
     const {
         isLength,
         trim
@@ -32,9 +32,9 @@ module.exports = (Area, server, helper) =>
             return next(new Error("City is required"));
         }
 
-        if(!instance.countryId){
+       /* if(!instance.countryId){
             return next(new Error("Country is required"));
-        }
+        }*/
 
         next();
 

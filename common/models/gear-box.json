@@ -8,7 +8,8 @@
   "properties": {
     "name": {
       "type": "string",
-      "required": true,
+      "required": false,
+      "default": "NA",
       "template": {
         "type": "input",
         "templateOptions": {
@@ -21,7 +22,7 @@
     },
     "status": {
       "type": "string",
-      "required": true,
+      "required": false,
       "default": "active",
       "template": {
         "type": "selectString",
@@ -38,11 +39,11 @@
     },
     "gearboxNumber": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "added": {
       "type": "date",
-      "required": true,
+      "required": false,
       "defaultFn": "now",
       "template": {
         "type": "dummy"

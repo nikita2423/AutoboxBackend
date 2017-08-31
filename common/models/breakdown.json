@@ -21,7 +21,7 @@
     },
     "contactNumber": {
       "type": "string",
-      "required": true,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -34,7 +34,7 @@
     },
     "latlong": {
       "type": "geopoint",
-      "required": true,
+      "required": false,
       "template": {
         "type": "objectValue",
         "templateOptions": {
@@ -63,11 +63,11 @@
     },
     "breakdownNumber": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "added": {
       "type": "date",
-      "required": true,
+      "required": false,
       "defaultFn": "now",
       "template": {
         "type": "dummy"

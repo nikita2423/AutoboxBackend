@@ -3,7 +3,7 @@
  */
 module.exports = (Emergency, server, helper) =>
 {
-    Emergency.validatesUniquenessOf('name');
+    //Emergency.validatesUniquenessOf('name');
     Emergency.validatesUniquenessOf('emergencyNumber');
     const {
         isLength,
@@ -43,9 +43,9 @@ module.exports = (Emergency, server, helper) =>
             return next(new Error("Emergency Category is required"));
         }
 
-        if(!instance.areaId){
+      /*  if(!instance.areaId){
             return next(new Error("Area is required"));
-        }
+        }*/
 
         next();
 

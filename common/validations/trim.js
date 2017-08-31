@@ -3,7 +3,7 @@
  */
 module.exports = (Trim, server, helper) =>
 {
-    Trim.validatesUniquenessOf('name');
+    //Trim.validatesUniquenessOf('name');
     Trim.validatesUniquenessOf('trimNumber');
     const {
         isLength,
@@ -26,8 +26,8 @@ module.exports = (Trim, server, helper) =>
 
 
         if(instance.name){
-            instance.name = toTitleCase(instance.name.toString().trim());
-            const check = isLength(instance.name, {min: 2, max: 200});
+            instance.name = instance.name.toString().trim();
+            const check = isLength(instance.name, {min: 1, max: 200});
             if(!check){
                 return next(new Error("Trim Name cannot exceed more than 200 words"));
             }
