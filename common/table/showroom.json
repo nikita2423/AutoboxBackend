@@ -1,4 +1,68 @@
 {
+  "box":{
+    "name":{
+      "priority":10,
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    }
+  },
+  "email_":{
+    "name":{
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    }
+  },
+  "status":{
+    "name":{
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    }
+  },
+  "address":{
+    "name":{
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    }
+  },
+  "brand":{
+    "name":{
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    }
+  },
+  "profileImage":{
+    "name":{
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    }
+  },
+  "showroomImage":{
+    "name":{
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    }
+  },
   "widgets": [
     {
       "label": "Showrooms",

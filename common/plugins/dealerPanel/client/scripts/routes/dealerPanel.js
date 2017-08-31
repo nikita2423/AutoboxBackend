@@ -88,7 +88,7 @@ angular.module($snaphy.getModuleName())
           //Provide routes in this way..
         .state('manageShowroomProfile', {
             url: '/manageShowroomProfile',
-            templateUrl: '/dealerPanel/views/manageProfile.html',
+            templateUrl: '/dealerPanel/views/showroom.html',
             controller: 'dealerPanelControl',
               //Only allow anonym users here
               data: {

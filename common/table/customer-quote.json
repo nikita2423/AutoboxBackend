@@ -46,7 +46,7 @@
     "customer_firstName": {
       "label": "Customer",
       "style":{
-        "width": "70px"
+        "width": "100px"
       },
       "search": "text"
     },
@@ -62,7 +62,7 @@
     "customer_phoneNumber": {
       "label": "Mobile",
       "style":{
-        "width": "70px"
+        "width": "130px"
       },
       "search": "text"
     },
@@ -85,7 +85,7 @@
     "vehicleInfo_fuelType": {
       "label": "Fuel Type",
       "style":{
-        "width": "70px"
+        "width": "60px"
       },
       "search": "text"
     },
@@ -99,7 +99,7 @@
     "vehicleInfo_vehicleGearbox": {
       "label": "Gearbox",
       "style":{
-        "width": "70px"
+        "width": "80px"
       },
       "search": "text"
     },
@@ -146,7 +146,7 @@
         "no": "label-danger"
       },
       "style":{
-        "width": "70px"
+        "width": "60px"
       },
       "search": "select",
       "label" : "Sold via Autobox",
@@ -162,7 +162,7 @@
       },
       "search": "select",
       "style":{
-        "width": "70px"
+        "width": "60px"
       },
       "options": [
         "yes",
@@ -177,7 +177,7 @@
       },
       "search": "select",
       "style":{
-        "width": "70px"
+        "width": "60px"
       },
       "options": [
         "yes",
@@ -188,7 +188,7 @@
     "quoteNumber": {
       "label": "Quote",
       "style":{
-        "width": "70px"
+        "width": "90px"
       },
       "search": "text"
     },
@@ -198,7 +198,7 @@
         "no": "label-danger"
       },
       "style":{
-        "width": "70px"
+        "width": "60px"
       },
       "label" : "GPS Tracker",
       "search": "select",
@@ -213,7 +213,7 @@
         "no": "label-danger"
       },
       "style":{
-        "width": "70px"
+        "width": "60px"
       },
       "search": "select",
       "label" : "Dash Camera",
@@ -228,7 +228,7 @@
         "no": "label-danger"
       },
       "style":{
-        "width": "70px"
+        "width": "60px"
       },
       "search": "select",
       "label" : "Test Drive",

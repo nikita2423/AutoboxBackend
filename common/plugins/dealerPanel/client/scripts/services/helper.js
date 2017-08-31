@@ -4,8 +4,8 @@
 (function(){'use strict'})();
 angular.module($snaphy.getModuleName())
 //Define your services here....
-    .factory('HelperService', ['$state', 'LoginServices', '$q', "$timeout", "Database", 'SnaphyTemplate',
-        function($state, LoginServices, $q, $timeout, Database, SnaphyTemplate)
+    .factory('HelperService', ['$state', 'LoginServices', '$q', "$timeout", "Database", 'SnaphyTemplate', 'DetailViewResource', "$rootScope",
+        function($state, LoginServices, $q, $timeout, Database, SnaphyTemplate, DetailViewResource, $rootScope)
         {
 
             /**
@@ -41,7 +41,6 @@ angular.module($snaphy.getModuleName())
                                         });
                                     })
                                     .then(function(workshop){
-                                        
                                         resolve(settings.get().config.employee);
                                     })
                                     .catch(function(err){
@@ -61,6 +60,7 @@ angular.module($snaphy.getModuleName())
                     }
                 });
             };
+
 
             //load a tab
             var changeTab = function(Obj){
@@ -153,31 +153,88 @@ angular.module($snaphy.getModuleName())
 
                                     }
                                 ]
-                                /*onSchemaFetched:[
-                                    function(schemaObj){
-                                        if(schemaObj){
-                                            if(schemaObj.header){
-                                                removeArrayProperty(schemaObj.header, 'restaurantTime');
-                                            }
-                                        }
-                                        //delete schemaObj.header;
-                                        return schemaObj;
-                                    }
-                                ]*/
                             },
                             //List of widgets..
                             widgets: function(){
                                 return [
-                                    //Todays
+                                    //All Time
                                     {
-                                        schema: window.STATIC_DATA.schema.Dealer,
-                                        label: "Today New Bookings",
-                                        model: "Dealer",
+                                        label: "Total quote requested",
+                                        model: "CustomerQuote",
                                         icon:"si-user-following",
                                         propObj: {
-                                            type: "$today",
+                                            type: "$allTime",
                                             where:{
-                                                brandId: settings.config.employee.brandId
+                                                "cityId": "$user.cityId",
+                                                "brandId": "$user.brandId"
+                                            },
+                                            dateProp: 'added'
+                                        }
+                                    },
+                                    {
+                                        label: "Total quote replied",
+                                        model: "QuoteReply",
+                                        icon:"si-user-following",
+                                        propObj: {
+                                            type: "$allTime",
+                                            where:{
+                                                "dealerId": "$user.id"
+                                            },
+                                            dateProp: 'added'
+                                        }
+                                    },
+                                    {
+                                        label: "Total Sold Via Autobox",
+                                        model: "CustomerQuote",
+                                        icon:"si-user-following",
+                                        propObj: {
+                                            type: "$allTime",
+                                            where:{
+                                                "cityId": "$user.cityId",
+                                                "brandId": "$user.brandId",
+                                                "soldViaAutobox": "yes"
+                                            },
+                                            dateProp: 'added'
+                                        }
+                                    },
+                                    {
+                                        label: "Total GPS Tracker",
+                                        model: "CustomerQuote",
+                                        icon:"si-user-following",
+                                        propObj: {
+                                            type: "$allTime",
+                                            where:{
+                                                "cityId": "$user.cityId",
+                                                "brandId": "$user.brandId",
+                                                "gpsTracker": "yes"
+                                            },
+                                            dateProp: 'added'
+                                        }
+                                    },
+                                    {
+                                        label: "Total Dash Camera",
+                                        model: "CustomerQuote",
+                                        icon:"si-user-following",
+                                        propObj: {
+                                            type: "$allTime",
+                                            where:{
+                                                "cityId": "$user.cityId",
+                                                "brandId": "$user.brandId",
+                                                "dashCamera": "yes"
+                                            },
+                                            dateProp: 'added'
+                                        }
+                                    },
+                                    {
+                                        label: "Total Test Drive",
+                                        model: "CustomerQuote",
+                                        icon:"si-user-following",
+                                        propObj: {
+                                            type: "$allTime",
+                                            where:{
+                                                "cityId": "$user.cityId",
+                                                "brandId": "$user.brandId",
+                                                "testDrive": "yes"
                                             },
                                             dateProp: 'added'
                                         }
@@ -211,14 +268,8 @@ angular.module($snaphy.getModuleName())
                                     function(data){
                                 
                                     }
-                                ],
-                                /* onSchemaFetched:[
-                                    function(schemaObj){
-                                        //delete schemaObj.header;
-                                        return schemaObj;
-                                    }
-                                ] */
-                            },
+                                ]
+                             },
                             /*validations: fetchValidationObj('appUser'),*/
                             config: {
                                 stateName: "monthlyReports",
@@ -247,12 +298,6 @@ angular.module($snaphy.getModuleName())
                                 
                                     }
                                 ],
-                                /* onSchemaFetched:[
-                                    function(schemaObj){
-                                        //delete schemaObj.header;
-                                        return schemaObj;
-                                    }
-                                ] */
                             },
                             /*validations: fetchValidationObj('appUser'),*/
                             config: {
@@ -282,12 +327,6 @@ angular.module($snaphy.getModuleName())
                                 
                                     }
                                 ],
-                                /* onSchemaFetched:[
-                                    function(schemaObj){
-                                        //delete schemaObj.header;
-                                        return schemaObj;
-                                    }
-                                ] */
                             },
                             /*validations: fetchValidationObj('appUser'),*/
                             config: {
@@ -301,34 +340,155 @@ angular.module($snaphy.getModuleName())
                                 changeTab(settings.tabs.manageWorkshopProfile);
                             },
                             data: {},
-                            title: "Manage Workshop Profile",
+                            form: {},
+                            title: "Workshop Profile",
+                            loadArea: function () {
+                                console.log("Getting loaded");
+                                var val = $rootScope.$broadcast("areaLoaded", {
+                                    where: {
+                                        cityId: settings.config.employee.cityId
+                                    }
+                                });
+                                console.log(val);
+                            },
                             //Contains the current model detail..
                             relationDetail: {
                                 "relationName": "workshop",
                                 "modelName": "Workshop",
-                                "action":{
-                                    create: false,
-                                    showHeader: false,
-                                    delete: false
-                                },
                                 beforeSaveHook: [
                                     //Here data going to be saved..
                                     function(data){
                                 
                                     }
-                                ],
-                                /* onSchemaFetched:[
-                                    function(schemaObj){
-                                        //delete schemaObj.header;
-                                        return schemaObj;
-                                    }
-                                ] */
+                                ]
                             },
-                            /*validations: fetchValidationObj('appUser'),*/
+                            schema : window.STATIC_DATA.schema.Workshop,
+                            saveForm: function (formSchema, formData, formModel) {
+                                formModel.brandId = settings.config.employee.brandId;
+                                formModel.areaId = settings.config.employee.areaId;
+                                formModel.cityId = settings.config.employee.cityId;
+                                DetailViewResource.saveForm(formSchema, formData, formModel)
+                                    .then(function (data) {
+
+                                    })
+                                    .catch(function (error) {
+
+                                    });
+                            },
+                            getWorkshopData : getWorkshopData,
+                            validations: {
+                                rules : {
+                                    "dealershipName": {
+                                        "required": true,
+                                        "minlength": "2",
+                                        "maxlength": "30"
+                                      },
+                                      "consultantName": {
+                                        "required": true,
+                                        "minlength": "2",
+                                        "maxlength": "30"
+                                      },
+                                      "contact": {
+                                        "required": true,
+                                        "valueNotEquals": ""
+                                      },
+                                      "email": {
+                                        "required": true,
+                                        "email":true
+                                      },
+                                      "latitude": {
+                                        "required": true,
+                                        "valueNotEquals": ""
+                                      },
+                                      "longitude": {
+                                        "required": true,
+                                        "valueNotEquals": ""
+                                      },
+                                      "workshopStatus": {
+                                        "required": true,
+                                        "valueNotEquals": ""
+                                      },
+                                      "gmemail": {
+                                        "required": true,
+                                        "email":true
+                                      },
+                                      "address": {
+                                        "required": true,
+                                        "minlength": "2",
+                                        "maxlength": "50"
+                                      },
+                                      "opening": {
+                                        "required": true,
+                                        "valueNotEquals": ""
+                                      },
+                                      "closing": {
+                                        "required": true,
+                                        "valueNotEquals": ""
+                                      },
+                                      "area": {
+                                          "required": true,
+                                          "valueNotEquals":""
+                                      }
+                                },
+                                messages: {
+                                    "dealershipName": {
+                                        "required": "Showroom name is required",
+                                        "minlength": "Length should be atleast 2",
+                                        "maxlength": "Length can't exceed 30"
+                                      },
+                                    "consultantName": {
+                                        "required": "Consultant name is required",
+                                        "minlength": "Length should be atleast 2",
+                                        "maxlength": "Length can't exceed 30"
+                                      },
+                                      "contact": {
+                                        "required": "Phone Number is required",
+                                        "valueNotEquals": "Enter your phone Number"
+                                      },
+                                      "email": {
+                                        "required": "Email is required",
+                                        "email": "Email must be valid."
+                                      },
+                                      "latitude": {
+                                        "required": "Latitude is required",
+                                        "valueNotEquals": "Enter correct latitude of showroom"
+                                      }, 
+                                      "longitude": {
+                                        "required": "Longitude is required",
+                                        "valueNotEquals": "Enter correct langitude of showroom"
+                                      },
+                                      "workshopStatus": {
+                                        "required": "Status is required",
+                                        "valueNotEquals": "Status must be one of the value"
+                                      },
+                                      "gmemail": {
+                                        "required": "Emails is required",
+                                        "valueNotEquals": "Email must be valid"
+                                      },
+                                      "address": {
+                                        "required": "Address is required",
+                                        "minlength": "Length should be atleast 2",
+                                        "maxlength": "Length can't exceed 50"
+                                      },
+                                      "opening": {
+                                        "required": "Showroom opening time is required",
+                                        "valueNotEquals": "Enter showroom opening time"
+                                      },
+                                      "closing": {
+                                        "required": "Showroom closing time is required",
+                                        "valueNotEquals": "Enter showroom closing time"
+                                      },
+                                      "area": {
+                                        "required": "Area is required",
+                                        "valueNotEquals": "Area should one of the selected values"
+                                      }
+                                }
+                            },
                             config: {
                                 stateName: "manageWorkshopProfile",
                                 stateOptions: {},
-                                active: false
+                                active: false,
+                                tableId : "WorkshopForm"
                             }
                         },
                         manageShowroomProfile: {
@@ -336,34 +496,148 @@ angular.module($snaphy.getModuleName())
                                 changeTab(settings.tabs.manageShowroomProfile);
                             },
                             data: {},
-                            title: "Manage Showroom Profile",
-                            //Contains the current model detail..
+                            form: {},
+                            title: "Showroom Profile",
+                            loadArea: function () {
+                                console.log("Getting loaded");
+                                var val = $rootScope.$broadcast("areaLoaded", {
+                                    where: {
+                                        cityId: settings.config.employee.cityId
+                                    }
+                                });
+                                console.log(val);
+                            },
+                            saveForm: function (formSchema, formData, formModel) {
+                                formModel.brandId = settings.config.employee.brandId;
+                                formModel.areaId = settings.config.employee.areaId;
+                                formModel.cityId = settings.config.employee.cityId;
+                                DetailViewResource.saveForm(formSchema, formData, formModel)
+                                    .then(function (data) {
+
+                                    })
+                                    .catch(function (error) {
+
+                                    });
+                            },
                             relationDetail: {
                                 "relationName": "showroom",
-                                "modelName": "Showroom",
-                                "action":{
-                                    create: false,
-                                    showHeader: false,
-                                    delete: false
-                                },
-                                beforeSaveHook: [
-                                    //Here data going to be saved..
-                                    function(data){
-                                
-                                    }
-                                ],
-                                /* onSchemaFetched:[
-                                    function(schemaObj){
-                                        //delete schemaObj.header;
-                                        return schemaObj;
-                                    }
-                                ] */
+                                "modelName": "Showroom"
                             },
-                            /*validations: fetchValidationObj('appUser'),*/
+                            getShowroomData: getShowroomData,
+                            schema: window.STATIC_DATA.schema.Showroom,
+                            validations: {
+                                rules : {
+                                    "showroomName": {
+                                        "required": true,
+                                        "minlength": "2",
+                                        "maxlength": "30"
+                                      },
+                                      "salesConsultantName": {
+                                        "required": true,
+                                        "minlength": "2",
+                                        "maxlength": "30"
+                                      },
+                                      "conatct": {
+                                        "required": true,
+                                        "valueNotEquals": ""
+                                      },
+                                      "email": {
+                                        "required": true,
+                                        "email":true
+                                      },
+                                      "latitude": {
+                                        "required": true,
+                                        "valueNotEquals": ""
+                                      },
+                                      "longitude": {
+                                        "required": true,
+                                        "valueNotEquals": ""
+                                      },
+                                      "showroomStatus": {
+                                        "required": true,
+                                        "valueNotEquals": ""
+                                      },
+                                      "gmemail": {
+                                        "required": true,
+                                        "email":true
+                                      },
+                                      "address": {
+                                        "required": true,
+                                        "minlength": "2",
+                                        "maxlength": "50"
+                                      },
+                                      "opening": {
+                                        "required": true,
+                                        "valueNotEquals": ""
+                                      },
+                                      "closing": {
+                                        "required": true,
+                                        "valueNotEquals": ""
+                                      },
+                                      "area": {
+                                          "required": true,
+                                          "valueNotEquals":""
+                                      }
+                                },
+                                messages: {
+                                    "showroomName": {
+                                        "required": "Showroom name is required",
+                                        "minlength": "Length should be atleast 2",
+                                        "maxlength": "Length can't exceed 30"
+                                      },
+                                    "salesConsultantName": {
+                                        "required": "Consultant name is required",
+                                        "minlength": "Length should be atleast 2",
+                                        "maxlength": "Length can't exceed 30"
+                                      },
+                                      "conatct": {
+                                        "required": "Phone Number is required",
+                                        "valueNotEquals": "Enter your phone Number"
+                                      },
+                                      "email": {
+                                        "required": "Email is required",
+                                        "email": "Email must be valid."
+                                      },
+                                      "latitude": {
+                                        "required": "Latitude is required",
+                                        "valueNotEquals": "Enter correct latitude of showroom"
+                                      }, 
+                                      "longitude": {
+                                        "required": "Longitude is required",
+                                        "valueNotEquals": "Enter correct langitude of showroom"
+                                      },
+                                      "showroomStatus": {
+                                        "required": "Status is required",
+                                        "valueNotEquals": "Status must be one of the value"
+                                      },
+                                      "gmemail": {
+                                        "required": "Emails is required",
+                                        "valueNotEquals": "Email must be valid"
+                                      },
+                                      "address": {
+                                        "required": "Address is required",
+                                        "minlength": "Length should be atleast 2",
+                                        "maxlength": "Length can't exceed 50"
+                                      },
+                                      "opening": {
+                                        "required": "Showroom opening time is required",
+                                        "valueNotEquals": "Enter showroom opening time"
+                                      },
+                                      "closing": {
+                                        "required": "Showroom closing time is required",
+                                        "valueNotEquals": "Enter showroom closing time"
+                                      },
+                                      "area": {
+                                        "required": "Area is required",
+                                        "valueNotEquals": "Area should one of the selected values"
+                                      }
+                                }
+                            },
                             config: {
                                 stateName: "manageShowroomProfile",
                                 stateOptions: {},
-                                active: false
+                                active: false,
+                                tableId: "ShowRoomForm"
                             }
                         },
                         orderGPSTracker: {
@@ -386,13 +660,7 @@ angular.module($snaphy.getModuleName())
                                     function(data){
                                 
                                     }
-                                ],
-                                /* onSchemaFetched:[
-                                    function(schemaObj){
-                                        //delete schemaObj.header;
-                                        return schemaObj;
-                                    }
-                                ] */
+                                ]
                             },
                             /*validations: fetchValidationObj('appUser'),*/
                             config: {
@@ -422,12 +690,6 @@ angular.module($snaphy.getModuleName())
                                 
                                     }
                                 ],
-                                /* onSchemaFetched:[
-                                    function(schemaObj){
-                                        //delete schemaObj.header;
-                                        return schemaObj;
-                                    }
-                                ] */
                             },
                             /*validations: fetchValidationObj('appUser'),*/
                             config: {
@@ -457,12 +719,6 @@ angular.module($snaphy.getModuleName())
                                 
                                     }
                                 ],
-                                /* onSchemaFetched:[
-                                    function(schemaObj){
-                                        //delete schemaObj.header;
-                                        return schemaObj;
-                                    }
-                                ] */
                             },
                             /*validations: fetchValidationObj('appUser'),*/
                             config: {
@@ -474,6 +730,61 @@ angular.module($snaphy.getModuleName())
                     }
                 };
                 return settings;
+            };
+
+
+            /**
+             * Get showroom data on start..
+             * @param user
+             * @return {*}
+             */
+            var getShowroomData = function (user) {
+                return $q(function (resolve, reject) {
+                    var showroomService = Database.getDb("dealerPanel", "Showroom");
+                    showroomService.findOne({
+                        filter:{
+                            where:{
+                                brandId: user.brandId,
+                                areaId: user.areaId,
+                                cityId: user.cityId
+                            },
+                            include:["city", "area", "brand"]
+                        }
+                    }, function (data) {
+                        //Copy data..
+                        angular.copy(data, settings.get().tabs.manageShowroomProfile.data);
+                        resolve(data);
+                    }, function (error) {
+                        reject(error);
+                    });
+                });
+            };
+
+
+            /**
+             * 
+             * @param {*} 
+             * @param user 
+             */
+            var getWorkshopData = function(user) {
+                return $q(function(resolve, reject) {
+                    var workshopService = Database.getDb("dealerPanel", "Workshop");
+                    workshopService.findOne({
+                        filter : {
+                            where : {
+                                brandId: user.brandId,
+                                areaId: user.areaId,
+                                cityId: user.cityId
+                            },
+                            include: ["city", "area", "brand"]
+                        }
+                    }, function(data) {
+                            angular.copy(data, settings.get().tabs.manageWorkshopProfile.data);
+                            resolve(data);
+                    }, function(error) {
+                            reject(error);
+                    });
+                });
             };
 
 

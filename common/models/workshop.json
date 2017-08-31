@@ -15,7 +15,10 @@
           "type": "text",
           "priority": 3,
           "label": "DealerShip Name",
-          "id": "dealershipName"
+          "id": "dealershipName",
+          "box": "name",
+          "inline": "true",
+          "colSize": "col-md-4"
         }
       }
     },
@@ -29,6 +32,9 @@
           "label": "Status of Workshop",
           "id": "workshopStatus",
           "priority": 6,
+          "box": "name",
+          "inline": "true",
+          "colSize": "col-md-4",
           "options": [
             "active",
             "inactive"
@@ -45,7 +51,10 @@
           "type": "text",
           "priority": 3,
           "label": "Consultant Name",
-          "id": "consultantName"
+          "id": "consultantName",
+          "box": "name",
+          "inline": "true",
+          "colSize": "col-md-4"
         }
       }
     },
@@ -210,6 +219,27 @@
   },
   "validations": [],
   "relations": {
+    "city": {
+      "type": "belongsTo",
+      "model": "City",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add City",
+        "searchProp": "name",
+        "type": "smartSelect",
+        "readOnly": true,
+        "inline": true,
+        "colSize": "col-md-4",
+        "loadWhen": "cityAdded",
+        "acl": {
+          "allow": [],
+          "reject": []
+        },
+        "priority": 2,
+        "id": "AddCity",
+        "label": "Add City"
+      }
+    },
     "area": {
       "type": "belongsTo",
       "model": "Area",
@@ -217,12 +247,13 @@
       "templateOptions": {
         "btnText": "Add Area",
         "searchProp": "name",
-        "priority": 2,
-        "search": true,
-        "create": false,
         "id": "AddArea",
-        "hide": false,
-        "label": "Add Area"
+        "label": "Add Area",
+        "type": "smartSelect",
+        "readOnly": false,
+        "inline": true,
+        "colSize": "col-md-4",
+        "loadWhen": "areaLoaded"
       }
     },
     "brand": {
@@ -233,11 +264,14 @@
         "btnText": "Add Brand",
         "searchProp": "name",
         "priority": 2,
-        "search": true,
-        "create": false,
         "id": "AddBrand",
-        "hide": false,
-        "label": "Add Brand"
+        "label": "Add Brand",
+        "type": "smartSelect",
+        "readOnly": true,
+        "inline": true,
+        "colSize": "col-md-4",
+        "loadWhen": "dummyBrandAdded",
+        "box": "brand"
       }
     }
   },
