@@ -1,16 +1,16 @@
 <div ng-init="init()">
    
-    <!-- <div  class="row">
+     <div  ng-init="widgets = settings.tabs.dashboard.widgets()" class="row">
             <robust-widget-added  ng-cloak class="col-sm-4 col-lg-2"
-            ng-repeat="widget in settings.tabs.dashboard.widgets()"
+            ng-repeat="widget in widgets"
             label="{{widget.label}}"
             model="{{widget.model}}"
             icon="{{widget.icon}}"
             prop-obj="widget.propObj"
-            model-values="settings.tabs.dashboard.data"
-            schema="widget.schema">
+            fetch-locally="widget.fetchLocally"
+            model-values="displayed">
             </robust-widget-added>
-    </div> -->
+    </div>
 
     <div class="col-md-12" style="margin-top:10px;">
         <span  style="font-weight:bold;font-size:13px;margin-top:2px;">Vehicle Quotation</span>

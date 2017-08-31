@@ -2774,7 +2774,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 const customerId = request.accessToken.userId;
                 const Sos = databaseObj.Sos;
                 Sos.findOne({
-                    customerId : customerId
+                    where: {
+                        customerId : customerId
+                    }
                 })
                     .then(function(sos){
                         if(sos){

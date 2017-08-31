@@ -38,7 +38,7 @@
     },
     "consultantName": {
       "type": "string",
-      "required": true,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -51,7 +51,7 @@
     },
     "contactNumber": {
       "type": "string",
-      "required": true,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -64,7 +64,7 @@
     },
     "email": {
       "type": "string",
-      "required": true,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -131,7 +131,7 @@
     },
     "image": {
       "type": "object",
-      "required": true,
+      "required": false,
       "template": {
         "type": "singleFileUpload",
         "templateOptions": {

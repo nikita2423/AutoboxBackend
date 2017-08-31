@@ -14,6 +14,41 @@ module.exports = (Showroom, server, helper) =>
     const _ = require('lodash');
     const STATUS = ["active", "inactive"];
 
+
+    Showroom.observe("after save" ,function (ctx, next) {
+        const instance = ctx.instance || ctx.data;
+
+        if (ctx.isNewInstance) {
+            if (instance.cityId && instance.brandId && instance.areaId) {
+                //Create dealer panel..
+                const Dealer = server.models["Dealer"];
+                Dealer.findOne({
+                    where:{
+                        cityId: instance.cityId,
+                        brandId: instance.brandId,
+                        areaId: instance.areaId
+                    }
+                })
+                    .then(function (dealerObj) {
+                        return dealerObj.updateAttributes({
+                            showroomId: instance.id
+                        });
+                    })
+                    .then(function () {
+                        next();
+                    })
+                    .catch(function (error) {
+                       next(error);
+                    });
+            }else{
+                next();
+            }
+        }else{
+            next();
+        }
+
+    });
+
     Showroom.observe("before save", function(ctx, next){
         const instance = ctx.instance || ctx.data;
         const currentInstance = ctx.currentInstance;
@@ -25,6 +60,7 @@ module.exports = (Showroom, server, helper) =>
         }else{
             instance.updated = new Date();
         }
+
 
 
         if(instance.name){
