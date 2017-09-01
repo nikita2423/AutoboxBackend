@@ -39,6 +39,7 @@
       "display": false
     },
     "country_name": {
+      "display": false,
       "label": "Country",
       "search": "text"
     }

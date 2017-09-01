@@ -176,6 +176,9 @@
         }
       }
     },
+    "currentBrandId": {
+      "type": "string"
+    },
     "added": {
       "type": "date",
       "required": true,

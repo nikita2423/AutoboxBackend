@@ -14,9 +14,10 @@
   "tables": {
      "customer_firstName": {
        "search": "text",
-       "label": "FirstName"
+       "label": "Customer"
      },
     "customer_lastName": {
+      "display": false,
       "search": "text",
       "label": "LastName"
     },
@@ -90,6 +91,9 @@
     "dealer_contact": {
       "display": false
     },
+    "dealer_noOfVehicleSold":{
+      "display": false
+    },
     "customerQuote_ownershipType": {
       "display": false
     },
@@ -124,6 +128,15 @@
       "display": false
     },
     "customer_profilePic": {
+      "display": false
+    },
+    "customer_sosStatus": {
+      "display": false
+    },
+    "customer_registerStatus": {
+      "display": false
+    },
+    "customer_countryName": {
       "display": false
     }
   }

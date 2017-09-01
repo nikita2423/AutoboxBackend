@@ -90,6 +90,9 @@
     },
     "dealer_contact": {
       "display": false
+    },
+    "dealer_noOfVehicleSold": {
+      "display": false
     }
   }
 }

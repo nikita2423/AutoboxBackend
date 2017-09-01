@@ -64,7 +64,7 @@
       "search": "text"
     },
     "brand_status": {
-      "display": "false"
+      "display": false
     },
     "brand_added": {
       "display": false
@@ -80,6 +80,15 @@
       "display": false
     },
     "area_added": {
+      "display": false
+    },
+    "city_added": {
+      "display": false
+    },
+    "city_name": {
+      "display": false
+    },
+    "city_status": {
       "display": false
     }
   }

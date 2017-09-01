@@ -266,7 +266,8 @@
     },
     "city_name": {
       "display": true,
-      "label": "City"
+      "label": "City",
+      "search": "text"
     },
     "city_status": {
       "display": false

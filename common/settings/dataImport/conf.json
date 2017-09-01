@@ -280,7 +280,7 @@
               "modelProperty": "color15"
             }
           ],
-          "beforeSave":["addCarDetailIds","addColorIds"]
+          "beforeSave":["addCarDetailIds"]
         }
       ]
     },
