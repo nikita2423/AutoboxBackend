@@ -1,4 +1,62 @@
 {
+  "box":{
+    "name":{
+      "priority":1,
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    },
+    "email":{
+      "priority":2,
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    },
+    "area":{
+      "priority":3,
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    },
+    "address":{
+      "priority":5,
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    },
+    "brand":{
+      "priority":4,
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    },
+    "image":{
+      "priority":6,
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    },
+    "managerImage":{
+      "priority":7,
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    }
+  },
   "widgets": [
     {
       "label": "Workshops",

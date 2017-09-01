@@ -31,10 +31,10 @@
         "templateOptions": {
           "label": "Status of Workshop",
           "id": "workshopStatus",
-          "priority": 6,
-          "box": "name",
+          "box": "area",
           "inline": "true",
           "colSize": "col-md-4",
+          "priority": 6,
           "options": [
             "active",
             "inactive"
@@ -67,7 +67,10 @@
           "type": "text",
           "priority": 3,
           "label": "Contact",
-          "id": "contact"
+          "id": "contact",
+          "box": "name",
+          "inline": "true",
+          "colSize": "col-md-4"
         }
       }
     },
@@ -80,7 +83,10 @@
           "type": "email",
           "priority": 3,
           "label": "Email",
-          "id": "email"
+          "id": "email",
+          "box": "email",
+          "inline": "true",
+          "colSize": "col-md-4"
         }
       }
     },
@@ -90,6 +96,7 @@
       "template": {
         "type": "objectValue",
         "templateOptions": {
+          "box": "email",
           "fields": [
             {
               "type": "input",
@@ -97,7 +104,9 @@
               "templateOptions": {
                 "type": "text",
                 "label": "Enter latitude",
-                "id": "latitude"
+                "id": "latitude",
+                "inline": "true",
+                "colSize": "col-md-4"
               }
             },
             {
@@ -106,7 +115,9 @@
               "templateOptions": {
                 "type": "text",
                 "label": "Enter longitude",
-                "id": "longitude"
+                "id": "longitude",
+                "inline": "true",
+                "colSize": "col-md-4"
               }
             }
           ]
@@ -122,7 +133,10 @@
           "type": "text",
           "priority": 3,
           "label": "Enter Address",
-          "id": "address"
+          "id": "address",
+          "box": "address",
+          "inline": "true",
+          "colSize": "col-md-12"
         }
       }
     },
@@ -134,7 +148,10 @@
           "type": "text",
           "priority": 3,
           "label": "Enter Landline",
-          "id": ";landline"
+          "id": "landline",
+          "box": "brand",
+          "inline": "true",
+          "colSize": "col-md-4"
         }
       }
     },
@@ -148,6 +165,9 @@
           "containerName": "AMAZON_CONTAINER_NAME",
           "containerModel": "Container",
           "bind": true,
+          "box": "image",
+          "inline": "true",
+          "colSize": "col-md-12",
           "fileDataSource": "Image",
           "onImageUpdate": {
             "deletePrevious": true
@@ -161,6 +181,7 @@
       "template": {
         "type": "objectValue",
         "templateOptions": {
+          "box": "brand",
           "fields": [
             {
               "type": "input",
@@ -168,7 +189,9 @@
               "templateOptions": {
                 "type": "time",
                 "label": "Opening Timing",
-                "id": "opening"
+                "id": "opening",
+                "inline": "true",
+                "colSize": "col-md-2"
               }
             },
             {
@@ -177,7 +200,9 @@
               "templateOptions": {
                 "type": "time",
                 "label": "Closing Timing",
-                "id": "closing"
+                "id": "closing",
+                "inline": "true",
+                "colSize": "col-md-2"
               }
             }
           ]
@@ -193,6 +218,9 @@
           "containerName": "AMAZON_CONTAINER_NAME",
           "containerModel": "Container",
           "bind": true,
+          "box": "managerImage",
+          "inline": "true",
+          "colSize": "col-md-12",
           "fileDataSource": "Image",
           "onImageUpdate": {
             "deletePrevious": true
@@ -231,6 +259,7 @@
         "inline": true,
         "colSize": "col-md-4",
         "loadWhen": "cityAdded",
+        "box": "area",
         "acl": {
           "allow": [],
           "reject": []
@@ -253,7 +282,8 @@
         "readOnly": false,
         "inline": true,
         "colSize": "col-md-4",
-        "loadWhen": "areaLoaded"
+        "loadWhen": "areaLoaded",
+        "box": "area"
       }
     },
     "brand": {
@@ -271,7 +301,9 @@
         "inline": true,
         "colSize": "col-md-4",
         "loadWhen": "dummyBrandAdded",
-        "box": "brand"
+        "box": "brand",
+        "inline": "true",
+        "colSize": "col-md-4"
       }
     }
   },

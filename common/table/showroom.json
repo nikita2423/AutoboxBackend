@@ -1,61 +1,55 @@
 {
   "box":{
     "name":{
-      "priority":10,
+      "priority":1,
       "style":{
         "padding-top": "20px",
         "margin-bottom": "10px"
       },
       "class":["col-md-12", "clearfix"]
-    }
-  },
-  "email_":{
-    "name":{
+    },
+    "email_":{
+      "priority":2,
       "style":{
         "padding-top": "20px",
         "margin-bottom": "10px"
       },
       "class":["col-md-12", "clearfix"]
-    }
-  },
-  "status":{
-    "name":{
+    },
+    "status":{
+      "priority":3,
       "style":{
         "padding-top": "20px",
         "margin-bottom": "10px"
       },
       "class":["col-md-12", "clearfix"]
-    }
-  },
-  "address":{
-    "name":{
+    },
+    "address":{
+      "priority":5,
       "style":{
         "padding-top": "20px",
         "margin-bottom": "10px"
       },
       "class":["col-md-12", "clearfix"]
-    }
-  },
-  "brand":{
-    "name":{
+    },
+    "brand":{
+      "priority":4,
       "style":{
         "padding-top": "20px",
         "margin-bottom": "10px"
       },
       "class":["col-md-12", "clearfix"]
-    }
-  },
-  "profileImage":{
-    "name":{
+    },
+    "profileImage":{
+      "priority":6,
       "style":{
         "padding-top": "20px",
         "margin-bottom": "10px"
       },
       "class":["col-md-12", "clearfix"]
-    }
-  },
-  "showroomImage":{
-    "name":{
+    },
+    "showroomImage":{
+      "priority":7,
       "style":{
         "padding-top": "20px",
         "margin-bottom": "10px"

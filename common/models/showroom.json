@@ -73,6 +73,7 @@
       "template": {
         "type": "objectValue",
         "templateOptions": {
+          "box": "email_",
           "fields": [
             {
               "type": "input",
@@ -81,7 +82,6 @@
                 "type": "text",
                 "label": "Enter latitude",
                 "id": "latitude",
-                "box": "email_",
                 "inline": "true",
                 "colSize": "col-md-4",
                 "priority":10
@@ -94,7 +94,6 @@
                 "type": "text",
                 "label": "Enter longitude",
                 "id": "longitude",
-                "box": "email_",
                 "inline": "true",
                 "colSize": "col-md-4",
                 "priority":10
@@ -150,7 +149,7 @@
           "id": "address",
           "box": "address",
           "inline": "true",
-          "colSize": "col-md-12"
+          "colSize": "col-md-8"
         }
       }
     },
@@ -160,6 +159,7 @@
       "template": {
         "type": "objectValue",
         "templateOptions": {
+          "box": "brand",
           "fields": [
             {
               "type": "input",
@@ -180,7 +180,6 @@
                 "type": "time",
                 "label": "Closing Timing",
                 "id": "closing",
-                "box": "brand",
                 "inline": "true",
                 "colSize": "col-md-2"
               }
@@ -275,6 +274,7 @@
         "inline": true,
         "colSize": "col-md-4",
         "loadWhen": "cityAdded",
+        "box": "status",
         "acl": {
           "allow": [],
           "reject": []
@@ -295,6 +295,7 @@
         "readOnly": false,
         "inline": true,
         "colSize": "col-md-4",
+        "box": "address",
         "loadWhen": "areaLoaded",
         "acl": {
           "allow": [],
