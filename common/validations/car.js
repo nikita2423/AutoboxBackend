@@ -27,30 +27,28 @@ module.exports = (Car, server, helper) =>
         }
 
 
-        /*if(!validate(instance, currentInstance, 'brandId')){
+        if(!validate(instance, currentInstance, 'brandId')){
             return next(new Error("Brand is required"));
-        }*/
-/*
-
-        if(!validate(instance, currentInstance, 'colors_')){
-            return next(new Error("Colors is required"));
         }
-*/
 
-        /*if(!validate(instance, currentInstance, 'carModelId')){
-            return next(new Error("Car Model is required"));
+       /* if(!validate(instance, currentInstance, 'colors_')){
+            return next(new Error("Colors is required"));
         }*/
+
+        if(!validate(instance, currentInstance, 'carModelId')){
+            return next(new Error("Car Model is required"));
+        }
 
         /*if(!validate(instance, currentInstance, 'fuelId')){
             return next(new Error("Fuel is required"));
         }*/
 
-        /*if(!validate(instance, currentInstance, 'trimId')){
+       /* if(!validate(instance, currentInstance, 'trimId')){
             return next(new Error("Trim is required"));
         }*/
 
 
-      /*  if(!validate(instance, currentInstance, 'gearBoxId')){
+       /* if(!validate(instance, currentInstance, 'gearBoxId')){
             return next(new Error("GearBox is required"));
         }*/
 
