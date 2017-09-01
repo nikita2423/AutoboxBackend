@@ -12,6 +12,34 @@
     "fileDataSource": "ImportData"
   },
   "worksheet":{
+    "brand": {
+      "structure": [
+        {
+          "model": "Brand",
+          "properties": [
+            {
+              "sheetColName": "Name",
+              "modelProperty": "name",
+              "unique": true
+            }
+          ]
+        }
+      ]
+    },
+    "carmodel":{
+      "structure": [
+        {
+          "model": "CarModel",
+          "properties": [
+            {
+              "sheetColName": "Name",
+              "modelProperty": "name",
+              "unique": true
+            }
+          ]
+        }
+      ]
+    },
     "trim": {
       "structure": [
         {
@@ -454,8 +482,7 @@
             },
             {
               "sheetColName": "Pincode",
-              "modelProperty": "pincode",
-              "unique": true
+              "modelProperty": "pincode"
             }
           ],
           "beforeSave": ["addCityId"]
