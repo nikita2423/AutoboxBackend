@@ -171,37 +171,15 @@
         "label": "Add Brand"
       }
     },
-    "showroom": {
-      "type": "belongsTo",
+    "showrooms": {
+      "type": "hasOne",
       "model": "Showroom",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Showroom",
-        "searchProp": "name",
-        "priority": 2,
-        "search": true,
-        "load": true,
-        "create": false,
-        "id": "AddShowroom",
-        "hide": false,
-        "label": "Add Showroom"
-      }
+      "foreignKey": ""
     },
-    "workshop": {
-      "type": "belongsTo",
+    "workshops": {
+      "type": "hasOne",
       "model": "Workshop",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Workshop",
-        "searchProp": "dealershipName",
-        "priority": 2,
-        "load": true,
-        "search": true,
-        "create": false,
-        "id": "AddWorkshop",
-        "hide": false,
-        "label": "Add Workshop"
-      }
+      "foreignKey": ""
     }
   },
   "acls": [

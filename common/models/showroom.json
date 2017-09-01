@@ -62,7 +62,7 @@
           "id": "email",
           "box": "email_",
           "inline": "true",
-          "priority":10,
+          "priority": 10,
           "colSize": "col-md-4"
         }
       }
@@ -84,7 +84,7 @@
                 "id": "latitude",
                 "inline": "true",
                 "colSize": "col-md-4",
-                "priority":10
+                "priority": 10
               }
             },
             {
@@ -96,7 +96,7 @@
                 "id": "longitude",
                 "inline": "true",
                 "colSize": "col-md-4",
-                "priority":10
+                "priority": 10
               }
             }
           ]
@@ -122,7 +122,6 @@
         }
       }
     },
-    
     "generalManagerEmail": {
       "type": "string",
       "required": false,
@@ -216,7 +215,7 @@
           "containerName": "AMAZON_CONTAINER_NAME",
           "containerModel": "Container",
           "bind": true,
-          "id":"image",
+          "id": "image",
           "box": "showroomImage",
           "inline": "true",
           "colSize": "col-md-12",
@@ -236,7 +235,7 @@
           "containerName": "AMAZON_CONTAINER_NAME",
           "containerModel": "Container",
           "bind": true,
-          "id":"managerImage",
+          "id": "managerImage",
           "box": "profileImage",
           "inline": "true",
           "colSize": "col-md-12",
@@ -323,6 +322,11 @@
         "id": "AddBrand",
         "label": "Add Brand"
       }
+    },
+    "dealer": {
+      "type": "belongsTo",
+      "model": "Dealer",
+      "foreignKey": ""
     }
   },
   "acls": [],

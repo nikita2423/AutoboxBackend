@@ -298,13 +298,16 @@
         "label": "Add Brand",
         "type": "smartSelect",
         "readOnly": true,
-        "inline": true,
+        "inline": "true",
         "colSize": "col-md-4",
         "loadWhen": "dummyBrandAdded",
-        "box": "brand",
-        "inline": "true",
-        "colSize": "col-md-4"
+        "box": "brand"
       }
+    },
+    "dealer": {
+      "type": "belongsTo",
+      "model": "Dealer",
+      "foreignKey": ""
     }
   },
   "acls": [],
