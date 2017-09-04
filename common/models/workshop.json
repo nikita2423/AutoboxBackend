@@ -301,9 +301,7 @@
         "inline": true,
         "colSize": "col-md-4",
         "loadWhen": "dummyBrandAdded",
-        "box": "brand",
-        "inline": "true",
-        "colSize": "col-md-4"
+        "box": "brand"
       }
     }
   },
