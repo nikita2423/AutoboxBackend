@@ -178,6 +178,7 @@
         "btnText": "Add City",
         "searchProp": "name",
         "priority": 5,
+        "load": true,
         "type":"smartSelect",
         "readOnly": false,
         "search": true,
