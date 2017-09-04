@@ -241,6 +241,36 @@
               "sheetColName": "Color15",
               "modelProperty": "name",
               "unique": true
+            },
+            {
+              "sheetColName": "Color16",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color17",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color18",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color19",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color20",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color21",
+              "modelProperty": "name",
+              "unique": true
             }
           ]
         },
@@ -306,6 +336,30 @@
             {
               "sheetColName": "Color15",
               "modelProperty": "color15"
+            },
+            {
+              "sheetColName": "Color16",
+              "modelProperty": "color16"
+            },
+            {
+              "sheetColName": "Color17",
+              "modelProperty": "color17"
+            },
+            {
+              "sheetColName": "Color18",
+              "modelProperty": "color18"
+            },
+            {
+              "sheetColName": "Color19",
+              "modelProperty": "color19"
+            },
+            {
+              "sheetColName": "Color20",
+              "modelProperty": "color20"
+            },
+            {
+              "sheetColName": "Color21",
+              "modelProperty": "color21"
             }
           ],
           "beforeSave":["addCarDetailIds"]
