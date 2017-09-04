@@ -180,6 +180,7 @@
         "priority": 5,
         "type":"smartSelect",
         "readOnly": false,
+        "load": true,
         "id": "AddCity",
         "loadWhen": "cityAdded",
         "label": "Add City"
