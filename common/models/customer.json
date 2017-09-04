@@ -16,7 +16,7 @@
         "templateOptions": {
           "container": "customerBox",
           "type": "text",
-          "label": "Enter first name",
+          "label": "Enter First Name",
           "id": "CustomerFirstName",
           "inline": true,
           "colSize": "col-xs-6",
@@ -48,7 +48,7 @@
         "templateOptions": {
           "label": "Register Status",
           "id": "registerStatus",
-          "priority": 6,
+          "priority": 3,
           "options": [
             "registered",
             "notregistered"
@@ -66,7 +66,8 @@
         "templateOptions": {
           "label": "Country Name",
           "type": "text",
-          "id": "countryName"
+          "id": "countryName",
+          "priority": 4
         }
       }
     },
@@ -100,7 +101,7 @@
           "type": "text",
           "label": "Enter Phone Number",
           "id": "phoneNumber",
-          "priority": 10
+          "priority": 8
         }
       }
     },
@@ -113,22 +114,12 @@
           "type": "email",
           "label": "Enter customer email",
           "id": "CustomerEmail",
-          "priority": 8
+          "priority": 7
         }
       }
     },
     "username": {
-      "type": "string",
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "container": "customerBox",
-          "type": "text",
-          "label": "Enter customer username",
-          "id": "CustomerUsername",
-          "priority": 8
-        }
-      }
+      "type": "string"
     },
     "added": {
       "type": "date",
@@ -148,20 +139,7 @@
       "required": false
     },
     "profilePic": {
-      "type": "object",
-      "template": {
-        "type": "singleFileUpload",
-        "templateOptions": {
-          "label": "Add profile pic",
-          "containerName": "AMAZON_CONTAINER_NAME",
-          "containerModel": "Container",
-          "bind": true,
-          "fileDataSource": "Image",
-          "onImageUpdate": {
-            "deletePrevious": true
-          }
-        }
-      }
+      "type": "object"
     },
     "sosStatus": {
       "type": "string",
@@ -172,7 +150,7 @@
         "templateOptions": {
           "label": "Sos Status",
           "id": "incomplete",
-          "priority": 6,
+          "priority": 2,
           "options": [
             "complete",
             "incomplete"
@@ -199,7 +177,9 @@
       "templateOptions": {
         "btnText": "Add City",
         "searchProp": "name",
-        "priority": 2,
+        "priority": 5,
+        "type":"smartSelect",
+        "readOnly": false,
         "search": true,
         "create": false,
         "id": "AddCity",
@@ -210,32 +190,12 @@
     "country": {
       "type": "belongsTo",
       "model": "Country",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Country",
-        "searchProp": "name",
-        "priority": 2,
-        "search": true,
-        "create": false,
-        "id": "AddCountry",
-        "hide": false,
-        "label": "Add Country"
-      }
+      "foreignKey": ""
     },
     "workshop": {
       "type": "belongsTo",
       "model": "Workshop",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Workshop",
-        "searchProp": "dealershipName",
-        "priority": 2,
-        "search": true,
-        "create": false,
-        "id": "AddWorkshop",
-        "hide": false,
-        "label": "Add Workshop"
-      }
+      "foreignKey": ""
     }
   },
   "acls": [
