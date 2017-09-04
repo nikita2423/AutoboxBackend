@@ -3,7 +3,7 @@
   "tables": {
     "versionCode": {
       "label": "Version Code",
-      "search": "text"
+      "search": "number"
     },
     "added": {
       "date": true,

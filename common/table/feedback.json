@@ -48,9 +48,22 @@
     "customer_status": {
       "display": false
     },
+    "customer_sosStatus": {
+      "display": false
+    },
+    "customer_registerStatus": {
+      "display": false
+    },
+    "customer_countryName": {
+      "display": false
+    },
     "dealer_firstName": {
+      "display": false,
       "search": "text",
       "label": "Dealer"
+    },
+    "dealer_noOfVehicleSold": {
+      "display": false
     },
     "dealer_lastName": {
       "display": false
@@ -65,6 +78,49 @@
       "display": false
     },
     "dealer_added": {
+      "display": false
+    },
+    "showroom_name": {
+      "label": "Showroom",
+      "search": "text"
+    },
+    "showroom_salesConsultantName": {
+      "display": false
+    },
+    "showroom_contactNumber": {
+      "display": false
+    },
+    "showroom_email": {
+      "display": false
+    },
+    "showroom_latlong": {
+      "display": false
+    },
+    "showroom_status": {
+      "display": false
+    },
+    "showroom_generalManagerEmail": {
+      "display": false
+    },
+    "showroom_address": {
+      "display": false
+    },
+    "showroom_timings": {
+      "display": false
+    },
+    "showroom_landline": {
+      "display": false
+    },
+    "showroom_showroomNumber": {
+      "display": false
+    },
+    "showroom_image": {
+      "display": false
+    },
+    "showroom_managerImage": {
+      "display": false
+    },
+    "showroom_added": {
       "display": false
     }
   }

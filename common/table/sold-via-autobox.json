@@ -43,6 +43,15 @@
     "vehicleInfo_vehicleColor": {
       "display": false
     },
+    "vehicleInfo_vehicleBrand": {
+      "display": false
+    },
+    "vehicleInfo_vehicleType": {
+      "display": false
+    },
+    "vehicleInfo_quoteType": {
+      "display": false
+    },
     "dealer_added": {
       "display": false
     },
@@ -60,6 +69,9 @@
       "display": false
     },
     "dealer_contact": {
+      "display": false
+    },
+    "dealer_noOfVehicleSold": {
       "display": false
     }
   }

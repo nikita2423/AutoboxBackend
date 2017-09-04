@@ -21,7 +21,7 @@
     },
     "status": {
       "type": "string",
-      "required": true,
+      "required": false,
       "default": "active",
       "template": {
         "type": "selectString",
@@ -38,7 +38,7 @@
     },
     "added": {
       "type": "date",
-      "required": true,
+      "required": false,
       "defaultFn": "now",
       "template": {
         "type": "dummy"

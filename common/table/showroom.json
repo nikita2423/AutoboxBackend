@@ -87,14 +87,25 @@
     },
     "salesConsultantName": {
       "label": "Sales Consultant",
+      "search": "text",
+      "display": false
+    },
+    "address": {
+      "label": "Address",
       "search": "text"
     },
     "contactNumber": {
       "label": "Contact",
       "search": "text"
     },
+    "name": {
+      "search": "text"
+    },
     "email": {
       "search": "text"
+    },
+    "generalManagerEmail": {
+      "display": false
     },
     "latlong": {
       "display": false
@@ -136,6 +147,17 @@
       "display": false
     },
     "brand_image": {
+      "display": false
+    },
+    "city_added": {
+      "display": false
+    },
+    "city_name": {
+      "label": "City",
+      "search": "text",
+      "display": false
+    },
+    "city_status": {
       "display": false
     }
   }

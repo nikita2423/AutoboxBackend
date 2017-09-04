@@ -12,28 +12,28 @@
     "fileDataSource": "ImportData"
   },
   "worksheet":{
-    "brand":{
-      "structure":[
+    "brand": {
+      "structure": [
         {
           "model": "Brand",
-          "properties":[
+          "properties": [
             {
               "sheetColName": "Name",
-              "modelProperty":"name",
+              "modelProperty": "name",
               "unique": true
             }
           ]
         }
       ]
     },
-    "carmodel": {
+    "carmodel":{
       "structure": [
         {
           "model": "CarModel",
           "properties": [
             {
               "sheetColName": "Name",
-              "modelProperty":"name",
+              "modelProperty": "name",
               "unique": true
             }
           ]
@@ -44,59 +44,11 @@
       "structure": [
         {
           "model": "Brand",
-          "properties": [
+          "properties":[
             {
               "sheetColName": "Brand",
-              "modelProperty": "name"
-            }
-          ]
-        },
-        {
-          "model": "CarModel",
-          "properties": [
-            {
-              "sheetColName": "Brand",
-              "modelProperty": "name"
-            }
-          ]
-        },
-        {
-          "model": "Fuel",
-          "properties": [
-            {
-              "sheetColName": "Fuel",
-              "modelProperty": "name"
-            }
-          ]
-        },
-        {
-          "model": "GearBox",
-          "properties": [
-            {
-              "sheetColName": "Gearbox",
-              "modelProperty": "name"
-            }
-          ]
-        },
-        {
-          "model": "Trim",
-          "properties": [
-            {
-              "sheetColName": "Name",
-              "modelProperty": "name"
-            }
-          ]
-        }
-      ]
-    },
-    "Car": {
-      "structure": [
-        {
-          "model": "Brand",
-          "properties": [
-            {
-              "sheetColName": "Brand",
-              "modelProperty": "name"
+              "modelProperty": "name",
+              "unique": true
             }
           ]
         },
@@ -104,17 +56,20 @@
           "model": "CarModel",
           "properties":[
             {
-              "sheetColName": "CarModel",
-              "modelProperty": "name"
+              "sheetColName": "Model",
+              "modelProperty": "name",
+              "unique": true
             }
-          ]
+          ],
+          "beforeSave": ["addModelBrandId"]
         },
         {
           "model": "Fuel",
           "properties":[
             {
               "sheetColName": "Fuel",
-              "modelProperty": "name"
+              "modelProperty": "name",
+              "unique": true
             }
           ]
         },
@@ -123,7 +78,8 @@
           "properties":[
             {
               "sheetColName": "Gearbox",
-              "modelProperty": "name"
+              "modelProperty": "name",
+              "unique": true
             }
           ]
         },
@@ -131,97 +87,9 @@
           "model": "Trim",
           "properties": [
             {
-              "sheetColName": "Trim",
-              "modelProperty": "name"
-            }
-          ]
-        },
-        {
-          "model": "Color",
-          "properties": [
-            {
-              "sheetColName": "Color1",
-              "modelProperty": "name"
-            }
-          ]
-        },
-        {
-          "model": "Color",
-          "properties": [
-            {
-              "sheetColName": "Color2",
-              "modelProperty": "name"
-            }
-          ]
-        },
-        {
-          "model": "Color",
-          "properties": [
-            {
-              "sheetColName": "Color3",
-              "modelProperty": "name"
-            }
-          ]
-        },
-        {
-          "model": "Color",
-          "properties": [
-            {
-              "sheetColName": "Color4",
-              "modelProperty": "name"
-            }
-          ]
-        },
-        {
-          "model": "Color",
-          "properties": [
-            {
-              "sheetColName": "Color5",
-              "modelProperty": "name"
-            }
-          ]
-        },
-        {
-          "model": "Color",
-          "properties": [
-            {
-              "sheetColName": "Color6",
-              "modelProperty": "name"
-            }
-          ]
-        },
-        {
-          "model": "Color",
-          "properties": [
-            {
-              "sheetColName": "Color7",
-              "modelProperty": "name"
-            }
-          ]
-        }
-      ]
-    },
-    "fuel": {
-      "structure":[
-        {
-          "model": "Fuel",
-          "properties": [
-            {
               "sheetColName": "Name",
-              "modelProperty": "name"
-            }
-          ]
-        }
-      ]
-    },
-    "gearbox": {
-      "structure":[
-        {
-          "model": "GearBox",
-          "properties": [
-            {
-              "sheetColName": "Name",
-              "modelProperty": "name"
+              "modelProperty": "name",
+              "unique": true
             }
           ]
         }
@@ -244,6 +112,207 @@
         }
       ]
     },
+    "Car": {
+      "structure": [
+        {
+          "model": "Brand",
+          "properties": [
+            {
+              "sheetColName": "Brand",
+              "modelProperty": "name",
+              "unique": true
+            }
+          ]
+        },
+        {
+          "model": "CarModel",
+          "properties":[
+            {
+              "sheetColName": "CarModel",
+              "modelProperty": "name",
+              "unique": true
+            }
+          ]
+        },
+        {
+          "model": "Fuel",
+          "properties":[
+            {
+              "sheetColName": "Fuel",
+              "modelProperty": "name",
+              "unique": true
+            }
+          ]
+        },
+        {
+          "model": "GearBox",
+          "properties":[
+            {
+              "sheetColName": "Gearbox",
+              "modelProperty": "name",
+              "unique": true
+            }
+          ]
+        },
+        {
+          "model": "Trim",
+          "properties": [
+            {
+              "sheetColName": "Trim",
+              "modelProperty": "name",
+              "unique": true
+            }
+          ]
+        },
+        {
+          "model": "Color",
+          "properties": [
+            {
+              "sheetColName": "Color1",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color2",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color3",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color4",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color5",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color6",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color7",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color8",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color9",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color10",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color11",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color12",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color13",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color14",
+              "modelProperty": "name",
+              "unique": true
+            },
+            {
+              "sheetColName": "Color15",
+              "modelProperty": "name",
+              "unique": true
+            }
+          ]
+        },
+        {
+          "model": "Car",
+          "properties": [
+            {
+              "sheetColName": "Color1",
+              "modelProperty": "color1"
+            },
+            {
+              "sheetColName": "Color2",
+              "modelProperty": "color2"
+            },
+            {
+              "sheetColName": "Color3",
+              "modelProperty": "color3"
+            },
+            {
+              "sheetColName": "Color4",
+              "modelProperty": "color4"
+            },
+            {
+              "sheetColName": "Color5",
+              "modelProperty": "color5"
+            },
+            {
+              "sheetColName": "Color6",
+              "modelProperty": "color6"
+            },
+            {
+              "sheetColName": "Color7",
+              "modelProperty": "color7"
+            },
+            {
+              "sheetColName": "Color8",
+              "modelProperty": "color8"
+            },
+            {
+              "sheetColName": "Color9",
+              "modelProperty": "color9"
+            },
+            {
+              "sheetColName": "Color10",
+              "modelProperty": "color10"
+            },
+            {
+              "sheetColName": "Color11",
+              "modelProperty": "color11"
+            },
+            {
+              "sheetColName": "Color12",
+              "modelProperty": "color12"
+            },
+            {
+              "sheetColName": "Color13",
+              "modelProperty": "color13"
+            },
+            {
+              "sheetColName": "Color14",
+              "modelProperty": "color14"
+            },
+            {
+              "sheetColName": "Color15",
+              "modelProperty": "color15"
+            }
+          ],
+          "beforeSave":["addCarDetailIds"]
+        }
+      ]
+    },
+
     "breakdowncategory": {
       "structure":[
         {
@@ -251,7 +320,8 @@
           "properties":[
             {
               "sheetColName": "Name",
-              "modelProperty": "name"
+              "modelProperty": "name",
+              "unique": true
             }
           ]
         }
@@ -264,7 +334,8 @@
           "properties":[
             {
               "sheetColName": "Name",
-              "modelProperty": "name"
+              "modelProperty": "name",
+              "unique": true
             }
           ]
         }
@@ -277,7 +348,18 @@
           "properties":[
             {
               "sheetColName": "Breakdown Category",
-              "modelProperty": "name"
+              "modelProperty": "name",
+              "unique": true
+            }
+          ]
+        },
+        {
+          "model": "City",
+          "properties": [
+            {
+              "sheetColName": "City",
+              "modelProperty": "name",
+              "unique": true
             }
           ]
         },
@@ -300,16 +382,8 @@
               "sheetColName": "Longitude",
               "modelProperty": "longitude"
             }
-          ]
-        },
-        {
-          "model": "City",
-          "properties": [
-            {
-              "sheetColName": "City",
-              "modelProperty": "name"
-            }
-          ]
+          ],
+          "beforeSave":["addCategoryCityId", "addBreakdownLatLang"]
         }
       ]
     },
@@ -320,7 +394,8 @@
           "properties": [
             {
               "sheetColName": "Name",
-              "modelProperty": "name"
+              "modelProperty": "name",
+              "unique": true
             }
           ]
         }
@@ -333,7 +408,18 @@
           "properties": [
             {
               "sheetColName": "Emergency Category",
-              "modelProperty": "name"
+              "modelProperty": "name",
+              "unique": true
+            }
+          ]
+        },
+        {
+          "model": "City",
+          "properties": [
+            {
+              "sheetColName": "City",
+              "modelProperty": "name",
+              "unique": true
             }
           ]
         },
@@ -356,27 +442,20 @@
               "sheetColName": "Longitude",
               "modelProperty": "longitude"
             }
-          ]
-        },
-        {
-          "model": "City",
-          "properties": [
-            {
-              "sheetColName": "City",
-              "modelProperty": "name"
-            }
-          ]
+          ],
+          "beforeSave":["addEmergencyCityId", "addEmergencyLatLng"]
         }
       ]
     },
-    "Service Type Category": {
+    "servicetype": {
       "structure": [
         {
           "model": "ServiceType",
           "properties": [
             {
               "sheetColName": "Name",
-              "modelProperty": "name"
+              "modelProperty": "name",
+              "unique": true
             }
           ]
         }
@@ -389,7 +468,8 @@
           "properties": [
             {
               "sheetColName": "City",
-              "modelProperty": "name"
+              "modelProperty": "name",
+              "unique": true
             }
           ]
         },
@@ -404,7 +484,8 @@
               "sheetColName": "Pincode",
               "modelProperty": "pincode"
             }
-          ]
+          ],
+          "beforeSave": ["addCityId"]
         }
       ]
     },

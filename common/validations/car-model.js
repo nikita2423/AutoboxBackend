@@ -3,7 +3,7 @@
  */
 module.exports = (Carmodel, server, helper) =>
 {
-    Carmodel.validatesUniquenessOf('name');
+    //Carmodel.validatesUniquenessOf('name');
     Carmodel.validatesUniquenessOf('modelNumber');
     const {
         isLength,
@@ -25,7 +25,7 @@ module.exports = (Carmodel, server, helper) =>
         }
 
         if(instance.name){
-            instance.name = toTitleCase(instance.name.toString().trim());
+            instance.name = instance.name.toString().trim();
             const check = isLength(instance.name, {min: 2, max: 200});
             if(!check){
                 return next(new Error("Model Name cannot exceed more than 200 words"));

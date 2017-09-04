@@ -41,6 +41,9 @@
     "contact": {
       "search": "text"
     },
+    "noOfVehicleSold": {
+      "display": false
+    },
     "area_pincode": {
       "display": false
     },
@@ -108,6 +111,9 @@
       "display": false
     },
     "showroom_timings": {
+      "display": false
+    },
+    "showroom_generalManagerEmail": {
       "display": false
     },
     "workshop_added": {

@@ -3,7 +3,7 @@
  */
 module.exports = (Emergency, server, helper) =>
 {
-    Emergency.validatesUniquenessOf('name');
+    //Emergency.validatesUniquenessOf('name');
     Emergency.validatesUniquenessOf('emergencyNumber');
     const {
         isLength,
@@ -24,7 +24,7 @@ module.exports = (Emergency, server, helper) =>
         }
 
         if(instance.name){
-            instance.name = toTitleCase(instance.name.toString().trim());
+            instance.name = instance.name.toString().trim();
             const check = isLength(instance.name,{min: 2, max: 500});
             if(!check){
                 return next(new Error("Emergency length should be between 2 to 500"));
@@ -43,9 +43,9 @@ module.exports = (Emergency, server, helper) =>
             return next(new Error("Emergency Category is required"));
         }
 
-        if(!instance.areaId){
+      /*  if(!instance.areaId){
             return next(new Error("Area is required"));
-        }
+        }*/
 
         next();
 

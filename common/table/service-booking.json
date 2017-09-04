@@ -99,6 +99,15 @@
     },
     "customer_profilePic": {
       "display": false
+    },
+    "customer_sosStatus": {
+      "display": false
+    },
+    "customer_registerStatus": {
+      "display": false
+    },
+    "customer_countryName": {
+      "display": false
     }
   }
 }

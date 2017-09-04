@@ -7,16 +7,52 @@
   },
   "properties": {
     "insuranceProvider": {
-      "type": "string"
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Provider",
+          "id": "provider"
+        }
+      }
     },
     "policyEndDate": {
-      "type": "date"
+      "type": "date",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "date",
+          "priority": 3,
+          "label": "Enter Policy End Date",
+          "id": "policyEndDate"
+        }
+      }
     },
     "insurancePlanType": {
-      "type": "string"
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Insurance Plan Type",
+          "id": "insurancePlanType"
+        }
+      }
     },
     "policyNumber": {
-      "type": "string"
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Policy Number",
+          "id": "policyNumber"
+        }
+      }
     }
   },
   "validations": [],
@@ -24,12 +60,32 @@
     "vehicleInfo": {
       "type": "belongsTo",
       "model": "VehicleInfo",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Vehicle",
+        "searchProp": "vehicleModel",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddVehicle",
+        "hide": false,
+        "label": "Add Vehicle"
+      }
     },
     "customer": {
       "type": "belongsTo",
       "model": "Customer",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Customer",
+        "searchProp": "email",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCustomer",
+        "hide": false,
+        "label": "Add Customer"
+      }
     }
   },
   "acls": [],

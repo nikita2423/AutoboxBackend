@@ -21,7 +21,7 @@
     },
     "added": {
       "type": "date",
-      "required": true,
+      "required": false,
       "defaultFn": "now",
       "template": {
         "type": "dummy"

@@ -1,0 +1,102 @@
+{
+  "widgets": [
+    {
+      "label": "Insurance",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "added": {
+      "search": "date",
+      "date": true
+    },
+    "insuranceProvider": {
+      "label": "Provider",
+      "search": "text"
+    },
+    "policyEndDate": {
+      "label": "Policy End Date",
+      "search": "date",
+      "date": true
+    },
+    "insurancePlanType": {
+      "label": "Plan Type",
+      "search": "text"
+    },
+    "policyNumber": {
+      "label": "PolicyNo",
+      "search": "text"
+    },
+    "vehicleInfo_vehicleModel": {
+      "display": true,
+      "label": "Vehicle",
+      "search": "text"
+    },
+    "vehicleInfo_vehicleType": {
+      "display": false
+    },
+    "vehicleInfo_fuelType": {
+      "display": false
+    },
+    "vehicleInfo_vehicleTrim": {
+      "display": false
+    },
+    "vehicleInfo_vehicleGearbox": {
+      "display": false
+    },
+    "vehicleInfo_vehicleColor": {
+      "display": false
+    },
+    "vehicleInfo_vehicleBrand": {
+      "display": false
+    },
+    "vehicleInfo_quoteType": {
+      "display": false
+    },
+    "customer_firstName": {
+      "display": false
+    },
+    "customer_lastName": {
+      "display": false
+    },
+    "customer_profilePic": {
+      "display": false
+    },
+    "customer_sosStatus": {
+      "display": false
+    },
+    "customer_registerStatus": {
+      "display": false
+    },
+    "customer_cityName": {
+      "display": false
+    },
+    "customer_countryName": {
+      "display": false
+    },
+    "customer_serviceCenter": {
+      "display": false
+    },
+    "customer_status": {
+      "display": false
+    },
+    "customer_phoneNumber": {
+      "display": false
+    },
+    "customer_email": {
+      "display": false
+    },
+    "customer_username":{
+      "display": false
+    },
+    "customer_added": {
+      "display": false
+    }
+  }
+}

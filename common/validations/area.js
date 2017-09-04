@@ -3,7 +3,7 @@
  */
 module.exports = (Area, server, helper) =>
 {
-    Area.validatesUniquenessOf('name');
+    //Area.validatesUniquenessOf('name');
     const {
         isLength,
         trim
@@ -22,7 +22,7 @@ module.exports = (Area, server, helper) =>
         }
 
         if(instance.name){
-            instance.name = toTitleCase(instance.name.toString().trim());
+            instance.name = instance.name.toString().trim();
             const check = isLength(instance.name, {min: 2, max: 500});
             if(!check){
                 return next(new Error("Area Name cannot exceed more than 500 words"));
@@ -32,9 +32,9 @@ module.exports = (Area, server, helper) =>
             return next(new Error("City is required"));
         }
 
-        if(!instance.countryId){
+       /* if(!instance.countryId){
             return next(new Error("Country is required"));
-        }
+        }*/
 
         next();
 

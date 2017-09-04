@@ -8,7 +8,7 @@
   "properties": {
     "name": {
       "type": "string",
-      "required": true,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -21,7 +21,7 @@
     },
     "colorCode": {
       "type": "string",
-      "required": true,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -34,7 +34,7 @@
     },
     "status": {
       "type": "string",
-      "required": true,
+      "required": false,
       "default": "active",
       "template": {
         "type": "selectString",
@@ -51,7 +51,7 @@
     },
     "added": {
       "type": "date",
-      "required": true,
+      "required": false,
       "defaultFn": "now",
       "template": {
         "type": "dummy"

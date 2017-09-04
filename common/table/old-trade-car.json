@@ -53,9 +53,18 @@
     "customer_phoneNumber": {
       "display": false
     },
+    "customer_registerStatus": {
+      "display": false
+    },
+    "customer_sosStatus": {
+      "display": false
+    },
+    "customer_countryName": {
+      "display": false
+    },
     "carModel_name":{
       "label": "Model",
-      "search": true
+      "search": "text"
     },
     "carModel_added": {
       "display": false

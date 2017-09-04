@@ -31,6 +31,7 @@
       "search": "text"
     },
     "country_name":{
+      "display": false,
       "label": "Country",
       "search": "text"
     },

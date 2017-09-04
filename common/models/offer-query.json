@@ -61,7 +61,18 @@
     "customer": {
       "type": "belongsTo",
       "model": "Customer",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Customer",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "load": true,
+        "create": false,
+        "id": "AddCustomer",
+        "hide": false,
+        "label": "Add Customer"
+      }
     },
     "dealer": {
       "type": "belongsTo",

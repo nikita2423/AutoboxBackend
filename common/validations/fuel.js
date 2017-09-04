@@ -3,7 +3,7 @@
  */
 module.exports = (Fuel, server, helper) =>
 {
-    Fuel.validatesUniquenessOf('name');
+    //Fuel.validatesUniquenessOf('name');
     const {
         isLength,
         trim
@@ -25,7 +25,7 @@ module.exports = (Fuel, server, helper) =>
 
 
         if(instance.name){
-            instance.name = toTitleCase(instance.name.toString().trim());
+            instance.name = instance.name.toString().trim();
             const check = isLength(instance.name, {min: 2, max: 200});
             if(!check){
                 return next(new Error("Fuel Name cannot exceed more than 200 words"));

@@ -1,0 +1,43 @@
+{
+  "tables": {
+    "vehicleModel": {
+      "label": "Model",
+      "search": "text"
+    },
+    "vehicleType": {
+      "label": "Type",
+      "tag": {
+        "car": "label-primary",
+        "bike": "label-success"
+      },
+      "search": "select",
+      "options": [
+        "car",
+        "bike"
+      ]
+    },
+    "fuelType": {
+      "label": "Fuel",
+      "search": "text"
+    },
+    "vehicleTrim": {
+      "label": "Variant",
+      "search": "text"
+    },
+    "vehicleGearbox": {
+      "label": "Gearbox",
+      "search": "text"
+    },
+    "vehicleColor": {
+      "label": "Color",
+      "search": "text"
+    },
+    "vehicleBrand": {
+      "label": "Brand",
+      "search": "text"
+    },
+    "quoteType": {
+      "display": false
+    }
+  }
+}

@@ -44,6 +44,7 @@
       "display": false
     },
     "area_name": {
+      "display": false,
       "label" : "Area",
       "search": "text"
     },

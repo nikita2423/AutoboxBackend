@@ -1,7 +1,7 @@
 {
   "widgets": [
     {
-      "label": "SOS",
+      "label": "Offer Queries",
       "icon": "si-bar-chart",
       "fetchLocally": true,
       "propObj": {
@@ -12,12 +12,31 @@
     }
   ],
   "tables": {
-    "added": {
-      "search": "date",
-      "date": true
+    "queryType": {
+      "tag": {
+        "call": "label-success",
+        "message": "label-warning"
+      },
+      "search": "select",
+      "label": "Query",
+      "options": [
+        "call",
+        "message"
+      ]
     },
-    "customer_added": {
-      "display": false
+    "subject": {
+      "search": "text"
+    },
+    "message": {
+      "search": "text"
+    },
+    "customerContact": {
+      "label": "Contact",
+      "search": "text"
+    },
+    "added": {
+      "date": true,
+      "search": "date"
     },
     "customer_firstName": {
       "label": "Customer",
@@ -29,10 +48,10 @@
     "customer_profilePic": {
       "display": false
     },
-    "customer_status": {
+    "customer_sosStatus": {
       "display": false
     },
-    "customer_username": {
+    "customer_registerStatus": {
       "display": false
     },
     "customer_email": {
@@ -41,13 +60,16 @@
     "customer_phoneNumber": {
       "display": false
     },
-    "customer_sosStatus": {
+    "customer_status": {
       "display": false
     },
-    "customer_registerStatus": {
+    "customer_added": {
       "display": false
     },
     "customer_countryName": {
+      "display": false
+    },
+    "customer_username": {
       "display": false
     }
   }

@@ -37,6 +37,12 @@
         "inactive"
       ]
     },
+    "sosStatus": {
+      "display": false
+    },
+    "registerStatus": {
+      "display": false
+    },
     "lastName": {
       "search": "text",
       "display": false
@@ -48,7 +54,12 @@
       "search": "date",
       "date": true
     },
+    "cityName": {
+      "label": "City",
+      "search": "text"
+    },
     "city_name": {
+      "display": false,
       "label": "City",
       "search": "text"
     },
@@ -74,6 +85,7 @@
       "display": false
     },
     "workshop_dealershipName": {
+      "display": false,
       "label": "Workshop",
       "search": "text"
     },
