@@ -1,0 +1,19 @@
+{
+  "css": {
+    "/dataImport/style/dataImport.css": "dataImportCss"
+  },
+  "js": {
+    "/dataImport/scripts/routes/dataImport.js": "dataImportRoute",
+    "/dataImport/scripts/controllers/dataImport.js": "dataImportController"
+  },
+  "moduleDependencies":{
+
+  },
+  "settings": ["/dataImport/admin-panel-setting.js"],
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [],
+    "footerHook":[]
+  }
+}

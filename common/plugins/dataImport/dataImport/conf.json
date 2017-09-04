@@ -1,0 +1,87 @@
+{
+  "name": "dataImport",
+  "description": "Plugin to import data from excel into database",
+  "routeExposure": "/dataImport",
+  "activate": true,
+  "pluginDependencies": {},
+  "constants":{
+    "sheetColNumber": "sheetColNumber"
+  },
+  "upload":{
+    "containerModel": "ImportData",
+    "fileDataSource": "ImportData"
+  },
+  "worksheet":{
+    "Sheet1":{
+      "structure":[
+        {
+          "model": "Area",
+          "properties":[
+            {
+              "sheetColName": "Area",
+              "modelProperty":"name",
+              "unique": true
+            }
+          ],
+          "beforeSave":["addCityId"]
+        },
+        {
+          "model": "Customer",
+          "properties":[
+            {
+              "sheetColName": "Road",
+              "modelProperty":"roadName",
+              "unique": false
+            },
+            {
+              "sheetColName": "First name",
+              "modelProperty":"firstName",
+              "unique": false
+            },
+            {
+              "sheetColName": "Last name",
+              "modelProperty":"lastName",
+              "unique": false
+            },
+            {
+              "sheetColName": "E-mail",
+              "modelProperty":"email",
+              "unique": false
+            },
+            {
+              "sheetColName": "E-mail",
+              "modelProperty":"email",
+              "unique": true
+            },
+            {
+              "sheetColName": "Time",
+              "modelProperty":"time",
+              "unique": false
+            },
+            {
+              "sheetColName": "Address",
+              "modelProperty":"address",
+              "unique": false
+            },
+            {
+              "sheetColName": "Account number",
+              "modelProperty":"accountNumber",
+              "unique": false
+            },
+            {
+              "sheetColName": "Phone",
+              "modelProperty":"phoneNumber",
+              "unique": false
+            },
+            {
+              "sheetColName": "Mobile",
+              "modelProperty":"mobileNumber",
+              "unique": true
+            }
+          ],
+          "beforeSave":["validateMobileNumber"]
+        }
+      ]
+    }
+  }
+}

@@ -83,32 +83,12 @@
     "area": {
       "type": "belongsTo",
       "model": "Area",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Area",
-        "searchProp": "name",
-        "priority": 2,
-        "search": true,
-        "create": false,
-        "id": "AddArea",
-        "hide": false,
-        "label": "Add Area"
-      }
+      "foreignKey": ""
     },
     "brand": {
       "type": "belongsTo",
       "model": "Brand",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Brand",
-        "searchProp": "name",
-        "priority": 2,
-        "search": true,
-        "create": false,
-        "id": "AddBrand",
-        "hide": false,
-        "label": "Add Brand"
-      }
+      "foreignKey": ""
     },
     "breakdownCategory": {
       "type": "belongsTo",
@@ -118,6 +98,7 @@
         "btnText": "Add Breakdown Category",
         "searchProp": "name",
         "priority": 2,
+        "type": "smartSelect",
         "search": true,
         "create": false,
         "id": "AddBreakdownCategory",
@@ -133,6 +114,7 @@
         "btnText": "Add City",
         "searchProp": "name",
         "priority": 2,
+        "type": "smartSelect",
         "search": true,
         "create": false,
         "id": "AddCity",
