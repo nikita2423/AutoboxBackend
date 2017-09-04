@@ -1,0 +1,23 @@
+{
+  "name": "dataImport",
+  "version": "1.0.0",
+  "main": "backend",
+  "description": "Plugin to import data from excel into database",
+  "author": "Robins Gupta",
+  "authorEmail": "robinskumar73@gmail.com",
+  "dependencies": {
+    "async": "^1.5.2",
+    "exceljs": "^0.3.0",
+    "bluebird": "^3.4.7",
+    "lodash": "^4.17.4",
+    "formidable": "^1.0.17"
+  },
+  "optionalDependencies": {},
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "devDependencies": {
+
+  }
+}
