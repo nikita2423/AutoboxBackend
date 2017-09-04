@@ -178,13 +178,10 @@
         "btnText": "Add City",
         "searchProp": "name",
         "priority": 5,
-        "load": true,
         "type":"smartSelect",
         "readOnly": false,
-        "search": true,
-        "create": false,
         "id": "AddCity",
-        "hide": false,
+        "loadWhen": "cityAdded",
         "label": "Add City"
       }
     },
