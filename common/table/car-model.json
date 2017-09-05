@@ -22,6 +22,9 @@
     "image": {
       "display": false
     },
+    "quoteImage": {
+      "display": false
+    },
     "status": {
       "tag": {
         "inactive": "label-warning",

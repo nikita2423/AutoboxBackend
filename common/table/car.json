@@ -57,6 +57,9 @@
     "carModel_status": {
       "display": false
     },
+    "carModel_quoteImage": {
+      "display": false
+    },
     "fuel_added": {
       "display": false
     },
