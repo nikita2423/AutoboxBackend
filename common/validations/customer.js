@@ -76,21 +76,27 @@ module.exports = ( Customer, server, helper) => {
             return next(new Error("Workshop is required"));
         }*/
       if(instance.firstName){
-          Customer.findById(instance.id)
-              .then(function(customer){
-                  if(customer){
-                      if(customer.firstName){
-                          instance.registerStatus = "registered";
-                          next();
-                      } else{
-                          instance.registerStatus = "notregistered";
-                          next();
+          if(instance.id){
+              Customer.findById(instance.id)
+                  .then(function(customer){
+                      if(customer){
+                          if(customer.firstName){
+                              instance.registerStatus = "registered";
+                              next();
+                          } else{
+                              instance.registerStatus = "notregistered";
+                              next();
+                          }
                       }
-                  }
-              })
-              .catch(function(error){
-                  next(error);
-              });
+                  })
+                  .catch(function(error){
+                      next(error);
+                  });
+          } else{
+              instance.registerStatus = "notRegistered";
+              next();
+          }
+
       } else{
           next();
       }

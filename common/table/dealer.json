@@ -1,4 +1,7 @@
 {
+  "settings": {
+    "create": false
+  },
   "widgets": [
     {
       "label": "Dealers",

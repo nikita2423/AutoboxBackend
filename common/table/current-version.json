@@ -5,6 +5,10 @@
       "label": "Version Code",
       "search": "number"
     },
+    "versionName": {
+      "label": "Version Name",
+      "search": "text"
+    },
     "added": {
       "date": true,
       "search": "date"

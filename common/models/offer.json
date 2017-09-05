@@ -41,6 +41,8 @@
         "templateOptions": {
           "label": "Status of Offer",
           "id": "offerStatus",
+          "inline": true,
+          "colSize": "col-xs-6",
           "priority": 6,
           "options": [
             "active",
@@ -56,6 +58,8 @@
         "type": "input",
         "templateOptions": {
           "type": "date",
+          "inline": true,
+          "colSize": "col-xs-6",
           "priority": 3,
           "label": "Enter Date of Expiry",
           "id": "dateOfExpiry"
@@ -89,8 +93,11 @@
         "btnText": "Add City",
         "searchProp": "name",
         "priority": 2,
+        "type": "smartSelect",
         "search": true,
         "create": false,
+        "inline": true,
+        "colSize": "col-xs-6",
         "id": "AddCity",
         "hide": false,
         "label": "Add City"
@@ -104,8 +111,11 @@
         "btnText": "Add Area",
         "searchProp": "name",
         "priority": 2,
+        "type": "smartSelect",
         "search": true,
         "create": false,
+        "inline": true,
+        "colSize": "col-xs-6",
         "id": "AddArea",
         "hide": false,
         "label": "Add Area"
@@ -119,8 +129,11 @@
         "btnText": "Add Brand",
         "searchProp": "name",
         "priority": 2,
+        "type": "smartSelect",
         "search": true,
         "create": false,
+        "inline": true,
+        "colSize": "col-xs-6",
         "id": "AddBrand",
         "hide": false,
         "label": "Add Brand"
@@ -134,8 +147,11 @@
         "btnText": "Add Dealer",
         "searchProp": "email",
         "priority": 2,
+        "type": "smartSelect",
         "search": true,
         "create": false,
+        "inline": true,
+        "colSize": "col-xs-6",
         "id": "AddDealer",
         "hide": false,
         "label": "Add Dealer"

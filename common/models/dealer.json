@@ -17,6 +17,8 @@
         "templateOptions": {
           "type": "text",
           "priority": 3,
+          "inline": true,
+          "colSize": "col-xs-6",
           "label": "Enter First Name",
           "id": "firstName"
         }
@@ -29,6 +31,8 @@
         "templateOptions": {
           "type": "text",
           "priority": 3,
+          "inline": true,
+          "colSize": "col-xs-6",
           "label": "Enter Last Name",
           "id": "lastName"
         }
@@ -43,6 +47,8 @@
           "type": "password",
           "label": "Enter Password",
           "priority": 7,
+          "inline": true,
+          "colSize": "col-xs-6",
           "id": "password"
         }
       }
@@ -56,7 +62,9 @@
           "type": "email",
           "label": "Enter Dealer email",
           "id": "dealerEmail",
-          "priority": 8
+          "priority": 8,
+          "inline": true,
+          "colSize": "col-xs-6"
         }
       }
     },
@@ -70,23 +78,12 @@
           "label": "Status of Dealer",
           "id": "dealerStatus",
           "priority": 6,
+          "inline": true,
+          "colSize": "col-xs-6",
           "options": [
             "active",
             "inactive"
           ]
-        }
-      }
-    },
-    "noOfVehicleSold": {
-      "type": "number",
-      "required": true,
-      "default": 0,
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "number",
-          "label": "Enter Number Of Vehicles Sold",
-          "id": "vehicleSold"
         }
       }
     },
@@ -99,10 +96,28 @@
           "type": "text",
           "label": "Enter Contact Number",
           "id": "dealerContact",
-          "priority": 8
+          "priority": 8,
+          "inline": true,
+          "colSize": "col-xs-6"
         }
       }
     },
+    "noOfVehicleSold": {
+      "type": "number",
+      "required": true,
+      "default": 0,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "number",
+          "inline": true,
+          "colSize": "col-xs-6",
+          "label": "Enter Number Of Vehicles Sold",
+          "id": "vehicleSold"
+        }
+      }
+    },
+
     "dealerNumber": {
       "type": "string",
       "required": true
@@ -132,10 +147,12 @@
         "searchProp": "name",
         "priority": 2,
         "search": true,
-        "load": true,
+        "type":"smartSelect",
         "create": false,
         "id": "AddArea",
         "hide": false,
+        "inline": true,
+        "colSize": "col-xs-6",
         "label": "Add Area"
       }
     },
@@ -148,9 +165,11 @@
         "searchProp": "name",
         "priority": 2,
         "search": true,
-        "load": true,
+        "type":"smartSelect",
         "create": false,
         "id": "AddCity",
+        "inline": true,
+        "colSize": "col-xs-6",
         "hide": false,
         "label": "Add City"
       }
@@ -164,8 +183,10 @@
         "searchProp": "name",
         "priority": 2,
         "search": true,
-        "load": true,
+        "type":"smartSelect",
         "create": false,
+        "inline": true,
+        "colSize": "col-xs-6",
         "id": "AddBrand",
         "hide": false,
         "label": "Add Brand"

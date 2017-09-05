@@ -14,6 +14,14 @@
       "expiredOn": {
         "required": true,
         "valueNotEquals": ""
+      },
+      "dealer": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "city": {
+        "required": true,
+        "valueNotEquals": ""
       }
     },
     "messages": {
@@ -30,8 +38,15 @@
       "expiredOn": {
         "required": "Expiry Date is required",
         "valueNotEquals": "Expiry Date can't be blank"
+      },
+      "dealer": {
+        "required": "Dealer is required",
+        "valueNotEquals": "Dealer can't be blank"
+      },
+      "city": {
+        "required": "City is required",
+        "valueNotEquals": "City can't be blank"
       }
-
     }
   },
   "complexValidation": {}

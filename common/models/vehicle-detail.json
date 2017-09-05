@@ -93,7 +93,16 @@
     "customer": {
       "type": "belongsTo",
       "model": "Customer",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Customer",
+        "searchProp": "email",
+        "inline": true,
+        "colSize": "col-md-4",
+        "box": "customer",
+        "id": "AddCustomer",
+        "label": "Customer"
+      }
     },
     "vehicleInfo": {
       "type": "belongsTo",

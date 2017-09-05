@@ -19,6 +19,19 @@
         }
       }
     },
+    "versionName": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Version Name",
+          "id": "versionName"
+        }
+      }
+    },
     "added": {
       "type": "date",
       "required": true,

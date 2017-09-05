@@ -45,7 +45,9 @@
               "templateOptions": {
                 "type": "text",
                 "label": "Enter latitude",
-                "id": "latitude"
+                "id": "latitude",
+                "inline": true,
+                "colSize": "col-xs-6"
               }
             },
             {
@@ -54,7 +56,9 @@
               "templateOptions": {
                 "type": "text",
                 "label": "Enter longitude",
-                "id": "longitude"
+                "id": "longitude",
+                "inline": true,
+                "colSize": "col-xs-6"
               }
             }
           ]
@@ -88,27 +92,20 @@
         "btnText": "Add City",
         "searchProp": "name",
         "priority": 2,
+        "type": "smartSelect",
         "search": true,
         "create": false,
         "id": "AddCity",
         "hide": false,
+        "inline": true,
+        "colSize": "col-xs-6",
         "label": "Add City"
       }
     },
     "area": {
       "type": "belongsTo",
       "model": "Area",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Area",
-        "searchProp": "name",
-        "priority": 2,
-        "search": true,
-        "create": false,
-        "id": "AddArea",
-        "hide": false,
-        "label": "Add Area"
-      }
+      "foreignKey": ""
     },
     "emergencyCategory": {
       "type": "belongsTo",
@@ -118,10 +115,13 @@
         "btnText": "Add Category",
         "searchProp": "name",
         "priority": 2,
+        "type": "smartSelect",
         "search": true,
         "create": false,
         "id": "AddCategory",
         "hide": false,
+        "inline": true,
+        "colSize": "col-xs-6",
         "label": "Add Category"
       }
     }

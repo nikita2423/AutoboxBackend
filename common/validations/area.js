@@ -31,6 +31,9 @@ module.exports = (Area, server, helper) =>
         if(!instance.cityId){
             return next(new Error("City is required"));
         }
+        if(!instance.pincode){
+            return next(new Error("Pincode is required"));
+        }
 
        /* if(!instance.countryId){
             return next(new Error("Country is required"));

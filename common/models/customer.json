@@ -61,6 +61,7 @@
     },
     "countryName": {
       "type": "string",
+      "default": "India",
       "template": {
         "type": "input",
         "templateOptions": {
@@ -178,7 +179,7 @@
         "btnText": "Add City",
         "searchProp": "name",
         "priority": 5,
-        "type":"smartSelect",
+        "type": "smartSelect",
         "readOnly": false,
         "id": "AddCity",
         "label": "Add City"

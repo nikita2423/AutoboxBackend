@@ -56,6 +56,10 @@ module.exports = ( Dealer, server, helper) => {
             }
         }
 
+        if(!instance.password){
+            return next(new Error("Password is required"));
+        }
+
         if(instance.email){
             instance.email = trim(instance.email);
             //Sanitize an Email..
@@ -70,13 +74,13 @@ module.exports = ( Dealer, server, helper) => {
             return next(new Error("Brand is required"));
         }
 
-        if(!validate(instance, currentInstance, 'showroomId')){
+       /* if(!validate(instance, currentInstance, 'showroomId')){
             return next(new Error("Showroom is required"));
         }
 
         if(!validate(instance, currentInstance, 'workshopId')){
             return next(new Error("Workshop is required"));
-        }
+        }*/
 
         if(!validate(instance, currentInstance, 'areaId')){
             return next(new Error("Area is required"));

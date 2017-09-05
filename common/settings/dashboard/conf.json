@@ -19,7 +19,6 @@
     "Color",
     "Country",
     "CurrentVersion",
-    "CustomerQuote",
     "Dealer",
     "Emergency",
     "EmergencyCategory",
@@ -27,9 +26,7 @@
     "Feedback",
     "Fuel",
     "GearBox",
-    "Insurance",
     "Offer",
-    "OfferQuery",
     "OldTradeCar",
     "ServiceBooking",
     "ServiceHistory",
@@ -39,9 +36,7 @@
     "Sos",
     "Trim",
     "VehicleDetail",
-    "VehicleInfo",
-    "Workshop",
-    "SnaphyAcl"
+    "Workshop"
   ],
   "services": {},
   "pluginDependencies": {

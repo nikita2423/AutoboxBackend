@@ -47,6 +47,25 @@
           "containerName": "autoboxsnaphy",
           "containerModel": "Container",
           "bind": true,
+          "priority": 1,
+          "fileDataSource": "Image",
+          "onImageUpdate": {
+            "deletePrevious": true
+          }
+        }
+      }
+    },
+    "quoteImage": {
+      "type": "object",
+      "required": false,
+      "template": {
+        "type": "singleFileUpload",
+        "templateOptions": {
+          "label": "Add Car Quote image",
+          "containerName": "autoboxsnaphy",
+          "containerModel": "Container",
+          "bind": true,
+          "priority": 1,
           "fileDataSource": "Image",
           "onImageUpdate": {
             "deletePrevious": true
@@ -83,7 +102,7 @@
         "priority": 2,
         "search": true,
         "create": false,
-        "load": true,
+        "type": "smartSelect",
         "id": "AddBrand",
         "hide": false,
         "label": "Add Brand"

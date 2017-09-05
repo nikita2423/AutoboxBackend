@@ -1,4 +1,8 @@
 {
+  "settings": {
+    "create": false,
+    "edit": false
+  },
   "widgets": [
     {
       "label": "Vehicles Sold",

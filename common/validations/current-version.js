@@ -21,6 +21,10 @@ module.exports = function(Currentversion, server, helper) {
            return next(new Error("Version code is required"));
        }
 
+       if(!instance.versionName){
+           return next(new Error("Version Name is required"));
+       }
+
        next();
    });
 };

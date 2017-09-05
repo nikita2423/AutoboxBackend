@@ -34,7 +34,7 @@
     },
     "latlong": {
       "type": "geopoint",
-      "required": false,
+      "required": true,
       "template": {
         "type": "objectValue",
         "templateOptions": {

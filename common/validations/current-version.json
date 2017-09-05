@@ -3,11 +3,17 @@
     "rules": {
       "versionCode": {
         "required": true
+      },
+      "versionName": {
+        "required": true
       }
     },
     "messages": {
       "versionCode": {
         "required": "Version Code is required"
+      },
+      "versionName": {
+        "required": "Version Name is required"
       }
     }
   },

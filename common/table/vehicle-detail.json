@@ -1,4 +1,8 @@
 {
+  "settings": {
+    "create": false,
+    "edit": false
+  },
   "widgets": [
     {
       "label": "Vehicle Details",
@@ -31,6 +35,34 @@
     "workshopName": {
       "label": "Workshop",
       "search": "text"
+    },
+    "customer_firstName": {
+      "label": "Customer",
+      "search": "text"
+    },
+    "customer_lastName": {
+      "display": false
+    },
+    "customer_status": {
+      "display": false
+    },
+    "customer_added": {
+      "display": false
+    },
+    "customer_registerStatus": {
+      "display": false
+    },
+    "customer_sosStatus": {
+      "display": false
+    },
+    "customer_phoneNumber": {
+      "display": false
+    },
+    "customer_email": {
+      "display": false
+    },
+    "customer_countryName": {
+      "display": false
     }
   }
 }

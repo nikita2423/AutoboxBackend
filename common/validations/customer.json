@@ -14,7 +14,7 @@
         "required": true,
         "email":true
       },
-      "phone": {
+      "phoneNumber": {
         "required": true,
         "valueNotEquals": ""
       },

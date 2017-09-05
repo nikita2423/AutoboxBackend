@@ -57,6 +57,9 @@
       "class":["col-md-12", "clearfix"]
     }
   },
+  "settings": {
+    "create": false
+  },
   "widgets": [
     {
       "label": "Workshops",

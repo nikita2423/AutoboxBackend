@@ -7,16 +7,7 @@
   },
   "properties": {
     "name": {
-      "type": "string",
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "text",
-          "priority": 3,
-          "label": "Enter name",
-          "id": "carName"
-        }
-      }
+      "type": "string"
     },
     "status": {
       "type": "string",
@@ -64,10 +55,10 @@
         "priority": 2,
         "search": true,
         "create": false,
-        "load": true,
+        "type": "smartSelect",
         "id": "AddBrand",
         "hide": false,
-        "label": "Add Brand"
+        "label": "Brand"
       }
     },
     "carModel": {
@@ -80,10 +71,10 @@
         "priority": 2,
         "search": true,
         "create": false,
-        "load": true,
+        "type": "smartSelect",
         "id": "AddCarModel",
         "hide": false,
-        "label": "Add Car Model"
+        "label": "Car Model"
       }
     },
     "fuel": {
@@ -95,11 +86,11 @@
         "searchProp": "name",
         "priority": 2,
         "search": true,
-        "load": true,
+        "type": "smartSelect",
         "create": false,
         "id": "AddFuel",
         "hide": false,
-        "label": "Add Fuel"
+        "label": "Fuel"
       }
     },
     "trim": {
@@ -111,11 +102,11 @@
         "searchProp": "name",
         "priority": 2,
         "search": true,
-        "load": true,
+        "type": "smartSelect",
         "create": false,
         "id": "AddTrim",
         "hide": false,
-        "label": "Add Trim"
+        "label": "Trim"
       }
     },
     "gearBox": {
@@ -127,11 +118,11 @@
         "searchProp": "name",
         "priority": 2,
         "search": true,
-        "load": true,
+        "type": "smartSelect",
         "create": false,
         "id": "AddGearBox",
         "hide": false,
-        "label": "Add GearBox"
+        "label": "GearBox"
       }
     },
     "colors": {

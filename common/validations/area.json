@@ -6,6 +6,10 @@
         "minlength": "2",
         "maxlength": "500"
       },
+      "pincode": {
+        "required": true,
+        "valueNotEquals": ""
+      },
       "city": {
         "required": true,
         "valueNotEquals": ""
@@ -20,6 +24,10 @@
         "required": "Area Name is required",
         "minlength": "Length should be atleast 2",
         "maxlength": "Length can't exceed 500"
+      },
+      "pincode": {
+        "required": "Pincode is required",
+        "valueNotEquals": "Pincode can't be blank"
       },
       "city": {
         "required": "City is required",
