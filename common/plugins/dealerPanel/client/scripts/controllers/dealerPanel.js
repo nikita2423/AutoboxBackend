@@ -29,6 +29,7 @@ angular.module($snaphy.getModuleName())
             HelperService.initialize()
                 .then(function (user) {
                     userObj = user;
+                    console.log(user.id);
                     console.log("User loaded successfully");
                     return $scope.setCurrentState();
                 })

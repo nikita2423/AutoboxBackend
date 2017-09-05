@@ -29,6 +29,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         createServiceBookingMethod();
         createCustomerQuoteMethod();
         findAllCustomerQuoteMethod();
+        createQuoteReplyMethod();
         fetchQuoteReplyFromDealerMethod();
         sendFeedbackMethod();
         addServiceMethod();
@@ -521,6 +522,28 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             ],
             returns: {
                 arg: "customerQuoteList", type: ["CustomerQuote"], root: true
+            }
+        });
+    };
+
+    const createQuoteReplyMethod = function(){
+        const QuoteReply = databaseObj.QuoteReply;
+        QuoteReply.createQuoteReply = createQuoteReply;
+        QuoteReply.remoteMethod("createQuoteReply", {
+          accepts: [
+              {
+                  arg: 'ctx',
+                  type: 'object',
+                  http:{
+                      source: 'context'
+                  }
+              },
+              {
+                  arg: "quoteReplyObj", type: "object"
+              }
+          ] ,
+            returns: {
+              arg: "quoteReplyObj", type: "object"
             }
         });
     };
@@ -2083,6 +2106,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                               return  CustomerQuote.create({
                                   vehicleInfoId: vehicleInfoId,
                                   cityId: customerQuoteObj.cityId,
+                                  currentBrandId: vehicleInfoObj.brandId,
                                   ownershipType: customerQuoteObj.ownershipType,
                                   isFinance: customerQuoteObj.isFinance,
                                   isInsurance: customerQuoteObj.isInsurance,
@@ -2153,6 +2177,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             return CustomerQuote.create({
                                 vehicleInfoId: vehicleInfoId,
                                 quoteType: "t",
+                                currentBrandId: vehicleInfoObj.brandId,
                                 customerId: customerId,
                                 status: "active",
                                 purchaseStatus: "notpurchased"
@@ -2232,6 +2257,46 @@ module.exports = function( server, databaseObj, helper, packageObj) {
               return callback(new Error("User not valid"));
           }
       }
+    };
+
+    const createQuoteReply = function(ctx, quoteReplyObj, callback){
+        const request = ctx.req;
+        if(!quoteReplyObj){
+            callback(new Error("Invalid arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const dealerId = request.accessToken.userId;
+                    const QuoteReply = databaseObj.QuoteReply;
+                    const insurance = quoteReplyObj.insurance? quoteReplyObj.insurance : 0;
+                    QuoteReply.create({
+                        exShowroomPrice : quoteReplyObj.exShowroomPrice,
+                        exchangeBonus : quoteReplyObj.exchangeBonus,
+                        insurance : insurance,
+                        specialDiscount : quoteReplyObj.specialDiscount,
+                        rtoRegistration : quoteReplyObj.rtoRegistration,
+                        loyaltyBonus : quoteReplyObj.loyaltyBonus,
+                        miscCharges : quoteReplyObj.miscCharges,
+                        gst : quoteReplyObj.gst,
+                        roadPrice: quoteReplyObj.roadPrice,
+                        customerQuoteId : quoteReplyObj.customerQuoteId,
+                        dealerId : dealerId
+                    })
+                        .then(function(quoteReply){
+                            if(quoteReply){
+                                callback(null, quoteReply);
+                            }
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+                } else{
+                    callback(new Error("Dealer not found"));
+                }
+            } else{
+                callback(new Error("Dealer not found"));
+            }
+        }
     };
 
     /**

@@ -19,6 +19,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         onOfferCreate();
         onVehicleAddNotification();
         createServiceBookingNotification();
+        sendQuoteReplyNotification();
     };
 
 
@@ -601,8 +602,51 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       });
     };
 
-
-
+    const sendQuoteReplyNotification = function(){
+        const QuoteReply = databaseObj.QuoteReply;
+        let customerObj;
+        QuoteReply.observe("after save", function(ctx, next){
+            const instance = ctx.instance;
+            const quoteReplyObj = instance.toJSON();
+            if(ctx.isNewInstance){
+                process.nextTick(function(){
+                    databaseObj.CustomerQuote.findById(quoteReplyObj.customerQuoteId)
+                        .then(function(customerQuoteObj){
+                            if(customerQuoteObj){
+                                quoteReplyObj.customerQuote = customerQuoteObj;
+                                return databaseObj.Customer.findById(customerQuoteObj.customerId);
+                            }
+                        })
+                        .then(function(customer){
+                            if(customer){
+                                customerObj = customer;
+                            }
+                        })
+                        .then(function(){
+                            const to = customerObj.firstName + " " + customerObj.lastName;
+                            const type = "QuoteReply";
+                            const title = "Hi, Kindly check the new quote reply received from dealer";
+                            var pushFrom = packageObj.companyName;
+                            const instanceId = quoteReplyObj.customerQuoteId;
+                            const message = quoteReplyMessageFormat(to, type, title, instanceId);
+                            if(customerObj.id){
+                                sendNotification(server, message, customerObj.id, pushFrom, function(error){
+                                    if(error){
+                                        console.log(error);
+                                    } else{
+                                        console.log("Push Notification for Quote Reply has been send Successfully!");
+                                    }
+                                })
+                            }
+                        })
+                        .catch(function(error){
+                            console.log(error);
+                        })
+                })
+            }
+            next();
+        })
+    };
 
     const sendNotification = function(app, message, id, from, callback){
         //push.push(app, message, id, from, callback);
@@ -685,6 +729,16 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             id : sosId
         };
 
+        return JSON.stringify(message);
+    };
+
+    var quoteReplyMessageFormat = function(to, eventType, title, customerQuoteId){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            id : customerQuoteId
+        }
         return JSON.stringify(message);
     };
 
