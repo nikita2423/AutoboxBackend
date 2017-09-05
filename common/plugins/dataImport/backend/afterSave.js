@@ -559,7 +559,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 							 series.push(
 							 connectData("colors", "Car", sheetRowObj.Car.results, colorInstance)
 							 .then(function(){
-							 	//callback(null);
+							 	callback(null);
 								 })
 							 );
 							 });

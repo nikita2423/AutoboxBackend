@@ -35,9 +35,9 @@ module.exports = (Car, server, helper) =>
             return next(new Error("Colors is required"));
         }*/
 
-        if(!validate(instance, currentInstance, 'carModelId')){
+       /* if(!validate(instance, currentInstance, 'carModelId')){
             return next(new Error("Car Model is required"));
-        }
+        }*/
 
         /*if(!validate(instance, currentInstance, 'fuelId')){
             return next(new Error("Fuel is required"));
