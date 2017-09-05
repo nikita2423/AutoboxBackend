@@ -559,14 +559,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 							 series.push(
 							 connectData("colors", "Car", sheetRowObj.Car.results, colorInstance)
 							 .then(function(){
-							 	callback(null);
+							 	//callback(null);
 								 })
 							 );
 							 });
 
 							Promise.all(series).then(function(){
 								callback(null);
-							})
+							});
 							 })
 
                             .catch(function (error) {
@@ -619,43 +619,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 })
 				.then(function (updatedData) {
 					resolve();
-                   /* var relatedModelRelationName;
-                    var relatedModelRelationProp;
-					//Now the related model name..relation name
-					var relatedModelRelationObj = relatedModel.definition.settings.relations;
-					for(var relatedRelationName in relatedModelRelationObj){
-						if(relatedModelRelationObj.hasOwnProperty(relatedRelationName)){
-							var relatedRelationProp = relatedModelRelationObj[relatedRelationName];
-							if(relatedRelationProp.model === modelName){
-								relatedModelRelationName = relatedRelationName;
-								relatedModelRelationProp = relatedRelationProp;
-								break;
-							}
-						}
-					}*/
-
-					/*if(relatedModelRelationName) {
-						//If relation value is in instance of array the change it to object..
-						if (relatedModelRelationName[relatedModelRelationName + "_"] instanceof Array) {
-							relatedModelRelationName[relatedModelRelationName + "_"] = {};
-						}
-
-						relatedModelInstance[relatedModelRelationName + "_"] = relatedModelInstance[relatedModelRelationName + "_"] || {};
-						//Now add data to this model too..
-						relatedModelInstance[relatedModelRelationName + "_"][mainModelInstance.id] = true;
-
-						//Now updating the property.. of the related value..
-						relatedModelInstance.updateAttribute(relatedModelRelationName + "_", relatedModelInstance[relatedModelRelationName + "_"], function (err, value) {
-							if (err) {
-								console.error(err);
-								callback(err);
-							} else {
-								console.info("saving related value", value);
-								//Do nothing.. return async callback..success..
-								callback();
-							}
-						});
-					}*/
 
                 })
                 .catch(function(err){

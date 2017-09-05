@@ -10,7 +10,11 @@
         "required": true,
         "valueNotEquals": ""
       },
-      "latlong": {
+      "latitude": {
+        "required": true,
+        "valueNotEquals": ""
+      },
+      "longitude": {
         "required": true,
         "valueNotEquals": ""
       },
@@ -33,9 +37,13 @@
         "required": "Contact is required",
         "valueNotEquals": "Contact can't be blank"
       },
-      "latlong": {
-        "required": "Latlong is required",
-        "valueNotEquals": "LatLong can't be blank"
+      "latitude": {
+        "required": "Latitude is required",
+        "valueNotEquals": "Latitude can't be blank"
+      },
+      "longitude": {
+        "required": "Longitude is required",
+        "valueNotEquals": "Longitude can't be blank"
       },
       "area": {
         "required": "Area is required",
