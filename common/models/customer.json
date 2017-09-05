@@ -142,6 +142,13 @@
     "profilePic": {
       "type": "object"
     },
+    "referralCode": {
+      "type": "string"
+    },
+    "referralCount":{
+       "type": "number",
+      "default": 0
+    },
     "sosStatus": {
       "type": "string",
       "required": true,

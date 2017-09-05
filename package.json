@@ -55,7 +55,8 @@
     "socket.io": "^1.7.2",
     "speakeasy": "^2.0.0",
     "url": "^0.11.0",
-    "validator": "^6.3.0"
+    "validator": "^6.3.0",
+    "voucher-code-generator": "^1.1.1"
   },
   "optionalDependencies": {
     "loopback-explorer": "^1.1.0"

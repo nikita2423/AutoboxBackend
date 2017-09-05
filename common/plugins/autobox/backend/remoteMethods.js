@@ -48,6 +48,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         offerQueryMethod();
         fetchFeedbackShowroomMethod();
         fetchSosSettingsMethod();
+        incrementReferralCountMethod();
     };
 
     const findAllBrandMethod = function(){
@@ -808,6 +809,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         })
     };
 
+
+
     const cancelQuoteMethod = function(){
         const CustomerQuote = databaseObj.CustomerQuote;
         CustomerQuote.cancelQuote = cancelQuote;
@@ -894,7 +897,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         })
     };
 
-
     const fetchSosSettingsMethod = function(){
         const Sos = databaseObj.Sos;
         Sos.fetchSosSettings = fetchSosSettings;
@@ -914,6 +916,27 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         })
     };
 
+    const incrementReferralCountMethod = function(){
+        const Customer = databaseObj.Customer;
+        Customer.incrementReferralCount = incrementReferralCount;
+        Customer.remoteMethod('incrementReferralCount', {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "referralCode", type: "string"
+                }
+            ],
+            returns: {
+                arg: "response", type: "object", root: true
+            }
+        })
+    };
 
     /**
      * To fetch all the Brands
@@ -2858,6 +2881,45 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
         } else{
             callback(new Error("User not valid"));
+        }
+    };
+
+    const incrementReferralCount = function(ctx, referralCode, callback){
+        const request = ctx.req;
+        if(!referralCode){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const customerId = request.accessToken.userId;
+                    const Customer = databaseObj.Customer;
+                    Customer.findOne({
+                        where: {
+                            referralCode: referralCode
+                        }
+                    })
+                        .then(function(customer){
+                            if(customer){
+                                customer.referralCount = customer.referralCount + 1;
+                                return customer.updateAttribute("referralCount", customer.referralCount);
+                            } else{
+                                callback(new Error("Referral Code not found"));
+                            }
+                        })
+                        .then(function(customer){
+                            if(customer){
+                                callback(null, {response:"success"});
+                            }
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
         }
     };
 

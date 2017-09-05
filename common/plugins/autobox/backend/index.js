@@ -19,6 +19,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     var speakeasy = require("speakeasy");
     const SendOtp = require('sendotp');
+    const voucher_codes = require('voucher-code-generator');
 	var secret = speakeasy.generateSecret({length: 20});
 
     const sendOtp = new SendOtp(packageObj.msgAuthKey);
@@ -169,8 +170,21 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			})
 			.then(function(customer){
 				if(customer){
+					if(!customer.referralCode){
+                        const referralCode = voucher_codes.generate({
+                            length: 6,
+                            count : 1
+                        });
+                        return customer.updateAttribute("referralCode", referralCode);
+					} else{
+						return customer.updateAttribute("referralCode", customer.referralCode);
+					}
+				}
+			})
+			.then(function(customer){
+				if(customer){
 					customerInstance = customer;
-					return customer.createAccessToken(31536000);
+                    return customer.createAccessToken(31536000);
 				}
 			})
 
