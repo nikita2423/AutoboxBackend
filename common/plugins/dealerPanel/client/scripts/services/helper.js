@@ -499,7 +499,7 @@ angular.module($snaphy.getModuleName())
                             form: {},
                             title: "Showroom Profile",
                             loadArea: function () {
-                                console.log("Getting loaded");
+
                                 var val = $rootScope.$broadcast("areaLoaded", {
                                     where: {
                                         cityId: settings.config.employee.cityId

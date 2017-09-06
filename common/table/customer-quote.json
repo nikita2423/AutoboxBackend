@@ -6,7 +6,19 @@
       },
       "beforeLoad":{
         "brandId": "$user.brandId"
-      }
+      },
+      "action":[
+        {
+          "title":"Quote Reply",
+          "onClick":{
+            "type":"dialog",
+            "state":"soldViaAutobox.quoteReply",
+            "options":{},
+            "icon": ["fa", "fa-pencil"],
+            "dataTargetId": "customerQuoteReply"
+          }
+        }
+      ]
     }
   },
   "widgets": [
