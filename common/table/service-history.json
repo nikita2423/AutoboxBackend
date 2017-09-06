@@ -66,6 +66,23 @@
     },
     "customer_countryName": {
       "display": false
+    },
+    "vehicleDetail_registrationNumber": {
+      "label": "Registered Number",
+      "search": "text",
+      "display": true
+    },
+    "vehicleDetail_registeredName": {
+      "display": false
+    },
+    "vehicleDetail_showroomName": {
+      "display": false
+    },
+    "vehicleDetail_workshopName": {
+      "display": false
+    },
+    "vehicleDetail_added": {
+      "display": false
     }
   }
 }

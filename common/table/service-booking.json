@@ -90,7 +90,9 @@
       "display": false
     },
     "customer_phoneNumber": {
-      "display": false
+      "label": "Customer Contact",
+      "search": "text",
+      "display": true
     },
     "customer_status": {
       "display": false

@@ -89,7 +89,17 @@
     "vehicleDetail": {
       "type": "belongsTo",
       "model": "VehicleDetail",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Vehicle Detail",
+        "searchProp": "registrationNumber",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddVehicleDetail",
+        "hide": false,
+        "label": "Add Vehicle Detail"
+      }
     }
   },
   "acls": [],

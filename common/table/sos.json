@@ -1,6 +1,6 @@
 {
   "settings": {
-    "create": false,
+    "create": true,
     "edit": false
   },
   "widgets": [
@@ -24,11 +24,13 @@
       "display": false
     },
     "customer_firstName": {
-      "label": "Customer",
+      "label": "Customer First Name",
       "search": "text"
     },
     "customer_lastName": {
-      "display": false
+      "label": "Customer Last Name",
+      "display": true,
+      "search": "text"
     },
     "customer_profilePic": {
       "display": false
@@ -43,7 +45,9 @@
       "display": false
     },
     "customer_phoneNumber": {
-      "display": false
+      "display": true,
+      "label": "Customer Contact",
+      "search": "text"
     },
     "customer_sosStatus": {
       "display": false

@@ -19,8 +19,9 @@
       "display": false
     },
     "phoneNumber": {
-      "display": false,
-      "label": "Mobile"
+      "display": true,
+      "label": "Mobile No.",
+      "search": "text"
     },
     "firstName": {
       "search": "text",
@@ -70,6 +71,7 @@
       "display": false
     },
     "countryName": {
+      "display": false,
       "label": "Country",
       "search": "text"
     },

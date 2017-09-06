@@ -69,9 +69,6 @@
       }
     }
   ],
-  "settings": {
-    "create": false
-  },
   "tables": {
     "name": {
       "search": true

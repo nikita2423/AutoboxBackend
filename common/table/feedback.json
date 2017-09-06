@@ -43,7 +43,9 @@
       "display": false
     },
     "customer_phoneNumber": {
-      "display": false
+      "label": "Customer Contact",
+      "search": "text",
+      "display": true
     },
     "customer_added": {
       "display": false
@@ -84,6 +86,7 @@
       "display": false
     },
     "showroom_name": {
+      "display": false,
       "label": "Showroom",
       "search": "text"
     },
