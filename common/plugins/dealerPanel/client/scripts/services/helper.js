@@ -335,6 +335,49 @@ angular.module($snaphy.getModuleName())
                                 active: false
                             }
                         },
+                        quoteReply:{
+                            data: {},
+                            form: {},
+                            relationDetail: {
+                                "relationName": "quoteReply",
+                                "modelName": "QuoteReply",
+                                beforeSaveHook: [
+                                    //Here data going to be saved..
+                                    function(data){
+
+                                    }
+                                ]
+                            },
+                            validations: {
+                                rules : {
+
+                                },
+                                messages: {
+
+                                }
+                            },
+                            schema : window.STATIC_DATA.schema.QuoteReply,
+                            saveForm: function (formSchema, formData, formModel) {
+                                if(settings.tabs.quoteReply.config.dealerId && settings.tabs.quoteReply.config.customerQuoteId){
+                                    formModel.dealerId        = settings.tabs.quoteReply.config.dealerId;
+                                    formModel.customerQuoteId = settings.tabs.quoteReply.config.customerQuoteId;
+                                    DetailViewResource.saveForm(formSchema, formData, formModel)
+                                        .then(function (data) {
+
+                                        })
+                                        .catch(function (error) {
+
+                                        });
+                                }
+                            },
+                            config: {
+                                stateName: "demo",
+                                stateOptions: {},
+                                active: false,
+                                dealerId: "",
+                                customerQuoteId: ""
+                            }
+                        },
                         manageWorkshopProfile: {
                             load: function () {
                                 changeTab(settings.tabs.manageWorkshopProfile);
@@ -343,7 +386,6 @@ angular.module($snaphy.getModuleName())
                             form: {},
                             title: "Workshop Profile",
                             loadArea: function () {
-                                console.log("Getting loaded");
                                 var val = $rootScope.$broadcast("areaLoaded", {
                                     where: {
                                         cityId: settings.config.employee.cityId
@@ -499,7 +541,7 @@ angular.module($snaphy.getModuleName())
                             form: {},
                             title: "Showroom Profile",
                             loadArea: function () {
-                                console.log("Getting loaded");
+
                                 var val = $rootScope.$broadcast("areaLoaded", {
                                     where: {
                                         cityId: settings.config.employee.cityId

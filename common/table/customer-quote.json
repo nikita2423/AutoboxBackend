@@ -6,7 +6,22 @@
       },
       "beforeLoad":{
         "brandId": "$user.brandId"
-      }
+      },
+      "action":[
+        {
+          "title":"Quote Reply",
+          "onClick":{
+            "type":"dialog",
+            "state":"soldViaAutobox.quoteReply",
+            "options":{
+              "customerQuoteId": "$data.id",
+              "dealerId": "$user.id"
+            },
+            "icon": ["fa", "fa-mail-reply"],
+            "dataTargetId": "customerQuoteReply"
+          }
+        }
+      ]
     }
   },
   "widgets": [

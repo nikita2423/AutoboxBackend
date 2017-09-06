@@ -3,8 +3,8 @@
 angular.module($snaphy.getModuleName())
 
 //Controller for dealerPanelControl ..
-.controller('dealerPanelControl', ['$scope', 'HelperService', 'LoginServices', 'InitTableService', '$rootScope', "$timeout",
-    function($scope, HelperService, LoginServices, InitTableService, $rootScope, $timeout) {
+.controller('dealerPanelControl', ['$scope', 'HelperService', 'LoginServices', 'InitTableService', '$rootScope', "$timeout", '$state',
+    function($scope, HelperService, LoginServices, InitTableService, $rootScope, $timeout, $state) {
         //Checking if default templating feature is enabled..
         var defaultTemplate = $snaphy.loadSettings('dealerPanel', "defaultTemplate");
         $snaphy.setDefaultTemplate(defaultTemplate);
@@ -22,6 +22,15 @@ angular.module($snaphy.getModuleName())
         //workshop initializer
         $scope.initWorkshop = function() {
             //do something here
+        };
+        
+        
+        $scope.quoteReplyInit = function () {
+            $scope.settings.tabs.quoteReply.config.dealerId = "";
+            $scope.settings.tabs.quoteReply.config.customerQuoteId = "";
+
+            $scope.settings.tabs.quoteReply.config.customerQuoteId = $state.params.customerQuoteId;
+            $scope.settings.tabs.quoteReply.config.dealerId = $state.params.dealerId;
         };
 
         $scope.init = function(){

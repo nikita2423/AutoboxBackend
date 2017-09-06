@@ -138,6 +138,19 @@ angular.module($snaphy.getModuleName())
                       redirectTo: loginState
                   }
               }
+          })
+
+          .state('soldViaAutobox.quoteReply', {
+            templateUrl: '/dealerPanel/views/quoteReply.html',
+            controller: 'dealerPanelControl',
+              params: { dealerId: null,  customerQuoteId: null},
+              //Only allow anonym users here
+              data: {
+                  permissions: {
+                      only: [employeeRole],
+                      redirectTo: loginState
+                  }
+              }
           });
 
     }]); //config
