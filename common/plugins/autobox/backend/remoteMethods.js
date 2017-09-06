@@ -2105,61 +2105,132 @@ module.exports = function( server, databaseObj, helper, packageObj) {
               if(request.accessToken.userId){
                   const customerId = request.accessToken.userId;
                   const VehicleInfo = databaseObj.VehicleInfo;
-                  VehicleInfo.create({
-                      colorId : vehicleInfoObj.colorId,
-                      brandId: vehicleInfoObj.brandId,
-                      carModelId: vehicleInfoObj.carModelId,
-                      trimId: vehicleInfoObj.trimId,
-                      customerId: customerId,
-                      gearBoxId: vehicleInfoObj.gearBoxId,
-                      fuelId: vehicleInfoObj.fuelId,
-                      vehicleModel: vehicleInfoObj.vehicleModel,
-                      vehicleType: "car",
-                      quoteType : "q",
-                      fuelType: vehicleInfoObj.fuelType,
-                      vehicleTrim: vehicleInfoObj.vehicleTrim,
-                      vehicleBrand: vehicleInfoObj.vehicleBrand,
-                      vehicleGearbox : vehicleInfoObj.vehicleGearbox,
-                      vehicleColor: vehicleInfoObj.vehicleColor
-                  })
-                      .then(function(vehicleInfoObj){
-                          if(vehicleInfoObj){
-                              const vehicleInfoId = vehicleInfoObj.id;
-                              const CustomerQuote = databaseObj.CustomerQuote;
-                              return  CustomerQuote.create({
-                                  vehicleInfoId: vehicleInfoId,
-                                  cityId: customerQuoteObj.cityId,
-                                  currentBrandId: vehicleInfoObj.brandId,
-                                  ownershipType: customerQuoteObj.ownershipType,
-                                  isFinance: customerQuoteObj.isFinance,
-                                  isInsurance: customerQuoteObj.isInsurance,
-                                  isOldVehicleTrade: customerQuoteObj.isOldVehicleTrade,
-                                  brandId: customerQuoteObj.brandId,
-                                  carModelId: customerQuoteObj.carModelId,
-                                  trimId: customerQuoteObj.trimId,
-                                  quoteType: customerQuoteObj.quoteType,
-                                  customerId: customerId,
-                                  soldViaAutobox: "no",
-                                  gpsTracker: "no",
-                                  dashCamera: "no",
-                                  testDrive: "no",
-                                  status: "active",
-                                  purchaseStatus: "notpurchased"
-                              })
-                          } else{
-                              callback(new Error("Vehicle not found"));
-                          }
+                  const CustomerQuote = databaseObj.CustomerQuote;
+                  if(customerQuoteObj.isOldVehicleTrade === "yes"){
+                      const OldTradeCar = databaseObj.OldTradeCar;
+                      OldTradeCar.create({
+                          brandId : customerQuoteObj.brandId,
+                          carModelId : customerQuoteObj.carModelId,
+                          trimId : customerQuoteObj.trimId,
+                          customerId : customerId
                       })
+                          .then(function(oldTradeCar){
+                              if(oldTradeCar){
+                                  return VehicleInfo.create({
+                                      colorId : vehicleInfoObj.colorId,
+                                      brandId: vehicleInfoObj.brandId,
+                                      carModelId: vehicleInfoObj.carModelId,
+                                      trimId: vehicleInfoObj.trimId,
+                                      customerId: customerId,
+                                      gearBoxId: vehicleInfoObj.gearBoxId,
+                                      fuelId: vehicleInfoObj.fuelId,
+                                      vehicleModel: vehicleInfoObj.vehicleModel,
+                                      vehicleType: "car",
+                                      quoteType : "q",
+                                      fuelType: vehicleInfoObj.fuelType,
+                                      vehicleTrim: vehicleInfoObj.vehicleTrim,
+                                      vehicleBrand: vehicleInfoObj.vehicleBrand,
+                                      vehicleGearbox : vehicleInfoObj.vehicleGearbox,
+                                      vehicleColor: vehicleInfoObj.vehicleColor
+                                  })
+                              }
+                          })
+                          .then(function(vehicleInfoObj){
+                              if(vehicleInfoObj){
+                                  const vehicleInfoId = vehicleInfoObj.id;
 
-                      .then(function(customerQuote){
-                          if(customerQuote){
-                              callback(null, customerQuote);
-                          }
-                      })
+                                  return  CustomerQuote.create({
+                                      vehicleInfoId: vehicleInfoId,
+                                      cityId: customerQuoteObj.cityId,
+                                      currentBrandId: vehicleInfoObj.brandId,
+                                      ownershipType: customerQuoteObj.ownershipType,
+                                      isFinance: customerQuoteObj.isFinance,
+                                      isInsurance: customerQuoteObj.isInsurance,
+                                      isOldVehicleTrade: customerQuoteObj.isOldVehicleTrade,
+                                      brandId: customerQuoteObj.brandId,
+                                      carModelId: customerQuoteObj.carModelId,
+                                      trimId: customerQuoteObj.trimId,
+                                      quoteType: customerQuoteObj.quoteType,
+                                      customerId: customerId,
+                                      soldViaAutobox: "no",
+                                      gpsTracker: "no",
+                                      dashCamera: "no",
+                                      testDrive: "no",
+                                      status: "active",
+                                      purchaseStatus: "notpurchased"
+                                  })
+                              } else{
+                                  callback(new Error("Vehicle not found"));
+                              }
+                          })
 
-                      .catch(function (error) {
-                          callback(error);
+                          .then(function(customerQuote){
+                              if(customerQuote){
+                                  callback(null, customerQuote);
+                              }
+                          })
+
+                          .catch(function (error) {
+                              callback(error);
+                          })
+                  } else{
+                      VehicleInfo.create({
+                          colorId : vehicleInfoObj.colorId,
+                          brandId: vehicleInfoObj.brandId,
+                          carModelId: vehicleInfoObj.carModelId,
+                          trimId: vehicleInfoObj.trimId,
+                          customerId: customerId,
+                          gearBoxId: vehicleInfoObj.gearBoxId,
+                          fuelId: vehicleInfoObj.fuelId,
+                          vehicleModel: vehicleInfoObj.vehicleModel,
+                          vehicleType: "car",
+                          quoteType : "q",
+                          fuelType: vehicleInfoObj.fuelType,
+                          vehicleTrim: vehicleInfoObj.vehicleTrim,
+                          vehicleBrand: vehicleInfoObj.vehicleBrand,
+                          vehicleGearbox : vehicleInfoObj.vehicleGearbox,
+                          vehicleColor: vehicleInfoObj.vehicleColor
                       })
+                          .then(function(vehicleInfoObj){
+                              if(vehicleInfoObj){
+                                  const vehicleInfoId = vehicleInfoObj.id;
+
+                                  return  CustomerQuote.create({
+                                      vehicleInfoId: vehicleInfoId,
+                                      cityId: customerQuoteObj.cityId,
+                                      currentBrandId: vehicleInfoObj.brandId,
+                                      ownershipType: customerQuoteObj.ownershipType,
+                                      isFinance: customerQuoteObj.isFinance,
+                                      isInsurance: customerQuoteObj.isInsurance,
+                                      isOldVehicleTrade: customerQuoteObj.isOldVehicleTrade,
+                                      brandId: customerQuoteObj.brandId,
+                                      carModelId: customerQuoteObj.carModelId,
+                                      trimId: customerQuoteObj.trimId,
+                                      quoteType: customerQuoteObj.quoteType,
+                                      customerId: customerId,
+                                      soldViaAutobox: "no",
+                                      gpsTracker: "no",
+                                      dashCamera: "no",
+                                      testDrive: "no",
+                                      status: "active",
+                                      purchaseStatus: "notpurchased"
+                                  })
+                              } else{
+                                  callback(new Error("Vehicle not found"));
+                              }
+                          })
+
+                          .then(function(customerQuote){
+                              if(customerQuote){
+                                  callback(null, customerQuote);
+                              }
+                          })
+
+                          .catch(function (error) {
+                              callback(error);
+                          })
+                  }
+
               } else{
                   return callback(new Error("User not valid"));
               }

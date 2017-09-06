@@ -14,5 +14,8 @@
   "customer": {
     "subject": "Registered Successfully",
     "subject_complete_purchase": "Congratulations For New Purchase"
+  },
+  "admin": {
+    "subject_add_old_vehicle": "New Old Trade Car Arrived"
   }
 }

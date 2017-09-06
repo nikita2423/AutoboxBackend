@@ -19,7 +19,7 @@
     },
     "updated": {
       "type": "date",
-      "required": true,
+      "required": false,
       "defaultFn": "now"
     }
   },
@@ -28,17 +28,7 @@
     "city": {
       "type": "belongsTo",
       "model": "City",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Register City",
-        "searchProp": "name",
-        "priority": 2,
-        "search": true,
-        "create": false,
-        "id": "AddCity",
-        "hide": false,
-        "label": "Add Register City"
-      }
+      "foreignKey": ""
     },
     "customer": {
       "type": "belongsTo",
@@ -83,6 +73,21 @@
         "id": "AddBrand",
         "hide": false,
         "label": "Add Brand"
+      }
+    },
+    "trim": {
+      "type": "belongsTo",
+      "model": "Trim",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Trim",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddTrim",
+        "hide": false,
+        "label": "Add Trim"
       }
     }
   },

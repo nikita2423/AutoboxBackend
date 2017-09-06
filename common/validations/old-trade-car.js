@@ -23,13 +23,13 @@ module.exports = (Oldtradecar, server, helper) =>
             instance.updated = new Date();
         }
 
-        if(!validate(instance, currentInstance, "areaId")){
+     /*   if(!validate(instance, currentInstance, "areaId")){
             return next(new Error("Area is required"));
         }
 
         if(!validate(instance, currentInstance, "cityId")){
             return next(new Error("Register city is required"));
-        }
+        }*/
 
         if(!validate(instance, currentInstance, "customerId")){
             return next(new Error("Customer is required"));

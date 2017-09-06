@@ -24,6 +24,12 @@
         "label": "On Complete Purchase",
         "templatePath": "../../plugins/autobox/backend/email/customer/customer_complete_purchase.ejs",
         "display": false
+      },
+      "onOldTradeCarAdded": {
+        "name": "onOldTradeCarAdded",
+        "label": "On Old Trade Car Added",
+        "templatePath": "../../plugins/autobox/backend/email/admin/add_old_trade_car.ejs",
+        "display": false
       }
     }
   }],

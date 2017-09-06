@@ -79,6 +79,9 @@
     "carModel_image": {
       "display": false
     },
+    "carModel_quoteImage": {
+      "display": false
+    },
     "brand_image": {
       "display": false
     },
@@ -90,6 +93,16 @@
       "display": false
     },
     "brand_added": {
+      "display": false
+    },
+    "trim_added": {
+      "display": false
+    },
+    "trim_name": {
+      "label": "Variant",
+      "search": "text"
+    },
+    "trim_status": {
       "display": false
     }
   }

@@ -20,6 +20,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         onVehicleAddNotification();
         createServiceBookingNotification();
         sendQuoteReplyNotification();
+        sendOldTradeCarEmail();
     };
 
 
@@ -190,6 +191,57 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 });
             }
 
+            next();
+        });
+    };
+
+    const sendOldTradeCarEmail = function(){
+        const OldTradeCar = databaseObj.OldTradeCar;
+        OldTradeCar.observe("after save", function(ctx, next){
+            const instance = ctx.instance;
+            const oldTradeVehicleObj = instance.toJSON();
+            process.nextTick(function(){
+               databaseObj.Customer.findById(oldTradeVehicleObj.customerId)
+                   .then(function(customer){
+                       if(customer){
+                           oldTradeVehicleObj.customer = customer;
+                           return databaseObj.Brand.findById(oldTradeVehicleObj.brandId);
+                       }
+                   })
+                   .then(function(brand){
+                       if(brand){
+                           oldTradeVehicleObj.brand = brand;
+                           return databaseObj.CarModel.findById(oldTradeVehicleObj.carModelId);
+                       }
+                   })
+                   .then(function(carModel){
+                       if(carModel){
+                           oldTradeVehicleObj.carModel = carModel;
+                           return databaseObj.Trim.findById(oldTradeVehicleObj.trimId);
+                       }
+                   })
+                   .then(function(trim){
+                       if(trim){
+                           oldTradeVehicleObj.trim = trim;
+                       }
+                   })
+                   .then(function(){
+                       const subject = packageObj.admin.subject_add_old_vehicle;
+                       const to = [];
+                       const from = packageObj.from;
+                       to.push("nikita@snaphy.com");
+                       emailPlugin.adminEmail.onOldTradeCarAdded(from, to, subject, oldTradeVehicleObj, function(err, send){
+                          if(err){
+                              console.log(err);
+                          } else{
+                              console.log("Email Send Successfully for old trade vehicle");
+                          }
+                       });
+                   })
+                   .catch(function(error){
+                       console.log(error);
+                   });
+            });
             next();
         });
     };
