@@ -139,32 +139,12 @@
     "customerQuote": {
       "type": "belongsTo",
       "model": "CustomerQuote",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Customer Quote",
-        "searchProp": "quoteNumber",
-        "priority": 2,
-        "search": true,
-        "create": false,
-        "id": "AddCustomerQuote",
-        "hide": false,
-        "label": "Add Customer Quote"
-      }
+      "foreignKey": ""
     },
     "dealer": {
       "type": "belongsTo",
       "model": "Dealer",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Dealer",
-        "searchProp": "name",
-        "priority": 2,
-        "search": true,
-        "create": false,
-        "id": "AddDealer",
-        "hide": false,
-        "label": "Add Dealer"
-      }
+      "foreignKey": ""
     }
   },
   "acls": [],

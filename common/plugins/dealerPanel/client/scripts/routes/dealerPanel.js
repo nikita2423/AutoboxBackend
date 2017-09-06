@@ -143,6 +143,7 @@ angular.module($snaphy.getModuleName())
           .state('soldViaAutobox.quoteReply', {
             templateUrl: '/dealerPanel/views/quoteReply.html',
             controller: 'dealerPanelControl',
+              params: { dealerId: null,  customerQuoteId: null},
               //Only allow anonym users here
               data: {
                   permissions: {

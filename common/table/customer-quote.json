@@ -13,8 +13,11 @@
           "onClick":{
             "type":"dialog",
             "state":"soldViaAutobox.quoteReply",
-            "options":{},
-            "icon": ["fa", "fa-pencil"],
+            "options":{
+              "customerQuoteId": "$data.id",
+              "dealerId": "$user.id"
+            },
+            "icon": ["fa", "fa-mail-reply"],
             "dataTargetId": "customerQuoteReply"
           }
         }
