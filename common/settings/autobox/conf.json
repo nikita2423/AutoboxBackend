@@ -5,7 +5,8 @@
   "activate": true,
   "pluginDependencies": {},
   "load":{
-    "dealerPanel": false
+    "dealerPanel": false,
+    "root": true
   },
   "companyName": "Autobox",
   "msgAuthKey": "169390A6seo9UTfz69598d4606",

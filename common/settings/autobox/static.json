@@ -1,10 +1,6 @@
 {
-  "css": {
-    "/autobox/style/autobox.css": "autoboxCss"
-  },
   "js": {
-    "/autobox/scripts/routes/autobox.js": "autoboxRoute",
-    "/autobox/scripts/controllers/autobox.js": "autoboxController"
+    "/autobox/scripts/autobox.run.js": "autoboxrunScript"
   },
   "moduleDependencies":{
 
