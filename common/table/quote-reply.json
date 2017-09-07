@@ -1,4 +1,14 @@
 {
+  "box":{
+    "ShowroomPrice":{
+      "priority":1,
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["clearfix"]
+    }
+  },
   "widgets": [
     {
       "label": "QuoteReplies",

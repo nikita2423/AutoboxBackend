@@ -15,7 +15,10 @@
           "type": "text",
           "priority": 3,
           "label": "Enter ExShowroom Price",
-          "id": "exShowroomPrice"
+          "id": "exShowroomPrice",
+          "box": "ShowroomPrice",
+          "inline": true,
+          "colSize": "col-md-6"
         }
       }
     },
@@ -28,7 +31,10 @@
           "type": "text",
           "priority": 3,
           "label": "Enter name",
-          "id": "breakdownName"
+          "id": "breakdownName",
+          "box": "ShowroomPrice",
+          "inline": true,
+          "colSize": "col-md-6"
         }
       }
     },

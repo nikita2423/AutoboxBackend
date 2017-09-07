@@ -123,7 +123,29 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             const waitingTimeLimit = moment(customerQuote.added).add(packageObj.WAITING_TIME, "hours");
                             if(!moment().isAfter(waitingTimeLimit)){
                                 deleteCustomerQuoteBasicDetails(customerQuote);
-                                resolve(customerQuote);
+                                const QuoteReply = databaseObj.QuoteReply;
+                                QuoteReply.findOne({
+                                    where:{
+                                        dealerId: userId,
+                                        customerQuoteId: customerQuote.id
+                                    }
+                                })
+                                    .then(function (quoteReply) {
+                                        if(!quoteReply){
+                                            ///Niether vehicle is sold yet nor the dealer has replied the quote yet..
+                                            //Disable the button dealer cannot send quote after 2 days..
+                                            customerQuote[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
+                                        }else{
+                                            //Do nothing here..
+                                        }
+                                    })
+                                    .then(function () {
+                                        resolve(customerQuote);
+                                    })
+                                    .catch(function (error) {
+                                        customerQuote[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
+                                        reject(error);
+                                    });
                             }else{
                                 //Check if dealer has given the customer quote or not...
 								const QuoteReply = databaseObj.QuoteReply;
