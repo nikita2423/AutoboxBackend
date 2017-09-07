@@ -922,13 +922,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         Customer.remoteMethod('incrementReferralCount', {
             accepts: [
                 {
-                    arg: 'ctx',
-                    type: 'object',
-                    http: {
-                        source: 'context'
-                    }
-                },
-                {
                     arg: "referralCode", type: "string"
                 }
             ],
@@ -2954,42 +2947,32 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         }
     };
 
-    const incrementReferralCount = function(ctx, referralCode, callback){
-        const request = ctx.req;
+    const incrementReferralCount = function(referralCode, callback){
         if(!referralCode){
             callback(new Error("Invalid Arguments"));
         } else{
-            if(request.accessToken){
-                if(request.accessToken.userId){
-                    const customerId = request.accessToken.userId;
-                    const Customer = databaseObj.Customer;
-                    Customer.findOne({
-                        where: {
-                            referralCode: referralCode
-                        }
-                    })
-                        .then(function(customer){
-                            if(customer){
-                                customer.referralCount = customer.referralCount + 1;
-                                return customer.updateAttribute("referralCount", customer.referralCount);
-                            } else{
-                                callback(new Error("Referral Code not found"));
-                            }
-                        })
-                        .then(function(customer){
-                            if(customer){
-                                callback(null, {response:"success"});
-                            }
-                        })
-                        .catch(function(error){
-                            callback(error);
-                        })
-                } else{
-                    callback(new Error("User not valid"));
+            const Customer = databaseObj.Customer;
+            Customer.findOne({
+                where: {
+                    referralCode: referralCode
                 }
-            } else{
-                callback(new Error("User not valid"));
-            }
+            })
+            .then(function(customer){
+                if(customer){
+                    customer.referralCount = customer.referralCount + 1;
+                    return customer.updateAttribute("referralCount", customer.referralCount);
+                } else{
+                    callback(new Error("Referral Code not found"));
+                }
+            })
+            .then(function(customer){
+                if(customer){
+                    callback(null, {response:"success"});
+                }
+            })
+            .catch(function(error){
+                callback(error);
+            })
         }
     };
 
