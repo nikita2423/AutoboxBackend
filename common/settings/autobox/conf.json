@@ -17,5 +17,17 @@
   },
   "admin": {
     "subject_add_old_vehicle": "New Old Trade Car Arrived"
+  },
+  "WAITING_TIME": 48,
+  "DEALER_ROLE": "Dealer",
+  "soldViaAutobox":{
+    "yes": "yes",
+    "no": "no"
+  },
+  "EDIT_BUTTON": "editButton",
+  "REPLY_BUTTON": "replyButton",
+  "disableButton":{
+    "disable": "disable",
+    "enable": "enable"
   }
 }

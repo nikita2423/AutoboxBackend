@@ -244,6 +244,28 @@
         "label": "Add Customer"
       }
     },
+    "dealer": {
+      "type": "belongsTo",
+      "model": "Dealer",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Dealer",
+        "searchProp": "email",
+        "search": true,
+        "create": false,
+        "id": "AddDealer",
+        "hide": false,
+        "label": "Dealer",
+        "acl":{
+          "relations":{
+            "accept":[],
+            "reject":["Dealer"]
+          },
+          "accept":[],
+          "reject":["Dealer"]
+        }
+      }
+    },
     "city": {
       "type": "belongsTo",
       "model": "City",

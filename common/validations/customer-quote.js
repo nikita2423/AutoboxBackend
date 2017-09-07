@@ -3,12 +3,30 @@
  */
 module.exports = (Customerquote, server, helper) =>
 {
-    const {validate} = require("../helper/usefullMethods");
-    const schedule = require('node-schedule');
-    const moment = require('moment');
-    const push = helper.loadPlugin("pushService");
+    const {validate}    = require("../helper/usefullMethods");
+    const schedule      = require('node-schedule');
+    const moment        = require('moment');
+    const push          = helper.loadPlugin("pushService");
+    const autoboxPlugin = helper.loadPlugin("autobox");
     const OWNERSHIPTYPE = ["individual", "corporate"];
-    const QUOTETYPE = ["q", "t"];
+    const QUOTETYPE     = ["q", "t"];
+
+    /*Override the custmer quote method for Hiding the Mobile number*/
+    Customerquote.afterRemote("find", function (ctx, data, next) {
+        if(data){
+            autoboxPlugin.overrideCustomerQuoteData(ctx.req, data)
+                .then(function () {
+                    next();
+                })
+                .catch(function (error) {
+                    console.error(error);
+                    next(error);
+                });
+        }else{
+            next();
+        }
+    });
+
 
 
    Customerquote.observe("before save", function(ctx,next){

@@ -14,13 +14,16 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 	 * @return {[type]} [description]
 	 */
 
-    const remoteMethods = require("./remoteMethods")(server, databaseObj, helper, packageObj);
+	const Promise          = require("bluebird");
+    const remoteMethods    = require("./remoteMethods")(server, databaseObj, helper, packageObj);
     const pushNotification = require("./pushNotification")(server, databaseObj, helper, packageObj);
 
-    var speakeasy = require("speakeasy");
-    const SendOtp = require('sendotp');
-    const voucher_codes = require('voucher-code-generator');
-	var secret = speakeasy.generateSecret({length: 20});
+    var speakeasy          = require("speakeasy");
+    var moment             = require("moment");
+    const SendOtp          = require('sendotp');
+    const voucher_codes    = require('voucher-code-generator');
+	var secret             = speakeasy.generateSecret({length: 20});
+	const loginPlugin      = helper.loadPlugin("login");
 
     const sendOtp = new SendOtp(packageObj.msgAuthKey);
 
@@ -31,6 +34,173 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         remoteMethods.init();
         pushNotification.init();
 	};
+
+
+    /**
+	 * Override the customer quote data according the dealer.
+     * @param req
+     * @param customerQuoteList
+     */
+	const overrideCustomerQuoteData = function (req, customerQuoteList) {
+		return new Promise(function (resolve, reject) {
+			let userId;
+			if(req){
+				if(req.accessToken){
+					if(req.accessToken.userId){
+						userId = req.accessToken.userId;
+					}
+				}
+			}
+
+            getAuthorisedRoles(req)
+				.then(function (roles) {
+					const promiseList = [];
+                    if(customerQuoteList){
+                        if(customerQuoteList.length){
+                            customerQuoteList.forEach(function (customerQuoteItem, index) {
+								promiseList.push(new Promise(function (resolve, reject) {
+                                    filterCustomerQuote(customerQuoteItem, roles, userId)
+										.then(function (customerQuote) {
+											customerQuoteList.splice(index, 1, customerQuote);
+                                        })
+										.then(function () {
+											resolve();
+                                        })
+										.catch(function (error) {
+											reject(error);
+                                        })
+                                }));
+                            });
+                        }
+                    }
+					return Promise.all(promiseList);
+                })
+				.then(function () {
+					resolve();
+                })
+				.catch(function (error) {
+					reject(error);
+                });
+        });
+    };
+
+
+    /**
+	 * Filter Individual Customer Quote According to the dealer.
+     * @param customerQuote
+     * @param roles
+     * @param userId
+     */
+	const filterCustomerQuote = function (customerQuote, roles, userId) {
+		return new Promise(function (resolve, reject) {
+			if(customerQuote){
+                customerQuote = customerQuote.toJSON();
+			}
+
+			//Proceed only if the role is of dealer..
+			if(roles.indexOf(packageObj.DEALER_ROLE) !== -1){
+                if(customerQuote){
+                    if(customerQuote.added){
+                        //Check if this car is already sold by autobox or not..
+                        if(customerQuote.soldViaAutobox === packageObj.soldViaAutobox.yes){
+                            //Now check if the. current dealer has sold the car..
+							if(customerQuote.dealerId.toString() === userId.toString()){
+								//Current dealer has sold the car...allow to dealer to display the customer info..
+								//Display all the information..of customer in this case..
+								//Do nothing here..
+							}else{
+                                deleteCustomerQuoteBasicDetails(customerQuote);
+								//if some other dealer has sold the car.. then..
+								//Display a dummy no button.. and disable all functionality..
+                                customerQuote.soldViaAutobox = packageObj.soldViaAutobox.no;
+                                customerQuote.gpsTracker     = packageObj.soldViaAutobox.no;
+                                customerQuote.dashCamera     = packageObj.soldViaAutobox.no;
+								customerQuote[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
+								customerQuote[packageObj.REPLY_BUTTON] = packageObj.disableButton.disable;
+							}
+                            resolve(customerQuote);
+                        }else{
+                            const waitingTimeLimit = moment(customerQuote.added).add(packageObj.WAITING_TIME, "hours");
+                            if(!moment().isAfter(waitingTimeLimit)){
+                                deleteCustomerQuoteBasicDetails(customerQuote);
+                                resolve(customerQuote);
+                            }else{
+                                //Check if dealer has given the customer quote or not...
+								const QuoteReply = databaseObj.QuoteReply;
+								QuoteReply.findOne({
+									where:{
+										dealerId: userId,
+										customerQuoteId: customerQuote.id
+									}
+								})
+									.then(function (quoteReply) {
+										if(!quoteReply){
+                                            deleteCustomerQuoteBasicDetails(customerQuote);
+											///Niether vehicle is sold yet nor the dealer has replied the quote yet..
+											//Disable the button dealer cannot send quote after 2 days..
+                                            customerQuote[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
+                                            customerQuote[packageObj.REPLY_BUTTON] = packageObj.disableButton.disable;
+										}else{
+											//Do nothing here..
+										}
+                                    })
+									.then(function () {
+                                        resolve(customerQuote);
+                                    })
+									.catch(function (error) {
+										reject(error);
+                                    });
+                            }
+						}
+                    }else{
+                    	reject(new Error("Added date is required."));
+					}
+                }else{
+                    resolve(customerQuote);
+				}
+			}else{
+				//Dealer is not requesting the data...
+				resolve(customerQuote);
+			}
+        });
+    };
+
+
+    /**
+	 * Delete basic details of customer Quote
+     * @param customerQuote
+     */
+	const deleteCustomerQuoteBasicDetails = function (customerQuote) {
+		if(customerQuote){
+			if(customerQuote.customer){
+                //Remote the customer basic details..
+                delete customerQuote.customer.phoneNumber;
+                delete customerQuote.customer.referralCode;
+                delete customerQuote.customer.referralCount;
+                delete customerQuote.customer.sosStatus;
+                delete customerQuote.customer.googleRefreshToken;
+                delete customerQuote.customer.email;
+			}
+		}
+
+    };
+
+
+    /**
+	 * Get the authorised roles..
+     * @param req
+     */
+	const getAuthorisedRoles = function (req) {
+		return new Promise(function (resolve, reject) {
+            loginPlugin.getRoles(server, req, function (error, roles) {
+				if(error){
+					reject(error);
+				}else{
+					resolve(roles);
+				}
+            });
+        });
+    };
 
 
 	const requestOtpMethod = function(){
@@ -205,6 +375,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
 	//return all the methods that you wish to provide user to extend this plugin.
 	return {
-		init: init
+		init: init,
+        overrideCustomerQuoteData: overrideCustomerQuoteData
 	};
 }; //module.exports
