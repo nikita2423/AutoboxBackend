@@ -27,8 +27,8 @@
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Enter name",
-          "id": "breakdownName"
+          "label": "Enter Exchange Bonus",
+          "id": "exchangeBonus"
         }
       }
     },

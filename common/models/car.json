@@ -70,6 +70,12 @@
         "searchProp": "name",
         "priority": 2,
         "search": true,
+        "where" : {
+          "brandId":{
+            "relationName": "brand",
+            "relationKey": "id"
+          }
+        },
         "create": false,
         "type": "smartSelect",
         "id": "AddCarModel",
