@@ -15,7 +15,10 @@
           "type": "text",
           "priority": 3,
           "label": "Enter ExShowroom Price",
-          "id": "exShowroomPrice"
+          "id": "exShowroomPrice",
+          "box": "ShowroomPrice",
+          "inline": true,
+          "colSize": "col-md-6"
         }
       }
     },
@@ -27,8 +30,11 @@
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Enter Exchange Bonus",
-          "id": "exchangeBonus"
+          "label": "Enter name",
+          "id": "breakdownName",
+          "box": "ShowroomPrice",
+          "inline": true,
+          "colSize": "col-md-6"
         }
       }
     },

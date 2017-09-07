@@ -5,7 +5,8 @@
   "activate": true,
   "pluginDependencies": {},
   "load":{
-    "dealerPanel": false
+    "dealerPanel": false,
+    "root": true
   },
   "companyName": "Autobox",
   "msgAuthKey": "169390A6seo9UTfz69598d4606",
@@ -17,5 +18,17 @@
   },
   "admin": {
     "subject_add_old_vehicle": "New Old Trade Car Arrived"
+  },
+  "WAITING_TIME": 48,
+  "DEALER_ROLE": "Dealer",
+  "soldViaAutobox":{
+    "yes": "yes",
+    "no": "no"
+  },
+  "EDIT_BUTTON": "editButton",
+  "REPLY_BUTTON": "replyButton",
+  "disableButton":{
+    "disable": "disable",
+    "enable": "enable"
   }
 }

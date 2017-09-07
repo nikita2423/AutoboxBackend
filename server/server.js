@@ -36,25 +36,30 @@ app.use(loopback.token({
 app.disable('x-powered-by');
 
 app.use(function (req, res, next) {
-    if(req.headers.authorization){
-        const AccessToken = app.models["AccessToken"];
+    if(!req.accessToken){
         if(req.headers.authorization){
-            AccessToken.findById(req.headers.authorization)
-                .then(function (accessToken) {
-                    req.accessToken = accessToken || null;
-                    next();
-                })
-                .catch(function (error) {
-                    req.accessToken = null;
-                    next();
-                });
+            const AccessToken = app.models["AccessToken"];
+            if(req.headers.authorization){
+                AccessToken.findById(req.headers.authorization)
+                    .then(function (accessToken) {
+                        req.accessToken = accessToken || null;
+                        next();
+                    })
+                    .catch(function (error) {
+                        req.accessToken = null;
+                        next();
+                    });
+            }else{
+                next();
+            }
         }else{
+            //req.accessToken = null;
             next();
         }
     }else{
-        //req.accessToken = null;
         next();
     }
+
 });
 
 // Bootstrap the application, configure models, datasources and middleware.

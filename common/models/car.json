@@ -56,6 +56,7 @@
         "search": true,
         "create": false,
         "type": "smartSelect",
+        "onSelect":"onCarBrandSelected",
         "id": "AddBrand",
         "hide": false,
         "label": "Brand"
@@ -77,6 +78,8 @@
           }
         },
         "create": false,
+        "loadWhen": "brandHasBeenLoaded",
+        "onSelect":"onCarSelected",
         "type": "smartSelect",
         "id": "AddCarModel",
         "hide": false,

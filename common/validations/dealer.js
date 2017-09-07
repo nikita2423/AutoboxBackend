@@ -82,9 +82,9 @@ module.exports = ( Dealer, server, helper) => {
             return next(new Error("Workshop is required"));
         }*/
 
-        if(!validate(instance, currentInstance, 'areaId')){
+       /* if(!validate(instance, currentInstance, 'areaId')){
             return next(new Error("Area is required"));
-        }
+        }*/
 
         if(!validate(instance, currentInstance, 'cityId')){
             return next(new Error("City is required"));

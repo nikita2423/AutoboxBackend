@@ -26,11 +26,14 @@ angular.module($snaphy.getModuleName())
         
         
         $scope.quoteReplyInit = function () {
+            $scope.settings.tabs.quoteReply.data = {};
+            $scope.settings.tabs.quoteReply.form = {};
             $scope.settings.tabs.quoteReply.config.dealerId = "";
             $scope.settings.tabs.quoteReply.config.customerQuoteId = "";
 
             $scope.settings.tabs.quoteReply.config.customerQuoteId = $state.params.customerQuoteId;
             $scope.settings.tabs.quoteReply.config.dealerId = $state.params.dealerId;
+            $scope.settings.tabs.quoteReply.displayData($scope.settings.tabs.quoteReply.config.customerQuoteId);
         };
 
         $scope.init = function(){

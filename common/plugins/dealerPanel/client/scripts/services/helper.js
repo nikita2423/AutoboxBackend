@@ -297,7 +297,7 @@ angular.module($snaphy.getModuleName())
                                     function(data){
                                 
                                     }
-                                ],
+                                ]
                             },
                             /*validations: fetchValidationObj('appUser'),*/
                             config: {
@@ -326,7 +326,7 @@ angular.module($snaphy.getModuleName())
                                     function(data){
                                 
                                     }
-                                ],
+                                ]
                             },
                             /*validations: fetchValidationObj('appUser'),*/
                             config: {
@@ -338,6 +338,8 @@ angular.module($snaphy.getModuleName())
                         quoteReply:{
                             data: {},
                             form: {},
+                            displayData: displayData,
+                            isDataLoaded: false,
                             relationDetail: {
                                 "relationName": "quoteReply",
                                 "modelName": "QuoteReply",
@@ -391,7 +393,6 @@ angular.module($snaphy.getModuleName())
                                         cityId: settings.config.employee.cityId
                                     }
                                 });
-                                console.log(val);
                             },
                             //Contains the current model detail..
                             relationDetail: {
@@ -773,6 +774,42 @@ angular.module($snaphy.getModuleName())
                 };
                 return settings;
             };
+
+
+            /**
+             * display data
+             */
+            var displayData = function (customerQuoteId) {
+              return $q(function (resolve, reject) {
+                  var quoteReply = Database.getDb("dealerPanel", "QuoteReply");
+                  settings.get().tabs.quoteReply.isDataLoaded = false;
+                  quoteReply.findOne({
+                      filter: {
+                          where: {
+                              customerQuoteId: customerQuoteId
+                          }
+
+                      }
+                  }, function(quoteReply){
+                      //angular.copy(settings.get().tabs.quoteReply.data, quoteReply);
+                      angular.copy(quoteReply, settings.get().tabs.quoteReply.data);
+                      //console.log("Display data", settings.get().tabs.quoteReply.data);
+                      settings.get().tabs.quoteReply.isDataLoaded = true;
+                      resolve(quoteReply);
+                  }, function(error){
+                      settings.get().tabs.quoteReply.isDataLoaded = true;
+                      reject(error);
+                  });
+                     /* .then(function (quoteReply) {
+
+                      })
+                      .catch(function (error) {
+
+                      });*/
+              });
+            };
+            
+            
 
 
             /**

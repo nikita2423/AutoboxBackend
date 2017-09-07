@@ -61,16 +61,7 @@
     },
     "countryName": {
       "type": "string",
-      "default": "India",
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "label": "Country Name",
-          "type": "text",
-          "id": "countryName",
-          "priority": 4
-        }
-      }
+      "default": "India"
     },
     "serviceCenter": {
       "type": "string"

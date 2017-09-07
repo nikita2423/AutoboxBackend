@@ -5,7 +5,15 @@
         "added": "DESC"
       },
       "beforeLoad":{
-        "brandId": "$user.brandId"
+        "brandId": "$user.brandId",
+        "cityId": "$user.cityId"
+      },
+      "edit":{
+        "disableWhen": {
+          "key": "$data.editButton",
+          "value": "disable"
+        },
+        "display": true
       },
       "action":[
         {
@@ -19,6 +27,10 @@
             },
             "icon": ["fa", "fa-mail-reply"],
             "dataTargetId": "customerQuoteReply"
+          },
+          "disableWhen": {
+            "key": "$data.replyButton",
+            "value": "disable"
           }
         }
       ]
@@ -274,6 +286,9 @@
       "display": false
     },
     "carModel_name":{
+      "display": false
+    },
+    "carModel_quoteImage": {
       "display": false
     },
     "city_added": {
