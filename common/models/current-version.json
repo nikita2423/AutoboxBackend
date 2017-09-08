@@ -12,7 +12,7 @@
       "template": {
         "type": "input",
         "templateOptions": {
-          "type": "text",
+          "type": "number",
           "priority": 3,
           "label": "Enter Version Code",
           "id": "versionCode"
