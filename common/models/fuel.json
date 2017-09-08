@@ -55,7 +55,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "brand": {
+      "type": "belongsTo",
+      "model": "Brand",
+      "foreignKey": ""
+    },
+    "carModel": {
+      "type": "belongsTo",
+      "model": "CarModel",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

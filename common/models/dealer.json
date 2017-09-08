@@ -117,7 +117,6 @@
         }
       }
     },
-
     "dealerNumber": {
       "type": "string",
       "required": true
@@ -147,7 +146,7 @@
         "searchProp": "name",
         "priority": 2,
         "search": true,
-        "type":"smartSelect",
+        "type": "smartSelect",
         "create": false,
         "id": "AddArea",
         "hide": false,
@@ -165,7 +164,7 @@
         "searchProp": "name",
         "priority": 2,
         "search": true,
-        "type":"smartSelect",
+        "type": "smartSelect",
         "create": false,
         "id": "AddCity",
         "inline": true,
@@ -183,7 +182,7 @@
         "searchProp": "name",
         "priority": 2,
         "search": true,
-        "type":"smartSelect",
+        "type": "smartSelect",
         "create": false,
         "inline": true,
         "colSize": "col-xs-6",

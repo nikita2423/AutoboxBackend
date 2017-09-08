@@ -55,7 +55,73 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "brand": {
+      "type": "belongsTo",
+      "model": "Brand",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Brand",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "type": "smartSelect",
+        "id": "AddBrand",
+        "hide": false,
+        "label": "Brand"
+      }
+    },
+    "carModel": {
+      "type": "belongsTo",
+      "model": "CarModel",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add CarModel",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "type": "smartSelect",
+        "id": "AddCarModel",
+        "hide": false,
+        "label": "Car Model"
+      }
+    },
+    "fuel": {
+      "type": "belongsTo",
+      "model": "Fuel",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Fuel",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "type": "smartSelect",
+        "id": "AddFuel",
+        "hide": false,
+        "label": "Fuel"
+      }
+
+    },
+    "gearBox": {
+      "type": "belongsTo",
+      "model": "GearBox",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Gearbox",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "type": "smartSelect",
+        "id": "AddGearbox",
+        "hide": false,
+        "label": "Gearbox"
+      }
+    }
+  },
   "acls": [],
   "methods": {}
 }

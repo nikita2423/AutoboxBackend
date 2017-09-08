@@ -136,8 +136,8 @@
     "referralCode": {
       "type": "string"
     },
-    "referralCount":{
-       "type": "number",
+    "referralCount": {
+      "type": "number",
       "default": 0
     },
     "sosStatus": {

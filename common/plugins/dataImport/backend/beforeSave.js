@@ -49,7 +49,90 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 callback(new Error("Brand not found"));
             }
         },
-        addCarDetailIds: function (sheetRowObj, callback) {
+
+        addTrimDetailIds: function(sheetRowObj, callback){
+            const Brand = server.models["Brand"];
+            const CarModel = server.models["CarModel"];
+            const Fuel = server.models["Fuel"];
+            const GearBox = server.models["GearBox"];
+            const Trim = server.models["Trim"];
+            let brandData, carModelData, fuelData, gearboxData;
+            if(sheetRowObj.Brand.data){
+                if(sheetRowObj.Brand.data.name){
+                    Brand.findOne({
+                        where: {
+                            name: sheetRowObj.Brand.data.name
+                        }
+                    })
+                        .then(function(brand){
+                            if(brand){
+                                brandData = brand;
+                                if(sheetRowObj.CarModel.data){
+                                    if(sheetRowObj.CarModel.data.name){
+                                        return CarModel.findOne({
+                                            where: {
+                                                name: sheetRowObj.CarModel.data.name
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        })
+                        .then(function(carModel){
+                            if(carModel){
+                                carModelData = carModel;
+                                if(sheetRowObj.Fuel.data){
+                                    if(sheetRowObj.Fuel.data.name){
+                                        return Fuel.findOne({
+                                            where: {
+                                                name: sheetRowObj.Fuel.data.name
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        })
+                        .then(function(fuel){
+                            if(fuel){
+                                fuelData = fuel;
+                                if(sheetRowObj.GearBox.data){
+                                    if(sheetRowObj.GearBox.data.name){
+                                        return GearBox.findOne({
+                                            where: {
+                                                name: sheetRowObj.GearBox.data.name
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        })
+                        .then(function(gearBox){
+                            if(gearBox){
+                                gearboxData = gearBox;
+                            }
+                        })
+                        .then(function(){
+                            if(brandData){
+                                sheetRowObj.Trim.data.brandId = brandData.id;
+                            }
+                            if(carModelData){
+                                sheetRowObj.Trim.data.carModelId = carModelData.id;
+                            }
+                            if(fuelData){
+                                sheetRowObj.Trim.data.fuelId = fuelData.id;
+                            }
+                            if(gearboxData){
+                                sheetRowObj.Trim.data.gearBoxId = gearboxData.id;
+                            }
+                            callback(null);
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        });
+                }
+            }
+        },
+        addCarDetailIds: function (sheetRowObj, callback){
             const Brand = server.models["Brand"];
             const CarModel = server.models["CarModel"];
             const Fuel = server.models["Fuel"];

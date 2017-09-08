@@ -256,13 +256,17 @@
         "id": "AddDealer",
         "hide": false,
         "label": "Dealer",
-        "acl":{
-          "relations":{
-            "accept":[],
-            "reject":["Dealer"]
+        "acl": {
+          "relations": {
+            "accept": [],
+            "reject": [
+              "Dealer"
+            ]
           },
-          "accept":[],
-          "reject":["Dealer"]
+          "accept": [],
+          "reject": [
+            "Dealer"
+          ]
         }
       }
     },

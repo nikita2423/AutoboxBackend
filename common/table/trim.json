@@ -30,6 +30,55 @@
         "active",
         "inactive"
       ]
+    },
+    "brand_name": {
+      "label": "Brand",
+      "search": "text"
+    },
+    "brand_added": {
+      "display": false
+    },
+    "brand_image": {
+      "display": false
+    },
+    "brand_status": {
+      "display": false
+    },
+    "carModel_name": {
+      "label": "Model",
+      "search": "text"
+    },
+    "carModel_added": {
+      "display": false
+    },
+    "carModel_image": {
+      "display": false
+    },
+    "carModel_quoteImage": {
+      "display": false
+    },
+    "carModel_status": {
+      "display": false
+    },
+    "fuel_added": {
+      "display": false
+    },
+    "fuel_name": {
+      "label": "Fuel",
+      "search": "text"
+    },
+    "fuel_status": {
+      "display": false
+    },
+    "gearBox_name": {
+      "label": "GearBox",
+      "search": "text"
+    },
+    "gearBox_status": {
+      "display": false
+    },
+    "gearBox_added": {
+      "display": false
     }
   }
 }

@@ -56,7 +56,7 @@
         "search": true,
         "create": false,
         "type": "smartSelect",
-        "onSelect":"onCarBrandSelected",
+        "onSelect": "onCarBrandSelected",
         "id": "AddBrand",
         "hide": false,
         "label": "Brand"
@@ -71,15 +71,9 @@
         "searchProp": "name",
         "priority": 2,
         "search": true,
-        "where" : {
-          "brandId":{
-            "relationName": "brand",
-            "relationKey": "id"
-          }
-        },
         "create": false,
         "loadWhen": "brandHasBeenLoaded",
-        "onSelect":"onCarSelected",
+        "onSelect": "onCarModelSelected",
         "type": "smartSelect",
         "id": "AddCarModel",
         "hide": false,
@@ -112,6 +106,7 @@
         "priority": 2,
         "search": true,
         "type": "smartSelect",
+        "loadWhen": "modelHasBeenLoaded",
         "create": false,
         "id": "AddTrim",
         "hide": false,
