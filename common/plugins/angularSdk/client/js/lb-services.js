@@ -6984,6 +6984,46 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.Customer#incrementReferralCount
+             * @methodOf lbServices.Customer
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `referralCode` – `{string=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Customer` object.)
+             * </em>
+             */
+            "incrementReferralCount": {
+              url: urlBase + "/Customers/incrementReferralCount",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
              * @name lbServices.Customer#getSchema
              * @methodOf lbServices.Customer
              *
@@ -8973,6 +9013,211 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.AdminEmail#onOldTradeCarAdded
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "onOldTradeCarAdded": {
+              url: urlBase + "/adminEmails/onOldTradeCarAdded",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#sendMail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending text mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `html` – `{string=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "sendMail": {
+              url: urlBase + "/adminEmails/sendMail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#successfulRegistrationForCustomer
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "successfulRegistrationForCustomer": {
+              url: urlBase + "/adminEmails/successfulRegistrationForCustomer",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#onCompletePurchaseForCustomer
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "onCompletePurchaseForCustomer": {
+              url: urlBase + "/adminEmails/onCompletePurchaseForCustomer",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#onOldTradeCarAdded
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "onOldTradeCarAdded": {
+              url: urlBase + "/adminEmails/onOldTradeCarAdded",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
              * @name lbServices.AdminEmail#getSchema
              * @methodOf lbServices.AdminEmail
              *
@@ -9278,6 +9523,47 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "onCompletePurchaseForCustomer": {
               url: urlBase + "/adminEmails/onCompletePurchaseForCustomer",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#onOldTradeCarAdded
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "onOldTradeCarAdded": {
+              url: urlBase + "/adminEmails/onOldTradeCarAdded",
               method: "POST",
             },
 
@@ -14658,6 +14944,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use Workshop.city() instead.
+            "::get::Workshop::city": {
+              url: urlBase + "/Workshops/:id/city",
+              method: "GET",
+            },
+
             // INTERNAL. Use Showroom.city() instead.
             "::get::Showroom::city": {
               url: urlBase + "/Showrooms/:id/city",
@@ -15602,6 +15894,24 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use Fuel.brand() instead.
+            "::get::Fuel::brand": {
+              url: urlBase + "/Fuel/:id/brand",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Trim.brand() instead.
+            "::get::Trim::brand": {
+              url: urlBase + "/Trims/:id/brand",
+              method: "GET",
+            },
+
+            // INTERNAL. Use GearBox.brand() instead.
+            "::get::GearBox::brand": {
+              url: urlBase + "/GearBoxes/:id/brand",
+              method: "GET",
+            },
+
             // INTERNAL. Use Car.brand() instead.
             "::get::Car::brand": {
               url: urlBase + "/Cars/:id/brand",
@@ -16486,6 +16796,24 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
+            // INTERNAL. Use Fuel.carModel() instead.
+            "::get::Fuel::carModel": {
+              url: urlBase + "/Fuel/:id/carModel",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Trim.carModel() instead.
+            "::get::Trim::carModel": {
+              url: urlBase + "/Trims/:id/carModel",
+              method: "GET",
+            },
+
+            // INTERNAL. Use GearBox.carModel() instead.
+            "::get::GearBox::carModel": {
+              url: urlBase + "/GearBoxes/:id/carModel",
+              method: "GET",
+            },
+
             // INTERNAL. Use Car.carModel() instead.
             "::get::Car::carModel": {
               url: urlBase + "/Cars/:id/carModel",
@@ -16718,6 +17046,18 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         urlBase + "/Fuel/:id",
           { 'id': '@id' },
           {
+
+            // INTERNAL. Use Fuel.brand() instead.
+            "prototype$__get__brand": {
+              url: urlBase + "/Fuel/:id/brand",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Fuel.carModel() instead.
+            "prototype$__get__carModel": {
+              url: urlBase + "/Fuel/:id/carModel",
+              method: "GET",
+            },
 
             /**
              * @ngdoc method
@@ -17328,6 +17668,18 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
+            // INTERNAL. Use Trim.fuel() instead.
+            "::get::Trim::fuel": {
+              url: urlBase + "/Trims/:id/fuel",
+              method: "GET",
+            },
+
+            // INTERNAL. Use GearBox.fuel() instead.
+            "::get::GearBox::fuel": {
+              url: urlBase + "/GearBoxes/:id/fuel",
+              method: "GET",
+            },
+
             // INTERNAL. Use Car.fuel() instead.
             "::get::Car::fuel": {
               url: urlBase + "/Cars/:id/fuel",
@@ -17482,6 +17834,78 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.modelName = "Fuel";
 
 
+            /**
+             * @ngdoc method
+             * @name lbServices.Fuel#brand
+             * @methodOf lbServices.Fuel
+             *
+             * @description
+             *
+             * Fetches belongsTo relation brand.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Brand` object.)
+             * </em>
+             */
+        R.brand = function() {
+          var TargetResource = $injector.get("Brand");
+          var action = TargetResource["::get::Fuel::brand"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Fuel#carModel
+             * @methodOf lbServices.Fuel
+             *
+             * @description
+             *
+             * Fetches belongsTo relation carModel.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CarModel` object.)
+             * </em>
+             */
+        R.carModel = function() {
+          var TargetResource = $injector.get("CarModel");
+          var action = TargetResource["::get::Fuel::carModel"];
+          return action.apply(R, arguments);
+        };
+
 
         return R;
       }]);
@@ -17512,6 +17936,30 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         urlBase + "/Trims/:id",
           { 'id': '@id' },
           {
+
+            // INTERNAL. Use Trim.brand() instead.
+            "prototype$__get__brand": {
+              url: urlBase + "/Trims/:id/brand",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Trim.carModel() instead.
+            "prototype$__get__carModel": {
+              url: urlBase + "/Trims/:id/carModel",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Trim.fuel() instead.
+            "prototype$__get__fuel": {
+              url: urlBase + "/Trims/:id/fuel",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Trim.gearBox() instead.
+            "prototype$__get__gearBox": {
+              url: urlBase + "/Trims/:id/gearBox",
+              method: "GET",
+            },
 
             /**
              * @ngdoc method
@@ -18134,6 +18582,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use OldTradeCar.trim() instead.
+            "::get::OldTradeCar::trim": {
+              url: urlBase + "/OldTradeCars/:id/trim",
+              method: "GET",
+            },
+
             // INTERNAL. Use VehicleInfo.trim() instead.
             "::get::VehicleInfo::trim": {
               url: urlBase + "/VehicleInfos/:id/trim",
@@ -18282,6 +18736,150 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.modelName = "Trim";
 
 
+            /**
+             * @ngdoc method
+             * @name lbServices.Trim#brand
+             * @methodOf lbServices.Trim
+             *
+             * @description
+             *
+             * Fetches belongsTo relation brand.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Brand` object.)
+             * </em>
+             */
+        R.brand = function() {
+          var TargetResource = $injector.get("Brand");
+          var action = TargetResource["::get::Trim::brand"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Trim#carModel
+             * @methodOf lbServices.Trim
+             *
+             * @description
+             *
+             * Fetches belongsTo relation carModel.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CarModel` object.)
+             * </em>
+             */
+        R.carModel = function() {
+          var TargetResource = $injector.get("CarModel");
+          var action = TargetResource["::get::Trim::carModel"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Trim#fuel
+             * @methodOf lbServices.Trim
+             *
+             * @description
+             *
+             * Fetches belongsTo relation fuel.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Fuel` object.)
+             * </em>
+             */
+        R.fuel = function() {
+          var TargetResource = $injector.get("Fuel");
+          var action = TargetResource["::get::Trim::fuel"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Trim#gearBox
+             * @methodOf lbServices.Trim
+             *
+             * @description
+             *
+             * Fetches belongsTo relation gearBox.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `GearBox` object.)
+             * </em>
+             */
+        R.gearBox = function() {
+          var TargetResource = $injector.get("GearBox");
+          var action = TargetResource["::get::Trim::gearBox"];
+          return action.apply(R, arguments);
+        };
+
 
         return R;
       }]);
@@ -18312,6 +18910,24 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         urlBase + "/GearBoxes/:id",
           { 'id': '@id' },
           {
+
+            // INTERNAL. Use GearBox.brand() instead.
+            "prototype$__get__brand": {
+              url: urlBase + "/GearBoxes/:id/brand",
+              method: "GET",
+            },
+
+            // INTERNAL. Use GearBox.carModel() instead.
+            "prototype$__get__carModel": {
+              url: urlBase + "/GearBoxes/:id/carModel",
+              method: "GET",
+            },
+
+            // INTERNAL. Use GearBox.fuel() instead.
+            "prototype$__get__fuel": {
+              url: urlBase + "/GearBoxes/:id/fuel",
+              method: "GET",
+            },
 
             /**
              * @ngdoc method
@@ -18922,6 +19538,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
+            // INTERNAL. Use Trim.gearBox() instead.
+            "::get::Trim::gearBox": {
+              url: urlBase + "/Trims/:id/gearBox",
+              method: "GET",
+            },
+
             // INTERNAL. Use Car.gearBox() instead.
             "::get::Car::gearBox": {
               url: urlBase + "/Cars/:id/gearBox",
@@ -19075,6 +19697,114 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         */
         R.modelName = "GearBox";
 
+
+            /**
+             * @ngdoc method
+             * @name lbServices.GearBox#brand
+             * @methodOf lbServices.GearBox
+             *
+             * @description
+             *
+             * Fetches belongsTo relation brand.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Brand` object.)
+             * </em>
+             */
+        R.brand = function() {
+          var TargetResource = $injector.get("Brand");
+          var action = TargetResource["::get::GearBox::brand"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.GearBox#carModel
+             * @methodOf lbServices.GearBox
+             *
+             * @description
+             *
+             * Fetches belongsTo relation carModel.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CarModel` object.)
+             * </em>
+             */
+        R.carModel = function() {
+          var TargetResource = $injector.get("CarModel");
+          var action = TargetResource["::get::GearBox::carModel"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.GearBox#fuel
+             * @methodOf lbServices.GearBox
+             *
+             * @description
+             *
+             * Fetches belongsTo relation fuel.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Fuel` object.)
+             * </em>
+             */
+        R.fuel = function() {
+          var TargetResource = $injector.get("Fuel");
+          var action = TargetResource["::get::GearBox::fuel"];
+          return action.apply(R, arguments);
+        };
 
 
         return R;
@@ -28512,9 +29242,21 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
           { 'id': '@id' },
           {
 
+            // INTERNAL. Use Workshop.city() instead.
+            "prototype$__get__city": {
+              url: urlBase + "/Workshops/:id/city",
+              method: "GET",
+            },
+
             // INTERNAL. Use Workshop.brand() instead.
             "prototype$__get__brand": {
               url: urlBase + "/Workshops/:id/brand",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Workshop.dealer() instead.
+            "prototype$__get__dealer": {
+              url: urlBase + "/Workshops/:id/dealer",
               method: "GET",
             },
 
@@ -29235,10 +29977,35 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
-            // INTERNAL. Use Dealer.workshop() instead.
-            "::get::Dealer::workshop": {
-              url: urlBase + "/Dealers/:id/workshop",
+            // INTERNAL. Use Dealer.workshops() instead.
+            "::get::Dealer::workshops": {
+              url: urlBase + "/Dealers/:id/workshops",
               method: "GET",
+            },
+
+            // INTERNAL. Use Dealer.workshops.create() instead.
+            "::create::Dealer::workshops": {
+              url: urlBase + "/Dealers/:id/workshops",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Dealer.workshops.createMany() instead.
+            "::createMany::Dealer::workshops": {
+              isArray: true,
+              url: urlBase + "/Dealers/:id/workshops",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Dealer.workshops.update() instead.
+            "::update::Dealer::workshops": {
+              url: urlBase + "/Dealers/:id/workshops",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Dealer.workshops.destroy() instead.
+            "::destroy::Dealer::workshops": {
+              url: urlBase + "/Dealers/:id/workshops",
+              method: "DELETE",
             },
 
             // INTERNAL. Use ServiceBooking.workshop() instead.
@@ -29397,6 +30164,42 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.Workshop#city
+             * @methodOf lbServices.Workshop
+             *
+             * @description
+             *
+             * Fetches belongsTo relation city.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `City` object.)
+             * </em>
+             */
+        R.city = function() {
+          var TargetResource = $injector.get("City");
+          var action = TargetResource["::get::Workshop::city"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
              * @name lbServices.Workshop#brand
              * @methodOf lbServices.Workshop
              *
@@ -29428,6 +30231,42 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.brand = function() {
           var TargetResource = $injector.get("Brand");
           var action = TargetResource["::get::Workshop::brand"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Workshop#dealer
+             * @methodOf lbServices.Workshop
+             *
+             * @description
+             *
+             * Fetches belongsTo relation dealer.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Dealer` object.)
+             * </em>
+             */
+        R.dealer = function() {
+          var TargetResource = $injector.get("Dealer");
+          var action = TargetResource["::get::Workshop::dealer"];
           return action.apply(R, arguments);
         };
 
@@ -29507,6 +30346,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use Showroom.brand() instead.
             "prototype$__get__brand": {
               url: urlBase + "/Showrooms/:id/brand",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Showroom.dealer() instead.
+            "prototype$__get__dealer": {
+              url: urlBase + "/Showrooms/:id/dealer",
               method: "GET",
             },
 
@@ -30175,10 +31020,35 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
-            // INTERNAL. Use Dealer.showroom() instead.
-            "::get::Dealer::showroom": {
-              url: urlBase + "/Dealers/:id/showroom",
+            // INTERNAL. Use Dealer.showrooms() instead.
+            "::get::Dealer::showrooms": {
+              url: urlBase + "/Dealers/:id/showrooms",
               method: "GET",
+            },
+
+            // INTERNAL. Use Dealer.showrooms.create() instead.
+            "::create::Dealer::showrooms": {
+              url: urlBase + "/Dealers/:id/showrooms",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Dealer.showrooms.createMany() instead.
+            "::createMany::Dealer::showrooms": {
+              isArray: true,
+              url: urlBase + "/Dealers/:id/showrooms",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Dealer.showrooms.update() instead.
+            "::update::Dealer::showrooms": {
+              url: urlBase + "/Dealers/:id/showrooms",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Dealer.showrooms.destroy() instead.
+            "::destroy::Dealer::showrooms": {
+              url: urlBase + "/Dealers/:id/showrooms",
+              method: "DELETE",
             },
 
             // INTERNAL. Use Feedback.showroom() instead.
@@ -30403,6 +31273,42 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.Showroom#dealer
+             * @methodOf lbServices.Showroom
+             *
+             * @description
+             *
+             * Fetches belongsTo relation dealer.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Dealer` object.)
+             * </em>
+             */
+        R.dealer = function() {
+          var TargetResource = $injector.get("Dealer");
+          var action = TargetResource["::get::Showroom::dealer"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
              * @name lbServices.Showroom#area
              * @methodOf lbServices.Showroom
              *
@@ -30595,16 +31501,52 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
-            // INTERNAL. Use Dealer.showroom() instead.
-            "prototype$__get__showroom": {
-              url: urlBase + "/Dealers/:id/showroom",
+            // INTERNAL. Use Dealer.showrooms() instead.
+            "prototype$__get__showrooms": {
+              url: urlBase + "/Dealers/:id/showrooms",
               method: "GET",
             },
 
-            // INTERNAL. Use Dealer.workshop() instead.
-            "prototype$__get__workshop": {
-              url: urlBase + "/Dealers/:id/workshop",
+            // INTERNAL. Use Dealer.showrooms.create() instead.
+            "prototype$__create__showrooms": {
+              url: urlBase + "/Dealers/:id/showrooms",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Dealer.showrooms.update() instead.
+            "prototype$__update__showrooms": {
+              url: urlBase + "/Dealers/:id/showrooms",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Dealer.showrooms.destroy() instead.
+            "prototype$__destroy__showrooms": {
+              url: urlBase + "/Dealers/:id/showrooms",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Dealer.workshops() instead.
+            "prototype$__get__workshops": {
+              url: urlBase + "/Dealers/:id/workshops",
               method: "GET",
+            },
+
+            // INTERNAL. Use Dealer.workshops.create() instead.
+            "prototype$__create__workshops": {
+              url: urlBase + "/Dealers/:id/workshops",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Dealer.workshops.update() instead.
+            "prototype$__update__workshops": {
+              url: urlBase + "/Dealers/:id/workshops",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Dealer.workshops.destroy() instead.
+            "prototype$__destroy__workshops": {
+              url: urlBase + "/Dealers/:id/workshops",
+              method: "DELETE",
             },
 
             // INTERNAL. Use Dealer.area() instead.
@@ -31662,6 +32604,24 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use Workshop.dealer() instead.
+            "::get::Workshop::dealer": {
+              url: urlBase + "/Workshops/:id/dealer",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Showroom.dealer() instead.
+            "::get::Showroom::dealer": {
+              url: urlBase + "/Showrooms/:id/dealer",
+              method: "GET",
+            },
+
+            // INTERNAL. Use CustomerQuote.dealer() instead.
+            "::get::CustomerQuote::dealer": {
+              url: urlBase + "/CustomerQuotes/:id/dealer",
+              method: "GET",
+            },
+
             // INTERNAL. Use QuoteReply.dealer() instead.
             "::get::QuoteReply::dealer": {
               url: urlBase + "/QuoteReplies/:id/dealer",
@@ -31990,15 +32950,29 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
           var action = TargetResource["::get::Dealer::brand"];
           return action.apply(R, arguments);
         };
+    /**
+     * @ngdoc object
+     * @name lbServices.Dealer.showrooms
+     * @header lbServices.Dealer.showrooms
+     * @object
+     * @description
+     *
+     * The object `Dealer.showrooms` groups methods
+     * manipulating `Showroom` instances related to `Dealer`.
+     *
+     * Call {@link lbServices.Dealer#showrooms Dealer.showrooms()}
+     * to query all related instances.
+     */
+
 
             /**
              * @ngdoc method
-             * @name lbServices.Dealer#showroom
+             * @name lbServices.Dealer#showrooms
              * @methodOf lbServices.Dealer
              *
              * @description
              *
-             * Fetches belongsTo relation showroom.
+             * Fetches hasOne relation showrooms.
              *
              * @param {Object=} parameters Request parameters.
              *
@@ -32021,20 +32995,179 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `Showroom` object.)
              * </em>
              */
-        R.showroom = function() {
+        R.showrooms = function() {
           var TargetResource = $injector.get("Showroom");
-          var action = TargetResource["::get::Dealer::showroom"];
+          var action = TargetResource["::get::Dealer::showrooms"];
           return action.apply(R, arguments);
         };
 
             /**
              * @ngdoc method
-             * @name lbServices.Dealer#workshop
+             * @name lbServices.Dealer.showrooms#create
+             * @methodOf lbServices.Dealer.showrooms
+             *
+             * @description
+             *
+             * Creates a new instance in showrooms of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Showroom` object.)
+             * </em>
+             */
+        R.showrooms.create = function() {
+          var TargetResource = $injector.get("Showroom");
+          var action = TargetResource["::create::Dealer::showrooms"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Dealer.showrooms#createMany
+             * @methodOf lbServices.Dealer.showrooms
+             *
+             * @description
+             *
+             * Creates a new instance in showrooms of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Showroom` object.)
+             * </em>
+             */
+        R.showrooms.createMany = function() {
+          var TargetResource = $injector.get("Showroom");
+          var action = TargetResource["::createMany::Dealer::showrooms"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Dealer.showrooms#destroy
+             * @methodOf lbServices.Dealer.showrooms
+             *
+             * @description
+             *
+             * Deletes showrooms of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.showrooms.destroy = function() {
+          var TargetResource = $injector.get("Showroom");
+          var action = TargetResource["::destroy::Dealer::showrooms"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Dealer.showrooms#update
+             * @methodOf lbServices.Dealer.showrooms
+             *
+             * @description
+             *
+             * Update showrooms of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Showroom` object.)
+             * </em>
+             */
+        R.showrooms.update = function() {
+          var TargetResource = $injector.get("Showroom");
+          var action = TargetResource["::update::Dealer::showrooms"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Dealer.workshops
+     * @header lbServices.Dealer.workshops
+     * @object
+     * @description
+     *
+     * The object `Dealer.workshops` groups methods
+     * manipulating `Workshop` instances related to `Dealer`.
+     *
+     * Call {@link lbServices.Dealer#workshops Dealer.workshops()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Dealer#workshops
              * @methodOf lbServices.Dealer
              *
              * @description
              *
-             * Fetches belongsTo relation workshop.
+             * Fetches hasOne relation workshops.
              *
              * @param {Object=} parameters Request parameters.
              *
@@ -32057,9 +33190,154 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `Workshop` object.)
              * </em>
              */
-        R.workshop = function() {
+        R.workshops = function() {
           var TargetResource = $injector.get("Workshop");
-          var action = TargetResource["::get::Dealer::workshop"];
+          var action = TargetResource["::get::Dealer::workshops"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Dealer.workshops#create
+             * @methodOf lbServices.Dealer.workshops
+             *
+             * @description
+             *
+             * Creates a new instance in workshops of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Workshop` object.)
+             * </em>
+             */
+        R.workshops.create = function() {
+          var TargetResource = $injector.get("Workshop");
+          var action = TargetResource["::create::Dealer::workshops"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Dealer.workshops#createMany
+             * @methodOf lbServices.Dealer.workshops
+             *
+             * @description
+             *
+             * Creates a new instance in workshops of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Workshop` object.)
+             * </em>
+             */
+        R.workshops.createMany = function() {
+          var TargetResource = $injector.get("Workshop");
+          var action = TargetResource["::createMany::Dealer::workshops"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Dealer.workshops#destroy
+             * @methodOf lbServices.Dealer.workshops
+             *
+             * @description
+             *
+             * Deletes workshops of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.workshops.destroy = function() {
+          var TargetResource = $injector.get("Workshop");
+          var action = TargetResource["::destroy::Dealer::workshops"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Dealer.workshops#update
+             * @methodOf lbServices.Dealer.workshops
+             *
+             * @description
+             *
+             * Update workshops of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Workshop` object.)
+             * </em>
+             */
+        R.workshops.update = function() {
+          var TargetResource = $injector.get("Workshop");
+          var action = TargetResource["::update::Dealer::workshops"];
           return action.apply(R, arguments);
         };
 
@@ -33095,6 +34373,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use CustomerQuote.customer() instead.
             "prototype$__get__customer": {
               url: urlBase + "/CustomerQuotes/:id/customer",
+              method: "GET",
+            },
+
+            // INTERNAL. Use CustomerQuote.dealer() instead.
+            "prototype$__get__dealer": {
+              url: urlBase + "/CustomerQuotes/:id/dealer",
               method: "GET",
             },
 
@@ -34204,6 +35488,42 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.CustomerQuote#dealer
+             * @methodOf lbServices.CustomerQuote
+             *
+             * @description
+             *
+             * Fetches belongsTo relation dealer.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Dealer` object.)
+             * </em>
+             */
+        R.dealer = function() {
+          var TargetResource = $injector.get("Dealer");
+          var action = TargetResource["::get::CustomerQuote::dealer"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
              * @name lbServices.CustomerQuote#city
              * @methodOf lbServices.CustomerQuote
              *
@@ -34772,6 +36092,47 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "createChangeStream": {
               url: urlBase + "/QuoteReplies/change-stream",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.QuoteReply#createQuoteReply
+             * @methodOf lbServices.QuoteReply
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `ctx` – `{object=}` -
+             *
+             *  - `quoteReplyObj` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `quoteReplyObj` – `{object=}` -
+             */
+            "createQuoteReply": {
+              url: urlBase + "/QuoteReplies/createQuoteReply",
               method: "POST",
             },
 
@@ -37968,6 +39329,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use OldTradeCar.trim() instead.
+            "prototype$__get__trim": {
+              url: urlBase + "/OldTradeCars/:id/trim",
+              method: "GET",
+            },
+
             /**
              * @ngdoc method
              * @name lbServices.OldTradeCar#create
@@ -38860,6 +40227,42 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.brand = function() {
           var TargetResource = $injector.get("Brand");
           var action = TargetResource["::get::OldTradeCar::brand"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.OldTradeCar#trim
+             * @methodOf lbServices.OldTradeCar
+             *
+             * @description
+             *
+             * Fetches belongsTo relation trim.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Trim` object.)
+             * </em>
+             */
+        R.trim = function() {
+          var TargetResource = $injector.get("Trim");
+          var action = TargetResource["::get::OldTradeCar::trim"];
           return action.apply(R, arguments);
         };
 

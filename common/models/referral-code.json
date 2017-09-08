@@ -1,0 +1,56 @@
+{
+  "name": "ReferralCode",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "code": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Code",
+          "id": "referralCode"
+        }
+      }
+    },
+    "codeCount": {
+      "type": "number",
+      "default": 0,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "number",
+          "priority": 3,
+          "label": "Code Count",
+          "id": "referralCodeCount"
+        }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Customer",
+        "searchProp": "email",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCustomer",
+        "hide": false,
+        "label": "Add Customer"
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

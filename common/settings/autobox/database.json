@@ -24,6 +24,7 @@
   "OfferQuery": "OfferQuery",
   "OldTradeCar": "OldTradeCar",
   "QuoteReply": "QuoteReply",
+  "ReferralCode": "ReferralCode",
   "ServiceBooking": "ServiceBooking",
   "ServiceHistory": "ServiceHistory",
   "ServiceType": "ServiceType",

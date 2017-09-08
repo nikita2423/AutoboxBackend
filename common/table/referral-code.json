@@ -1,0 +1,46 @@
+{
+  "widgets": [
+    {
+      "label": "Referral Code",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "codeCount": {
+      "label": "Code Used",
+      "search": "number"
+    },
+    "customer_firstName": {
+      "label": "Customer",
+      "search": "text"
+    },
+    "customer_lastName": {
+      "display": false
+    },
+    "customer_email": {
+      "label": "Email",
+      "search": "text"
+    },
+    "customer_phoneNumber": {
+      "display": false
+    },
+    "customer_added": {
+      "display": false
+    },
+    "customer_registerStatus": {
+      "display": false
+    },
+    "customer_countryName": {
+      "display": false
+    },
+    "customer_status": {
+      "display": false
+    }
+  }
+}
