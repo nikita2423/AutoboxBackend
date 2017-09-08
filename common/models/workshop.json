@@ -255,10 +255,8 @@
         "btnText": "Add City",
         "searchProp": "name",
         "type": "smartSelect",
-        "readOnly": true,
         "inline": true,
         "colSize": "col-md-4",
-        "loadWhen": "cityAdded",
         "box": "area",
         "acl": {
           "allow": [],
@@ -282,7 +280,6 @@
         "readOnly": false,
         "inline": true,
         "colSize": "col-md-4",
-        "loadWhen": "areaLoaded",
         "box": "area"
       }
     },
@@ -297,10 +294,9 @@
         "id": "AddBrand",
         "label": "Add Brand",
         "type": "smartSelect",
-        "readOnly": true,
+        "readOnly": false,
         "inline": "true",
         "colSize": "col-md-4",
-        "loadWhen": "dummyBrandAdded",
         "box": "brand"
       }
     },

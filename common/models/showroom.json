@@ -269,10 +269,9 @@
         "btnText": "Add City",
         "searchProp": "name",
         "type": "smartSelect",
-        "readOnly": true,
+        "readOnly": false,
         "inline": true,
         "colSize": "col-md-4",
-        "loadWhen": "cityAdded",
         "box": "status",
         "acl": {
           "allow": [],
@@ -295,7 +294,6 @@
         "inline": true,
         "colSize": "col-md-4",
         "box": "address",
-        "loadWhen": "areaLoaded",
         "acl": {
           "allow": [],
           "reject": []
@@ -310,10 +308,9 @@
         "btnText": "Add Brand",
         "searchProp": "name",
         "type": "smartSelect",
-        "readOnly": true,
+        "readOnly": false,
         "inline": true,
         "colSize": "col-md-4",
-        "loadWhen": "dummyBrandAdded",
         "box": "brand",
         "acl": {
           "allow": [],
