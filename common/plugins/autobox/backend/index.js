@@ -364,12 +364,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			.then(function(customer){
 				if(customer){
                     customerInstance = customer;
-                    return ReferralCode.findOne({
+                    /*return ReferralCode.findOne({
 						where: {
 							customerId : customer.id
 						}
-					});
-					/*if(!customer.referralCode){
+					});*/
+					if(!customer.referralCode){
                         const referralCode = voucher_codes.generate({
                             length: 6,
                             count : 1
@@ -377,10 +377,15 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         return customer.updateAttribute("referralCode", referralCode);
 					} else{
 						return customer.updateAttribute("referralCode", customer.referralCode);
-					}*/
+					}
 				}
 			})
-			.then(function(referralCode){
+			.then(function(customer){
+				if(customer){
+					return customer.createAccessToken(31536000);
+				}
+			})
+		/*	.then(function(referralCode){
 				if(!referralCode){
                     const referralCode = voucher_codes.generate({
                         length: 6,
@@ -395,7 +400,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			})
 			.then(function(referralCode){
                 return customerInstance.createAccessToken(31536000);
-			})
+			})*/
 
 			.then(function(token){
 				if(token) {
