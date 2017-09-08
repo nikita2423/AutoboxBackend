@@ -341,6 +341,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
 	const createAccessToken = function(phoneNumber, callback){
 		const Customer = databaseObj.Customer;
+		const ReferralCode = databaseObj.ReferralCode;
 		let customerInstance;
 		Customer.findOne({
 			where:{
@@ -362,7 +363,13 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			})
 			.then(function(customer){
 				if(customer){
-					if(!customer.referralCode){
+                    customerInstance = customer;
+                    return ReferralCode.findOne({
+						where: {
+							customerId : customer.id
+						}
+					});
+					/*if(!customer.referralCode){
                         const referralCode = voucher_codes.generate({
                             length: 6,
                             count : 1
@@ -370,14 +377,24 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         return customer.updateAttribute("referralCode", referralCode);
 					} else{
 						return customer.updateAttribute("referralCode", customer.referralCode);
-					}
+					}*/
 				}
 			})
-			.then(function(customer){
-				if(customer){
-					customerInstance = customer;
-                    return customer.createAccessToken(31536000);
+			.then(function(referralCode){
+				if(!referralCode){
+                    const referralCode = voucher_codes.generate({
+                        length: 6,
+                        count : 1
+                    });
+                    return ReferralCode.create({
+						code: referralCode,
+						codeCount: 0,
+						customerId : customerInstance.id
+					});
 				}
+			})
+			.then(function(referralCode){
+                return customerInstance.createAccessToken(31536000);
 			})
 
 			.then(function(token){
