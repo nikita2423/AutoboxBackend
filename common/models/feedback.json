@@ -80,17 +80,7 @@
     "showroom": {
       "type": "belongsTo",
       "model": "Showroom",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Showroom",
-        "searchProp": "email",
-        "priority": 2,
-        "search": true,
-        "create": false,
-        "id": "AddShowroom",
-        "hide": false,
-        "label": "Add Showroom"
-      }
+      "foreignKey": ""
     }
   },
   "acls": [],
