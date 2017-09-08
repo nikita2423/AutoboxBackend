@@ -821,14 +821,12 @@ angular.module($snaphy.getModuleName())
                 return $q(function (resolve, reject) {
                     var showroomService = Database.getDb("dealerPanel", "Showroom");
                     showroomService.findOne({
-                        filter:{
                             where:{
                                 brandId: user.brandId,
                                 areaId: user.areaId,
                                 cityId: user.cityId
                             },
                             include:["city", "area", "brand"]
-                        }
                     }, function (data) {
                         //Copy data..
                         angular.copy(data, settings.get().tabs.manageShowroomProfile.data);
@@ -849,14 +847,12 @@ angular.module($snaphy.getModuleName())
                 return $q(function(resolve, reject) {
                     var workshopService = Database.getDb("dealerPanel", "Workshop");
                     workshopService.findOne({
-                        filter : {
                             where : {
                                 brandId: user.brandId,
                                 areaId: user.areaId,
                                 cityId: user.cityId
                             },
                             include: ["city", "area", "brand"]
-                        }
                     }, function(data) {
                             angular.copy(data, settings.get().tabs.manageWorkshopProfile.data);
                             resolve(data);
