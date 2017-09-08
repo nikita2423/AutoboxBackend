@@ -1,6 +1,6 @@
 #  SnaphyDemo
 ## SnaphyDemo Backend and SERVER API
-
+pm2 deploy ecosystem.json production deploy
 ##How to install
 ```
 $ git clone --recurse-submodules https://github.com/snaphy-plugin-2/demo.git
