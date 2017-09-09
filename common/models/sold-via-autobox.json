@@ -53,6 +53,41 @@
         "hide": false,
         "label": "Add Dealer"
       }
+    },
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Customer",
+        "searchProp": "email",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddCustomer",
+        "hide": false,
+        "label": "Add Customer"
+      }
+    },
+    "customerQuote": {
+      "type": "belongsTo",
+      "model": "CustomerQuote",
+      "foreignKey": ""
+    },
+    "vehicleDetail": {
+      "type": "belongsTo",
+      "model": "VehicleDetail",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Vehicle Detail",
+        "searchProp": "vehicleModel",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "id": "AddVehicleDetail",
+        "hide": false,
+        "label": "Add Vehicle Detail"
+      }
     }
   },
   "acls": [],

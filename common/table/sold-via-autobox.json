@@ -77,6 +77,51 @@
     },
     "dealer_noOfVehicleSold": {
       "display": false
+    },
+    "customer_firstName": {
+      "label": "Customer",
+      "search": "text"
+    },
+    "customer_lastName": {
+      "display": false
+    },
+    "customer_added": {
+      "display": false
+    },
+    "customer_countryName": {
+      "display": false
+    },
+    "customer_status": {
+      "display": false
+    },
+    "customer_phoneNumber": {
+      "display": true,
+      "label": "Contact",
+      "search": "text"
+    },
+    "customer_email": {
+      "display": false
+    },
+    "customer_registerStatus": {
+      "display": false
+    },
+    "customer_sosStatus": {
+      "display": false
+    },
+    "vehicleDetail_registrationNumber": {
+      "display": false
+    },
+    "vehicleDetail_registeredName": {
+      "display": false
+    },
+    "vehicleDetail_showroomName": {
+      "display": false
+    },
+    "vehicleDetail_workshopName": {
+      "display": false
+    },
+    "vehicleDetail_added": {
+      "display": false
     }
   }
 }

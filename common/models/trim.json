@@ -103,7 +103,6 @@
         "hide": false,
         "label": "Fuel"
       }
-
     },
     "gearBox": {
       "type": "belongsTo",
