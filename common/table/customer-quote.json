@@ -5,7 +5,7 @@
         "added": "DESC"
       },
       "beforeLoad":{
-        "brandId": "$user.brandId",
+        "currentBrandId": "$user.brandId",
         "cityId": "$user.cityId"
       },
       "edit":{

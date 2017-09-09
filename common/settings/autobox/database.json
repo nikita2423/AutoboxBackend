@@ -30,6 +30,7 @@
   "ServiceType": "ServiceType",
   "Showroom": "Showroom",
   "Sos": "Sos",
+  "SoldViaAutobox": "SoldViaAutobox",
   "VehicleDetail": "VehicleDetail",
   "Workshop": "Workshop",
   "VehicleInfo": "VehicleInfo"

@@ -166,7 +166,7 @@ angular.module($snaphy.getModuleName())
                                             type: "$allTime",
                                             where:{
                                                 "cityId": "$user.cityId",
-                                                "brandId": "$user.brandId"
+                                                "currentBrandId": "$user.brandId"
                                             },
                                             dateProp: 'added'
                                         }
@@ -191,7 +191,7 @@ angular.module($snaphy.getModuleName())
                                             type: "$allTime",
                                             where:{
                                                 "cityId": "$user.cityId",
-                                                "brandId": "$user.brandId",
+                                                "currentBrandId": "$user.brandId",
                                                 "soldViaAutobox": "yes"
                                             },
                                             dateProp: 'added'
@@ -205,7 +205,7 @@ angular.module($snaphy.getModuleName())
                                             type: "$allTime",
                                             where:{
                                                 "cityId": "$user.cityId",
-                                                "brandId": "$user.brandId",
+                                                "currentBrandId": "$user.brandId",
                                                 "gpsTracker": "yes"
                                             },
                                             dateProp: 'added'
@@ -219,7 +219,7 @@ angular.module($snaphy.getModuleName())
                                             type: "$allTime",
                                             where:{
                                                 "cityId": "$user.cityId",
-                                                "brandId": "$user.brandId",
+                                                "currentBrandId": "$user.brandId",
                                                 "dashCamera": "yes"
                                             },
                                             dateProp: 'added'
@@ -233,7 +233,7 @@ angular.module($snaphy.getModuleName())
                                             type: "$allTime",
                                             where:{
                                                 "cityId": "$user.cityId",
-                                                "brandId": "$user.brandId",
+                                                "currentBrandId": "$user.brandId",
                                                 "testDrive": "yes"
                                             },
                                             dateProp: 'added'

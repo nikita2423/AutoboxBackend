@@ -158,6 +158,30 @@
     },
     "city_status": {
       "display": false
+    },
+    "dealer_firstName":{
+      "label": "Dealer",
+      "search": "text"
+    },
+    "dealer_lastName": {
+      "display": false
+    },
+    "dealer_added": {
+      "display": false
+    },
+    "dealer_noOfVehicleSold": {
+      "display": false
+    },
+    "dealer_status": {
+      "display": false
+    },
+    "dealer_email": {
+      "label": "Email",
+      "search": "text"
+    },
+    "dealer_contact": {
+      "label": "Contact",
+      "search": "text"
     }
   }
 }

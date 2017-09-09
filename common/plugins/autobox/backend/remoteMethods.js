@@ -1752,21 +1752,35 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                        .then(function(insurance){
                            if(insurance){
                                insuranceId = insurance.id;
-                               const VehicleDetail = databaseObj.VehicleDetail;
-                               return VehicleDetail.create({
-                                   workshopName: vehicleDetailObj.workshopName,
-                                   showroomName: vehicleDetailObj.showroomName,
-                                   registeredName: vehicleDetailObj.registeredName,
-                                   registrationNumber: vehicleDetailObj.registrationNumber,
-                                   showroomId: vehicleDetailObj.showroomId,
-                                   workshopId: vehicleDetailObj.workshopId,
-                                   customerId: customerId,
-                                   vehicleInfoId : vehicleInfoId,
-                                   insuranceId: insuranceId,
-                                   status: "active",
-                                   vehicleType: "new"
+                               const Showroom = databaseObj.Showroom;
+                               return Showroom.findById(vehicleDetailObj.showroomId);
+                           }
+                       })
+                       .then(function(showroom){
+                           if(showroom){
+                               const SoldViaAutobox = databaseObj.SoldViaAutobox;
+                               return SoldViaAutobox.create({
+                                   dealerId : showroom.dealerId,
+                                   customerQuoteId : customerQuoteId,
+                                   customerId: customerId
                                })
                            }
+                       })
+                       .then(function(soldViaAutobox){
+                           const VehicleDetail = databaseObj.VehicleDetail;
+                           return VehicleDetail.create({
+                               workshopName: vehicleDetailObj.workshopName,
+                               showroomName: vehicleDetailObj.showroomName,
+                               registeredName: vehicleDetailObj.registeredName,
+                               registrationNumber: vehicleDetailObj.registrationNumber,
+                               showroomId: vehicleDetailObj.showroomId,
+                               workshopId: vehicleDetailObj.workshopId,
+                               customerId: customerId,
+                               vehicleInfoId : vehicleInfoId,
+                               insuranceId: insuranceId,
+                               status: "active",
+                               vehicleType: "new"
+                           })
                        })
                        .then(function(vehicleDetail){
                            if(vehicleDetail){

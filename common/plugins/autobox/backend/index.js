@@ -58,17 +58,34 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     if(customerQuoteList){
                         if(customerQuoteList.length){
                             customerQuoteList.forEach(function (customerQuoteItem, index) {
+                            	let customerQuoteInstance;
 								promiseList.push(new Promise(function (resolve, reject) {
                                     filterCustomerQuote(customerQuoteItem, roles, userId)
 										.then(function (customerQuote) {
-											customerQuoteList.splice(index, 1, customerQuote);
+											customerQuoteInstance = customerQuote;
+											//Check for if SoldViaAutobox has the customerQuoteId for this dealerId
+											return databaseObj.SoldViaAutobox.findOne({
+												where: {
+													customerQuoteId : customerQuote.id,
+													dealerId: userId
+												}
+											});
+
                                         })
+										.then(function(soldViaAutobox){
+											if(soldViaAutobox){
+												customerQuoteInstance.soldViaAutobox = "yes";
+											} else{
+												customerQuoteInstance.soldViaAutobox = "no";
+											}
+                                            customerQuoteList.splice(index, 1, customerQuoteInstance);
+										})
 										.then(function () {
 											resolve();
                                         })
 										.catch(function (error) {
 											reject(error);
-                                        })
+                                        });
                                 }));
                             });
                         }
@@ -364,12 +381,13 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			.then(function(customer){
 				if(customer){
                     customerInstance = customer;
+                    return customer.createAccessToken(31536000);
                     /*return ReferralCode.findOne({
 						where: {
 							customerId : customer.id
 						}
 					});*/
-					if(!customer.referralCode){
+					/*if(!customer.referralCode){
                         const referralCode = voucher_codes.generate({
                             length: 6,
                             count : 1
@@ -377,14 +395,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         return customer.updateAttribute("referralCode", referralCode);
 					} else{
 						return customer.updateAttribute("referralCode", customer.referralCode);
-					}
+					}*/
 				}
 			})
-			.then(function(customer){
+			/*.then(function(customer){
 				if(customer){
-					return customer.createAccessToken(31536000);
+
 				}
-			})
+			})*/
 		/*	.then(function(referralCode){
 				if(!referralCode){
                     const referralCode = voucher_codes.generate({
