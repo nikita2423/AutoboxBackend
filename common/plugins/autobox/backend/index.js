@@ -369,56 +369,18 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 				if(!customer){
 					return Customer.create({
                         phoneNumber : phoneNumber,
-						            email: "demo@gmail.com"
+						email: "demo@gmail.com"
                     });
 				} else{
 					return customer.updateAttribute("phoneNumber", phoneNumber);
-					/*customerInstance = customer;
-					return customer.createAccessToken(31536000);*/
-                    //Do not create AccessToken
 				}
 			})
 			.then(function(customer){
 				if(customer){
                     customerInstance = customer;
                     return customer.createAccessToken(31536000);
-                    /*return ReferralCode.findOne({
-						where: {
-							customerId : customer.id
-						}
-					});*/
-					/*if(!customer.referralCode){
-                        const referralCode = voucher_codes.generate({
-                            length: 6,
-                            count : 1
-                        });
-                        return customer.updateAttribute("referralCode", referralCode);
-					} else{
-						return customer.updateAttribute("referralCode", customer.referralCode);
-					}*/
 				}
 			})
-			/*.then(function(customer){
-				if(customer){
-
-				}
-			})*/
-		/*	.then(function(referralCode){
-				if(!referralCode){
-                    const referralCode = voucher_codes.generate({
-                        length: 6,
-                        count : 1
-                    });
-                    return ReferralCode.create({
-						code: referralCode,
-						codeCount: 0,
-						customerId : customerInstance.id
-					});
-				}
-			})
-			.then(function(referralCode){
-                return customerInstance.createAccessToken(31536000);
-			})*/
 
 			.then(function(token){
 				if(token) {
