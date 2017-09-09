@@ -99,6 +99,7 @@
     },
     "email": {
       "type": "string",
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -123,7 +124,6 @@
     },
     "updated": {
       "type": "date",
-      "required": true,
       "defaultFn": "now"
     },
     "registrationId": {

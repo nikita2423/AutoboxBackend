@@ -2,7 +2,7 @@ module.exports = ( Customer, server, helper) => {
     const SECRET_KEY = "BRANDZOOMR_PASSWORD_@!%#_SNAPHY";
     //AppUser.validatesUniquenessOf('email');
     //Remove email verification..
-    //delete AppUser.validations.email;
+    delete Customer.validations.email;
     Customer.validatesUniquenessOf('phoneNumber');
     const {
         isLength,

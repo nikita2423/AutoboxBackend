@@ -369,7 +369,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 				if(!customer){
 					return Customer.create({
                         phoneNumber : phoneNumber,
-						email: "demo@gmail.com"
                     });
 				} else{
 					return customer.updateAttribute("phoneNumber", phoneNumber);
