@@ -1721,6 +1721,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         const request = ctx.req;
         let vehicleInfoId;
         let insuranceId;
+        let dealerId;
         if(!customerQuoteId && !vehicleDetailObj){
             callback(new Error("Invalid Arguments"));
         } else{
@@ -1758,29 +1759,40 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                        })
                        .then(function(showroom){
                            if(showroom){
+                               dealerId = showroom.dealerId;
                                const SoldViaAutobox = databaseObj.SoldViaAutobox;
                                return SoldViaAutobox.create({
-                                   dealerId : showroom.dealerId,
+                                   dealerId : dealerId,
                                    customerQuoteId : customerQuoteId,
                                    customerId: customerId
                                })
                            }
                        })
                        .then(function(soldViaAutobox){
-                           const VehicleDetail = databaseObj.VehicleDetail;
-                           return VehicleDetail.create({
-                               workshopName: vehicleDetailObj.workshopName,
-                               showroomName: vehicleDetailObj.showroomName,
-                               registeredName: vehicleDetailObj.registeredName,
-                               registrationNumber: vehicleDetailObj.registrationNumber,
-                               showroomId: vehicleDetailObj.showroomId,
-                               workshopId: vehicleDetailObj.workshopId,
-                               customerId: customerId,
-                               vehicleInfoId : vehicleInfoId,
-                               insuranceId: insuranceId,
-                               status: "active",
-                               vehicleType: "new"
-                           })
+                           return databaseObj.CustomerQuote.findById(customerQuoteId);
+                       })
+                       .then(function(customerQuote){
+                           if(customerQuote){
+                               return customerQuote.updateAttribute("dealerId", dealerId);
+                           }
+                       })
+                       .then(function(customerQuote){
+                           if(customerQuote){
+                               const VehicleDetail = databaseObj.VehicleDetail;
+                               return VehicleDetail.create({
+                                   workshopName: vehicleDetailObj.workshopName,
+                                   showroomName: vehicleDetailObj.showroomName,
+                                   registeredName: vehicleDetailObj.registeredName,
+                                   registrationNumber: vehicleDetailObj.registrationNumber,
+                                   showroomId: vehicleDetailObj.showroomId,
+                                   workshopId: vehicleDetailObj.workshopId,
+                                   customerId: customerId,
+                                   vehicleInfoId : vehicleInfoId,
+                                   insuranceId: insuranceId,
+                                   status: "active",
+                                   vehicleType: "new"
+                               });
+                           }
                        })
                        .then(function(vehicleDetail){
                            if(vehicleDetail){

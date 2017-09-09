@@ -304,7 +304,18 @@
     "dealer": {
       "type": "belongsTo",
       "model": "Dealer",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Dealer",
+        "searchProp": "email",
+        "priority": 2,
+        "id": "AddDealer",
+        "label": "Add Dealer",
+        "type": "smartSelect",
+        "readOnly": false,
+        "inline": "true",
+        "colSize": "col-md-4"
+      }
     }
   },
   "acls": [],

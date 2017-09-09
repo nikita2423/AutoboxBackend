@@ -12,7 +12,8 @@
     "Showroom",
     "Workshop",
     "CustomerQuote",
-    "QuoteReply"
+    "QuoteReply",
+    "Feedback"
   ],
   "pluginDependencies": {}
 }

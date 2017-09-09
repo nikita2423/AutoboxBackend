@@ -746,6 +746,7 @@ angular.module($snaphy.getModuleName())
                                 changeTab(settings.tabs.feedback);
                             },
                             data: {},
+                            form: {},
                             title: "Feedback and Help",
                             //Contains the current model detail..
                             relationDetail: {
@@ -763,6 +764,8 @@ angular.module($snaphy.getModuleName())
                                     }
                                 ],
                             },
+                            schema : window.STATIC_DATA.schema.Feedback,
+                            sendFeedback: sendFeedback,
                             /*validations: fetchValidationObj('appUser'),*/
                             config: {
                                 stateName: "feedback",
@@ -807,6 +810,23 @@ angular.module($snaphy.getModuleName())
 
                       });*/
               });
+            };
+
+
+            var sendFeedback = function(){
+                console.log("Inside Feedback");
+                console.log("Employee", settings);
+                return $q(function (resolve, reject) {
+                var Feedback = Database.getDb("dealerPanel", "Feedback");
+                //const dealerId = settings.get().config.employee;
+                Feedback.create({
+                    message: settings.tabs.feedback.data
+                }, function(){
+                    resolve();
+                }, function(error){
+                    reject(error);
+                });
+            });
             };
             
             

@@ -28,12 +28,15 @@ module.exports = function(Soldviaautobox, server, helper) {
             }
         }
 
-        if(!validate(instance, currentInstance, "vehicleInfoId")){
+      /*  if(!validate(instance, currentInstance, "vehicleInfoId")){
             return next(new Error("Vehicle Information is required"));
-        }
+        }*/
 
         if(!validate(instance, currentInstance, "dealerId")){
             return next(new Error("Dealer Id is required"));
+        }
+        if(!validate(instance, currentInstance, "customerQuoteId")){
+            return next(new Error("Customer Quote Id is required"));
         }
         next();
     });

@@ -38,9 +38,8 @@ module.exports = (Feedback, server, helper) =>
               return next(new Error("Message length should be between 3 to 500"));
           }
       }
-
-      if(!validate(instance, currentInstance, "customerId")){
-          return next(new Error("Customer is required"));
+      if(!validate(instance, currentInstance, "customerId") && !validate(instance, currentInstance, "dealerId")){
+          return next(new Error("Dealer or customer is required"));
       }
 
       next();

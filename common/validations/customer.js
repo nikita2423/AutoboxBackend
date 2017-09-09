@@ -93,7 +93,7 @@ module.exports = ( Customer, server, helper) => {
                       next(error);
                   });
           } else{
-              instance.registerStatus = "notRegistered";
+              instance.registerStatus = "notregistered";
               next();
           }
 

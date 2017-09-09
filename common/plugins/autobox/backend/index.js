@@ -75,8 +75,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 										.then(function(soldViaAutobox){
 											if(soldViaAutobox){
 												customerQuoteInstance.soldViaAutobox = "yes";
+                                                customerQuoteInstance[packageObj.EDIT_BUTTON] = packageObj.disableButton.enable;
 											} else{
-												customerQuoteInstance.soldViaAutobox = "no";
+												//customerQuoteInstance.soldViaAutobox = "no";
+                                                customerQuoteInstance[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
 											}
                                             customerQuoteList.splice(index, 1, customerQuoteInstance);
 										})
