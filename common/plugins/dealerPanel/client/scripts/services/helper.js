@@ -812,23 +812,49 @@ angular.module($snaphy.getModuleName())
               });
             };
 
-
             var sendFeedback = function(){
                 console.log("Inside Feedback");
-                console.log("Employee", settings);
-                return $q(function (resolve, reject) {
                 var Feedback = Database.getDb("dealerPanel", "Feedback");
-                //const dealerId = settings.get().config.employee;
-                Feedback.create({
-                    message: settings.tabs.feedback.data
-                }, function(){
-                    resolve();
-                }, function(error){
-                    reject(error);
+                return $q(function(resolve, reject){
+                    initialize()
+                        .then(function(){
+                            return setCurrentState();
+                        })
+                        .then(function(){
+                            return getActiveTabSettings();
+                        })
+                        .then(function(){
+                            var message = document.getElementById("feedbackTextArea").value;
+                            return Feedback.create({
+                                message: message,
+                                dealerId: settings.get().config.employee.id
+                            });
+                        })
+                        .then(function(feedback){
+                            if(feedback){
+                                console.log("Feedback send Successfully");
+                                SnaphyTemplate.notify({
+                                    message: "Feedback send Successfully",
+                                    type: 'success',
+                                    icon: 'fa fa-check',
+                                    align: 'right'
+                                });
+                                resolve();
+                            }
+                        })
+                        .catch(function(error){
+                            SnaphyTemplate.notify({
+                                message: "Error in sending feedback",
+                                type: 'danger',
+                                icon: 'fa fa-times',
+                                align: 'right'
+
+                            });
+                            reject(error);
+                        });
+
                 });
-            });
             };
-            
             
 
 
