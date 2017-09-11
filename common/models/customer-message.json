@@ -81,7 +81,7 @@
       }
     },
     "time": {
-      "type": "time",
+      "type": "string",
       "required" : false,
       "template": {
         "type": "input",
@@ -199,6 +199,26 @@
             "dealer",
             "customer"
           ]
+        }
+      }
+    },
+    "replyMessage": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Reply Message",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": ["Dealer"]
+            }
+          },
+          "id": "subject"
         }
       }
     },

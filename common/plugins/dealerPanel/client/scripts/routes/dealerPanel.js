@@ -151,6 +151,19 @@ angular.module($snaphy.getModuleName())
                       redirectTo: loginState
                   }
               }
+          })
+
+          .state('customerCallMessage.replyToCustomer', {
+             templateUrl: '/dealerPanel/views/replyCustomerMessage.html',
+              controller: 'dealerPanelControl',
+              params: { dealerId: null,  customerMessageId: null},
+              data: {
+                 permissions: {
+                     only: [employeeRole],
+                     redirectTo: loginState
+                 }
+              }
           });
+
 
     }]); //config

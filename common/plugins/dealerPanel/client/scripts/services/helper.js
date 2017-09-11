@@ -771,11 +771,36 @@ angular.module($snaphy.getModuleName())
                                 stateOptions: {},
                                 active: false
                             }
+                        },
+                        replyCustomerMessage: {
+                            data:{},
+                            form:{},
+                            relationDetail: {
+                                "relationName": "replyCustomerMessage",
+                                "modelName": "CustomerMessage",
+                                beforeSaveHook: [
+                                    //Here data going to be saved..
+                                    function(data){
+
+                                    }
+                                ]
+                            },
+                            schema : window.STATIC_DATA.schema.CustomerMessage,
+                            sendReplyToCustomer: sendReplyToCustomer,
+                            config: {
+                                stateName: "demo1",
+                                stateOptions: {},
+                                active: false,
+                                dealerId: "",
+                                customerMessageId: ""
+                            }
                         }
                     }
                 };
                 return settings;
             };
+
+
 
 
             /**
@@ -854,6 +879,185 @@ angular.module($snaphy.getModuleName())
 
                 });
             };
+
+
+            var sendReplyToCustomer = function(){
+                var CustomerMessage = Database.getDb("dealerPanel", "CustomerMessage");
+                return $q(function(resolve, reject){
+                    initialize()
+                        .then(function(){
+                            return setCurrentState();
+                        })
+                        .then(function(){
+                            return getActiveTabSettings();
+                        })
+                        .then(function(){
+                            var customerMessageId = settings.get().tabs.replyCustomerMessage.config.customerMessageId;
+                            CustomerMessage.findOne({
+                                filter: {
+                                    where: {
+                                        id: customerMessageId
+                                    }
+                                }
+                            }, function(customerMessage){
+                                console.log("customerMessage", customerMessage);
+                                var replyMessage = document.getElementById("replyTextArea").value;
+                                if(replyMessage){
+                                    var callTime = "";
+                                    if(customerMessage.time){
+                                        callTime = customerMessage.time;
+                                    }
+                                     return CustomerMessage.upsert({
+                                        firstName: customerMessage.firstName,
+                                        lastName: customerMessage.lastName,
+                                        type: customerMessage.type? customerMessage.type:"",
+                                        added: customerMessage.added,
+                                        status: customerMessage.status?customerMessage.status:"",
+                                        mobileNumber: customerMessage.mobileNumber?customerMessage.mobileNumber:"",
+                                        message: customerMessage.message? customerMessage.message:"",
+                                        subject: customerMessage.subject?customerMessage.subject:"",
+                                        userType: customerMessage.userType?customerMessage.userType:"",
+                                        replyMessage: replyMessage,
+                                        time: callTime,
+                                        id: customerMessage.id,
+                                        customerId : customerMessage.customerId? customerMessage.customerId:"",
+                                        dealerId: customerMessage.dealerId? customerMessage.dealerId:"",
+                                        customerQuoteId: customerMessage.customerQuoteId? customerMessage.customerQuoteId:""
+                                    });
+                                }
+                            }, function(error){
+                                SnaphyTemplate.notify({
+                                    message: "Error in sending reply",
+                                    type: 'danger',
+                                    icon: 'fa fa-times',
+                                    align: 'right'
+
+                                });
+                                reject(error);
+                            });
+                        })
+                        .then(function(customerMessage){
+                            if(customerMessage){
+                                SnaphyTemplate.notify({
+                                    message: "Reply send Successfully",
+                                    type: 'success',
+                                    icon: 'fa fa-check',
+                                    align: 'right'
+                                });
+                                resolve();
+                            }
+                        })
+                        .catch(function(error){
+                            SnaphyTemplate.notify({
+                                message: "Error in sending reply",
+                                type: 'danger',
+                                icon: 'fa fa-times',
+                                align: 'right'
+
+                            });
+                            reject(error);
+                        });
+                });
+            }
+
+
+            /*var sendReplyToCustomer = function(){
+                var CustomerMessage = Database.getDb("dealerPanel", "CustomerMessage");
+                return $q(function(resolve, reject){
+                    initialize()
+                        .then(function(){
+                            return setCurrentState();
+                        })
+                        .then(function(){
+                            return getActiveTabSettings();
+                        })
+                        .then(function(){
+                            var customerMessageId = settings.get().tabs.replyCustomerMessage.config.customerMessageId;
+                            console.log("customerMessageId", settings.get().tabs.replyCustomerMessage.config.customerMessageId);
+                            CustomerMessage.findOne({
+                                filter: {
+                                    where:{
+                                        id: customerMessageId
+                                    }
+                                }
+                            }, function(customerMessage){
+                                console.log("customerMessage", customerMessage);
+                                var replyMessage = document.getElementById("replyTextArea").value;
+                                if(replyMessage) {
+                                    return customerMessage.updateAttribute("replyMessage",replyMessage);
+                                    /!* return customerMessage.updateAttribute({
+                                         replyMessage: replyMessage
+                                     }, function(customerMessage){
+                                         console.log(customerMessage);
+                                         console.log("Reply send Successfully");
+                                         SnaphyTemplate.notify({
+                                             message: "Reply send Successfully",
+                                             type: 'success',
+                                             icon: 'fa fa-check',
+                                             align: 'right'
+                                         });
+                                         resolve();
+                                     }, function(error){
+                                         SnaphyTemplate.notify({
+                                             message: "Error in sending reply",
+                                             type: 'danger',
+                                             icon: 'fa fa-times',
+                                             align: 'right'
+
+                                         });
+                                         reject(error);
+                                     });*!/
+                                }
+                            }, function(error){
+                                SnaphyTemplate.notify({
+                                    message: "Error in sending reply",
+                                    type: 'danger',
+                                    icon: 'fa fa-times',
+                                    align: 'right'
+
+                                });
+                                reject(error);
+                            });
+                        })
+                        .then(function(customerMessage){
+                            if(customerMessage){
+                                var replyMessage = document.getElementById("replyTextArea").value;
+                                return customerMessage.updateAttribute("replyMessage", replyMessage);
+                            }
+                        })
+                        .then(function(customerMessage){
+                            if(customerMessage){
+                                console.log("Reply send Successfully");
+                                SnaphyTemplate.notify({
+                                    message: "Reply send Successfully",
+                                    type: 'success',
+                                    icon: 'fa fa-check',
+                                    align: 'right'
+                                });
+                                resolve();
+                            }
+                        })
+                     /!*   .then(function(){
+                            console.log("Reply send Successfully");
+                            SnaphyTemplate.notify({
+                                message: "Reply send Successfully",
+                                type: 'success',
+                                icon: 'fa fa-check',
+                                align: 'right'
+                            });
+                            resolve();
+                        })*!/
+                        .catch(function(error){
+                            SnaphyTemplate.notify({
+                                message: "Error in sending reply",
+                                type: 'danger',
+                                icon: 'fa fa-times',
+                                align: 'right'
+
+                            });
+                        });
+                });
+            };*/
             
 
 

@@ -36,6 +36,16 @@ angular.module($snaphy.getModuleName())
             $scope.settings.tabs.quoteReply.displayData($scope.settings.tabs.quoteReply.config.customerQuoteId);
         };
 
+        $scope.replyCustomerMessageInit = function() {
+          $scope.settings.tabs.replyCustomerMessage.data = {};
+          $scope.settings.tabs.replyCustomerMessage.form = {};
+          $scope.settings.tabs.replyCustomerMessage.config.dealerId = "";
+          $scope.settings.tabs.replyCustomerMessage.config.customerMessageId = "";
+
+          $scope.settings.tabs.replyCustomerMessage.config.customerMessageId = $state.params.customerMessageId;
+          $scope.settings.tabs.replyCustomerMessage.config.dealerId = $state.params.dealerId;
+        };
+
         $scope.init = function(){
             var userObj;
             HelperService.initialize()

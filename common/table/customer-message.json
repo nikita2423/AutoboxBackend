@@ -6,7 +6,22 @@
       },
       "beforeLoad": {
         "dealerId":"$user.id"
-      }
+      },
+      "action":[
+        {
+          "title": "Reply",
+          "onClick": {
+            "type": "dialog",
+            "state": "customerCallMessage.replyToCustomer",
+            "options":{
+              "customerMessageId": "$data.id",
+              "dealerId": "$user.id"
+            },
+            "icon": ["fa", "fa-mail-reply"],
+            "dataTargetId": "customerMessageReply"
+          }
+        }
+      ]
     }
   },
   "widgets": [
