@@ -25,8 +25,11 @@ angular.module($snaphy.getModuleName())
                                         settings.get().config.employee = userObj;
                                         settings.get().config.isUserLoaded = true;
                                         var workshopService = Database.getDb("dealerPanel", "Workshop");
-                                        return workshopService.findById({id:userObj.workshopId,
+                                        return workshopService.findOne({
                                             filter:{
+                                                where: {
+                                                    dealerId: userObj.id
+                                                },
                                                 include:{
                                                     relation: "area",
                                                     "scope":{
@@ -405,7 +408,7 @@ angular.module($snaphy.getModuleName())
                                     }
                                 ]
                             },
-                            schema : window.STATIC_DATA.schema.Workshop,
+                            schema : modifySchema(window.STATIC_DATA.schema.Workshop),
                             saveForm: function (formSchema, formData, formModel) {
                                 formModel.brandId = settings.config.employee.brandId;
                                 formModel.areaId = settings.config.employee.areaId;
@@ -542,13 +545,11 @@ angular.module($snaphy.getModuleName())
                             form: {},
                             title: "Showroom Profile",
                             loadArea: function () {
-
                                 var val = $rootScope.$broadcast("areaLoaded", {
                                     where: {
                                         cityId: settings.config.employee.cityId
                                     }
                                 });
-                                console.log(val);
                             },
                             saveForm: function (formSchema, formData, formModel) {
                                 formModel.brandId = settings.config.employee.brandId;
@@ -567,7 +568,7 @@ angular.module($snaphy.getModuleName())
                                 "modelName": "Showroom"
                             },
                             getShowroomData: getShowroomData,
-                            schema: window.STATIC_DATA.schema.Showroom,
+                            schema: modifySchema(window.STATIC_DATA.schema.Showroom),
                             validations: {
                                 rules : {
                                     "showroomName": {
@@ -802,6 +803,39 @@ angular.module($snaphy.getModuleName())
 
 
 
+            var modifySchema = function (schema_) {
+                var schema = schema_;
+                var newSchema =  angular.copy(schema);
+                for(var key in newSchema.container){
+                    if(newSchema.container.hasOwnProperty(key)){
+                        if(newSchema.container[key].schema){
+                            if(newSchema.container[key].schema.length){
+                                newSchema.container[key].schema.forEach(function (obj) {
+                                   if(obj.templateOptions){
+                                       obj.templateOptions.disabled = true;
+                                       obj.templateOptions.readonly = true;
+                                       obj.templateOptions.readOnly = true;
+                                   }
+                                   if(obj.type === "objectValue"){
+                                       if(obj.templateOptions){
+                                           if(obj.templateOptions.fields){
+                                               obj.templateOptions.fields.forEach(function (nested_obj) {
+                                                   if(nested_obj.templateOptions){
+                                                       nested_obj.templateOptions.disabled = true;
+                                                   }
+                                               });
+                                           }
+                                       }
+
+                                   }
+                                });
+                            }
+                        }
+                    }
+                }
+                console.log(newSchema);
+                return newSchema;
+            };
 
             /**
              * display data
@@ -827,15 +861,13 @@ angular.module($snaphy.getModuleName())
                       settings.get().tabs.quoteReply.isDataLoaded = true;
                       reject(error);
                   });
-                     /* .then(function (quoteReply) {
-
-                      })
-                      .catch(function (error) {
-
-                      });*/
               });
             };
 
+            /**
+             * Sending feedback to admin
+             * @returns {*}
+             */
             var sendFeedback = function(){
                 console.log("Inside Feedback");
                 var Feedback = Database.getDb("dealerPanel", "Feedback");
@@ -881,6 +913,10 @@ angular.module($snaphy.getModuleName())
             };
 
 
+            /**
+             * Send Reply for Customer Message
+             * @returns {*}
+             */
             var sendReplyToCustomer = function(){
                 var CustomerMessage = Database.getDb("dealerPanel", "CustomerMessage");
                 return $q(function(resolve, reject){
@@ -968,106 +1004,6 @@ angular.module($snaphy.getModuleName())
             }
 
 
-            /*var sendReplyToCustomer = function(){
-                var CustomerMessage = Database.getDb("dealerPanel", "CustomerMessage");
-                return $q(function(resolve, reject){
-                    initialize()
-                        .then(function(){
-                            return setCurrentState();
-                        })
-                        .then(function(){
-                            return getActiveTabSettings();
-                        })
-                        .then(function(){
-                            var customerMessageId = settings.get().tabs.replyCustomerMessage.config.customerMessageId;
-                            console.log("customerMessageId", settings.get().tabs.replyCustomerMessage.config.customerMessageId);
-                            CustomerMessage.findOne({
-                                filter: {
-                                    where:{
-                                        id: customerMessageId
-                                    }
-                                }
-                            }, function(customerMessage){
-                                console.log("customerMessage", customerMessage);
-                                var replyMessage = document.getElementById("replyTextArea").value;
-                                if(replyMessage) {
-                                    return customerMessage.updateAttribute("replyMessage",replyMessage);
-                                    /!* return customerMessage.updateAttribute({
-                                         replyMessage: replyMessage
-                                     }, function(customerMessage){
-                                         console.log(customerMessage);
-                                         console.log("Reply send Successfully");
-                                         SnaphyTemplate.notify({
-                                             message: "Reply send Successfully",
-                                             type: 'success',
-                                             icon: 'fa fa-check',
-                                             align: 'right'
-                                         });
-                                         resolve();
-                                     }, function(error){
-                                         SnaphyTemplate.notify({
-                                             message: "Error in sending reply",
-                                             type: 'danger',
-                                             icon: 'fa fa-times',
-                                             align: 'right'
-
-                                         });
-                                         reject(error);
-                                     });*!/
-                                }
-                            }, function(error){
-                                SnaphyTemplate.notify({
-                                    message: "Error in sending reply",
-                                    type: 'danger',
-                                    icon: 'fa fa-times',
-                                    align: 'right'
-
-                                });
-                                reject(error);
-                            });
-                        })
-                        .then(function(customerMessage){
-                            if(customerMessage){
-                                var replyMessage = document.getElementById("replyTextArea").value;
-                                return customerMessage.updateAttribute("replyMessage", replyMessage);
-                            }
-                        })
-                        .then(function(customerMessage){
-                            if(customerMessage){
-                                console.log("Reply send Successfully");
-                                SnaphyTemplate.notify({
-                                    message: "Reply send Successfully",
-                                    type: 'success',
-                                    icon: 'fa fa-check',
-                                    align: 'right'
-                                });
-                                resolve();
-                            }
-                        })
-                     /!*   .then(function(){
-                            console.log("Reply send Successfully");
-                            SnaphyTemplate.notify({
-                                message: "Reply send Successfully",
-                                type: 'success',
-                                icon: 'fa fa-check',
-                                align: 'right'
-                            });
-                            resolve();
-                        })*!/
-                        .catch(function(error){
-                            SnaphyTemplate.notify({
-                                message: "Error in sending reply",
-                                type: 'danger',
-                                icon: 'fa fa-times',
-                                align: 'right'
-
-                            });
-                        });
-                });
-            };*/
-            
-
-
             /**
              * Get showroom data on start..
              * @param user
@@ -1077,15 +1013,28 @@ angular.module($snaphy.getModuleName())
                 return $q(function (resolve, reject) {
                     var showroomService = Database.getDb("dealerPanel", "Showroom");
                     showroomService.findOne({
+                        filter:{
                             where:{
                                 brandId: user.brandId,
                                 areaId: user.areaId,
-                                cityId: user.cityId
+                                cityId: user.cityId,
+                                dealerId: user.id
                             },
                             include:["city", "area", "brand"]
+                        }
                     }, function (data) {
                         //Copy data..
                         angular.copy(data, settings.get().tabs.manageShowroomProfile.data);
+                        if(settings.get().tabs.manageShowroomProfile.data){
+                            if(settings.get().tabs.manageShowroomProfile.data.timings){
+                                if(settings.get().tabs.manageShowroomProfile.data.timings.opening){
+                                    settings.get().tabs.manageShowroomProfile.data.timings.opening = moment.utc(settings.get().tabs.manageShowroomProfile.data.timings.opening).toDate();
+                                }
+                                if(settings.get().tabs.manageShowroomProfile.data.timings.closing){
+                                    settings.get().tabs.manageShowroomProfile.data.timings.closing = moment.utc(settings.get().tabs.manageShowroomProfile.data.timings.closing).toDate();
+                                }
+                            }
+                        }
                         resolve(data);
                     }, function (error) {
                         reject(error);
@@ -1103,14 +1052,27 @@ angular.module($snaphy.getModuleName())
                 return $q(function(resolve, reject) {
                     var workshopService = Database.getDb("dealerPanel", "Workshop");
                     workshopService.findOne({
+                        filter:{
                             where : {
                                 brandId: user.brandId,
                                 areaId: user.areaId,
-                                cityId: user.cityId
+                                cityId: user.cityId,
+                                dealerId: user.id
                             },
                             include: ["city", "area", "brand"]
+                        }
                     }, function(data) {
                             angular.copy(data, settings.get().tabs.manageWorkshopProfile.data);
+                            if(settings.get().tabs.manageWorkshopProfile.data){
+                                if(settings.get().tabs.manageWorkshopProfile.data.timings){
+                                    if(settings.get().tabs.manageWorkshopProfile.data.timings.opening){
+                                        settings.get().tabs.manageWorkshopProfile.data.timings.opening = moment.utc(settings.get().tabs.manageWorkshopProfile.data.timings.opening).toDate();
+                                    }
+                                    if(settings.get().tabs.manageWorkshopProfile.data.timings.closing){
+                                        settings.get().tabs.manageWorkshopProfile.data.timings.closing = moment.utc(settings.get().tabs.manageWorkshopProfile.data.timings.closing).toDate();
+                                    }
+                                }
+                            }
                             resolve(data);
                     }, function(error) {
                             reject(error);

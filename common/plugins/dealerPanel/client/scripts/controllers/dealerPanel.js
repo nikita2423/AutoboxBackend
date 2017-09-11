@@ -66,6 +66,11 @@ angular.module($snaphy.getModuleName())
                             $scope.getActiveTabSettings().loadArea();
                         }, 200);
                         return $scope.getActiveTabSettings().getShowroomData(userObj);
+                    } else if($rootScope.settings.config.currentActiveTab === "manageWorkshopProfile"){
+                        $timeout(function(){
+                            $scope.getActiveTabSettings().loadArea();
+                        }, 200);
+                        return $scope.getActiveTabSettings().getWorkshopData(userObj);
                     }
                 })
                 .then(function () {

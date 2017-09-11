@@ -11,6 +11,7 @@ module.exports = (Customermessage, server, helper) =>
     } = require('validator');
     const _ = require('lodash');
     const process = require('process');
+    const push = helper.loadPlugin("pushService");
     const {validate} = require("../helper/usefullMethods");
     const STATUS = ["pending", "contacted"];
     const USERTYPE = ["dealer", "customer"];
@@ -128,7 +129,7 @@ module.exports = (Customermessage, server, helper) =>
                                    } else{
                                        console.log("Reply for customer message send successfully");
                                    }
-                               })
+                               });
                            }
                        })
                        .catch(function(error){

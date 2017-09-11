@@ -15,7 +15,7 @@ module.exports = (Showroom, server, helper) =>
     const STATUS = ["active", "inactive"];
 
 
-    Showroom.observe("after save" ,function (ctx, next) {
+  /*  Showroom.observe("after save" ,function (ctx, next) {
         const instance = ctx.instance || ctx.data;
 
         if (ctx.isNewInstance) {
@@ -47,7 +47,7 @@ module.exports = (Showroom, server, helper) =>
             next();
         }
 
-    });
+    });*/
 
     Showroom.observe("before save", function(ctx, next){
         const instance = ctx.instance || ctx.data;
