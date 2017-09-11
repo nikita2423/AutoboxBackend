@@ -17,7 +17,6 @@
           "label": "DealerShip Name",
           "id": "dealershipName",
           "box": "name",
-          "disabled": true,
           "inline": "true",
           "colSize": "col-md-4"
         }

@@ -6,43 +6,45 @@
     "validateUpsert": true
   },
   "properties": {
-    "message": {
+    "firstName": {
       "type": "string",
+      "default": "NA",
       "template": {
         "type": "input",
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Enter Message",
-          "id": "message"
+          "label": "Enter FirstName",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": ["Dealer"]
+            }
+          },
+          "id": "firstName"
         }
       }
     },
-    "subject": {
+    "lastName": {
       "type": "string",
+      "default": "NA",
       "template": {
         "type": "input",
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Enter subject",
-          "id": "subject"
-        }
-      }
-    },
-    "userType": {
-      "type": "string",
-      "required": true,
-      "template": {
-        "type": "selectString",
-        "templateOptions": {
-          "label": "Type of user",
-          "id": "userType",
-          "priority": 6,
-          "options": [
-            "dealer",
-            "customer"
-          ]
+          "label": "Enter LastName",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": ["Dealer"]
+            }
+          },
+          "id": "lastName"
         }
       }
     },
@@ -55,10 +57,46 @@
           "label": "Type",
           "id": "type",
           "priority": 6,
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": ["Dealer"]
+            }
+          },
           "options": [
             "call",
             "message"
           ]
+        }
+      }
+    },
+    "added": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "time": {
+      "type": "time",
+      "required" : false,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "label": "Time",
+          "id": "time",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": ["Dealer"]
+            }
+          },
+          "priority": 6
         }
       }
     },
@@ -79,12 +117,89 @@
         }
       }
     },
-    "added": {
-      "type": "date",
-      "required": true,
-      "defaultFn": "now",
+    "mobileNumber": {
+      "type": "string",
       "template": {
-        "type": "dummy"
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Mobile Number",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": ["Dealer"]
+            }
+          },
+          "id": "mobileNumber"
+        }
+      }
+    },
+    "message": {
+      "type": "string",
+      "default": "NA",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Message",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": ["Dealer"]
+            }
+          },
+          "id": "message"
+        }
+      }
+    },
+    "subject": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter subject",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": ["Dealer"]
+            }
+          },
+          "id": "subject"
+        }
+      }
+    },
+    "userType": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Type of user",
+          "id": "userType",
+          "priority": 6,
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": ["Dealer"]
+            }
+          },
+          "options": [
+            "dealer",
+            "customer"
+          ]
+        }
       }
     },
     "updated": {
@@ -106,6 +221,14 @@
         "create": false,
         "id": "AddCustomer",
         "load": true,
+        "acl": {
+          "allow": [],
+          "reject": [],
+          "relations": {
+            "allow": [],
+            "reject": ["Dealer"]
+          }
+        },
         "hide": false,
         "label": "Add Customer"
       }
@@ -123,6 +246,14 @@
         "id": "AddDealer",
         "load": true,
         "hide": false,
+        "acl": {
+          "allow": [],
+          "reject": [],
+          "relations": {
+            "allow": [],
+            "reject": ["Dealer"]
+          }
+        },
         "label": "Add Dealer"
       }
     },
@@ -139,6 +270,14 @@
         "load": true,
         "id": "AddCustomerQuote",
         "hide": false,
+        "acl": {
+          "allow": [],
+          "reject": [],
+          "relations": {
+            "allow": [],
+            "reject": ["Dealer"]
+          }
+        },
         "label": "Add Customer Quote"
       }
     }

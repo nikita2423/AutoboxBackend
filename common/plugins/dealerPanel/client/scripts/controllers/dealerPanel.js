@@ -66,5 +66,28 @@ angular.module($snaphy.getModuleName())
                     console.error(error);
                 });
         };
+
+        $scope.initCallMessage = function(){
+            var userObj;
+            HelperService.initialize()
+                .then(function(user){
+                    userObj = user;
+                    console.log(user.id);
+                    console.log("User loaded Successfully");
+                    return $scope.setCurrentState();
+                })
+                .then(function(){
+                    console.log("tab", $rootScope.settings.tabs[$rootScope.settings.config.currentActiveTab].relationDetail);
+                    if($rootScope.settings.tabs[$rootScope.settings.config.currentActiveTab].relationDetail){
+                        var modelName = $rootScope.settings.tabs[$rootScope.settings.config.currentActiveTab].relationDetail.modelName;
+                        console.log("modelName", modelName);
+                      /*  $scope.tableViewInit  = InitTableService.tableViewInit($scope, modelName, null);
+                        $scope.relationDetail = $rootScope.settings.tabs[$rootScope.settings.config.currentActiveTab].relationDetail;
+*/                    }
+                })
+                .catch(function(error){
+                    console.log(error);
+                });
+        };
     }//controller function..
 ]);

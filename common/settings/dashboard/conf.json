@@ -19,6 +19,7 @@
     "Color",
     "Country",
     "CurrentVersion",
+    "CustomerMessage",
     "Dealer",
     "Emergency",
     "EmergencyCategory",

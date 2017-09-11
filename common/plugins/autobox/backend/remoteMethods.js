@@ -1992,7 +1992,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       userType: customerMessageObj.userType,
                       dealerId: customerMessageObj.dealerId,
                       customerId: customerId,
-                      customerQuoteId: customerMessageObj.customerQuoteId
+                      customerQuoteId: customerMessageObj.customerQuoteId,
+                      firstName: customerMessageObj.firstName,
+                      lastName: customerMessageObj.lastName,
+                      mobileNumber: customerMessageObj.mobileNumber
                   })
                       .then(function(customerMessage){
                           if(customerMessage){

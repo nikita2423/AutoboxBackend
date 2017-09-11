@@ -13,7 +13,8 @@
     "Workshop",
     "CustomerQuote",
     "QuoteReply",
-    "Feedback"
+    "Feedback",
+    "CustomerMessage"
   ],
   "pluginDependencies": {}
 }

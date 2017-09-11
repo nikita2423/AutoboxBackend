@@ -40,7 +40,7 @@
     },
     "password": {
       "type": "string",
-      "required": true,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -231,7 +231,21 @@
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
+      "principalId": "Dealer",
+      "permission": "ALLOW",
+      "property": "find"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
       "principalId": "staff",
+      "permission": "ALLOW",
+      "property": "findById"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "Dealer",
       "permission": "ALLOW",
       "property": "findById"
     },

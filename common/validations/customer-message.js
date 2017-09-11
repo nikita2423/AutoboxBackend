@@ -32,6 +32,8 @@ module.exports = (Customermessage, server, helper) =>
             if(!check){
                 return next(new Error("Message should be between 3 to 1000"));
             }
+        } else{
+            instance.message = "NA";
         }
 
         if(instance.subject){

@@ -1,4 +1,14 @@
 {
+  "settings": {
+    "tables": {
+      "sort":{
+        "added": "DESC"
+      },
+      "beforeLoad": {
+        "dealerId":"$user.id"
+      }
+    }
+  },
   "widgets": [
     {
       "label": "Customer Messages",
@@ -14,10 +24,10 @@
   "tables": {
      "customer_firstName": {
        "search": "text",
-       "label": "Customer"
+       "label": "FirstName"
      },
     "customer_lastName": {
-      "display": false,
+      "display": true,
       "search": "text",
       "label": "LastName"
     },
@@ -138,6 +148,18 @@
     },
     "customer_countryName": {
       "display": false
+    },
+    "firstName": {
+      "search": "text",
+      "label": "First Name"
+    },
+    "lastName": {
+      "search": "text",
+      "label": "Last Name"
+    },
+    "mobileNumber": {
+      "search": "text",
+      "label": "Mobile Number"
     }
   }
 }
