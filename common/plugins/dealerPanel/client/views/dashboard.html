@@ -1,4 +1,13 @@
 <div ng-init="init()">
+
+    <div class="row" style="margin-top: 5px;margin-bottom:5px;margin-left: 5px">
+        <span  style="font-size:13px;margin-top:4px;margin-bottom: 4px;margin-left: 5px">FILTER VIA DATE</span>
+        <input style="margin-left: 5px;" type="date" id="fromId" placeholder="FROM"/>
+        <input style="margin-left: 5px;" type="date" id="toId" placeholder="TO"/>
+        <button style="color: #fff;float:right;margin-right:50px" class="btn btn-sm bg-primary-dark">
+            SEARCH
+        </button>
+    </div>
    
      <div  ng-init="widgets = settings.tabs.dashboard.widgets()" class="row">
             <robust-widget-added  ng-cloak class="col-sm-4 col-lg-2"

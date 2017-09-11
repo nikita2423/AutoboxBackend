@@ -273,6 +273,7 @@ angular.module($snaphy.getModuleName())
                                     }
                                 ]
                              },
+                            getFilteredQuotes: getFilteredQuotes,
                             /*validations: fetchValidationObj('appUser'),*/
                             config: {
                                 stateName: "monthlyReports",
@@ -835,6 +836,35 @@ angular.module($snaphy.getModuleName())
                 }
                 console.log(newSchema);
                 return newSchema;
+            };
+
+
+            var getFilteredQuotes = function(addedFrom, addedTo){
+                return $q(function(resolve, reject){
+                    var customerQuote = Database.getDb("dealerPanel", "CustomerQuote");
+                    var brandId = settings.get().config.employee.brandId;
+                    var cityId = settings.get().config.employee.cityId;
+                    customerQuote.find({
+                        filter: {
+                            where: {
+                                cityId: cityId,
+                                currentBrandId: brandId,
+                                added: {
+                                    between: [addedFrom, addedTo]
+
+                                }
+                            }
+                        }
+                    }, function(customerQuoteList){
+                        if(customerQuoteList){
+                            if(customerQuoteList.length){
+                                resolve();
+                            }
+                        }
+                    }, function(error){
+                        reject(error);
+                    });
+                });
             };
 
             /**
