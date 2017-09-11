@@ -28,7 +28,8 @@
     },
     "customer_firstName": {
       "label": "Customer",
-      "search": "text"
+      "search": "text",
+      "display": false
     },
     "customer_lastName": {
       "display": false
@@ -40,7 +41,9 @@
       "display": false
     },
     "customer_email": {
-      "display": false
+      "display": true,
+      "label": "Customer",
+      "search":"text"
     },
     "customer_phoneNumber": {
       "label": "Customer Contact",
@@ -74,13 +77,17 @@
       "display": false
     },
     "dealer_email": {
-      "display": false
+      "display": true,
+      "label": "Dealer",
+      "search": "text"
     },
     "dealer_status": {
       "display": false
     },
     "dealer_contact": {
-      "display": false
+      "display": true,
+      "label": "Dealer Contact",
+      "search": "text"
     },
     "dealer_added": {
       "display": false

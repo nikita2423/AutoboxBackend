@@ -10,6 +10,7 @@ module.exports = (Customermessage, server, helper) =>
         normalizeEmail
     } = require('validator');
     const _ = require('lodash');
+    const process = require('process');
     const {validate} = require("../helper/usefullMethods");
     const STATUS = ["pending", "contacted"];
     const USERTYPE = ["dealer", "customer"];
@@ -80,4 +81,77 @@ module.exports = (Customermessage, server, helper) =>
         next();
 
     });
+
+    var sendNotification = function(app, message, id, from, callback){
+        //push.push(app, message, id, from, callback);
+        push.notifyByUserId(message, id, from, callback);
+    };
+
+    Customermessage.observe("before save", function(ctx, next){
+        const instance = ctx.instance || ctx.data;
+        const currentInstance = ctx.currentInstance;
+        const customerMessageObj = instance.toJSON();
+        if(ctx.isNewInstance){
+            instance.added = new Date();
+            instance.updated = new Date();
+        }else{
+            instance.updated = new Date();
+        }
+
+        if(instance.replyMessage){
+            process.nextTick(function(){
+               const Customer = server.models["Customer"];
+               const Dealer = server.models["Dealer"];
+               if(customerMessageObj.customerId){
+                   Customer.findById(customerMessageObj.customerId)
+                       .then(function(customer){
+                           customerMessageObj.customer = customer;
+                           return Dealer.findById(customerMessageObj.dealerId);
+                       })
+                       .then(function(dealer){
+                           if(dealer){
+                               customerMessageObj.dealer = dealer;
+                           }
+                       })
+                       .then(function(){
+                           var name = customerMessageObj.customer.firstName + " " + customerMessageObj.customer.lastName;
+                           var type = "CustomerMesssage";
+                           var title = "";
+                           var id = customerMessageObj.id;
+                           var from = "Autobox";
+                           var sender = customerMessageObj.dealer.firstName + " " + customerMessageObj.dealer.lastName;
+                           var message = replyMessageFormat(name, type, title, sender, id);
+                           if(customerMessageObj.customer.id){
+                               sendNotification(server, message, customerMessageObj.customer.id, function(error){
+                                   if(error){
+                                       console.log(error);
+                                   } else{
+                                       console.log("Reply for customer message send successfully");
+                                   }
+                               })
+                           }
+                       })
+                       .catch(function(error){
+                           console.log(error);
+                       });
+               }
+
+
+            });
+        }
+        next();
+    });
+
+
+
+    var replyMessageFormat = function(to, type, title, from, id){
+        var message = {
+            to : to,
+            type: type,
+            title : title,
+            senderName : from,
+            id : id
+        };
+        return JSON.stringify(message);
+    };
 };

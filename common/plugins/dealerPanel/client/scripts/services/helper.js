@@ -907,6 +907,12 @@ angular.module($snaphy.getModuleName())
                                     if(customerMessage.time){
                                         callTime = customerMessage.time;
                                     }
+                                    SnaphyTemplate.notify({
+                                        message: "Reply send Successfully",
+                                        type: 'success',
+                                        icon: 'fa fa-check',
+                                        align: 'right'
+                                    });
                                      return CustomerMessage.upsert({
                                         firstName: customerMessage.firstName,
                                         lastName: customerMessage.lastName,
@@ -924,6 +930,7 @@ angular.module($snaphy.getModuleName())
                                         dealerId: customerMessage.dealerId? customerMessage.dealerId:"",
                                         customerQuoteId: customerMessage.customerQuoteId? customerMessage.customerQuoteId:""
                                     });
+
                                 }
                             }, function(error){
                                 SnaphyTemplate.notify({
