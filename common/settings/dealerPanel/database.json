@@ -4,5 +4,6 @@
     "Dealer": "Dealer",
     "QuoteReply": "QuoteReply",
     "Feedback": "Feedback",
-    "CustomerMessage": "CustomerMessage"
+    "CustomerMessage": "CustomerMessage",
+    "CustomerQuote": "CustomerQuote"
 }

@@ -1,15 +1,30 @@
 <div ng-init="init()">
 
-    <div class="row" style="margin-top: 5px;margin-bottom:5px;margin-left: 5px">
-        <span  style="font-size:13px;margin-top:4px;margin-bottom: 4px;margin-left: 5px">FILTER VIA DATE</span>
+    <div
+            ng-if="relationDetail"
+            ng-init="tableInstance = tableViewInit(relationDetail, relationType);"
+            class="row" style="margin-top: 5px;margin-bottom:5px;margin-left: 5px">
+        <!--<span  style="font-size:13px;margin-top:4px;margin-bottom: 4px;margin-left: 5px">FILTER VIA DATE</span>
         <input style="margin-left: 5px;" type="date" id="fromId" placeholder="FROM"/>
         <input style="margin-left: 5px;" type="date" id="toId" placeholder="TO"/>
-        <button style="color: #fff;float:right;margin-right:50px" class="btn btn-sm bg-primary-dark">
+        <button style="color: #fff;float:right;margin-right:50px" class="btn btn-sm bg-primary-dark" ng-click="pageReload()">
             SEARCH
-        </button>
+        </button>-->
+        <dealer-filter-date
+                label-class="settings.tabs.dashboard.config.labelClass"
+                date-class="settings.tabs.dashboard.config.dateClass"
+                column-name="{{settings.tabs.dashboard.config.columnName}}"
+                model-settings="settings.tabs.dashboard.config.modelSetting"
+                parent-scope="tableInstance"
+                label="{{settings.tabs.dashboard.config.label}}"></dealer-filter-date>
+        <div>
+            <button
+                    ng-click="tableInstance.resetAll()" class="btn btn-minw btn-default pull-right" type="button">Reset</button>
+        </div>
     </div>
    
-     <div  ng-init="widgets = settings.tabs.dashboard.widgets()" class="row">
+     <div
+         ng-init="widgets = settings.tabs.dashboard.widgets()" class="row">
             <robust-widget-added  ng-cloak class="col-sm-4 col-lg-2"
             ng-repeat="widget in widgets"
             label="{{widget.label}}"
@@ -26,7 +41,7 @@
         <input class="emailButtonStyle" type="submit" value="SEND EMAIL">
     </div>
 
-    <div ng-if="relationDetail">
+    <div class="dataClass" ng-init="initCustomerQuoteWhere()" ng-if="relationDetail">
         <div  ng-include="'detailView/views/tableView.html'"></div>
     </div>
 </div>

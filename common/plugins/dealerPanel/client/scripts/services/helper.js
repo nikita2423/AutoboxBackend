@@ -150,6 +150,7 @@ angular.module($snaphy.getModuleName())
                                     showHeader: false,
                                     delete: false
                                 },
+
                                 beforeSaveHook: [
                                     //Here data is employee data going to be saved..
                                     function(data){
@@ -248,7 +249,14 @@ angular.module($snaphy.getModuleName())
                             config: {
                                 stateName: "dashboard",
                                 stateOptions: {},
-                                active: false
+                                active: false,
+                                dateClass:["col-md-4", "clearfix"],
+                                labelClass:["col-md-2"],
+                                columnName: "added",
+                                modelSetting:{
+
+                                },
+                                label: "Filter by date"
                             }
                         },
                         monthlyReports: {
@@ -265,6 +273,11 @@ angular.module($snaphy.getModuleName())
                                     create: false,
                                     showHeader: false,
                                     delete: false
+                                },
+                                "where": {
+                                    "added": {
+                                        "between": [moment.utc("2017-08-01", "YYYY-MM-DD").format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"), moment.utc("2017-08-30", "YYYY-MM-DD").format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")]
+                                    }
                                 },
                                 beforeSaveHook: [
                                     //Here data going to be saved..
@@ -839,8 +852,13 @@ angular.module($snaphy.getModuleName())
             };
 
 
-            var getFilteredQuotes = function(addedFrom, addedTo){
+            var getFilteredQuotes = function(){
                 return $q(function(resolve, reject){
+                    $('#dataClass').load(document.URL +  ' #dataClass');
+                    var fromDate = moment.utc(document.getElementById("fromId").value, "YYYY-MM-DD").toDate();
+                    var toDate = moment.utc(document.getElementById("toId").value, "YYYY-MM-DD").toDate();
+                    console.log("filterFrom", fromDate);
+                    console.log("filterTo", toDate);
                     var customerQuote = Database.getDb("dealerPanel", "CustomerQuote");
                     var brandId = settings.get().config.employee.brandId;
                     var cityId = settings.get().config.employee.cityId;
@@ -850,7 +868,7 @@ angular.module($snaphy.getModuleName())
                                 cityId: cityId,
                                 currentBrandId: brandId,
                                 added: {
-                                    between: [addedFrom, addedTo]
+                                    between: [fromDate, toDate]
 
                                 }
                             }

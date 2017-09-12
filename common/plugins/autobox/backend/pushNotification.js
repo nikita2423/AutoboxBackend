@@ -550,9 +550,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const onOfferCreate = function(){
       const Offer= databaseObj.Offer;
       Offer.observe("after save", function(ctx, next){
-          const instance = ctx.instance;
-          const offerObj = instance.toJSON();
           if(ctx.isNewInstance){
+              const instance = ctx.instance;
+              const offerObj = instance.toJSON();
               const eventType = "Offer";
               const title = offerObj.title;
               const instanceId = offerObj.id;

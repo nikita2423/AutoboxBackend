@@ -104,5 +104,16 @@ angular.module($snaphy.getModuleName())
                     console.log(error);
                 });
         };
+
+        $scope.initCustomerQuoteWhere = function(){
+            console.log("Inside Customer Quote where");
+
+           /* $scope.settings.tabs.monthlyReports.relationDetail.where.added = {
+                between: [moment.utc("2017-08-01", "YYYY-MM-DD").toDate(), moment.utc("2017-08-30", "YYYY-MM-DD").toDate()]
+            };*/
+        };
+        $scope.pageReload = function(){
+            $state.reload('monthlyReports');
+        };
     }//controller function..
 ]);
