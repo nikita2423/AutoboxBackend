@@ -91,7 +91,7 @@ module.exports = (Customermessage, server, helper) =>
     Customermessage.observe("before save", function(ctx, next){
         const instance = ctx.instance || ctx.data;
         const currentInstance = ctx.currentInstance;
-        const customerMessageObj = instance.toJSON();
+        const customerMessageObj = instance;
         if(ctx.isNewInstance){
             instance.added = new Date();
             instance.updated = new Date();

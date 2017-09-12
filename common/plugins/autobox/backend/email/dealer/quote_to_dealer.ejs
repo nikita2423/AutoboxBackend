@@ -1,0 +1,27 @@
+<p style="text-align:center">&nbsp;</p>
+
+<div style="background:#eee;border:1px solid #ccc;padding:5px 10px;">
+    <h3><span style="font-size:14px">Kindly Find Below the details&nbsp;:</span></h3>
+
+    <h3>Customer Name: <strong><%=customer.firstName%> <%=customer.lastName%></strong></h3>
+    <%if(quoteType ==="q"){%>
+    <p>QuoteType:<strong> Quote</strong></p>
+    <%}else if(quoteType === "t"){%>
+    <p>QuoteType:<strong> Test Drive</strong></p>
+    <%}%>
+    <p>Brand: <strong><%=vehicleInfo.vehicleBrand%></strong></p>
+
+    <p>CarModel: <strong><%=vehicleInfo.vehicleModel%></strong></p>
+
+    <p>Fuel:&nbsp;<strong><%=vehicleInfo.fuelType%></strong></p>
+
+    <p>GearBox:&nbsp;<strong><%=vehicleInfo.vehicleGearbox%></strong></p>
+
+    <p>Trim: <strong><%=vehicleInfo.vehicleTrim%></strong></p>
+
+    <%if(quoteType!=="Test Drive"){%>
+    <p>Color:&nbsp;<strong><%=vehicleInfo.vehicleColor%></strong></p>
+    <%}%>
+</div>
+
+<p>&nbsp;</p>

@@ -19,6 +19,9 @@
   "admin": {
     "subject_add_old_vehicle": "New Old Trade Car Arrived"
   },
+  "dealer": {
+    "subject_customer_quote": "New Quote Arrived!"
+  },
   "WAITING_TIME": 48,
   "DEALER_ROLE": "Dealer",
   "soldViaAutobox":{

@@ -49,6 +49,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         fetchFeedbackShowroomMethod();
         fetchSosSettingsMethod();
         incrementReferralCountMethod();
+        removeSOSMethod();
     };
 
     const findAllBrandMethod = function(){
@@ -923,6 +924,26 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             accepts: [
                 {
                     arg: "referralCode", type: "string"
+                }
+            ],
+            returns: {
+                arg: "response", type: "object", root: true
+            }
+        })
+    };
+
+
+    const removeSOSMethod = function(){
+        const Sos = databaseObj.Sos;
+        Sos.removeSOS = removeSos;
+        Sos.remoteMethod('removeSos', {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
                 }
             ],
             returns: {
@@ -3002,6 +3023,38 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             .catch(function(error){
                 callback(error);
             })
+        }
+    };
+
+
+    const removeSos = function(ctx, callback){
+        const request = ctx.req;
+        if(request.accessToken){
+            if(request.accessToken.userId){
+                const customerId = request.accessToken.userId;
+                const Sos = databaseObj.Sos;
+                Sos.findOne({
+                    where: {
+                        customerId : customerId
+                    }
+                })
+                    .then(function(sos){
+                        if(sos){
+                            const sosId = sos.id;
+                            return Sos.destroyById(sosId)
+                        }
+                    })
+                    .then(function(){
+                        callback(null, {response: "success"});
+                    })
+                    .catch(function(error){
+                        callback(error);
+                    })
+            } else{
+                callback(new Error("User not valid"));
+            }
+        } else{
+            callback(new Error("User not valid"));
         }
     };
 

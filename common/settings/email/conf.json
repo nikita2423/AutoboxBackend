@@ -30,6 +30,12 @@
         "label": "On Old Trade Car Added",
         "templatePath": "../../plugins/autobox/backend/email/admin/add_old_trade_car.ejs",
         "display": false
+      },
+      "quoteGeneratedForDealer": {
+        "name": "quoteGeneratedForDealer",
+        "label": "Quote Generated For Dealer",
+        "templatePath": "../../plugins/autobox/backend/email/dealer/quote_to_dealer.ejs",
+        "display": false
       }
     }
   }],

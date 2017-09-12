@@ -30,7 +30,7 @@
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Enter name",
+          "label": "Enter Exchange Bonus",
           "id": "breakdownName",
           "box": "ShowroomPrice",
           "inline": true,

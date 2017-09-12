@@ -21,6 +21,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         createServiceBookingNotification();
         sendQuoteReplyNotification();
         sendOldTradeCarEmail();
+        sendCustomerQuoteEmailToDealer();
     };
 
 
@@ -121,6 +122,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             next();
         });
     };
+
+
 
 
     /**
@@ -544,6 +547,131 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
             next();
         });
+    };
+
+
+    const sendCustomerQuoteEmailToDealer = function(){
+        const CustomerQuote = databaseObj.CustomerQuote;
+        CustomerQuote.observe("after save", function (ctx, next) {
+            if(ctx.isNewInstance){
+                const instance = ctx.instance;
+                const customerQuoteObj = instance.toJSON();
+                let brandInstance;
+                let cityInstance;
+                process.nextTick(function(){
+                    if(customerQuoteObj.quoteType === 'q'){
+                        customerQuoteObj.quoteType = "Quote";
+                    } else if(customerQuoteObj.quoteType === 't'){
+                        customerQuoteObj.quoteType === "Test Drive";
+                    }
+                    databaseObj.Customer.findById(customerQuoteObj.customerId)
+                        .then(function(customer){
+                            if(customer){
+                                customerQuoteObj.customer = customer;
+                                return databaseObj.VehicleInfo.findById(customerQuoteObj.vehicleInfoId)
+                            }
+                        })
+                        .then(function (vehicleInfo) {
+                            if(vehicleInfo){
+                                customerQuoteObj.vehicleInfo = vehicleInfo;
+                                return  databaseObj.City.findById(customerQuoteObj.cityId)
+                            }
+                        })
+                        .then(function(city){
+                            if(city){
+                                cityInstance = city;
+                                customerQuoteObj.city = city;
+                                return databaseObj.Brand.findById(customerQuoteObj.currentBrandId);
+                            }
+                        })
+                        .then(function(brand){
+                            if(brand){
+                                brandInstance = brand;
+                                customerQuoteObj.brand = brand;
+                                sendEmailToAllDealer(server, databaseObj, packageObj, brandInstance, cityInstance, customerQuoteObj);
+                            }
+                        })
+                        .catch(function(error){
+                            console.log(error);
+                        });
+                })
+            }
+            next();
+        });
+    };
+
+
+    const sendEmailToAllDealer = function(server, databaseObj, packageObj, brand, city, customerQuoteInstance){
+        var skip = 0;
+        var limit = 10;
+        const findDealerList = function(skip){
+            //find customer..
+            findDealer(server, databaseObj, packageObj, brand, city, skip, limit, function (err, list, cursor) {
+                if (err) {
+                    reject(error);
+                } else {
+                    if (cursor === null) {
+                        //Stop all data
+                        //send push
+                        sendEmailToDealerList(list, customerQuoteInstance);
+                    } else {
+                        sendEmailToDealerList(list, customerQuoteInstance);
+                        //Recursive call..
+                        findDealerList(cursor);
+                    }//else
+                }//else
+            }); //findDealer
+        };//findAllDealerList
+        findDealerList(skip);
+    };
+
+    const findDealer = function(server, databaseObj, packageObj, brand, city, skip, limit, callback){
+        const Dealer = databaseObj.Dealer;
+        var cityId = city.id;
+        var brandId = brand.id;
+        var filter = {
+            skip: skip,
+            limit : limit,
+            where : {
+                cityId: cityId,
+                brandId: brandId
+            }
+        };
+
+        Dealer.find(filter, function(error, instanceList){
+            if(error){
+                callback(error);
+            } else{
+                if(instanceList){
+                    if(instanceList.length < limit){
+                        //All data are fetched
+                        callback(null, instanceList, null);
+                    } else{
+                        callback(null, instanceList, skip + limit);
+                    }
+                } else{
+                    callback(error);
+                }
+            }
+
+        });
+    };
+
+    const sendEmailToDealerList = function(dealerList, customerQuoteInstance){
+
+        dealerList.forEach(function(dealer){
+            const subject = packageObj.dealer.subject_customer_quote;
+            const to = [];
+            const from = packageObj.from;
+            to.push(dealer.email);
+            emailPlugin.adminEmail.quoteGeneratedForDealer(from, to, subject, customerQuoteInstance, function (err, send) {
+                if(err){
+                    console.log(err);
+                } else{
+                    console.log("Email send Successfully for Customer Quote to dealer");
+                }
+            });
+        })
     };
 
 
