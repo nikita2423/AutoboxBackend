@@ -141,6 +141,7 @@ angular.module($snaphy.getModuleName())
                             },
                             data: {},
                             title: "Dashboard",
+                            isMonthlyReports: false,
                             //Contains the current model detail..
                             relationDetail: {
                                 "relationName": "customerQuote",
@@ -264,6 +265,7 @@ angular.module($snaphy.getModuleName())
                                 changeTab(settings.tabs.monthlyReports);
                             },
                             data: {},
+                            isMonthlyReports: true,
                             title: "Monthly Reports",
                             //Contains the current model detail..
                             relationDetail: {
@@ -300,6 +302,7 @@ angular.module($snaphy.getModuleName())
                             },
                             data: {},
                             title: "Sold via Autobox",
+                            isMonthlyReports: false,
                             //Contains the current model detail..
                             relationDetail: {
                                 "relationName": "customerQuoteViaAutobox",

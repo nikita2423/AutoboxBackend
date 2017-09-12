@@ -90,6 +90,23 @@ module.exports = (Workshop, server, helper) =>
 
     });
 
+    Workshop.observe("after save", function(ctx, next){
+        const instance = ctx.instance || ctx.data;
+        const Dealer = server.models['Dealer'];
+        Dealer.findById(instance.dealerId)
+            .then(function(dealer){
+                if(dealer){
+                    return dealer.updateAttribute("workshopId", instance.id);
+                }
+            })
+            .then(function(dealer){
+                next();
+            })
+            .catch(function(error){
+                next(error);
+            });
+    });
+
     function toTitleCase(str)
     {
         return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});

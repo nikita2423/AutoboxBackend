@@ -2484,7 +2484,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             }
                         }
                     }
-                    filter.include = ["dealer"];
+                    filter.include =   filter.include = [{
+                        relation: "dealer",
+                        scope: {
+                            include: ["showroom", "workshop"]
+                        }
+                    }];
                     const QuoteReply = databaseObj.QuoteReply;
                     QuoteReply.find(filter)
                         .then(function(quoteReplyList){

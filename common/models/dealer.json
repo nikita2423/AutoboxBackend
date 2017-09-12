@@ -192,12 +192,12 @@
       }
     },
     "showrooms": {
-      "type": "hasOne",
+      "type": "belongsTo",
       "model": "Showroom",
       "foreignKey": ""
     },
     "workshops": {
-      "type": "hasOne",
+      "type": "belongsTo",
       "model": "Workshop",
       "foreignKey": ""
     }
