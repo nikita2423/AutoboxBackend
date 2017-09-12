@@ -9,6 +9,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const Promise = require("bluebird");
     const moment = require("moment");
     const process = require("process");
+    const async = require("async");
 
     var init = function(){
         findAllBrandMethod();
@@ -1382,31 +1383,44 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                     if(breakdownCategory){
                                         const categoryId = breakdownCategory.id;
                                         const Breakdown = databaseObj.Breakdown;
-                                        promises.push(
-                                        Breakdown.findOne({
-                                            limit:1,
-                                            where: {
-                                                breakdownCategoryId : categoryId,
-                                                latlong : {
-                                                    near: customerLatLong
-                                                }
-                                            },
-                                            include: ["breakdownCategory"]
-                                        })
-                                            .then(function(breakdown){
-                                                if(breakdown){
-                                                    breakdownList.push(breakdown);
-                                                }
+                                        promises.push(function(callback){
+                                            Breakdown.findOne({
+                                                limit:1,
+                                                where: {
+                                                    breakdownCategoryId : categoryId,
+                                                    latlong : {
+                                                        near: customerLatLong,
+                                                        maxDistance: 10,
+                                                        unit: 'kilometers'
+                                                    }
+                                                },
+                                                include: ["breakdownCategory"]
                                             })
-                                    );
+                                                .then(function(breakdown){
+                                                    if(breakdown){
+                                                        breakdownList.push(breakdown);
+                                                        callback(null);
+                                                    } else{
+                                                        callback(null);
+                                                    }
+                                                })
+                                                .catch(function(error){
+                                                    callback(error);
+                                                })
+                                        });
 
 
                                     }else{
                                         callback(new Error("Breakdown Category not found"));
                                     }
                                 });
-                            Promise.all(promises).then(function(){
-                                callback(null, breakdownList);
+                           async.series(promises,function(error, list){
+                               if(error){
+                                   callback(error);
+                               } else{
+                                   callback(null, breakdownList);
+                               }
+
                             })
                         }
                     })
@@ -1542,36 +1556,46 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                     if(emergencyCategory){
                                         const categoryId = emergencyCategory.id;
                                         const Emergency = databaseObj.Emergency;
-                                        promises.push(
-                                        Emergency.findOne({
-                                            limit:1,
-                                            where: {
-                                                emergencyCategoryId : categoryId,
-                                                latlong : {
-                                                    near: customerLatLong,
-                                                    maxDistance: 10,
-                                                    unit: 'kilometers'
-                                                }
-                                            },
-                                            include: ["emergencyCategory"]
-                                        })
-                                            .then(function(emergency){
-                                                if(emergency){
-                                                    emergencyList.push(emergency);
-                                                }
+                                        promises.push(function(callback){
+                                            Emergency.findOne({
+                                                limit:1,
+                                                where: {
+                                                    emergencyCategoryId : categoryId,
+                                                    latlong : {
+                                                        near: customerLatLong,
+                                                        maxDistance: 10,
+                                                        unit: 'kilometers'
+                                                    }
+                                                },
+                                                include: ["emergencyCategory"]
                                             })
-                                        );
-
+                                                .then(function(emergency){
+                                                    if(emergency){
+                                                        emergencyList.push(emergency);
+                                                        callback(null);
+                                                    } else{
+                                                        callback(null);
+                                                    }
+                                                })
+                                                .catch(function(error){
+                                                    console.error(error);
+                                                    callback(error);
+                                                })
+                                        });
 
                                     }else{
                                         callback(new Error("Emergency Category not found"));
                                     }
                                 });
 
-                            Promise.all(promises).then(function(){
-                                callback(null, emergencyList);
-                            })
+                            async.series(promises, function(error, list){
+                                if(error){
+                                    callback(error);
+                                } else{
+                                    callback(null, emergencyList);
+                                }
 
+                            })
                         }
                     })
 
