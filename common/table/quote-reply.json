@@ -7,7 +7,39 @@
         "margin-bottom": "10px"
       },
       "class":["clearfix"]
+    },
+    "InsuranceDiscount": {
+      "priority": 2,
+      "style": {
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["clearfix"]
     }
+  },
+  "RtoBonus": {
+    "priority": 3,
+    "style": {
+      "padding-top": "20px",
+      "margin-bottom": "10px"
+    },
+    "class":["clearfix"]
+  },
+  "MiscCharges": {
+    "priority": 4,
+    "style": {
+      "padding-top": "20px",
+      "margin-bottom": "10px"
+    },
+    "class": ["clearfix"]
+  },
+  "GstRoad": {
+    "priority": 5,
+    "style": {
+      "padding-top": "20px",
+      "margin-bottom": "10px"
+    },
+    "class": ["clearfix"]
   },
   "widgets": [
     {
