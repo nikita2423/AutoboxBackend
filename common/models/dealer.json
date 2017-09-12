@@ -191,12 +191,12 @@
         "label": "Add Brand"
       }
     },
-    "showrooms": {
+    "showroom": {
       "type": "belongsTo",
       "model": "Showroom",
       "foreignKey": ""
     },
-    "workshops": {
+    "workshop": {
       "type": "belongsTo",
       "model": "Workshop",
       "foreignKey": ""
