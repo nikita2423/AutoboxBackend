@@ -279,6 +279,26 @@
           "model": "Car",
           "properties": [
             {
+              "sheetColName": "Brand",
+              "modelProperty": "brandName"
+            },
+            {
+              "sheetColName": "CarModel",
+              "modelProperty": "carModelName"
+            },
+            {
+              "sheetColName": "Fuel",
+              "modelProperty": "fuelName"
+            },
+            {
+              "sheetColName": "Gearbox",
+              "modelProperty": "gearBoxName"
+            },
+            {
+              "sheetColName": "Trim",
+              "modelProperty": "variantName"
+            },
+            {
               "sheetColName": "Color1",
               "modelProperty": "color1"
             },

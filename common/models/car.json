@@ -38,6 +38,116 @@
         "type": "dummy"
       }
     },
+    "brandName": {
+      "type": "string",
+      "required": false,
+      "default": "NA",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter name",
+          "id": "brandName",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": ["admin"]
+            }
+          }
+        }
+      }
+    },
+    "carModelName": {
+      "type": "string",
+      "required": false,
+      "default": "NA",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter name",
+          "id": "carModelName",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": ["admin"]
+            }
+          }
+        }
+      }
+    },
+    "fuelName":{
+      "type": "string",
+      "required": false,
+      "default": "NA",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter name",
+          "id": "fuelName",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": ["admin"]
+            }
+          }
+        }
+      }
+    },
+    "gearBoxName": {
+      "type": "string",
+      "required": false,
+      "default": "NA",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter name",
+          "id": "gearboxName",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": ["admin"]
+            }
+          }
+        }
+      }
+    },
+    "variantName": {
+      "type": "string",
+      "required": false,
+      "default": "NA",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter name",
+          "id": "variantName",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": ["admin"]
+            }
+          }
+        }
+      }
+    },
     "updated": {
       "type": "date",
       "defaultFn": "now"

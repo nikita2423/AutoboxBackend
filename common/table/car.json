@@ -31,9 +31,30 @@
       "search": "date",
       "date": true
     },
-    "brand_name": {
+    "brandName": {
       "label": "Brand",
       "search": "text"
+    },
+    "carModelName": {
+      "label": "Model",
+      "search": "text"
+    },
+    "fuelName": {
+      "label": "Fuel",
+      "search": "text"
+    },
+    "gearBoxName": {
+      "label": "GearBox",
+      "search": "text"
+    },
+    "variantName": {
+      "label": "Variant",
+      "search": "text"
+    },
+    "brand_name": {
+      "label": "Brand",
+      "search": "text",
+      "display": false
       },
     "brand_image": {
       "display": false
@@ -46,7 +67,8 @@
     },
     "carModel_name": {
       "label": "Model",
-      "search": "text"
+      "search": "text",
+      "display": false
     },
     "carModel_image": {
       "display": false
@@ -65,14 +87,16 @@
     },
     "fuel_name": {
       "label": "Fuel",
-      "search": "text"
+      "search": "text",
+      "display": false
     },
     "fuel_status": {
       "display": false
     },
     "gearBox_name": {
       "label": "GearBox",
-      "search": "text"
+      "search": "text",
+      "display": false
     },
     "gearBox_added": {
       "display": false
@@ -82,7 +106,8 @@
     },
     "trim_name": {
       "label": "Variant",
-      "search": "text"
+      "search": "text",
+      "display": false
     },
     "trim_added":{
       "display":false
