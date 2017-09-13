@@ -2484,10 +2484,24 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             }
                         }
                     }
-                    filter.include =   filter.include = [{
+                    filter.include = [{
                         relation: "dealer",
                         scope: {
-                            include: ["showroom", "workshop"]
+                            include: [{
+                                relation: "showroom",
+                                scope: {
+                                    include: ["area", "city"]
+                                }
+                            },
+                                {
+                                    relation: "workshop",
+                                    scope: {
+                                        include: ["area", "city"]
+                                    }
+                                },
+                                {
+                                    relation: "brand"
+                                }]
                         }
                     }];
                     const QuoteReply = databaseObj.QuoteReply;

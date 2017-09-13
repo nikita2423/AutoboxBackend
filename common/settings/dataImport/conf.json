@@ -383,7 +383,8 @@
               "modelProperty": "color21"
             }
           ],
-          "beforeSave":["addCarDetailIds"]
+          "beforeSave":["addCarDetailIds"],
+          "afterSave":["addColorIds"]
         }
       ]
     },
