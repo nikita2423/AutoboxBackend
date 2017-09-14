@@ -200,22 +200,6 @@
         "label": "Car Model"
       }
     },
-    "fuel": {
-      "type": "belongsTo",
-      "model": "Fuel",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Fuel",
-        "searchProp": "name",
-        "priority": 2,
-        "search": true,
-        "type": "smartSelect",
-        "create": false,
-        "id": "AddFuel",
-        "hide": false,
-        "label": "Fuel"
-      }
-    },
     "trim": {
       "type": "belongsTo",
       "model": "Trim",
@@ -231,6 +215,22 @@
         "id": "AddTrim",
         "hide": false,
         "label": "Trim"
+      }
+    },
+    "fuel": {
+      "type": "belongsTo",
+      "model": "Fuel",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Fuel",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "type": "smartSelect",
+        "create": false,
+        "id": "AddFuel",
+        "hide": false,
+        "label": "Fuel"
       }
     },
     "gearBox": {
