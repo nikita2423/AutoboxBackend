@@ -67,6 +67,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 },
                 {
                     arg: "filter", type: "Object"
+                },
+                {
+                    arg: "lastDate", type: "string"
                 }
             ],
             returns:{
@@ -960,9 +963,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @param callback
      * @returns {*}
      */
-    const findAllBrands = function(ctx, filter, callback){
+    const findAllBrands = function(ctx, filter, lastDate, callback){
+        /*if(!filter.where.added.lt){
+            filter.where.added.lt = new Date();
+        }*/
+        if(!lastDate) {
+            lastDate = !lastDate ? moment(new Date()).valueOf() : moment(new Date(lastDate)).valueOf();
+        }
         const request = ctx.req;
-        let lastDate;
         if(request.accessToken){
             if(request.accessToken.userId){
                   const Brand = databaseObj.Brand;
@@ -977,10 +985,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                   }
 
                   if(filter.where){
-                      if(filter.where.added){
-                          if(!filter.where.added.lt){
-                              filter.where.added.lt = new Date();
-                          }
+                      if(!filter.where.added){
+                        filter.where.added = {
+                            lt: lastDate
+                        }
                       }
                   }
 
@@ -993,7 +1001,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                           if(brandList){
                               if(brandList.length){
                                   const brand = brandList[brandList.length - 1];
-                                  lastDate = brand.added;
+                                  lastDate = moment(brand.added).valueOf().toString();
                               }
                           }
 
@@ -2132,11 +2140,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                   const customerId = request.accessToken.userId;
                   const ServiceBooking = databaseObj.ServiceBooking;
                   ServiceBooking.create({
-                      serviceDate: moment(serviceBookingObj.serviceDate, "DD/MM/YYYY"),
-                      comments: serviceBookingObj.comments,
-                      vehiclePickup: serviceBookingObj.vehiclePickup,
-                      serviceTypeId: serviceBookingObj.serviceTypeId,
                       workshopId: serviceBookingObj.workshopId,
+                      vehicleDetailId: serviceBookingObj.vehicleDetailId,
                       customerId: customerId
                   })
                       .then(function(serviceBooking){

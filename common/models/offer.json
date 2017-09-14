@@ -80,7 +80,12 @@
       "defaultFn": "now"
     },
     "isRead": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
+    },
+    "isRemoved": {
+      "type": "boolean",
+      "default": false
     }
   },
   "validations": [],

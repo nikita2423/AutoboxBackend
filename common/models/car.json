@@ -54,7 +54,9 @@
             "reject": [],
             "fields": {
               "allow": [],
-              "reject": ["admin"]
+              "reject": [
+                "admin"
+              ]
             }
           }
         }
@@ -76,13 +78,15 @@
             "reject": [],
             "fields": {
               "allow": [],
-              "reject": ["admin"]
+              "reject": [
+                "admin"
+              ]
             }
           }
         }
       }
     },
-    "fuelName":{
+    "fuelName": {
       "type": "string",
       "required": false,
       "default": "NA",
@@ -98,7 +102,9 @@
             "reject": [],
             "fields": {
               "allow": [],
-              "reject": ["admin"]
+              "reject": [
+                "admin"
+              ]
             }
           }
         }
@@ -120,7 +126,9 @@
             "reject": [],
             "fields": {
               "allow": [],
-              "reject": ["admin"]
+              "reject": [
+                "admin"
+              ]
             }
           }
         }
@@ -142,7 +150,9 @@
             "reject": [],
             "fields": {
               "allow": [],
-              "reject": ["admin"]
+              "reject": [
+                "admin"
+              ]
             }
           }
         }

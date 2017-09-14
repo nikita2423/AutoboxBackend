@@ -33,7 +33,7 @@ angular.module($snaphy.getModuleName())
 
             $scope.settings.tabs.quoteReply.config.customerQuoteId = $state.params.customerQuoteId;
             $scope.settings.tabs.quoteReply.config.dealerId = $state.params.dealerId;
-            $scope.settings.tabs.quoteReply.displayData($scope.settings.tabs.quoteReply.config.customerQuoteId);
+            $scope.settings.tabs.quoteReply.displayData($scope.settings.tabs.quoteReply.config.customerQuoteId, $scope.settings.tabs.quoteReply.config.dealerId);
         };
 
         $scope.replyCustomerMessageInit = function() {

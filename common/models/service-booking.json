@@ -8,7 +8,7 @@
   "properties": {
     "serviceDate": {
       "type": "date",
-      "required": true,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -33,7 +33,7 @@
     },
     "vehiclePickup": {
       "type": "string",
-      "required": true,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -46,7 +46,7 @@
     },
     "bookingNumber": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "added": {
       "type": "date",
@@ -58,7 +58,7 @@
     },
     "updated": {
       "type": "date",
-      "required": true,
+      "required": false,
       "defaultFn": "now"
     }
   },
@@ -108,6 +108,11 @@
         "hide": false,
         "label": "Add Customer"
       }
+    },
+    "vehicleDetail": {
+      "type": "belongsTo",
+      "model": "VehicleDetail",
+      "foreignKey": ""
     }
   },
   "acls": [],

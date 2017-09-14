@@ -20,7 +20,7 @@
           "title":"Quote Reply",
           "onClick":{
             "type":"dialog",
-            "state":"soldViaAutobox.quoteReply",
+            "state":"dashboard.quoteReply",
             "options":{
               "customerQuoteId": "$data.id",
               "dealerId": "$user.id"

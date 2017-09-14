@@ -20,7 +20,9 @@
             "reject": [],
             "fields": {
               "allow": [],
-              "reject": ["Dealer"]
+              "reject": [
+                "Dealer"
+              ]
             }
           },
           "id": "firstName"
@@ -41,7 +43,9 @@
             "reject": [],
             "fields": {
               "allow": [],
-              "reject": ["Dealer"]
+              "reject": [
+                "Dealer"
+              ]
             }
           },
           "id": "lastName"
@@ -62,7 +66,9 @@
             "reject": [],
             "fields": {
               "allow": [],
-              "reject": ["Dealer"]
+              "reject": [
+                "Dealer"
+              ]
             }
           },
           "options": [
@@ -82,7 +88,7 @@
     },
     "time": {
       "type": "string",
-      "required" : false,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -93,7 +99,9 @@
             "reject": [],
             "fields": {
               "allow": [],
-              "reject": ["Dealer"]
+              "reject": [
+                "Dealer"
+              ]
             }
           },
           "priority": 6
@@ -130,7 +138,9 @@
             "reject": [],
             "fields": {
               "allow": [],
-              "reject": ["Dealer"]
+              "reject": [
+                "Dealer"
+              ]
             }
           },
           "id": "mobileNumber"
@@ -151,7 +161,9 @@
             "reject": [],
             "fields": {
               "allow": [],
-              "reject": ["Dealer"]
+              "reject": [
+                "Dealer"
+              ]
             }
           },
           "id": "message"
@@ -171,7 +183,9 @@
             "reject": [],
             "fields": {
               "allow": [],
-              "reject": ["Dealer"]
+              "reject": [
+                "Dealer"
+              ]
             }
           },
           "id": "subject"
@@ -192,7 +206,9 @@
             "reject": [],
             "fields": {
               "allow": [],
-              "reject": ["Dealer"]
+              "reject": [
+                "Dealer"
+              ]
             }
           },
           "options": [
@@ -215,7 +231,9 @@
             "reject": [],
             "fields": {
               "allow": [],
-              "reject": ["Dealer"]
+              "reject": [
+                "Dealer"
+              ]
             }
           },
           "id": "subject"
@@ -246,7 +264,9 @@
           "reject": [],
           "relations": {
             "allow": [],
-            "reject": ["Dealer"]
+            "reject": [
+              "Dealer"
+            ]
           }
         },
         "hide": false,
@@ -271,7 +291,9 @@
           "reject": [],
           "relations": {
             "allow": [],
-            "reject": ["Dealer"]
+            "reject": [
+              "Dealer"
+            ]
           }
         },
         "label": "Add Dealer"
@@ -295,7 +317,9 @@
           "reject": [],
           "relations": {
             "allow": [],
-            "reject": ["Dealer"]
+            "reject": [
+              "Dealer"
+            ]
           }
         },
         "label": "Add Customer Quote"

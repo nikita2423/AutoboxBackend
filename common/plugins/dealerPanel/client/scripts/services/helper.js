@@ -891,14 +891,15 @@ angular.module($snaphy.getModuleName())
             /**
              * display data
              */
-            var displayData = function (customerQuoteId) {
+            var displayData = function (customerQuoteId, dealerId) {
               return $q(function (resolve, reject) {
                   var quoteReply = Database.getDb("dealerPanel", "QuoteReply");
                   settings.get().tabs.quoteReply.isDataLoaded = false;
                   quoteReply.findOne({
                       filter: {
                           where: {
-                              customerQuoteId: customerQuoteId
+                              customerQuoteId: customerQuoteId,
+                              dealerId: dealerId
                           }
 
                       }

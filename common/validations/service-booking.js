@@ -29,7 +29,7 @@ module.exports = (Servicebooking, server, helper) =>
             instance.updated = new Date();
         }
 
-        if(instance.comments){
+      /*  if(instance.comments){
             const check = isLength(instance.comments,{min:3, max:500});
             if(!check){
                 return next(new Error("Comments length should be between 3 to 500"));
@@ -43,10 +43,14 @@ module.exports = (Servicebooking, server, helper) =>
 
         if(!validate(instance, currentInstance, "serviceTypeId")){
             return next(new Error("Service Type is required"));
-        }
+        }*/
 
         if(!validate(instance, currentInstance, "workshopId")){
             return next(new Error("Workshop is required"));
+        }
+
+        if(!validate(instance, currentInstance, "vehicleDetailId")){
+            return next(new Error("Vehicle Detail is required"));
         }
 
         next();
