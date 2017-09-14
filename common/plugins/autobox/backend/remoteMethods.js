@@ -939,7 +939,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     const removeSOSMethod = function(){
         const Sos = databaseObj.Sos;
-        Sos.removeSOS = removeSos;
+        Sos.removeSos = removeSos;
         Sos.remoteMethod('removeSos', {
             accepts: [
                 {
@@ -1678,7 +1678,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         added:{
                             lt: lastDate
                         }
-                    }
+                    },
+                    include: ["brand"]
                 })
                     .then(function(workshopList){
                         if(workshopList){

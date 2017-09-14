@@ -27,7 +27,7 @@ module.exports = (Trim, server, helper) =>
 
         if(instance.name){
             instance.name = instance.name.toString().trim();
-            const check = isLength(instance.name, {min: 1, max: 200});
+            const check = isLength(instance.name, {min: 1, max: 500});
             if(!check){
                 return next(new Error("Trim Name cannot exceed more than 200 words"));
             }

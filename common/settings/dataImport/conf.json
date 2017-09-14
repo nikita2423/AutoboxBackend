@@ -88,8 +88,7 @@
           "properties": [
             {
               "sheetColName": "Name",
-              "modelProperty": "name",
-              "unique": true
+              "modelProperty": "name"
             }
           ],
           "beforeSave": ["addTrimDetailIds"]

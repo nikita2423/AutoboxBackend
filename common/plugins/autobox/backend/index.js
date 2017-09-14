@@ -307,10 +307,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         console.log('Sending code for verification process : ' + code);
         sendOtp.send(phoneNumber.toString(), packageObj.senderId, code.toString(), function (error, data, response) {
         	if(error){
-        		console.log(error);
+        		//console.log(error);
         		callback(error);
 			} else{
-                console.log(data, response);
+               // console.log(data, response);
                 callback(null, "Success");
 			}
 
