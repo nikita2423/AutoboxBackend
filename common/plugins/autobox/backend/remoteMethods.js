@@ -967,9 +967,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         /*if(!filter.where.added.lt){
             filter.where.added.lt = new Date();
         }*/
-        if(!lastDate) {
-            lastDate = !lastDate ? moment(new Date()).valueOf() : moment(new Date(lastDate)).valueOf();
-        }
+        lastDate="";
         const request = ctx.req;
         if(request.accessToken){
             if(request.accessToken.userId){
@@ -984,14 +982,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       }
                   }
 
-                  if(filter.where){
-                      if(!filter.where.added){
-                        filter.where.added = {
-                            lt: lastDate
-                        }
-                      }
-                  }
-
                   if(!filter.order){
                       filter.order = ['trending DESC'];
                   }
@@ -1001,7 +991,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                           if(brandList){
                               if(brandList.length){
                                   const brand = brandList[brandList.length - 1];
-                                  lastDate = moment(brand.added).valueOf().toString();
+                                  lastDate = brand.added;
                               }
                           }
 
