@@ -2921,9 +2921,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       .then(function(offerList){
                           if(offerList){
                               if(offerList.length){
-                                  callback(null, offerList);
+
                               }
                           }
+                          callback(null, offerList);
                       })
                       .catch(function(error){
                           callback(error);

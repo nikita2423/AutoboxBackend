@@ -1,7 +1,7 @@
 {
   "widgets": [
     {
-      "label": "Old Trade cars",
+      "label": "Offers",
       "icon": "si-bar-chart",
       "fetchLocally": true,
       "propObj": {
