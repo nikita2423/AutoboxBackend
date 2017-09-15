@@ -8,7 +8,7 @@
   "properties": {
     "contact1": {
       "type": "object",
-      "required": true,
+      "required": false,
       "template": {
         "type": "objectValue",
         "templateOptions": {

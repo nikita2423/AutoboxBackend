@@ -3081,10 +3081,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     .then(function(sos){
                         if(sos){
                             const sosId = sos.id;
-                            return Sos.destroyById(sosId)
+                            return sos.updateAttributes({
+                                contact1: {},
+                                contact2: {},
+                                contact3: {}
+                            });
                         }
                     })
-                    .then(function(){
+                    .then(function(sos){
                         callback(null, {response: "success"});
                     })
                     .catch(function(error){

@@ -19,13 +19,13 @@ module.exports = function(Sos, server, helper) {
             instance.updated = new Date();
         }
 
-        if(instance.contact1){
+       /* if(instance.contact1){
             if(!instance.contact1.firstContactNo){
                 return next(new Error("First Contact Number is required"));
             }
         } else{
             return next(new Error("First Contact is required"));
-        }
+        }*/
 
         if(!validate(instance, currentInstance, "customerId")){
             return next(new Error("Customer is required"));
