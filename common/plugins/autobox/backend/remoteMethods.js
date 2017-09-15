@@ -2306,6 +2306,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     const createTestDriveQuote = function(ctx, vehicleInfoObj, callback){
         const request = ctx.req;
+        let cityId;
         if(!vehicleInfoObj){
             callback(new Error("Invalid Arguments"));
         } else{
@@ -2313,21 +2314,28 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 if(request.accessToken.userId){
                     const customerId = request.accessToken.userId;
                     const VehicleInfo = databaseObj.VehicleInfo;
-                    VehicleInfo.create({
-                        brandId: vehicleInfoObj.brandId,
-                        carModelId: vehicleInfoObj.carModelId,
-                        trimId: vehicleInfoObj.trimId,
-                        customerId: customerId,
-                        gearBoxId: vehicleInfoObj.gearBoxId,
-                        fuelId: vehicleInfoObj.fuelId,
-                        vehicleModel: vehicleInfoObj.vehicleModel,
-                        vehicleType: "car",
-                        quoteType : "t",
-                        fuelType: vehicleInfoObj.fuelType,
-                        vehicleTrim: vehicleInfoObj.vehicleTrim,
-                        vehicleBrand: vehicleInfoObj.vehicleBrand,
-                        vehicleGearbox : vehicleInfoObj.vehicleGearbox
-                    })
+                    const Customer = databaseObj.Customer;
+                    Customer.findById(customerId)
+                        .then(function(customer){
+                            if(customer){
+                                cityId = customer.cityId;
+                                return VehicleInfo.create({
+                                    brandId: vehicleInfoObj.brandId,
+                                    carModelId: vehicleInfoObj.carModelId,
+                                    trimId: vehicleInfoObj.trimId,
+                                    customerId: customerId,
+                                    gearBoxId: vehicleInfoObj.gearBoxId,
+                                    fuelId: vehicleInfoObj.fuelId,
+                                    vehicleModel: vehicleInfoObj.vehicleModel,
+                                    vehicleType: "car",
+                                    quoteType : "t",
+                                    fuelType: vehicleInfoObj.fuelType,
+                                    vehicleTrim: vehicleInfoObj.vehicleTrim,
+                                    vehicleBrand: vehicleInfoObj.vehicleBrand,
+                                    vehicleGearbox : vehicleInfoObj.vehicleGearbox
+                                })
+                            }
+                        })
                         .then(function(vehicleInfo){
                             const vehicleInfoId = vehicleInfo.id;
                             const CustomerQuote = databaseObj.CustomerQuote;
@@ -2336,6 +2344,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 quoteType: "t",
                                 currentBrandId: vehicleInfoObj.brandId,
                                 customerId: customerId,
+                                cityId: cityId,
                                 status: "active",
                                 purchaseStatus: "notpurchased"
                             })
