@@ -51,6 +51,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         fetchSosSettingsMethod();
         incrementReferralCountMethod();
         removeSOSMethod();
+        findAllCustomerOfferMethod();
+        rateDealerExperienceMethod();
     };
 
     const findAllBrandMethod = function(){
@@ -568,6 +570,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 },
                 {
                     arg: "filter", type: "object"
+                },
+                {
+                    arg: "lat", type: "number"
+                },
+                {
+                    arg: "lang", type: "number"
                 }
             ],
             returns: {
@@ -954,6 +962,50 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 arg: "response", type: "object", root: true
             }
         })
+    };
+
+    const findAllCustomerOfferMethod = function(){
+      const CustomerOffer = databaseObj.CustomerOffer;
+      CustomerOffer.findAll = findAllCustomerOffers;
+      CustomerOffer.remoteMethod('findAll', {
+          accepts: [
+              {
+                  arg: 'ctx',
+                  type: 'object',
+                  http: {
+                      source: 'context'
+                  }
+              },
+              {
+                  arg:"lastDate", type: "string"
+              }
+          ],
+          returns: {
+              arg: "customerOfferList", type: "object", root: true
+          }
+      })
+    };
+
+    const rateDealerExperienceMethod = function(){
+      const DealerRating = databaseObj.DealerRating;
+      DealerRating.rateDealerExperience = rateDealerExperience;
+      DealerRating.remoteMethod('rateDealerExperience', {
+          accepts: [
+              {
+                  arg: 'ctx',
+                  type: 'object',
+                  http: {
+                      source: 'context'
+                  }
+              },
+              {
+                  arg: "dealerRatingObj", type: "object"
+              }
+          ],
+          returns: {
+              arg: "response", type: "object", root: true
+          }
+      })
     };
 
     /**
@@ -1406,8 +1458,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                     callback(error);
                                                 })
                                         });
-
-
                                     }else{
                                         callback(new Error("Breakdown Category not found"));
                                     }
@@ -2472,8 +2522,11 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @param callback
      * @returns {*}
      */
-    const fetchQuoteReplyFromDealer = function(ctx, filter, callback){
+    const fetchQuoteReplyFromDealer = function(ctx, filter, lat, lang, callback){
         const request = ctx.req;
+        const QuoteReply = databaseObj.QuoteReply;
+        var quoteReplyResultList = [];
+        var promises = [];
         let lastDate;
         if(!filter){
             return callback(new Error("Invalid Arguments"));
@@ -2509,20 +2562,72 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 }]
                         }
                     }];
-                    const QuoteReply = databaseObj.QuoteReply;
-                    QuoteReply.find(filter)
+                    const customerQuoteId = filter.where.customerQuoteId;
+                    QuoteReply.find({
+                        where: {
+                            customerQuoteId: customerQuoteId
+                        },
+                        include: [{
+                            relation: "dealer",
+                            scope: {
+                                include: [{
+                                    relation: "showroom",
+                                    scope: {
+                                        include: ["area", "city"]
+                                    }
+                                },
+                                    {
+                                        relation: "workshop",
+                                        scope: {
+                                            include: ["area", "city"]
+                                        }
+                                    },
+                                    {
+                                        relation: "brand"
+                                    }]
+                            }
+                        }]
+                    })
                         .then(function(quoteReplyList){
                             if(quoteReplyList){
                                 if(quoteReplyList.length){
-                                    const quoteReply = quoteReplyList[quoteReplyList.length - 1];
-                                    lastDate = quoteReply.added;
+                                    quoteReplyList.forEach(function(quoteReply){
+                                        promises.push(function(callback){
+                                            quoteReply.updateAttribute("distance", getDistance(lat, lang, quoteReply.dealer().showroom().latlong["lat"], quoteReply.dealer().showroom().latlong["lng"]))
+                                                .then(function(quoteReply){
+                                                    if(quoteReply){
+                                                        callback(null);
+                                                    }
+                                                })
+                                                .catch(function(error){
+                                                    callback(error);
+                                                })
+                                        })
+                                    })
                                 }
+                                async.series(promises, function(error){
+                                    if(error){
+                                        callback(error);
+                                    } else{
+                                        QuoteReply.find(filter)
+                                            .then(function(quoteReplyList){
+                                                if(quoteReplyList){
+                                                    if(quoteReplyList.length){
+                                                        const quoteReply = quoteReplyList[quoteReplyList.length - 1];
+                                                        lastDate = quoteReply.added;
+                                                    }
+                                                }
+                                                callback(null, {
+                                                    quoteReplyList: quoteReplyList,
+                                                    cursor: lastDate
+                                                })
+                                            })
+                                            .catch(function(error){
+                                                callback(error);
+                                            })
+                                    }
+                                })
                             }
-
-                            callback(null, {
-                                quoteReplyList: quoteReplyList,
-                                cursor: lastDate
-                            })
                         })
                         .catch(function(error){
                             callback(error);
@@ -2535,6 +2640,24 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 return callback(new Error("User not valid"));
             }
         }
+    };
+
+    var getDistance = function(lat1, lon1, lat2, lon2){
+        var R = 6371; // Radius of the earth in km
+        var dLat = deg2rad(lat2-lat1);  // deg2rad below
+        var dLon = deg2rad(lon2-lon1);
+        var a =
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+            Math.sin(dLon/2) * Math.sin(dLon/2)
+        ;
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        var d = R * c; // Distance in km
+        return d;
+    };
+
+    var deg2rad = function(deg){
+        return deg * (Math.PI/180)
     };
 
     /**
@@ -3109,6 +3232,80 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         } else{
             callback(new Error("User not valid"));
         }
+    };
+
+    const findAllCustomerOffers = function(ctx, lastDate, callback){
+        const request = ctx.req;
+        lastDate = !lastDate ? new Date() : new Date(lastDate);
+        if(request.accessToken){
+            if(request.accessToken.userId){
+                const customerId = request.accessToken.userId;
+                const CustomerOffer = databaseObj.CustomerOffer;
+                CustomerOffer.find({
+                    limit: 10,
+                    where: {
+                        customerId: customerId,
+                        removeStatus: false,
+                        added: {
+                            lt: lastDate
+                        },
+                        status: "active"
+                    },
+                    include: ["offer"]
+                })
+                    .then(function(customerOfferList){
+                        if(customerOfferList){
+                            if(customerOfferList.length){
+                                lastDate = customerOfferList[customerOfferList.length];
+                            }
+                        }
+                        callback(null, {
+                            data: customerOfferList,
+                            cursor: lastDate
+                        })
+                    })
+                    .catch(function(error){
+                        callback(error);
+                    })
+            } else{
+                callback(new Error("User not valid"));
+            }
+        } else{
+            callback(new Error("User not valid"));
+        }
+    };
+
+    const rateDealerExperience = function(ctx, dealerRatingObj, callback){
+      const request = ctx.req;
+      if(!dealerRatingObj){
+          callback(new Error("Invalid Arguments"));
+      } else{
+          if(request.accessToken){
+              if(request.accessToken.userId){
+                  const customerId = request.accessToken.userId;
+                  const DealerRating = databaseObj.DealerRating;
+                  DealerRating.create({
+                      customerId: customerId,
+                      dealerId : dealerRatingObj.dealerId,
+                      dealerName: dealerRatingObj.dealerName,
+                      customerName: dealerRatingObj.customerName,
+                      rating: dealerRatingObj.rating
+                  })
+                      .then(function(dealerRating){
+                          if(dealerRating){
+                              callback(null, {response:"success"});
+                          }
+                      })
+                      .catch(function(error){
+                          callback(error);
+                      })
+              } else{
+                  callback(new Error("User not valid"));
+              }
+          } else{
+              callback(new Error("User not valid"));
+          }
+      }
     };
 
     return {

@@ -386,7 +386,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			.then(function(token){
 				if(token) {
                     token.__data.user = customerInstance;
-                    console.log("myToken", token);
+                    //console.log("myToken", token);
                     callback(null, token);
                 }else{
 					callback(null,{});

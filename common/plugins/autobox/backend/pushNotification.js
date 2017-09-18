@@ -10,6 +10,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const emailPlugin = helper.loadPlugin("email");
     const send = helper.loadPlugin("smsService");
     const Promise = require("bluebird");
+    const async = require("async");
 
     var init = function(){
         sendCreateQuoteNotification();
@@ -688,7 +689,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                   databaseObj.City.findOne(offerObj.cityId)
                       .then(function(city){
                           if(city){
-                              sendPushToAllCustomer(server, databaseObj, packageObj, eventType, title, city, instanceId, push);
+                              sendPushToAllCustomer(server, databaseObj, packageObj, eventType, title, city, instanceId, push, offerObj);
                           }
                       })
                       .catch(function(error){
@@ -702,7 +703,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
 
-    const sendPushToAllCustomer = function(server, databaseObj, packageObj, eventType, title, city, instanceId, push){
+    const sendPushToAllCustomer = function(server, databaseObj, packageObj, eventType, title, city, instanceId, push, offerObj){
         var skip = 0;
         var limit = 10;
         const findCustomerList = function (skip) {
@@ -714,9 +715,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     if (cursor === null) {
                         //Stop all data
                         //send push
-                        sendNotificationToCustomerList(list, instanceId, eventType, title);
+                        sendNotificationToCustomerList(list, instanceId, eventType, title, offerObj);
                     } else {
-                        sendNotificationToCustomerList(list, instanceId, eventType, title);
+                        sendNotificationToCustomerList(list, instanceId, eventType, title, offerObj);
                         //Recursive call..
                         findCustomerList(cursor);
                     }//else
@@ -727,27 +728,55 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
 
-    const sendNotificationToCustomerList = function (customerList, offerId, eventType, title) {
+    const sendNotificationToCustomerList = function (customerList, offerId, eventType, title, offerObj) {
         //send push..
         //and recursive call..
         //send push
+        var promises = [];
+        const CustomerOffer = databaseObj.CustomerOffer;
         customerList.forEach(function (customer) {
-            var name = customer.firstName;
-            var lastName = customer.lastName ? customer.lastName : "";
-            name = name + " " + lastName;
-            var message = getOfferMessageObject(name, eventType, title, offerId);
-            if (customer.id) {
-                //app, message, id, from, callback
-                //Now send push..
-                sendNotification(server, message, customer.id, packageObj.companyName, function (err) {
-                    if (err) {
-                        console.error(error);
-                    } else {
-                        console.log("Offer has been send Successfully");
-                    }
-                });
-            }
+            promises.push(function(callback){
+                CustomerOffer.create({
+                    offerId : offerObj.id,
+                    customerId : customer.id,
+                    status: "active",
+                    expiredOn: offerObj.expiredOn
+                })
+                    .then(function(customerOffer){
+                        if(customerOffer){
+                            var name = customer.firstName;
+                            var lastName = customer.lastName ? customer.lastName : "";
+                            name = name + " " + lastName;
+                            var message = getOfferMessageObject(name, eventType, title, offerId);
+                            if (customer.id) {
+                                //app, message, id, from, callback
+                                //Now send push..
+                                sendNotification(server, message, customer.id, packageObj.companyName, function (err) {
+                                    if (err) {
+                                        console.error(error);
+                                    } else {
+                                        console.log("Offer has been send Successfully");
+                                    }
+                                });
+                            }
+                            callback(null);
+                        }
+                    })
+                    .catch(function(error){
+                        callback(error);
+                    })
+            })
+
         });
+
+        async.series(promises, function(error){
+            if(error){
+                console.log(error);
+            } else{
+                console.log("Customer Offer created successfully");
+            }
+        })
+
     };
 
 

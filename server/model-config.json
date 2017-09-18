@@ -251,5 +251,17 @@
   "GpsTracker": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "CustomerOffer": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "DealerRating": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "GpsPacketData": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

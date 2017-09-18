@@ -1,0 +1,54 @@
+{
+  "name": "CustomerOffer",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "readStatus": {
+      "type": "boolean",
+      "default": false
+    },
+    "removeStatus": {
+      "type": "boolean",
+      "default": false
+    },
+    "status": {
+      "type": "string",
+      "default": "active"
+    },
+    "expiredOn": {
+      "type": "date",
+      "required": true
+    },
+    "added": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "updated": {
+      "type": "date",
+      "required": false,
+      "defaultFn": "now"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "offer": {
+      "type": "belongsTo",
+      "model": "Offer",
+      "foreignKey": ""
+    },
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

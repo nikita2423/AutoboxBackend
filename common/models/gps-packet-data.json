@@ -1,0 +1,110 @@
+{
+  "name": "GpsPacketData",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "clientId": {
+      "type": "string"
+    },
+    "deviceIMEI": {
+      "type": "string",
+      "required": true
+    },
+    "eventCode": {
+      "type": "number",
+      "required": true
+    },
+    "isStoredPacket": {
+      "type": "boolean",
+      "required": true
+    },
+    "eventType": {
+      "type": "string",
+      "required": true
+    },
+    "eventDate": {
+      "type": "date",
+      "required": true
+    },
+    "gpsStatus": {
+      "type": "string"
+    },
+    "gmsSignal": {
+      "type": "number",
+      "required": true
+    },
+    "speed": {
+      "type": "number"
+    },
+    "accumulatedDistance": {
+      "type": "string"
+    },
+    "courseInDegree": {
+      "type": "number"
+    },
+    "satelliteConnected": {
+      "type": "number"
+    },
+    "hdop": {
+      "type": "number"
+    },
+    "voltageEquivalent": {
+      "type": "number"
+    },
+    "digitalInput1": {
+      "type": "string"
+    },
+    "caseStatus": {
+      "type": "string"
+    },
+    "isOverSpeedStarted": {
+      "type": "boolean"
+    },
+    "isOverSpeedEnded": {
+      "type": "boolean"
+    },
+    "immobilizerVoilationAlert": {
+      "type": "boolean"
+    },
+    "batteryStatus": {
+      "type": "string"
+    },
+    "digitalInput2": {
+      "type": "string"
+    },
+    "ignitionStatus": {
+      "type": "string"
+    },
+    "internalBatteryLowAlert": {
+      "type": "boolean"
+    },
+    "anglePollingBit": {
+      "type": "boolean"
+    },
+    "digitalOutput1Status": {
+      "type": "string"
+    },
+    "isHarshAccelerationDetected": {
+      "type": "boolean"
+    },
+    "isHarshBrakingDetected": {
+      "type": "boolean"
+    },
+    "externalBatteryVoltage": {
+      "type": "string"
+    },
+    "internalBatteryVoltage": {
+      "type": "number"
+    },
+    "gpsPacketId": {
+      "type": "object"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

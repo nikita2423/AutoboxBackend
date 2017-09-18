@@ -150,6 +150,10 @@
         }
       }
     },
+    "distance": {
+      "type": "number",
+      "default": 0
+    },
     "replyNumber": {
       "type": "string",
       "required": true

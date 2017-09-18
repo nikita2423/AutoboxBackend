@@ -63,12 +63,10 @@ module.exports = (Offer, server, helper) =>
 
     });
 
-
     var checkOfferExpiry = function(){
         var rule = new schedule.RecurrenceRule();
         rule.hour = alarmManager.dailyHour || 0;
         rule.minute = alarmManager.dailyMinutes || 1;
-
         var job = schedule.scheduleJob(rule, function(){
             console.log("Waking up to check the expiry of offers");
             var yesterday = moment().subtract(1, 'days');
@@ -88,6 +86,8 @@ module.exports = (Offer, server, helper) =>
                     console.log(info);
                 }
             });
+
+
 
 
 
