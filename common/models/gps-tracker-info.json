@@ -17,6 +17,14 @@
     "registrationNumber": {
       "type": "string",
       "required": true
+    },
+    "serialNumber": {
+      "type": "string",
+      "required": true
+    },
+    "modelName": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
