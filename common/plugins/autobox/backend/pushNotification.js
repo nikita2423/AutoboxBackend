@@ -23,6 +23,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         sendQuoteReplyNotification();
         sendOldTradeCarEmail();
         sendCustomerQuoteEmailToDealer();
+        sendGpsNotification();
     };
 
 
@@ -550,6 +551,24 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         });
     };
 
+    const sendGpsNotification = function(){
+        const GpsPacketData = databaseObj.GpsPacketData;
+        GpsPacketData.observe("after save", function(ctx, next){
+            if(ctx.isNewInstance){
+                let customerInstance;
+                const instance = ctx.instance;
+                const gpsPacketDataObj = instance.toJSON();
+                process.nextTick(function(){
+                    databaseObj.Customer.findById(gpsPacketDataObj.customerId)
+                        .then(function(customer){
+                            if(customer){
+                                customerInstance = customer;
+                            }
+                        })
+                })
+            }
+        })
+    };
 
     const sendCustomerQuoteEmailToDealer = function(){
         const CustomerQuote = databaseObj.CustomerQuote;
@@ -563,7 +582,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     if(customerQuoteObj.quoteType === 'q'){
                         customerQuoteObj.quoteType = "Quote";
                     } else if(customerQuoteObj.quoteType === 't'){
-                        customerQuoteObj.quoteType === "Test Drive";
+                        customerQuoteObj.quoteType = "Test Drive";
                     }
                     databaseObj.Customer.findById(customerQuoteObj.customerId)
                         .then(function(customer){

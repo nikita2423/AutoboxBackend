@@ -53,6 +53,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         removeSOSMethod();
         findAllCustomerOfferMethod();
         rateDealerExperienceMethod();
+        createGpsPacketDataMethod();
     };
 
     const findAllBrandMethod = function(){
@@ -1000,6 +1001,28 @@ module.exports = function( server, databaseObj, helper, packageObj) {
               },
               {
                   arg: "dealerRatingObj", type: "object"
+              }
+          ],
+          returns: {
+              arg: "response", type: "object", root: true
+          }
+      })
+    };
+
+    const createGpsPacketDataMethod = function(){
+      const GpsPacketData = databaseObj.GpsPacketData;
+      GpsPacketData.createGpsPacketData = createGpsPacketData;
+      GpsPacketData.remoteMethod('createGpsPacketData', {
+          accepts: [
+              {
+                  arg: 'ctx',
+                  type: 'object',
+                  http: {
+                      source: 'context'
+                  }
+              },
+              {
+                  arg: "gpsPacketDataObj", type: "object"
               }
           ],
           returns: {
@@ -3277,20 +3300,28 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     const rateDealerExperience = function(ctx, dealerRatingObj, callback){
       const request = ctx.req;
+      let dealerName;
       if(!dealerRatingObj){
           callback(new Error("Invalid Arguments"));
       } else{
           if(request.accessToken){
               if(request.accessToken.userId){
                   const customerId = request.accessToken.userId;
+                  const Dealer = databaseObj.Dealer;
                   const DealerRating = databaseObj.DealerRating;
-                  DealerRating.create({
-                      customerId: customerId,
-                      dealerId : dealerRatingObj.dealerId,
-                      dealerName: dealerRatingObj.dealerName,
-                      customerName: dealerRatingObj.customerName,
-                      rating: dealerRatingObj.rating
-                  })
+                  Dealer.findById(dealerRatingObj.dealerId)
+                      .then(function(dealer){
+                          if(dealer){
+                              dealerName = dealer.firstName + " " + dealer.lastName
+                          }
+                          return DealerRating.create({
+                              customerId: customerId,
+                              dealerId : dealerRatingObj.dealerId,
+                              dealerName: dealerName,
+                              customerName: dealerRatingObj.customerName,
+                              rating: dealerRatingObj.rating
+                          })
+                      })
                       .then(function(dealerRating){
                           if(dealerRating){
                               callback(null, {response:"success"});
@@ -3306,6 +3337,18 @@ module.exports = function( server, databaseObj, helper, packageObj) {
               callback(new Error("User not valid"));
           }
       }
+    };
+
+    const createGpsPacketData = function(ctx, gpsPacketDataObj, callback){
+        const request = ctx.req;
+        const GpsPacketData = databaseObj.GpsPacketData;
+        GpsPacketData.create(gpsPacketDataObj)
+            .then(function(gpsPacketData){
+                callback(null, {response: "success"});
+            })
+            .catch(function(error){
+                callback(error);
+            });
     };
 
     return {

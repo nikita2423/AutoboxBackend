@@ -1,21 +1,21 @@
 {
-  "name": "DealerRating",
+  "name": "GpsTrackerInfo",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "dealerName": {
+    "deviceIMEI": {
       "type": "string",
       "required": true
     },
-    "customerName": {
+    "gpsPassword": {
       "type": "string",
       "required": true
     },
-    "rating": {
-      "type": "number",
+    "registrationNumber": {
+      "type": "string",
       "required": true
     }
   },
@@ -24,16 +24,6 @@
     "customer": {
       "type": "belongsTo",
       "model": "Customer",
-      "foreignKey": ""
-    },
-    "dealer": {
-      "type": "belongsTo",
-      "model": "Dealer",
-      "foreignKey": ""
-    },
-    "showroom": {
-      "type": "belongsTo",
-      "model": "Showroom",
       "foreignKey": ""
     }
   },
