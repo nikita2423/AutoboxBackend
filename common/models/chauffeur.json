@@ -1,0 +1,38 @@
+{
+  "name": "Chauffeur",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "chauffeurContact": {
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    },
+    "vehicleDetail": {
+      "type": "belongsTo",
+      "model": "VehicleDetail",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

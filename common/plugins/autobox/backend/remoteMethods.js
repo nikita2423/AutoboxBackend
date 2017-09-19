@@ -1774,7 +1774,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             lt: lastDate
                         }
                     },
-                    include: ["brand", "area"]
+                    include: ["brand", "area"]igt 
                 })
                     .then(function(workshopList){
                         if(workshopList){
