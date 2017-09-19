@@ -33,5 +33,15 @@
   "disableButton":{
     "disable": "disable",
     "enable": "enable"
+  },
+  "gps": {
+    "power_fail": "power_fail",
+    "over_speed_started": "over_speed_started",
+    "over_speed_ended": "over_speed_ended",
+    "ignition_on": "ignition_on",
+    "ignition_off": "ignition_off",
+    "harsh_braking": "harsh_braking",
+    "internal_battery_low": "internal_battery_low",
+    "harsh_acceleration": "harsh_acceleration"
   }
 }

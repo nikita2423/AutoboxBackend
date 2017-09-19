@@ -1030,7 +1030,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
           }
       })
     };
-
     /**
      * To fetch all the Brands
      * @param ctx

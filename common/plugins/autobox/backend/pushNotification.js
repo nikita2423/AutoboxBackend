@@ -556,6 +556,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         GpsPacketData.observe("after save", function(ctx, next){
             if(ctx.isNewInstance){
                 let customerInstance;
+                let eventType = "";
+                let title = "";
                 const instance = ctx.instance;
                 const gpsPacketDataObj = instance.toJSON();
                 process.nextTick(function(){
@@ -564,6 +566,34 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             if(customer){
                                 customerInstance = customer;
                             }
+                        })
+                        .then(function(){
+                            var name = customerInstance.firstName;
+                            var lastName = customerInstance.lastName ? customerInstance.lastName : "";
+                            name = name + " " + lastName;
+                            if(gpsPacketDataObj.eventType === packageObj.gps.power_fail){
+                                eventType = gpsPacketDataObj.eventType;
+                                title = "Power failed!"
+                            } else if(gpsPacketDataObj.eventType === packageObj.gps.harsh_braking){
+                                eventType = gpsPacketDataObj.eventType;
+                                title = "Harsh Braking has been applied";
+                            } else if(gpsPacketDataObj.eventType === packageObj.gps.harsh_acceleration){
+                                eventType = gpsPacketDataObj.eventType;
+                                title = "Harsh Acceleration has been applied";
+                            }
+                            var message = gpsMessageFormat(name, eventType, title, gpsPacketDataObj.id);
+                            if(gpsPacketDataObj.customerId){
+                                sendNotification(server, message, gpsPacketDataObj.customerId, packageObj.companyName, function (err) {
+                                    if (err) {
+                                        console.error(error);
+                                    } else {
+                                        console.log("Offer has been send Successfully");
+                                    }
+                                });
+                            }
+                        })
+                        .catch(function(error){
+                            console.error(error);
                         })
                 })
             }
@@ -678,7 +708,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
     const sendEmailToDealerList = function(dealerList, customerQuoteInstance){
-
         dealerList.forEach(function(dealer){
             const subject = packageObj.dealer.subject_customer_quote;
             const to = [];
@@ -966,6 +995,16 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             type : eventType,
             title : title,
             id : customerQuoteId
+        }
+        return JSON.stringify(message);
+    };
+
+    var gpsMessageFormat = function(to, eventType, title, gpsDataId){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            id : gpsDataId
         }
         return JSON.stringify(message);
     };

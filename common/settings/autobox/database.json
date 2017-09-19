@@ -21,6 +21,7 @@
   "EmergencyCategory": "EmergencyCategory",
   "Feedback": "Feedback",
   "GearBox": "GearBox",
+  "GpsPacketData": "GpsPacketData",
   "GpsTrackerInfo": "GpsTrackerInfo",
   "Insurance": "Insurance",
   "Offer": "Offer",
