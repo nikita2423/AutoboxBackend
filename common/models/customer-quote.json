@@ -6,6 +6,22 @@
     "validateUpsert": true
   },
   "properties": {
+    "quoteType": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Quote Type",
+          "id": "quotetype",
+          "priority": 6,
+          "options": [
+            "q",
+            "t"
+          ]
+        }
+      }
+    },
     "ownershipType": {
       "type": "string",
       "required": false,
@@ -68,22 +84,6 @@
           "options": [
             "yes",
             "no"
-          ]
-        }
-      }
-    },
-    "quoteType": {
-      "type": "string",
-      "required": true,
-      "template": {
-        "type": "selectString",
-        "templateOptions": {
-          "label": "Quote Type",
-          "id": "quotetype",
-          "priority": 6,
-          "options": [
-            "q",
-            "t"
           ]
         }
       }
