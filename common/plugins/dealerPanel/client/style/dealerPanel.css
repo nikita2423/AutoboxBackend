@@ -11,6 +11,16 @@
     background-color: #FFF !important;
 }
 
+.labelDashboard {
+    padding: 0px !important;
+    margin-left: 10px !important;
+    margin-top: 12px !important;
+}
+
+.dateDashboard {
+    margin-top: 4px;
+}
+
 .header-navbar-fixed #header-navbar {
     min-height: 30px;
     padding: 0px;
@@ -185,4 +195,18 @@ header > ul > li > button {
 
 .formly-field-singleFileUpload > div {
     height: 40px !important;
+}
+
+.label {
+    text-transform: uppercase !important;
+    font-size: 8px !important;
+}
+
+.modal-footer {
+    border: none !important;
+}
+
+.widgetBackground {
+    background-color: #EEE;
+    padding-bottom: 5px;
 }

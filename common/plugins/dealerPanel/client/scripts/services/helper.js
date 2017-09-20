@@ -251,13 +251,13 @@ angular.module($snaphy.getModuleName())
                                 stateName: "dashboard",
                                 stateOptions: {},
                                 active: false,
-                                dateClass:["col-md-4", "clearfix"],
-                                labelClass:["col-md-2"],
+                                dateClass:["col-md-4", "clearfix", "dateDashboard"],
+                                labelClass:["col-md-1", "labelDashboard"],
                                 columnName: "added",
                                 modelSetting:{
 
                                 },
-                                label: "Filter by date"
+                                label: "Filter by Date"
                             }
                         },
                         monthlyReports: {

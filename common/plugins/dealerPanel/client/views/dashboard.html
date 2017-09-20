@@ -1,9 +1,10 @@
 <div ng-init="init()">
-    {{getActiveTabSettings().title}}
+    <!--{{getActiveTabSettings().title}}-->
         <div
                 ng-if="relationDetail"
                 ng-init="tableInstance = tableViewInit(relationDetail, relationType);"
-                class="row" style="margin-top: 5px;margin-bottom:5px;margin-left: 5px">
+                class="row" style="margin-top: 4px;margin-bottom:0px;margin-left: 7px !important;
+                margin-right: 5px !important;background-color:white">
             <!--<span  style="font-size:13px;margin-top:4px;margin-bottom: 4px;margin-left: 5px">FILTER VIA DATE</span>
             <input style="margin-left: 5px;" type="date" id="fromId" placeholder="FROM"/>
             <input style="margin-left: 5px;" type="date" id="toId" placeholder="TO"/>
@@ -19,14 +20,15 @@
                     label="{{settings.tabs.dashboard.config.label}}"></dealer-filter-date>
             <div>
                 <button
-                        ng-click="tableInstance.resetAll()" class="btn btn-minw btn-default pull-right" type="button">Reset</button>
+                        ng-click="tableInstance.resetAll()" class="btn btn-minw btn-default pull-right" type="button"
+                        style="margin-right:5px;margin-bottom:5px;margin-top:-5px;">Reset</button>
             </div>
         </div>
 
     </div>
 
      <div
-         ng-init="widgets = settings.tabs.dashboard.widgets()" class="row">
+         ng-init="widgets = settings.tabs.dashboard.widgets()" class="row widgetBackground">
             <robust-widget-added  ng-cloak class="col-sm-4 col-lg-2"
             ng-repeat="widget in widgets"
             label="{{widget.label}}"

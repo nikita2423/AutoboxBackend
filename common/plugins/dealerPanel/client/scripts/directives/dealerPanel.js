@@ -26,7 +26,7 @@ angular.module($snaphy.getModuleName())
         },
         replace: true,
         template: '<div class="form-group">' +
-        '<label ng-class="labelClass" class="col-md-2 control-label" for="example-daterange1">{{label}}</label>' +
+        '<label ng-class="labelClass" class="col-md-1 control-label" for="example-daterange1">{{label}}</label>' +
         '<div ng-class="dateClass">' +
         '<div class="input-daterange input-group" data-date-format="dd/mm/yyyy">' +
         '<input class="form-control leftDate" type="text"  name="daterange1" placeholder="From">' +
