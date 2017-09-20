@@ -267,5 +267,9 @@
   "GpsTrackerInfo": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "Chauffeur": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

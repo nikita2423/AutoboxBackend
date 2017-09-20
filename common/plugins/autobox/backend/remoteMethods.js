@@ -54,6 +54,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         findAllCustomerOfferMethod();
         rateDealerExperienceMethod();
         createGpsPacketDataMethod();
+        createGpsTrackerInfoMethod();
+
     };
 
     const findAllBrandMethod = function(){
@@ -1030,6 +1032,30 @@ module.exports = function( server, databaseObj, helper, packageObj) {
           }
       })
     };
+
+    const createGpsTrackerInfoMethod = function(){
+        const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+        GpsTrackerInfo.createGpsTrackerInfo = createGpsTrackerInfo;
+        GpsTrackerInfo.remoteMethod('createGpsTrackerInfo', {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "gpsTrackerInfoObj", type: "object"
+                }
+            ],
+            returns: {
+                arg: "response", type: "object", root: true
+            }
+        })
+    };
+
+
     /**
      * To fetch all the Brands
      * @param ctx
@@ -1751,7 +1777,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             lt: lastDate
                         }
                     },
-                    include: ["brand"]
+                    include: ["brand", "area", "city"]
                 })
                     .then(function(workshopList){
                         if(workshopList){
@@ -2870,13 +2896,19 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       }
                   },
                       {
-                          relation: "workshop"
+                          relation: "workshop",
+                          scope: {
+                              include: ["area", "city"]
+                          }
                       },
                       {
                           relation: "insurance"
                       },
                       {
-                          relation: "showroom"
+                          relation: "showroom",
+                          scope: {
+                              include: ["area", "city"]
+                          }
                       }];
 
                   VehicleDetail.find(filter)
@@ -3258,6 +3290,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     const findAllCustomerOffers = function(ctx, lastDate, callback){
         const request = ctx.req;
+        let resultCustomerOfferList = [];
         lastDate = !lastDate ? new Date() : new Date(lastDate);
         if(request.accessToken){
             if(request.accessToken.userId){
@@ -3273,16 +3306,26 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         },
                         status: "active"
                     },
-                    include: ["offer"]
+                    include: [{
+                        relation: "offer",
+                        scope: {
+                            include: ["dealer"]
+                        }
+                    }]
                 })
                     .then(function(customerOfferList){
                         if(customerOfferList){
                             if(customerOfferList.length){
                                 lastDate = customerOfferList[customerOfferList.length];
                             }
+                            customerOfferList.forEach(function(customerOffer){
+                                if(customerOffer.offer().id){
+                                    resultCustomerOfferList.push(customerOffer);
+                                }
+                            })
                         }
                         callback(null, {
-                            data: customerOfferList,
+                            data: resultCustomerOfferList,
                             cursor: lastDate
                         })
                     })
@@ -3349,6 +3392,42 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 callback(error);
             });
     };
+
+    const createGpsTrackerInfo = function(ctx, gpsTrackerInfoObj, callback){
+        const request = ctx.req;
+        if(!gpsTrackerInfoObj){
+            callback(new Error("Invalid Arguments!"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const customerId = request.accessToken.userId;
+                    const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+                    GpsTrackerInfo.create({
+                        deviceIMEI : gpsTrackerInfoObj.deviceIMEI,
+                        registrationNumber : gpsTrackerInfoObj.registrationNumber,
+                        serialNumber : gpsTrackerInfoObj.serialNumber,
+                        modelName : gpsTrackerInfoObj.modelName,
+                        gpsPassword : gpsTrackerInfoObj.gpsPassword,
+                        customerId : customerId
+                    })
+                        .then(function(gpsTrackerInfo){
+                            if(gpsTrackerInfo){
+                                callback(null, {response: "success"});
+                            }
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
+
+
 
     return {
         init: init
