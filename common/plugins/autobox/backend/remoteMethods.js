@@ -3290,6 +3290,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     const findAllCustomerOffers = function(ctx, lastDate, callback){
         const request = ctx.req;
+        let resultCustomerOfferList = [];
         lastDate = !lastDate ? new Date() : new Date(lastDate);
         if(request.accessToken){
             if(request.accessToken.userId){
@@ -3317,9 +3318,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             if(customerOfferList.length){
                                 lastDate = customerOfferList[customerOfferList.length];
                             }
+                            customerOfferList.forEach(function(customerOffer){
+                                if(customerOffer.offer().id){
+                                    resultCustomerOfferList.push(customerOffer);
+                                }
+                            })
                         }
                         callback(null, {
-                            data: customerOfferList,
+                            data: resultCustomerOfferList,
                             cursor: lastDate
                         })
                     })
