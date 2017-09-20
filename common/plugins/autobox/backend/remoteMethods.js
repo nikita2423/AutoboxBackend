@@ -55,6 +55,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         rateDealerExperienceMethod();
         createGpsPacketDataMethod();
         createGpsTrackerInfoMethod();
+        createChauffeurMethod();
     };
 
     const findAllBrandMethod = function(){
@@ -1053,6 +1054,28 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
         })
     };
+
+    const createChauffeurMethod = function(){
+        const Chauffeur = databaseObj.Chauffeur;
+        Chauffeur.createChauffeur = createChauffeur;
+        Chauffeur.remoteMethod('createChauffeur', {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "chauffeurObj", type: "object"
+                }
+            ],
+            returns: {
+                arg: "response", type: "object", root: true
+            }
+        })
+    };
     /**
      * To fetch all the Brands
      * @param ctx
@@ -1774,7 +1797,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             lt: lastDate
                         }
                     },
-                    include: ["brand", "area"]igt 
+                    include: ["brand", "area"]
                 })
                     .then(function(workshopList){
                         if(workshopList){
@@ -3392,6 +3415,53 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     })
                         .then(function(gpsTrackerInfo){
                             if(gpsTrackerInfo){
+                                callback(null, {response: "success"});
+                            }
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
+
+    const createChauffeur = function(ctx, chauffeurObj, callback){
+        const request = ctx.req;
+        let chaffeurName;
+        if(!chauffeurObj){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const customerId = request.accessToken.userId;
+                    const Chauffeur = databaseObj.Chauffeur;
+                    const Customer = databaseObj.Customer;
+                    Customer.findOne({
+                        where: {
+                            mobileNumber: chauffeurObj.chauffeurContact
+                        }
+                    })
+                        .then(function(customer){
+                            if(customer){
+                                chaffeurName = customer.firstName;
+                                var lastName = customer.lastName? customer.lastName : "";
+                                chaffeurName = chaffeurName + " " + lastName;
+                                return Chauffeur.create({
+                                    chauffeurContact : chauffeurObj.chauffeurContact,
+                                    name : chaffeurName,
+                                    status: "pending",
+                                    message : "",
+                                    customerId : customerId
+                                })
+                            }
+                        })
+                        .then(function(chauffeur){
+                            if(chauffeur){
                                 callback(null, {response: "success"});
                             }
                         })

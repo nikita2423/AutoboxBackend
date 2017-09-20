@@ -268,10 +268,6 @@
     "dataSource": "mongodb",
     "public": true
   },
-  "Chauffer": {
-    "dataSource": "mongodb",
-    "public": true
-  },
   "Chauffeur": {
     "dataSource": "mongodb",
     "public": true
