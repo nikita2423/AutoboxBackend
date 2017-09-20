@@ -1797,7 +1797,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             lt: lastDate
                         }
                     },
-                    include: ["brand", "area"]
+                    include: ["brand", "area", "city"]
                 })
                     .then(function(workshopList){
                         if(workshopList){
@@ -2916,13 +2916,19 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       }
                   },
                       {
-                          relation: "workshop"
+                          relation: "workshop",
+                          scope: {
+                              include: ["area", "city"]
+                          }
                       },
                       {
                           relation: "insurance"
                       },
                       {
-                          relation: "showroom"
+                          relation: "showroom",
+                          scope: {
+                              include: ["area", "city"]
+                          }
                       }];
 
                   VehicleDetail.find(filter)
@@ -3433,6 +3439,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const createChauffeur = function(ctx, chauffeurObj, callback){
         const request = ctx.req;
         let chaffeurName;
+        let ownerName;
+        let ownerContact;
+        let driverId;
         if(!chauffeurObj){
             callback(new Error("Invalid Arguments"));
         } else{
@@ -3441,22 +3450,35 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     const customerId = request.accessToken.userId;
                     const Chauffeur = databaseObj.Chauffeur;
                     const Customer = databaseObj.Customer;
-                    Customer.findOne({
-                        where: {
-                            mobileNumber: chauffeurObj.chauffeurContact
-                        }
-                    })
+                    Customer.findById(customerId)
+                        .then(function(customer){
+                            if(customer){
+                                ownerContact = customer.phoneNumber;
+                                ownerName = customer.firstName;
+                                var lastName = customer.lastName? customer.lastName : "";
+                                ownerName = ownerName + " " + lastName;
+                                return Customer.findOne({
+                                    where: {
+                                        phoneNumber: chauffeurObj.chauffeurContact
+                                    }
+                                })
+                            }
+                        })
                         .then(function(customer){
                             if(customer){
                                 chaffeurName = customer.firstName;
                                 var lastName = customer.lastName? customer.lastName : "";
                                 chaffeurName = chaffeurName + " " + lastName;
+                                driverId = customer.id;
                                 return Chauffeur.create({
                                     chauffeurContact : chauffeurObj.chauffeurContact,
                                     name : chaffeurName,
                                     status: "pending",
                                     message : "",
-                                    customerId : customerId
+                                    customerId : customerId,
+                                    driverId : driverId,
+                                    ownerName: ownerName,
+                                    ownerContact: ownerContact
                                 })
                             }
                         })

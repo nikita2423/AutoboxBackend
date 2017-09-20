@@ -18,6 +18,15 @@
     },
     "message": {
       "type": "string"
+    },
+    "driverId": {
+      "type": "string"
+    },
+    "ownerName": {
+      "type": "string"
+    },
+    "ownerContact": {
+      "type": "string"
     }
   },
   "validations": [],
