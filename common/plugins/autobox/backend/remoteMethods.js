@@ -53,8 +53,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         removeSOSMethod();
         findAllCustomerOfferMethod();
         rateDealerExperienceMethod();
-        createGpsPacketDataMethod();
-        createGpsTrackerInfoMethod();
+
 
     };
 
@@ -1011,49 +1010,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       })
     };
 
-    const createGpsPacketDataMethod = function(){
-      const GpsPacketData = databaseObj.GpsPacketData;
-      GpsPacketData.createGpsPacketData = createGpsPacketData;
-      GpsPacketData.remoteMethod('createGpsPacketData', {
-          accepts: [
-              {
-                  arg: 'ctx',
-                  type: 'object',
-                  http: {
-                      source: 'context'
-                  }
-              },
-              {
-                  arg: "gpsPacketDataObj", type: "object"
-              }
-          ],
-          returns: {
-              arg: "response", type: "object", root: true
-          }
-      })
-    };
-
-    const createGpsTrackerInfoMethod = function(){
-        const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
-        GpsTrackerInfo.createGpsTrackerInfo = createGpsTrackerInfo;
-        GpsTrackerInfo.remoteMethod('createGpsTrackerInfo', {
-            accepts: [
-                {
-                    arg: 'ctx',
-                    type: 'object',
-                    http: {
-                        source: 'context'
-                    }
-                },
-                {
-                    arg: "gpsTrackerInfoObj", type: "object"
-                }
-            ],
-            returns: {
-                arg: "response", type: "object", root: true
-            }
-        })
-    };
 
 
     /**
@@ -3380,53 +3336,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
           }
       }
     };
-
-    const createGpsPacketData = function(ctx, gpsPacketDataObj, callback){
-        const request = ctx.req;
-        const GpsPacketData = databaseObj.GpsPacketData;
-        GpsPacketData.create(gpsPacketDataObj)
-            .then(function(gpsPacketData){
-                callback(null, {response: "success"});
-            })
-            .catch(function(error){
-                callback(error);
-            });
-    };
-
-    const createGpsTrackerInfo = function(ctx, gpsTrackerInfoObj, callback){
-        const request = ctx.req;
-        if(!gpsTrackerInfoObj){
-            callback(new Error("Invalid Arguments!"));
-        } else{
-            if(request.accessToken){
-                if(request.accessToken.userId){
-                    const customerId = request.accessToken.userId;
-                    const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
-                    GpsTrackerInfo.create({
-                        deviceIMEI : gpsTrackerInfoObj.deviceIMEI,
-                        registrationNumber : gpsTrackerInfoObj.registrationNumber,
-                        serialNumber : gpsTrackerInfoObj.serialNumber,
-                        modelName : gpsTrackerInfoObj.modelName,
-                        gpsPassword : gpsTrackerInfoObj.gpsPassword,
-                        customerId : customerId
-                    })
-                        .then(function(gpsTrackerInfo){
-                            if(gpsTrackerInfo){
-                                callback(null, {response: "success"});
-                            }
-                        })
-                        .catch(function(error){
-                            callback(error);
-                        })
-                } else{
-                    callback(new Error("User not valid"));
-                }
-            } else{
-                callback(new Error("User not valid"));
-            }
-        }
-    };
-
 
 
     return {

@@ -11,30 +11,30 @@
     },
     "deviceIMEI": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "eventCode": {
       "type": "number",
-      "required": true
+      "required": false
     },
     "isStoredPacket": {
       "type": "boolean",
-      "required": true
+      "required": false
     },
     "eventType": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "eventDate": {
       "type": "date",
-      "required": true
+      "required": false
     },
     "gpsStatus": {
       "type": "string"
     },
     "gmsSignal": {
       "type": "number",
-      "required": true
+      "required": false
     },
     "speed": {
       "type": "number"

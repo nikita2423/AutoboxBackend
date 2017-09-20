@@ -4,9 +4,15 @@
 "use strict";
 module.exports = function( server, databaseObj, helper, packageObj) {
 
+    const process = require("process");
+    const push = helper.loadPlugin("pushService");
+
     var init = function(){
         createChauffeurMethod();
+        sendChauffeurRequestNotification();
         chauffeurReplyMethod();
+        findAllChauffeurMethod();
+        assignChauffeurVehicleMethod();
     };
 
 
@@ -57,6 +63,53 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       });
     };
 
+    const findAllChauffeurMethod = function(){
+      const Chauffeur = databaseObj.Chauffeur;
+      Chauffeur.findAll = findAllChauffeur;
+      Chauffeur.remoteMethod("findAll", {
+         accepts: [
+             {
+                 arg: 'ctx',
+                 type: 'object',
+                 http: {
+                     source: 'context'
+                 }
+             },
+             {
+                 arg: "filter", type: "object"
+             }
+         ],
+          returns: {
+             arg: "chauffeurList", type: ["Chauffeur"], root: true
+          }
+      });
+    };
+
+    const assignChauffeurVehicleMethod = function(){
+        const Chauffeur = databaseObj.Chauffeur;
+        Chauffeur.assignChauffeurVehicle = assignChauffeurVehicle;
+        Chauffeur.remoteMethod("assignChauffeurVehicle", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "chauffeurId", type: "string"
+                },
+                {
+                    arg: "vehicleDetailId", type: "string"
+                }
+            ],
+            returns: {
+                arg: "response", type: "object", root : true
+            }
+        });
+    };
+
 
     const createChauffeur = function(ctx, chauffeurObj, callback){
         const request = ctx.req;
@@ -83,7 +136,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                     where: {
                                         phoneNumber: chauffeurObj.chauffeurContact
                                     }
-                                })
+                                });
                             }
                         })
                         .then(function(customer){
@@ -101,7 +154,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                     driverId : driverId,
                                     ownerName: ownerName,
                                     ownerContact: ownerContact
-                                })
+                                });
                             }
                         })
                         .then(function(chauffeur){
@@ -121,9 +174,40 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         }
     };
 
+
+    const sendChauffeurRequestNotification = function(){
+        const Chaffeur = databaseObj.Chauffeur;
+        Chaffeur.observe("after save", function(ctx, next){
+            const instance = ctx.instance;
+            const chauffeurObj = instance.toJSON();
+            if(ctx.isNewInstance){
+                process.nextTick(function(){
+                    var name = chauffeurObj.name;
+                    var type = "ChauffeurRequest";
+                    var from = packageObj.companyName;
+                    var title = chauffeurObj.ownerName + " has sent you chauffuer request";
+                    var message = chauffeurRequestMessageFormat(name, type, title, chauffeurObj.id);
+                    if(chauffeurObj.driverId){
+                        sendNotification(server, message, chauffeurObj.driverId, from, function(error){
+                            if(error){
+                                console.error(error);
+                            } else{
+                                console.log("Chauffeur Request Notification send successfully");
+                            }
+                        });
+                    }
+
+                });
+            }
+            next();
+        });
+    };
+
+
     const chauffeurReply = function(ctx, chauffeurId, status, callback){
       const request = ctx.req;
-      if(!chaufferId && !status){
+      let title;
+      if(!chauffeurId && !status){
           callback(new Error("Invalid Arguments"));
       } else{
           if(request.accessToken){
@@ -139,19 +223,121 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                           if(chaffeur){
                               var name = chaffeur.ownerName;
                               var type = "ChauffeurReply";
-                              var title = chaffeur.name ;
+                              var from = packageObj.companyName;
                               if(chaffeur.status === "reject"){
-
+                                  title = chaffeur.name + " has rejected your chauffeur request";
                               } else if(chaffeur.status === "accept"){
-
+                                  title = chaffeur.name + " has accepted your chauffeur request";
                               }
-
+                              var message = chauffeurReplyMessage(name, type, title, chaffeur.id);
+                              if(chaffeur.customerId){
+                                  sendNotification(server, message, chaffeur.customerId, from, function(error){
+                                      if(error){
+                                          console.log(error);
+                                      } else{
+                                          console.log("Reject for chauffeur notification send successfully");
+                                      }
+                                  });
+                              }
                           }
                       })
+                  .catch(function(error){
+                      callback(error);
+                  });
+              } else{
+                  callback(new Error("User not valid"));
               }
+          } else{
+              callback(new Error("User not valid"));
           }
       }
     };
+
+    const findAllChauffeur = function(ctx, filter, callback){
+        const request = ctx.req;
+        if(request.accessToken){
+            if(request.accessToken.userId){
+                const customerId = request.accessToken.userId;
+                const Chauffeur = databaseObj.Chauffeur;
+                Chauffeur.find({
+                    where: {
+                        customerId : customerId,
+                        status: "accept"
+                    }
+                })
+                    .then(function(chaufferList){
+                        if(chaufferList){
+                            callback(null, chaufferList);
+                        }
+                    })
+                    .catch(function(error){
+                        callback(error);
+                    });
+            } else{
+                callback(new Error("User not valid"));
+            }
+        } else{
+            callback(new Error("User not valid"));
+        }
+    };
+
+    const assignChauffeurVehicle = function(ctx, chauffeurId, vehicleDetailId, callback){
+        const request = ctx.req;
+        if(!chauffeurId && !vehicleDetailId){
+            return callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const Chauffeur = databaseObj.Chauffeur;
+                    Chauffeur.findById(chauffeurId)
+                        .then(function(chauffeur){
+                            if(chauffeur){
+                                return chauffeur.updateAttribute("vehicleDetailId", vehicleDetailId);
+                            }
+                        })
+                        .then(function(chauffuer){
+                            if(chauffuer){
+                                callback(null,{response: "success"});
+                            }
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        });
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
+
+
+    const sendNotification = function(app, message, id, from, callback){
+        //push.push(app, message, id, from, callback);
+        push.notifyByUserId(message, id, from, callback);
+    };
+
+    var chauffeurRequestMessageFormat = function(to, eventType, title, chaufferId){
+        var message = {
+            to : to,
+            eventType : eventType,
+            title : title,
+            id : chaufferId
+        }
+        return JSON.stringify(message);
+    };
+
+
+    var chauffeurReplyMessage = function(to, eventType, title, id){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            id : id
+        }
+        return JSON.stringify(message);
+    }
 
     return {
         init: init
