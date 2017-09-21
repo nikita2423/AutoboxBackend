@@ -61,14 +61,16 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 if(gpsTrackerInfoList){
                     if(gpsTrackerInfoList.length){
                         gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
-                            console.log("create customerId", gpsTrackerInfo.customerId);
+                           // console.log("create customerId", gpsTrackerInfo.customerId);
                             const customerId = gpsTrackerInfo.customerId;
                             var gpsPacketDataObj_ = gpsPacketDataObj;
+                            console.log("gpsInfoObj", gpsPacketDataObj);
                             if(gpsPacketDataObj_){
                                 if(!gpsPacketDataObj_.customerId){
                                     gpsPacketDataObj_.customerId = customerId;
                                 }
                             }
+                            console.log("gpsInfoObj CustomerId", gpsPacketDataObj_.customerId);
                             promises.push(function(callback){
                                 GpsPacketData.create(gpsPacketDataObj_)
                                     .then(function(gpsPacketData){
