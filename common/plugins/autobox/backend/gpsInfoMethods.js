@@ -69,7 +69,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 }
                             }
                             promises.push(function(callback){
-                                GpsPacketData.create(gpsPacketDataObj)
+                                GpsPacketData.create(gpsPacketDataObj_)
                                     .then(function(gpsPacketData){
                                         callback(null);
                                     })
