@@ -122,14 +122,29 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         .then(function(gpsTrackerInfo){
                             if(gpsTrackerInfo){
                                 if(gpsTrackerInfo.gpsPassword.toString() === gpsTrackerInfoObj.gpsPassword.toString()){
-                                    return  GpsTrackerInfo.create({
-                                        deviceIMEI : gpsTrackerInfoObj.deviceIMEI,
-                                        registrationNumber : gpsTrackerInfoObj.registrationNumber,
-                                        serialNumber : gpsTrackerInfoObj.serialNumber,
-                                        modelName : gpsTrackerInfoObj.modelName,
-                                        gpsPassword : gpsTrackerInfoObj.gpsPassword,
-                                        customerId : customerId
-                                    });
+                                    if(gpsTrackerInfo.customerId === customerId){
+                                        //upsert it
+                                        return GpsTrackerInfo.upsert({
+                                            deviceIMEI : gpsTrackerInfo.deviceIMEI,
+                                            gpsPassword : gpsTrackerInfo.gpsPassword,
+                                            registrationNumber : gpsTrackerInfo.registrationNumber,
+                                            serialNumber : gpsTrackerInfo.serialNumber,
+                                            modelName : gpsTrackerInfo.modelName,
+                                            customerId : customerId,
+                                            added: gpsTrackerInfo.added,
+                                            updated : gpsTrackerInfo.updated,
+                                            id: gpsTrackerInfo.id
+                                        });
+                                    } else{
+                                        return GpsTrackerInfo.create({
+                                            deviceIMEI : gpsTrackerInfoObj.deviceIMEI,
+                                            registrationNumber : gpsTrackerInfoObj.registrationNumber,
+                                            serialNumber : gpsTrackerInfoObj.serialNumber,
+                                            modelName : gpsTrackerInfoObj.modelName,
+                                            gpsPassword : gpsTrackerInfoObj.gpsPassword,
+                                            customerId : customerId
+                                        });
+                                    }
                                 } else{
                                     callback(new Error("Gps Password do not match"));
                                 }
