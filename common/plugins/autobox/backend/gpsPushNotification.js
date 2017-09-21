@@ -7,7 +7,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const push = helper.loadPlugin("pushService");
 
     var init = function(){
-        gpsTestNotification();
+        //gpsTestNotification();
         sendHardBrakingAccelerationNotification();
         sendGpsBatteryLowNotification();
         sendEngineStatusNotification();
@@ -17,7 +17,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
 
-    const gpsTestNotification = function(){
+  /*  const gpsTestNotification = function(){
         const GpsPacketData = server.models["GpsPacketData"];
         GpsPacketData.observe("after save", function(ctx, next){
             const instance = ctx.instance;
@@ -61,7 +61,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
             next();
         });
-    }
+    }*/
 
     const sendHardBrakingAccelerationNotification = function(){
         const GpsPacketData = server.models["GpsPacketData"];
