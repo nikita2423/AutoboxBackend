@@ -51,6 +51,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const createGpsPacketData = function(gpsPacketDataObj, callback){
         const GpsPacketData = databaseObj.GpsPacketData;
         const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+        let resultGpsPacketData;
+        resultGpsPacketData = gpsPacketDataObj;
         let promises = [];
         GpsTrackerInfo.find({
             where: {
@@ -63,16 +65,16 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
                            // console.log("create customerId", gpsTrackerInfo.customerId);
                             const customerId = gpsTrackerInfo.customerId;
-                            var gpsPacketDataObj_ = gpsPacketDataObj;
-                            console.log("gpsInfoObj", gpsPacketDataObj);
-                            if(gpsPacketDataObj_){
-                                if(!gpsPacketDataObj_.customerId){
-                                    gpsPacketDataObj_.customerId = customerId;
+                            //var gpsPacketDataObj_ = gpsPacketDataObj;
+                            console.log("gpsInfoObj", resultGpsPacketData);
+                            if(resultGpsPacketData){
+                                if(!resultGpsPacketData.customerId){
+                                    resultGpsPacketData.customerId = customerId;
                                 }
                             }
-                            console.log("gpsInfoObj CustomerId", gpsPacketDataObj_.customerId);
+                            console.log("gpsInfoObj CustomerId", resultGpsPacketData.customerId);
                             promises.push(function(callback){
-                                GpsPacketData.create(gpsPacketDataObj_)
+                                GpsPacketData.create(resultGpsPacketData)
                                     .then(function(gpsPacketData){
                                         callback(null);
                                     })
