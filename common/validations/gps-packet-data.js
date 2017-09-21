@@ -16,9 +16,9 @@ module.exports = function(Gpspacketdata, server, helper) {
           instance.updated = new Date();
       }
 
-      //next();
+      next();
 
-      if(instance.deviceIMEI){
+  /*    if(instance.deviceIMEI){
           const GpsTrackerInfo = server.models["GpsTrackerInfo"];
           GpsTrackerInfo.findOne({
               where: {
@@ -34,6 +34,6 @@ module.exports = function(Gpspacketdata, server, helper) {
               .catch(function(error){
                   next(error);
               });
-      }
+      }*/
   });
 };

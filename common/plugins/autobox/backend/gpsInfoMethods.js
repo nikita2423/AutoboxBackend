@@ -46,7 +46,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         });
     };
 
-/*    const createGpsPacketData = function(gpsPacketDataObj, callback){
+    const createGpsPacketData = function(gpsPacketDataObj, callback){
         const GpsPacketData = databaseObj.GpsPacketData;
         const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
         let promises = [];
@@ -90,9 +90,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 callback(error);
             });
 
-    };*/
+    };
 
-    const createGpsPacketData = function(gpsPacketDataObj, callback){
+ /*   const createGpsPacketData = function(gpsPacketDataObj, callback){
         const GpsPacketData = databaseObj.GpsPacketData;
         GpsPacketData.create(gpsPacketDataObj)
             .then(function(gpsPacketData){
@@ -101,7 +101,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             .catch(function(error){
                 callback(error);
             });
-    };
+    };*/
 
     const createGpsTrackerInfo = function(ctx, gpsTrackerInfoObj, callback){
         const request = ctx.req;
