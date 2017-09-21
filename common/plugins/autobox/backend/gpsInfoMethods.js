@@ -163,17 +163,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 if(gpsTrackerInfo.gpsPassword.toString() === gpsTrackerInfoObj.gpsPassword.toString()){
                                     if(gpsTrackerInfo.customerId === customerId){
                                         //upsert it
-                                        return GpsTrackerInfo.upsert({
-                                            deviceIMEI : gpsTrackerInfo.deviceIMEI,
-                                            gpsPassword : gpsTrackerInfo.gpsPassword,
-                                            registrationNumber : gpsTrackerInfo.registrationNumber,
-                                            serialNumber : gpsTrackerInfo.serialNumber,
-                                            modelName : gpsTrackerInfo.modelName,
-                                            customerId : customerId,
-                                            added: gpsTrackerInfo.added,
-                                            updated : gpsTrackerInfo.updated,
-                                            id: gpsTrackerInfo.id
-                                        });
+                                        return gpsTrackerInfo.updateAttribute("gpsPassword", gpsTrackerInfo.gpsPassword);
                                     } else{
                                         return GpsTrackerInfo.create({
                                             deviceIMEI : gpsTrackerInfoObj.deviceIMEI,
