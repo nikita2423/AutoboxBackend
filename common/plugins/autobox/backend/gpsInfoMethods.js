@@ -61,6 +61,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 if(gpsTrackerInfoList){
                     if(gpsTrackerInfoList.length){
                         gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
+                            console.log("create customerId", gpsTrackerInfo.customerId);
                             const customerId = gpsTrackerInfo.customerId;
                             var gpsPacketDataObj_ = gpsPacketDataObj;
                             if(gpsPacketDataObj_){
