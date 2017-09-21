@@ -20,6 +20,8 @@ module.exports = function(Gpstrackerinfo,server, helper) {
             return next(new Error("Customer is required"));
         }
 
+        next();
+
     });
 
 };
