@@ -967,6 +967,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let title;
             if(ctx.isNewInstance){
                 process.nextTick(function(){
+                    console.log("customerId", gpsPacketDataObj.customerId);
                     databaseObj.Customer.findById(gpsPacketDataObj.customerId)
                         .then(function(customer){
                             if(customer){
