@@ -66,7 +66,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                            // console.log("create customerId", gpsTrackerInfo.customerId);
                             const customerId = gpsTrackerInfo.customerId;
                             //var gpsPacketDataObj_ = gpsPacketDataObj;
-                            console.log("gpsInfoObj", resultGpsPacketData);
+                            //console.log("gpsInfoObj", resultGpsPacketData);
                             if(resultGpsPacketData){
                                 if(!resultGpsPacketData.customerId){
                                     resultGpsPacketData.customerId = customerId;
@@ -74,9 +74,41 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                     resultGpsPacketData.customerId = customerId;
                                 }
                             }
-                            console.log("resultPacketData CustomerId", resultGpsPacketData.customerId);
+                            console.log("create customerId", gpsTrackerInfo.customerId);
                             promises.push(function(callback){
-                                GpsPacketData.create(resultGpsPacketData)
+                                GpsPacketData.create({
+                                    clientId: gpsPacketDataObj.clientId,
+                                    deviceIMEI: gpsPacketDataObj.deviceIMEI,
+                                    eventCode : gpsPacketDataObj.eventCode,
+                                    isStoredPacket : gpsPacketDataObj.isStoredPacket,
+                                    eventType : gpsPacketDataObj.eventType,
+                                    eventDate : gpsPacketDataObj.eventDate,
+                                    gpsStatus : gpsPacketDataObj.gpsStatus,
+                                    gmsSignal : gpsPacketDataObj.gmsSignal,
+                                    speed : gpsPacketDataObj.speed,
+                                    accumulatedDistance : gpsPacketDataObj.accumulatedDistance,
+                                    courseInDegree : gpsPacketDataObj.courseInDegree,
+                                    satelliteConnected : gpsPacketDataObj.satelliteConnected,
+                                    hdop : gpsPacketDataObj.hdop,
+                                    voltageEquivalent : gpsPacketDataObj.voltageEquivalent,
+                                    digitalInput1 : gpsPacketDataObj.digitalInput1,
+                                    caseStatus : gpsPacketDataObj.caseStatus,
+                                    isOverSpeedStarted : gpsPacketDataObj.isOverSpeedStarted,
+                                    isOverSpeedEnded : gpsPacketDataObj.isOverSpeedEnded,
+                                    immobilizerVoilationAlert : gpsPacketDataObj.immobilizerVoilationAlert,
+                                    batteryStatus : gpsPacketDataObj.batteryStatus,
+                                    digitalInput2 : gpsPacketDataObj.digitalInput2,
+                                    ignitionStatus: gpsPacketDataObj.ignitionStatus,
+                                    internalBatteryLowAlert: gpsPacketDataObj.internalBatteryLowAlert,
+                                    anglePollingBit : gpsPacketDataObj.anglePollingBit,
+                                    digitalOutput1Status : gpsPacketDataObj.digitalOutput1Status,
+                                    isHarshAccelerationDetected : gpsPacketDataObj.isHarshAccelerationDetected,
+                                    isHarshBrakingDetected: gpsPacketDataObj.isHarshBrakingDetected,
+                                    externalBatteryVoltage: gpsPacketDataObj.externalBatteryVoltage,
+                                    internalBatteryVoltage : gpsPacketDataObj.internalBatteryVoltage,
+                                    gpsPacketId : gpsPacketDataObj.gpsPacketId,
+                                    customerId : customerId
+                                })
                                     .then(function(gpsPacketData){
                                         callback(null);
                                     })
