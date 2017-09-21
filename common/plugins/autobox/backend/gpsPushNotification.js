@@ -27,7 +27,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let title;
             if(ctx.isNewInstance){
                 process.nextTick(function(){
-                    console.log("customerId", gpsPacketDataObj.customerId);
+                    //console.log("customerId", gpsPacketDataObj.customerId);
                     databaseObj.Customer.findById(gpsPacketDataObj.customerId)
                         .then(function(customer){
                             if(customer){
@@ -43,6 +43,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             title = "Default Test Packet Arrived";
                             const message = brakeAccelerationMessageFormat(customerName, eventType, title, instanceId);
                             if(gpsPacketDataObj.customerId){
+                                console.log("Notification customer Id", gpsPacketDataObj.customerId + " " + customerName);
                                 sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
                                     if(error){
                                         console.log(error);
