@@ -1039,6 +1039,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             if(gpsPacketData){
                                 if(gpsPacketData[1].internalBatteryLowAlert === false){
                                     //send push notification
+                                    eventType = "Low Internal Battery"
                                     var message = lowBatteryGpsMessage(name, eventType, title, instanceId);
                                     if(gpsPacketDataObj.customerId){
                                         sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
@@ -1258,6 +1259,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                     if(gpsPacketData[1].speed === 0){
                                         //send Notification
                                         title = "Your Vehicle is suspected to be towed";
+                                        eventType = "Vehicle Towed";
                                         var message = vehicleTowingMessageFormat(name, eventType, title, gpsPacketDataObj.id);
                                         if(gpsPacketDataObj.customerId){
                                             sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){

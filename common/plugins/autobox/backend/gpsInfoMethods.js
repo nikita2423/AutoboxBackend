@@ -21,7 +21,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             returns: {
                 arg: "response", type: "object", root: true
             }
-        })
+        });
     };
 
     const createGpsTrackerInfoMethod = function(){
@@ -48,13 +48,48 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     const createGpsPacketData = function(gpsPacketDataObj, callback){
         const GpsPacketData = databaseObj.GpsPacketData;
-        GpsPacketData.create(gpsPacketDataObj)
-            .then(function(gpsPacketData){
-                callback(null, {response: "success"});
+        const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+        let promises = [];
+        GpsTrackerInfo.find({
+            where: {
+                deviceIMEI : gpsPacketDataObj.deviceIMEI
+            }
+        })
+            .then(function(gpsTrackerInfoList){
+                if(gpsTrackerInfoList){
+                    if(gpsTrackerInfoList.length){
+                        gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
+                            const customerId = gpsTrackerInfo.customerId;
+                            var gpsPacketDataObj_ = gpsPacketDataObj;
+                            if(gpsPacketDataObj_){
+                                if(!gpsPacketDataObj_.customerId){
+                                    gpsPacketDataObj_.customerId = customerId;
+                                }
+                            }
+                            promises.push(function(callback){
+                                GpsPacketData.create(gpsPacketDataObj)
+                                    .then(function(gpsPacketData){
+                                        callback(null);
+                                    })
+                                    .catch(function(error){
+                                        callback(error);
+                                    });
+                            });
+                        });
+                        async.series(promises, function(error){
+                            if(error){
+                               callback(error);
+                            } else{
+                                callback(null, {response: "success"});
+                            }
+                        });
+                    }
+                }
             })
             .catch(function(error){
                 callback(error);
             });
+
     };
 
     const createGpsTrackerInfo = function(ctx, gpsTrackerInfoObj, callback){
@@ -74,15 +109,13 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         .then(function(gpsTrackerInfo){
                             if(gpsTrackerInfo){
                                 if(gpsTrackerInfo.gpsPassword.toString() === gpsTrackerInfoObj.gpsPassword.toString()){
-                                    return GpsTrackerInfo.upsert({
-                                        deviceIMEI : gpsTrackerInfo.deviceIMEI,
-                                        registrationNumber : gpsTrackerInfo.registrationNumber,
-                                        serialNumber : gpsTrackerInfo.serialNumber,
-                                        modelName : gpsTrackerInfo.modelName,
-                                        gpsPassword : gpsTrackerInfo.gpsPassword,
-                                        customerId : customerId,
-                                        added: gpsTrackerInfo.added,
-                                        updated: gpsTrackerInfo.updated
+                                    return  GpsTrackerInfo.create({
+                                        deviceIMEI : gpsTrackerInfoObj.deviceIMEI,
+                                        registrationNumber : gpsTrackerInfoObj.registrationNumber,
+                                        serialNumber : gpsTrackerInfoObj.serialNumber,
+                                        modelName : gpsTrackerInfoObj.modelName,
+                                        gpsPassword : gpsTrackerInfoObj.gpsPassword,
+                                        customerId : customerId
                                     });
                                 } else{
                                     callback(new Error("Gps Password do not match"));
@@ -115,7 +148,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
         }
     };
-
 
     return {
         init: init
