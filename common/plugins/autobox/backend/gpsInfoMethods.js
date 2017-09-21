@@ -70,9 +70,11 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             if(resultGpsPacketData){
                                 if(!resultGpsPacketData.customerId){
                                     resultGpsPacketData.customerId = customerId;
+                                } else{
+                                    resultGpsPacketData.customerId = customerId;
                                 }
                             }
-                            console.log("gpsInfoObj CustomerId", resultGpsPacketData.customerId);
+                            console.log("resultPacketData CustomerId", resultGpsPacketData.customerId);
                             promises.push(function(callback){
                                 GpsPacketData.create(resultGpsPacketData)
                                     .then(function(gpsPacketData){
