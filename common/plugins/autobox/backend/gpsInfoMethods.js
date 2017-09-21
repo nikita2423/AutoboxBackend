@@ -4,6 +4,8 @@
 "use strict";
 module.exports = function( server, databaseObj, helper, packageObj) {
 
+    const async = require("async");
+
     var init = function(){
         createGpsPacketDataMethod();
         createGpsTrackerInfoMethod();

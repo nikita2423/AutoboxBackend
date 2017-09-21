@@ -7,6 +7,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const push = helper.loadPlugin("pushService");
 
     var init = function(){
+        gpsTestNotification();
         sendHardBrakingAccelerationNotification();
         sendGpsBatteryLowNotification();
         sendEngineStatusNotification();
@@ -14,6 +15,52 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         sendOverSpeedingNotification();
         sendVehicleTowingNotification();
     };
+
+
+    const gpsTestNotification = function(){
+        const GpsPacketData = server.models["GpsPacketData"];
+        GpsPacketData.observe("after save", function(ctx, next){
+            const instance = ctx.instance;
+            const gpsPacketDataObj = instance.toJSON();
+            let customerName;
+            let eventType;
+            let title;
+            if(ctx.isNewInstance){
+                process.nextTick(function(){
+                    console.log("customerId", gpsPacketDataObj.customerId);
+                    databaseObj.Customer.findById(gpsPacketDataObj.customerId)
+                        .then(function(customer){
+                            if(customer){
+                                customerName = customer.firstName;
+                                var lastName = customer.lastName? customer.lastName : "";
+                                customerName = customerName + " " + lastName;
+                            }
+                        })
+                        .then(function(){
+                            var pushFrom = packageObj.companyName;
+                            const instanceId = gpsPacketDataObj.id;
+                            eventType = "Default Packet";
+                            title = "Default Test Packet Arrived";
+                            const message = brakeAccelerationMessageFormat(customerName, eventType, title, instanceId);
+                            if(gpsPacketDataObj.customerId){
+                                sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
+                                    if(error){
+                                        console.log(error);
+                                    } else{
+                                        console.log("Notification for gps has been send successfully");
+                                    }
+                                });
+                            }
+
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        });
+                });
+            }
+            next();
+        });
+    }
 
     const sendHardBrakingAccelerationNotification = function(){
         const GpsPacketData = server.models["GpsPacketData"];
