@@ -1040,7 +1040,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 if(gpsPacketData[1].internalBatteryLowAlert === false){
                                     //send push notification
                                     eventType = "Low Internal Battery"
-                                    var message = lowBatteryGpsMessage(name, eventType, title, instanceId);
+                                    var message = lowBatteryGpsMessage(customerName, eventType, title, instanceId);
                                     if(gpsPacketDataObj.customerId){
                                         sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
                                             if(error){
@@ -1093,7 +1093,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                eventType = "Ignition Off";
                                title = "Engine has stopped";
                            }
-                           var message = engineStatusMessageFormat(name, eventType, title, instanceId);
+                           var message = engineStatusMessageFormat(customerName, eventType, title, instanceId);
                            if(gpsPacketDataObj.customerId){
                                sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
                                    if(error){
@@ -1146,7 +1146,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                     //send Notification
                                     eventType = "GPS Status";
                                     title = "Device has been disconnected";
-                                    var message = gpsDeviceStatusMessage(name, eventType, title, gpsPacketDataObj.id);
+                                    var message = gpsDeviceStatusMessage(customerName, eventType, title, gpsPacketDataObj.id);
                                     if(gpsPacketDataObj.customerId){
                                         sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
                                             if(error){
@@ -1204,7 +1204,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                           if(gpsPacketData){
                               if(gpsPacketData[1].isOverSpeedStarted === false){
                                   //send Notification
-                                  var message = overSpeedMessageFormat(name, eventType, title, gpsPacketDataObj.id);
+                                  var message = overSpeedMessageFormat(customerName, eventType, title, gpsPacketDataObj.id);
                                   if(gpsPacketDataObj.customerId){
                                       sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
                                           if(error){
@@ -1260,7 +1260,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                         //send Notification
                                         title = "Your Vehicle is suspected to be towed";
                                         eventType = "Vehicle Towed";
-                                        var message = vehicleTowingMessageFormat(name, eventType, title, gpsPacketDataObj.id);
+                                        var message = vehicleTowingMessageFormat(customerName, eventType, title, gpsPacketDataObj.id);
                                         if(gpsPacketDataObj.customerId){
                                             sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
                                                 if(error){
