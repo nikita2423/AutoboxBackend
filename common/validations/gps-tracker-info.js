@@ -4,7 +4,7 @@
 
 module.exports = function(Gpstrackerinfo,server, helper) {
 
-
+    const {validate} = require("../helper/usefullMethods");
     Gpstrackerinfo.observe("before save", function(ctx, next){
         const instance = ctx.instance || ctx.data;
         const currentInstance = ctx.currentInstance;
@@ -16,7 +16,7 @@ module.exports = function(Gpstrackerinfo,server, helper) {
             instance.updated = new Date();
         }
 
-        if(!instance.customerId){
+        if(!validate(instance, currentInstance, "customerId")){
             return next(new Error("Customer is required"));
         }
 

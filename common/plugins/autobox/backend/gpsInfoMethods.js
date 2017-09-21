@@ -144,67 +144,93 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             });
     };*/
 
-    const createGpsTrackerInfo = function(ctx, gpsTrackerInfoObj, callback){
-        const request = ctx.req;
-        if(!gpsTrackerInfoObj){
-            callback(new Error("Invalid Arguments!"));
-        } else{
-            if(request.accessToken){
-                if(request.accessToken.userId){
-                    const customerId = request.accessToken.userId;
-                    const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
-                    GpsTrackerInfo.findOne({
-                        where:{
-                            deviceIMEI: gpsTrackerInfoObj.deviceIMEI
-                        }
-                    })
-                        .then(function(gpsTrackerInfo){
-                            if(gpsTrackerInfo){
-                                if(gpsTrackerInfo.gpsPassword.toString() === gpsTrackerInfoObj.gpsPassword.toString()){
-                                    if(gpsTrackerInfo.customerId === customerId){
-                                        //upsert it
-                                        return gpsTrackerInfo.updateAttribute("gpsPassword", gpsTrackerInfo.gpsPassword);
-                                    } else{
-                                        return GpsTrackerInfo.create({
-                                            deviceIMEI : gpsTrackerInfoObj.deviceIMEI,
-                                            registrationNumber : gpsTrackerInfoObj.registrationNumber,
-                                            serialNumber : gpsTrackerInfoObj.serialNumber,
-                                            modelName : gpsTrackerInfoObj.modelName,
-                                            gpsPassword : gpsTrackerInfoObj.gpsPassword,
-                                            customerId : customerId
-                                        });
-                                    }
-                                } else{
-                                    callback(new Error("Gps Password do not match"));
-                                }
-                            } else{
-                                return  GpsTrackerInfo.create({
-                                    deviceIMEI : gpsTrackerInfoObj.deviceIMEI,
-                                    registrationNumber : gpsTrackerInfoObj.registrationNumber,
-                                    serialNumber : gpsTrackerInfoObj.serialNumber,
-                                    modelName : gpsTrackerInfoObj.modelName,
-                                    gpsPassword : gpsTrackerInfoObj.gpsPassword,
-                                    customerId : customerId
-                                });
-                            }
-                        })
+   const createGpsTrackerInfo = function(ctx, gpsTrackerInfoObj, callback){
+     const request = ctx.req;
+     if(!gpsTrackerInfoObj){
+         callback(new Error("Invalid Arguments"));
+     } else{
+         if(request.accessToken){
+             if(request.accessToken.userId){
+                 const customerId = request.accessToken.userId;
+                 const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+                 var count = 0;
+                 let gpsTrackerInfoInstance;
+                 GpsTrackerInfo.find({
+                     where: {
+                         deviceIMEI: gpsTrackerInfoObj.deviceIMEI
+                     }
+                 })
+                     .then(function(gpsTrackerInfoList){
+                         if(gpsTrackerInfoList){
+                             if(gpsTrackerInfoList.length){
+                                 if(gpsTrackerInfoList[0].gpsPassword.toString() === gpsTrackerInfoObj.gpsPassword.toString()){
+                                     gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
+                                         if(JSON.stringify(gpsTrackerInfo.customerId) === JSON.stringify(customerId)){
+                                             count = count + 1;
+                                             gpsTrackerInfoInstance = gpsTrackerInfo;
+                                         }
+                                     });
+                                     if(count>0){
+                                         //upsert
+                                         return gpsTrackerInfoInstance.updateAttribute("gpsPassword", gpsTrackerInfoInstance.gpsPassword);
+                                     } else{
+                                         //create
+                                         return GpsTrackerInfo.create({
+                                             deviceIMEI : gpsTrackerInfoObj.deviceIMEI,
+                                             registrationNumber : gpsTrackerInfoObj.registrationNumber,
+                                             serialNumber : gpsTrackerInfoObj.serialNumber,
+                                             modelName : gpsTrackerInfoObj.modelName,
+                                             gpsPassword : gpsTrackerInfoObj.gpsPassword,
+                                             customerId : customerId
+                                         });
+                                     }
+                                 } else{
+                                     //unauthorized
+                                   callback(new Error("Pin doesn't match"));
+                                 }
+                             } else{
+                                 //create
+                                 return GpsTrackerInfo.create({
+                                     deviceIMEI : gpsTrackerInfoObj.deviceIMEI,
+                                     registrationNumber : gpsTrackerInfoObj.registrationNumber,
+                                     serialNumber : gpsTrackerInfoObj.serialNumber,
+                                     modelName : gpsTrackerInfoObj.modelName,
+                                     gpsPassword : gpsTrackerInfoObj.gpsPassword,
+                                     customerId : customerId
+                                 });
+                             }
+                         } else{
+                             //create
+                             return GpsTrackerInfo.create({
+                                 deviceIMEI : gpsTrackerInfoObj.deviceIMEI,
+                                 registrationNumber : gpsTrackerInfoObj.registrationNumber,
+                                 serialNumber : gpsTrackerInfoObj.serialNumber,
+                                 modelName : gpsTrackerInfoObj.modelName,
+                                 gpsPassword : gpsTrackerInfoObj.gpsPassword,
+                                 customerId : customerId
+                             });
+                         }
+                     })
+                     .then(function(gpsTrackerInfo){
+                         if(gpsTrackerInfo){
+                             callback(null, {response: "success"});
+                         } else{
+                             callback(null, {response: "failure"});
+                         }
 
-                        .then(function(gpsTrackerInfo){
-                            if(gpsTrackerInfo){
-                                callback(null, {response: "success"});
-                            }
-                        })
-                        .catch(function(error){
-                            callback(error);
-                        });
-                } else{
-                    callback(new Error("User not valid"));
-                }
-            } else{
-                callback(new Error("User not valid"));
-            }
-        }
-    };
+                     })
+                     .catch(function(error){
+                         callback(error);
+                     });
+             } else{
+                 callback(new Error("User not valid"));
+             }
+         } else{
+             callback(new Error("User not valid"));
+         }
+     }
+   };
+
 
     return {
         init: init
