@@ -210,3 +210,13 @@ header > ul > li > button {
     background-color: #EEE;
     padding-bottom: 5px;
 }
+
+.slimScrollDiv {
+    overflow-y: auto !important;
+    overflow: auto;
+}
+
+#sidebar-scroll {
+    overflow: auto !important;
+    overflow-y: auto !important;
+}

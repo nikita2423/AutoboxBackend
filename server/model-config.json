@@ -271,5 +271,9 @@
   "Chauffeur": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "DealerVehicle": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

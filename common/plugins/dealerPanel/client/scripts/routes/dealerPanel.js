@@ -163,6 +163,32 @@ angular.module($snaphy.getModuleName())
                      redirectTo: loginState
                  }
               }
+          })
+
+          .state('addDealerVehicle', {
+              url: '/addDealerVehicle',
+              templateUrl: '/dealerPanel/views/addVehicle.html',
+              controller: 'dealerPanelControl',
+              data: {
+                  permissions: {
+                      only: [employeeRole],
+                      redirectTo: loginState
+                  }
+              }
+          })
+
+          .state('dealerVehicle', {
+              url:'/addDealerVehicle/add',
+              templateUrl: '/dealerPanel/views/dealerVehicle.html',
+              controller: 'dealerPanelControl',
+              params: { dealerId: null,  customerQuoteId: null},
+              //Only allow anonym users here
+              data: {
+                  permissions: {
+                      only: [employeeRole],
+                      redirectTo: loginState
+                  }
+              }
           });
 
 

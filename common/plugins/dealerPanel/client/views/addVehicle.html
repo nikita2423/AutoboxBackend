@@ -1,0 +1,20 @@
+<div ng-init="init();">
+    <div class="header">
+        VEHICLES
+    </div>
+
+    <div>
+        <button
+                ui-sref="dealerVehicle" style="color: #fff;" class="btn btn-sm bg-primary-dark"
+                style="margin-right:5px;margin-bottom:5px;margin-top:-5px;"> <i class="fa fa-add"></i>Add Vehicle</button>
+    </div>
+
+    <div ng-if="settings.config.isUserLoaded">
+
+        <div class="homeTable" ng-init="relationDetail = settings.tabs.addDealerVehicle.relationDetail;" >
+            <div ng-if="relationDetail">
+                <div  ng-include="'detailView/views/tableView.html'"></div>
+            </div>
+        </div>
+    </div>
+</div>

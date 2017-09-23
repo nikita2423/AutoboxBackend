@@ -117,6 +117,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         let ownerName;
         let ownerContact;
         let driverId;
+        let chauffeurContact;
         if(!chauffeurObj){
             callback(new Error("Invalid Arguments"));
         } else{
@@ -132,9 +133,18 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 ownerName = customer.firstName;
                                 var lastName = customer.lastName? customer.lastName : "";
                                 ownerName = ownerName + " " + lastName;
+                                var phoneNumber = chauffeurObj.chauffeurContact;
+                                var patt = /\+\d{12,12}/,
+                                    match = phoneNumber.toString().match(patt);
+
+                                if (!match) {
+                                    chauffeurContact = "+91" + phoneNumber;
+                                } else{
+                                    chauffeurContact = phoneNumber;
+                                }
                                 return Customer.findOne({
                                     where: {
-                                        phoneNumber: chauffeurObj.chauffeurContact
+                                        phoneNumber: chauffeurContact
                                     }
                                 });
                             }
@@ -155,6 +165,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                     ownerName: ownerName,
                                     ownerContact: ownerContact
                                 });
+                            } else{
+                                callback(new Error("Customer not found"));
                             }
                         })
                         .then(function(chauffeur){

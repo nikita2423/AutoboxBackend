@@ -14,7 +14,8 @@
     "CustomerQuote",
     "QuoteReply",
     "Feedback",
-    "CustomerMessage"
+    "CustomerMessage",
+    "DealerVehicle"
   ],
   "pluginDependencies": {}
 }

@@ -1,0 +1,296 @@
+{
+  "name": "DealerVehicle",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "deviceIMEI": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "inline": true,
+          "colSize": "col-xs-6",
+          "label": "DeviceIMEI",
+          "id": "deviceImei"
+        }
+      }
+    },
+    "serialNumber": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "inline": true,
+          "colSize": "col-xs-6",
+          "label": "Serial Number",
+          "id": "serial Number"
+        }
+      }
+    },
+    "registerNumber": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Register Number",
+          "id": "registerNumber"
+        }
+      }
+    },
+    "brandName": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "inline": true,
+          "colSize": "col-xs-6",
+          "label": "Brand",
+          "id": "brandName",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "Dealer"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "modelName": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "inline": true,
+          "colSize": "col-xs-6",
+          "label": "Model",
+          "id": "modelName",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "Dealer"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "fuelName": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "inline": true,
+          "colSize": "col-xs-6",
+          "label": "Fuel",
+          "id": "fuelName",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "Dealer"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "gearboxName": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "inline": true,
+          "colSize": "col-xs-6",
+          "label": "GearBox",
+          "id": "gearboxName",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "Dealer"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "trimName": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "inline": true,
+          "colSize": "col-xs-6",
+          "label": "Trim",
+          "id": "trimName",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "Dealer"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "added": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "updated": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "brand": {
+      "type": "belongsTo",
+      "model": "Brand",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Brand",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "type": "smartSelect",
+        "create": false,
+        "id": "AddBrand",
+        "hide": false,
+        "inline": true,
+        "colSize": "col-xs-6",
+        "label": "Add Brand"
+      }
+    },
+    "carModel": {
+      "type": "belongsTo",
+      "model": "CarModel",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Model",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "type": "smartSelect",
+        "create": false,
+        "id": "AddModel",
+        "hide": false,
+        "inline": true,
+        "colSize": "col-xs-6",
+        "label": "Add Model"
+      }
+    },
+    "fuel": {
+      "type": "belongsTo",
+      "model": "Fuel",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Fuel",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "type": "smartSelect",
+        "create": false,
+        "id": "AddFuel",
+        "hide": false,
+        "inline": true,
+        "colSize": "col-xs-6",
+        "label": "Add Fuel"
+      }
+    },
+    "gearBox": {
+      "type": "belongsTo",
+      "model": "GearBox",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Gearbox",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "type": "smartSelect",
+        "create": false,
+        "id": "AddGearbox",
+        "hide": false,
+        "inline": true,
+        "colSize": "col-xs-6",
+        "label": "Add GearBox"
+      }
+    },
+    "trim": {
+      "type": "belongsTo",
+      "model": "Trim",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Trim",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "type": "smartSelect",
+        "create": false,
+        "id": "AddTrim",
+        "hide": false,
+        "inline": true,
+        "colSize": "col-xs-6",
+        "label": "Add Trim"
+      }
+    },
+    "dealer": {
+      "type": "belongsTo",
+      "model": "Dealer",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Dealer",
+        "searchProp": "email",
+        "priority": 2,
+        "search": true,
+        "type": "smartSelect",
+        "create": false,
+        "id": "AddDealer",
+        "hide": false,
+        "inline": true,
+        "colSize": "col-xs-6",
+        "label": "Add Dealer"
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

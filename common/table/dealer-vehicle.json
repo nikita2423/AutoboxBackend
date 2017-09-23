@@ -1,0 +1,117 @@
+{
+  "settings": {
+    "create": true
+  },
+  "widgets": [
+    {
+      "label": "Vehicles",
+      "icon": "si-bar-chart",
+      "fetchLocally": true,
+      "propObj": {
+        "type": "$allTime",
+        "where": {},
+        "dateProp": "added"
+      }
+    }
+  ],
+  "tables": {
+    "added": {
+      "display": false
+    },
+    "brandName": {
+      "label": "Brand",
+      "search": "text"
+    },
+    "modelName": {
+      "label": "Model",
+      "search": "text"
+    },
+    "fuelName": {
+      "label": "Fuel",
+      "search": "text"
+    },
+    "gearboxName": {
+      "label": "GearBox",
+      "search": "text"
+    },
+    "trimName": {
+      "label": "Trim",
+      "search": "text"
+    },
+    "dealer_firstName": {
+      "display": false
+    },
+    "dealer_lastName": {
+      "display": false
+    },
+    "dealer_added": {
+      "display": false
+    },
+    "dealer_email": {
+      "display": false
+    },
+    "dealer_status": {
+      "display": false
+    },
+    "dealer_contact": {
+      "display": false
+    },
+    "dealer_noOfVehicleSold": {
+      "display": false
+    },
+    "brand_name": {
+      "display": false
+    },
+    "brand_added": {
+      "display": false
+    },
+    "brand_status": {
+      "display": false
+    },
+    "carModel_name": {
+      "display": false
+    },
+    "carModel_status": {
+      "display": false
+    },
+    "carModel_added": {
+      "display": false
+    },
+    "fuel_name": {
+      "display": false
+    },
+    "fuel_added": {
+      "display": false
+    },
+    "fuel_status": {
+      "display": false
+    },
+    "gearBox_name": {
+      "display": false
+    },
+    "gearBox_added": {
+      "display": false
+    },
+    "gearBox_status": {
+      "display": false
+    },
+    "trim_name": {
+      "display": false
+    },
+    "trim_added": {
+      "display": false
+    },
+    "trim_status": {
+      "display": false
+    },
+    "brand_image": {
+      "display": false
+    },
+    "carModel_image": {
+      "display": false
+    },
+    "carModel_quoteImage": {
+      "display": false
+    }
+  }
+}
