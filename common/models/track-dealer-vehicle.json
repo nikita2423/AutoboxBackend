@@ -1,0 +1,34 @@
+{
+  "name": "TrackDealerVehicle",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "deviceIMEI": {
+      "type": "string"
+    },
+    "clientId": {
+      "type": "string"
+    },
+    "latlng": {
+      "type": "geopoint"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "dealer": {
+      "type": "belongsTo",
+      "model": "Dealer",
+      "foreignKey": ""
+    },
+    "dealerVehicle": {
+      "type": "belongsTo",
+      "model": "DealerVehicle",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

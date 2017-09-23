@@ -82,6 +82,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                     eventCode : gpsPacketDataObj.eventCode,
                                     isStoredPacket : gpsPacketDataObj.isStoredPacket,
                                     eventType : gpsPacketDataObj.eventType,
+                                    latlng: [gpsPacketDataObj.latitude, gpsPacketDataObj.longitude],
                                     eventDate : gpsPacketDataObj.eventDate,
                                     gpsStatus : gpsPacketDataObj.gpsStatus,
                                     gmsSignal : gpsPacketDataObj.gmsSignal,

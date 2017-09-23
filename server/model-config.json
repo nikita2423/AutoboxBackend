@@ -275,5 +275,9 @@
   "DealerVehicle": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "TrackDealerVehicle": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

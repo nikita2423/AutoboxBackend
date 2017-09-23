@@ -181,7 +181,6 @@ angular.module($snaphy.getModuleName())
               url:'/addDealerVehicle/add',
               templateUrl: '/dealerPanel/views/dealerVehicle.html',
               controller: 'dealerPanelControl',
-              params: { dealerId: null,  customerQuoteId: null},
               //Only allow anonym users here
               data: {
                   permissions: {
@@ -189,7 +188,20 @@ angular.module($snaphy.getModuleName())
                       redirectTo: loginState
                   }
               }
-          });
+          })
+
+          .state('trackVehicle', {
+              url: '/trackVehicle',
+              templateUrl: '/dealerPanel/views/trackVehicle.html',
+              controller: 'dealerPanelControl',
+              //Only allow anonym users here
+              data: {
+                  permissions: {
+                      only: [employeeRole],
+                      redirectTo: loginState
+                  }
+              }
+          })
 
 
     }]); //config

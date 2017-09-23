@@ -25,6 +25,24 @@
       "type": "string",
       "required": false
     },
+    "latlng": {
+      "type": "geopoint",
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "type": "input",
+              "key": "lat"
+            },
+            {
+              "type": "input",
+              "key": "lng"
+            }
+          ]
+        }
+      }
+    },
     "eventDate": {
       "type": "date",
       "required": false

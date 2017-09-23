@@ -455,6 +455,28 @@ angular.module($snaphy.getModuleName())
                                     tableId: "DealerVehicleForm"
                                 }
                             },
+
+                            trackVehicle: {
+                                data:{},
+                                form:{},
+                                relationDetail: {
+                                    "relationName": "trackVehicle",
+                                    "modelName": "DealerVehicle",
+                                    beforeSaveHook: [
+                                        //Here data going to be saved..
+                                        function (data) {
+
+                                        }
+                                    ]
+                                },
+
+                                config: {
+                                    stateName: "trackVehicle",
+                                    stateOptions: {},
+                                    active: false
+                                }
+
+                            },
                             manageWorkshopProfile: {
                                 load: function () {
                                     changeTab(settings.tabs.manageWorkshopProfile);
@@ -1184,6 +1206,8 @@ angular.module($snaphy.getModuleName())
                         });
                     });
                 };
+
+
 
 
                 /**
