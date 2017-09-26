@@ -13,7 +13,22 @@
       "type": "string"
     },
     "latlng": {
-      "type": "geopoint"
+      "type": "geopoint",
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "type": "input",
+              "key": "lat"
+            },
+            {
+              "type": "input",
+              "key": "lng"
+            }
+          ]
+        }
+      }
     }
   },
   "validations": [],

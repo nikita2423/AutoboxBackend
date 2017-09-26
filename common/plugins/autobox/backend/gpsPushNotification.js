@@ -8,12 +8,37 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     var init = function(){
         //gpsTestNotification();
+        setGpsNotificationStatusMethod();
         sendHardBrakingAccelerationNotification();
         sendGpsBatteryLowNotification();
         sendEngineStatusNotification();
         sendGpsDeviceStatusNotification();
         sendOverSpeedingNotification();
         sendVehicleTowingNotification();
+    };
+
+
+    const setGpsNotificationStatusMethod = function(){
+        const Customer = databaseObj.Customer;
+        Customer.setGpsNotificationStatus = setGpsNotificationStatus;
+        Customer.remoteMethod('setGpsNotificationStatus', {
+            accepts:[
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "customerNotificationObj", type: "object"
+                }
+            ],
+            returns: {
+                arg: "response", type: "object", root: true
+            }
+
+        });
     };
 
 
@@ -63,12 +88,47 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         });
     }*/
 
+  const setGpsNotificationStatus = function(ctx, customerNotificationObj, callback){
+      const request = ctx.req;
+      if(!customerNotificationObj){
+          callback(new Error("Invalid Arguments"));
+      } else{
+          if(request.accessToken){
+              if(request.accessToken.userId){
+                  const customerId = request.accessToken.userId;
+                  const Customer = databaseObj.Customer;
+                  Customer.findById(customerId)
+                      .then(function(customer){
+                          if(customer){
+                              return customer.updateAttribute("gpsTrackerNotification", customerNotificationObj.gpsTrackerNotification);
+                          } else{
+                              throw new Error("Customer not found");
+                          }
+                      })
+                      .then(function(customer){
+                          if(customer){
+                              callback(null, {response: "success"});
+                          }
+                      })
+                      .catch(function(error){
+                          callback(error);
+                      });
+              } else{
+                  callback(new Error("User not found"));
+              }
+          } else{
+              callback(new Error("User not found"));
+          }
+      }
+  };
+
     const sendHardBrakingAccelerationNotification = function(){
         const GpsPacketData = server.models["GpsPacketData"];
         GpsPacketData.observe("after save", function(ctx, next){
             const instance = ctx.instance;
             const gpsPacketDataObj = instance.toJSON();
             let customerName;
+            let customerInstance;
             let eventType;
             let title;
             if(ctx.isNewInstance){
@@ -77,6 +137,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     databaseObj.Customer.findById(gpsPacketDataObj.customerId)
                         .then(function(customer){
                             if(customer){
+                                customerInstance = customer;
                                 customerName = customer.firstName;
                                 var lastName = customer.lastName? customer.lastName : "";
                                 customerName = customerName + " " + lastName;
@@ -89,7 +150,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 eventType = "Harsh Brake";
                                 title = "Harsh Brake has been applied";
                                 const message = brakeAccelerationMessageFormat(customerName, eventType, title, instanceId);
-                                if(gpsPacketDataObj.customerId){
+                                if(gpsPacketDataObj.customerId && customerInstance.gpsTrackerNotification["hardBraking"] === "on"){
                                     sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
                                         if(error){
                                             console.log(error);
@@ -102,7 +163,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 eventType = "Harsh Acceleration";
                                 title = "Harsh Acceleration has been applied";
                                 const message = brakeAccelerationMessageFormat(customerName, eventType, title, instanceId);
-                                if(gpsPacketDataObj.customerId){
+                                if(gpsPacketDataObj.customerId && customerInstance.gpsTrackerNotification["hardAcceleration"] === "on"){
                                     sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
                                         if(error){
                                             console.log(error);
@@ -191,6 +252,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let title;
             let pushFrom;
             let instanceId;
+            let customerInstance;
             if(ctx.isNewInstance){
                 process.nextTick(function(){
                     databaseObj.Customer.findById(gpsPacketDataObj.customerId)
@@ -208,7 +270,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 eventType = "Ignition On";
                                 title = "Engine has started";
                                 var message = engineStatusMessageFormat(customerName, eventType, title, instanceId);
-                                if(gpsPacketDataObj.customerId){
+                                if(gpsPacketDataObj.customerId && customerInstance.gpsTrackerNotification["engineOn"] === "on"){
                                     sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
                                         if(error){
                                             console.log(error);
@@ -221,7 +283,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 eventType = "Ignition Off";
                                 title = "Engine has stopped";
                                 var message = engineStatusMessageFormat(customerName, eventType, title, instanceId);
-                                if(gpsPacketDataObj.customerId){
+                                if(gpsPacketDataObj.customerId  && customerInstance.gpsTrackerNotification["engineOff"] === "on"){
                                     sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
                                         if(error){
                                             console.log(error);
@@ -245,6 +307,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             const instance = ctx.instance;
             const gpsPacketDataObj = instance.toJSON();
             let customerName;
+            let customerInstance;
             let eventType;
             let title;
             let pushFrom;
@@ -254,6 +317,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     databaseObj.Customer.findById(gpsPacketDataObj.customer)
                         .then(function(customer){
                             if(customer){
+                                customerInstance = customer;
                                 customerName = customer.firstName;
                                 var lastName = customer.lastName? customer.lastName : "";
                                 customerName = customerName + " " + lastName;
@@ -276,7 +340,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                     eventType = "GPS Status";
                                     title = "Device has been disconnected";
                                     var message = gpsDeviceStatusMessage(customerName, eventType, title, gpsPacketDataObj.id);
-                                    if(gpsPacketDataObj.customerId){
+                                    if(gpsPacketDataObj.customerId && customerInstance.gpsTrackerNotification["gpsDisconnect"] === "on"){
                                         sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
                                             if(error){
                                                 console.log(error);
@@ -304,6 +368,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             const gpsPacketDataObj = instance.toJSON();
             let customerName;
             let eventType;
+            let customerInstance;
             let title;
             let pushFrom;
             let instanceId;
@@ -312,6 +377,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     databaseObj.Customer.findById(gpsPacketDataObj.customerId)
                         .then(function(customer){
                             if(customer){
+                                customerInstance = customer;
                                 customerName = customer.firstName;
                                 var lastName = customer.lastName? customer.lastName : "";
                                 customerName = customerName + " " + lastName;
@@ -334,7 +400,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 if(gpsPacketData[1].isOverSpeedStarted === false){
                                     //send Notification
                                     var message = overSpeedMessageFormat(customerName, eventType, title, gpsPacketDataObj.id);
-                                    if(gpsPacketDataObj.customerId){
+                                    if(gpsPacketDataObj.customerId && customerInstance.gpsTrackerNotification["overSpeeding"] === "on"){
                                         sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
                                             if(error){
                                                 console.log(error);
@@ -358,6 +424,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             const instance = ctx.instance;
             const gpsPacketDataObj = instance.toJSON();
             let customerName;
+            let customerInstance;
             let eventType;
             let title;
             let pushFrom;
@@ -367,6 +434,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     databaseObj.Customer.findById(gpsPacketDataObj.customerId)
                         .then(function(customer){
                             if(customer){
+                                customerInstance = customer;
                                 customerName = customer.firstName;
                                 var lastName = customer.lastName? customer.lastName : "";
                                 customerName = customerName + " " + lastName;
@@ -390,7 +458,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                         title = "Your Vehicle is suspected to be towed";
                                         eventType = "Vehicle Towed";
                                         var message = vehicleTowingMessageFormat(customerName, eventType, title, gpsPacketDataObj.id);
-                                        if(gpsPacketDataObj.customerId){
+                                        if(gpsPacketDataObj.customerId && customerInstance.gpsTrackerNotification["vehicleTowing"] === "on"){
                                             sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
                                                 if(error){
                                                     console.log(error);

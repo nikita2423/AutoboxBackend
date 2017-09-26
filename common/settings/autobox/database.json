@@ -19,6 +19,7 @@
   "CustomerQuote": "CustomerQuote",
   "Dealer": "Dealer",
   "DealerRating": "DealerRating",
+  "DealerVehicle": "DealerVehicle",
   "EmergencyCategory": "EmergencyCategory",
   "Feedback": "Feedback",
   "GearBox": "GearBox",
@@ -36,6 +37,7 @@
   "Showroom": "Showroom",
   "Sos": "Sos",
   "SoldViaAutobox": "SoldViaAutobox",
+  "TrackDealerVehicle": "TrackDealerVehicle",
   "VehicleDetail": "VehicleDetail",
   "Workshop": "Workshop",
   "VehicleInfo": "VehicleInfo"

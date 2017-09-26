@@ -333,7 +333,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     var chauffeurRequestMessageFormat = function(to, eventType, title, chaufferId){
         var message = {
             to : to,
-            eventType : eventType,
+            type : eventType,
             title : title,
             id : chaufferId
         }

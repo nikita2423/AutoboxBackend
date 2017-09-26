@@ -53,6 +53,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         removeSOSMethod();
         findAllCustomerOfferMethod();
         rateDealerExperienceMethod();
+        findAllQuoteMessageMethod();
 
 
     };
@@ -1006,6 +1007,31 @@ module.exports = function( server, databaseObj, helper, packageObj) {
           ],
           returns: {
               arg: "response", type: "object", root: true
+          }
+      })
+    };
+
+    const findAllQuoteMessageMethod = function(){
+      const CustomerMessage = databaseObj.CustomerMessage;
+      CustomerMessage.findAll = findAllQuoteMessage;
+      CustomerMessage.remoteMethod('findAll', {
+          accepts: [
+              {
+                  arg: 'ctx',
+                  type: 'object',
+                  http: {
+                      source: 'context'
+                  }
+              },
+              {
+                  arg: "filter", type: "object"
+              },
+              {
+                  arg: "lastDate", type: "string"
+              }
+          ],
+          returns: {
+              arg: "customerMessageList", type: "object", root: true
           }
       })
     };
@@ -3335,6 +3361,64 @@ module.exports = function( server, databaseObj, helper, packageObj) {
               callback(new Error("User not valid"));
           }
       }
+    };
+
+    const findAllQuoteMessage = function(ctx, filter, lastDate, callback){
+        lastDate = !lastDate? new Date() : new Date(lastDate);
+        let limit;
+        const request = ctx.req;
+        if(!filter && !lastDate){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const customerId = request.accessToken.userId;
+                    limit = filter.limit;
+                    const CustomerMessage = databaseObj.CustomerMessage;
+                    CustomerMessage.find({
+                        limit : limit,
+                        where: {
+                            customerId : customerId,
+                            added: {
+                                lt : lastDate
+                            },
+                            type: "message"
+                        },
+                        include: [
+                            {
+                                relation: "dealer"
+                            },
+                            {
+                                relation: "customerQuote",
+                                scope: {
+                                    include: ["vehicleInfo"]
+                                }
+                            }
+                        ]
+                    })
+                        .then(function(customerMessageList){
+                            if(customerMessageList){
+                                if(customerMessageList.length){
+                                    const customerMessage = customerMessageList[customerMessageList.length - 1];
+                                    lastDate = customerMessage.added;
+                                }
+                            }
+                            callback(null, {
+                                data: customerMessageList,
+                                cursor: lastDate
+                            })
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+
+                }else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
     };
 
 

@@ -1,6 +1,7 @@
 'use strict';
 module.exports = function( server, databaseObj, helper, packageObj) {
 	const Promise = require("bluebird");
+    const vehicleMethods = require("./vehicleMethods")(server, databaseObj, helper, packageObj);
 	/**
 	 * Here server is the main app object
 	 * databaseObj is the mapped database from the package.json file
@@ -15,6 +16,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 	 * @return {[type]} [description]
 	 */
 	var init = function(){
+		vehicleMethods.init();
 
 	};
 

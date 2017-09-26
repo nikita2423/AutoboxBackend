@@ -157,6 +157,74 @@
         }
       }
     },
+    "notificationSettings": {
+      "type": "object",
+      "required": false,
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "priority": 13,
+          "fields": [
+            {
+              "key": "offerNotification",
+              "type": "input",
+              "default": "on"
+            }
+          ]
+        }
+      }
+    },
+    "gpsTrackerNotification": {
+      "type": "object",
+      "required": false,
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "key": "hardBraking",
+              "type": "input",
+              "default": "on"
+            },
+            {
+              "key": "hardAcceleration",
+              "type": "input",
+              "default": "on"
+            },
+            {
+              "key": "gpsDisconnect",
+              "type": "input",
+              "default": "on"
+            },
+            {
+              "key": "vehicleTowing",
+              "type": "input",
+              "default": "on"
+            },
+            {
+              "key": "accidentDetection",
+              "type": "input",
+              "default": "on"
+            },
+            {
+              "key": "overSpeeding",
+              "type": "input",
+              "default": "on"
+            },
+            {
+              "key": "engineOn",
+              "type": "input",
+              "default": "on"
+            },
+            {
+              "key": "engineOff",
+              "type": "input",
+              "default": "on"
+            }
+          ]
+        }
+      }
+    },
     "googleRefreshToken": {
       "type": "string"
     }
@@ -297,7 +365,9 @@
       "permission": "ALLOW",
       "property": [
         "saveCustomer",
-        "onCompletePurchase"
+        "onCompletePurchase",
+        "setGpsNotificationStatus",
+        "setOfferNotificationStatus"
       ]
     }
   ],

@@ -6,5 +6,6 @@
     "Feedback": "Feedback",
     "CustomerMessage": "CustomerMessage",
     "CustomerQuote": "CustomerQuote",
-    "DealerVehicle": "DealerVehicle"
+    "DealerVehicle": "DealerVehicle",
+    "TrackDealerVehicle": "TrackDealerVehicle"
 }

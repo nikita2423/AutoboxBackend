@@ -469,7 +469,8 @@ angular.module($snaphy.getModuleName())
                                         }
                                     ]
                                 },
-
+                                dealerVehicleList: [],
+                                findDealerVehicles: findDealerVehicles,
                                 config: {
                                     stateName: "trackVehicle",
                                     stateOptions: {},
@@ -1110,25 +1111,68 @@ angular.module($snaphy.getModuleName())
                     });
                 };
 
-                var openAddVehicleUrl = function () {
-                    console.log("Inside Dealer Vehicle");
-                   /* $scope.dialog = {
-                        message: "Do you want to delete the data?",
-                        title: "Confirm Delete"
-                    };*/
-                  /*  if (schema.settings) {
-                        if (schema.settings.form) {
-                            if (schema.settings.form.url) {
-                                if (schema.settings.form.target === "_blank") {
-                                    var url = $state.href(schema.settings.form.url, {});
-                                    window.open(url, 'blank');
-                                } else {
-                                    $state.go(schema.settings.form.url);
-                                }
-                            }
-                        }
-                    }*/
+                var findDealerVehicles = function(){
+                  var DealerVehicle = Database.getDb("dealerPanel", "DealerVehicle");
+                  var TrackDealerVehicle = Database.getDb("dealerPanel", "TrackDealerVehicle");
+                  return $q(function(resolve, reject){
+                      DealerVehicle.findAll({}, {dealerId:"5979d02c05c659827d26c853"},
+                          function (vehicleList) {
+                             console.log("All Dealer fetched", vehicleList);
+                              settings.get().tabs.trackVehicle.dealerVehicleList = vehicleList;
+                              settings.get().tabs.trackVehicle.dealerVehicleList.push({lat: 28.582035, lng: 77.366283});
+                              console.log("vehicle dealer Id", settings.get().tabs.trackVehicle.dealerVehicleList);
+                             resolve(settings.get().tabs.trackVehicle.dealerVehicleList);
+                              GoogleMapsAPI = require('../../lib/index')
+                              var gmAPI = new GoogleMapsAPI();
+                              var params = {
+                                  center: '444 W Main St Lock Haven PA',
+                                  zoom: 15,
+                                  size: '500x400',
+                                  maptype: 'roadmap',
+                                  markers: [
+                                      {
+                                          location: '300 W Main St Lock Haven, PA',
+                                          label   : 'A',
+                                          color   : 'green',
+                                          shadow  : true
+                                      },
+                                      {
+                                          location: '444 W Main St Lock Haven, PA',
+                                          icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_icon&chld=cafe%7C996600'
+                                      }
+                                  ],
+                                  style: [
+                                      {
+                                          feature: 'road',
+                                          element: 'all',
+                                          rules: {
+                                              hue: '0x00ff00'
+                                          }
+                                      }
+                                  ],
+                                  path: [
+                                      {
+                                          color: '0x0000ff',
+                                          weight: '5',
+                                          points: [
+                                              '41.139817,-77.454439',
+                                              '41.138621,-77.451596'
+                                          ]
+                                      }
+                                  ]
+                              };
+                              gmAPI.staticMap(params); // return static map URL
+                              gmAPI.staticMap(params, function(err, binaryImage) {
+                                  // fetch asynchronously the binary image
+                              });
+
+                          }, function (error) {
+                              console.error("Error for dealer vehicle");
+                              reject(error);
+                          });
+                  });
                 };
+
 
 
                 /**

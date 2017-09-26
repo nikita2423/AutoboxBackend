@@ -20,6 +20,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const gpsInfoMethods = require("./gpsInfoMethods")(server, databaseObj, helper, packageObj);
     const chauffeur = require("./chauffeur")(server, databaseObj, helper, packageObj);
     const gpsPushNotification = require("./gpsPushNotification")(server, databaseObj, helper, packageObj);
+    const trackDealerVehicleMethod = require("./trackDealerVehicleMethod")(server, databaseObj, helper, packageObj);
     var speakeasy          = require("speakeasy");
     var moment             = require("moment");
     const SendOtp          = require('sendotp');
@@ -38,6 +39,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         gpsInfoMethods.init();
         chauffeur.init();
         gpsPushNotification.init();
+        trackDealerVehicleMethod.init();
 	};
 
 

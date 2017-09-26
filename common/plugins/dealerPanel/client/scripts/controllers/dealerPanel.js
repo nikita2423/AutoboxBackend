@@ -46,6 +46,35 @@ angular.module($snaphy.getModuleName())
           $scope.settings.tabs.replyCustomerMessage.config.dealerId = $state.params.dealerId;
         };
 
+        $scope.trackDealerVehicleInit = function(){
+            $scope.settings.tabs.trackVehicle.findDealerVehicles();
+        };
+
+        $scope.initMap = function(){
+            var location = {lat: 40.671531, lng: -73.963588};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 20,
+                center: location
+            });
+
+            var markers = [
+                ['Brooklyn Museum, NY', 40.671531, -73.963588],
+                ['Brooklyn Public Library, NY', 40.672587, -73.968146],
+                ['Prospect Park Zoo, NY', 40.665588, -73.965336]
+            ];
+            /*  var marker = new google.maps.Marker({
+             position: location,
+             map: map
+             });*/for(var i = 0; i < markers.length; i++ ) {
+                var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+                var marker = new google.maps.Marker({
+                    position: position,
+                    map: map
+                });
+
+            }
+        };
+
         $scope.init = function(){
             var userObj;
             HelperService.initialize()

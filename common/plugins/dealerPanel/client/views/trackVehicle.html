@@ -11,23 +11,36 @@
     </style>
 </head>
 <body>
-<div id="map"></div>
-<script>
-    function initMap(){
-        var location = {lat: 28.582035, lng: 77.366283};
+<div id="map" ng-init="init(); trackDealerVehicleInit();"></div>
+<!--<script async defer>
+    function initMap() {
+        var location = {lat: 40.671531, lng: -73.963588};
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 20,
             center: location
         });
 
-        var marker = new google.maps.Marker({
+        var markers = [
+            ['Brooklyn Museum, NY', 40.671531, -73.963588],
+            ['Brooklyn Public Library, NY', 40.672587, -73.968146],
+            ['Prospect Park Zoo, NY', 40.665588, -73.965336]
+        ];
+        /*  var marker = new google.maps.Marker({
             position: location,
             map: map
-        });
-    }
+        });*/for(var i = 0; i < markers.length; i++ ) {
+            var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+            marker = new google.maps.Marker({
+                position: position,
+                map: map
+            });
+
+        }
+        }
+
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCx05SZ1q9q5saK9QLf15_NBUdNb7JPDVw&callback=initMap">
-</script>
+</script>-->
 </body>
 </html>

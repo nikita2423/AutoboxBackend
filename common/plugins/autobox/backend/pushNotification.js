@@ -13,6 +13,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const async = require("async");
 
     var init = function(){
+        setOfferNotificationStatusMethod();
         sendCreateQuoteNotification();
         onCustomerSaved();
         onCompletePurchaseMethod();
@@ -23,6 +24,29 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         sendQuoteReplyNotification();
         sendOldTradeCarEmail();
         sendCustomerQuoteEmailToDealer();
+    };
+
+
+    const setOfferNotificationStatusMethod = function(){
+        const Customer = databaseObj.Customer;
+        Customer.setOfferNotificationStatus = setOfferNotificationStatus;
+        Customer.remoteMethod('setOfferNotificationStatus', {
+            accepts:[
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "customerOfferObj", type: "object"
+                }
+            ],
+            returns: {
+                arg: "response", type: "object", root: true
+            }
+        });
     };
 
 
@@ -769,6 +793,40 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         })
     };
 
+    const setOfferNotificationStatus = function(ctx, customerOfferObj, callback){
+        const request = ctx.req;
+        if(!customerOfferObj){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const customerId = request.accessToken.userId;
+                    const Customer = databaseObj.Customer;
+                    Customer.findById(customerId)
+                        .then(function(customer){
+                            if(customer){
+                                return customer.updateAttribute("notificationSettings", customerOfferObj.notificationSettings)
+                            } else{
+                                throw new Error("Customer not found");
+                            }
+                        })
+                        .then(function(customer){
+                            if(customer){
+                                callback(null, {response: "success"});
+                            }
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
+
 
     const onOfferCreate = function(){
       const Offer= databaseObj.Offer;
@@ -842,7 +900,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             var lastName = customer.lastName ? customer.lastName : "";
                             name = name + " " + lastName;
                             var message = getOfferMessageObject(name, eventType, title, offerId);
-                            if (customer.id) {
+                            if (customer.id && customer.notificationSettings["offerNotification"] === "on") {
                                 //app, message, id, from, callback
                                 //Now send push..
                                 sendNotification(server, message, customer.id, packageObj.companyName, function (err) {
