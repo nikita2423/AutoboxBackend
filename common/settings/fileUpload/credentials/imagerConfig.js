@@ -2,10 +2,10 @@ module.exports = {
     variants: {
         items: {
             resize: {
-                thumb: "300x300",
+                thumb: "80x80",
                 original: "100%",
                 medium: "80%",
-                small: "400"
+                small: "300"
             }
         }
     },

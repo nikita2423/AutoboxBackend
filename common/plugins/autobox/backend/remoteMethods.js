@@ -3366,6 +3366,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const findAllQuoteMessage = function(ctx, filter, lastDate, callback){
         lastDate = !lastDate? new Date() : new Date(lastDate);
         let limit;
+        let resultMessageList = [];
         const request = ctx.req;
         if(!filter && !lastDate){
             callback(new Error("Invalid Arguments"));
@@ -3382,7 +3383,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             added: {
                                 lt : lastDate
                             },
-                            type: "message"
+                            type: "message",
+                            status: "contacted"
                         },
                         include: [
                             {
@@ -3401,6 +3403,11 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 if(customerMessageList.length){
                                     const customerMessage = customerMessageList[customerMessageList.length - 1];
                                     lastDate = customerMessage.added;
+                                    customerMessageList.forEach(function(customerMessage){
+                                        if(customerMessage.replyMessage){
+                                            resultMessageList.push(customerMessage);
+                                        }
+                                    })
                                 }
                             }
                             callback(null, {

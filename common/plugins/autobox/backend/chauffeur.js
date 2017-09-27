@@ -41,7 +41,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const chauffeurReplyMethod = function(){
       const Chauffeur = databaseObj.Chauffeur;
       Chauffeur.chauffeurReply = chauffeurReply;
-      Chauffeur.remoteMethod('chaffeurReply', {
+      Chauffeur.remoteMethod('chauffeurReply', {
           accepts: [
               {
                   arg: 'ctx',
@@ -246,8 +246,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                   sendNotification(server, message, chaffeur.customerId, from, function(error){
                                       if(error){
                                           console.log(error);
+                                          callback(error);
                                       } else{
-                                          console.log("Reject for chauffeur notification send successfully");
+                                          callback(null, {response: "success"});
+                                          console.log("Reply for chauffeur notification send successfully");
                                       }
                                   });
                               }

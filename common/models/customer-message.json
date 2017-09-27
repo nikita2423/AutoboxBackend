@@ -240,6 +240,10 @@
         }
       }
     },
+    "readStatus": {
+      "type": "boolean",
+      "default": false
+    },
     "updated": {
       "type": "date",
       "defaultFn": "now"

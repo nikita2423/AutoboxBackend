@@ -157,6 +157,11 @@
         }
       }
     },
+    "vehicleAdded": {
+      "type": "number",
+      "required": false,
+      "default": 0
+    },
     "notificationSettings": {
       "type": "object",
       "required": false,
