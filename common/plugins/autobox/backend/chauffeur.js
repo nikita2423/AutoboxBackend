@@ -326,7 +326,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         }
     };
 
-
     const sendNotification = function(app, message, id, from, callback){
         //push.push(app, message, id, from, callback);
         push.notifyByUserId(message, id, from, callback);
