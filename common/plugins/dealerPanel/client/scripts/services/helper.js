@@ -302,6 +302,7 @@ angular.module($snaphy.getModuleName())
                                     "modelName": "CustomerQuote",
                                     "action": {
                                         create: false,
+                                        edit: false,
                                         showHeader: false,
                                         delete: false
                                     },
@@ -898,13 +899,15 @@ angular.module($snaphy.getModuleName())
 
                 var modifySoldViaAutoboxSchema = function (schema) {
                     var newSchema = angular.copy(schema);
+                    if(newSchema.settings.tables){
+                        delete newSchema.settings.tables.action;
+                    }
 
                     if (newSchema.settings.tables.beforeLoad) {
                         if (!newSchema.settings.tables.beforeLoad.soldViaAutobox) {
                             newSchema.settings.tables.beforeLoad.soldViaAutobox = "yes";
                         }
                     }
-                    console.log("table schema", newSchema);
                     return newSchema;
                 };
 
@@ -939,7 +942,6 @@ angular.module($snaphy.getModuleName())
                             }
                         }
                     }
-                    console.log(newSchema);
                     return newSchema;
                 };
 
