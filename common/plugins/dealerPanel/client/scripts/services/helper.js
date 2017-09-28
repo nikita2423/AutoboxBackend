@@ -18,7 +18,6 @@ angular.module($snaphy.getModuleName())
                         if (settings.get()) {
                             if (settings.get().config) {
                                 if (!settings.get().config.employee) {
-
                                     LoginServices.addUserDetail.get()
                                         .then(function (userObj) {
                                             settings.get().config.employee = userObj;
@@ -248,7 +247,7 @@ angular.module($snaphy.getModuleName())
                                     stateName: "dashboard",
                                     stateOptions: {},
                                     active: false,
-                                    dateClass: ["col-md-4", "clearfix", "dateDashboard"],
+                                    dateClass: ["col-md-3", "clearfix", "dateDashboard"],
                                     labelClass: ["col-md-1", "labelDashboard"],
                                     columnName: "added",
                                     modelSetting: {},

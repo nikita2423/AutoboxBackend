@@ -75,13 +75,15 @@ angular.module($snaphy.getModuleName())
             }
         };
 
+
+        /**
+         * Initialize the function..
+         */
         $scope.init = function(){
             var userObj;
             HelperService.initialize()
                 .then(function (user) {
                     userObj = user;
-                    console.log(user.id);
-                    console.log("User loaded successfully");
                     return $scope.setCurrentState();
                 })
                 .then(function () {
