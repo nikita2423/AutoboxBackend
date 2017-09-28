@@ -18,6 +18,7 @@
     </div>
 
      <div
+         ng-if="settings.config.currentActiveTab==='soldViaAutobox'"
          ng-init="widgets = settings.tabs.dashboard.widgets()" class="row widgetBackground">
             <robust-widget-added  ng-cloak class="col-sm-4 col-lg-2" ng-repeat="widget in widgets" label="{{widget.label}}"
             model="{{widget.model}}"

@@ -38,11 +38,13 @@
   ],
   "tables": {
      "customer_firstName": {
+       "position":0,
        "search": "text",
-       "label": "FirstName"
+       "label": "First Name"
      },
     "customer_lastName": {
       "display": true,
+      "position":1,
       "search": "text",
       "label": "LastName"
     },
@@ -62,7 +64,12 @@
     "customer_username": {
       "display": false
     },
+    "time":{
+      "position":4,
+      "display": true
+    },
     "type": {
+      "position":2,
       "tag": {
         "call": "label-primary",
         "message": "label-warning"
@@ -76,13 +83,16 @@
     "added": {
       "date": true,
       "search": "date",
-      "label": "Date"
+      "label": "Date",
+      "position":3,
+      "format":"dd/mm/yyyy"
     },
     "status": {
       "tag": {
         "pending": "label-danger",
         "contacted": "label-success"
       },
+      "position": 5,
       "search": "select",
       "options": [
         "pending",
@@ -90,7 +100,8 @@
       ]
     },
     "message": {
-      "search": "text"
+      "search": "text",
+      "position": 7
     },
     "subject": {
       "display": false
@@ -166,15 +177,18 @@
     },
     "firstName": {
       "search": "text",
-      "label": "First Name"
+      "label": "First Name",
+      "position":0
     },
     "lastName": {
       "search": "text",
-      "label": "Last Name"
+      "label": "Last Name",
+      "position":1
     },
     "mobileNumber": {
       "search": "text",
-      "label": "Mobile Number"
+      "label": "Mobile Number",
+      "position": 6
     }
   }
 }
