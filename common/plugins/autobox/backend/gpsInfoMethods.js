@@ -9,6 +9,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     var init = function(){
         createGpsPacketDataMethod();
         createGpsTrackerInfoMethod();
+        findAllGpsInfoMethod();
     };
 
     const createGpsPacketDataMethod = function(){
@@ -21,15 +22,15 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 }
             ],
             returns: {
-                arg: "response", type: "object", root: true
+                arg: "data", type: "object", root: true
             }
         });
     };
 
     const createGpsTrackerInfoMethod = function(){
         const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
-        GpsTrackerInfo.createGpsTrackerInfo = createGpsTrackerInfo;
-        GpsTrackerInfo.remoteMethod('createGpsTrackerInfo', {
+        GpsTrackerInfo.saveGpsTrackerInfo = saveGpsTrackerInfo;
+        GpsTrackerInfo.remoteMethod('saveGpsTrackerInfo', {
             accepts: [
                 {
                     arg: 'ctx',
@@ -43,11 +44,35 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 }
             ],
             returns: {
-                arg: "response", type: "object", root: true
+                arg: "data", type: "object", root: true
             }
         });
     };
 
+    const findAllGpsInfoMethod = function(){
+        const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+        GpsTrackerInfo.findAll = findAllGpsInfo;
+        GpsTrackerInfo.remoteMethod('findAll', {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "filter", type: "object"
+                },
+                {
+                    arg: "lastDate", type: "string"
+                }
+            ],
+            returns: {
+                arg: "data", type: "object", root: true
+            }
+        });
+    };
     const createGpsPacketData = function(gpsPacketDataObj, callback){
         const GpsPacketData = databaseObj.GpsPacketData;
         const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
@@ -134,18 +159,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     };
 
- /*   const createGpsPacketData = function(gpsPacketDataObj, callback){
-        const GpsPacketData = databaseObj.GpsPacketData;
-        GpsPacketData.create(gpsPacketDataObj)
-            .then(function(gpsPacketData){
-                callback(null, {response: "success"});
-            })
-            .catch(function(error){
-                callback(error);
-            });
-    };*/
-
-   const createGpsTrackerInfo = function(ctx, gpsTrackerInfoObj, callback){
+   const saveGpsTrackerInfo = function(ctx, gpsTrackerInfoObj, callback){
      const request = ctx.req;
      if(!gpsTrackerInfoObj){
          callback(new Error("Invalid Arguments"));
@@ -230,6 +244,44 @@ module.exports = function( server, databaseObj, helper, packageObj) {
              callback(new Error("User not valid"));
          }
      }
+   };
+
+   const findAllGpsInfo = function(ctx, filter, lastDate, callback){
+       const request = ctx.req;
+       lastDate = !lastDate ? new Date():new Date(lastDate);
+       let limit;
+       if(!lastDate && !filter){
+           callback(new Error("Invalid Arguments"));
+       } else{
+           if(request.accessToken){
+               if(request.accessToken.userId){
+                   const customerId = request.accessToken.userId;
+                   const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+                   limit = filter.limit;
+                   GpsTrackerInfo.find({
+                       limit : limit,
+                       where: {
+                           customerId : customerId
+                       }
+                   })
+                       .then(function(gpsTrackerInfoList){
+                           if(gpsTrackerInfoList){
+                               if(gpsTrackerInfoList.length){
+                                   const gpsTrackerInfo = gpsTrackerInfoList[gpsTrackerInfoList.length - 1];
+                                   lastDate = gpsTrackerInfo.added;
+                               }
+                           }
+                           callback(null, {
+                               data: gpsTrackerInfoList,
+                               cursor : lastDate
+                           });
+                       })
+                       .catch(function(error){
+                           callback(error);
+                       });
+               }
+           }
+       }
    };
 
 

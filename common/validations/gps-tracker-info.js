@@ -2,7 +2,7 @@
  * Created by nikita on 20/9/17.
  */
 
-module.exports = function(Gpstrackerinfo,server, helper) {
+module.exports = function(Gpstrackerinfo, server, helper) {
 
     const {validate} = require("../helper/usefullMethods");
     Gpstrackerinfo.observe("before save", function(ctx, next){
@@ -15,7 +15,6 @@ module.exports = function(Gpstrackerinfo,server, helper) {
         }else{
             instance.updated = new Date();
         }
-
         if(!validate(instance, currentInstance, "customerId")){
             return next(new Error("Customer is required"));
         }
