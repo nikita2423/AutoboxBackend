@@ -87,6 +87,10 @@ angular.module($snaphy.getModuleName())
                     return $scope.setCurrentState();
                 })
                 .then(function () {
+                    //Feedback
+                    $rootScope.settings.tabs.feedback.config.display = true;
+                    $rootScope.settings.tabs.feedback.data="";
+
                     if($rootScope.settings.tabs[$rootScope.settings.config.currentActiveTab].relationDetail){
                         var modelName = $rootScope.settings.tabs[$rootScope.settings.config.currentActiveTab].relationDetail.modelName;
                         $scope.tableViewInit  = InitTableService.tableViewInit($scope, modelName, null);
