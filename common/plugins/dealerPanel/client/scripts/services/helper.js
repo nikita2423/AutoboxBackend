@@ -371,7 +371,7 @@ angular.module($snaphy.getModuleName())
                                     beforeSaveHook: [
                                         //Here data going to be saved..
                                         function (data) {
-                                            console.log("before hook data", data);
+                                            //console.log("before hook data", data);
                                         }
                                     ]
                                 },
