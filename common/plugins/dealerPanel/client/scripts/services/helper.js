@@ -927,6 +927,7 @@ angular.module($snaphy.getModuleName())
                     }
                     return newSchema;
                 };
+                
 
 
                 var modifySchema = function (schema_) {
@@ -937,6 +938,13 @@ angular.module($snaphy.getModuleName())
                             if (newSchema.container[key].schema) {
                                 if (newSchema.container[key].schema.length) {
                                     newSchema.container[key].schema.forEach(function (obj) {
+                                        if(obj.type === "singleFileUpload"){
+                                            if (obj.templateOptions) {
+                                                obj.templateOptions.showUploadButton =  false;
+                                                obj.templateOptions.showRemoveButton =  false;
+                                            }
+                                        }
+
                                         if (obj.templateOptions) {
                                             obj.templateOptions.disabled = true;
                                             obj.templateOptions.readonly = true;
