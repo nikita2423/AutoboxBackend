@@ -199,6 +199,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     var from = packageObj.companyName;
                     var title = chauffeurObj.ownerName + " has sent you chauffuer request";
                     var message = chauffeurRequestMessageFormat(name, type, title, chauffeurObj.id);
+                    server.logger.info("chaufferId", JSON.stringify( chauffeurObj.id));
                     if(chauffeurObj.driverId){
                         sendNotification(server, message, chauffeurObj.driverId, from, function(error){
                             if(error){
@@ -229,6 +230,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       .then(function(chauffeur){
                           if(chauffeur){
                             return chauffeur.updateAttribute("status", status);
+                          } else{
+                              throw new Error("Chauffeur not found");
                           }
                       })
                       .then(function(chaffeur){
@@ -253,6 +256,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                       }
                                   });
                               }
+                          } else{
+                              throw new Error("Chauffeur not found");
                           }
                       })
                   .catch(function(error){

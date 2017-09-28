@@ -1,0 +1,22 @@
+{
+  "name": "logger",
+  "description": "Plugin for Reporting Logs.",
+  "routeExposure": "/logger",
+  "activate": true,
+  "logger":{
+    "path": ".autobox",
+    "createPathIfNotPresent": true,
+    "logs":{
+      "info": {
+        "name": "snaphy-info",
+        "fileName": "snaphy-info.log"
+      },
+      "error": {
+        "name": "snaphy-error",
+        "fileName": "snaphy-error.log"
+      }
+    },
+    "handleException":"snaphy-exceptions.log"
+  },
+  "pluginDependencies": {}
+}

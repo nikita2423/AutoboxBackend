@@ -153,9 +153,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 if(gpsPacketDataObj.customerId && customerInstance.gpsTrackerNotification["hardBraking"] === "on"){
                                     sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
                                         if(error){
-                                            console.log(error);
+                                            //console.log(error);
+                                            server.logger.error(error);
                                         } else{
-                                            console.log("Notification for gps has been send successfully");
+                                            server.logger.info("Notification for gps has been send successfully");
                                         }
                                     })
                                 }

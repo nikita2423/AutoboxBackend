@@ -1,0 +1,16 @@
+{
+  "css": {
+  },
+  "js": {
+  },
+  "moduleDependencies":{
+
+  },
+  "settings": [],
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [],
+    "footerHook":[]
+  }
+}

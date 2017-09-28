@@ -46,3 +46,6 @@
 [submodule "common/plugins/fileUpload"]
 	path = common/plugins/fileUpload
 	url = https://github.com/snaphy-plugin-2/fileUpload.git
+[submodule "common/plugins/logger"]
+	path = common/plugins/logger
+	url = https://github.com/snaphy-plugin-2/logger.git
