@@ -29,15 +29,12 @@
 
      <div
          ng-init="widgets = settings.tabs.dashboard.widgets()" class="row widgetBackground">
-            <robust-widget-added  ng-cloak class="col-sm-4 col-lg-2"
-            ng-repeat="widget in widgets"
-            label="{{widget.label}}"
+            <robust-widget-added  ng-cloak class="col-sm-4 col-lg-2" ng-repeat="widget in widgets" label="{{widget.label}}"
             model="{{widget.model}}"
             icon="{{widget.icon}}"
             prop-obj="widget.propObj"
             fetch-locally="widget.fetchLocally"
-            model-values="displayed">
-            </robust-widget-added>
+            model-values="displayed"></robust-widget-added>
     </div>
 
     <div class="col-md-12" style="margin-top:10px;">
@@ -46,6 +43,6 @@
     </div>
 
     <div class="dataClass" ng-if="relationDetail">
-        <div  ng-include="'detailView/views/tableView.html'"></div>
+        <div ng-include="'detailView/views/tableView.html'"></div>
     </div>
 </div>

@@ -88,6 +88,9 @@ angular.module($snaphy.getModuleName())
                     if($rootScope.settings.tabs[$rootScope.settings.config.currentActiveTab].relationDetail){
                         var modelName = $rootScope.settings.tabs[$rootScope.settings.config.currentActiveTab].relationDetail.modelName;
                         $scope.tableViewInit  = InitTableService.tableViewInit($scope, modelName, null);
+                        var tableInstance = $scope.tableViewInit($rootScope.settings.tabs[$rootScope.settings.config.currentActiveTab].relationDetail);
+                        //Adding Total Number of Rows..
+                        tableInstance.getCache().settings.totalNumberOfRows = 15;
                         $scope.relationDetail = $rootScope.settings.tabs[$rootScope.settings.config.currentActiveTab].relationDetail;
                     }
                     if($rootScope.settings.config.currentActiveTab === "manageShowroomProfile"){
