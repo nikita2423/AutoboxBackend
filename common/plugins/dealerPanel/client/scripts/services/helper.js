@@ -267,6 +267,7 @@ angular.module($snaphy.getModuleName())
                                     "modelName": "CustomerQuote",
                                     "action": {
                                         create: false,
+                                        edit: false,
                                         showHeader: false,
                                         delete: false
                                     },
@@ -275,6 +276,7 @@ angular.module($snaphy.getModuleName())
                                             "between": [moment.utc("2017-08-01", "YYYY-MM-DD").format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"), moment.utc("2017-08-30", "YYYY-MM-DD").format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")]
                                         }
                                     },
+                                    schema: modifyMonthlyReportsSchema(window.STATIC_DATA.schema.CustomerQuote),
                                     beforeSaveHook: [
                                         //Here data going to be saved..
                                         function (data) {
@@ -841,7 +843,7 @@ angular.module($snaphy.getModuleName())
                                 load: function () {
                                     changeTab(settings.tabs.feedback);
                                 },
-                                data: {},
+                                data: "",
                                 form: {},
                                 title: "Feedback and Help",
                                 //Contains the current model detail..
@@ -857,7 +859,7 @@ angular.module($snaphy.getModuleName())
                                         //Here data going to be saved..
                                         function (data) {
                                         }
-                                    ],
+                                    ]
                                 },
                                 schema: window.STATIC_DATA.schema.Feedback,
                                 sendFeedback: sendFeedback,
@@ -865,7 +867,9 @@ angular.module($snaphy.getModuleName())
                                 config: {
                                     stateName: "feedback",
                                     stateOptions: {},
-                                    active: false
+                                    active: false,
+                                    display: true,
+                                    message: "Thank you for your feedback. Our representative will contact you shortly."
                                 }
                             },
                             replyCustomerMessage: {
@@ -894,6 +898,19 @@ angular.module($snaphy.getModuleName())
                         }
                     };
                     return settings;
+                };
+
+                /**
+                 * MOdify schema at runtime..
+                 * @param schema
+                 * @return {*}
+                 */
+                var modifyMonthlyReportsSchema = function (schema) {
+                    var newSchema = angular.copy(schema);
+                    if(newSchema.settings.tables){
+                        delete newSchema.settings.tables.action;
+                    }
+                    return newSchema;
                 };
 
 
@@ -973,52 +990,53 @@ angular.module($snaphy.getModuleName())
                     });
                 };
 
+
+
                 /**
                  * Sending feedback to admin
                  * @returns {*}
                  */
                 var sendFeedback = function () {
-                    console.log("Inside Feedback");
                     var Feedback = Database.getDb("dealerPanel", "Feedback");
-                    return $q(function (resolve, reject) {
-                        initialize()
-                            .then(function () {
-                                return setCurrentState();
-                            })
-                            .then(function () {
-                                return getActiveTabSettings();
-                            })
-                            .then(function () {
-                                var message = document.getElementById("feedbackTextArea").value;
-                                return Feedback.create({
-                                    message: message,
-                                    dealerId: settings.get().config.employee.id
-                                });
-                            })
-                            .then(function (feedback) {
-                                if (feedback) {
-                                    console.log("Feedback send Successfully");
-                                    SnaphyTemplate.notify({
-                                        message: "Feedback send Successfully",
-                                        type: 'success',
-                                        icon: 'fa fa-check',
-                                        align: 'right'
-                                    });
-                                    resolve();
-                                }
-                            })
-                            .catch(function (error) {
-                                SnaphyTemplate.notify({
-                                    message: "Error in sending feedback",
-                                    type: 'danger',
-                                    icon: 'fa fa-times',
-                                    align: 'right'
-
-                                });
-                                reject(error);
+                    var message = angular.copy(settings.get().tabs.feedback.data);
+                    startLoadingBar("#dealerFeedback");
+                    //Clear the data..
+                    settings.get().tabs.feedback.data = "";
+                    if(message && settings.get().config.employee.id){
+                        Feedback.create({
+                            message: message,
+                            dealerId: settings.get().config.employee.id
+                        }, function () {
+                            stopLoadingBar("#dealerFeedback");
+                            settings.get().tabs.feedback.config.display = false;
+                            SnaphyTemplate.notify({
+                                message: "Feedback send Successfully",
+                                type: 'success',
+                                icon: 'fa fa-check',
+                                align: 'right'
                             });
+                        }, function () {
+                            stopLoadingBar("#dealerFeedback");
+                            settings.get().tabs.feedback.data = message;
+                            SnaphyTemplate.notify({
+                                message: "Something went wrong! Please try again later",
+                                type: 'danger',
+                                icon: 'fa fa-times',
+                                align: 'right'
 
-                    });
+                            });
+                        });
+                    }else{
+                        stopLoadingBar("#dealerFeedback");
+                        settings.get().tabs.feedback.data = message;
+                        SnaphyTemplate.notify({
+                            message: "Message cannot be blank",
+                            type: 'danger',
+                            icon: 'fa fa-times',
+                            align: 'right'
+
+                        });
+                    }
                 };
 
 
@@ -1175,8 +1193,25 @@ angular.module($snaphy.getModuleName())
                 };
 
 
+                var startLoadingBar = function (id) {
+                    $timeout(function() {
+                        //Now hide remove the refresh widget..
+                        $(id).addClass('block-opt-refresh');
+                    }, 200);
+                };
 
-                /**
+
+                var stopLoadingBar = function (id) {
+                    $timeout(function() {
+                        //Now hide remove the refresh widget..
+                        $(id).removeClass('block-opt-refresh');
+                    }, 200);
+                };
+
+
+
+
+            /**
                  * Get showroom data on start..
                  * @param user
                  * @return {*}
