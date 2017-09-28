@@ -18,7 +18,6 @@ angular.module($snaphy.getModuleName())
                         if (settings.get()) {
                             if (settings.get().config) {
                                 if (!settings.get().config.employee) {
-
                                     LoginServices.addUserDetail.get()
                                         .then(function (userObj) {
                                             settings.get().config.employee = userObj;
@@ -248,7 +247,7 @@ angular.module($snaphy.getModuleName())
                                     stateName: "dashboard",
                                     stateOptions: {},
                                     active: false,
-                                    dateClass: ["col-md-4", "clearfix", "dateDashboard"],
+                                    dateClass: ["col-md-3", "clearfix", "dateDashboard"],
                                     labelClass: ["col-md-1", "labelDashboard"],
                                     columnName: "added",
                                     modelSetting: {},
@@ -303,6 +302,7 @@ angular.module($snaphy.getModuleName())
                                     "modelName": "CustomerQuote",
                                     "action": {
                                         create: false,
+                                        edit: false,
                                         showHeader: false,
                                         delete: false
                                     },
@@ -339,7 +339,7 @@ angular.module($snaphy.getModuleName())
                                     beforeSaveHook: [
                                         //Here data going to be saved..
                                         function (data) {
-                                            console.log("before hook data", data);
+
                                         }
                                     ]
                                 },
@@ -899,13 +899,15 @@ angular.module($snaphy.getModuleName())
 
                 var modifySoldViaAutoboxSchema = function (schema) {
                     var newSchema = angular.copy(schema);
+                    if(newSchema.settings.tables){
+                        delete newSchema.settings.tables.action;
+                    }
 
                     if (newSchema.settings.tables.beforeLoad) {
                         if (!newSchema.settings.tables.beforeLoad.soldViaAutobox) {
                             newSchema.settings.tables.beforeLoad.soldViaAutobox = "yes";
                         }
                     }
-                    console.log("table schema", newSchema);
                     return newSchema;
                 };
 
@@ -940,7 +942,6 @@ angular.module($snaphy.getModuleName())
                             }
                         }
                     }
-                    console.log(newSchema);
                     return newSchema;
                 };
 

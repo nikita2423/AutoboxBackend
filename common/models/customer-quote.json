@@ -282,7 +282,15 @@
         "create": false,
         "id": "registercity",
         "hide": false,
-        "label": "Add Register City"
+        "label": "Add Register City",
+        "acl":{
+          "allow":[],
+          "reject": ["Dealer"],
+          "relations":{
+            "allow":[],
+            "reject": ["Dealer"]
+          }
+        }
       }
     },
     "vehicleInfo": {

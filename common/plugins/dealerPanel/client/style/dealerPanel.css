@@ -1,8 +1,11 @@
-/*This is a sample css page*/
-
 @font-face {
     font-family: "tt1018m";
     src: url(../fonts/tt1018m_.ttf);
+}
+
+
+.block-content{
+    padding-top: 0 !important;
 }
 
 #main-container {
@@ -19,6 +22,8 @@
 
 .dateDashboard {
     margin-top: 4px;
+    width: 400px !important;
+
 }
 
 .header-navbar-fixed #header-navbar {

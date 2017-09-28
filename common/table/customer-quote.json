@@ -57,6 +57,7 @@
     },
     "quoteType": {
       "label": "Query",
+      "position": 0,
       "style":{
         "width": "50px"
       },
@@ -71,6 +72,7 @@
       ]
     },
     "customer_firstName": {
+      "position": 1,
       "label": "Customer",
       "style":{
         "width": "100px"
@@ -88,6 +90,7 @@
     },
     "customer_phoneNumber": {
       "label": "Mobile",
+      "position": 12,
       "style":{
         "width": "130px"
       },
@@ -99,11 +102,18 @@
     "customer_added": {
       "display": false
     },
+    "customer_notificationSettings":{
+      "display": false
+    },
+    "customer_gpsTrackerNotification":{
+      "display": false
+    },
     "vehicleInfo_added": {
       "display": false
     },
     "vehicleInfo_vehicleModel": {
       "label": "Model",
+      "position": 2,
       "style":{
         "width": "70px"
       },
@@ -111,6 +121,7 @@
     },
     "vehicleInfo_fuelType": {
       "label": "Fuel Type",
+      "position": 3,
       "style":{
         "width": "60px"
       },
@@ -118,6 +129,7 @@
     },
     "vehicleInfo_vehicleTrim": {
       "label": "Trim",
+      "position": 4,
       "style":{
         "width": "70px"
       },
@@ -125,6 +137,7 @@
     },
     "vehicleInfo_vehicleGearbox": {
       "label": "Gearbox",
+      "position": 5,
       "style":{
         "width": "80px"
       },
@@ -132,12 +145,14 @@
     },
     "vehicleInfo_vehicleColor":{
       "label": "Color",
+      "position": 6,
       "style":{
         "width": "70px"
       },
       "search": "text"
     },
     "ownershipType": {
+      "position": 7,
       "tag": {
         "individual": "label-success",
         "corporate": "label-danger"
@@ -162,12 +177,14 @@
         "yes",
         "no"
       ],
+      "position": 8,
       "label": "Trade In",
       "style":{
         "width": "70px"
       }
     },
     "soldViaAutobox": {
+      "position": 13,
       "tag": {
         "yes": "label-primary",
         "no": "label-danger"
@@ -195,6 +212,7 @@
         "yes",
         "no"
       ],
+      "position": 9,
       "label": "Insurance"
     },
     "isFinance": {
@@ -210,16 +228,19 @@
         "yes",
         "no"
       ],
+      "position": 10,
       "label": "Finance"
     },
     "quoteNumber": {
       "label": "Quote",
+      "position": 11,
       "style":{
         "width": "90px"
       },
       "search": "text"
     },
     "gpsTracker": {
+      "position": 14,
       "tag": {
         "yes": "label-primary",
         "no": "label-danger"
@@ -235,6 +256,7 @@
       ]
     },
     "dashCamera": {
+      "position": 15,
       "tag": {
         "yes": "label-primary",
         "no": "label-danger"
@@ -250,6 +272,7 @@
       ]
     },
     "testDrive": {
+      "position": 16,
       "tag": {
         "yes": "label-primary",
         "no": "label-danger"
