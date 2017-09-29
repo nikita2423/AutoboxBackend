@@ -875,6 +875,26 @@ angular.module($snaphy.getModuleName())
                             replyCustomerMessage: {
                                 data: {},
                                 form: {},
+                                initialize: initializeReplyCustomerMessage,
+                                saveForm: function (formSchema, formData, formModel) {
+                                    //startLoading bar..
+                                    startLoadingBar('#customerMessageReply');
+                                    if(formModel){
+                                        if(formModel.replyMessage){
+                                            DetailViewResource.saveForm(formSchema, formData, formModel)
+                                                .then(function (data) {
+                                                    stopLoadingBar('#customerMessageReply');
+                                                })
+                                                .catch(function (error) {
+                                                    stopLoadingBar('#customerMessageReply');
+                                                });
+                                        }else{
+                                            stopLoadingBar('#customerMessageReply');
+                                        }
+                                    }else{
+                                        stopLoadingBar('#customerMessageReply');
+                                    }
+                                },
                                 schema: modifySchemaCustomerMessageReply(window.STATIC_DATA.schema.CustomerMessage),
                                 sendReplyToCustomer: sendReplyToCustomer,
                                 config: {
@@ -889,6 +909,18 @@ angular.module($snaphy.getModuleName())
                     };
                     return settings;
                 };
+
+
+            /**
+             * Initialize the Reply Customer Message.
+             */
+            var initializeReplyCustomerMessage = function () {
+                //Fetch the data from server...
+                //settings.get().tabs.replyCustomerMessage.config.customerMessageId;
+                //settings.get().tabs.replyCustomerMessage.config.dealerId;
+               //Do nothing here..
+
+            };
 
 
                 /**
