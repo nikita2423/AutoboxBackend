@@ -75,11 +75,11 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             }
                         })
                         .then(function(){
-                            console.log("customerIdList", customerIdList);
                             if(customerIdList){
                                 if(customerIdList.length){
                                     customerIdList.forEach(function(customerId){
                                         if(customerId){
+                                            console.log("customerIdList",customerId);
                                            promises.push(function(callback){
                                                databaseObj.Customer.findById(customerId)
                                                    .then(function(customer){
@@ -116,7 +116,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                         if(error){
                                             server.logger.error("Error in sending notification for gps default packet");
                                         } else{
-                                            server.logger.info("Notification for gps default packet Send Successfully");
+                                            console.log("Notification for gps default packet Send Successfully");
                                         }
                                     });
                                 }
