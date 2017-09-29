@@ -146,9 +146,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         async.series(promises, function(error){
                             if(error){
                                callback(error);
-                               console.log("Notification send Successfully");
                             } else{
                                 callback(null, {response: "success"});
+                                console.log("Notification send Successfully");
                             }
                         });
                     }
