@@ -503,7 +503,7 @@ angular.module($snaphy.getModuleName())
                                         function (data) {
 
                                         }
-                                    ]
+                                    ],
                                 },
                                 schema: modifySchema(window.STATIC_DATA.schema.Workshop),
                                 saveForm: function (formSchema, formData, formModel) {
