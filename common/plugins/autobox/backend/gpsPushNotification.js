@@ -75,6 +75,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             }
                         })
                         .then(function(){
+                            console.log("customerIdList", customerIdList);
                             if(customerIdList){
                                 if(customerIdList.length){
                                     customerIdList.forEach(function(customerId){
