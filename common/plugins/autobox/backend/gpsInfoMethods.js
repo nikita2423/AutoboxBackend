@@ -73,6 +73,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
         });
     };
+
+
     const createGpsPacketData = function(gpsPacketDataObj, callback){
         const GpsPacketData = databaseObj.GpsPacketData;
         const GpsTrackerInfo = databaseObj.GpsTrackerInfo;

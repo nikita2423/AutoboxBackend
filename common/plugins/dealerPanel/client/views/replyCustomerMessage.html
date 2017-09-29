@@ -1,8 +1,31 @@
+
+<div class="modal-content" >
+    <div ng-if="settings.tabs.replyCustomerMessage.schema.validations" class="block-content block-content-narrow">
+        <form name="settings.tabs.replyCustomerMessage.schema.form" ng-validate="settings.tabs.replyCustomerMessage.schema.validations" novalidate  class="form-horizontal">
+            <!--Add container class and style related to this..-->
+            <div ng-class="container.class" ng-style="container.style" ng-repeat="container in settings.tabs.replyCustomerMessage.schema.container">
+                <formly-form   model="settings.tabs.replyCustomerMessage.data" fields="container.schema" ></formly-form>
+            </div>
+        </form>
+    </div><!--block-content-->
+
+    <!-- ng disabled removed as now ng-disabled="!enableButton(settings.form)" -->
+    <div class="modal-footer">
+        <button data-target="#customerMessageReply" class="btn btn-sm btn-default "  type="button" data-dismiss="modal">Close</button>
+        <button class="btn btn-sm btn-default"
+                ng-click="settings.tabs.replyCustomerMessage.saveForm(replyCustomerMessage.getCache().schema, replyCustomerMessage.getCache().settings.form,  replyCustomerMessage.getCache().settings.saveFormData, true, editTableId)">
+            <i class="fa fa-save"></i>
+            Save
+        </button>
+    </div>
+</div>
+
+<!--
 <div ng-init="init();replyCustomerMessageInit();">
     <div class="block-content block-content-narrow">
     <form name="getActiveTabSettings().form">
         <div class="col-md-12">
-            <textarea class="textAreaStyle" id="replyTextArea" rows="8" placeholder="Reply Message"></textarea>
+            <textarea style="width: 100%;" class="textAreaStyle" id="replyTextArea" rows="8" placeholder="Reply Message"></textarea>
         </div>
     </form>
     </div>
@@ -14,4 +37,4 @@
         </button>
     </div>
 
-</div>
+</div>-->

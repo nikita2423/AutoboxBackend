@@ -231,12 +231,10 @@
             "reject": [],
             "fields": {
               "allow": [],
-              "reject": [
-                "Dealer"
-              ]
+              "reject": []
             }
           },
-          "id": "subject"
+          "id": "replyMessage"
         }
       }
     },

@@ -875,17 +875,7 @@ angular.module($snaphy.getModuleName())
                             replyCustomerMessage: {
                                 data: {},
                                 form: {},
-                                relationDetail: {
-                                    "relationName": "replyCustomerMessage",
-                                    "modelName": "CustomerMessage",
-                                    beforeSaveHook: [
-                                        //Here data going to be saved..
-                                        function (data) {
-
-                                        }
-                                    ]
-                                },
-                                schema: window.STATIC_DATA.schema.CustomerMessage,
+                                schema: modifySchemaCustomerMessageReply(window.STATIC_DATA.schema.CustomerMessage),
                                 sendReplyToCustomer: sendReplyToCustomer,
                                 config: {
                                     stateName: "demo1",
@@ -899,6 +889,42 @@ angular.module($snaphy.getModuleName())
                     };
                     return settings;
                 };
+
+
+                /**
+                 * Modify Customer Message Reply Schema
+                 * @param schema_
+                 */
+                var  modifySchemaCustomerMessageReply = function(schema_){
+                    var newSchema = angular.copy(schema_);
+                    if(newSchema){
+                        if(newSchema.container){
+                            for(var key in newSchema.container){
+                                if(newSchema.container.hasOwnProperty(key)){
+                                    var schemaList = newSchema.container[key].schema;
+                                    if(schemaList){
+                                        if(schemaList.length){
+                                            var indexList = [];
+                                            schemaList.forEach(function (schema, index) {
+                                                if(schema.key === "status"){
+                                                    indexList.push(index);
+                                                }
+                                            });
+
+                                            indexList.forEach(function (i) {
+                                                schemaList.splice(i, 1);
+                                            });
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    return newSchema;
+                };
+
+
 
                 /**
                  * MOdify schema at runtime..

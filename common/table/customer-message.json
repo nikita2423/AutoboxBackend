@@ -80,6 +80,9 @@
         "message"
       ]
     },
+    "replyMessage":{
+      "display": false
+    },
     "added": {
       "date": true,
       "search": "date",
