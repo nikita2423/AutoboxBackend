@@ -48,6 +48,12 @@
       "search": "text",
       "display": false
     },
+    "gpsTrackerNotification": {
+      "display": false
+    },
+    "notificationSettings": {
+      "display": false
+    },
     "username": {
       "display": false
     },
