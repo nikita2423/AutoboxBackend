@@ -10,12 +10,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     var init = function(){
         gpsTestNotification();
         setGpsNotificationStatusMethod();
-        sendHardBrakingAccelerationNotification();
+      /*  sendHardBrakingAccelerationNotification();
         sendGpsBatteryLowNotification();
         sendEngineStatusNotification();
         sendGpsDeviceStatusNotification();
         sendOverSpeedingNotification();
-        sendVehicleTowingNotification();
+        sendVehicleTowingNotification();*/
     };
 
 
@@ -122,7 +122,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             }
                         })
                         .catch(function(error){
-                            server.logger.error(error);
+                            server.logger.error("Error in sending notification", error);
                         });
                    /* databaseObj.Customer.findById(gpsPacketDataObj.customerId)
                         .then(function(customer){
