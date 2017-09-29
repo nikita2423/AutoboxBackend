@@ -5,9 +5,10 @@
 module.exports = function( server, databaseObj, helper, packageObj) {
 
     const push = helper.loadPlugin("pushService");
+    const async = require("async");
 
     var init = function(){
-        //gpsTestNotification();
+        gpsTestNotification();
         setGpsNotificationStatusMethod();
         sendHardBrakingAccelerationNotification();
         sendGpsBatteryLowNotification();
@@ -42,7 +43,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
 
-  /*  const gpsTestNotification = function(){
+    const gpsTestNotification = function(){
         const GpsPacketData = server.models["GpsPacketData"];
         GpsPacketData.observe("after save", function(ctx, next){
             const instance = ctx.instance;
@@ -50,10 +51,80 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let customerName;
             let eventType;
             let title;
+            let customerIdList = [];
+            let promises = [];
             if(ctx.isNewInstance){
                 process.nextTick(function(){
                     //console.log("customerId", gpsPacketDataObj.customerId);
-                    databaseObj.Customer.findById(gpsPacketDataObj.customerId)
+                    databaseObj.GpsTrackerInfo.find({
+                        where: {
+                            deviceIMEI : gpsPacketDataObj.deviceIMEI
+                        }
+                    })
+                        .then(function(gpsTrackerInfoList){
+                            if(gpsTrackerInfoList){
+                                if(gpsTrackerInfoList.length){
+                                    gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
+                                        if(gpsTrackerInfo){
+                                            if(gpsTrackerInfo.customerId){
+                                                customerIdList.push(gpsTrackerInfo.customerId);
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        })
+                        .then(function(){
+                            if(customerIdList){
+                                if(customerIdList.length){
+                                    customerIdList.forEach(function(customerId){
+                                        if(customerId){
+                                           promises.push(function(callback){
+                                               databaseObj.Customer.findById(customerId)
+                                                   .then(function(customer){
+                                                       if(customer){
+                                                           customerName = customer.firstName;
+                                                           var lastName = customer.lastName? customer.lastName : "";
+                                                           customerName = customerName + " " + lastName;
+                                                           var pushFrom = packageObj.companyName;
+                                                           const instanceId = gpsPacketDataObj.id;
+                                                           eventType = "Default Packet";
+                                                           title = "Default Test Packet Arrived";
+                                                           const message = brakeAccelerationMessageFormat(customerName, eventType, title, instanceId);
+                                                           if(customerId){
+                                                               console.log("Notification customer Id",customerId + " " + customerName);
+                                                               sendNotification(server, message, customerId, pushFrom, function(error){
+                                                                   if(error){
+                                                                       console.log(error);
+                                                                       callback(error);
+                                                                   } else{
+                                                                       callback(null);
+                                                                       console.log("Notification for  default packet gps has been send successfully");
+                                                                   }
+                                                               });
+                                                           }
+                                                       }
+                                                   })
+                                                   .catch(function(error){
+                                                       callback(error);
+                                                   });
+                                           });
+                                        }
+                                    });
+                                    async.series(promises, function(error){
+                                        if(error){
+                                            server.logger.error("Error in sending notification for gps default packet");
+                                        } else{
+                                            server.logger.info("Notification for gps default packet Send Successfully");
+                                        }
+                                    });
+                                }
+                            }
+                        })
+                        .catch(function(error){
+                            server.logger.error(error);
+                        });
+                   /* databaseObj.Customer.findById(gpsPacketDataObj.customerId)
                         .then(function(customer){
                             if(customer){
                                 customerName = customer.firstName;
@@ -81,12 +152,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         })
                         .catch(function(error){
                             callback(error);
-                        });
+                        });*/
                 });
             }
             next();
         });
-    }*/
+    };
 
   const setGpsNotificationStatus = function(ctx, customerNotificationObj, callback){
       const request = ctx.req;
@@ -171,7 +242,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                         } else{
                                             console.log("Notification for gps has been send successfully");
                                         }
-                                    })
+                                    });
                                 }
                             }
 
