@@ -4,9 +4,9 @@
     </div>
     <div ng-if="settings.config.isUserLoaded">
 
-        <div class="homeTable" ng-init="relationDetail = settings.tabs.customerCallMessage.relationDetail;" >
+        <div class="dataClass" ng-init="relationDetail = settings.tabs.customerCallMessage.relationDetail;" >
             <div ng-if="relationDetail">
-                <div  ng-include="'detailView/views/tableView.html'"></div>
+                <div style="padding-top: 0px !important;" ng-include="'detailView/views/tableView.html'"></div>
             </div>
         </div>
     </div>

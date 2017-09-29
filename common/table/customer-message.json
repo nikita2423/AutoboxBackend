@@ -15,7 +15,11 @@
             "state": "customerCallMessage.replyToCustomer",
             "options":{
               "customerMessageId": "$data.id",
-              "dealerId": "$user.id"
+              "customerId": "$data.customerId",
+              "dealerId": "$user.id",
+              "status": "$data.status",
+              "replyMessage": "$data.replyMessage",
+              "customerQuoteId": "$data.customerQuoteId"
             },
             "icon": ["fa", "fa-mail-reply"],
             "dataTargetId": "customerMessageReply"
@@ -79,6 +83,9 @@
         "call",
         "message"
       ]
+    },
+    "replyMessage":{
+      "display": false
     },
     "added": {
       "date": true,

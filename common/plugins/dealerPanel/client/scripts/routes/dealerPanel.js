@@ -156,7 +156,7 @@ angular.module($snaphy.getModuleName())
           .state('customerCallMessage.replyToCustomer', {
              templateUrl: '/dealerPanel/views/replyCustomerMessage.html',
               controller: 'dealerPanelControl',
-              params: { dealerId: null,  customerMessageId: null},
+              params: { dealerId: null,  customerMessageId: null, status: null, replyMessage: null, customerId: null, customerQuoteId: null},
               data: {
                  permissions: {
                      only: [employeeRole],

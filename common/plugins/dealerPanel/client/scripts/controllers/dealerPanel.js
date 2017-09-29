@@ -23,7 +23,7 @@ angular.module($snaphy.getModuleName())
         $scope.initWorkshop = function() {
             //do something here
         };
-        
+
         
         $scope.quoteReplyInit = function () {
             $scope.settings.tabs.quoteReply.data = {};
@@ -37,15 +37,29 @@ angular.module($snaphy.getModuleName())
         };
 
         $scope.replyCustomerMessageInit = function() {
-          $scope.settings.tabs.replyCustomerMessage.data = {};
-          $scope.settings.tabs.replyCustomerMessage.form = {};
-          $scope.settings.tabs.replyCustomerMessage.config.dealerId = "";
-          $scope.settings.tabs.replyCustomerMessage.config.customerMessageId = "";
+            // dealerId: null,  customerMessageId: null, status: null, replyMessage: null
+            $scope.settings.tabs.replyCustomerMessage.data = {
+                id: $state.params.customerMessageId,
+                status:  $state.params.status,
+                replyMessage: $state.params.replyMessage,
+                customerId: $state.params.customerId,
+                dealerId: $state.params.dealerId,
+                customerQuoteId: $state.params.customerQuoteId
+            };
+            $scope.settings.tabs.replyCustomerMessage.form = {};
+            $scope.settings.tabs.replyCustomerMessage.config.dealerId = "";
+            $scope.settings.tabs.replyCustomerMessage.config.customerMessageId = "";
 
-          $scope.settings.tabs.replyCustomerMessage.config.customerMessageId = $state.params.customerMessageId;
-          $scope.settings.tabs.replyCustomerMessage.config.dealerId = $state.params.dealerId;
+            $scope.settings.tabs.replyCustomerMessage.config.customerMessageId = $state.params.customerMessageId;
+            $scope.settings.tabs.replyCustomerMessage.config.dealerId = $state.params.dealerId;
+            //Fetch the data from backend..first..
+            $scope.settings.tabs.replyCustomerMessage.initialize();
         };
 
+
+        /**
+         * Track Dealer Vehicle Init.
+         */
         $scope.trackDealerVehicleInit = function(){
             $scope.settings.tabs.trackVehicle.findDealerVehicles();
         };

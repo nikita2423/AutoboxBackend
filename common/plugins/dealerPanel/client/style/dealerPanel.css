@@ -26,6 +26,7 @@
 
 }
 
+
 .header-navbar-fixed #header-navbar {
     min-height: 30px;
     padding: 0px;
@@ -102,11 +103,13 @@
 
 /* Table Style */
 
+
 .table>thead:first-child>tr:first-child>th {
     padding:  0px !important;
     font-size: 10px !important;
     text-align: center;
-    background: #F9F9F9;
+    background: #E9E9E9;
+    height: 30px;
 }
 
 .table>tbody>tr>td {

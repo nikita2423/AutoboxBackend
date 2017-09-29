@@ -9,7 +9,7 @@
             <button ui-sref="dealerVehicle"  class="emailButtonStyle" type="submit" >Add Vehicle</button>
         </div>
 
-        <div ng-if="settings.config.isUserLoaded">
+        <div style="color: #646464;" ng-if="settings.config.isUserLoaded">
             <div class="homeTable" ng-init="relationDetail = settings.tabs.addDealerVehicle.relationDetail;" >
                 <div ng-if="relationDetail">
                     <div  ng-include="'detailView/views/tableView.html'"></div>
