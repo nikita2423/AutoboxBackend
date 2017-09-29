@@ -6,16 +6,17 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     const push = helper.loadPlugin("pushService");
     const async = require("async");
+    const process = require("process");
 
     var init = function(){
         gpsTestNotification();
         setGpsNotificationStatusMethod();
-      /*  sendHardBrakingAccelerationNotification();
+        sendHardBrakingAccelerationNotification();
         sendGpsBatteryLowNotification();
         sendEngineStatusNotification();
         sendGpsDeviceStatusNotification();
         sendOverSpeedingNotification();
-        sendVehicleTowingNotification();*/
+        sendVehicleTowingNotification();
     };
 
 
@@ -128,35 +129,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         .catch(function(error){
                             server.logger.error("Error in sending notification", error);
                         });
-                   /* databaseObj.Customer.findById(gpsPacketDataObj.customerId)
-                        .then(function(customer){
-                            if(customer){
-                                customerName = customer.firstName;
-                                var lastName = customer.lastName? customer.lastName : "";
-                                customerName = customerName + " " + lastName;
-                            }
-                        })
-                        .then(function(){
-                            var pushFrom = packageObj.companyName;
-                            const instanceId = gpsPacketDataObj.id;
-                            eventType = "Default Packet";
-                            title = "Default Test Packet Arrived";
-                            const message = brakeAccelerationMessageFormat(customerName, eventType, title, instanceId);
-                            if(gpsPacketDataObj.customerId){
-                                console.log("Notification customer Id", gpsPacketDataObj.customerId + " " + customerName);
-                                sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
-                                    if(error){
-                                        console.log(error);
-                                    } else{
-                                        console.log("Notification for gps has been send successfully");
-                                    }
-                                });
-                            }
-
-                        })
-                        .catch(function(error){
-                            callback(error);
-                        });*/
                 });
             }
             next();
@@ -197,6 +169,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       }
   };
 
+
     const sendHardBrakingAccelerationNotification = function(){
         const GpsPacketData = server.models["GpsPacketData"];
         GpsPacketData.observe("after save", function(ctx, next){
@@ -206,58 +179,108 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let customerInstance;
             let eventType;
             let title;
+            let customerIdList = [];
+            var promises = [];
             if(ctx.isNewInstance){
                 process.nextTick(function(){
                     //console.log("customerId", gpsPacketDataObj.customerId);
-                    databaseObj.Customer.findById(gpsPacketDataObj.customerId)
-                        .then(function(customer){
-                            if(customer){
-                                customerInstance = customer;
-                                customerName = customer.firstName;
-                                var lastName = customer.lastName? customer.lastName : "";
-                                customerName = customerName + " " + lastName;
-                            }
-                        })
-                        .then(function(){
-                            var pushFrom = packageObj.companyName;
-                            const instanceId = gpsPacketDataObj.id;
-                            if(gpsPacketDataObj.eventType === packageObj.gps.harsh_braking){
-                                eventType = "Harsh Brake";
-                                title = "Harsh Brake has been applied";
-                                const message = brakeAccelerationMessageFormat(customerName, eventType, title, instanceId);
-                                if(gpsPacketDataObj.customerId && customerInstance.gpsTrackerNotification["hardBraking"] === "on"){
-                                    sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
-                                        if(error){
-                                            //console.log(error);
-                                            server.logger.error(error);
-                                        } else{
-                                            server.logger.info("Notification for gps has been send successfully");
-                                        }
-                                    })
-                                }
-                            } else if(gpsPacketDataObj.eventType === packageObj.gps.harsh_acceleration){
-                                eventType = "Harsh Acceleration";
-                                title = "Harsh Acceleration has been applied";
-                                const message = brakeAccelerationMessageFormat(customerName, eventType, title, instanceId);
-                                if(gpsPacketDataObj.customerId && customerInstance.gpsTrackerNotification["hardAcceleration"] === "on"){
-                                    sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
-                                        if(error){
-                                            console.log(error);
-                                        } else{
-                                            console.log("Notification for gps has been send successfully");
+
+                    databaseObj.GpsTrackerInfo.find({
+                        where: {
+                            deviceIMEI : gpsPacketDataObj.deviceIMEI
+                        }
+                    })
+                        .then(function(gpsTrackerInfoList){
+                            if(gpsTrackerInfoList){
+                                if(gpsTrackerInfoList.length){
+                                    gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
+                                        if(gpsTrackerInfo){
+                                            if(gpsTrackerInfo.customerId){
+                                                customerIdList.push(gpsTrackerInfo.customerId);
+                                            }
                                         }
                                     });
                                 }
                             }
+                        })
+                        .then(function(){
+                            if(customerIdList){
+                                if(customerIdList.length){
+                                    customerIdList.forEach(function(customerId){
+                                        if(customerId){
+                                            const Customer = databaseObj.Customer;
+                                            promises.push(function(callback){
+                                                Customer.findById(customerId)
+                                                    .then(function(customer){
+                                                        if(customer){
+                                                            console.log("customerIdList",customer.id);
+                                                            customerInstance = customer;
+                                                            customerName = customer.firstName;
+                                                            var lastName = customer.lastName? customer.lastName : "";
+                                                            customerName = customerName + " " + lastName;
+                                                            var pushFrom = packageObj.companyName;
+                                                            const instanceId = gpsPacketDataObj.id;
+                                                            if(gpsPacketDataObj.eventType === packageObj.gps.harsh_braking){
+                                                                eventType = "Harsh Brake";
+                                                                title = "Harsh Brake has been applied";
+                                                                const message = brakeAccelerationMessageFormat(customerName, eventType, title, instanceId);
+                                                                if(customer.id && customerInstance.gpsTrackerNotification["hardBraking"] === "on"){
+                                                                    sendNotification(server, message, customer.id, pushFrom, function(error){
+                                                                        if(error){
+                                                                            //console.log(error);
+                                                                            server.logger.error(error);
+                                                                            callback(error);
+                                                                        } else{
+                                                                            server.logger.info("Notification for gps has been send successfully");
+                                                                            callback(null);
+                                                                        }
+                                                                    });
+                                                                }
+                                                            } else if(gpsPacketDataObj.eventType === packageObj.gps.harsh_acceleration){
+                                                                eventType = "Harsh Acceleration";
+                                                                title = "Harsh Acceleration has been applied";
+                                                                const message = brakeAccelerationMessageFormat(customerName, eventType, title, instanceId);
+                                                                if(customer.id && customerInstance.gpsTrackerNotification["hardAcceleration"] === "on"){
+                                                                    sendNotification(server, message, customer.id, pushFrom, function(error){
+                                                                        if(error){
+                                                                            console.log(error);
+                                                                            callback(error);
+                                                                        } else{
+                                                                            console.log("Notification for gps has been send successfully");
+                                                                            callback(null);
+                                                                        }
+                                                                    });
+                                                                }
+                                                            }
+                                                        } else{
+                                                            callback(null);
+                                                        }
+                                                    })
+                                                    .catch(function(error){
+                                                        callback(error);
+                                                    });
 
+                                            })
+                                        }
+                                    })
+
+                                    async.series(promises, function (error) {
+                                        if(error){
+                                            console.error(error);
+                                        } else{
+                                            console.log("Hard Acceleration");
+                                        }
+                                    });
+                                }
+                            }
                         })
                         .catch(function(error){
-                            callback(error);
-                        })
-                })
+                            console.error(error);
+                        });
+                });
             }
             next();
-        })
+        });
     };
 
     const sendGpsBatteryLowNotification = function(){
@@ -270,48 +293,97 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let title;
             let pushFrom;
             let instanceId;
+            let customerIdList = [];
+            var promises = [];
+            let customerInstance;
             if(ctx.isNewInstance){
                 process.nextTick(function(){
-                    databaseObj.Customer.findById(gpsPacketDataObj.customerId)
-                        .then(function(customer){
-                            if(customer){
-                                customerName = customer.firstName;
-                                var lastName = customer.lastName? customer.lastName : "";
-                                customerName = customerName + " " + lastName;
+                    databaseObj.GpsTrackerInfo.find({
+                        where: {
+                            deviceIMEI : gpsPacketDataObj.deviceIMEI
+                        }
+                    })
+                        .then(function(gpsTrackerInfoList){
+                            if(gpsTrackerInfoList){
+                                if(gpsTrackerInfoList.length){
+                                    gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
+                                        if(gpsTrackerInfo){
+                                            if(gpsTrackerInfo.customerId){
+                                                customerIdList.push(gpsTrackerInfo.customerId);
+                                            }
+                                        }
+                                    });
+                                }
                             }
                         })
                         .then(function(){
-                            pushFrom = packageObj.companyName;
-                            instanceId = gpsPacketDataObj.id;
-                            if(gpsPacketDataObj.eventType === packageObj.gps.internal_battery_low){
-                                return databaseObj.GpsPacketData.find({
-                                    limit : 2,
-                                    order: ["added DESC"]
-                                })
-                            }
-                        })
-                        .then(function(gpsPacketData){
-                            if(gpsPacketData){
-                                if(gpsPacketData[1].internalBatteryLowAlert === false){
-                                    //send push notification
-                                    eventType = "Low Internal Battery"
-                                    var message = lowBatteryGpsMessage(customerName, eventType, title, instanceId);
-                                    if(gpsPacketDataObj.customerId){
-                                        sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
-                                            if(error){
-                                                console.error(error);
-                                            } else{
-                                                console.log("Notification for Low Battery send successfully");
-                                            }
-                                        })
-                                    }
+                            if(customerIdList){
+                                if(customerIdList.length){
+                                    customerIdList.forEach(function(customerId){
+                                        if(customerId){
+                                            const Customer = databaseObj.Customer;
+                                            promises.push(function(callback){
+                                                Customer.findById(customerId)
+                                                    .then(function(customer){
+                                                        if(customer){
+                                                            console.log("customerIdList",customer.id);
+                                                            customerInstance = customer;
+                                                            customerName = customer.firstName;
+                                                            var lastName = customer.lastName? customer.lastName : "";
+                                                            customerName = customerName + " " + lastName;
+                                                            pushFrom = packageObj.companyName;
+                                                            instanceId = gpsPacketDataObj.id;
+                                                            if(gpsPacketDataObj.eventType === packageObj.gps.internal_battery_low){
+                                                                return databaseObj.GpsPacketData.find({
+                                                                    limit : 2,
+                                                                    order: ["added DESC"]
+                                                                })
+                                                            }
+                                                        }
+                                                    })
+                                                    .then(function(gpsPacketData){
+                                                        if(gpsPacketData){
+                                                            if(gpsPacketData[1].internalBatteryLowAlert === false){
+                                                                //send push notification
+                                                                eventType = "Low Internal Battery";
+                                                                var message = lowBatteryGpsMessage(customerName, eventType, title, instanceId);
+                                                                if(customerInstance.id){
+                                                                    sendNotification(server, message, customerInstance.id, pushFrom, function(error){
+                                                                        if(error){
+                                                                            console.error(error);
+                                                                            callback(error);
+                                                                        } else{
+                                                                            console.log("Notification for Low Battery send successfully");
+                                                                            callback(null);
+                                                                        }
+                                                                    })
+                                                                }
 
+                                                            }
+                                                        } else{
+                                                            callback(null);
+                                                        }
+                                                    })
+                                                    .catch(function(error){
+                                                        callback(error);
+                                                    })
+                                            })
+                                        }
+                                    })
+
+                                    async.series(promises, function(error){
+                                        if(error){
+                                            console.error(error);
+                                        } else{
+                                            console.log("Notification for Low Battery send successfully to all customers")
+                                        }
+                                    })
                                 }
                             }
                         })
                         .catch(function(error){
-                            callback(error);
-                        })
+                            console.log(error);
+                        });
                 });
                 next();
             }
@@ -329,48 +401,98 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let pushFrom;
             let instanceId;
             let customerInstance;
+            let promises = [];
+            let customerIdList = [];
             if(ctx.isNewInstance){
                 process.nextTick(function(){
-                    databaseObj.Customer.findById(gpsPacketDataObj.customerId)
-                        .then(function(customer){
-                            if(customer){
-                                customerName = customer.firstName;
-                                var lastName = customer.lastName? customer.lastName : "";
-                                customerName = customerName + " " + lastName;
+                    databaseObj.GpsTrackerInfo.find({
+                        where: {
+                            deviceIMEI : gpsPacketDataObj.deviceIMEI
+                        }
+                    })
+                        .then(function(gpsTrackerInfoList){
+                            if(gpsTrackerInfoList){
+                                if(gpsTrackerInfoList.length){
+                                    gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
+                                        if(gpsTrackerInfo){
+                                            if(gpsTrackerInfo.customerId){
+                                                customerIdList.push(gpsTrackerInfo.customerId);
+                                            }
+                                        }
+                                    });
+                                }
                             }
                         })
                         .then(function(){
-                            pushFrom = packageObj.companyName;
-                            instanceId = gpsPacketDataObj.id;
-                            if(gpsPacketDataObj.eventType === packageObj.gps.ignition_on){
-                                eventType = "Ignition On";
-                                title = "Engine has started";
-                                var message = engineStatusMessageFormat(customerName, eventType, title, instanceId);
-                                if(gpsPacketDataObj.customerId && customerInstance.gpsTrackerNotification["engineOn"] === "on"){
-                                    sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
+                            if(customerIdList){
+                                if(customerIdList.length){
+                                    customerIdList.forEach(function(customerId){
+                                       if(customerId){
+                                           const Customer = databaseObj.Customer;
+                                           promises.push(function(callback){
+                                               Customer.findById(customerId)
+                                                   .then(function(customer){
+                                                       if(customer){
+                                                           customerName = customer.firstName;
+                                                           var lastName = customer.lastName? customer.lastName : "";
+                                                           customerName = customerName + " " + lastName;
+                                                           pushFrom = packageObj.companyName;
+                                                           instanceId = gpsPacketDataObj.id;
+                                                           if(gpsPacketDataObj.eventType === packageObj.gps.ignition_on){
+                                                               eventType = "Ignition On";
+                                                               title = "Engine has started";
+                                                               var message = engineStatusMessageFormat(customerName, eventType, title, instanceId);
+                                                               if(customer.id && customerInstance.gpsTrackerNotification["engineOn"] === "on"){
+                                                                   sendNotification(server, message, customer.id, pushFrom, function(error){
+                                                                       if(error){
+                                                                           console.log(error);
+                                                                           callback(error);
+                                                                       } else{
+                                                                           console.log("Notification for engine status send successfully");
+                                                                           callback(null);
+                                                                       }
+                                                                   })
+                                                               }
+                                                           } else if(gpsPacketDataObj.eventType === packageObj.gps.ignition_off){
+                                                               eventType = "Ignition Off";
+                                                               title = "Engine has stopped";
+                                                               var message = engineStatusMessageFormat(customerName, eventType, title, instanceId);
+                                                               if(customer.id  && customerInstance.gpsTrackerNotification["engineOff"] === "on"){
+                                                                   sendNotification(server, message, customer.id, pushFrom, function(error){
+                                                                       if(error){
+                                                                           console.log(error);
+                                                                           callback(error);
+                                                                       } else{
+                                                                           console.log("Notification for engine status send successfully");
+                                                                           callback(null);
+                                                                       }
+                                                                   })
+                                                               }
+                                                           }
+                                                       } else{
+                                                           callback(null);
+                                                       }
+                                                   })
+                                                   .catch(function(error){
+                                                       callback(error);
+                                                   })
+                                           })
+                                       }
+                                    });
+
+                                    async.series(promises, function(error){
                                         if(error){
-                                            console.log(error);
+                                            server.logger.error(error);
                                         } else{
-                                            console.log("Notification for engine status send successfully");
-                                        }
-                                    })
-                                }
-                            } else if(gpsPacketDataObj.eventType === packageObj.gps.ignition_off){
-                                eventType = "Ignition Off";
-                                title = "Engine has stopped";
-                                var message = engineStatusMessageFormat(customerName, eventType, title, instanceId);
-                                if(gpsPacketDataObj.customerId  && customerInstance.gpsTrackerNotification["engineOff"] === "on"){
-                                    sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
-                                        if(error){
-                                            console.log(error);
-                                        } else{
-                                            console.log("Notification for engine status send successfully");
+                                            server.logger.info("Notification for engine status send successfully to all customers");
                                         }
                                     })
                                 }
                             }
-
                         })
+                        .catch(function(error){
+                            server.logger.error(error);
+                        });
                 })
             }
             next();
@@ -388,49 +510,96 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let title;
             let pushFrom;
             let instanceId;
+            let customerIdList = [];
+            let promises = [];
             if(ctx.isNewInstance){
                 process.nextTick(function(){
-                    databaseObj.Customer.findById(gpsPacketDataObj.customer)
-                        .then(function(customer){
-                            if(customer){
-                                customerInstance = customer;
-                                customerName = customer.firstName;
-                                var lastName = customer.lastName? customer.lastName : "";
-                                customerName = customerName + " " + lastName;
+                    databaseObj.GpsTrackerInfo.find({
+                        where: {
+                            deviceIMEI : gpsPacketDataObj.deviceIMEI
+                        }
+                    })
+                        .then(function(gpsTrackerInfoList){
+                            if(gpsTrackerInfoList){
+                                if(gpsTrackerInfoList.length){
+                                    gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
+                                        if(gpsTrackerInfo){
+                                            if(gpsTrackerInfo.customerId){
+                                                customerIdList.push(gpsTrackerInfo.customerId);
+                                            }
+                                        }
+                                    });
+                                }
                             }
                         })
                         .then(function(){
-                            pushFrom = packageObj.companyName;
-                            instanceId = gpsPacketDataObj.id;
-                            if(gpsPacketDataObj.batteryStatus !== "vehicle"){
-                                return GpsPacketData.find({
-                                    limit : 2,
-                                    order: ["added DESC"]
-                                })
-                            }
-                        })
-                        .then(function(gpsPacketData){
-                            if(gpsPacketData){
-                                if(gpsPacketData[1].batteryStatus === "vehicle"){
-                                    //send Notification
-                                    eventType = "GPS Status";
-                                    title = "Device has been disconnected";
-                                    var message = gpsDeviceStatusMessage(customerName, eventType, title, gpsPacketDataObj.id);
-                                    if(gpsPacketDataObj.customerId && customerInstance.gpsTrackerNotification["gpsDisconnect"] === "on"){
-                                        sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
-                                            if(error){
-                                                console.log(error);
-                                            } else{
-                                                console.log("Notification for engine status send successfully");
-                                            }
-                                        })
-                                    }
+                            if(customerIdList){
+                                if(customerIdList.length){
+                                    customerIdList.forEach(function(customerId){
+                                        if(customerId){
+                                            const Customer = databaseObj.Customer;
+                                            promises.push(function(callback){
+                                                Customer.findById(customerId)
+                                                    .then(function(customer){
+                                                        if(customer){
+                                                            console.log("customerIdList",customer.id);
+                                                            customerInstance = customer;
+                                                            customerName = customer.firstName;
+                                                            var lastName = customer.lastName? customer.lastName : "";
+                                                            customerName = customerName + " " + lastName;
+                                                            pushFrom = packageObj.companyName;
+                                                            instanceId = gpsPacketDataObj.id;
+                                                            if(gpsPacketDataObj.batteryStatus !== "vehicle"){
+                                                                return GpsPacketData.find({
+                                                                    limit : 2,
+                                                                    order: ["added DESC"]
+                                                                })
+                                                            }
+                                                        }
+                                                    })
+                                                    .then(function(gpsPacketData){
+                                                        if(gpsPacketData){
+                                                            if(gpsPacketData[1].batteryStatus === "vehicle"){
+                                                                //send Notification
+                                                                eventType = "GPS Status";
+                                                                title = "Device has been disconnected";
+                                                                var message = gpsDeviceStatusMessage(customerName, eventType, title, gpsPacketDataObj.id);
+                                                                if(customerInstance.id && customerInstance.gpsTrackerNotification["gpsDisconnect"] === "on"){
+                                                                    sendNotification(server, message, customerInstance.id, pushFrom, function(error){
+                                                                        if(error){
+                                                                            console.log(error);
+                                                                            callback(error);
+                                                                        } else{
+                                                                            console.log("Notification for engine status send successfully");
+                                                                            callback(null);
+
+                                                                        }
+                                                                    })
+                                                                }
+                                                            }
+                                                        } else{
+                                                            callback(null);
+                                                        }
+                                                    })
+                                                    .catch(function(error){
+                                                        callback(error);
+                                                    })
+                                            })
+                                        }
+                                    });
+                                    async.series(promises, function(error){
+                                        if(error){
+                                            server.logger.error(error);
+                                        } else{
+                                            server.logger.info("Notification for engine status send successfully to all customers");
+                                        }
+                                    })
                                 }
                             }
                         })
                         .catch(function(error){
-                            console.log(error);
-                        })
+                            server.logger.error(error);
+                        });
                 })
             }
             next();
@@ -448,46 +617,95 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let title;
             let pushFrom;
             let instanceId;
+            let customerIdList = [];
+            let promises = [];
             if(ctx.isNewInstance){
                 process.nextTick(function(){
-                    databaseObj.Customer.findById(gpsPacketDataObj.customerId)
-                        .then(function(customer){
-                            if(customer){
-                                customerInstance = customer;
-                                customerName = customer.firstName;
-                                var lastName = customer.lastName? customer.lastName : "";
-                                customerName = customerName + " " + lastName;
-                            }
-                        })
-                        .then(function(){
-                            pushFrom = packageObj.companyName;
-                            instanceId = gpsPacketDataObj.id;
-                            if(gpsPacketDataObj.eventType === packageObj.gps.over_speed_started){
-                                eventType = "Over Speed";
-                                title = "Over Speed Started";
-                                return GpsPacketData.find({
-                                    limit : 2,
-                                    order: ["added DESC"]
-                                })
-                            }
-                        })
-                        .then(function(gpsPacketData){
-                            if(gpsPacketData){
-                                if(gpsPacketData[1].isOverSpeedStarted === false){
-                                    //send Notification
-                                    var message = overSpeedMessageFormat(customerName, eventType, title, gpsPacketDataObj.id);
-                                    if(gpsPacketDataObj.customerId && customerInstance.gpsTrackerNotification["overSpeeding"] === "on"){
-                                        sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
-                                            if(error){
-                                                console.log(error);
-                                            } else{
-                                                console.log("Notification for Over Speed send Successfully");
+                    databaseObj.GpsTrackerInfo.find({
+                        where: {
+                            deviceIMEI : gpsPacketDataObj.deviceIMEI
+                        }
+                    })
+                        .then(function(gpsTrackerInfoList){
+                            if(gpsTrackerInfoList){
+                                if(gpsTrackerInfoList.length){
+                                    gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
+                                        if(gpsTrackerInfo){
+                                            if(gpsTrackerInfo.customerId){
+                                                customerIdList.push(gpsTrackerInfo.customerId);
                                             }
-                                        })
-                                    }
+                                        }
+                                    });
                                 }
                             }
                         })
+                        .then(function(){
+                            if(customerIdList){
+                                if(customerIdList.length){
+                                    customerIdList.forEach(function(customerId){
+                                        if(customerId){
+                                            const Customer = databaseObj.Customer;
+                                            promises.push(function(callback){
+                                                Customer.findById(customerId)
+                                                    .then(function(customer){
+                                                        if(customer){
+                                                            console.log("customerIdList",customer.id);
+                                                            customerInstance = customer;
+                                                            customerName = customer.firstName;
+                                                            var lastName = customer.lastName? customer.lastName : "";
+                                                            customerName = customerName + " " + lastName;
+                                                            pushFrom = packageObj.companyName;
+                                                            instanceId = gpsPacketDataObj.id;
+                                                            if(gpsPacketDataObj.eventType === packageObj.gps.over_speed_started){
+                                                                eventType = "Over Speed";
+                                                                title = "Over Speed Started";
+                                                                return GpsPacketData.find({
+                                                                    limit : 2,
+                                                                    order: ["added DESC"]
+                                                                })
+                                                            }
+                                                        }
+                                                    })
+                                                    .then(function(gpsPacketData){
+                                                        if(gpsPacketData){
+                                                            if(gpsPacketData[1].isOverSpeedStarted === false){
+                                                                //send Notification
+                                                                var message = overSpeedMessageFormat(customerName, eventType, title, gpsPacketDataObj.id);
+                                                                if(customerInstance.id && customerInstance.gpsTrackerNotification["overSpeeding"] === "on"){
+                                                                    sendNotification(server, message, customerInstance.id, pushFrom, function(error){
+                                                                        if(error){
+                                                                            console.log(error);
+                                                                            callback(error);
+                                                                        } else{
+                                                                            console.log("Notification for Over Speed send Successfully");
+                                                                            callback(null);
+                                                                        }
+                                                                    })
+                                                                }
+                                                            }
+                                                        } else{
+                                                            callback(null);
+                                                        }
+                                                    })
+                                                    .catch(function(error){
+                                                        callback(error);
+                                                    })
+                                            })
+                                        }
+                                    });
+                                    async.series(promises, function(error){
+                                        if(error){
+                                            server.logger.error(error);
+                                        } else{
+                                            server.logger.info("Notification for Over Speed send Successfully to all Customers");
+                                        }
+                                    })
+                                }
+                            }
+                        })
+                        .catch(function(error){
+                            server.logger.error(error);
+                        });
                 })
             }
             next();
@@ -505,49 +723,99 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let title;
             let pushFrom;
             let instanceId;
+            let customerIdList = [];
+            let promises = [];
             if(ctx.isNewInstance){
                 process.nextTick(function(){
-                    databaseObj.Customer.findById(gpsPacketDataObj.customerId)
-                        .then(function(customer){
-                            if(customer){
-                                customerInstance = customer;
-                                customerName = customer.firstName;
-                                var lastName = customer.lastName? customer.lastName : "";
-                                customerName = customerName + " " + lastName;
+                    databaseObj.GpsTrackerInfo.find({
+                        where: {
+                            deviceIMEI : gpsPacketDataObj.deviceIMEI
+                        }
+                    })
+                        .then(function(gpsTrackerInfoList){
+                            if(gpsTrackerInfoList){
+                                if(gpsTrackerInfoList.length){
+                                    gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
+                                        if(gpsTrackerInfo){
+                                            if(gpsTrackerInfo.customerId){
+                                                customerIdList.push(gpsTrackerInfo.customerId);
+                                            }
+                                        }
+                                    });
+                                }
                             }
                         })
                         .then(function(){
-                            pushFrom = packageObj.companyName;
-                            instanceId = gpsPacketDataObj.id;
-                            if(gpsPacketDataObj.ignitionStatus === "off" && gpsPacketDataObj.speed > 0){
-                                return GpsPacketData.find({
-                                    limit:2,
-                                    order: ["added DESC"]
-                                })
-                            }
-                        })
-                        .then(function(gpsPacketDataList){
-                            if(gpsPacketDataList){
-                                if(gpsPacketDataList.length){
-                                    if(gpsPacketData[1].speed === 0){
-                                        //send Notification
-                                        title = "Your Vehicle is suspected to be towed";
-                                        eventType = "Vehicle Towed";
-                                        var message = vehicleTowingMessageFormat(customerName, eventType, title, gpsPacketDataObj.id);
-                                        if(gpsPacketDataObj.customerId && customerInstance.gpsTrackerNotification["vehicleTowing"] === "on"){
-                                            sendNotification(server, message, gpsPacketDataObj.customerId, pushFrom, function(error){
-                                                if(error){
-                                                    console.log(error);
-                                                } else{
-                                                    console.log("Car Towing Notification send Successfully");
-                                                }
+                            if(customerIdList){
+                                if(customerIdList.length){
+                                    customerIdList.forEach(function(customerId){
+                                        if(customerId){
+                                            const Customer = databaseObj.Customer;
+                                            promises.push(function(callback){
+                                                Customer.findById(customerId)
+                                                    .then(function(customer){
+                                                        if(customer){
+                                                            console.log("customerIdList",customer.id);
+                                                            customerInstance = customer;
+                                                            customerName = customer.firstName;
+                                                            var lastName = customer.lastName? customer.lastName : "";
+                                                            customerName = customerName + " " + lastName;
+                                                            pushFrom = packageObj.companyName;
+                                                            instanceId = gpsPacketDataObj.id;
+                                                            if(gpsPacketDataObj.ignitionStatus === "off" && gpsPacketDataObj.speed > 0){
+                                                                return GpsPacketData.find({
+                                                                    limit:2,
+                                                                    order: ["added DESC"]
+                                                                })
+                                                            }
+                                                        }
+                                                    })
+                                                    .then(function(gpsPacketDataList){
+                                                        if(gpsPacketDataList){
+                                                            if(gpsPacketDataList.length){
+                                                                if(gpsPacketData[1].speed === 0){
+                                                                    //send Notification
+                                                                    title = "Your Vehicle is suspected to be towed";
+                                                                    eventType = "Vehicle Towed";
+                                                                    var message = vehicleTowingMessageFormat(customerName, eventType, title, gpsPacketDataObj.id);
+                                                                    if(customerInstance.id && customerInstance.gpsTrackerNotification["vehicleTowing"] === "on"){
+                                                                        sendNotification(server, message, customerInstance.id, pushFrom, function(error){
+                                                                            if(error){
+                                                                               server.logger.error(error);
+                                                                                callback(error);
+                                                                            } else{
+                                                                                server.logger.info("Car Towing Notification send Successfully");
+                                                                                callback(null);
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                }
+                                                            }
+
+                                                        } else{
+                                                            callback(null);
+                                                        }
+                                                    })
+                                                    .catch(function(error){
+                                                        callback(error);
+                                                    })
                                             })
                                         }
-                                    }
-                                }
+                                    });
 
+                                    async.series(promises, function(error){
+                                        if(error){
+                                            server.logger.error(error);
+                                        } else{
+                                            server.logger.info("Car Towing Notification send Successfully to all customers");
+                                        }
+                                    })
+                                }
                             }
                         })
+                        .catch(function(error){
+                            server.logger.error(error);
+                        });
                 })
             }
             next();
