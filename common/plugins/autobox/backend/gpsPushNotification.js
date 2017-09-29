@@ -79,11 +79,11 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 if(customerIdList.length){
                                     customerIdList.forEach(function(customerId){
                                         if(customerId){
-                                            console.log("customerIdList",customerId);
                                            promises.push(function(callback){
                                                databaseObj.Customer.findById(customerId)
                                                    .then(function(customer){
                                                        if(customer){
+                                                           console.log("customerIdList",customer.id);
                                                            customerName = customer.firstName;
                                                            var lastName = customer.lastName? customer.lastName : "";
                                                            customerName = customerName + " " + lastName;
@@ -92,9 +92,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                            eventType = "Default Packet";
                                                            title = "Default Test Packet Arrived";
                                                            const message = brakeAccelerationMessageFormat(customerName, eventType, title, instanceId);
-                                                           if(customerId){
-                                                               console.log("Notification customer Id",customerId + " " + customerName);
-                                                               sendNotification(server, message, customerId, pushFrom, function(error){
+                                                           if(customer.id){
+                                                               console.log("Notification customer Id",customer.id + " " + customerName);
+                                                               sendNotification(server, message, customer.id, pushFrom, function(error){
                                                                    if(error){
                                                                        console.log(error);
                                                                        callback(error);
