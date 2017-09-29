@@ -77,6 +77,24 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     const createGpsPacketData = function(gpsPacketDataObj, callback){
         const GpsPacketData = databaseObj.GpsPacketData;
+        if(!gpsPacketDataObj){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            GpsPacketData.create(gpsPacketDataObj)
+                .then(function(gpsPacketData){
+                    if(gpsPacketData){
+                        callback(null, {response: "success"});
+                        console.log("Notification send Successfully");
+                    }
+                })
+                .catch(function(error){
+                    callback(error);
+                    console.log("Error in creating Notification", error);
+                });
+        }
+    };
+  /*  const createGpsPacketData = function(gpsPacketDataObj, callback){
+        const GpsPacketData = databaseObj.GpsPacketData;
         const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
         let resultGpsPacketData;
         resultGpsPacketData = gpsPacketDataObj;
@@ -150,6 +168,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                callback(error);
                             } else{
                                 callback(null, {response: "success"});
+                                console.log("Notification send Successfully");
                             }
                         });
                     }
@@ -159,7 +178,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 callback(error);
             });
 
-    };
+    };*/
 
    const saveGpsTrackerInfo = function(ctx, gpsTrackerInfoObj, callback){
      const request = ctx.req;

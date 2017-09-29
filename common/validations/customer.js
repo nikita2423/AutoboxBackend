@@ -52,6 +52,24 @@ module.exports = ( Customer, server, helper) => {
             }
         }
 
+        if(!instance.notificationSettings){
+            instance.notificationSettings = {
+                offerNotification: "on"
+            };
+        }
+
+        if(!instance.gpsTrackerNotification){
+            instance.gpsTrackerNotification = {
+                hardBraking : "on",
+                hardAcceleration : "on",
+                gpsDisconnect : "on",
+                vehicleTowing : "on",
+                accidentDetection : "on",
+                engineOn : "on",
+                engineOff : "on"
+            };
+        }
+
 
        /* if(instance.email){
             instance.email = trim(instance.email);
