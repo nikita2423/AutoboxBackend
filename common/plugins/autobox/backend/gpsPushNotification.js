@@ -52,7 +52,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let eventType;
             let title;
             let customerIdList = [];
-            let promises = [];
+            var promises = [];
             if(ctx.isNewInstance){
                 process.nextTick(function(){
                     //console.log("customerId", gpsPacketDataObj.customerId);
@@ -79,8 +79,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 if(customerIdList.length){
                                     customerIdList.forEach(function(customerId){
                                         if(customerId){
+                                            const Customer = databaseObj.Customer;
                                            promises.push(function(callback){
-                                               databaseObj.Customer.findById(customerId)
+                                               Customer.findById(customerId)
                                                    .then(function(customer){
                                                        if(customer){
                                                            console.log("customerIdList",customer.id);
@@ -104,6 +105,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                    }
                                                                });
                                                            }
+                                                       } else{
+                                                           callback(null);
                                                        }
                                                    })
                                                    .catch(function(error){
