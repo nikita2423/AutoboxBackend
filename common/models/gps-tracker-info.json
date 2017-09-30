@@ -25,6 +25,10 @@
       "type": "string",
       "required": true
     },
+    "status": {
+      "type": "string",
+      "default": "active"
+    },
     "added": {
       "type": "date",
       "required": true,

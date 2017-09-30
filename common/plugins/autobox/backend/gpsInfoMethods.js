@@ -10,6 +10,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         createGpsPacketDataMethod();
         createGpsTrackerInfoMethod();
         findAllGpsInfoMethod();
+        deleteGpsInfoMethod();
     };
 
     const createGpsPacketDataMethod = function(){
@@ -73,6 +74,28 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
         });
     };
+
+    const deleteGpsInfoMethod = function(){
+        const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+        GpsTrackerInfo.deleteGpsInfo = deleteGpsInfo;
+        GpsTrackerInfo.remoteMethod('deleteGpsInfo', {
+            accepts:[
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "gpsInfoId", type: "string"
+                }
+            ],
+            returns: {
+                arg: "response", type: "object", root: true
+            }
+        });
+    }
 
 
     const createGpsPacketData = function(gpsPacketDataObj, callback){
@@ -282,7 +305,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                    GpsTrackerInfo.find({
                        limit : limit,
                        where: {
-                           customerId : customerId
+                           customerId : customerId,
+                           status: "active"
                        }
                    })
                        .then(function(gpsTrackerInfoList){
@@ -305,8 +329,39 @@ module.exports = function( server, databaseObj, helper, packageObj) {
        }
    };
 
+   const deleteGpsInfo = function(ctx, gpsInfoId, callback){
+       const request = ctx.req;
+       if(!gpsInfoId){
+           callback(new Error("Invalid Arguments"));
+       } else{
+           if(request.accessToken){
+               if(request.accessToken.userId){
+                   const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+                   GpsTrackerInfo.findById(gpsInfoId)
+                       .then(function(gpsTrackerInfo){
+                           if(gpsTrackerInfo){
+                               return gpsTrackerInfo.updateAttributes("status", "inactive");
+                           }
+                       })
+                       .then(function(gpsTrackerInfo){
+                           if(gpsTrackerInfo){
+                               callback(null, {response:"success"});
+                           }
+                       })
+                       .catch(function(error){
+                           callback(error);
+                       });
+               } else{
+                   callback(new Error("User not valid"));
+               }
+           } else{
+               callback(new Error("User not valid"));
+           }
+       }
+   };
+
 
     return {
         init: init
     };
-}
+};
