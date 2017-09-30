@@ -15,8 +15,7 @@
         "name": "snaphy-error",
         "fileName": "snaphy-error.log"
       }
-    },
-    "handleException":"snaphy-exceptions.log"
+    }
   },
   "pluginDependencies": {}
 }
