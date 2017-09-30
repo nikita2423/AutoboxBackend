@@ -124,7 +124,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                            if(customerQuoteObj.quoteType === "q"){
                                title = "Your Quote for model " + customerQuoteObj.vehicleInfo.vehicleModel + " has been forwarded to dealers. You can view all the quotes with corresponding dealers on My Quotes Section";
                            } else if(customerQuoteObj.quoteType === "t"){
-                               title = "Your Test Drive from " + customerQuoteObj.vehicleInfo.vehicleModel + " has been forwarded to the nearest authorised dealership";
+                               title = "Your Test Drive for " + customerQuoteObj.vehicleInfo.vehicleModel + " has been forwarded to the nearest authorised dealership";
                            }
                            var id = customerQuoteObj.id;
                            var from = packageObj.companyName;
