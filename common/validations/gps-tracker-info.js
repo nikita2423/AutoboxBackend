@@ -18,6 +18,9 @@ module.exports = function(Gpstrackerinfo, server, helper) {
         if(!validate(instance, currentInstance, "customerId")){
             return next(new Error("Customer is required"));
         }
+        if(!instance.status){
+            instance.status = "active";
+        }
 
         next();
 

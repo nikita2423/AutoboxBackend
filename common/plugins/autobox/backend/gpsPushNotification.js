@@ -9,7 +9,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const process = require("process");
 
     var init = function(){
-        gpsTestNotification();
+        //gpsTestNotification();
         setGpsNotificationStatusMethod();
         sendHardBrakingAccelerationNotification();
         sendGpsBatteryLowNotification();
@@ -187,7 +187,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
                     databaseObj.GpsTrackerInfo.find({
                         where: {
-                            deviceIMEI : gpsPacketDataObj.deviceIMEI
+                            deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                            status :"active"
                         }
                     })
                         .then(function(gpsTrackerInfoList){
@@ -300,7 +301,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 process.nextTick(function(){
                     databaseObj.GpsTrackerInfo.find({
                         where: {
-                            deviceIMEI : gpsPacketDataObj.deviceIMEI
+                            deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                            status : "active"
                         }
                     })
                         .then(function(gpsTrackerInfoList){
@@ -516,7 +518,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 process.nextTick(function(){
                     databaseObj.GpsTrackerInfo.find({
                         where: {
-                            deviceIMEI : gpsPacketDataObj.deviceIMEI
+                            deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                            status : "active"
                         }
                     })
                         .then(function(gpsTrackerInfoList){
@@ -623,7 +626,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 process.nextTick(function(){
                     databaseObj.GpsTrackerInfo.find({
                         where: {
-                            deviceIMEI : gpsPacketDataObj.deviceIMEI
+                            deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                            status : "active"
                         }
                     })
                         .then(function(gpsTrackerInfoList){
@@ -729,7 +733,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 process.nextTick(function(){
                     databaseObj.GpsTrackerInfo.find({
                         where: {
-                            deviceIMEI : gpsPacketDataObj.deviceIMEI
+                            deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                            status : "active"
                         }
                     })
                         .then(function(gpsTrackerInfoList){

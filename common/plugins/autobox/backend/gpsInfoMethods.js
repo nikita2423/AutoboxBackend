@@ -340,7 +340,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                    GpsTrackerInfo.findById(gpsInfoId)
                        .then(function(gpsTrackerInfo){
                            if(gpsTrackerInfo){
-                               return gpsTrackerInfo.updateAttributes("status", "inactive");
+                               return gpsTrackerInfo.updateAttribute("status", "inactive");
                            }
                        })
                        .then(function(gpsTrackerInfo){
