@@ -14,6 +14,16 @@
         "templateOptions": {
           "label": "Quote Type",
           "id": "quotetype",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "Dealer"
+              ]
+            }
+          },
           "priority": 6,
           "options": [
             "q",
@@ -31,6 +41,16 @@
           "label": "OwnershipType",
           "id": "ownershipType",
           "priority": 6,
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "Dealer"
+              ]
+            }
+          },
           "options": [
             "individual",
             "corporate"
@@ -48,6 +68,16 @@
           "label": "Finance",
           "id": "isFinance",
           "priority": 6,
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "Dealer"
+              ]
+            }
+          },
           "options": [
             "yes",
             "no"
@@ -64,6 +94,16 @@
           "label": "Insurance",
           "id": "isInsurance",
           "priority": 6,
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "Dealer"
+              ]
+            }
+          },
           "options": [
             "yes",
             "no"
@@ -81,6 +121,16 @@
           "label": "Trade In",
           "id": "tradeIn",
           "priority": 6,
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "Dealer"
+              ]
+            }
+          },
           "options": [
             "yes",
             "no"
@@ -122,6 +172,16 @@
           "label": "GPS Tracker",
           "id": "gpsTracker",
           "priority": 6,
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "Dealer"
+              ]
+            }
+          },
           "options": [
             "yes",
             "no"
@@ -139,6 +199,16 @@
           "label": "Dash Camera",
           "id": "dashCamera",
           "priority": 6,
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "Dealer"
+              ]
+            }
+          },
           "options": [
             "yes",
             "no"
@@ -156,6 +226,16 @@
           "label": "Test Drive",
           "id": "testDrive",
           "priority": 6,
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "Dealer"
+              ]
+            }
+          },
           "options": [
             "yes",
             "no"
@@ -171,6 +251,16 @@
         "templateOptions": {
           "type": "text",
           "priority": 3,
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "Dealer"
+              ]
+            }
+          },
           "label": "Enter Quote Number",
           "id": "quoteNumber"
         }

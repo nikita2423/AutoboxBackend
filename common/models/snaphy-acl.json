@@ -8,11 +8,11 @@
   "properties": {
     "added": {
       "type": "date",
-      "default": "now"
+      "defaultFn": "now"
     },
     "updated": {
       "type": "date",
-      "default": "now"
+      "defaultFn": "now"
     },
     "model": {
       "type": "string",
@@ -25,18 +25,7 @@
           "priority": 10,
           "id": "read_permission_snaphy",
           "options": [
-            "Employee",
-            "Retailer",
-            "QrCode",
-            "QrCodeGroup",
-            "Department",
-            "Product",
-            "Category",
-            "SubCategory1",
-            "SubCategory2",
-            "RetailerTransaction",
-            "City",
-            "ContactUs",
+            "CustomerQuote",
             "SnaphyAcl"
           ]
         }
@@ -113,8 +102,7 @@
           "id": "role_permission_snaphy",
           "options": [
             "Admin",
-            "DepartmentEmployee",
-            "DepartmentAdmin"
+            "Dealer"
           ]
         }
       }

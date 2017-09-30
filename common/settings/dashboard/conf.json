@@ -37,7 +37,8 @@
     "Sos",
     "Trim",
     "VehicleDetail",
-    "Workshop"
+    "Workshop",
+    "SnaphyAcl"
   ],
   "services": {},
   "pluginDependencies": {
