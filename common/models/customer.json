@@ -265,6 +265,11 @@
       "type": "belongsTo",
       "model": "Workshop",
       "foreignKey": ""
+    },
+    "bus": {
+      "type": "belongsTo",
+      "model": "Bus",
+      "foreignKey": ""
     }
   },
   "acls": [

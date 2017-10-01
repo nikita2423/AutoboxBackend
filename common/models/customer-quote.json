@@ -373,12 +373,16 @@
         "id": "registercity",
         "hide": false,
         "label": "Add Register City",
-        "acl":{
-          "allow":[],
-          "reject": ["Dealer"],
-          "relations":{
-            "allow":[],
-            "reject": ["Dealer"]
+        "acl": {
+          "allow": [],
+          "reject": [
+            "Dealer"
+          ],
+          "relations": {
+            "allow": [],
+            "reject": [
+              "Dealer"
+            ]
           }
         }
       }

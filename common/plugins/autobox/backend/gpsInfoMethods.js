@@ -11,6 +11,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         createGpsTrackerInfoMethod();
         findAllGpsInfoMethod();
         deleteGpsInfoMethod();
+        fetchGpsInfoDetailsMethod();
     };
 
     const createGpsPacketDataMethod = function(){
@@ -95,7 +96,29 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 arg: "response", type: "object", root: true
             }
         });
-    }
+    };
+
+    const fetchGpsInfoDetailsMethod = function(){
+        const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+        GpsTrackerInfo.fetchGpsInfoDetail = fetchGpsInfoDetail;
+        GpsTrackerInfo.remoteMethod('fetchGpsInfoDetail', {
+            accepts : [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: 'deviceIMEI', type: "string"
+                }
+            ],
+            returns: {
+                arg: "gpsTrackerInfoObj", type: "object", root : true
+            }
+        });
+    };
 
 
     const createGpsPacketData = function(gpsPacketDataObj, callback){
@@ -358,6 +381,27 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                callback(new Error("User not valid"));
            }
        }
+   };
+
+   const fetchGpsInfoDetail = function(ctx, deviceIMEI, callback){
+     const request = ctx.req;
+     if(!deviceIMEI){
+         callback(new Error("Invalid Arguments"));
+     } else{
+         if(request.accessToken){
+             if(request.accessToken.userId){
+                 const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+                 GpsTrackerInfo.findOne({
+                     where: {
+                         deviceIMEI : deviceIMEI
+                     }
+                 })
+                     .then(function(gpsTrackerInfo){
+
+                     })
+             }
+         }
+     }
    };
 
 

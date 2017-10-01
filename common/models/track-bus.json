@@ -1,0 +1,73 @@
+{
+  "name": "TrackBus",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "gpsCode": {
+      "type": "string",
+      "required": true
+    },
+    "homeLocation": {
+      "type": "geopoint",
+      "required": true,
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "type": "input",
+              "key": "lat",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter latitude",
+                "id": "latitude"
+              }
+            },
+            {
+              "type": "input",
+              "key": "lng",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter longitude",
+                "id": "longitude"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "vicinity": {
+      "type": "number"
+    },
+    "added": {
+      "type": "date",
+      "required": false,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "updated": {
+      "type": "date",
+      "defaultFn": "now"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    },
+    "bus": {
+      "type": "belongsTo",
+      "model": "Bus",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
