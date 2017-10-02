@@ -1023,80 +1023,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.User#getDetailSchema
-             * @methodOf lbServices.User
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Users/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.User#getModelRelationSchema
-             * @methodOf lbServices.User
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Users/getModelRelationSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
              * @name lbServices.User#getCurrent
              * @methodOf lbServices.User
              *
@@ -1898,80 +1824,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            /**
-             * @ngdoc method
-             * @name lbServices.RoleMapping#getDetailSchema
-             * @methodOf lbServices.RoleMapping
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/RoleMappings/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.RoleMapping#getModelRelationSchema
-             * @methodOf lbServices.RoleMapping
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/RoleMappings/getModelRelationSchema",
-              method: "POST",
-            },
-
             // INTERNAL. Use Role.principals.findById() instead.
             "::findById::Role::principals": {
               params: {
@@ -2478,80 +2330,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/Roles/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Role#getDetailSchema
-             * @methodOf lbServices.Role
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Roles/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Role#getModelRelationSchema
-             * @methodOf lbServices.Role
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Roles/getModelRelationSchema",
               method: "POST",
             },
 
@@ -3441,80 +3219,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/CompanyInfos/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.CompanyInfo#getDetailSchema
-             * @methodOf lbServices.CompanyInfo
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/CompanyInfos/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.CompanyInfo#getModelRelationSchema
-             * @methodOf lbServices.CompanyInfo
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/CompanyInfos/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -4730,80 +4434,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.Employee#getDetailSchema
-             * @methodOf lbServices.Employee
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Employees/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Employee#getModelRelationSchema
-             * @methodOf lbServices.Employee
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Employees/getModelRelationSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
              * @name lbServices.Employee#getCurrent
              * @methodOf lbServices.Employee
              *
@@ -5598,80 +5228,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/FacebookAccessTokens/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.FacebookAccessToken#getDetailSchema
-             * @methodOf lbServices.FacebookAccessToken
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/FacebookAccessTokens/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.FacebookAccessToken#getModelRelationSchema
-             * @methodOf lbServices.FacebookAccessToken
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/FacebookAccessTokens/getModelRelationSchema",
               method: "POST",
             },
 
@@ -7227,80 +6783,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.Customer#getDetailSchema
-             * @methodOf lbServices.Customer
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Customers/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Customer#getModelRelationSchema
-             * @methodOf lbServices.Customer
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Customers/getModelRelationSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
              * @name lbServices.Customer#loginWithGoogle
              * @methodOf lbServices.Customer
              *
@@ -8766,122 +8248,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/AmazonImages/save",
               method: "POST",
             },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AmazonImage#getDetailSchema
-             * @methodOf lbServices.AmazonImage
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/AmazonImages/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AmazonImage#getModelRelationSchema
-             * @methodOf lbServices.AmazonImage
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/AmazonImages/getModelRelationSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AmazonImage#getUrl
-             * @methodOf lbServices.AmazonImage
-             *
-             * @description
-             *
-             * Get download url for the file. Also generates signed url automatically if provided.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `container` – `{string=}` -
-             *
-             *  - `file` – `{string=}` -
-             *
-             *  - `options` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * <em>
-             * (The remote method definition does not provide any description.
-             * This usually means the response is a `AmazonImage` object.)
-             * </em>
-             */
-            "getUrl": {
-              url: urlBase + "/AmazonImages/getUrl",
-              method: "POST",
-            },
           }
         );
 
@@ -9576,80 +8942,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/adminEmails/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#getDetailSchema
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/adminEmails/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#getModelRelationSchema
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/adminEmails/getModelRelationSchema",
               method: "POST",
             },
 
@@ -10388,80 +9680,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/containers/save",
               method: "POST",
             },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Container#getDetailSchema
-             * @methodOf lbServices.Container
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/containers/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Container#getModelRelationSchema
-             * @methodOf lbServices.Container
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/containers/getModelRelationSchema",
-              method: "POST",
-            },
           }
         );
 
@@ -11042,80 +10260,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/applications/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Application#getDetailSchema
-             * @methodOf lbServices.Application
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/applications/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Application#getModelRelationSchema
-             * @methodOf lbServices.Application
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/applications/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -11736,80 +10880,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/ImportData/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.ImportData#getDetailSchema
-             * @methodOf lbServices.ImportData
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/ImportData/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.ImportData#getModelRelationSchema
-             * @methodOf lbServices.ImportData
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/ImportData/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -12499,80 +11569,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/installations/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Installation#getDetailSchema
-             * @methodOf lbServices.Installation
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/installations/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Installation#getModelRelationSchema
-             * @methodOf lbServices.Installation
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/installations/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -13283,80 +12279,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/notifications/save",
               method: "POST",
             },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Notification#getDetailSchema
-             * @methodOf lbServices.Notification
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/notifications/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Notification#getModelRelationSchema
-             * @methodOf lbServices.Notification
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/notifications/getModelRelationSchema",
-              method: "POST",
-            },
           }
         );
 
@@ -13678,80 +12600,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/Push/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Push#getDetailSchema
-             * @methodOf lbServices.Push
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Push/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Push#getModelRelationSchema
-             * @methodOf lbServices.Push
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Push/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -14334,80 +13182,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/Countries/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Country#getDetailSchema
-             * @methodOf lbServices.Country
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Countries/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Country#getModelRelationSchema
-             * @methodOf lbServices.Country
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Countries/getModelRelationSchema",
               method: "POST",
             },
 
@@ -15140,80 +13914,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/Cities/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.City#getDetailSchema
-             * @methodOf lbServices.City
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Cities/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.City#getModelRelationSchema
-             * @methodOf lbServices.City
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Cities/getModelRelationSchema",
               method: "POST",
             },
 
@@ -16113,80 +14813,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            /**
-             * @ngdoc method
-             * @name lbServices.Brand#getDetailSchema
-             * @methodOf lbServices.Brand
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Brands/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Brand#getModelRelationSchema
-             * @methodOf lbServices.Brand
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Brands/getModelRelationSchema",
-              method: "POST",
-            },
-
             // INTERNAL. Use CarModel.brand() instead.
             "::get::CarModel::brand": {
               url: urlBase + "/CarModels/:id/brand",
@@ -17027,80 +15653,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            /**
-             * @ngdoc method
-             * @name lbServices.CarModel#getDetailSchema
-             * @methodOf lbServices.CarModel
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/CarModels/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.CarModel#getModelRelationSchema
-             * @methodOf lbServices.CarModel
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/CarModels/getModelRelationSchema",
-              method: "POST",
-            },
-
             // INTERNAL. Use Fuel.carModel() instead.
             "::get::Fuel::carModel": {
               url: urlBase + "/Fuel/:id/carModel",
@@ -17902,80 +16454,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/Fuel/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Fuel#getDetailSchema
-             * @methodOf lbServices.Fuel
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Fuel/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Fuel#getModelRelationSchema
-             * @methodOf lbServices.Fuel
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Fuel/getModelRelationSchema",
               method: "POST",
             },
 
@@ -18810,80 +17288,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/Trims/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Trim#getDetailSchema
-             * @methodOf lbServices.Trim
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Trims/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Trim#getModelRelationSchema
-             * @methodOf lbServices.Trim
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Trims/getModelRelationSchema",
               method: "POST",
             },
 
@@ -19784,80 +18188,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/GearBoxes/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.GearBox#getDetailSchema
-             * @methodOf lbServices.GearBox
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/GearBoxes/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.GearBox#getModelRelationSchema
-             * @methodOf lbServices.GearBox
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/GearBoxes/getModelRelationSchema",
               method: "POST",
             },
 
@@ -20857,80 +19187,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "__disconnect__cars": {
               url: urlBase + "/Colors/__disconnect__cars",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Color#getDetailSchema
-             * @methodOf lbServices.Color
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Colors/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Color#getModelRelationSchema
-             * @methodOf lbServices.Color
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Colors/getModelRelationSchema",
               method: "POST",
             },
 
@@ -22503,80 +20759,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            /**
-             * @ngdoc method
-             * @name lbServices.Car#getDetailSchema
-             * @methodOf lbServices.Car
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Cars/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Car#getModelRelationSchema
-             * @methodOf lbServices.Car
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Cars/getModelRelationSchema",
-              method: "POST",
-            },
-
             // INTERNAL. Use Color.cars.findById() instead.
             "::findById::Color::cars": {
               params: {
@@ -24013,80 +22195,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            /**
-             * @ngdoc method
-             * @name lbServices.BreakdownCategory#getDetailSchema
-             * @methodOf lbServices.BreakdownCategory
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/BreakdownCategories/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.BreakdownCategory#getModelRelationSchema
-             * @methodOf lbServices.BreakdownCategory
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/BreakdownCategories/getModelRelationSchema",
-              method: "POST",
-            },
-
             // INTERNAL. Use Breakdown.breakdownCategory() instead.
             "::get::Breakdown::breakdownCategory": {
               url: urlBase + "/Breakdowns/:id/breakdownCategory",
@@ -25171,80 +23279,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            /**
-             * @ngdoc method
-             * @name lbServices.Breakdown#getDetailSchema
-             * @methodOf lbServices.Breakdown
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Breakdowns/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Breakdown#getModelRelationSchema
-             * @methodOf lbServices.Breakdown
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Breakdowns/getModelRelationSchema",
-              method: "POST",
-            },
-
             // INTERNAL. Use BreakdownCategory.breakdowns.findById() instead.
             "::findById::BreakdownCategory::breakdowns": {
               params: {
@@ -26156,80 +24190,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            /**
-             * @ngdoc method
-             * @name lbServices.EmergencyCategory#getDetailSchema
-             * @methodOf lbServices.EmergencyCategory
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/EmergencyCategories/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.EmergencyCategory#getModelRelationSchema
-             * @methodOf lbServices.EmergencyCategory
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/EmergencyCategories/getModelRelationSchema",
-              method: "POST",
-            },
-
             // INTERNAL. Use Emergency.emergencyCategory() instead.
             "::get::Emergency::emergencyCategory": {
               url: urlBase + "/Emergencies/:id/emergencyCategory",
@@ -27004,80 +24964,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/Emergencies/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Emergency#getDetailSchema
-             * @methodOf lbServices.Emergency
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Emergencies/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Emergency#getModelRelationSchema
-             * @methodOf lbServices.Emergency
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Emergencies/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -28188,80 +26074,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            /**
-             * @ngdoc method
-             * @name lbServices.VehicleDetail#getDetailSchema
-             * @methodOf lbServices.VehicleDetail
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/VehicleDetails/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.VehicleDetail#getModelRelationSchema
-             * @methodOf lbServices.VehicleDetail
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/VehicleDetails/getModelRelationSchema",
-              method: "POST",
-            },
-
             // INTERNAL. Use ServiceBooking.vehicleDetail() instead.
             "::get::ServiceBooking::vehicleDetail": {
               url: urlBase + "/ServiceBookings/:id/vehicleDetail",
@@ -29277,80 +27089,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/CustomerMessages/save",
               method: "POST",
             },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.CustomerMessage#getDetailSchema
-             * @methodOf lbServices.CustomerMessage
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/CustomerMessages/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.CustomerMessage#getModelRelationSchema
-             * @methodOf lbServices.CustomerMessage
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/CustomerMessages/getModelRelationSchema",
-              method: "POST",
-            },
           }
         );
 
@@ -30279,80 +28017,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/Workshops/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Workshop#getDetailSchema
-             * @methodOf lbServices.Workshop
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Workshops/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Workshop#getModelRelationSchema
-             * @methodOf lbServices.Workshop
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Workshops/getModelRelationSchema",
               method: "POST",
             },
 
@@ -31303,80 +28967,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/Showrooms/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Showroom#getDetailSchema
-             * @methodOf lbServices.Showroom
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Showrooms/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Showroom#getModelRelationSchema
-             * @methodOf lbServices.Showroom
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Showrooms/getModelRelationSchema",
               method: "POST",
             },
 
@@ -32835,80 +30425,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            /**
-             * @ngdoc method
-             * @name lbServices.Dealer#getDetailSchema
-             * @methodOf lbServices.Dealer
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Dealers/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Dealer#getModelRelationSchema
-             * @methodOf lbServices.Dealer
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Dealers/getModelRelationSchema",
-              method: "POST",
-            },
-
             // INTERNAL. Use CustomerMessage.dealer() instead.
             "::get::CustomerMessage::dealer": {
               url: urlBase + "/CustomerMessages/:id/dealer",
@@ -34017,80 +31533,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/ServiceBookings/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.ServiceBooking#getDetailSchema
-             * @methodOf lbServices.ServiceBooking
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/ServiceBookings/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.ServiceBooking#getModelRelationSchema
-             * @methodOf lbServices.ServiceBooking
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/ServiceBookings/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -35203,80 +32645,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            /**
-             * @ngdoc method
-             * @name lbServices.CustomerQuote#getDetailSchema
-             * @methodOf lbServices.CustomerQuote
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/CustomerQuotes/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.CustomerQuote#getModelRelationSchema
-             * @methodOf lbServices.CustomerQuote
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/CustomerQuotes/getModelRelationSchema",
-              method: "POST",
-            },
-
             // INTERNAL. Use CustomerMessage.customerQuote() instead.
             "::get::CustomerMessage::customerQuote": {
               url: urlBase + "/CustomerMessages/:id/customerQuote",
@@ -36353,80 +33721,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/QuoteReplies/save",
               method: "POST",
             },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.QuoteReply#getDetailSchema
-             * @methodOf lbServices.QuoteReply
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/QuoteReplies/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.QuoteReply#getModelRelationSchema
-             * @methodOf lbServices.QuoteReply
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/QuoteReplies/getModelRelationSchema",
-              method: "POST",
-            },
           }
         );
 
@@ -37265,80 +34559,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/Feedbacks/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Feedback#getDetailSchema
-             * @methodOf lbServices.Feedback
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Feedbacks/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Feedback#getModelRelationSchema
-             * @methodOf lbServices.Feedback
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Feedbacks/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -38201,80 +35421,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            /**
-             * @ngdoc method
-             * @name lbServices.ServiceType#getDetailSchema
-             * @methodOf lbServices.ServiceType
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/ServiceTypes/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.ServiceType#getModelRelationSchema
-             * @methodOf lbServices.ServiceType
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/ServiceTypes/getModelRelationSchema",
-              method: "POST",
-            },
-
             // INTERNAL. Use ServiceBooking.serviceType() instead.
             "::get::ServiceBooking::serviceType": {
               url: urlBase + "/ServiceBookings/:id/serviceType",
@@ -39004,80 +36150,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/Areas/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Area#getDetailSchema
-             * @methodOf lbServices.Area
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Areas/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Area#getModelRelationSchema
-             * @methodOf lbServices.Area
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Areas/getModelRelationSchema",
               method: "POST",
             },
 
@@ -39936,80 +37008,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/OldTradeCars/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.OldTradeCar#getDetailSchema
-             * @methodOf lbServices.OldTradeCar
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/OldTradeCars/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.OldTradeCar#getModelRelationSchema
-             * @methodOf lbServices.OldTradeCar
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/OldTradeCars/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -40968,80 +37966,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            /**
-             * @ngdoc method
-             * @name lbServices.Offer#getDetailSchema
-             * @methodOf lbServices.Offer
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Offers/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Offer#getModelRelationSchema
-             * @methodOf lbServices.Offer
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Offers/getModelRelationSchema",
-              method: "POST",
-            },
-
             // INTERNAL. Use CustomerOffer.offer() instead.
             "::get::CustomerOffer::offer": {
               url: urlBase + "/CustomerOffers/:id/offer",
@@ -41905,80 +38829,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/Banks/save",
               method: "POST",
             },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Bank#getDetailSchema
-             * @methodOf lbServices.Bank
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Banks/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Bank#getModelRelationSchema
-             * @methodOf lbServices.Bank
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Banks/getModelRelationSchema",
-              method: "POST",
-            },
           }
         );
 
@@ -42829,80 +39679,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/ServiceHistories/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.ServiceHistory#getDetailSchema
-             * @methodOf lbServices.ServiceHistory
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/ServiceHistories/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.ServiceHistory#getModelRelationSchema
-             * @methodOf lbServices.ServiceHistory
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/ServiceHistories/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -43797,80 +40573,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/VehicleInfos/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.VehicleInfo#getDetailSchema
-             * @methodOf lbServices.VehicleInfo
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/VehicleInfos/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.VehicleInfo#getModelRelationSchema
-             * @methodOf lbServices.VehicleInfo
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/VehicleInfos/getModelRelationSchema",
               method: "POST",
             },
 
@@ -45025,80 +41727,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/Sos/save",
               method: "POST",
             },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Sos#getDetailSchema
-             * @methodOf lbServices.Sos
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Sos/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Sos#getModelRelationSchema
-             * @methodOf lbServices.Sos
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Sos/getModelRelationSchema",
-              method: "POST",
-            },
           }
         );
 
@@ -45843,80 +42471,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/CurrentVersions/save",
               method: "POST",
             },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.CurrentVersion#getDetailSchema
-             * @methodOf lbServices.CurrentVersion
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/CurrentVersions/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.CurrentVersion#getModelRelationSchema
-             * @methodOf lbServices.CurrentVersion
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/CurrentVersions/getModelRelationSchema",
-              method: "POST",
-            },
           }
         );
 
@@ -46623,80 +43177,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/Faqs/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Faq#getDetailSchema
-             * @methodOf lbServices.Faq
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Faqs/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Faq#getModelRelationSchema
-             * @methodOf lbServices.Faq
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Faqs/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -47435,80 +43915,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/SoldViaAutoboxes/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.SoldViaAutobox#getDetailSchema
-             * @methodOf lbServices.SoldViaAutobox
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/SoldViaAutoboxes/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.SoldViaAutobox#getModelRelationSchema
-             * @methodOf lbServices.SoldViaAutobox
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/SoldViaAutoboxes/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -48399,80 +44805,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/SnaphyBases/save",
               method: "POST",
             },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.SnaphyBase#getDetailSchema
-             * @methodOf lbServices.SnaphyBase
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/SnaphyBases/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.SnaphyBase#getModelRelationSchema
-             * @methodOf lbServices.SnaphyBase
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/SnaphyBases/getModelRelationSchema",
-              method: "POST",
-            },
           }
         );
 
@@ -49179,80 +45511,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/SnaphyNotifications/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.SnaphyNotification#getDetailSchema
-             * @methodOf lbServices.SnaphyNotification
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/SnaphyNotifications/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.SnaphyNotification#getModelRelationSchema
-             * @methodOf lbServices.SnaphyNotification
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/SnaphyNotifications/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -50065,80 +46323,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/SnaphyAcls/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.SnaphyAcl#getDetailSchema
-             * @methodOf lbServices.SnaphyAcl
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/SnaphyAcls/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.SnaphyAcl#getModelRelationSchema
-             * @methodOf lbServices.SnaphyAcl
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/SnaphyAcls/getModelRelationSchema",
               method: "POST",
             },
 
@@ -51470,80 +47654,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            /**
-             * @ngdoc method
-             * @name lbServices.SnaphyAclProp#getDetailSchema
-             * @methodOf lbServices.SnaphyAclProp
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/SnaphyAclProps/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.SnaphyAclProp#getModelRelationSchema
-             * @methodOf lbServices.SnaphyAclProp
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/SnaphyAclProps/getModelRelationSchema",
-              method: "POST",
-            },
-
             // INTERNAL. Use SnaphyAcl.snaphyAclProps.findById() instead.
             "::findById::SnaphyAcl::snaphyAclProps": {
               params: {
@@ -52350,80 +48460,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/SnaphyAclRelations/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.SnaphyAclRelation#getDetailSchema
-             * @methodOf lbServices.SnaphyAclRelation
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/SnaphyAclRelations/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.SnaphyAclRelation#getModelRelationSchema
-             * @methodOf lbServices.SnaphyAclRelation
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/SnaphyAclRelations/getModelRelationSchema",
               method: "POST",
             },
 
@@ -53283,80 +49319,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/OfferQueries/save",
               method: "POST",
             },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.OfferQuery#getDetailSchema
-             * @methodOf lbServices.OfferQuery
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/OfferQueries/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.OfferQuery#getModelRelationSchema
-             * @methodOf lbServices.OfferQuery
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/OfferQueries/getModelRelationSchema",
-              method: "POST",
-            },
           }
         );
 
@@ -54150,80 +50112,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            /**
-             * @ngdoc method
-             * @name lbServices.Insurance#getDetailSchema
-             * @methodOf lbServices.Insurance
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Insurances/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Insurance#getModelRelationSchema
-             * @methodOf lbServices.Insurance
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Insurances/getModelRelationSchema",
-              method: "POST",
-            },
-
             // INTERNAL. Use VehicleDetail.insurance() instead.
             "::get::VehicleDetail::insurance": {
               url: urlBase + "/VehicleDetails/:id/insurance",
@@ -55009,80 +50897,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/DashCameras/save",
               method: "POST",
             },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.DashCamera#getDetailSchema
-             * @methodOf lbServices.DashCamera
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/DashCameras/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.DashCamera#getModelRelationSchema
-             * @methodOf lbServices.DashCamera
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/DashCameras/getModelRelationSchema",
-              method: "POST",
-            },
           }
         );
 
@@ -55789,80 +51603,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/GpsTrackers/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.GpsTracker#getDetailSchema
-             * @methodOf lbServices.GpsTracker
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/GpsTrackers/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.GpsTracker#getModelRelationSchema
-             * @methodOf lbServices.GpsTracker
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/GpsTrackers/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -56625,80 +52365,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/CustomerOffers/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.CustomerOffer#getDetailSchema
-             * @methodOf lbServices.CustomerOffer
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/CustomerOffers/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.CustomerOffer#getModelRelationSchema
-             * @methodOf lbServices.CustomerOffer
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/CustomerOffers/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -57539,80 +53205,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/DealerRatings/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.DealerRating#getDetailSchema
-             * @methodOf lbServices.DealerRating
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/DealerRatings/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.DealerRating#getModelRelationSchema
-             * @methodOf lbServices.DealerRating
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/DealerRatings/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -58475,80 +54067,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/GpsPacketData/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.GpsPacketData#getDetailSchema
-             * @methodOf lbServices.GpsPacketData
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/GpsPacketData/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.GpsPacketData#getModelRelationSchema
-             * @methodOf lbServices.GpsPacketData
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/GpsPacketData/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -59469,80 +54987,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/GpsTrackerInfos/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.GpsTrackerInfo#getDetailSchema
-             * @methodOf lbServices.GpsTrackerInfo
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/GpsTrackerInfos/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.GpsTrackerInfo#getModelRelationSchema
-             * @methodOf lbServices.GpsTrackerInfo
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/GpsTrackerInfos/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -60474,80 +55918,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/Chauffeurs/save",
               method: "POST",
             },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Chauffeur#getDetailSchema
-             * @methodOf lbServices.Chauffeur
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Chauffeurs/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Chauffeur#getModelRelationSchema
-             * @methodOf lbServices.Chauffeur
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Chauffeurs/getModelRelationSchema",
-              method: "POST",
-            },
           }
         );
 
@@ -61403,80 +56773,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             "findAll": {
               isArray: true,
               url: urlBase + "/DealerVehicles/findAll",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.DealerVehicle#getDetailSchema
-             * @methodOf lbServices.DealerVehicle
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/DealerVehicles/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.DealerVehicle#getModelRelationSchema
-             * @methodOf lbServices.DealerVehicle
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/DealerVehicles/getModelRelationSchema",
               method: "POST",
             },
 
@@ -62459,80 +57755,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "save": {
               url: urlBase + "/TrackDealerVehicles/save",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.TrackDealerVehicle#getDetailSchema
-             * @methodOf lbServices.TrackDealerVehicle
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/TrackDealerVehicles/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.TrackDealerVehicle#getModelRelationSchema
-             * @methodOf lbServices.TrackDealerVehicle
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/TrackDealerVehicles/getModelRelationSchema",
               method: "POST",
             },
           }
@@ -63794,83 +59016,15 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            /**
-             * @ngdoc method
-             * @name lbServices.School#getDetailSchema
-             * @methodOf lbServices.School
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Schools/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.School#getModelRelationSchema
-             * @methodOf lbServices.School
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Schools/getModelRelationSchema",
-              method: "POST",
-            },
-
             // INTERNAL. Use Bus.school() instead.
             "::get::Bus::school": {
               url: urlBase + "/Buses/:id/school",
+              method: "GET",
+            },
+
+            // INTERNAL. Use BusModel.school() instead.
+            "::get::BusModel::school": {
+              url: urlBase + "/BusModels/:id/school",
               method: "GET",
             },
 
@@ -64634,48 +59788,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.Bus#findAll
-             * @methodOf lbServices.Bus
-             *
-             * @description
-             *
-             * <em>
-             * (The remote method definition does not provide any description.)
-             * </em>
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `ctx` – `{object=}` -
-             *
-             *  - `filter` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * <em>
-             * (The remote method definition does not provide any description.
-             * This usually means the response is a `Bus` object.)
-             * </em>
-             */
-            "findAll": {
-              url: urlBase + "/Buses/findAll",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
              * @name lbServices.Bus#getSchema
              * @methodOf lbServices.Bus
              *
@@ -64787,89 +59899,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            /**
-             * @ngdoc method
-             * @name lbServices.Bus#getDetailSchema
-             * @methodOf lbServices.Bus
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/Buses/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Bus#getModelRelationSchema
-             * @methodOf lbServices.Bus
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/Buses/getModelRelationSchema",
-              method: "POST",
-            },
-
             // INTERNAL. Use Customer.bus() instead.
             "::get::Customer::bus": {
               url: urlBase + "/Customers/:id/bus",
-              method: "GET",
-            },
-
-            // INTERNAL. Use TrackBus.bus() instead.
-            "::get::TrackBus::bus": {
-              url: urlBase + "/TrackBuses/:id/bus",
               method: "GET",
             },
           }
@@ -65088,9 +60120,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
-            // INTERNAL. Use TrackBus.bus() instead.
-            "prototype$__get__bus": {
-              url: urlBase + "/TrackBuses/:id/bus",
+            // INTERNAL. Use TrackBus.busModel() instead.
+            "prototype$__get__busModel": {
+              url: urlBase + "/TrackBuses/:id/busModel",
               method: "GET",
             },
 
@@ -65676,80 +60708,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/TrackBuses/save",
               method: "POST",
             },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.TrackBus#getDetailSchema
-             * @methodOf lbServices.TrackBus
-             *
-             * @description
-             *
-             * Get the detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getDetailSchema": {
-              url: urlBase + "/TrackBuses/getDetailSchema",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.TrackBus#getModelRelationSchema
-             * @methodOf lbServices.TrackBus
-             *
-             * @description
-             *
-             * Get the relation detail schema for a particular model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method does not accept any data. Supply an empty object.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `schema` – `{object=}` -
-             */
-            "getModelRelationSchema": {
-              url: urlBase + "/TrackBuses/getModelRelationSchema",
-              method: "POST",
-            },
           }
         );
 
@@ -65931,12 +60889,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.TrackBus#bus
+             * @name lbServices.TrackBus#busModel
              * @methodOf lbServices.TrackBus
              *
              * @description
              *
-             * Fetches belongsTo relation bus.
+             * Fetches belongsTo relation busModel.
              *
              * @param {Object=} parameters Request parameters.
              *
@@ -65956,12 +60914,810 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              * <em>
              * (The remote method definition does not provide any description.
-             * This usually means the response is a `Bus` object.)
+             * This usually means the response is a `BusModel` object.)
              * </em>
              */
-        R.bus = function() {
-          var TargetResource = $injector.get("Bus");
-          var action = TargetResource["::get::TrackBus::bus"];
+        R.busModel = function() {
+          var TargetResource = $injector.get("BusModel");
+          var action = TargetResource["::get::TrackBus::busModel"];
+          return action.apply(R, arguments);
+        };
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.BusModel
+ * @header lbServices.BusModel
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `BusModel` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "BusModel",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/BusModels/:id",
+          { 'id': '@id' },
+          {
+
+            // INTERNAL. Use BusModel.school() instead.
+            "prototype$__get__school": {
+              url: urlBase + "/BusModels/:id/school",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#create
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusModel` object.)
+             * </em>
+             */
+            "create": {
+              url: urlBase + "/BusModels",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#createMany
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusModel` object.)
+             * </em>
+             */
+            "createMany": {
+              isArray: true,
+              url: urlBase + "/BusModels",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#upsert
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusModel` object.)
+             * </em>
+             */
+            "upsert": {
+              url: urlBase + "/BusModels",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#exists
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/BusModels/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#findById
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Find a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusModel` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/BusModels/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#find
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusModel` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/BusModels",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#findOne
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusModel` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/BusModels/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#updateAll
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+            "updateAll": {
+              url: urlBase + "/BusModels/update",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#deleteById
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusModel` object.)
+             * </em>
+             */
+            "deleteById": {
+              url: urlBase + "/BusModels/:id",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#count
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/BusModels/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#prototype$updateAttributes
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Update attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusModel` object.)
+             * </em>
+             */
+            "prototype$updateAttributes": {
+              url: urlBase + "/BusModels/:id",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#createChangeStream
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Create a change stream.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `changes` – `{ReadableStream=}` -
+             */
+            "createChangeStream": {
+              url: urlBase + "/BusModels/change-stream",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#findAll
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `ctx` – `{object=}` -
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusModel` object.)
+             * </em>
+             */
+            "findAll": {
+              url: urlBase + "/BusModels/findAll",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#getSchema
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Send the schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getSchema": {
+              url: urlBase + "/BusModels/getSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#getAbsoluteSchema
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Send the absolute schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getAbsoluteSchema": {
+              url: urlBase + "/BusModels/getAbsoluteSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#save
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Remote method for saving data with its depedencies
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `schema` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `data` – `{object=}` -
+             */
+            "save": {
+              url: urlBase + "/BusModels/save",
+              method: "POST",
+            },
+
+            // INTERNAL. Use TrackBus.busModel() instead.
+            "::get::TrackBus::busModel": {
+              url: urlBase + "/TrackBuses/:id/busModel",
+              method: "GET",
+            },
+          }
+        );
+
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#updateOrCreate
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusModel` object.)
+             * </em>
+             */
+        R["updateOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#update
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+        R["update"] = R["updateAll"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#destroyById
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusModel` object.)
+             * </em>
+             */
+        R["destroyById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#removeById
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusModel` object.)
+             * </em>
+             */
+        R["removeById"] = R["deleteById"];
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.BusModel#modelName
+        * @propertyOf lbServices.BusModel
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `BusModel`.
+        */
+        R.modelName = "BusModel";
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusModel#school
+             * @methodOf lbServices.BusModel
+             *
+             * @description
+             *
+             * Fetches belongsTo relation school.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `School` object.)
+             * </em>
+             */
+        R.school = function() {
+          var TargetResource = $injector.get("School");
+          var action = TargetResource["::get::BusModel::school"];
           return action.apply(R, arguments);
         };
 

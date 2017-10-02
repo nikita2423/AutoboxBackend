@@ -8,6 +8,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         findAllSchoolMethod();
         findAllBusesMethod();
         saveTrackBusDetailsMethod();
+        findAllTrackBusMethod();
     };
 
     const findAllSchoolMethod = function(){
@@ -81,6 +82,25 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             ],
             returns: {
                 arg: "response", type: "object", root : true
+            }
+        });
+    };
+
+    const findAllTrackBusMethod = function(){
+        const TrackBus = databaseObj.TrackBus;
+        TrackBus.findAll = findTrackBus;
+        TrackBus.remoteMethod('findAll', {
+            accepts:[
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                }
+            ],
+            returns: {
+                arg: "trackBusList", type: "object", root: true
             }
         });
     };
@@ -226,6 +246,41 @@ module.exports = function( server, databaseObj, helper, packageObj) {
            } else{
                callback(new Error("User not valid"));
            }
+        }
+    };
+
+    const findTrackBus = function(ctx, callback){
+        const request = ctx.req;
+        if(request.accessToken){
+            if(request.accessToken.userId){
+                const customerId = request.accessToken.userId;
+                const TrackBus = databaseObj.TrackBus;
+                TrackBus.find({
+                    where: {
+                        customerId : customerId
+                    },
+                    include: [{
+                        relation: "busModel",
+                        scope: {
+                            include: ["school"]
+                        }
+                    }]
+                })
+                    .then(function(trackBusList){
+                        if(trackBusList){
+                           callback(null, trackBusList);
+                        } else{
+                            throw new Error("Track Bus not defined");
+                        }
+                    })
+                    .catch(function(error){
+                        callback(error);
+                    });
+            } else{
+                callback(new Error("User not valid"));
+            }
+        } else{
+            callback(new Error("User not valid"));
         }
     };
 
