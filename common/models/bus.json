@@ -66,11 +66,27 @@
           "fields": [
             {
               "key": "contact1",
-              "type": "input"
+              "type": "input",
+              "templateOptions": {
+                "type": "text",
+                "label": "Driver First Contact",
+                "priority": 12,
+                "id": "driverContact1",
+                "colSize": "col-xs-4",
+                "inline": true
+              }
             },
             {
               "key": "contact2",
-              "type": "input"
+              "type": "input",
+              "templateOptions": {
+                "type": "text",
+                "label": "Driver Second Contact",
+                "priority": 12,
+                "id": "driverContact2",
+                "colSize": "col-xs-4",
+                "inline": true
+              }
             }
           ]
         }
@@ -97,7 +113,7 @@
       "foreignKey": "",
       "templateOptions": {
         "btnText": "Add School",
-        "searchProp": "name",
+        "searchProp": "email",
         "priority": 5,
         "type": "smartSelect",
         "readOnly": false,

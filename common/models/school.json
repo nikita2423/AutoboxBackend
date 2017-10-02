@@ -5,6 +5,9 @@
   "options": {
     "validateUpsert": true
   },
+  "hidden": [
+    "password"
+  ],
   "properties": {
     "name": {
       "type": "string",
@@ -44,6 +47,21 @@
         }
       }
     },
+    "password": {
+      "type": "string",
+      "required": false,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "password",
+          "label": "Enter Password",
+          "priority": 7,
+          "inline": true,
+          "colSize": "col-xs-6",
+          "id": "password"
+        }
+      }
+    },
     "added": {
       "type": "date",
       "required": false,
@@ -62,12 +80,38 @@
     "area": {
       "type": "belongsTo",
       "model": "Area",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Area",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "type": "smartSelect",
+        "create": false,
+        "id": "AddArea",
+        "hide": false,
+        "inline": true,
+        "colSize": "col-xs-6",
+        "label": "Add Area"
+      }
     },
     "city": {
       "type": "belongsTo",
       "model": "City",
-      "foreignKey": ""
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add City",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "type": "smartSelect",
+        "create": false,
+        "id": "AddCity",
+        "inline": true,
+        "colSize": "col-xs-6",
+        "hide": false,
+        "label": "Add City"
+      }
     }
   },
   "acls": [
@@ -147,10 +191,11 @@
       "permission": "ALLOW"
     },
     {
-      "accessType": "READ",
+      "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$authenticated",
-      "permission": "ALLOW"
+      "permission": "ALLOW",
+      "property": "findAll"
     }
   ],
   "methods": {}
