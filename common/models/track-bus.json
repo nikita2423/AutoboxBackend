@@ -62,9 +62,9 @@
       "model": "Customer",
       "foreignKey": ""
     },
-    "bus": {
+    "busModel": {
       "type": "belongsTo",
-      "model": "Bus",
+      "model": "BusModel",
       "foreignKey": ""
     }
   },

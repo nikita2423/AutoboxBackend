@@ -33,9 +33,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
     const findAllBusesMethod = function(){
-        const Bus = databaseObj.Bus;
-        Bus.findAll = findAllBuses;
-        Bus.remoteMethod('findAll', {
+        const BusModel = databaseObj.BusModel;
+        BusModel.findAll = findAllBuses;
+        BusModel.remoteMethod('findAll', {
             accepts: [
                 {
                     arg: 'ctx',
@@ -136,7 +136,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         } else{
             if(request.accessToken){
                 if(request.accessToken.userId){
-                    const Bus = databaseObj.Bus;
+                    const BusModel = databaseObj.BusModel;
                     if(filter){
                         if(filter.where){
                             if(filter.where.added){
@@ -146,7 +146,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             }
                         }
                     }
-                    Bus.find(filter)
+                    BusModel.find(filter)
                         .then(function(busList){
                             if(busList){
                                 if(busList.length){
@@ -171,18 +171,18 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         }
     };
 
-    const saveTrackBusDetails = function(ctx, gpsCode, busId, customerObj, trackVehicleObj, callback){
+    const saveTrackBusDetails = function(ctx, gpsCode, busModelId, customerObj, trackVehicleObj, callback){
         const request = ctx.req;
-        if(!gpsCode && !busId && !customerObj){
+        if(!gpsCode && !busModelId && !customerObj){
             callback(new Error("Invalid Arguments"));
         } else{
            if(request.accessToken){
                if(request.accessToken.userId){
                    const customerId = request.accessToken.userId;
-                   const Bus = databaseObj.Bus;
+                   const BusModel = databaseObj.BusModel;
                    const Customer = databaseObj.Customer;
-                   const TrackVehicle = databaseObj.TrackVehicle;
-                   Bus.findById(busId)
+                   const TrackBus = databaseObj.TrackBus;
+                   BusModel.findById(busModelId)
                        .then(function(bus){
                            if(bus){
                                if(bus.gpsCode === gpsCode){
@@ -201,19 +201,19 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                        })
                        .then(function(customer){
                            if(customer){
-                              return TrackVehicle.create({
+                              return TrackBus.create({
                                    homeLocation: trackVehicleObj.homeLocation,
                                    vicinity : trackVehicleObj.vicinity,
                                    gpsCode : gpsCode,
-                                   busId : busId,
+                                   busModelId : busModelId,
                                    customerId : customerId
                                });
                            } else{
                                throw new Error("Customer not found");
                            }
                        })
-                       .then(function(trackVehicle){
-                           if(trackVehicle){
+                       .then(function(trackBus){
+                           if(trackBus){
                                callback(null, {response: "success"});
                            }
                        })

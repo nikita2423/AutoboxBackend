@@ -2,6 +2,7 @@
 "Customer": "Customer",
   "Brand": "Brand",
   "Bus": "Bus",
+  "BusModel": "BusModel",
   "CarModel": "CarModel",
   "Fuel": "Fuel",
   "Trim": "Trim",

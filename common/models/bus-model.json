@@ -1,0 +1,127 @@
+{
+  "name": "BusModel",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "busNumber": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Bus Number",
+          "id": "busNumber"
+        }
+      }
+    },
+    "gpsCode": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Gps Code",
+          "id": "gpsCode"
+        }
+      }
+    },
+    "registrationNumber": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Registration Number",
+          "id": "registrationNumber"
+        }
+      }
+    },
+    "driverName": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Driver Name",
+          "id": "driverName"
+        }
+      }
+    },
+    "driverContact": {
+      "type": "object",
+      "required": true,
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "priority": 13,
+          "fields": [
+            {
+              "key": "contact1",
+              "type": "input",
+              "templateOptions": {
+                "type": "text",
+                "label": "Driver First Contact",
+                "priority": 12,
+                "id": "driverContact1",
+                "colSize": "col-xs-4",
+                "inline": true
+              }
+            },
+            {
+              "key": "contact2",
+              "type": "input",
+              "templateOptions": {
+                "type": "text",
+                "label": "Driver Second Contact",
+                "priority": 12,
+                "id": "driverContact2",
+                "colSize": "col-xs-4",
+                "inline": true
+              }
+            }
+          ]
+        }
+      }
+    },
+    "added": {
+      "type": "date",
+      "required": false,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "updated": {
+      "type": "date",
+      "defaultFn": "now"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "school": {
+      "type": "belongsTo",
+      "model": "School",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add School",
+        "searchProp": "email",
+        "priority": 5,
+        "type": "smartSelect",
+        "readOnly": false,
+        "id": "AddSchool",
+        "label": "School"
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
