@@ -1,4 +1,6 @@
-
+[submodule "common/plugins/aboutUs"]
+	path = common/plugins/aboutUs
+	url = https://github.com/snaphy-plugin-2/aboutus-plugin.git
 [submodule "common/plugins/automata"]
 	path = common/plugins/automata
 	url = https://github.com/snaphy-plugin-2/automata-plugin.git
