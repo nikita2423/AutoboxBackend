@@ -84,9 +84,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
     const findAllTrackBusMethod = function(){
-        const TrackBus = databaseObj.TrackBus;
-        TrackBus.findAll = findTrackBus;
-        TrackBus.remoteMethod('findAll', {
+        const TrackBusVehicle = databaseObj.TrackBusVehicle;
+        TrackBusVehicle.findAll = findTrackBus;
+        TrackBusVehicle.remoteMethod('findAll', {
             accepts:[
                 {
                     arg: 'ctx',
@@ -101,6 +101,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
         });
     };
+
+
 
     const findAllSchool = function(ctx, filter, callback){
         const request = ctx.req;
@@ -197,12 +199,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                if(request.accessToken.userId){
                    const customerId = request.accessToken.userId;
                    const BusModel = databaseObj.BusModel;
-                   const TrackBus = databaseObj.TrackBus;
+                   const TrackBusVehicle = databaseObj.TrackBusVehicle;
                    BusModel.findById(busModelId)
                        .then(function(bus){
                            if(bus){
                                if(bus.gpsCode === gpsCode){
-                                   return TrackBus.create({
+                                   return TrackBusVehicle.create({
                                        homeLocation: trackVehicleObj.homeLocation,
                                        vicinity : trackVehicleObj.vicinity,
                                        gpsCode : gpsCode,
@@ -238,8 +240,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         if(request.accessToken){
             if(request.accessToken.userId){
                 const customerId = request.accessToken.userId;
-                const TrackBus = databaseObj.TrackBus;
-                TrackBus.find({
+                const TrackBusVehicle = databaseObj.TrackBusVehicle;
+                TrackBusVehicle.find({
                     where: {
                         customerId : customerId
                     },

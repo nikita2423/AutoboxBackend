@@ -7,13 +7,52 @@
   },
   "properties": {
     "gpsCode": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "homeLocation": {
-      "type": "geopoint"
+      "type": "geopoint",
+      "required": true,
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "type": "input",
+              "key": "lat",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter latitude",
+                "id": "latitude"
+              }
+            },
+            {
+              "type": "input",
+              "key": "lng",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter longitude",
+                "id": "longitude"
+              }
+            }
+          ]
+        }
+      }
     },
     "vicinity": {
       "type": "number"
+    },
+    "added": {
+      "type": "date",
+      "required": false,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "updated": {
+      "type": "date",
+      "defaultFn": "now"
     }
   },
   "validations": [],

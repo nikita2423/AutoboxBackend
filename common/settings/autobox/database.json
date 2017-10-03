@@ -42,6 +42,7 @@
   "SoldViaAutobox": "SoldViaAutobox",
   "TrackDealerVehicle": "TrackDealerVehicle",
   "TrackBus": "TrackBus",
+  "TrackBusVehicle": "TrackBusVehicle",
   "VehicleDetail": "VehicleDetail",
   "Workshop": "Workshop",
   "VehicleInfo": "VehicleInfo"
