@@ -154,6 +154,10 @@
       "type": "number",
       "default": 0
     },
+    "isRead":{
+      "type": "boolean",
+      "default": false
+    },
     "replyNumber": {
       "type": "string",
       "required": true
