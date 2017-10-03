@@ -56,9 +56,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
     const saveTrackBusDetailsMethod = function(){
-        const TrackBus = databaseObj.TrackBus;
-        TrackBus.saveTrackBusDetails = saveTrackBusDetails;
-        TrackBus.remoteMethod('saveTrackBusDetails', {
+        const TrackBusVehicle = databaseObj.TrackBusVehicle;
+        TrackBusVehicle.saveTrackBusDetails = saveTrackBusDetails;
+        TrackBusVehicle.remoteMethod('saveTrackBusDetails', {
             accepts:[
                 {
                     arg: 'ctx',
