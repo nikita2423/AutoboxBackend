@@ -97,7 +97,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 }
             ],
             returns: {
-                arg: "trackBusList", type: "object", root: true
+                arg: "trackBusList", type: ["TrackBusVehicle"], root: true
             }
         });
     };
