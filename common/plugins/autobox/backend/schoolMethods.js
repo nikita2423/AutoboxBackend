@@ -9,6 +9,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         findAllBusesMethod();
         saveTrackBusDetailsMethod();
         findAllTrackBusMethod();
+        deleteTrackBusVehicleMethod();
+        updateTrackBusDetailMethod();
     };
 
     const findAllSchoolMethod = function(){
@@ -100,6 +102,50 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 arg: "trackBusList", type: ["TrackBusVehicle"], root: true
             }
         });
+    };
+
+    const deleteTrackBusVehicleMethod = function(){
+        const TrackBusVehicle = databaseObj.TrackBusVehicle;
+        TrackBusVehicle.deleteTrackBusVehicle = deleteTrackBusVehicle;
+        TrackBusVehicle.remoteMethod('deleteTrackBusVehicle', {
+            accepts:[
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "trackBusVehicleId", type: "string"
+                }
+            ],
+            returns: {
+                arg: "response", type: "object", root: true
+            }
+        })
+    };
+
+    const updateTrackBusDetailMethod = function(){
+        const TrackBusVehicle = databaseObj.TrackBusVehicle;
+        TrackBusVehicle.updateTrackBusDetail = updateTrackBusDetail;
+        TrackBusVehicle.remoteMethod('updateTrackBusDetail', {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "trackBusVehicleObj", type: "object"
+                }
+            ],
+            returns: {
+                arg: "trackBusVehicle", type: "TrackBusVehicle", root: true
+            }
+        })
     };
 
 
@@ -267,6 +313,63 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
         } else{
             callback(new Error("User not valid"));
+        }
+    };
+
+    const deleteTrackBusVehicle = function(ctx, trackBusVehicleId, callback){
+        const request = ctx.req;
+        if(!trackBusVehicleId){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const TrackBusVehicle = databaseObj.TrackBusVehicle;
+                    TrackBusVehicle.findById(trackBusVehicleId)
+                        .then(function(trackBusVehicle){
+                            if(trackBusVehicle){
+                                trackBusVehicle.updateAttribute("status", "inactive");
+                            } else{
+                                throw new Error("Track Bus not found");
+                            }
+                        })
+                        .then(function(trackBusVehicle){
+                            callback(null, {response: "success"});
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
+
+    const updateTrackBusDetail = function(ctx, trackBusVehicleObj, callback){
+        const request = ctx.req;
+        if(!trackBusVehicleObj){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const TrackBusVehicle = databaseObj.TrackBusVehicle;
+                    TrackBusVehicle.upsert(trackBusVehicleObj)
+                        .then(function(trackBusVehicle){
+                            if(trackBusVehicle){
+                                callback(null, trackBusVehicle);
+                            }
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
         }
     };
 

@@ -39,6 +39,10 @@
         }
       }
     },
+    "status": {
+      "type": "string",
+      "default": "active"
+    },
     "vicinity": {
       "type": "number"
     },
