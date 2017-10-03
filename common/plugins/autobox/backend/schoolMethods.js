@@ -252,6 +252,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                if(bus.gpsCode === gpsCode){
                                    return TrackBusVehicle.create({
                                        homeLocation: trackVehicleObj.homeLocation,
+                                       homeAddress: trackVehicleObj.homeAddress,
                                        vicinity : trackVehicleObj.vicinity,
                                        gpsCode : gpsCode,
                                        busModelId : busModelId,
