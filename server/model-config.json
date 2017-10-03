@@ -295,5 +295,9 @@
   "BusModel": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "TrackBusVehicle": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

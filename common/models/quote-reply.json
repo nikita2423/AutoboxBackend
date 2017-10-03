@@ -154,7 +154,7 @@
       "type": "number",
       "default": 0
     },
-    "isRead":{
+    "isRead": {
       "type": "boolean",
       "default": false
     },

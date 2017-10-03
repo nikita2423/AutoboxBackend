@@ -1,0 +1,34 @@
+{
+  "name": "TrackBusVehicle",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "gpsCode": {
+      "type": "string"
+    },
+    "homeLocation": {
+      "type": "geopoint"
+    },
+    "vicinity": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    },
+    "busModel": {
+      "type": "belongsTo",
+      "model": "BusModel",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
