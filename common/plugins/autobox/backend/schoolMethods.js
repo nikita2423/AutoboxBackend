@@ -74,9 +74,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     arg: "busId", type: "string"
                 },
                 {
-                    arg: "customerObj", type: "object"
-                },
-                {
                     arg: "trackVehicleObj", type: "object"
                 }
             ],
@@ -191,45 +188,32 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         }
     };
 
-    const saveTrackBusDetails = function(ctx, gpsCode, busModelId, customerObj, trackVehicleObj, callback){
+    const saveTrackBusDetails = function(ctx, gpsCode, busModelId, trackVehicleObj, callback){
         const request = ctx.req;
-        if(!gpsCode && !busModelId && !customerObj){
+        if(!gpsCode && !busModelId && !trackVehicleObj){
             callback(new Error("Invalid Arguments"));
         } else{
            if(request.accessToken){
                if(request.accessToken.userId){
                    const customerId = request.accessToken.userId;
                    const BusModel = databaseObj.BusModel;
-                   const Customer = databaseObj.Customer;
                    const TrackBus = databaseObj.TrackBus;
                    BusModel.findById(busModelId)
                        .then(function(bus){
                            if(bus){
                                if(bus.gpsCode === gpsCode){
-                                   return Customer.findById(customerId);
+                                   return TrackBus.create({
+                                       homeLocation: trackVehicleObj.homeLocation,
+                                       vicinity : trackVehicleObj.vicinity,
+                                       gpsCode : gpsCode,
+                                       busModelId : busModelId,
+                                       customerId : customerId
+                                   });
                                } else{
                                    throw new Error("Code doesn't match");
                                }
                            } else{
                                throw new Error("Bus not found");
-                           }
-                       })
-                       .then(function(customer){
-                           if(customer){
-                               return customer.updateAttributes(customerObj);
-                           }
-                       })
-                       .then(function(customer){
-                           if(customer){
-                              return TrackBus.create({
-                                   homeLocation: trackVehicleObj.homeLocation,
-                                   vicinity : trackVehicleObj.vicinity,
-                                   gpsCode : gpsCode,
-                                   busModelId : busModelId,
-                                   customerId : customerId
-                               });
-                           } else{
-                               throw new Error("Customer not found");
                            }
                        })
                        .then(function(trackBus){
