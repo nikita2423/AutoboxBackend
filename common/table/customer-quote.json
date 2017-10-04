@@ -53,7 +53,8 @@
     "added": {
       "date": true,
       "search": "date",
-      "display":false
+      "display":true,
+      "label": "Date"
     },
     "quoteType": {
       "label": "Query",
@@ -255,6 +256,9 @@
         "no"
       ]
     },
+    "miles": {
+      "display": false
+    }
     "dashCamera": {
       "position": 15,
       "tag": {

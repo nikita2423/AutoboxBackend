@@ -21,6 +21,9 @@
       "type": "date",
       "required": false,
       "defaultFn": "now"
+    },
+    "miles": {
+      "type": "number"
     }
   },
   "validations": [],

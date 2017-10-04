@@ -270,7 +270,28 @@
       "type": "string"
     },
     "miles": {
-      "type": "number"
+      "type": "number",
+      "required": false,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "Dealer"
+              ]
+            }
+          },
+          "label": "Miles",
+          "id": "miles"
+        }
+      }
+
     },
     "added": {
       "type": "date",

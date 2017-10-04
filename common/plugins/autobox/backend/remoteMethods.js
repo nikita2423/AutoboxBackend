@@ -2278,6 +2278,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                           brandId : customerQuoteObj.brandId,
                           carModelId : customerQuoteObj.carModelId,
                           trimId : customerQuoteObj.trimId,
+                          miles: customerQuoteObj.miles,
                           customerId : customerId
                       })
                           .then(function(oldTradeCar){

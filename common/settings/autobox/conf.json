@@ -43,5 +43,14 @@
     "harsh_braking": "harsh_braking",
     "internal_battery_low": "internal_battery_low",
     "harsh_acceleration": "harsh_acceleration"
+  },
+  "oldTradeBrand": {
+    "bmw": "BMW",
+    "audi": "Audi",
+    "ferrari": "Ferrari",
+    "jaguar": "Jaguar",
+    "lamborghini": "Lamborghini",
+    "landrover": "Land Rover",
+    "mercedesbenz": "Mercedes-Benz"
   }
 }

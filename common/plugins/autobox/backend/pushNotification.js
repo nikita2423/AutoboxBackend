@@ -258,13 +258,24 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                        const to = [];
                        const from = packageObj.from;
                        to.push("nikita@snaphy.com");
-                       emailPlugin.adminEmail.onOldTradeCarAdded(from, to, subject, oldTradeVehicleObj, function(err, send){
-                          if(err){
-                              console.log(err);
-                          } else{
-                              console.log("Email Send Successfully for old trade vehicle");
-                          }
-                       });
+                       if(oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.bmw ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.audi ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.ferrari ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.jaguar ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.lamborghini ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.landrover ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.mercedesbenz){
+                           emailPlugin.adminEmail.onOldTradeCarAdded(from, to, subject, oldTradeVehicleObj, function(err, send){
+                               if(err){
+                                   console.log(err);
+                               } else{
+                                   console.log("Email Send Successfully for old trade vehicle");
+                               }
+                           });
+                       } else{
+                           console.log("Required brand not present");
+                       }
+
                    })
                    .catch(function(error){
                        console.log(error);
