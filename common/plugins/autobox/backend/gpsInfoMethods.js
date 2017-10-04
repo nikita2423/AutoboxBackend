@@ -12,6 +12,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         findAllGpsInfoMethod();
         deleteGpsInfoMethod();
         fetchGpsInfoDetailsMethod();
+        findAllGpsNotificationMethod();
     };
 
     const createGpsPacketDataMethod = function(){
@@ -118,6 +119,34 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 arg: "gpsTrackerInfoObj", type: "object", root : true
             }
         });
+    };
+
+    const findAllGpsNotificationMethod = function(){
+        const GpsPacketData = databaseObj.GpsPacketData;
+        GpsPacketData.findAll = findAllGpsNotification;
+        GpsPacketData.remoteMethod('findAllGpsNotification', {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "lastDate", type: "string"
+                },
+                {
+                    arg: "deviceIMEI", type: "string"
+                },
+                {
+                    arg: "limit", type: "number"
+                }
+            ],
+            returns: {
+                arg: "gpsPacketDataObj", type: "object", root: true
+            }
+        })
     };
 
 
@@ -402,6 +431,51 @@ module.exports = function( server, databaseObj, helper, packageObj) {
              }
          }
      }
+   };
+
+   const findAllGpsNotification = function(ctx, lastDate, deviceIMEI, limit, callback){
+       lastDate = !lastDate ? new Date():new Date(lastDate);
+       const request = ctx.req;
+       if(!filter){
+           callback(new Error("Invalid Arguments"));
+       } else{
+           if(request.accessToken){
+               if(request.accessToken.userId){
+                   const customerId = request.accessToken.userId;
+                   const GpsPacketData = databaseObj.GpsPacketData;
+                   GpsPacketData.find({
+                       limit: limit,
+                       where: {
+                           deviceIMEI : deviceIMEI,
+                           added: {
+                               lt : lastDate
+                           }
+                       }
+                   })
+                       .then(function(gpsPacketDataList){
+                           if(gpsPacketDataList){
+                               if(gpsPacketDataList.length){
+                                   const gpsPacketData = gpsPacketDataList[gpsPacketDataList.length - 1];
+                                   lastDate = gpsPacketData.added;
+                               }
+                               callback(null, {
+                                   data: gpsPacketDataList,
+                                   cursor: lastDate
+                               })
+                           } else{
+                               throw new Error("Gps Packet Data not found");
+                           }
+                       })
+                       .catch(function(error){
+                           callback(error);
+                       });
+               } else{
+                   callback(new Error("User not valid"));
+               }
+           } else{
+               callback(new Error("User not valid"));
+           }
+       }
    };
 
 
