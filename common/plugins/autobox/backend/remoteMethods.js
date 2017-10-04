@@ -54,6 +54,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         findAllCustomerOfferMethod();
         rateDealerExperienceMethod();
         findAllQuoteMessageMethod();
+        deleteSosContactMethod();
 
 
     };
@@ -1034,6 +1035,28 @@ module.exports = function( server, databaseObj, helper, packageObj) {
               arg: "customerMessageList", type: "object", root: true
           }
       })
+    };
+
+    const deleteSosContactMethod = function(){
+        const Sos = databaseObj.Sos;
+        Sos.deleteSosContact = deleteSosContact;
+        Sos.remoteMethod('deleteSosContact', {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "sosObj", type: "object"
+                },
+            ],
+            returns: {
+                arg: "response", type: "object", root: true
+            }
+        })
     };
 
 
@@ -2294,6 +2317,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                       carModelId: customerQuoteObj.carModelId,
                                       trimId: customerQuoteObj.trimId,
                                       quoteType: customerQuoteObj.quoteType,
+                                      miles: customerQuoteObj.miles,
                                       customerId: customerId,
                                       soldViaAutobox: "no",
                                       gpsTracker: "no",
@@ -3420,6 +3444,32 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         })
 
                 }else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
+
+    const deleteSosContact = function(ctx, sosObj, callback){
+        const request = ctx.req;
+        if(!sosObj){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const Sos = databaseObj.Sos;
+                    Sos.upsert(sosObj)
+                        .then(function(sos){
+                            if(sos){
+                                callback(null, {response: "success"});
+                            }
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+                } else{
                     callback(new Error("User not valid"));
                 }
             } else{

@@ -269,6 +269,9 @@
     "currentBrandId": {
       "type": "string"
     },
+    "miles": {
+      "type": "number"
+    },
     "added": {
       "type": "date",
       "required": true,

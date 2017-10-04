@@ -290,7 +290,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 const TrackBusVehicle = databaseObj.TrackBusVehicle;
                 TrackBusVehicle.find({
                     where: {
-                        customerId : customerId
+                        customerId : customerId,
+                        status: "active"
                     },
                     include: [{
                         relation: "busModel",
