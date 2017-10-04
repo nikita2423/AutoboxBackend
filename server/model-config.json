@@ -299,5 +299,9 @@
   "TrackBusVehicle": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "GpsNotification": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }
