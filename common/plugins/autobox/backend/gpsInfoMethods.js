@@ -124,7 +124,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const findAllGpsNotificationMethod = function(){
         const GpsPacketData = databaseObj.GpsPacketData;
         GpsPacketData.findAll = findAllGpsNotification;
-        GpsPacketData.remoteMethod('findAllGpsNotification', {
+        GpsPacketData.remoteMethod('findAllgit ', {
             accepts: [
                 {
                     arg: 'ctx',
