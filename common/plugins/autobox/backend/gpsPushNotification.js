@@ -9,7 +9,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const process = require("process");
 
     var init = function(){
-        //gpsTestNotification();
+        gpsTestNotification();
         setGpsNotificationStatusMethod();
         sendHardBrakingAccelerationNotification();
         sendGpsBatteryLowNotification();
@@ -84,33 +84,41 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                            promises.push(function(callback){
                                                Customer.findById(customerId)
                                                    .then(function(customer){
-                                                       if(customer){
-                                                           console.log("customerIdList",customer.id);
+                                                       if(customer) {
+                                                           console.log("customerIdList", customer.id);
                                                            customerName = customer.firstName;
-                                                           var lastName = customer.lastName? customer.lastName : "";
+                                                           var lastName = customer.lastName ? customer.lastName : "";
                                                            customerName = customerName + " " + lastName;
                                                            var pushFrom = packageObj.companyName;
                                                            const instanceId = gpsPacketDataObj.id;
                                                            eventType = "Default Packet";
                                                            title = "Default Test Packet Arrived";
                                                            const message = brakeAccelerationMessageFormat(customerName, eventType, title, instanceId);
-                                                           if(customer.id){
-                                                               console.log("Notification customer Id",customer.id + " " + customerName);
-                                                               sendNotification(server, message, customer.id, pushFrom, function(error){
-                                                                   if(error){
+                                                           if (customer.id) {
+                                                               console.log("Notification customer Id", customer.id + " " + customerName);
+                                                               sendNotification(server, message, customer.id, pushFrom, function (error) {
+                                                                   if (error) {
                                                                        console.log(error);
                                                                        callback(error);
-                                                                   } else{
-                                                                       callback(null);
-                                                                       console.log("Notification for  default packet gps has been send successfully");
+                                                                   } else {
+                                                                       server.logger.info("Notification for  default packet gps has been send successfully");
+                                                                       return databaseObj.GpsNotification.create({
+                                                                           message: title,
+                                                                           deviceIMEI: gpsPacketDataObj.deviceIMEI,
+                                                                           status: "active",
+                                                                           customerId: customer.id
+                                                                       });
                                                                    }
                                                                });
                                                            }
-                                                       } else{
-                                                           callback(null);
                                                        }
                                                    })
+                                                   .then(function(gpsNotification){
+                                                       callback(null);
+                                                       server.logger.info("Default Notification created");
+                                                   })
                                                    .catch(function(error){
+                                                       server.logger.error("Error in default Notification");
                                                        callback(error);
                                                    });
                                            });
@@ -120,7 +128,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                         if(error){
                                             server.logger.error("Error in sending notification for gps default packet");
                                         } else{
-                                            console.log("Notification for gps default packet Send Successfully");
+                                             server.logger.info("Notification for gps default packet Send Successfully");
                                         }
                                     });
                                 }
@@ -278,9 +286,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
                                     async.series(promises, function (error) {
                                         if(error){
-                                            console.error(error);
+                                            server.logger.error(error);
                                         } else{
-                                            console.log("Hard Acceleration");
+                                           server.logger.info("Hard Acceleration");
                                         }
                                     });
                                 }
@@ -393,9 +401,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
                                     async.series(promises, function(error){
                                         if(error){
-                                            console.error(error);
+                                            server.logger.error(error);
                                         } else{
-                                            console.log("Notification for Low Battery send successfully to all customers")
+                                            server.logger.info("Notification for Low Battery send successfully to all customers")
                                         }
                                     })
                                 }
@@ -602,7 +610,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                             console.log(error);
                                                                             callback(error);
                                                                         } else{
-                                                                            console.log("Notification for engine status send successfully");
+                                                                            console.log("Notification for gps Device send successfully");
                                                                             return databaseObj.GpsNotification.create({
                                                                                 message: title,
                                                                                 deviceIMEI : gpsPacketDataObj.deviceIMEI,
@@ -628,7 +636,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                         if(error){
                                             server.logger.error(error);
                                         } else{
-                                            server.logger.info("Notification for engine status send successfully to all customers");
+                                            server.logger.info("Notification for gps Device send successfully to all customers");
                                         }
                                     })
                                 }
