@@ -1054,7 +1054,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 },
             ],
             returns: {
-                arg: "response", type: "object", root: true
+                arg: "sosObj", type: "Sos", root: true
             }
         })
     };
@@ -3464,7 +3464,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     Sos.upsert(sosObj)
                         .then(function(sos){
                             if(sos){
-                                callback(null, {response: "success"});
+                                callback(null, sos);
                             }
                         })
                         .catch(function(error){
