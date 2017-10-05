@@ -12,14 +12,9 @@
     "deviceIMEI": {
       "type": "string"
     },
-    "registerNumber": {
-      "type": "string"
-    },
-    "vehicleModel": {
-      "type": "string"
-    },
-    "status": {
-      "type": "string"
+       "status": {
+      "type": "string",
+      "default": "active"
     }
   },
   "validations": [],

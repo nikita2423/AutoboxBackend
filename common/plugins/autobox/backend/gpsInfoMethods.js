@@ -122,9 +122,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
     const findAllGpsNotificationMethod = function(){
-        const GpsPacketData = databaseObj.GpsPacketData;
-        GpsPacketData.findAll = findAllGpsNotification;
-        GpsPacketData.remoteMethod('findAll', {
+        const GpsNotification = databaseObj.GpsNotification;
+        GpsNotification.findAll = findAllGpsNotification;
+        GpsNotification.remoteMethod('findAll', {
             accepts: [
                 {
                     arg: 'ctx',
@@ -442,28 +442,29 @@ module.exports = function( server, databaseObj, helper, packageObj) {
            if(request.accessToken){
                if(request.accessToken.userId){
                    const customerId = request.accessToken.userId;
-                   const GpsPacketData = databaseObj.GpsPacketData;
-                   GpsPacketData.find({
+                   const GpsNotification = databaseObj.GpsNotification;
+                   GpsNotification.find({
                        limit: limit,
                        where: {
                            deviceIMEI : deviceIMEI,
                            added: {
                                lt : lastDate
-                           }
+                           },
+                           customerId : customerId
                        }
                    })
-                       .then(function(gpsPacketDataList){
-                           if(gpsPacketDataList){
-                               if(gpsPacketDataList.length){
-                                   const gpsPacketData = gpsPacketDataList[gpsPacketDataList.length - 1];
-                                   lastDate = gpsPacketData.added;
+                       .then(function(gpsNotificationList){
+                           if(gpsNotificationList){
+                               if(gpsNotificationList.length){
+                                   const gpsNotification = gpsNotificationList[gpsNotificationList.length - 1];
+                                   lastDate = gpsNotification.added;
                                }
                                callback(null, {
-                                   data: gpsPacketDataList,
+                                   data: gpsNotificationList,
                                    cursor: lastDate
                                })
                            } else{
-                               throw new Error("Gps Packet Data not found");
+                               throw new Error("Gps Notification not found");
                            }
                        })
                        .catch(function(error){

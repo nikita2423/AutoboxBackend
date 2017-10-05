@@ -233,7 +233,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                             callback(error);
                                                                         } else{
                                                                             server.logger.info("Notification for gps has been send successfully");
-                                                                            callback(null);
+                                                                            return databaseObj.GpsNotification.create({
+                                                                                message: title,
+                                                                                deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                                status: "active",
+                                                                                customerId: customer.id
+                                                                            });
                                                                         }
                                                                     });
                                                                 }
@@ -248,14 +253,20 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                             callback(error);
                                                                         } else{
                                                                             console.log("Notification for gps has been send successfully");
-                                                                            callback(null);
+                                                                            return databaseObj.GpsNotification.create({
+                                                                                message: title,
+                                                                                deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                                status: "active",
+                                                                                customerId: customer.id
+                                                                            });
                                                                         }
                                                                     });
                                                                 }
                                                             }
-                                                        } else{
-                                                            callback(null);
                                                         }
+                                                    })
+                                                    .then(function(gpsNotification){
+                                                        callback(null);
                                                     })
                                                     .catch(function(error){
                                                         callback(error);
@@ -263,7 +274,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
                                             })
                                         }
-                                    })
+                                    });
 
                                     async.series(promises, function (error) {
                                         if(error){
@@ -348,6 +359,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                             if(gpsPacketData[1].internalBatteryLowAlert === false){
                                                                 //send push notification
                                                                 eventType = "Low Internal Battery";
+                                                                title = "Less than 35% Battery left";
                                                                 var message = lowBatteryGpsMessage(customerName, eventType, title, instanceId);
                                                                 if(customerInstance.id){
                                                                     sendNotification(server, message, customerInstance.id, pushFrom, function(error){
@@ -356,22 +368,28 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                             callback(error);
                                                                         } else{
                                                                             console.log("Notification for Low Battery send successfully");
-                                                                            callback(null);
+                                                                            return databaseObj.GpsNotification.create({
+                                                                                message: title,
+                                                                                deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                                status: "active",
+                                                                                customerId: customerInstance.id
+                                                                            });
                                                                         }
                                                                     })
                                                                 }
 
                                                             }
-                                                        } else{
-                                                            callback(null);
                                                         }
+                                                    })
+                                                    .then(function(gpsPacketData){
+                                                        callback(null);
                                                     })
                                                     .catch(function(error){
                                                         callback(error);
                                                     })
                                             })
                                         }
-                                    })
+                                    });
 
                                     async.series(promises, function(error){
                                         if(error){
@@ -451,7 +469,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                            callback(error);
                                                                        } else{
                                                                            console.log("Notification for engine status send successfully");
-                                                                           callback(null);
+                                                                           return databaseObj.GpsNotification.create({
+                                                                               message: title,
+                                                                               deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                               status: "active",
+                                                                               customerId: customer.id
+                                                                           });
                                                                        }
                                                                    })
                                                                }
@@ -466,14 +489,20 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                            callback(error);
                                                                        } else{
                                                                            console.log("Notification for engine status send successfully");
-                                                                           callback(null);
+                                                                           return databaseObj.GpsNotification.create({
+                                                                               message: title,
+                                                                               deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                               status: "active",
+                                                                               customerId: customer.id
+                                                                           });
                                                                        }
                                                                    })
                                                                }
                                                            }
-                                                       } else{
-                                                           callback(null);
                                                        }
+                                                   })
+                                                   .then(function(gpsNotification){
+                                                       callback(null);
                                                    })
                                                    .catch(function(error){
                                                        callback(error);
@@ -574,15 +603,20 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                             callback(error);
                                                                         } else{
                                                                             console.log("Notification for engine status send successfully");
-                                                                            callback(null);
-
+                                                                            return databaseObj.GpsNotification.create({
+                                                                                message: title,
+                                                                                deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                                status: "active",
+                                                                                customerId: customerInstance.id
+                                                                            });
                                                                         }
                                                                     })
                                                                 }
                                                             }
-                                                        } else{
-                                                            callback(null);
                                                         }
+                                                    })
+                                                    .then(function(gpsNotification){
+                                                        callback(null);
                                                     })
                                                     .catch(function(error){
                                                         callback(error);
@@ -682,14 +716,20 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                             callback(error);
                                                                         } else{
                                                                             console.log("Notification for Over Speed send Successfully");
-                                                                            callback(null);
+                                                                            return databaseObj.GpsNotification.create({
+                                                                                message: title,
+                                                                                deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                                status: "active",
+                                                                                customerId: customerInstance.id
+                                                                            });
                                                                         }
                                                                     })
                                                                 }
                                                             }
-                                                        } else{
-                                                            callback(null);
                                                         }
+                                                    })
+                                                    .then(function(gpsNotification){
+                                                        callback(null);
                                                     })
                                                     .catch(function(error){
                                                         callback(error);
@@ -790,16 +830,21 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                                 callback(error);
                                                                             } else{
                                                                                 server.logger.info("Car Towing Notification send Successfully");
-                                                                                callback(null);
+                                                                                return databaseObj.GpsNotification.create({
+                                                                                    message: title,
+                                                                                    deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                                    status: "active",
+                                                                                    customerId: customerInstance.id
+                                                                                });
                                                                             }
                                                                         })
                                                                     }
                                                                 }
                                                             }
-
-                                                        } else{
-                                                            callback(null);
                                                         }
+                                                    })
+                                                    .then(function(gpsNotification){
+                                                        callback(null);
                                                     })
                                                     .catch(function(error){
                                                         callback(error);
