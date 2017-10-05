@@ -436,7 +436,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
    const findAllGpsNotification = function(ctx, lastDate, deviceIMEI, limit, callback){
        lastDate = !lastDate ? new Date():new Date(lastDate);
        const request = ctx.req;
-       if(!filter){
+       if(!deviceIMEI && !limit){
            callback(new Error("Invalid Arguments"));
        } else{
            if(request.accessToken){

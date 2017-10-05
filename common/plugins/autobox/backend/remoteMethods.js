@@ -54,7 +54,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         findAllCustomerOfferMethod();
         rateDealerExperienceMethod();
         findAllQuoteMessageMethod();
-        deleteSosContactMethod();
+        updateSosDataMethod();
 
 
     };
@@ -1037,10 +1037,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
       })
     };
 
-    const deleteSosContactMethod = function(){
+    const updateSosDataMethod = function(){
         const Sos = databaseObj.Sos;
-        Sos.deleteSosContact = deleteSosContact;
-        Sos.remoteMethod('deleteSosContact', {
+        Sos.updateSosData = updateSosData;
+        Sos.remoteMethod('updateSosData', {
             accepts: [
                 {
                     arg: 'ctx',
@@ -3453,7 +3453,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         }
     };
 
-    const deleteSosContact = function(ctx, sosObj, callback){
+    const updateSosData = function(ctx, sosObj, callback){
         const request = ctx.req;
         if(!sosObj){
             callback(new Error("Invalid Arguments"));
