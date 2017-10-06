@@ -588,10 +588,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             }
                             //send email to workshop
                             const subject = packageObj.workshop.subject_service_booking;
-                            const to = [];
+                            const toService = [];
                             const from = packageObj.from;
-                            to.push(serviceBookingObj.workshop.email);
-                            emailPlugin.adminEmail.serviceBookingWorkshop(from, to, subject, serviceBookingObj, function (err, send) {
+                            toService.push(serviceBookingObj.workshop.email);
+                            emailPlugin.adminEmail.serviceBookingWorkshop(from, toService, subject, serviceBookingObj, function (err, send) {
                                 if(err){
                                     console.log(err);
                                 } else{
