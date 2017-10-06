@@ -75,7 +75,7 @@
     },
     "vehicleColor": {
       "type": "string",
-      "required": git ,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
