@@ -2741,7 +2741,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                   const userId = request.accessToken.userId;
                   const Feedback = databaseObj.Feedback;
                   Feedback.create({
-                      subject: feedbackObj.subject,
+                      subject: "",
                       message: feedbackObj.message,
                       customerId: userId
                   })
