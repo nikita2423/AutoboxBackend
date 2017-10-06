@@ -22,6 +22,9 @@
   "dealer": {
     "subject_customer_quote": "New Quote Arrived!"
   },
+  "workshop": {
+    "subject_service_booking": "New Service Booking Arrived!"
+  },
   "WAITING_TIME": 48,
   "DEALER_ROLE": "Dealer",
   "soldViaAutobox":{

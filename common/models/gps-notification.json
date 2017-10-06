@@ -12,7 +12,7 @@
     "deviceIMEI": {
       "type": "string"
     },
-       "status": {
+    "status": {
       "type": "string",
       "default": "active"
     },

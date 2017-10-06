@@ -113,6 +113,11 @@
       "type": "belongsTo",
       "model": "VehicleDetail",
       "foreignKey": ""
+    },
+    "vehicleInfo": {
+      "type": "belongsTo",
+      "model": "VehicleInfo",
+      "foreignKey": ""
     }
   },
   "acls": [],

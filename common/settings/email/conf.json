@@ -36,6 +36,12 @@
         "label": "Quote Generated For Dealer",
         "templatePath": "../../plugins/autobox/backend/email/dealer/quote_to_dealer.ejs",
         "display": false
+      },
+      "serviceBookingWorkshop": {
+        "name": "serviceBookingWorkshop",
+        "label": "Service Booking Workshop",
+        "templatePath": "../../plugins/autobox/backend/email/workshop/service_booking.ejs",
+        "display": false
       }
     }
   }],

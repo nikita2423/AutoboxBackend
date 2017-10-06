@@ -556,6 +556,18 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         .then(function(customer){
                             if(customer){
                                 serviceBookingObj.customer = customer;
+                                return databaseObj.Workshop.findById(serviceBookingObj.workshopId)
+                            }
+                        })
+                        .then(function(workshop){
+                            if(workshop){
+                                serviceBookingObj.workshop = workshop;
+                                return databaseObj.VehicleInfo.findById(serviceBookingObj.vehicleInfoId)
+                            }
+                        })
+                        .then(function(vehicleInfo){
+                            if(vehicleInfo){
+                                serviceBookingObj.vehicleInfo = vehicleInfo;
                             }
                         })
                         .then(function(){
@@ -574,6 +586,18 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                     }
                                 })
                             }
+                            //send email to workshop
+                            const subject = packageObj.workshop.subject_service_booking;
+                            const to = [];
+                            const from = packageObj.from;
+                            to.push(serviceBookingObj.workshop.email);
+                            emailPlugin.adminEmail.serviceBookingWorkshop(from, to, subject, serviceBookingObj, function (err, send) {
+                                if(err){
+                                    console.log(err);
+                                } else{
+                                    console.log("Email send Successfully for service booking");
+                                }
+                            });
 
                         })
                         .catch(function(error){

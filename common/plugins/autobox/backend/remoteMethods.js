@@ -2226,18 +2226,27 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      */
     const createServiceBooking = function(ctx, serviceBookingObj, callback){
       const request = ctx.req;
+      let vehicleInfoId;
       if(!serviceBookingObj){
           return callback(new Error("Invalid Arguments"));
       } else{
           if(request.accessToken){
               if(request.accessToken.userId){
                   const customerId = request.accessToken.userId;
+                  const VehicleDetail = databaseObj.VehicleDetail;
                   const ServiceBooking = databaseObj.ServiceBooking;
-                  ServiceBooking.create({
-                      workshopId: serviceBookingObj.workshopId,
-                      vehicleDetailId: serviceBookingObj.vehicleDetailId,
-                      customerId: customerId
-                  })
+                  VehicleDetail.findById(serviceBookingObj.vehicleDetailId)
+                      .then(function(vehicleDetail){
+                          if(vehicleDetail){
+                              vehicleInfoId = vehicleDetail.vehicleInfoId;
+                              return ServiceBooking.create({
+                                  workshopId: serviceBookingObj.workshopId,
+                                  vehicleDetailId: serviceBookingObj.vehicleDetailId,
+                                  vehicleInfoId : vehicleInfoId,
+                                  customerId: customerId
+                              })
+                          }
+                      })
                       .then(function(serviceBooking){
                           if(serviceBooking){
                               callback(null, serviceBooking);
