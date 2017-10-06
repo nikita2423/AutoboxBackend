@@ -36,7 +36,7 @@
     },
     "fuelType": {
       "type": "string",
-      "required": true,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -49,7 +49,7 @@
     },
     "vehicleTrim": {
       "type": "string",
-      "required": true,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -62,7 +62,7 @@
     },
     "vehicleGearbox": {
       "type": "string",
-      "required": true,
+      "required": false,
       "template": {
         "type": "input",
         "templateOptions": {
@@ -75,7 +75,7 @@
     },
     "vehicleColor": {
       "type": "string",
-      "required": false,
+      "required": git ,
       "template": {
         "type": "input",
         "templateOptions": {
