@@ -9,7 +9,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const process = require("process");
 
     var init = function(){
-        gpsTestNotification();
+        //gpsTestNotification();
         setGpsNotificationStatusMethod();
         sendHardBrakingAccelerationNotification();
         sendGpsBatteryLowNotification();
