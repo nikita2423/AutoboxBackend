@@ -462,6 +462,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                Customer.findById(customerId)
                                                    .then(function(customer){
                                                        if(customer){
+                                                           customerInstance = customer;
                                                            customerName = customer.firstName;
                                                            var lastName = customer.lastName? customer.lastName : "";
                                                            customerName = customerName + " " + lastName;
