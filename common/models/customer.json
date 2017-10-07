@@ -230,6 +230,9 @@
         }
       }
     },
+    "bloodGroup": {
+      "type": "string"
+    },
     "googleRefreshToken": {
       "type": "string"
     }

@@ -2974,6 +2974,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                   cityName: customerObj.cityName,
                                   workshopId : customerObj.workshopId,
                                   phoneNumber: customerObj.phoneNumber,
+                                  bloodGroup: customerObj.bloodGroup,
                                   id: customerId,
                                   status: "active",
                                   added: customer.added,

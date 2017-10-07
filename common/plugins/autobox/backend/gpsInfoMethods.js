@@ -451,7 +451,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                lt : lastDate
                            },
                            customerId : customerId
-                       }
+                       },
+                       order: "added DESC"
                    })
                        .then(function(gpsNotificationList){
                            if(gpsNotificationList){
