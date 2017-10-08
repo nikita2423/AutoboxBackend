@@ -1,0 +1,7 @@
+{
+  "name": "dealerPanel",
+  "description": "This plugin handles all dealer logic",
+  "routeExposure": "/dealer",
+  "activate": true,
+  "pluginDependencies": {}
+}

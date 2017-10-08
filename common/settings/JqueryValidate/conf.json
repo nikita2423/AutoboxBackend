@@ -6,7 +6,8 @@
   "activate": true,
   "load":{
     "root": true,
-    "dealerPanel": true
+    "dealerPanel": true,
+    "school": true
   },
   "pluginDepedencies": {}
 }

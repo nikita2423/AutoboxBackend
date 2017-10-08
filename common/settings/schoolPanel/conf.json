@@ -1,0 +1,15 @@
+{
+  "name": "schoolPanel",
+  "description": "This plugin handles all school logic",
+  "routeExposure": "/schoolPanel",
+  "activate": true,
+  "load":{
+    "dealerPanel": false,
+    "root": false,
+    "school":true
+  },
+  "loadDatabases":[
+
+  ],
+  "pluginDependencies": {}
+}

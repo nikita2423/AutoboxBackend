@@ -1,0 +1,31 @@
+{
+  "css": {
+    "/schoolLogin/style/schoolLogin.css": "loginCss"
+  },
+  "js": {
+    "/schoolLogin/scripts/controllers/login.js": "loginControl",
+    "/schoolLogin/scripts/services/schoolLogin.js": "loginService",
+    "/schoolLogin/scripts/controllers/forgotPass.js": "forgotPassControl",
+    "/schoolLogin/scripts/controllers/register.js": "registerControl",
+    "/schoolLogin/scripts/routes/schoolLogin.js": "loginRoute",
+    "/schoolLogin/scripts/directives/schoolLogin.js": "loginDirectives"
+  },
+  "moduleDependencies": {
+    "/static/bower_components/angular-permission/dist/angular-permission.js": "permission"
+  },
+  "settings": ["/schoolLogin/admin-panel-setting.js"],
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [
+      {
+        "path": "views/headerHook.html",
+        "acl": {
+          "allow": [],
+          "reject": []
+        }
+      }
+    ],
+    "footerHook": []
+  }
+}

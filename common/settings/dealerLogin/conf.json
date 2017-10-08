@@ -5,7 +5,8 @@
   "activate": true,
   "load":{
     "dealerPanel": true,
-    "root": false
+    "root": false,
+    "school":false
   },
   "roles":{
     "serviceLoggedUser": "Dealer"

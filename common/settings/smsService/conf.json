@@ -4,7 +4,8 @@
   "activate": true,
   "load":{
     "root": false,
-    "dealerPanel": false
+    "dealerPanel": false,
+    "school":false
   },
   "services": {},
   "routeExposure": "/smsService",

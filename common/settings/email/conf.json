@@ -4,7 +4,8 @@
   "activate": true,
   "load":{
     "root": true,
-    "dealerPanel": false
+    "dealerPanel": false,
+    "school":false
   },
   "mailConfig": [{
     "emailModel": "adminEmail",
