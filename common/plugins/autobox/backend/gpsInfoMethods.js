@@ -283,7 +283,17 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                      });
                                      if(count>0){
                                          //upsert
-                                         return gpsTrackerInfoInstance.updateAttribute("gpsPassword", gpsTrackerInfoInstance.gpsPassword);
+                                         return GpsTrackerInfo.upsert({
+                                             deviceIMEI : gpsTrackerInfoInstance.deviceIMEI,
+                                             gpsPassword : gpsTrackerInfoInstance.gpsPassword,
+                                             registrationNumber : gpsTrackerInfoObj.registrationNumber,
+                                             serialNumber : gpsTrackerInfoObj.serialNumber,
+                                             modelName : gpsTrackerInfoObj.modelName,
+                                             status : gpsTrackerInfoInstance.status,
+                                             added: gpsTrackerInfoInstance.added,
+                                             updated: gpsTrackerInfoInstance.updated,
+                                             customerId: customerId
+                                         });
                                      } else{
                                          //create
                                          return GpsTrackerInfo.create({
