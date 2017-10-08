@@ -292,7 +292,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                              status : gpsTrackerInfoInstance.status,
                                              added: gpsTrackerInfoInstance.added,
                                              updated: gpsTrackerInfoInstance.updated,
-                                             customerId: customerId,
+                                             customerId: gpsTrackerInfoInstance.customerId,
                                              id : gpsTrackerInfoInstance.id
                                          });
                                      } else{
