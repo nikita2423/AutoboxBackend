@@ -4,6 +4,11 @@
   "routeExposure": "/dataImport",
   "activate": true,
   "pluginDependencies": {},
+  "load":{
+    "root":true,
+    "dealer": false,
+    "school":false
+  },
   "constants":{
     "sheetColNumber": "sheetColNumber"
   },

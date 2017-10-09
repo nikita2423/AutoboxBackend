@@ -6,7 +6,8 @@
   "services": {},
   "load":{
     "root": false,
-    "dealerPanel": false
+    "dealerPanel": false,
+    "school":false
   },
   "config":{
     "google":{

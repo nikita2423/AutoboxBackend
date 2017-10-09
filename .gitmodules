@@ -50,9 +50,7 @@
 [submodule "common/plugin/fileUpload"]
 	path = common/plugin/fileUpload
 	url = https://github.com/snaphy-plugin-2/fileUpload.git
-[submodule "common/plugins/detailView"]
-	path = common/plugins/detailView
-	url = https://github.com/snaphy-plugin-2/detailView.git
-[submodule "common/plugins/fileUpload"]
-	path = common/plugins/fileUpload
-	url = https://github.com/snaphy-plugin-2/fileUpload.git
+
+[submodule "common/plugins/schoolLogin"]
+	path = common/plugins/schoolLogin
+	url = https://github.com/snaphy-plugin-2/login-plugin.git

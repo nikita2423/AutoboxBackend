@@ -5,7 +5,8 @@
   "activate": true,
   "load":{
     "root": true,
-    "dealerPanel": false
+    "dealerPanel": false,
+    "school": false
   },
   "routeExposure": "/login",
   "adminRole": "admin",

@@ -1,0 +1,38 @@
+{
+  "css": {
+    "/schoolPanel/style/schoolPanel.css": "schoolPanelCss"
+  },
+  "js": {
+    "/schoolPanel/scripts/routes/schoolPanel.js": "schoolPanelRoute",
+    "/schoolPanel/scripts/controllers/schoolPanel.js": "schoolPanelController",
+    "/schoolPanel/scripts/directives/schoolPanel.js": "schoolPanelDirectives",
+    "/schoolPanel/scripts/services/helper.js": "HelperServices",
+    "/schoolPanel/style/schoolPanel.css": "schoolPanelCss"
+  },
+  "moduleDependencies":{
+
+  },
+  "settings": ["/schoolPanel/admin-panel-setting.js"],
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [
+      {
+        "path":"views/sideBarHook.html",
+        "acl":{
+          "allow":[],
+          "reject":["admin", "Admin", "Dealer"]
+        }
+      }
+    ],
+    "headerHook": [
+      {
+        "path":"views/header-hooks.html",
+        "acl":{
+          "allow":[],
+          "reject":["admin", "Admin", "Dealer"]
+        }
+      }
+    ],
+    "footerHook":[]
+  }
+}
