@@ -228,3 +228,13 @@ header > ul > li > button {
     overflow: auto !important;
     overflow-y: auto !important;
 }
+
+h3 img {
+    max-height: 50px;
+}
+#map {
+    height: 400px;
+    margin: 20px 0;
+    border-radius: 5px;
+    border: 1px solid silver;
+}

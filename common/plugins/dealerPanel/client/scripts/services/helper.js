@@ -5,7 +5,7 @@
 angular.module($snaphy.getModuleName())
 //Define your services here....
     .factory('HelperService', ['$state', 'LoginServices', '$q', "$timeout", "Database", 'SnaphyTemplate', 'DetailViewResource', "$rootScope",
-        function($state, LoginServices, $q, $timeout, Database, SnaphyTemplate, DetailViewResource, $rootScope,)
+        function($state, LoginServices, $q, $timeout, Database, SnaphyTemplate, DetailViewResource, $rootScope)
         {
                 /**
                  * This method initialize the method for service provider screen..
@@ -473,6 +473,7 @@ angular.module($snaphy.getModuleName())
                                 },
                                 dealerVehicleList: [],
                                 findDealerVehicles: findDealerVehicles,
+                                initMap : initMap,
                                 config: {
                                     stateName: "trackVehicle",
                                     stateOptions: {},
@@ -908,6 +909,18 @@ angular.module($snaphy.getModuleName())
                         }
                     };
                     return settings;
+                };
+
+                var initMap = function(){
+                        var options = {
+                            center: new google.maps.LatLng(28.582261, 77.366669),
+                            zoom: 13,
+                            disableDefaultUI: true
+                        }
+                        this.map = new google.maps.Map(
+                            document.getElementById("map"), options
+                        );
+                        /* this.places = new google.maps.places.PlacesService(this.map);*/
                 };
 
 

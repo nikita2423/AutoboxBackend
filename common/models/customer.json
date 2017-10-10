@@ -273,6 +273,11 @@
       "type": "belongsTo",
       "model": "Bus",
       "foreignKey": ""
+    },
+    "planType": {
+      "type": "belongsTo",
+      "model": "PlanType",
+      "foreignKey": ""
     }
   },
   "acls": [

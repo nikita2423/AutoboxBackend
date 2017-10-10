@@ -56,6 +56,10 @@ angular.module($snaphy.getModuleName())
             $scope.settings.tabs.replyCustomerMessage.initialize();
         };
 
+        $scope.initMapView = function(){
+            $scope.settings.tabs.trackVehicle.initMap();
+        };
+
 
         /**
          * Track Dealer Vehicle Init.

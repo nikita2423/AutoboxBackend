@@ -1,0 +1,32 @@
+{
+  "name": "PlanType",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "amount": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "chauffeurCount": {
+      "type": "number"
+    },
+    "vehicleTrackCount": {
+      "type": "number"
+    },
+    "schoolBusTrackCount": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

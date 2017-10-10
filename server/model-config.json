@@ -303,5 +303,9 @@
   "GpsNotification": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "PlanType": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

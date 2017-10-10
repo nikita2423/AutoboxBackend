@@ -573,7 +573,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         .then(function(){
                             const to = serviceBookingObj.customer.firstName + " " + serviceBookingObj.customer.lastName;
                             const type = "ServiceBooking";
-                            const title = "Your Service Booking has been done Successfully";
+                            const title = "Your service booking sent successfully.";
                             const instanceId = serviceBookingObj.id;
                             var pushFrom = packageObj.companyName;
                             const message = serviceBookingNotificationFormat(to, type, title, instanceId);
