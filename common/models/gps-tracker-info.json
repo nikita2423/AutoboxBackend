@@ -41,6 +41,42 @@
       "type": "date",
       "required": true,
       "defaultFn": "now"
+    },
+    "gpsTrackerNotification": {
+      "type": "object",
+      "required": false,
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "key": "hardBraking",
+              "type": "input",
+              "default": "on"
+            },
+            {
+              "key": "hardAcceleration",
+              "type": "input",
+              "default": "on"
+            },
+            {
+              "key": "gpsDisconnect",
+              "type": "input",
+              "default": "on"
+            },
+            {
+              "key": "vehicleTowing",
+              "type": "input",
+              "default": "on"
+            },
+            {
+              "key": "overSpeeding",
+              "type": "input",
+              "default": "on"
+            }
+          ]
+        }
+      }
     }
   },
   "validations": [],
@@ -48,6 +84,11 @@
     "customer": {
       "type": "belongsTo",
       "model": "Customer",
+      "foreignKey": ""
+    },
+    "vehicleDetail": {
+      "type": "belongsTo",
+      "model": "VehicleDetail",
       "foreignKey": ""
     }
   },

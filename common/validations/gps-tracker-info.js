@@ -21,6 +21,16 @@ module.exports = function(Gpstrackerinfo, server, helper) {
         if(!instance.status){
             instance.status = "active";
         }
+        if(!instance.gpsTrackerNotification){
+            instance.gpsTrackerNotification = {
+                hardBraking : "on",
+                hardAcceleration : "on",
+                gpsDisconnect : "on",
+                vehicleTowing : "on",
+                overSpeeding: "on"
+            };
+        }
+
 
         next();
 
