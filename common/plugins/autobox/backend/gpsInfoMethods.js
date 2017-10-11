@@ -163,10 +163,13 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     http: {
                         source: 'context'
                     }
+                },
+                {
+                    arg: "deviceIMEI", type: "string"
                 }
             ],
             returns: {
-                arg: "gpsPacketDataObj", type: ["GpsPacketData"], root: true
+                arg: "gpsPacketDataObj", type: "GpsPacketData", root: true
             }
         })
     };
@@ -564,16 +567,26 @@ module.exports = function( server, databaseObj, helper, packageObj) {
        }
    };
 
-   const findAllGpsPacketDataInfo = function(ctx, callback){
+   const findAllGpsPacketDataInfo = function(ctx, deviceIMEI, callback){
        const request = ctx.req;
-       const promises = [];
-       let gpsPacketDataList = [];
        if(request.accessToken){
            if(request.accessToken.userId){
-               const customerId = request.accessToken.userId;
-               const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
                const GpsPacketData = databaseObj.GpsPacketData;
-               GpsTrackerInfo.find({
+               GpsPacketData.findOne({
+                   where: {
+                       deviceIMEI : deviceIMEI
+                   },
+                   order: 'added DESC'
+               })
+                   .then(function(gpsPacketData){
+                       if(gpsPacketData){
+                           callback(null, gpsPacketData);
+                       }
+                   })
+                   .catch(function(error){
+                       callback(error);
+                   });
+              /* GpsTrackerInfo.find({
                    where: {
                        customerId : customerId,
                        status: 'active'
@@ -615,7 +628,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                    })
                    .catch(function(error){
                        callback(error);
-                   })
+                   })*/
            } else{
                callback(new Error("User not valid"));
            }
