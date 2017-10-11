@@ -153,9 +153,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
     const findAllGpsPacketDataInfoMethod = function(){
-        const GpsPacketData = databaseObj.GpsPacketData;
-        GpsPacketData.findAllGpsPacketDataInfo = findAllGpsPacketDataInfo;
-        GpsPacketData.remoteMethod('findAllGpsPacketDataInfo', {
+        const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+        GpsTrackerInfo.findAllGpsPacketDataInfo = findAllGpsPacketDataInfo;
+        GpsTrackerInfo.remoteMethod('findAllGpsPacketDataInfo', {
             accepts: [
                 {
                     arg: 'ctx',
@@ -581,7 +581,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                    .then(function(gpsPacketData){
                        if(gpsPacketData){
                            callback(null, gpsPacketData);
+                       }else{
+                           callback(null, {});
                        }
+
                    })
                    .catch(function(error){
                        callback(error);
