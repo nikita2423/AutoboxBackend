@@ -25,6 +25,14 @@
       "type": "string",
       "required": false
     },
+    "latitude": {
+      "type": "string",
+      "required": false
+    },
+    "longitude": {
+      "type": "string",
+      "required": false
+    },
     "latlng": {
       "type": "geopoint",
       "template": {
