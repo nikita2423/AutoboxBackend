@@ -580,7 +580,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                })
                    .then(function(gpsPacketData){
                        if(gpsPacketData){
-                           callback(null, gpsPacketData);
+                           callback(null, {data: gpsPacketData});
                        }else{
                            callback(null, {});
                        }
