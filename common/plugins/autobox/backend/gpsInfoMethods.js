@@ -169,7 +169,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 }
             ],
             returns: {
-                arg: "gpsPacketDataObj", type: "GpsPacketData", root: true
+                arg: "gpsPacketDataObj", type: "object", root: true
             }
         })
     };
