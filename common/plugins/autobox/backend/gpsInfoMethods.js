@@ -16,6 +16,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         findAllGpsPacketDataInfoMethod();
         fetchGpsNotificationDataMethod();
         updateGpsNotificationDataMethod();
+
     };
 
     const createGpsPacketDataMethod = function(){
@@ -220,6 +221,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
         })
     };
+
+
 
 
     const createGpsPacketData = function(gpsPacketDataObj, callback){
@@ -715,6 +718,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
            }
        }
    };
+
+
 
 
     return {

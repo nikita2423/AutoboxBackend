@@ -42,12 +42,46 @@
     "homeAddress": {
       "type": "string"
     },
+    "gpsBusNotification": {
+      "type": "object",
+      "required": false,
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "key": "hardBraking",
+              "type": "input",
+              "default": "on"
+            },
+            {
+              "key": "hardAcceleration",
+              "type": "input",
+              "default": "on"
+            },
+            {
+              "key": "gpsDisconnect",
+              "type": "input",
+              "default": "on"
+            },
+            {
+              "key": "overSpeeding",
+              "type": "input",
+              "default": "on"
+            }
+          ]
+        }
+      }
+    },
     "status": {
       "type": "string",
       "default": "active"
     },
     "vicinity": {
       "type": "number"
+    },
+    "deviceIMEI": {
+      "type": "string"
     },
     "added": {
       "type": "date",

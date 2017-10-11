@@ -11,6 +11,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         findAllTrackBusMethod();
         deleteTrackBusVehicleMethod();
         updateTrackBusDetailMethod();
+        fetchBusLocationMethod();
     };
 
     const findAllSchoolMethod = function(){
@@ -148,6 +149,28 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         })
     };
 
+    const fetchBusLocationMethod = function(){
+        const BusModel = databaseObj.BusModel;
+        BusModel.fetchBusLocation = fetchBusLocation;
+        BusModel.remoteMethod("fetchBusLocation", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "deviceIMEI", type: "string"
+                }
+            ],
+            returns: {
+                arg:  "gpsPacketData", type: "object", root : true
+            }
+        })
+    }
+
 
 
     const findAllSchool = function(ctx, filter, callback){
@@ -256,7 +279,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                        vicinity : trackVehicleObj.vicinity,
                                        gpsCode : gpsCode,
                                        busModelId : busModelId,
-                                       customerId : customerId
+                                       customerId : customerId,
+                                       deviceIMEI : bus.deviceIMEI
                                    });
                                } else{
                                    throw new Error("Code doesn't match");
@@ -361,6 +385,40 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         .then(function(trackBusVehicle){
                             if(trackBusVehicle){
                                 callback(null, trackBusVehicle);
+                            }
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
+
+    const fetchBusLocation = function(ctx, deviceIMEI, callback){
+        const request = ctx.req;
+        if(!deviceIMEI){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const customerId = request.accessToken.userId;
+                    const GpsPacketData = databaseObj.GpsPacketData;
+                    GpsPacketData.findOne({
+                        where: {
+                            deviceIMEI : deviceIMEI
+                        },
+                        order : ["added DESC"]
+                    })
+                        .then(function(gpsPacketData){
+                            if(gpsPacketData){
+                                callback(null, {data: gpsPacketData});
+                            } else{
+                                callback(null, {});
                             }
                         })
                         .catch(function(error){

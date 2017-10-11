@@ -18,6 +18,19 @@
         }
       }
     },
+    "deviceIMEI": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Device IMEI",
+          "id": "deviceIMEI"
+        }
+      }
+    },
     "gpsCode": {
       "type": "string",
       "required": true,
