@@ -293,6 +293,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                              added: gpsTrackerInfoInstance.added,
                                              updated: gpsTrackerInfoInstance.updated,
                                              customerId: gpsTrackerInfoInstance.customerId,
+                                             vehicleDetailId : gpsTrackerInfoObj.vehicleDetailId,
                                              id : gpsTrackerInfoInstance.id
                                          });
                                      } else{
@@ -303,6 +304,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                              serialNumber : gpsTrackerInfoObj.serialNumber,
                                              modelName : gpsTrackerInfoObj.modelName,
                                              gpsPassword : gpsTrackerInfoObj.gpsPassword,
+                                             vehicleDetailId : gpsTrackerInfoObj.vehicleDetailId,
                                              customerId : customerId
                                          });
                                      }
@@ -318,6 +320,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                      serialNumber : gpsTrackerInfoObj.serialNumber,
                                      modelName : gpsTrackerInfoObj.modelName,
                                      gpsPassword : gpsTrackerInfoObj.gpsPassword,
+                                     vehicleDetailId : gpsTrackerInfoObj.vehicleDetailId,
                                      customerId : customerId
                                  });
                              }
@@ -329,6 +332,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                  serialNumber : gpsTrackerInfoObj.serialNumber,
                                  modelName : gpsTrackerInfoObj.modelName,
                                  gpsPassword : gpsTrackerInfoObj.gpsPassword,
+                                 vehicleDetailId : gpsTrackerInfoObj.vehicleDetailId,
                                  customerId : customerId
                              });
                          }
