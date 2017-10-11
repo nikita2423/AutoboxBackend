@@ -13,6 +13,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         deleteGpsInfoMethod();
         fetchGpsInfoDetailsMethod();
         findAllGpsNotificationMethod();
+        findAllGpsPacketDataInfoMethod();
+        fetchGpsNotificationDataMethod();
+        updateGpsNotificationDataMethod();
     };
 
     const createGpsPacketDataMethod = function(){
@@ -145,6 +148,72 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             ],
             returns: {
                 arg: "gpsPacketDataObj", type: "object", root: true
+            }
+        })
+    };
+
+    const findAllGpsPacketDataInfoMethod = function(){
+        const GpsPacketData = databaseObj.GpsPacketData;
+        GpsPacketData.findAllGpsPacketDataInfo = findAllGpsPacketDataInfo;
+        GpsPacketData.remoteMethod('findAllGpsPacketDataInfo', {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                }
+            ],
+            returns: {
+                arg: "gpsPacketDataObj", type: ["GpsPacketData"], root: true
+            }
+        })
+    };
+
+    const fetchGpsNotificationDataMethod = function(){
+        const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+        GpsTrackerInfo.fetchGpsNotificationData = fetchGpsNotificationData;
+        GpsTrackerInfo.remoteMethod('fetchGpsNotificationData', {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg:"deviceIMEI", type: "string"
+                }
+            ],
+            returns: {
+                arg: "gpsTrackerInfoObj", type: "GpsTrackerInfo", root: true
+            }
+        })
+    };
+
+    const updateGpsNotificationDataMethod = function(){
+        const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+        GpsTrackerInfo.updateGpsNotificationData = updateGpsNotificationData;
+        GpsTrackerInfo.remoteMethod('updateGpsNotificationData', {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "deviceIMEI", type: "string"
+                },
+                {
+                    arg: "gpsTrackerNotification", type: "object"
+                }
+            ],
+            returns: {
+                arg:  "gpsTrackerInfo", type: "GpsTrackerInfo", root : true
             }
         })
     };
@@ -486,6 +555,142 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                        .catch(function(error){
                            callback(error);
                        });
+               } else{
+                   callback(new Error("User not valid"));
+               }
+           } else{
+               callback(new Error("User not valid"));
+           }
+       }
+   };
+
+   const findAllGpsPacketDataInfo = function(ctx, callback){
+       const request = ctx.req;
+       const promises = [];
+       let gpsPacketDataList = [];
+       if(request.accessToken){
+           if(request.accessToken.userId){
+               const customerId = request.accessToken.userId;
+               const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+               const GpsPacketData = databaseObj.GpsPacketData;
+               GpsTrackerInfo.find({
+                   where: {
+                       customerId : customerId,
+                       status: 'active'
+                   }
+               })
+                   .then(function(gpsTrackerInfoList){
+                       if(gpsTrackerInfoList){
+                           if(gpsTrackerInfoList.length){
+                               gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
+                                   if(gpsTrackerInfo){
+                                       promises.push(function(callback){
+                                           GpsPacketData.findOne({
+                                               where: {
+                                                   deviceIMEI : gpsTrackerInfo.deviceIMEI
+                                               },
+                                               order: 'added DESC'
+                                           })
+                                               .then(function(gpsPacketData){
+                                                   if(gpsPacketData){
+                                                       gpsPacketDataList.push(gpsPacketData);
+                                                   }
+                                                   callback(null);
+                                               })
+                                               .catch(function(error){
+                                                   callback(error);
+                                               })
+                                       })
+                                   }
+                               })
+                           }
+                       }
+                       async.series(promises, function(error){
+                           if(error){
+                               callback(error);
+                           } else{
+                               callback(null, gpsPacketDataList);
+                           }
+                       })
+                   })
+                   .catch(function(error){
+                       callback(error);
+                   })
+           } else{
+               callback(new Error("User not valid"));
+           }
+       } else{
+           callback(new Error("User not valid"));
+       }
+   };
+
+   const fetchGpsNotificationData = function(ctx, deviceIMEI, callback){
+       const request = ctx.req;
+       if(!deviceIMEI){
+           callback(new Error("Invalid Arguments"));
+       } else{
+           if(request.accessToken){
+               if(request.accessToken.userId){
+                   const customerId = request.accessToken.userId;
+                   const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+                   GpsTrackerInfo.findOne({
+                       where: {
+                           deviceIMEI : deviceIMEI,
+                           status: "active",
+                           customerId : customerId
+                       }
+                   })
+                       .then(function(gpsTrackerInfo){
+                           if(gpsTrackerInfo){
+                               callback(null, gpsTrackerInfo);
+                           } else{
+                               throw new Error("Gps Tracker Info not found");
+                           }
+                       })
+                       .catch(function(error){
+                           callback(error);
+                       });
+               } else{
+                   callback(new Error("User not valid"));
+               }
+           } else{
+               callback(new Error("User not valid"));
+           }
+       }
+   };
+
+   const updateGpsNotificationData = function(ctx, deviceIMEI, gpsTrackerNotification, callback){
+       const request = ctx.req;
+       if(!deviceIMEI){
+           callback(new Error("Invalid Arguments"));
+       } else{
+           if(request.accessToken){
+               if(request.accessToken.userId){
+                   const customerId = request.accessToken.userId;
+                   const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+                   GpsTrackerInfo.findOne({
+                       where: {
+                           deviceIMEI : deviceIMEI,
+                           customerId : customerId
+                       }
+                   })
+                       .then(function(gpsTrackerInfo){
+                           if(gpsTrackerInfo){
+                               return gpsTrackerInfo.updateAttribute("gpsTrackerNotification", gpsTrackerNotification)
+                           }else{
+                               throw new Error("GpsTrackerInfo not found");
+                           }
+                       })
+                       .then(function(gpsTrackerInfo){
+                           if(gpsTrackerInfo){
+                               callback(null, gpsTrackerInfo);
+                           } else{
+                               throw new Error("Not able to update the data");
+                           }
+                       })
+                       .catch(function(error){
+                           callback(error);
+                       })
                } else{
                    callback(new Error("User not valid"));
                }
