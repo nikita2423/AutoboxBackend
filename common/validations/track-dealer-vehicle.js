@@ -12,17 +12,6 @@ module.exports = function(Trackdealervehicle, server, helper) {
         }else{
             instance.updated = new Date();
         }
-        if(!instance.status){
-            instance.status = "active";
-        }
-        if(!instance.gpsBusNotification){
-            instance.gpsBusNotification = {
-                hardBraking : "on",
-                hardAcceleration : "on",
-                gpsDisconnect : "on",
-                overSpeeding: "on"
-            };
-        }
         next();
     });
 };
