@@ -12,6 +12,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         deleteTrackBusVehicleMethod();
         updateTrackBusDetailMethod();
         fetchBusLocationMethod();
+        fetchBusNotificationStatusMethod();
+        updateBusNotificationMethod();
     };
 
     const findAllSchoolMethod = function(){
@@ -169,8 +171,54 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 arg:  "gpsPacketData", type: "object", root : true
             }
         })
-    }
+    };
 
+    const fetchBusNotificationStatusMethod = function(){
+        const TrackBusVehicle = databaseObj.TrackBusVehicle;
+        TrackBusVehicle.fetchBusNotificationStatus = fetchBusNotificationStatus;
+        TrackBusVehicle.remoteMethod("fetchBusNotificationStatus", {
+            accepts:[
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "deviceIMEI", type: "string"
+                }
+            ],
+            returns: {
+                arg: "trackBusVehicleObj", type: "TrackBusVehicle", root : true
+            }
+        })
+    };
+
+    const updateBusNotificationMethod = function(){
+        const TrackBusVehicle = databaseObj.TrackBusVehicle;
+        TrackBusVehicle.updateBusNotification = updateBusNotification;
+        TrackBusVehicle.remoteMethod("updateBusNotification", {
+            accepts:[
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "deviceIMEI", type: "string"
+                },
+                {
+                    arg: "notificationObj", type: "object"
+                }
+            ],
+            returns: {
+                arg: "trackBusVehicleObj", type: "TrackBusVehicle", root : true
+            }
+        })
+    };
 
 
     const findAllSchool = function(ctx, filter, callback){
@@ -417,6 +465,81 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         .then(function(gpsPacketData){
                             if(gpsPacketData){
                                 callback(null, {data: gpsPacketData});
+                            } else{
+                                callback(null, {});
+                            }
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
+
+    const fetchBusNotificationStatus = function(ctx, deviceIMEI, callback){
+        const request = ctx.req;
+        if(!deviceIMEI){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const customerId = request.accessToken.userId;
+                    const TrackBusVehicle = databaseObj.TrackBusVehicle;
+                    TrackBusVehicle.findOne({
+                        where: {
+                            customerId : customerId,
+                            status : "active",
+                            deviceIMEI : deviceIMEI
+                        }
+                    })
+                        .then(function(trackBusVehicle){
+                            if(trackBusVehicle){
+                                callback(null, trackBusVehicle);
+                            } else{
+                                callback(null,{});
+                            }
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
+
+    const updateBusNotification = function(ctx, deviceIMEI, notificationObj, callback){
+        const request = ctx.req;
+        if(!deviceIMEI){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const customerId = request.accessToken.userId;
+                    const TrackBusVehicle = databaseObj.TrackBusVehicle;
+                    TrackBusVehicle.findOne({
+                        where: {
+                            customerId : customerId,
+                            deviceIMEI : deviceIMEI,
+                            status : "active"
+                        }
+                    })
+                        .then(function(trackBusVehicle){
+                            if(trackBusVehicle){
+                                return trackBusVehicle.updateAttribute("gpsBusNotification", notificationObj);
+                            }
+                        })
+                        .then(function(trackBusVehicle){
+                            if(trackBusVehicle){
+                                callback(null, trackBusVehicle);
                             } else{
                                 callback(null, {});
                             }
