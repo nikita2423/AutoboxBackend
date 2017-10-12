@@ -189,6 +189,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let eventType;
             let title;
             let customerIdList = [];
+            let gpsTrackerInfoDataList = [];
             var promises = [];
             if(ctx.isNewInstance){
                 process.nextTick(function(){
@@ -205,22 +206,23 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 if(gpsTrackerInfoList.length){
                                     gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
                                         if(gpsTrackerInfo){
-                                            if(gpsTrackerInfo.customerId){
+                                            gpsTrackerInfoDataList.push(gpsTrackerInfo);
+                                           /* if(gpsTrackerInfo.customerId){
                                                 customerIdList.push(gpsTrackerInfo.customerId);
-                                            }
+                                            }*/
                                         }
                                     });
                                 }
                             }
                         })
                         .then(function(){
-                            if(customerIdList){
-                                if(customerIdList.length){
-                                    customerIdList.forEach(function(customerId){
-                                        if(customerId){
+                            if(gpsTrackerInfoDataList){
+                                if(gpsTrackerInfoDataList.length){
+                                    gpsTrackerInfoDataList.forEach(function(gpsTrackerInfo){
+                                        if(gpsTrackerInfo){
                                             const Customer = databaseObj.Customer;
                                             promises.push(function(callback){
-                                                Customer.findById(customerId)
+                                                Customer.findById(gpsTrackerInfo.customerId)
                                                     .then(function(customer){
                                                         if(customer){
                                                             console.log("customerIdList",customer.id);
@@ -234,7 +236,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                 eventType = "Harsh Brake";
                                                                 title = "Harsh Brake has been applied";
                                                                 const message = brakeAccelerationMessageFormat(customerName, eventType, title, instanceId);
-                                                                if(customer.id && customerInstance.gpsTrackerNotification["hardBraking"] === "on"){
+                                                                if(customer.id && gpsTrackerInfo.gpsTrackerNotification["hardBraking"] === "on"){
                                                                     sendNotification(server, message, customer.id, pushFrom, function(error){
                                                                         if(error){
                                                                             //console.log(error);
@@ -255,7 +257,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                 eventType = "Harsh Acceleration";
                                                                 title = "Harsh Acceleration has been applied";
                                                                 const message = brakeAccelerationMessageFormat(customerName, eventType, title, instanceId);
-                                                                if(customer.id && customerInstance.gpsTrackerNotification["hardAcceleration"] === "on"){
+                                                                if(customer.id && gpsTrackerInfo.gpsTrackerNotification["hardAcceleration"] === "on"){
                                                                     sendNotification(server, message, customer.id, pushFrom, function(error){
                                                                         if(error){
                                                                             console.log(error);
@@ -315,6 +317,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let pushFrom;
             let instanceId;
             let customerIdList = [];
+            let gpsTrackerInfoDataList = [];
             var promises = [];
             let customerInstance;
             if(ctx.isNewInstance){
@@ -330,22 +333,23 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 if(gpsTrackerInfoList.length){
                                     gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
                                         if(gpsTrackerInfo){
-                                            if(gpsTrackerInfo.customerId){
+                                            gpsTrackerInfoDataList.push(gpsTrackerInfo);
+                                            /*if(gpsTrackerInfo.customerId){
                                                 customerIdList.push(gpsTrackerInfo.customerId);
-                                            }
+                                            }*/
                                         }
                                     });
                                 }
                             }
                         })
                         .then(function(){
-                            if(customerIdList){
-                                if(customerIdList.length){
-                                    customerIdList.forEach(function(customerId){
-                                        if(customerId){
+                            if(gpsTrackerInfoDataList){
+                                if(gpsTrackerInfoDataList.length){
+                                    gpsTrackerInfoDataList.forEach(function(gpsTrackerInfo){
+                                        if(gpsTrackerInfo){
                                             const Customer = databaseObj.Customer;
                                             promises.push(function(callback){
-                                                Customer.findById(customerId)
+                                                Customer.findById(gpsTrackerInfo.customerId)
                                                     .then(function(customer){
                                                         if(customer){
                                                             console.log("customerIdList",customer.id);
@@ -552,6 +556,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let pushFrom;
             let instanceId;
             let customerIdList = [];
+            let gpsTrackerInfoDataList = [];
             let promises = [];
             if(ctx.isNewInstance){
                 process.nextTick(function(){
@@ -566,22 +571,23 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 if(gpsTrackerInfoList.length){
                                     gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
                                         if(gpsTrackerInfo){
-                                            if(gpsTrackerInfo.customerId){
+                                            gpsTrackerInfoDataList.push(gpsTrackerInfo);
+                                            /*if(gpsTrackerInfo.customerId){
                                                 customerIdList.push(gpsTrackerInfo.customerId);
-                                            }
+                                            }*/
                                         }
                                     });
                                 }
                             }
                         })
                         .then(function(){
-                            if(customerIdList){
-                                if(customerIdList.length){
-                                    customerIdList.forEach(function(customerId){
-                                        if(customerId){
+                            if(gpsTrackerInfoDataList){
+                                if(gpsTrackerInfoDataList.length){
+                                    gpsTrackerInfoDataList.forEach(function(gpsTrackerInfo){
+                                        if(gpsTrackerInfo){
                                             const Customer = databaseObj.Customer;
                                             promises.push(function(callback){
-                                                Customer.findById(customerId)
+                                                Customer.findById(gpsTrackerInfo.customerId)
                                                     .then(function(customer){
                                                         if(customer){
                                                             console.log("customerIdList",customer.id);
@@ -606,7 +612,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                 eventType = "GPS Status";
                                                                 title = "Device has been disconnected";
                                                                 var message = gpsDeviceStatusMessage(customerName, eventType, title, gpsPacketDataObj.id);
-                                                                if(customerInstance.id && customerInstance.gpsTrackerNotification["gpsDisconnect"] === "on"){
+                                                                if(customerInstance.id && gpsTrackerInfo.gpsTrackerNotification["gpsDisconnect"] === "on"){
                                                                     sendNotification(server, message, customerInstance.id, pushFrom, function(error){
                                                                         if(error){
                                                                             console.log(error);
@@ -665,6 +671,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let pushFrom;
             let instanceId;
             let customerIdList = [];
+            let gpsTrackerInfoDataList = [];
             let promises = [];
             if(ctx.isNewInstance){
                 process.nextTick(function(){
@@ -679,22 +686,23 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 if(gpsTrackerInfoList.length){
                                     gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
                                         if(gpsTrackerInfo){
-                                            if(gpsTrackerInfo.customerId){
+                                            gpsTrackerInfoDataList.push(gpsTrackerInfo);
+                                           /* if(gpsTrackerInfo.customerId){
                                                 customerIdList.push(gpsTrackerInfo.customerId);
-                                            }
+                                            }*/
                                         }
                                     });
                                 }
                             }
                         })
                         .then(function(){
-                            if(customerIdList){
-                                if(customerIdList.length){
-                                    customerIdList.forEach(function(customerId){
-                                        if(customerId){
+                            if(gpsTrackerInfoDataList){
+                                if(gpsTrackerInfoDataList.length){
+                                    gpsTrackerInfoDataList.forEach(function(gpsTrackerInfo){
+                                        if(gpsTrackerInfo){
                                             const Customer = databaseObj.Customer;
                                             promises.push(function(callback){
-                                                Customer.findById(customerId)
+                                                Customer.findById(gpsTrackerInfo.customerId)
                                                     .then(function(customer){
                                                         if(customer){
                                                             console.log("customerIdList",customer.id);
@@ -719,7 +727,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                             if(gpsPacketData[1].isOverSpeedStarted === false){
                                                                 //send Notification
                                                                 var message = overSpeedMessageFormat(customerName, eventType, title, gpsPacketDataObj.id);
-                                                                if(customerInstance.id && customerInstance.gpsTrackerNotification["overSpeeding"] === "on"){
+                                                                if(customerInstance.id && gpsTrackerInfo.gpsTrackerNotification["overSpeeding"] === "on"){
                                                                     sendNotification(server, message, customerInstance.id, pushFrom, function(error){
                                                                         if(error){
                                                                             console.log(error);
@@ -778,6 +786,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let pushFrom;
             let instanceId;
             let customerIdList = [];
+            let gpsTrackerInfoDataList = [];
             let promises = [];
             if(ctx.isNewInstance){
                 process.nextTick(function(){
@@ -792,22 +801,23 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 if(gpsTrackerInfoList.length){
                                     gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
                                         if(gpsTrackerInfo){
-                                            if(gpsTrackerInfo.customerId){
+                                            gpsTrackerInfoDataList.push(gpsTrackerInfo);
+                                           /* if(gpsTrackerInfo.customerId){
                                                 customerIdList.push(gpsTrackerInfo.customerId);
-                                            }
+                                            }*/
                                         }
                                     });
                                 }
                             }
                         })
                         .then(function(){
-                            if(customerIdList){
-                                if(customerIdList.length){
-                                    customerIdList.forEach(function(customerId){
-                                        if(customerId){
+                            if(gpsTrackerInfoDataList){
+                                if(gpsTrackerInfoDataList.length){
+                                    gpsTrackerInfoDataList.forEach(function(gpsTrackerInfo){
+                                        if(gpsTrackerInfo){
                                             const Customer = databaseObj.Customer;
                                             promises.push(function(callback){
-                                                Customer.findById(customerId)
+                                                Customer.findById(gpsTrackerInfo.customerId)
                                                     .then(function(customer){
                                                         if(customer){
                                                             console.log("customerIdList",customer.id);
@@ -833,7 +843,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                     title = "Your Vehicle is suspected to be towed";
                                                                     eventType = "Vehicle Towed";
                                                                     var message = vehicleTowingMessageFormat(customerName, eventType, title, gpsPacketDataObj.id);
-                                                                    if(customerInstance.id && customerInstance.gpsTrackerNotification["vehicleTowing"] === "on"){
+                                                                    if(customerInstance.id && gpsTrackerInfo.gpsTrackerNotification["vehicleTowing"] === "on"){
                                                                         sendNotification(server, message, customerInstance.id, pushFrom, function(error){
                                                                             if(error){
                                                                                server.logger.error(error);
