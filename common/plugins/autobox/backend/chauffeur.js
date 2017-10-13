@@ -183,7 +183,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 driverId = customer.id;
                                 return Chauffeur.create({
                                     chauffeurContact : chauffeurObj.chauffeurContact,
-                                    name : chaffeurName,
+                                    name : chauffeurObj.name,
                                     status: "pending",
                                     message : "",
                                     customerId : customerId,
