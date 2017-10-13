@@ -411,7 +411,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 if(chauffeur.status){
                                     if(chauffeur.status === "accept"){
                                         //update it
-                                        return chauffeur.updateAttributes(chauffeurObj);
+                                        return chauffeur.updateAttributes({
+                                            vehicleDetailId : chauffeurObj.vehicleDetailId,
+                                            message : chauffeurObj.message
+                                        });
                                     } else if(chauffeur.status === "reject"){
                                         //create Chauffeur
                                         return Chauffeur.create({
