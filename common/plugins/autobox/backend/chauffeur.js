@@ -127,7 +127,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                   arg: "chauffeurContact", type: "string"
               },
               {
-                  arg: "chauffeurObj", type: "string"
+                  arg: "chauffeurObj", type: "object"
               }
           ],
           returns: {
@@ -362,6 +362,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         let chauffeurPhoneNumber;
         let ownerName;
         let ownerContact;
+        let driverId;
         if(!chauffeurContact && !chauffeurObj){
             callback(new Error("Invalid Arguments"));
         } else{
@@ -394,6 +395,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
                         .then(function(customer){
                             if(customer){
+                                driverId = customer.id;
                                 return Chauffeur.findOne({
                                     where: {
                                         driverId : customer.id,
@@ -413,7 +415,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                     } else if(chauffeur.status === "reject"){
                                         //create Chauffeur
                                         return Chauffeur.create({
-                                            chauffeurContact : chauffeurObj.chauffeurContact,
+                                            chauffeurContact : chauffeurPhoneNumber,
                                             name : chauffeurObj.name,
                                             status: "pending",
                                             message : chauffeurObj.message,
@@ -427,12 +429,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             } else{
                                 //create chauffeur
                                 return Chauffeur.create({
-                                    chauffeurContact : chauffeurObj.chauffeurContact,
+                                    chauffeurContact : chauffeurPhoneNumber,
                                     name : chauffeurObj.name,
                                     status: "pending",
                                     message : chauffeurObj.message,
                                     customerId : customerId,
-                                    driverId : chauffeur.driverId,
+                                    driverId : driverId,
                                     ownerName: ownerName,
                                     ownerContact: ownerContact
                                 });
