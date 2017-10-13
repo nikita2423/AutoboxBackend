@@ -13,6 +13,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         chauffeurReplyMethod();
         findAllChauffeurMethod();
         assignChauffeurVehicleMethod();
+        checkChauffeurPresentMethod();
     };
 
 
@@ -108,6 +109,31 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 arg: "response", type: "object", root : true
             }
         });
+    };
+
+    const checkChauffeurPresentMethod = function(){
+      const Chauffeur = databaseObj.Chauffeur;
+      Chauffeur.checkChauffeurPresent = checkChauffeurPresent;
+      Chauffeur.remoteMethod("checkChauffeurPresent", {
+          accepts: [
+              {
+                  arg: 'ctx',
+                  type: 'object',
+                  http: {
+                      source: 'context'
+                  }
+              },
+              {
+                  arg: "chauffeurContact", type: "string"
+              },
+              {
+                  arg: "chauffeurObj", type: "string"
+              }
+          ],
+          returns: {
+              arg: "chauffeurObj", type: "Chauffeur", root : true
+          }
+      });
     };
 
 
@@ -317,6 +343,106 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         .then(function(chauffuer){
                             if(chauffuer){
                                 callback(null,{response: "success"});
+                            }
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        });
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
+
+    const checkChauffeurPresent = function(ctx, chauffeurContact, chauffeurObj, callback){
+        const request = ctx.req;
+        let chauffeurPhoneNumber;
+        let ownerName;
+        let ownerContact;
+        if(!chauffeurContact && !chauffeurObj){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const customerId = request.accessToken.userId;
+                    const Customer = databaseObj.Customer;
+                    const Chauffeur = databaseObj.Chauffeur;
+                    var phoneNumber = chauffeurContact;
+                    var patt = /\+\d{12,12}/,
+                        match = phoneNumber.toString().match(patt);
+
+                    if (!match) {
+                        chauffeurPhoneNumber = "+91" + phoneNumber;
+                    } else{
+                        chauffeurPhoneNumber = phoneNumber;
+                    }
+                    Customer.findById(customerId)
+                        .then(function(customer){
+                            if(customer){
+                                ownerName = customer.firstName + " " + customer.lastName ? customer.lastName : "";
+                                ownerContact = customer.phoneNumber;
+                            }
+                            return  Customer.findOne({
+                                where: {
+                                    phoneNumber : chauffeurPhoneNumber
+                                }
+                            });
+                        })
+
+                        .then(function(customer){
+                            if(customer){
+                                return Chauffeur.findOne({
+                                    where: {
+                                        driverId : customer.id,
+                                        customerId : customerId
+                                    }
+                                });
+                            } else{
+                                throw new Error("Customer not found");
+                            }
+                        })
+                        .then(function(chauffeur){
+                            if(chauffeur){
+                                if(chauffeur.status){
+                                    if(chauffeur.status === "accept"){
+                                        //update it
+                                        return chauffeur.updateAttributes(chauffeurObj);
+                                    } else if(chauffeur.status === "reject"){
+                                        //create Chauffeur
+                                        return Chauffeur.create({
+                                            chauffeurContact : chauffeurObj.chauffeurContact,
+                                            name : chauffeurObj.name,
+                                            status: "pending",
+                                            message : chauffeurObj.message,
+                                            customerId : customerId,
+                                            driverId : chauffeur.driverId,
+                                            ownerName: ownerName,
+                                            ownerContact: ownerContact
+                                        });
+                                    }
+                                }
+                            } else{
+                                //create chauffeur
+                                return Chauffeur.create({
+                                    chauffeurContact : chauffeurObj.chauffeurContact,
+                                    name : chauffeurObj.name,
+                                    status: "pending",
+                                    message : chauffeurObj.message,
+                                    customerId : customerId,
+                                    driverId : chauffeur.driverId,
+                                    ownerName: ownerName,
+                                    ownerContact: ownerContact
+                                });
+                            }
+                        })
+                        .then(function(chauffeur){
+                            if(chauffeur){
+                                callback(null, chauffeur);
+                            } else{
+                                callback(new Error("Error in creating chauffeur"));
                             }
                         })
                         .catch(function(error){
