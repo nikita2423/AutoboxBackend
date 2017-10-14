@@ -16,6 +16,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         findAllGpsPacketDataInfoMethod();
         fetchGpsNotificationDataMethod();
         updateGpsNotificationDataMethod();
+        resetGpsTrackerInfoPinMethod();
 
     };
 
@@ -150,7 +151,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             returns: {
                 arg: "gpsPacketDataObj", type: "object", root: true
             }
-        })
+        });
     };
 
     const findAllGpsPacketDataInfoMethod = function(){
@@ -172,7 +173,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             returns: {
                 arg: "gpsPacketDataObj", type: "object", root: true
             }
-        })
+        });
     };
 
     const fetchGpsNotificationDataMethod = function(){
@@ -194,7 +195,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             returns: {
                 arg: "gpsTrackerInfoObj", type: "GpsTrackerInfo", root: true
             }
-        })
+        });
     };
 
     const updateGpsNotificationDataMethod = function(){
@@ -219,11 +220,36 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             returns: {
                 arg:  "gpsTrackerInfo", type: "GpsTrackerInfo", root : true
             }
-        })
+        });
     };
 
-
-
+    const resetGpsTrackerInfoPinMethod = function(){
+        const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+        GpsTrackerInfo.resetGpsTrackerInfoPin = resetGpsTrackerInfoPin;
+        GpsTrackerInfo.remoteMethod('resetGpsTrackerInfoPin', {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "deviceIMEI", type: "string"
+                },
+                {
+                    arg: "oldGpsCode", type: "string"
+                },
+                {
+                    arg: "newGpsCode", type: "string"
+                }
+            ],
+            returns: {
+                arg: 'response', type: 'object', root : true
+            }
+        });
+    };
 
     const createGpsPacketData = function(gpsPacketDataObj, callback){
         const GpsPacketData = databaseObj.GpsPacketData;
@@ -718,6 +744,80 @@ module.exports = function( server, databaseObj, helper, packageObj) {
            }
        }
    };
+
+   const resetGpsTrackerInfoPin = function(ctx, deviceIMEI, oldGpsCode, newGpsCode, callback){
+     const request = ctx.req;
+     let promises = [];
+     if(!deviceIMEI && !oldGpsCode && !newGpsCode){
+         callback(new Error("Invalid Arguments"));
+     } else{
+         if(request.accessToken){
+             if(request.accessToken.userId){
+                 const customerId = request.accessToken.userId;
+                 const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+                 GpsTrackerInfo.findOne({
+                     where: {
+                         deviceIMEI : deviceIMEI
+                     }
+                 })
+                     .then(function(gpsTrackerInfo){
+                         if(gpsTrackerInfo){
+                             if(gpsTrackerInfo.gpsPassword === oldGpsCode){
+                                 //user can change the pin..
+                                 return GpsTrackerInfo.find({
+                                     where: {
+                                         deviceIMEI : deviceIMEI
+                                     }
+                                 })
+                             } else{
+                                 //user can't change the pin..
+                                 throw new Error("Old Gps Code is incorrect");
+                             }
+                         }
+                     })
+                     .then(function(gspTrackerInfoList){
+                         if(gspTrackerInfoList){
+                             if(gspTrackerInfoList.length){
+                                 gspTrackerInfoList.forEach(function(gpsTrackerInfo){
+                                     if(gpsTrackerInfo){
+                                         promises.push(function(callback){
+                                             gpsTrackerInfo.updateAttribute('gpsPassword', newGpsCode)
+                                                 .then(function(gpsTrackerInfo){
+                                                     callback(null);
+                                                 })
+                                                 .catch(function(error){
+                                                     callback(error);
+                                                 })
+                                         })
+                                     }
+                                 });
+                                 async.series(promises, function(error){
+                                    if(error){
+                                        callback(error);
+                                    } else{
+                                        callback(null, {response: "success"});
+                                    }
+                                 })
+                             } else{
+                                 callback(null, {});
+                             }
+                         } else{
+                             callback(null, {});
+                         }
+                     })
+                     .catch(function(error){
+                         callback(error);
+                     });
+             } else{
+                 callback(new Error("User not valid"));
+             }
+         } else{
+             callback(new Error("User not valid"));
+         }
+     }
+   };
+
+
 
 
 
