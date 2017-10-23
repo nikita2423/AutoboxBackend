@@ -130,7 +130,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             callback(error);
                         });
                 } else{
-                    ca
                 }
             }
         },
