@@ -12,6 +12,12 @@
     "clientId": {
       "type": "string"
     },
+    "latitude": {
+      "type": "number"
+    },
+    "longitude": {
+      "type": "number"
+    },
     "latlng": {
       "type": "geopoint",
       "template": {

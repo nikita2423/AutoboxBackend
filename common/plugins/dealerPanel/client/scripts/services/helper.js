@@ -927,6 +927,7 @@ angular.module($snaphy.getModuleName())
                                         console.log("All Dealer fetched", vehicleList);
                                         settings.get().tabs.trackVehicle.dealerVehicleList = vehicleList;
                                         console.log("vehicle dealer Id", settings.get().tabs.trackVehicle.dealerVehicleList);
+                                        console.log("latitude", vehicleList[0].latitude);
                                         var options = {
                                             center: new google.maps.LatLng(28.582261, 77.366669),
                                             zoom: 11,

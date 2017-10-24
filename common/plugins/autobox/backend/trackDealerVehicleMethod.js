@@ -47,7 +47,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             clientId : trackDealerVehicleObj.clientId,
                             latlng: [trackDealerVehicleObj.latitude, trackDealerVehicleObj.longitude],
                             dealerId : dealerVehicle.dealerId,
-                            dealerVehicleId : dealerVehicle.id
+                            dealerVehicleId : dealerVehicle.id,
+                            latitude : trackDealerVehicleObj.latitude,
+                            longitude : trackDealerVehicleObj.longitude
                         });
                     }
                 })
