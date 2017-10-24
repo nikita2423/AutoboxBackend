@@ -472,14 +472,12 @@ angular.module($snaphy.getModuleName())
                                     ]
                                 },
                                 dealerVehicleList: [],
-                                findDealerVehicles: findDealerVehicles,
                                 initMap : initMap,
                                 config: {
                                     stateName: "trackVehicle",
                                     stateOptions: {},
                                     active: false
                                 }
-
                             },
                             manageWorkshopProfile: {
                                 load: function () {
@@ -912,14 +910,49 @@ angular.module($snaphy.getModuleName())
                 };
 
                 var initMap = function(){
-                        var options = {
-                            center: new google.maps.LatLng(28.582261, 77.366669),
-                            zoom: 13,
-                            disableDefaultUI: true
-                        }
-                        this.map = new google.maps.Map(
-                            document.getElementById("map"), options
-                        );
+                    var DealerVehicle = Database.getDb("dealerPanel", "DealerVehicle");
+                    var TrackDealerVehicle = Database.getDb("dealerPanel", "TrackDealerVehicle");
+                    return $q(function(resolve, reject){
+                        initialize()
+                            .then(function () {
+                                return setCurrentState();
+                            })
+                            .then(function () {
+                                return getActiveTabSettings();
+                            })
+                            .then(function(){
+                                console.log("Employee Id", settings.get().config.employee.id);
+                                DealerVehicle.findAll({}, {dealerId:settings.get().config.employee.id},
+                                    function (vehicleList) {
+                                        console.log("All Dealer fetched", vehicleList);
+                                        settings.get().tabs.trackVehicle.dealerVehicleList = vehicleList;
+                                        settings.get().tabs.trackVehicle.dealerVehicleList.push({lat: 28.582035, lng: 77.366283});
+                                        console.log("vehicle dealer Id", settings.get().tabs.trackVehicle.dealerVehicleList);
+                                        var options = {
+                                            center: new google.maps.LatLng(28.582261, 77.366669),
+                                            zoom: 11,
+                                            disableDefaultUI: true
+                                        }
+                                        this.map = new google.maps.Map(
+                                            document.getElementById("map"), options
+                                        );
+
+                                        var marker = new google.maps.Marker({
+                                            map: this.map,
+                                            position: new google.maps.LatLng(28.582261, 77.366669)
+                                        });
+                                        resolve(settings.get().tabs.trackVehicle.dealerVehicleList);
+
+                                    }, function (error) {
+                                        console.error("Error for dealer vehicle");
+                                        reject(error);
+                                    });
+                            })
+                            .catch(function(error){
+                                reject(error);
+                            });
+
+                    });
                         /* this.places = new google.maps.places.PlacesService(this.map);*/
                 };
 
