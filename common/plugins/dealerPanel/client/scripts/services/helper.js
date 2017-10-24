@@ -929,18 +929,22 @@ angular.module($snaphy.getModuleName())
                                         console.log("vehicle dealer Id", settings.get().tabs.trackVehicle.dealerVehicleList);
                                         console.log("latitude", vehicleList[0].latitude);
                                         var options = {
-                                            center: new google.maps.LatLng(28.582261, 77.366669),
+                                            center: new google.maps.LatLng(vehicleList[0].latitude, vehicleList[0].longitude),
                                             zoom: 11,
                                             disableDefaultUI: true
                                         }
                                         this.map = new google.maps.Map(
                                             document.getElementById("map"), options
                                         );
+                                        vehicleList.forEach(function(trackDealerVehicle){
+                                            if(trackDealerVehicle){
+                                                var marker = new google.maps.Marker({
+                                                    map: this.map,
+                                                    position: new google.maps.LatLng(trackDealerVehicle.latitude, trackDealerVehicle.longitude)
+                                                });
+                                            }
+                                        })
 
-                                        var marker = new google.maps.Marker({
-                                            map: this.map,
-                                            position: new google.maps.LatLng(28.582261, 77.366669)
-                                        });
                                         resolve(settings.get().tabs.trackVehicle.dealerVehicleList);
 
                                     }, function (error) {
