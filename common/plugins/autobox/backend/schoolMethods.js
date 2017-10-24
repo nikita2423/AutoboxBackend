@@ -597,7 +597,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                               databaseObj.TrackBusVehicle.findOne({
                                                   where: {
                                                       homeLocation: {
-                                                          near: [28.582442, 77.367033],
+                                                          near: gpsLatLang,
                                                           maxDistance: 1,
                                                           unit: 'kilometers'
                                                       }
