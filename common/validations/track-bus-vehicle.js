@@ -17,13 +17,10 @@ module.exports = function(Trackbusvehicle, server, helper) {
         }
         if(!instance.gpsBusNotification){
             instance.gpsBusNotification = {
-                hardBraking : "on",
-                hardAcceleration : "on",
-                gpsDisconnect : "on",
-                overSpeeding: "on"
+                busVicinity : "on"
             };
         }
         next();
-    })
+    });
 
 };

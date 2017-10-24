@@ -4,6 +4,10 @@
 "use strict";
 module.exports = function( server, databaseObj, helper, packageObj) {
 
+    const process = require("process");
+    const async = require("async");
+    const push = helper.loadPlugin("pushService");
+
     var init = function(){
         findAllSchoolMethod();
         findAllBusesMethod();
@@ -14,6 +18,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         fetchBusLocationMethod();
         fetchBusNotificationStatusMethod();
         updateBusNotificationMethod();
+        sendBusVicinityNotification();
+
     };
 
     const findAllSchoolMethod = function(){
@@ -554,6 +560,108 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 callback(new Error("User not valid"));
             }
         }
+    };
+
+    const sendBusVicinityNotification = function(){
+      const GpsPacketData = databaseObj.GpsPacketData;
+      GpsPacketData.observe("after save", function(ctx, next){
+          const instance = ctx.instance;
+          const gpsPacketdataObj = instance.toJSON();
+          let promises = [];
+          let gpsLatLang;
+          if(ctx.isNewInstance){
+              process.nextTick(function(){
+                  databaseObj.BusModel.findOne({
+                      where: {
+                          deviceIMEI : gpsPacketdataObj.deviceIMEI
+                      }
+                  })
+                      .then(function(busModel){
+                          if(busModel){
+                              return databaseObj.TrackBusVehicle.find({
+                                  where: {
+                                      busModelId : busModel.id
+                                  }
+                              })
+                          }
+                      })
+                      .then(function(trackBusVehicleList){
+                          if(trackBusVehicleList){
+                              if(trackBusVehicleList.length){
+                                  const gpsLatitude = gpsPacketdataObj.latitude;
+                                  const gpsLongitude = gpsPacketdataObj.longitude;
+                                  gpsLatLang = [gpsLatitude, gpsLongitude];
+                                  trackBusVehicleList.forEach(function(trackBusVehicle){
+                                      if(trackBusVehicle){
+                                          promises.push(function(callback){
+                                              databaseObj.TrackBusVehicle.findOne({
+                                                  where: {
+                                                      homeLocation: {
+                                                          near: gpsLatLang,
+                                                          maxDistance: 1,
+                                                          unit: 'kilometers'
+                                                      }
+                                                  }
+                                              })
+                                                  .then(function(trackBusVehicle){
+                                                      if(trackBusVehicle){
+                                                         const to = trackBusVehicle.homeAddress;
+                                                         const type = "BusVicinity";
+                                                         const title = "Bus in Vicinity";
+                                                         const instanceId = trackBusVehicle.id;
+                                                         const from = packageObj.companyName;
+                                                         var message = busVicinityNotificationFormat(to, type, title, instanceId);
+                                                         if(trackBusVehicle.customerId && trackBusVehicle.gpsBusNotification["busVicinity"] === "on"){
+                                                             sendNotification(server, message, trackBusVehicle.customerId, from, function(error){
+                                                                 if(error){
+                                                                     server.logger.error(error);
+                                                                 } else{
+                                                                     server.logger.info("Bus In Vicinity send Successfully");
+                                                                 }
+                                                             })
+                                                         }
+                                                      }
+                                                      callback(null);
+                                                  })
+                                                  .catch(function(error){
+                                                      callback(error);
+                                                  })
+                                          })
+
+                                      }
+                                  });
+
+                                  async.series(promises, function(error){
+                                      if(error){
+                                          server.logger.error(error);
+                                      } else{
+                                          server.logger.info("Bus Vicinity for all bus send successfully");
+                                      }
+                                  })
+                              }
+                          }
+                      })
+                      .catch(function(error){
+                          server.logger.error(error);
+                      });
+              })
+          }
+          next();
+      })
+    };
+
+    var busVicinityNotificationFormat = function(to, eventType, title, id){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            id : id
+        };
+        return JSON.stringify(message);
+    };
+    const sendNotification = function(app, message, id, from, callback){
+        //push.push(app, message, id, from, callback);
+        push.notifyByUserId(message, id, from, callback);
     };
 
     return {

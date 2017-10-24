@@ -14,6 +14,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         findAllChauffeurMethod();
         assignChauffeurVehicleMethod();
         checkChauffeurPresentMethod();
+        sendChauffeurMessageNotificationMethod();
     };
 
 
@@ -134,6 +135,28 @@ module.exports = function( server, databaseObj, helper, packageObj) {
               arg: "chauffeurObj", type: "Chauffeur", root : true
           }
       });
+    };
+
+    const sendChauffeurMessageNotificationMethod = function(){
+        const Chauffeur = databaseObj.Chauffeur;
+        Chauffeur.sendChauffeurMessageNotification = sendChauffeurMessageNotification;
+        Chauffeur.remoteMethod('sendChauffeurMessageNotification', {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "chauffeurId", type: "string"
+                }
+            ],
+            returns: {
+                arg: "response", type: "object", root : true
+            }
+        });
     };
 
 
@@ -462,6 +485,54 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         }
     };
 
+    const sendChauffeurMessageNotification = function(ctx, chauffeurId, callback){
+        const request = ctx.req;
+        if(!chauffeurId){
+            callback(new Error("Invalid Arguments"));
+        }  else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const customerId = request.accessToken.userId;
+                    const Chauffeur = databaseObj.Chauffeur;
+                    Chauffeur.findById(chauffeurId)
+                        .then(function(chauffeur){
+                            if(chauffeur){
+                                //send notification to chauffeur..
+                                const name = chauffeur.name;
+                                const type = "ChauffeurMessage";
+                                const title = chauffeur.message;
+                                const id = chauffeur.id;
+                                const message = chauffeurMessageFormat(name, type, title, id);
+                                var from = packageObj.companyName;
+                                if(chauffeur.driverId){
+                                    sendNotification(server, message, chauffeur.driverId, from, function(error){
+                                        if(error){
+                                            server.logger.error(error);
+                                            callback(error);
+                                        } else{
+                                            server.logger.info("Message Notification to chauffeur send successfully");
+                                            callback(null, {response: "success"});
+                                        }
+                                    })
+                                } else{
+                                    callback(new Error("Driver Id not defined"));
+                                }
+                            } else{
+                                callback(new Error("Chauffeur not defined"));
+                            }
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+                } else{
+                    callback(new Error("User not defined"));
+                }
+            } else{
+                callback(new Error("User not defined"));
+            }
+        }
+    };
+
     const sendNotification = function(app, message, id, from, callback){
         //push.push(app, message, id, from, callback);
         push.notifyByUserId(message, id, from, callback);
@@ -473,7 +544,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             type : eventType,
             title : title,
             id : chaufferId
-        }
+        };
         return JSON.stringify(message);
     };
 
@@ -484,9 +555,19 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             type : eventType,
             title : title,
             id : id
-        }
+        };
         return JSON.stringify(message);
-    }
+    };
+
+    var chauffeurMessageFormat = function(to, eventType, title, id){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            id : id
+        };
+        return JSON.stringify(message);
+    };
 
     return {
         init: init

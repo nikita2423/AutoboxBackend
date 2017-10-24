@@ -24,6 +24,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         sendQuoteReplyNotification();
         sendOldTradeCarEmail();
         sendCustomerQuoteEmailToDealer();
+        sendCallMessageReplyNotification();
     };
 
 
@@ -1044,6 +1045,46 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         })
     };
 
+    const sendCallMessageReplyNotification = function(){
+        const CustomerMessage = databaseObj.CustomerMessage;
+        CustomerMessage.observe("after save", function(ctx, next){
+            const instance = ctx.instance;
+            let customerObj;
+            const customerMessageObj = instance.toJSON();
+            process.nextTick(function(){
+                databaseObj.Customer.findById(customerMessageObj.customerId)
+                    .then(function(customer){
+                        if(customer){
+                            customerObj = customer;
+                        }
+                    })
+                    .then(function(){
+                        const to = customerObj.firstName + " " + customerObj.lastName? customerObj.lastname : "";
+                        const pushFrom = packageObj.companyName;
+                        const title = "Fixed Message";
+                        const type = "CustomerMessageReply";
+                        const instanceId = customerMessageObj.id;
+                        const message = customerMessageFormat(to, type, title, instanceId);
+                        if(customerMessageObj.customerId){
+                            sendNotification(server, message, customerMessageObj.customerId, pushFrom, function(error){
+                                if(error){
+                                   server.logger.error(error);
+                                } else{
+                                    server.logger.info("Push Notification for customer Message reply send successfully");
+                                }
+                            });
+                        }
+                    })
+                    .catch(function(error){
+                        server.logger.error(error);
+                    })
+            });
+            next();
+        })
+    };
+
+
+
 
     const sendNotification = function(app, message, id, from, callback){
         //push.push(app, message, id, from, callback);
@@ -1135,7 +1176,17 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             type : eventType,
             title : title,
             id : customerQuoteId
-        }
+        };
+        return JSON.stringify(message);
+    };
+
+    var customerMessageFormat = function(to, eventType, title, customerMessageId){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            id : customerMessageId
+        };
         return JSON.stringify(message);
     };
 

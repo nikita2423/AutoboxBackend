@@ -8,7 +8,7 @@
     "/dealerPanel/scripts/directives/dealerPanel.js": "dealerPanelDirectives",
     "/dealerPanel/scripts/services/helper.js": "HelperServices",
     "/dealerPanel/style/dealerPanel.css": "dealerPanelCss",
-    "https://maps.googleapis.com/maps/api/js?key=AIzaSyAd1xMYT1bt99qtFWQEzXiRBvORDWHgPtk": "GoogleMapAPI"
+    "https://maps.googleapis.com/maps/api/js?key=AIzaSyCOUOXq77G1ArjLRa-M1_dmq3-N5uCf00U": "GoogleMapAPI"
   },
   "moduleDependencies":{
 

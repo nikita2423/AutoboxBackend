@@ -50,22 +50,7 @@
         "templateOptions": {
           "fields": [
             {
-              "key": "hardBraking",
-              "type": "input",
-              "default": "on"
-            },
-            {
-              "key": "hardAcceleration",
-              "type": "input",
-              "default": "on"
-            },
-            {
-              "key": "gpsDisconnect",
-              "type": "input",
-              "default": "on"
-            },
-            {
-              "key": "overSpeeding",
+              "key": "busVicinity",
               "type": "input",
               "default": "on"
             }
