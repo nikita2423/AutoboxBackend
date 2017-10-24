@@ -838,7 +838,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                     .then(function(gpsPacketDataList){
                                                         if(gpsPacketDataList){
                                                             if(gpsPacketDataList.length){
-                                                                if(gpsPacketData[1].speed === 0){
+                                                                if(gpsPacketDataList[1].speed === 0){
                                                                     //send Notification
                                                                     title = "Your Vehicle is suspected to be towed";
                                                                     eventType = "Vehicle Towed";
