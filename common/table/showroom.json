@@ -40,8 +40,16 @@
       },
       "class":["col-md-12", "clearfix"]
     },
+    "area": {
+      "priority": 6,
+      "style": {
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    },
     "profileImage":{
-      "priority":6,
+      "priority":7,
       "style":{
         "padding-top": "20px",
         "margin-bottom": "10px"
@@ -49,7 +57,7 @@
       "class":["col-md-12", "clearfix"]
     },
     "showroomImage":{
-      "priority":7,
+      "priority":8,
       "style":{
         "padding-top": "20px",
         "margin-bottom": "10px"

@@ -43,6 +43,12 @@
         "label": "Service Booking Workshop",
         "templatePath": "../../plugins/autobox/backend/email/workshop/service_booking.ejs",
         "display": false
+      },
+      "sosMedical":{
+        "name": "sosMedical",
+        "label": "Sos Medical",
+        "templatePath": "../../plugins/autobox/backend/email/hospital/sos_medical.ejs",
+        "display": false
       }
     }
   }],

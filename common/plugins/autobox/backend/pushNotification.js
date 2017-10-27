@@ -25,6 +25,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         sendOldTradeCarEmail();
         sendCustomerQuoteEmailToDealer();
         sendCallMessageReplyNotification();
+        sendMedicalSosEmailMethod();
     };
 
 
@@ -92,6 +93,30 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
         });
     };
+
+    const sendMedicalSosEmailMethod = function(){
+        const Sos = databaseObj.Sos;
+        Sos.sendMedicalSosEmail = sendMedicalSosEmail;
+        Sos.remoteMethod('sendMedicalSosEmail', {
+            accepts:[
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "locationUrl", type: "string"
+                }
+            ],
+            returns: {
+                arg: "response", type: "object", root: true
+            }
+        });
+    };
+
+
 
 
     /**
@@ -1083,8 +1108,48 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         })
     };
 
-
-
+    const sendMedicalSosEmail = function(ctx, locationUrl, callback){
+        const request = ctx.req;
+        let customerInstance;
+        if(!locationUrl){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const customerId = request.accessToken.userId;
+                    const Customer = databaseObj.Customer;
+                    Customer.findById(customerId)
+                        .then(function(customer){
+                            if(customer){
+                                customerInstance = customer;
+                                customerInstance.locationUrl = locationUrl
+                            }
+                        })
+                        .then(function(){
+                            //send Email
+                            const subject = "New Emergency Ambulance -" +  customerInstance.phoneNumber + "- Autobox";
+                            const to = [];
+                            const from = packageObj.from;
+                            to.push("nikita@snaphy.com");
+                            emailPlugin.adminEmail.sosMedical(from, to, subject, customerInstance, function (err, send) {
+                                if(err){
+                                    console.log(err);
+                                } else{
+                                    console.log("Email send Successfully for Sos Medical to hospital");
+                                }
+                            });
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
 
     const sendNotification = function(app, message, id, from, callback){
         //push.push(app, message, id, from, callback);

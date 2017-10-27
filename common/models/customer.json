@@ -136,6 +136,9 @@
     "referralCode": {
       "type": "string"
     },
+    "locationUrl": {
+      "type":"string"
+    },
     "referralCount": {
       "type": "number",
       "default": 0
