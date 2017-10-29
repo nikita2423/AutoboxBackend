@@ -283,24 +283,36 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                        const subject = packageObj.admin.subject_add_old_vehicle;
                        const to = [];
                        const from = packageObj.from;
-                       to.push("nikita@snaphy.com");
-                       if(oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.bmw ||
-                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.audi ||
-                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.ferrari ||
-                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.jaguar ||
-                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.lamborghini ||
-                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.landrover ||
-                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.mercedesbenz){
-                           emailPlugin.adminEmail.onOldTradeCarAdded(from, to, subject, oldTradeVehicleObj, function(err, send){
-                               if(err){
-                                   console.log(err);
-                               } else{
-                                   console.log("Email Send Successfully for old trade vehicle");
-                               }
-                           });
+                       if(oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.maruti ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.tata ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.mahindra ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.datsun ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.ford ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.chevrolet ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.nissan ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.fiat ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.honda ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.toyota ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.renault ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.nexa ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.hyundai ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.mitsubishi ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.skoda ||
+                           oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.volkswagen){
+                           to.push(packageObj.tradeSpecificBrandEmail1);
+                           to.push(packageObj.tradeSpecificBrandEmail2);
                        } else{
+                           to.push(packageObj.tradeNormalBrandEmail);
                            console.log("Required brand not present");
                        }
+
+                       emailPlugin.adminEmail.onOldTradeCarAdded(from, to, subject, oldTradeVehicleObj, function(err, send){
+                           if(err){
+                               console.log(err);
+                           } else{
+                               console.log("Email Send Successfully for old trade vehicle");
+                           }
+                       });
 
                    })
                    .catch(function(error){
@@ -1130,7 +1142,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             const subject = "New Emergency Ambulance -" +  customerInstance.phoneNumber + "- Autobox";
                             const to = [];
                             const from = packageObj.from;
-                            to.push("nikita@snaphy.com");
+                            to.push(packageObj.medicalEmail1);
+                            to.push(packageObj.medicalEmail2);
                             emailPlugin.adminEmail.sosMedical(from, to, subject, customerInstance, function (err, send) {
                                 if(err){
                                     console.log(err);

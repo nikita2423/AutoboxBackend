@@ -17,6 +17,11 @@
     "subject": "Registered Successfully",
     "subject_complete_purchase": "Congratulations For New Purchase"
   },
+  "medicalEmail1": "ist@murgency.com",
+  "medicalEmail2": "marketing@murgency.com",
+  "tradeSpecificBrandEmail1": "sitaram.ankilla@gmail.com",
+  "tradeSpecificBrandEmail2": "ravi.chirania@gmail.com",
+  "tradeNormalBrandEmail": "test@snaphy.com",
   "admin": {
     "subject_add_old_vehicle": "New Old Trade Car Arrived"
   },
@@ -55,6 +60,22 @@
     "jaguar": "Jaguar",
     "lamborghini": "Lamborghini",
     "landrover": "Land Rover",
-    "mercedesbenz": "Mercedes-Benz"
+    "mercedesbenz": "Mercedes-Benz",
+    "maruti": "Maruti Suzuki",
+    "tata": "Tata",
+    "mahindra": "Mahindra",
+    "datsun": "Datsun",
+    "ford": "Ford",
+    "chevrolet": "Chevrolet",
+    "nissan": "Nissan",
+    "fiat": "Fiat",
+    "honda": "Honda",
+    "toyota": "Toyota",
+    "renault": "Renault",
+    "nexa": "Nexa",
+    "hyundai": "Hyundai",
+    "mitsubishi": "Mitsubishi",
+    "skoda": "Skoda",
+    "volkswagen": "Volkswagen"
   }
 }
