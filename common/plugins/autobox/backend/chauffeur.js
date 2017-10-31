@@ -561,7 +561,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     const cancelChauffeur = function(ctx, chauffeurId, status, callback){
         const request = ctx.req;
-        if(!chauffeurId){
+        if(!chauffeurId && !status){
             callback(new Error("Invalid Arguments"));
         } else{
             if(request.accessToken){
@@ -580,7 +580,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             }
                         })
                         .then(function(){
-                            callback(null, success);
+                            callback(null, {response:"success"});
                         })
                         .catch(function(error){
                             callback(error);
