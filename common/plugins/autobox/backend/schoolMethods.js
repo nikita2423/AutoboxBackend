@@ -564,6 +564,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     const sendBusVicinityNotification = function(){
       const GpsPacketData = databaseObj.GpsPacketData;
+      let trackBusVehicleInstance;
       GpsPacketData.observe("after save", function(ctx, next){
           const instance = ctx.instance;
           const gpsPacketdataObj = instance.toJSON();
@@ -593,6 +594,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                   gpsLatLang = [gpsLatitude, gpsLongitude];
                                   trackBusVehicleList.forEach(function(trackBusVehicle){
                                       if(trackBusVehicle){
+                                          trackBusVehicleInstance = trackBusVehicle;
                                           promises.push(function(callback){
                                               databaseObj.TrackBusVehicle.findOne({
                                                   where: {
@@ -605,7 +607,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                               })
                                                   .then(function(trackBusVehicle){
                                                       if(trackBusVehicle){
-                                                          if(trackBusVehicle.busNotification === "normal"){
+                                                          if(trackBusVehicleInstance.busNotification === "normal"){
                                                               const to = trackBusVehicle.homeAddress;
                                                               const type = "BusVicinity";
                                                               const title = "Bus in Vicinity";
@@ -621,10 +623,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                       }
                                                                   })
                                                               }
-                                                              return trackBusVehicle.updateAttribute("busNotification", "busVicinity");
+                                                              return trackBusVehicleInstance.updateAttribute("busNotification", "busVicinity");
                                                           }
                                                       } else{
-                                                          return trackBusVehicle.updateAttributes("busNotification", "normal");
+                                                          return trackBusVehicleInstance.updateAttribute("busNotification", "normal");
                                                       }
                                                   })
                                                   .then(function(trackBusVehicle){
