@@ -304,14 +304,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             phoneNumber = "+91" + phoneNumber;
         }
 
-
-        var code = speakeasy.totp({
+		var code = speakeasy.totp({
             secret: secret.base32,
             encoding: 'base32',
             digits: 4,
             step: 55
         });
-
 
         console.log('Sending code for verification process : ' + code);
         sendOtp.send(phoneNumber.toString(), packageObj.senderId, code.toString(), function (error, data, response) {
@@ -324,7 +322,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			}
 
         });
-
 
 	};
 

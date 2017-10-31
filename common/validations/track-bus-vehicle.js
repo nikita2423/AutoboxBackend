@@ -20,6 +20,9 @@ module.exports = function(Trackbusvehicle, server, helper) {
                 busVicinity : "on"
             };
         }
+        if(!instance.busNotification){
+            instance.busNotification = "normal";
+        }
         next();
     });
 

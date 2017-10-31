@@ -79,6 +79,10 @@
     "updated": {
       "type": "date",
       "defaultFn": "now"
+    },
+    "busNotification": {
+      "type": "string",
+      "default": "normal"
     }
   },
   "validations": [],

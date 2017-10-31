@@ -605,22 +605,29 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                               })
                                                   .then(function(trackBusVehicle){
                                                       if(trackBusVehicle){
-                                                         const to = trackBusVehicle.homeAddress;
-                                                         const type = "BusVicinity";
-                                                         const title = "Bus in Vicinity";
-                                                         const instanceId = trackBusVehicle.id;
-                                                         const from = packageObj.companyName;
-                                                         var message = busVicinityNotificationFormat(to, type, title, instanceId);
-                                                         if(trackBusVehicle.customerId && trackBusVehicle.gpsBusNotification["busVicinity"] === "on"){
-                                                             sendNotification(server, message, trackBusVehicle.customerId, from, function(error){
-                                                                 if(error){
-                                                                     server.logger.error(error);
-                                                                 } else{
-                                                                     server.logger.info("Bus In Vicinity send Successfully");
-                                                                 }
-                                                             })
-                                                         }
+                                                          if(trackBusVehicle.busNotification === "normal"){
+                                                              const to = trackBusVehicle.homeAddress;
+                                                              const type = "BusVicinity";
+                                                              const title = "Bus in Vicinity";
+                                                              const instanceId = trackBusVehicle.id;
+                                                              const from = packageObj.companyName;
+                                                              var message = busVicinityNotificationFormat(to, type, title, instanceId);
+                                                              if(trackBusVehicle.customerId && trackBusVehicle.gpsBusNotification["busVicinity"] === "on"){
+                                                                  sendNotification(server, message, trackBusVehicle.customerId, from, function(error){
+                                                                      if(error){
+                                                                          server.logger.error(error);
+                                                                      } else{
+                                                                          server.logger.info("Bus In Vicinity send Successfully");
+                                                                      }
+                                                                  })
+                                                              }
+                                                              return trackBusVehicle.updateAttribute("busNotification", "busVicinity");
+                                                          }
+                                                      } else{
+                                                          return trackBusVehicle.updateAttributes("busNotification", "normal");
                                                       }
+                                                  })
+                                                  .then(function(trackBusVehicle){
                                                       callback(null);
                                                   })
                                                   .catch(function(error){

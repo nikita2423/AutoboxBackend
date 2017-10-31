@@ -15,6 +15,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         assignChauffeurVehicleMethod();
         checkChauffeurPresentMethod();
         sendChauffeurMessageNotificationMethod();
+        cancelChauffeurMethod();
     };
 
 
@@ -157,6 +158,31 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 arg: "response", type: "object", root : true
             }
         });
+    };
+
+    const cancelChauffeurMethod = function(){
+      const Chauffeur = databaseObj.Chauffeur;
+      Chauffeur.cancelChauffeur = cancelChauffeur;
+      Chauffeur.remoteMethod('cancelChauffeur', {
+          accepts: [
+              {
+                  arg: 'ctx',
+                  type: 'object',
+                  http: {
+                      source: 'context'
+                  }
+              },
+              {
+                  arg: "chauffeurId", type: "string"
+              },
+              {
+                  arg: "status", type: "string"
+              }
+          ],
+          returns: {
+              arg: "response", type: "object", root: true
+          }
+      });
     };
 
 
@@ -532,6 +558,42 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
         }
     };
+
+    const cancelChauffeur = function(ctx, chauffeurId, status, callback){
+        const request = ctx.req;
+        if(!chauffeurId){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request.accessToken){
+                if(request.accessToken.userId){
+                    const customerId = request.accessToken.userId;
+                    const Chauffeur = databaseObj.Chauffeur;
+                    Chauffeur.findOne({
+                        where: {
+                            customerId : customerId,
+                            status : status
+                        }
+                    })
+                        .then(function(chauffeur){
+                            if(chauffeur){
+                                return chauffeur.destroy();
+                            }
+                        })
+                        .then(function(){
+                            callback(null, success);
+                        })
+                        .catch(function(error){
+                            callback(error);
+                        })
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
+
 
     const sendNotification = function(app, message, id, from, callback){
         //push.push(app, message, id, from, callback);
