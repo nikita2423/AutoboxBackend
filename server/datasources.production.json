@@ -35,9 +35,9 @@
     "transports": [
       {
         "type": "SMTP",
-        "host": "smtp.zoho.com",
+        "host": "smtp.gmail.com",
         "aliases": [
-          "Zoho Mail"
+          "Google Mail"
         ],
         "secure": true,
         "port": 465,
