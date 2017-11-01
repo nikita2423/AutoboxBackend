@@ -7,6 +7,22 @@
 
 angular.module($snaphy.getModuleName())
 
+.directive("quoteReply", [function () {
+    return {
+        restrict: "E",
+        scope:{
+            "init" : "&init",
+            "findData": "&findData"
+        },
+        replace: true,
+        transclude: true,
+        template: '<div ng-transclude></div>',
+        link: function (scope, iElement, iAttrs) {
+            console.log("Getting Linked");
+        }
+    };
+}])
+
 
 /**
  *Directive for defining filters $date

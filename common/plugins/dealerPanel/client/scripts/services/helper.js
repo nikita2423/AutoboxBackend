@@ -408,7 +408,7 @@ angular.module($snaphy.getModuleName())
                                         formModel.customerQuoteId = settings.tabs.quoteReply.config.customerQuoteId;
                                         DetailViewResource.saveForm(formSchema, formData, formModel)
                                             .then(function (data) {
-                                                formModel.id = data.id;
+                                                formModel.id = data.data.id;
                                                 if (modelId) {
                                                     //close the model..
                                                     $(modelId).modal('hide');
