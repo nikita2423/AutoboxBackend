@@ -42,8 +42,8 @@
         "secure": true,
         "port": 465,
         "auth": {
-          "user": "EMAIL_ADDRESS",
-          "pass": "EMAIL_PASSWORD"
+          "user": "test@snaphy.com",
+          "pass": "snaphy2017"
         }
       }
     ]
