@@ -1096,9 +1096,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         }
                     })
                     .then(function(){
-                        const to = customerObj.firstName + " " + customerObj.lastName? customerObj.lastname : "";
+                        const to = customerObj.firstName + " " + customerObj.lastName? customerObj.lastName : "";
                         const pushFrom = packageObj.companyName;
-                        const title = "Fixed Message";
+                        const title = customerMessageObj.replyMessage;
                         const type = "CustomerMessageReply";
                         const instanceId = customerMessageObj.id;
                         const message = customerMessageFormat(to, type, title, instanceId);

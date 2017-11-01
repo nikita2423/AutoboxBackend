@@ -2136,6 +2136,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       subject: customerMessageObj.subject,
                       message: customerMessageObj.message,
                       type: customerMessageObj.type,
+                      time: moment().format('LT'),
                       userType: customerMessageObj.userType,
                       dealerId: customerMessageObj.dealerId,
                       customerId: customerId,

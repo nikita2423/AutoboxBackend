@@ -42,8 +42,8 @@
         "secure": true,
         "port": 465,
         "auth": {
-          "user": "test@snaphy.com",
-          "pass": "snaphy2017"
+          "user": "info@autoboxapp.in",
+          "pass": "AutoBox#2017"
         }
       }
     ]
