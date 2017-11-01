@@ -402,13 +402,16 @@ angular.module($snaphy.getModuleName())
                                     messages: {}
                                 },
                                 schema: window.STATIC_DATA.schema.QuoteReply,
-                                saveForm: function (formSchema, formData, formModel) {
+                                saveForm: function (formSchema, formData, formModel, goBack, modelId) {
                                     if (settings.tabs.quoteReply.config.dealerId && settings.tabs.quoteReply.config.customerQuoteId) {
                                         formModel.dealerId = settings.tabs.quoteReply.config.dealerId;
                                         formModel.customerQuoteId = settings.tabs.quoteReply.config.customerQuoteId;
                                         DetailViewResource.saveForm(formSchema, formData, formModel)
                                             .then(function (data) {
-
+                                                if (modelId) {
+                                                    //close the model..
+                                                    $(modelId).modal('hide');
+                                                }
                                             })
                                             .catch(function (error) {
 
