@@ -2682,12 +2682,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                         lastDate = quoteReply.added;
                                                     }
                                                 }
+                                                server.logger.info(quoteReplyList);
                                                 callback(null, {
                                                     quoteReplyList: quoteReplyList,
                                                     cursor: lastDate
                                                 })
                                             })
                                             .catch(function(error){
+                                                server.logger.error(error);
                                                 callback(error);
                                             })
                                     }
@@ -2695,6 +2697,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             }
                         })
                         .catch(function(error){
+                            server.logger.error(error);
                             callback(error);
                         })
 

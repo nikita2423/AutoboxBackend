@@ -41,7 +41,8 @@
     "offer": {
       "type": "belongsTo",
       "model": "Offer",
-      "foreignKey": ""
+      "foreignKey": "",
+      "onCascadeDelete": true
     },
     "customer": {
       "type": "belongsTo",
