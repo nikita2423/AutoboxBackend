@@ -1088,34 +1088,37 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             const instance = ctx.instance;
             let customerObj;
             const customerMessageObj = instance.toJSON();
-            process.nextTick(function(){
-                databaseObj.Customer.findById(customerMessageObj.customerId)
-                    .then(function(customer){
-                        if(customer){
-                            customerObj = customer;
-                        }
-                    })
-                    .then(function(){
-                        const to = customerObj.firstName + " " + customerObj.lastName? customerObj.lastName : "";
-                        const pushFrom = packageObj.companyName;
-                        const title = customerMessageObj.replyMessage;
-                        const type = "CustomerMessageReply";
-                        const instanceId = customerMessageObj.id;
-                        const message = customerMessageFormat(to, type, title, instanceId);
-                        if(customerMessageObj.customerId){
-                            sendNotification(server, message, customerMessageObj.customerId, pushFrom, function(error){
-                                if(error){
-                                   server.logger.error(error);
-                                } else{
-                                    server.logger.info("Push Notification for customer Message reply send successfully");
-                                }
-                            });
-                        }
-                    })
-                    .catch(function(error){
-                        server.logger.error(error);
-                    })
-            });
+            if(ctx.isNewInstance){
+                process.nextTick(function(){
+                    databaseObj.Customer.findById(customerMessageObj.customerId)
+                        .then(function(customer){
+                            if(customer){
+                                customerObj = customer;
+                            }
+                        })
+                        .then(function(){
+                            const to = customerObj.firstName + " " + customerObj.lastName? customerObj.lastName : "";
+                            const pushFrom = packageObj.companyName;
+                            const title = customerMessageObj.replyMessage;
+                            const type = "CustomerMessageReply";
+                            const instanceId = customerMessageObj.id;
+                            const message = customerMessageFormat(to, type, title, instanceId);
+                            if(customerMessageObj.customerId){
+                                sendNotification(server, message, customerMessageObj.customerId, pushFrom, function(error){
+                                    if(error){
+                                        server.logger.error(error);
+                                    } else{
+                                        server.logger.info("Push Notification for customer Message reply send successfully");
+                                    }
+                                });
+                            }
+                        })
+                        .catch(function(error){
+                            server.logger.error(error);
+                        })
+                });
+            }
+
             next();
         })
     };
