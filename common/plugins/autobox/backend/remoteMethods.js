@@ -3348,6 +3348,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         })
                     })
                     .catch(function(error){
+                        server.logger.error(error);
                         callback(error);
                     })
             } else{
