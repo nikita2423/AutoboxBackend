@@ -30,17 +30,15 @@ module.exports = (Customermessage, server, helper) =>
 
         if(instance.message){
             instance.message = _.capitalize(trim(instance.message));
-            const check = isLength(instance.message, {min:3, max:1000});
+            const check = isLength(instance.message, {min:1, max:1000});
             if(!check){
                 return next(new Error("Message should be between 3 to 1000"));
             }
-        } else{
-            instance.message = "NA";
         }
 
         if(instance.subject){
             instance.subject = _.capitalize(trim(instance.subject));
-            const check = isLength(instance.subject, {min:3, max:500});
+            const check = isLength(instance.subject, {min:1, max:500});
             if(!check){
                 return next(new Error("Subject should be between 3 to 500"));
             }
@@ -66,6 +64,7 @@ module.exports = (Customermessage, server, helper) =>
                 return next(new Error("Contact Type is not valid"));
             }
         }
+
 
         if(!validate(instance, currentInstance, "customerId")){
             return next(new Error("Customer is required"));
@@ -99,7 +98,8 @@ module.exports = (Customermessage, server, helper) =>
             instance.updated = new Date();
         }
 
-        if(instance.replyMessage){
+        if(instance.replyMessage && instance.replyStatus === "notreplied"){
+            instance.replyStatus = "replied";
             process.nextTick(function(){
                const Customer = server.models["Customer"];
                const Dealer = server.models["Dealer"];
@@ -117,13 +117,13 @@ module.exports = (Customermessage, server, helper) =>
                        .then(function(){
                            var name = customerMessageObj.customer.firstName + " " + customerMessageObj.customer.lastName;
                            var type = "CustomerMesssage";
-                           var title = "";
+                           var title = customerMessageObj.replyMessage;
                            var id = customerMessageObj.id;
                            var from = "Autobox";
                            var sender = customerMessageObj.dealer.firstName + " " + customerMessageObj.dealer.lastName;
                            var message = replyMessageFormat(name, type, title, sender, id);
                            if(customerMessageObj.customer.id){
-                               sendNotification(server, message, customerMessageObj.customer.id, function(error){
+                               sendNotification(server, message, customerMessageObj.customer.id, from, function(error){
                                    if(error){
                                        console.log(error);
                                    } else{
@@ -141,8 +141,8 @@ module.exports = (Customermessage, server, helper) =>
             });
         }
         next();
-    });
 
+    });
 
 
     var replyMessageFormat = function(to, type, title, from, id){

@@ -1083,12 +1083,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
     const sendCallMessageReplyNotification = function(){
-        const CustomerMessage = databaseObj.CustomerMessage;
+      /*  const CustomerMessage = databaseObj.CustomerMessage;
         CustomerMessage.observe("after save", function(ctx, next){
             const instance = ctx.instance;
             let customerObj;
             const customerMessageObj = instance.toJSON();
-            if(ctx.isNewInstance){
+            if(customerMessageObj.replyMessage && customerMessageObj.replyStatus === "notreplied"){
                 process.nextTick(function(){
                     databaseObj.Customer.findById(customerMessageObj.customerId)
                         .then(function(customer){
@@ -1117,10 +1117,22 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             server.logger.error(error);
                         })
                 });
+                CustomerMessage.findById(customerMessageObj.id)
+                    .then(function(customerMessageObj){
+                        if(customerMessageObj){
+                            return customerMessageObj.updateAttribute("replyStatus", "replied")
+                        }
+                    })
+                    .then(function(customerMessage){
+                        next();
+                    })
+                    .catch(function(error){
+                        next(error);
+                    });
+            } else{
+                next();
             }
-
-            next();
-        })
+        })*/
     };
 
     const sendMedicalSosEmail = function(ctx, locationUrl, callback){
