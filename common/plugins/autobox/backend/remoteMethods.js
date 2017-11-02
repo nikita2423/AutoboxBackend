@@ -3337,9 +3337,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 lastDate = customerOfferList[customerOfferList.length];
                             }
                             customerOfferList.forEach(function(customerOffer){
-                                if(customerOffer.offer().id){
-                                    resultCustomerOfferList.push(customerOffer);
+                                if(customerOffer.offer){
+                                    if(customerOffer.offer().id){
+                                        resultCustomerOfferList.push(customerOffer);
+                                    }
                                 }
+
                             })
                         }
                         callback(null, {
