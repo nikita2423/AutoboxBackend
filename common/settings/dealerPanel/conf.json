@@ -8,7 +8,7 @@
     "root": false,
     "school":false
   },
-  "from": "Autobox <test@snaphy.com>",
+  "from": "Autobox <info@autoboxapp.in>",
   "loadDatabases":[
     "Dealer",
     "Showroom",
