@@ -11,7 +11,7 @@
     "emailModel": "adminEmail",
     "emailLabel": "Send Info",
     "label": "Send Mail To Users",
-    "from": "'Autobox' <test@snaphy.com>",
+    "from": "'Autobox' <info@autoboxapp.in>",
     "assosiatedUsers": ["Customer", "Employee"],
     "templates": {
       "successfulRegistrationForCustomer": {
@@ -48,6 +48,12 @@
         "name": "sosMedical",
         "label": "Sos Medical",
         "templatePath": "../../plugins/autobox/backend/email/hospital/sos_medical.ejs",
+        "display": false
+      },
+      "orderingGpsTracker": {
+        "name": "orderingGpsTracker",
+        "label": "Ordering Gps Tracker",
+        "templatePath": "../../plugins/dealerPanel/backend/email/admin/admin_order_gps_tracker.ejs",
         "display": false
       }
     }

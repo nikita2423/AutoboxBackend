@@ -788,12 +788,12 @@ angular.module($snaphy.getModuleName())
                                 load: function () {
                                     changeTab(settings.tabs.orderGPSTracker);
                                 },
-                                data: {},
-                                title: "Manage Showroom Profile",
+                                data: "",
+                                title: "Order Gps Tracker",
                                 //Contains the current model detail..
                                 relationDetail: {
                                     "relationName": "orderGpsTracker",
-                                    "modelName": "CustomerQuote",
+                                    "modelName": "OrderGpsTracker",
                                     "action": {
                                         create: false,
                                         showHeader: false,
@@ -806,11 +806,15 @@ angular.module($snaphy.getModuleName())
                                         }
                                     ]
                                 },
+                                schema: window.STATIC_DATA.schema.OrderGpsTracker,
+                                orderGpsTracker: orderGpsTracker,
                                 /*validations: fetchValidationObj('appUser'),*/
                                 config: {
                                     stateName: "orderGPSTracker",
                                     stateOptions: {},
-                                    active: false
+                                    active: false,
+                                    display: true,
+                                    message: "Your order for Gps Trackers has been placed Successfully!"
                                 }
                             },
                             orderDashCamera: {
@@ -1159,6 +1163,52 @@ angular.module($snaphy.getModuleName())
                     }
                 };
 
+            /**
+             * Ordering Gps Trackers
+             */
+             var orderGpsTracker = function(){
+                var OrderGpsTracker = Database.getDb("dealerPanel", "OrderGpsTracker");
+                var quantity = angular.copy(settings.get().tabs.orderGPSTracker.data);
+                startLoadingBar("#dealerOrderGpsTracker");
+                //Clear the data..
+                settings.get().tabs.orderGPSTracker.data = "";
+                if(quantity && settings.get().config.employee.id){
+                    OrderGpsTracker.create({
+                        quantity: quantity,
+                        dealerId: settings.get().config.employee.id
+                    }, function () {
+                        stopLoadingBar("#dealerOrderGpsTracker");
+                        settings.get().tabs.orderGPSTracker.config.display = false;
+                        SnaphyTemplate.notify({
+                            message: "Gps Trackers Ordered Successfully",
+                            type: 'success',
+                            icon: 'fa fa-check',
+                            align: 'right'
+                        });
+                    }, function (error) {
+                        console.log(error);
+                        stopLoadingBar("#dealerOrderGpsTracker");
+                        settings.get().tabs.orderGPSTracker.data = quantity;
+                        SnaphyTemplate.notify({
+                            message: "Something went wrong! Please try again later",
+                            type: 'danger',
+                            icon: 'fa fa-times',
+                            align: 'right'
+
+                        });
+                    });
+                }else{
+                    stopLoadingBar("#dealerOrderGpsTracker");
+                    settings.get().tabs.orderGPSTracker.data = quantity;
+                    SnaphyTemplate.notify({
+                        message: "Quantity cannot be blank",
+                        type: 'danger',
+                        icon: 'fa fa-times',
+                        align: 'right'
+
+                    });
+                }
+            };
 
                 /**
                  * Send Reply for Customer Message

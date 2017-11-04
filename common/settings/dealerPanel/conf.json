@@ -8,6 +8,7 @@
     "root": false,
     "school":false
   },
+  "from": "Autobox <test@snaphy.com>",
   "loadDatabases":[
     "Dealer",
     "Showroom",
@@ -17,7 +18,8 @@
     "Feedback",
     "CustomerMessage",
     "DealerVehicle",
-    "TrackDealerVehicle"
+    "TrackDealerVehicle",
+    "OrderGpsTracker"
   ],
   "pluginDependencies": {}
 }

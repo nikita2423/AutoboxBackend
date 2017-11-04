@@ -1,0 +1,24 @@
+{
+  "name": "OrderGpsTracker",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "quantity": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "dealer": {
+      "type": "belongsTo",
+      "model": "Dealer",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

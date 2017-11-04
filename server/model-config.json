@@ -307,5 +307,9 @@
   "PlanType": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "OrderGpsTracker": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

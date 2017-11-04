@@ -7,5 +7,6 @@
     "CustomerMessage": "CustomerMessage",
     "CustomerQuote": "CustomerQuote",
     "DealerVehicle": "DealerVehicle",
-    "TrackDealerVehicle": "TrackDealerVehicle"
+    "TrackDealerVehicle": "TrackDealerVehicle",
+    "OrderGpsTracker": "OrderGpsTracker"
 }
