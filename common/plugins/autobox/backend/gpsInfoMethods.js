@@ -260,12 +260,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 .then(function(gpsPacketData){
                     if(gpsPacketData){
                         callback(null, {response: "success"});
-                        console.log("Notification send Successfully");
+                        server.logger.info("Gps Packet Data Successfully created");
                     }
                 })
                 .catch(function(error){
                     callback(error);
-                    console.log("Error in creating Notification", error);
+                    server.logger.error("Error in creating Gps Packet Data");
                 });
         }
     };

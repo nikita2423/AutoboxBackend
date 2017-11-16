@@ -75,7 +75,7 @@ module.exports = (Customerquote, server, helper) =>
        next();
    });
 
-   var sendNotificationAfterVehiclePurchase = function(){
+ /*  var sendNotificationAfterVehiclePurchase = function(){
        var rule = new schedule.RecurrenceRule();
        rule.dayOfWeek = 4;
        rule.hour = 4;
@@ -128,9 +128,9 @@ module.exports = (Customerquote, server, helper) =>
                    console.log(error);
                });
        });
-   };
+   };*/
 
-    sendNotificationAfterVehiclePurchase();
+    //sendNotificationAfterVehiclePurchase();
 
     var sendNotification = function(app, message, registrationId, from, callback){
         push.push(app, message, registrationId, from, callback);
