@@ -19,11 +19,12 @@
   },
   "medicalEmail1": "ist@murgency.com",
   "medicalEmail2": "marketing@murgency.com",
-  "tradeSpecificBrandEmail1": "ravi@snaphy.com",
-  "tradeSpecificBrandEmail2": "ravi@snaphy.com",
-  "tradeNormalBrandEmail": "ravi@snaphy.com",
+  "tradeSpecificBrandEmail1": "vikram.dangi@hotmail.com",
+  "tradeSpecificBrandEmail2": "vikram.dangi@hotmail.com",
+  "tradeNormalBrandEmail": "vikram.dangi@hotmail.com",
   "admin": {
-    "subject_add_old_vehicle": "New Old Trade Car Arrived"
+    "subject_add_old_vehicle": "New Old Trade Car Arrived",
+    "sell_vehicle_subject": "New Sell Vehicle Request Arrived"
   },
   "dealer": {
     "subject_customer_quote": "New Quote Arrived!"

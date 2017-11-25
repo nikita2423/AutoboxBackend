@@ -77,13 +77,47 @@
     "vehicleType": {
       "type": "string"
     },
-    "driverLicenceProof": {
+    "vehicleInsuranceProof": {
       "type": "object",
       "required": false,
       "template": {
         "type": "singleFileUpload",
         "templateOptions": {
-          "label": "Add Driver Licence Proof",
+          "label": "Add Vehicle Insurance Proof",
+          "containerName": "autoboxsnaphy",
+          "containerModel": "Container",
+          "bind": true,
+          "fileDataSource": "Image",
+          "onImageUpdate": {
+            "deletePrevious": true
+          }
+        }
+      }
+    },
+    "vehicleRegistrationProof": {
+      "type": "object",
+      "required": false,
+      "template": {
+        "type": "singleFileUpload",
+        "templateOptions": {
+          "label": "Add Vehicle Registration Proof",
+          "containerName": "autoboxsnaphy",
+          "containerModel": "Container",
+          "bind": true,
+          "fileDataSource": "Image",
+          "onImageUpdate": {
+            "deletePrevious": true
+          }
+        }
+      }
+    },
+    "pucProof": {
+      "type": "object",
+      "required": false,
+      "template": {
+        "type": "singleFileUpload",
+        "templateOptions": {
+          "label": "Add puc Proof",
           "containerName": "autoboxsnaphy",
           "containerModel": "Container",
           "bind": true,

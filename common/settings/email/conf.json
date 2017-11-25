@@ -55,6 +55,12 @@
         "label": "Ordering Gps Tracker",
         "templatePath": "../../plugins/dealerPanel/backend/email/admin/admin_order_gps_tracker.ejs",
         "display": false
+      },
+      "sellvehicle":{
+        "name": "sellvehicle",
+        "label": "Sell Vehicle",
+        "templatePath": "../../plugins/autobox/backend/email/admin/sell_vehicle.ejs",
+        "display": false
       }
     }
   }],

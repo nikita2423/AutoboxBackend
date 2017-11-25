@@ -5,8 +5,12 @@
 "use strict";
 module.exports = function( server, databaseObj, helper, packageObj) {
 
+    const process = require("process");
+    const emailPlugin = helper.loadPlugin("email");
+
     var init = function(){
         sellYourVehicleMethod();
+        sendSellVehicleEmailToAdminMethod();
     };
 
 
@@ -79,6 +83,49 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 callback(new Error("User not valid"));
             }
         }
+    };
+
+
+    const sendSellVehicleEmailToAdminMethod = function(){
+        const SellVehicle = databaseObj.SellVehicle;
+        SellVehicle.observe("after save", function(ctx, next){
+            if(ctx.isNewInstance){
+                const instance = ctx.instance;
+                const sellVehicleObj = instance.toJSON();
+
+                process.nextTick(function(){
+                    databaseObj.Customer.findById(sellVehicleObj.customerId)
+                        .then(function(customer){
+                            if(customer){
+                                sellVehicleObj.customer = customer;
+                                return databaseObj.VehicleInfo.findById(sellVehicleObj.vehicleInfoId);
+                            }
+                        })
+                        .then(function(vehicleInfo){
+                            if(vehicleInfo){
+                                sellVehicleObj.vehicleInfo = vehicleInfo;
+                            }
+                        })
+                        .then(function(){
+                            const subject = packageObj.admin.sell_vehicle_subject;
+                            const to = [];
+                            const from = packageObj.from;
+                            to.push("vikram.dangi@hotmail.com");
+                            emailPlugin.adminEmail.sellvehicle(from, to, subject, sellVehicleObj, function (err, send) {
+                                if(err){
+                                    console.log(err);
+                                } else{
+                                    console.log("Email send Successfully for Sell Vehicle to admin");
+                                }
+                            });
+                        })
+                        .catch(function(error){
+                            console.log(error);
+                        });
+                });
+            }
+            next();
+        });
     };
 
     return {

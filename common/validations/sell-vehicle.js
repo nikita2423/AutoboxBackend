@@ -23,6 +23,8 @@ module.exports = function(Sellvehicle,server, helper) {
             return next(new Error("Vehicle Info is required"));
         }
 
+        next();
+
     });
 
 };

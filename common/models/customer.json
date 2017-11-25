@@ -233,6 +233,23 @@
         }
       }
     },
+    "driverLicenceProof": {
+      "type": "object",
+      "required": false,
+      "template": {
+        "type": "singleFileUpload",
+        "templateOptions": {
+          "label": "Add Driver Licence Proof",
+          "containerName": "autoboxsnaphy",
+          "containerModel": "Container",
+          "bind": true,
+          "fileDataSource": "Image",
+          "onImageUpdate": {
+            "deletePrevious": true
+          }
+        }
+      }
+    },
     "bloodGroup": {
       "type": "string"
     },
