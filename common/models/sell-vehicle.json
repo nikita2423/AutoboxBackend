@@ -1,0 +1,34 @@
+{
+  "name": "SellVehicle",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "registrationNumber": {
+      "type": "string"
+    },
+    "kilometers": {
+      "type": "number"
+    },
+    "yearOfPurchase": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    },
+    "vehicleInfo": {
+      "type": "belongsTo",
+      "model": "VehicleInfo",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

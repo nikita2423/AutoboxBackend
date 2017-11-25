@@ -37,7 +37,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 }
             ],
             returns: {
-                arg: "response", type: "object", root: true
+                arg: "chauffeur", type: "Chauffeur", root: true
             }
         });
     };
@@ -266,7 +266,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         })
                         .then(function(chauffeur){
                             if(chauffeur){
-                                callback(null, {response: "success"});
+                                callback(null, chauffeur);
                             }
                         })
                         .catch(function(error){

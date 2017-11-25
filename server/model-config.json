@@ -311,5 +311,9 @@
   "OrderGpsTracker": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "SellVehicle": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

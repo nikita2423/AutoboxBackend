@@ -47,5 +47,6 @@
   "TrackBusVehicle": "TrackBusVehicle",
   "VehicleDetail": "VehicleDetail",
   "Workshop": "Workshop",
-  "VehicleInfo": "VehicleInfo"
+  "VehicleInfo": "VehicleInfo",
+  "SellVehicle": "SellVehicle"
 }
