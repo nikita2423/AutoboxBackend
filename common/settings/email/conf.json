@@ -61,6 +61,12 @@
         "label": "Sell Vehicle",
         "templatePath": "../../plugins/autobox/backend/email/admin/sell_vehicle.ejs",
         "display": false
+      },
+      "buyBattery": {
+        "name": "buyBattery",
+        "label": "Buy Battery",
+        "templatePath": "../../plugins/autobox/backend/email/admin/buy_battery.ejs",
+        "display": false
       }
     }
   }],

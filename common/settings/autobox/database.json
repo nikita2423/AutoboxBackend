@@ -48,5 +48,6 @@
   "VehicleDetail": "VehicleDetail",
   "Workshop": "Workshop",
   "VehicleInfo": "VehicleInfo",
-  "SellVehicle": "SellVehicle"
+  "SellVehicle": "SellVehicle",
+  "Battery": "Battery"
 }

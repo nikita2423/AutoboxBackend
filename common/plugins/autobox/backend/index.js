@@ -23,6 +23,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const trackDealerVehicleMethod = require("./trackDealerVehicleMethod")(server, databaseObj, helper, packageObj);
     const schoolMethods = require("./schoolMethods")(server, databaseObj, helper, packageObj);
     const sellVehicleMethods = require("./sellVehicleMethods")(server, databaseObj, helper, packageObj);
+    const batteryMethods = require("./batteryMethods")(server, databaseObj, helper, packageObj);
     var speakeasy          = require("speakeasy");
     var moment             = require("moment");
     const SendOtp          = require('sendotp');
@@ -44,6 +45,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         trackDealerVehicleMethod.init();
         schoolMethods.init();
         sellVehicleMethods.init();
+        batteryMethods.init();
 	};
 
 

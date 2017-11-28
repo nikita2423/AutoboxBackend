@@ -315,5 +315,9 @@
   "SellVehicle": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "Battery": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

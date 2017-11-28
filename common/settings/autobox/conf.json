@@ -24,7 +24,8 @@
   "tradeNormalBrandEmail": "vikram.dangi@hotmail.com",
   "admin": {
     "subject_add_old_vehicle": "New Old Trade Car Arrived",
-    "sell_vehicle_subject": "New Sell Vehicle Request Arrived"
+    "sell_vehicle_subject": "New Sell Vehicle Request Arrived",
+    "battery_request_subject": "New Battery Request Arrived"
   },
   "dealer": {
     "subject_customer_quote": "AutoBox - New Quote Request Arrived !"
