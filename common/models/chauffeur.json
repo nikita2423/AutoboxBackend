@@ -27,6 +27,18 @@
     },
     "ownerContact": {
       "type": "string"
+    },
+    "added": {
+      "type": "date",
+      "required": false,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "updated": {
+      "type": "date",
+      "defaultFn": "now"
     }
   },
   "validations": [],

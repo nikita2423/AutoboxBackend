@@ -361,6 +361,9 @@
     },
     "customer_sosStatus": {
       "display": false
+    },
+    "customer_driverLicenceProof": {
+      "display": false
     }
   }
 }

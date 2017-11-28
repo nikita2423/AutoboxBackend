@@ -377,7 +377,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     where: {
                         customerId : customerId,
                         status: "accept"
-                    }
+                    },
+                    order: ['added DESC']
                 })
                     .then(function(chaufferList){
                         if(chaufferList){

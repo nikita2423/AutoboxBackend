@@ -827,7 +827,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                             customerName = customerName + " " + lastName;
                                                             pushFrom = packageObj.companyName;
                                                             instanceId = gpsPacketDataObj.id;
-                                                            if(gpsPacketDataObj.ignitionStatus === "off" && gpsPacketDataObj.speed > 0){
+                                                            if(gpsPacketDataObj.ignitionStatus === "off" && gpsPacketDataObj.speed > 5){
                                                                 return GpsPacketData.find({
                                                                     limit:2,
                                                                     order: ["added DESC"]
@@ -840,7 +840,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                             if(gpsPacketDataList.length){
                                                                 if(gpsPacketDataList[1].speed === 0){
                                                                     //send Notification
-                                                                    title = "Your Vehicle is suspected to be towed";
+                                                                    title = "We suspect your vehicle is being towed";
                                                                     eventType = "Vehicle Towed";
                                                                     var message = vehicleTowingMessageFormat(customerName, eventType, title, gpsPacketDataObj.id);
                                                                     if(customerInstance.id && gpsTrackerInfo.gpsTrackerNotification["vehicleTowing"] === "on"){

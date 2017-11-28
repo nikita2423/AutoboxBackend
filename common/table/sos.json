@@ -57,6 +57,9 @@
     },
     "customer_countryName": {
       "display": false
+    },
+    "customer_driverLicenceProof": {
+      "display": false
     }
   }
 }

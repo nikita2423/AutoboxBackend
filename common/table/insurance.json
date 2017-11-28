@@ -97,6 +97,9 @@
     },
     "customer_added": {
       "display": false
+    },
+    "customer_driverLicenceProof": {
+      "display": false
     }
   }
 }

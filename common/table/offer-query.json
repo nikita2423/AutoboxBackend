@@ -71,6 +71,9 @@
     },
     "customer_username": {
       "display": false
+    },
+    "customer_driverLicenceProof": {
+      "display": false
     }
   }
 }

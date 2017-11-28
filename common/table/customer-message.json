@@ -163,6 +163,9 @@
     "customer_countryName": {
       "display": false
     },
+    "customer_driverLicenceProof": {
+      "display": false
+    },
     "firstName": {
       "search": "text",
       "label": "First Name",

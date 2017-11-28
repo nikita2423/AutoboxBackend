@@ -65,6 +65,9 @@
     "customer_countryName": {
       "display": false
     },
+    "customer_driverLicenceProof": {
+      "display": false
+    },
     "dealer_firstName": {
       "display": false,
       "search": "text",

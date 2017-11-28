@@ -19,7 +19,7 @@
     },
     "serialNumber": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "modelName": {
       "type": "string",

@@ -132,6 +132,9 @@
     },
     "workshop_managerImage": {
       "display": false
+    },
+    "driverLicenceProof": {
+      "display": false
     }
   }
 }

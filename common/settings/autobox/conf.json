@@ -27,7 +27,7 @@
     "sell_vehicle_subject": "New Sell Vehicle Request Arrived"
   },
   "dealer": {
-    "subject_customer_quote": "New Quote Arrived!"
+    "subject_customer_quote": "AutoBox - New Quote Request Arrived !"
   },
   "workshop": {
     "subject_service_booking": "New Service Booking Arrived!"

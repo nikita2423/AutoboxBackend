@@ -1,14 +1,12 @@
 <p style="text-align:center">&nbsp;</p>
 
 <div style="background:#eee;border:1px solid #ccc;padding:5px 10px;">
-    <h3><span style="font-size:14px">Kindly Find Below the details&nbsp;:</span></h3>
-
-    <h3>Customer Name: <strong><%=customer.firstName%> <%=customer.lastName%></strong></h3>
-    <%if(quoteType ==="q"){%>
-    <p>QuoteType:<strong> Quote</strong></p>
-    <%}else if(quoteType === "t"){%>
-    <p>QuoteType:<strong> Test Drive</strong></p>
+    <%if(quoteType ==="Quote"){%>
+    <h3><span style="font-size:14px">You have received a Quote request from <%=customer.firstName%> <%=customer.lastName%> for the vehicle model mentioned below:</span></h3>
+    <%}else if(quoteType === "Test Drive"){%>
+    <h3><span style="font-size:14px">You have received a Test Drive  request from <%=customer.firstName%> <%=customer.lastName%> for the vehicle model mentioned below:</span></h3>
     <%}%>
+
     <p>Brand: <strong><%=brand.name%></strong></p>
 
     <p>CarModel: <strong><%=vehicleInfo.vehicleModel%></strong></p>
@@ -21,7 +19,9 @@
 
     <%if(quoteType!=="Test Drive"){%>
     <p>Color:&nbsp;<strong><%=vehicleInfo.vehicleColor%></strong></p>
+    <p>Kindly Reply with your best quote via your Autobox Dealer Panel with in 12 hours to avail access to customer details.</p>
     <%}%>
+
 </div>
 
 <p>&nbsp;</p>

@@ -66,6 +66,9 @@
     "customer_countryName": {
       "display": false
     },
+    "customer_driverLicenceProof": {
+      "display": false
+    },
     "carModel_name":{
       "label": "Model",
       "search": "text"
