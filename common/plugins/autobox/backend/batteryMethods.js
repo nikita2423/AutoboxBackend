@@ -102,7 +102,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             const subject = packageObj.admin.sell_vehicle_subject;
                             const to = [];
                             const from = packageObj.from;
-                            to.push("nikita@snaphy.com");
+                            to.push("vikram.dangi@hotmail.com");
                             emailPlugin.adminEmail.buyBattery(from, to, subject, batteryObj, function (err, send) {
                                 if(err){
                                     console.log(err);
