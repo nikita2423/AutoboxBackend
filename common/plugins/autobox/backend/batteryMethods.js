@@ -103,7 +103,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             const to = [];
                             const from = packageObj.from;
                             to.push("nikita@snaphy.com");
-                            emailPlugin.adminEmail.sellvehicle(from, to, subject, batteryObj, function (err, send) {
+                            emailPlugin.adminEmail.buyBattery(from, to, subject, batteryObj, function (err, send) {
                                 if(err){
                                     console.log(err);
                                 } else{
