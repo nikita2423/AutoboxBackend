@@ -99,7 +99,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             }
                         })
                         .then(function(){
-                            const subject = packageObj.admin.sell_vehicle_subject;
+                            const subject = packageObj.admin.battery_request_subject;
                             const to = [];
                             const from = packageObj.from;
                             to.push("vikram.dangi@hotmail.com");
