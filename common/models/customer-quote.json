@@ -52,8 +52,8 @@
             }
           },
           "options": [
-            "individual",
-            "corporate"
+            "ind",
+            "cor"
           ]
         }
       }
@@ -152,6 +152,28 @@
             "yes",
             "no"
           ]
+        }
+      }
+    },
+    "onRoadPrice": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "Dealer"
+              ]
+            }
+          },
+          "label": "Enter Road Price",
+          "id": "roadPrice"
         }
       }
     },

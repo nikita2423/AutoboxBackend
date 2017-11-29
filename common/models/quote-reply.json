@@ -142,7 +142,7 @@
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Road Price",
+          "label": "On Road Price",
           "id": "roadPrice",
           "box": "GstRoad",
           "inline": true,

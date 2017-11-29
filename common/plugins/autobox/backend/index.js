@@ -76,15 +76,28 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                     filterCustomerQuote(customerQuoteItem, roles, userId)
 										.then(function (customerQuote) {
 											customerQuoteInstance = customerQuote;
-											//Check for if SoldViaAutobox has the customerQuoteId for this dealerId
-											return databaseObj.SoldViaAutobox.findOne({
+											return databaseObj.QuoteReply.findOne({
 												where: {
 													customerQuoteId : customerQuote.id,
 													dealerId: userId
 												}
 											});
 
-                                        })
+										})
+										.then(function(quoteReply){
+											if(quoteReply){
+												customerQuoteInstance.onRoadPrice = quoteReply.roadPrice;
+											} else{
+                                                customerQuoteInstance.onRoadPrice = "";
+											}
+                                            //Check for if SoldViaAutobox has the customerQuoteId for this dealerId
+											return databaseObj.SoldViaAutobox.findOne({
+                                                where: {
+                                                    customerQuoteId : customerQuoteInstance.id,
+                                                    dealerId: userId
+                                                }
+                                            });
+										})
 										.then(function(soldViaAutobox){
 											if(soldViaAutobox){
 												customerQuoteInstance.soldViaAutobox = "yes";

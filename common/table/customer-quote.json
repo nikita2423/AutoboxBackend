@@ -155,13 +155,13 @@
     "ownershipType": {
       "position": 7,
       "tag": {
-        "individual": "label-success",
-        "corporate": "label-danger"
+        "ind": "label-success",
+        "cor": "label-danger"
       },
       "search": "select",
       "options": [
-        "individual",
-        "corporate"
+        "ind",
+        "cor"
       ],
       "label": "Ownership",
       "style":{
@@ -233,6 +233,15 @@
       "label": "Finance"
     },
     "quoteNumber": {
+      "display": false,
+      "label": "Quote",
+      "position": 11,
+      "style":{
+        "width": "90px"
+      },
+      "search": "text"
+    },
+    "onRoadPrice":{
       "label": "Quote",
       "position": 11,
       "style":{

@@ -8,7 +8,7 @@ module.exports = (Customerquote, server, helper) =>
     const moment        = require('moment');
     const push          = helper.loadPlugin("pushService");
     const autoboxPlugin = helper.loadPlugin("autobox");
-    const OWNERSHIPTYPE = ["individual", "corporate"];
+    const OWNERSHIPTYPE = ["ind", "cor"];
     const QUOTETYPE     = ["q", "t"];
 
     /*Override the custmer quote method for Hiding the Mobile number*/
