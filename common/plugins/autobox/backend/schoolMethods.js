@@ -571,7 +571,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
           const gpsPacketdataObj = instance.toJSON();
           let promises = [];
           let gpsLatLang;
-          if(ctx.isNewInstance && moment().hour()>=6 && moment().hour()<=10){
+          if(ctx.isNewInstance && moment().hour()>=6 && moment().hour()<=12){
               process.nextTick(function(){
                   databaseObj.BusModel.findOne({
                       where: {
