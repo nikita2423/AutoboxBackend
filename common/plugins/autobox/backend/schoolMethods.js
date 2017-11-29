@@ -7,6 +7,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const process = require("process");
     const async = require("async");
     const push = helper.loadPlugin("pushService");
+    const moment = require("moment");
 
     var init = function(){
         findAllSchoolMethod();
@@ -570,7 +571,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
           const gpsPacketdataObj = instance.toJSON();
           let promises = [];
           let gpsLatLang;
-          if(ctx.isNewInstance){
+          if(ctx.isNewInstance && moment().hour()>=6 && moment().hour()<=10){
               process.nextTick(function(){
                   databaseObj.BusModel.findOne({
                       where: {
@@ -654,6 +655,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                           server.logger.error(error);
                       });
               })
+          } else{
+              server.logger("Not able to send bus notification as time is not between 6 and 10");
           }
           next();
       })

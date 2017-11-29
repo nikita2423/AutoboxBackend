@@ -17,6 +17,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         sendGpsDeviceStatusNotification();
         sendOverSpeedingNotification();
         sendVehicleTowingNotification();
+        sendAccidentDetectionNotification();
     };
 
 
@@ -893,6 +894,126 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
 
+    const sendAccidentDetectionNotification = function(){
+        const GpsPacketData = databaseObj.GpsPacketData;
+        GpsPacketData.observe("after save", function(ctx, next){
+            const instance = ctx.instance;
+            const gpsPacketDataObj = instance.toJSON();
+            let customerName;
+            let customerInstance;
+            let eventType;
+            let title;
+            let pushFrom;
+            let instanceId;
+            let customerIdList = [];
+            let gpsTrackerInfoDataList = [];
+            let promises = [];
+            if(ctx.isNewInstance){
+                process.nextTick(function(){
+                    databaseObj.GpsTrackerInfo.find({
+                        where: {
+                            deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                            status : "active"
+                        }
+                    })
+                        .then(function(gpsTrackerInfoList){
+                            if(gpsTrackerInfoList){
+                                if(gpsTrackerInfoList.length){
+                                    gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
+                                        if(gpsTrackerInfo){
+                                            gpsTrackerInfoDataList.push(gpsTrackerInfo);
+                                            /* if(gpsTrackerInfo.customerId){
+                                             customerIdList.push(gpsTrackerInfo.customerId);
+                                             }*/
+                                        }
+                                    });
+                                }
+                            }
+                        })
+                        .then(function(){
+                            if(gpsTrackerInfoDataList){
+                                if(gpsTrackerInfoDataList.length){
+                                    gpsTrackerInfoDataList.forEach(function(gpsTrackerInfo){
+                                        if(gpsTrackerInfo){
+                                            const Customer = databaseObj.Customer;
+                                            promises.push(function(callback){
+                                                Customer.findById(gpsTrackerInfo.customerId)
+                                                    .then(function(customer){
+                                                        if(customer){
+                                                            console.log("customerIdList",customer.id);
+                                                            customerInstance = customer;
+                                                            customerName = customer.firstName;
+                                                            var lastName = customer.lastName? customer.lastName : "";
+                                                            customerName = customerName + " " + lastName;
+                                                            pushFrom = packageObj.companyName;
+                                                            instanceId = gpsPacketDataObj.id;
+                                                            if(gpsPacketDataObj.ignitionStatus === "off" && gpsPacketDataObj.eventType === packageObj.gps.harsh_braking){
+                                                                return GpsPacketData.find({
+                                                                    limit:2,
+                                                                    order: ["added DESC"]
+                                                                })
+                                                            }
+                                                        }
+                                                    })
+                                                    .then(function(gpsPacketDataList){
+                                                        if(gpsPacketDataList){
+                                                            if(gpsPacketDataList.length){
+                                                                if(gpsPacketDataList[1].eventType !== packageObj.gps.harsh_braking){
+                                                                    //send Notification
+                                                                    title = "We suspect of accident occured of your vehicle";
+                                                                    eventType = "Accident Detection";
+                                                                    var message = accidentDetectionMessageFormat(customerName, eventType, title, gpsPacketDataObj.id);
+                                                                    if(customerInstance.id && gpsTrackerInfo.gpsTrackerNotification["accidentDetection"] === "on"){
+                                                                        sendNotification(server, message, customerInstance.id, pushFrom, function(error){
+                                                                            if(error){
+                                                                                server.logger.error(error);
+                                                                                callback(error);
+                                                                            } else{
+                                                                                server.logger.info("Accident Detection Notification send Successfully");
+                                                                                return databaseObj.GpsNotification.create({
+                                                                                    message: title,
+                                                                                    deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                                    status: "active",
+                                                                                    customerId: customerInstance.id
+                                                                                });
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    })
+                                                    .then(function(gpsNotification){
+                                                        callback(null);
+                                                    })
+                                                    .catch(function(error){
+                                                        callback(error);
+                                                    })
+                                            })
+                                        }
+                                    });
+
+                                    async.series(promises, function(error){
+                                        if(error){
+                                            server.logger.error(error);
+                                        } else{
+                                            server.logger.info("Accident Detection Notification send Successfully to all customers");
+                                        }
+                                    })
+                                }
+                            }
+                        })
+                        .catch(function(error){
+                            server.logger.error(error);
+                        });
+                })
+            }
+            next();
+        });
+
+    };
+
+
 
 
     var brakeAccelerationMessageFormat = function(to, eventType, title, gpsPacketDataId){
@@ -951,9 +1072,19 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             type : eventType,
             title : title,
             id : gpsPacketDataId
-        }
+        };
         return JSON.stringify(message);
     };
+
+    var accidentDetectionMessageFormat = function(to, eventType, title, gpsPacketDataId){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            id : gpsPacketDataId
+        };
+        return JSON.stringify(message);
+    }
 
     const sendNotification = function(app, message, id, from, callback){
         //push.push(app, message, id, from, callback);

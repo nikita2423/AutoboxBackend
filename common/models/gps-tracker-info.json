@@ -73,6 +73,11 @@
               "key": "overSpeeding",
               "type": "input",
               "default": "on"
+            },
+            {
+              "key": "accidentDetection",
+              "type": "input",
+              "default": "on"
             }
           ]
         }

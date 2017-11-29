@@ -27,7 +27,8 @@ module.exports = function(Gpstrackerinfo, server, helper) {
                 hardAcceleration : "on",
                 gpsDisconnect : "on",
                 vehicleTowing : "on",
-                overSpeeding: "on"
+                overSpeeding: "on",
+                accidentDetection: "on"
             };
         }
 
