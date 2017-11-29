@@ -2377,6 +2377,11 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                           .then(function(vehicleInfoObj){
                               if(vehicleInfoObj){
                                   const vehicleInfoId = vehicleInfoObj.id;
+                                  if(customerQuoteObj.ownershipType === "individual"){
+                                      customerQuoteObj.ownershipType = "ind";
+                                  } else if(customerQuoteObj.ownershipType === "corporate"){
+                                      customerQuoteObj.ownershipType = "cor"
+                                  }
 
                                   return  CustomerQuote.create({
                                       vehicleInfoId: vehicleInfoId,
