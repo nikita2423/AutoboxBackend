@@ -656,7 +656,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       });
               })
           } else{
-              server.logger("Not able to send bus notification as time is not between 6 and 10");
+              server.logger.info("Not able to send bus notification as time is not between 6 and 10");
           }
           next();
       })
