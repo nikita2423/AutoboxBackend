@@ -60,6 +60,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 kilometers : sellVehicleObj.kilometers,
                                 yearOfPurchase : sellVehicleObj.yearOfPurchase,
                                 vehicleInfoId : vehicleInfo.id,
+                                trimData : sellVehicleObj.trimData,
                                 customerId : customerId
                             });
                         } else{
