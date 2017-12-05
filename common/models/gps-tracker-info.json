@@ -10,6 +10,10 @@
       "type": "string",
       "required": true
     },
+    "gpsTrackerSimNumber":{
+      "type": "string",
+      "required": true
+    },
     "gpsPassword": {
       "type": "string"
     },

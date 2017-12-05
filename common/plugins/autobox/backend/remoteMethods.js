@@ -1830,7 +1830,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         added:{
                             lt: lastDate
                         }
-                    }
+                    },
+                    include:["area", "city"]
                 })
                     .then(function(showroomList){
                         if(showroomList){
