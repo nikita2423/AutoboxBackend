@@ -388,7 +388,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                              deviceIMEI : gpsTrackerInfoInstance.deviceIMEI,
                                              gpsPassword : gpsTrackerInfoInstance.gpsPassword,
                                              registrationNumber : gpsTrackerInfoObj.registrationNumber,
-                                             serialNumber : gpsTrackerInfoObj.serialNumber,
+                                             gpsTrackerSimNumber : gpsTrackerInfoObj.gpsTrackerSimNumber,
                                              modelName : gpsTrackerInfoObj.modelName,
                                              status : gpsTrackerInfoInstance.status,
                                              added: gpsTrackerInfoInstance.added,
@@ -402,7 +402,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                          return GpsTrackerInfo.create({
                                              deviceIMEI : gpsTrackerInfoObj.deviceIMEI,
                                              registrationNumber : gpsTrackerInfoObj.registrationNumber,
-                                             serialNumber : gpsTrackerInfoObj.serialNumber,
+                                             gpsTrackerSimNumber : gpsTrackerInfoObj.gpsTrackerSimNumber,
                                              modelName : gpsTrackerInfoObj.modelName,
                                              gpsPassword : gpsTrackerInfoObj.gpsPassword,
                                              vehicleDetailId : gpsTrackerInfoObj.vehicleDetailId,
@@ -418,7 +418,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                  return GpsTrackerInfo.create({
                                      deviceIMEI : gpsTrackerInfoObj.deviceIMEI,
                                      registrationNumber : gpsTrackerInfoObj.registrationNumber,
-                                     serialNumber : gpsTrackerInfoObj.serialNumber,
+                                     gpsTrackerSimNumber : gpsTrackerInfoObj.gpsTrackerSimNumber,
                                      modelName : gpsTrackerInfoObj.modelName,
                                      gpsPassword : gpsTrackerInfoObj.gpsPassword,
                                      vehicleDetailId : gpsTrackerInfoObj.vehicleDetailId,
@@ -430,7 +430,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                              return GpsTrackerInfo.create({
                                  deviceIMEI : gpsTrackerInfoObj.deviceIMEI,
                                  registrationNumber : gpsTrackerInfoObj.registrationNumber,
-                                 serialNumber : gpsTrackerInfoObj.serialNumber,
+                                 gpsTrackerSimNumber : gpsTrackerInfoObj.gpsTrackerSimNumber,
                                  modelName : gpsTrackerInfoObj.modelName,
                                  gpsPassword : gpsTrackerInfoObj.gpsPassword,
                                  vehicleDetailId : gpsTrackerInfoObj.vehicleDetailId,
