@@ -130,25 +130,6 @@
     "brand_image": {
       "display": false
     },
-    "area_name": {
-      "label": "Area",
-      "search": "text"
-    },
-    "area_pincode": {
-      "display": false
-    },
-    "area_added": {
-      "display": false
-    },
-    "city_added": {
-      "display": false
-    },
-    "city_name": {
-      "display": false
-    },
-    "city_status": {
-      "display": false
-    },
     "dealer_firstName": {
       "display": false
     },

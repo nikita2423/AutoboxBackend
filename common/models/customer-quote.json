@@ -420,14 +420,10 @@
         "label": "Add Register City",
         "acl": {
           "allow": [],
-          "reject": [
-            "Dealer"
-          ],
+          "reject": [],
           "relations": {
             "allow": [],
-            "reject": [
-              "Dealer"
-            ]
+            "reject": []
           }
         }
       }

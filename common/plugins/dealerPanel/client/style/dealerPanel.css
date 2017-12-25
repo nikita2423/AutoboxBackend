@@ -219,6 +219,18 @@ header > ul > li > button {
     padding-bottom: 5px;
 }
 
+.thumbnail{
+    text-align: center;
+    cursor: pointer;
+}
+
+
+
+
+.mapDiv{
+    margin-bottom: 150px;
+}
+
 .slimScrollDiv {
     overflow-y: auto !important;
     overflow: auto;
@@ -232,9 +244,19 @@ header > ul > li > button {
 h3 img {
     max-height: 50px;
 }
+
+/**--------------------MAP DESIGN CLASSS FOR FILENAME ------ **/
+
 #map {
     height: 400px;
     margin: 20px 0;
     border-radius: 5px;
     border: 1px solid silver;
+}
+
+
+
+/**  ------------------------END MAP DESIGN ------------------**/
+.onVehicleSelected {
+    color: #ffffff;
 }

@@ -51,21 +51,6 @@
   },
   "validations": [],
   "relations": {
-    "country": {
-      "type": "belongsTo",
-      "model": "Country",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Country",
-        "searchProp": "name",
-        "priority": 2,
-        "search": true,
-        "create": false,
-        "id": "AddCountry",
-        "hide": false,
-        "label": "Add Country"
-      }
-    }
   },
   "acls": [],
   "methods": {}

@@ -1,0 +1,97 @@
+{
+  "name": "BindAddress",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "type": {
+      "type": "string",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Showroom/Workshop",
+          "id": "type",
+          "priority": 6,
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "Dealer"
+              ]
+            }
+          },
+          "options": [
+            "showroom",
+            "workshop"
+          ]
+        }
+      }
+    },
+    "address": {
+      "type": "string"
+    },
+    "latlong": {
+      "type": "geopoint",
+      "required": true,
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "box": "email",
+          "fields": [
+            {
+              "type": "input",
+              "key": "lat",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter latitude",
+                "id": "latitude",
+                "inline": "true",
+                "colSize": "col-md-4"
+              }
+            },
+            {
+              "type": "input",
+              "key": "lng",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter longitude",
+                "id": "longitude",
+                "inline": "true",
+                "colSize": "col-md-4"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "city": {
+      "type": "belongsTo",
+      "model": "City",
+      "foreignKey": ""
+    },
+    "area": {
+      "type": "belongsTo",
+      "model": "Area",
+      "foreignKey": ""
+    },
+    "dealer": {
+      "type": "belongsTo",
+      "model": "Dealer",
+      "foreignKey": ""
+    },
+    "showroom": {
+      "type": "belongsTo",
+      "model": "Showroom",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

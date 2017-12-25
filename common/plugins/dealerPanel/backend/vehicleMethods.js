@@ -11,6 +11,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     var init = function(){
         findAllDealerVehicleMethod();
         orderGpsTrackerEmail();
+        getAllTestVehiclesMethod();
     };
 
     const findAllDealerVehicleMethod = function(){
@@ -24,6 +25,22 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             ],
             returns: {
                 arg: "vehicleList", type: ["TrackDealerVehicle"], root: true
+            }
+        });
+    };
+
+
+    const getAllTestVehiclesMethod = function(){
+        const DealerVehicle = databaseObj.DealerVehicle;
+        DealerVehicle.getAllTestVehicles = getAllTestVehicles;
+        DealerVehicle.remoteMethod('getAllTestVehicles', {
+            accepts:[
+                {
+                    arg: "dealerId", type: "string"
+                }
+            ],
+            returns: {
+                arg: "dealerVehicleList", type: ["DealerVehicle"], root : true
             }
         });
     };
@@ -113,7 +130,44 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
             next();
         });
-    }
+    };
+
+
+
+    const getAllTestVehicles = function(dealerId, callback){
+        const DealerVehicle = databaseObj.DealerVehicle;
+        DealerVehicle.find({
+            where: {
+                dealerId : dealerId
+            },
+            include: [{
+                relation: "brand",
+                scope: {
+                    fields: ["name"]
+                }
+            },
+                {
+                    relation: "carModel",
+                    scope: {
+                        fields: ["name"]
+                    }
+                }]
+        })
+            .then(function(dealerVehicleList){
+                if(dealerVehicleList){
+                    if(dealerVehicleList.length){
+                        callback(null, dealerVehicleList);
+                    } else{
+                        callback(null, []);
+                    }
+                } else{
+                    callback(null, []);
+                }
+            })
+            .catch(function(error){
+                callback(error);
+            });
+    };
 
 
     return {

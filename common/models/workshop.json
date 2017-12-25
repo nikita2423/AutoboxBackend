@@ -247,42 +247,6 @@
   },
   "validations": [],
   "relations": {
-    "city": {
-      "type": "belongsTo",
-      "model": "City",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add City",
-        "searchProp": "name",
-        "type": "smartSelect",
-        "inline": true,
-        "colSize": "col-md-4",
-        "box": "area",
-        "acl": {
-          "allow": [],
-          "reject": []
-        },
-        "priority": 2,
-        "id": "AddCity",
-        "label": "Add City"
-      }
-    },
-    "area": {
-      "type": "belongsTo",
-      "model": "Area",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Area",
-        "searchProp": "name",
-        "id": "AddArea",
-        "label": "Add Area",
-        "type": "smartSelect",
-        "readOnly": false,
-        "inline": true,
-        "colSize": "col-md-4",
-        "box": "area"
-      }
-    },
     "brand": {
       "type": "belongsTo",
       "model": "Brand",
@@ -314,6 +278,40 @@
         "readOnly": false,
         "inline": "true",
         "colSize": "col-md-4"
+      }
+    },
+    "areas": {
+      "type": "hasAndBelongsToMany",
+      "model": "Area",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Areas",
+        "searchProp": "name",
+        "priority": 2,
+        "box": "area",
+        "search": true,
+        "create": false,
+        "load": true,
+        "id": "AddAreas",
+        "hide": false,
+        "label": "Add Areas"
+      }
+    },
+    "cities": {
+      "type": "hasAndBelongsToMany",
+      "model": "City",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Cities",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "load": true,
+        "box": "area",
+        "id": "AddCities",
+        "hide": false,
+        "label": "Add Cities"
       }
     }
   },

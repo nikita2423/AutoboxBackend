@@ -13,6 +13,7 @@ module.exports = (Showroom, server, helper) =>
     } = require('validator');
     const _ = require('lodash');
     const STATUS = ["active", "inactive"];
+    const {validate} = require("../helper/usefullMethods");
 
 
   /*  Showroom.observe("after save" ,function (ctx, next) {
@@ -87,23 +88,26 @@ module.exports = (Showroom, server, helper) =>
             }
         }
 
-        if(!instance.latlong){
+        if(!validate(instance, currentInstance, 'latlong')){
             return next(new Error("LatLong is required"));
         }
 
-        if(!instance.timings){
+        if(!validate(instance, currentInstance, 'timings')){
             return next(new Error("Timings is required"));
         } else{
-            const openingTime = instance.timings["opening"];
-            const closingTime = instance.timings["closing"];
-            if(!openingTime || !closingTime){
-                return next(new Error("Opening and closing timing is required"));
+            if(instance.timings){
+                const openingTime = instance.timings["opening"];
+                const closingTime = instance.timings["closing"];
+                if(!openingTime || !closingTime){
+                    return next(new Error("Opening and closing timing is required"));
+                }
             }
+
         }
 
-        if(!instance.areaId){
+       /* if(!instance.areaId){
             return next(new Error("Area is required"));
-        }
+        }*/
 
         if(instance.email){
             instance.email = trim(instance.email);
@@ -127,22 +131,27 @@ module.exports = (Showroom, server, helper) =>
 
     });
 
-    Showroom.observe("after save", function(ctx, next){
+ /*   Showroom.observe("after save", function(ctx, next){
         const instance = ctx.instance || ctx.data;
         const Dealer = server.models['Dealer'];
-        Dealer.findById(instance.dealerId)
-            .then(function(dealer){
-                if(dealer){
-                    return dealer.updateAttribute("showroomId", instance.id);
-                }
-            })
-            .then(function(dealer){
-                next();
-            })
-            .catch(function(error){
-                next(error);
-            });
-    });
+        if(instance.dealerId){
+            Dealer.findById(instance.dealerId)
+                .then(function(dealer){
+                    if(dealer){
+                        if(instance.id){
+                            return dealer.updateAttribute("showroomId", instance.id);
+                        }
+                    }
+                })
+                .then(function(dealer){
+                    next();
+                })
+                .catch(function(error){
+                    next(error);
+                });
+        }
+
+    });*/
 
 
     function toTitleCase(str)

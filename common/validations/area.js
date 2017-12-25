@@ -9,6 +9,7 @@ module.exports = (Area, server, helper) =>
         trim
     } = require('validator');
     const _ = require('lodash');
+    const {validate} = require("../helper/usefullMethods");
 
     Area.observe("before save", function(ctx, next){
         const instance = ctx.instance || ctx.data;
@@ -28,10 +29,10 @@ module.exports = (Area, server, helper) =>
                 return next(new Error("Area Name cannot exceed more than 500 words"));
             }
         }
-        if(!instance.cityId){
+        if(!validate(instance, currentInstance, "cityId")){
             return next(new Error("City is required"));
         }
-        if(!instance.pincode){
+        if(!validate(instance, currentInstance, "pincode")){
             return next(new Error("Pincode is required"));
         }
 

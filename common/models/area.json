@@ -63,22 +63,6 @@
         "hide": false,
         "label": "Add City"
       }
-    },
-    "country": {
-      "type": "belongsTo",
-      "model": "Country",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Country",
-        "searchProp": "name",
-        "priority": 1,
-        "type": "smartSelect",
-        "search": true,
-        "create": false,
-        "id": "AddCountry",
-        "hide": false,
-        "label": "Add Country"
-      }
     }
   },
   "acls": [],

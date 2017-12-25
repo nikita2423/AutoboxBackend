@@ -8,7 +8,8 @@
     "/dealerPanel/scripts/directives/dealerPanel.js": "dealerPanelDirectives",
     "/dealerPanel/scripts/services/helper.js": "HelperServices",
     "/dealerPanel/style/dealerPanel.css": "dealerPanelCss",
-    "https://maps.googleapis.com/maps/api/js?key=AIzaSyCOUOXq77G1ArjLRa-M1_dmq3-N5uCf00U": "GoogleMapAPI"
+    "https://maps.googleapis.com/maps/api/js?key=AIzaSyCOUOXq77G1ArjLRa-M1_dmq3-N5uCf00U": "GoogleMapAPI",
+    "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js": "DynamicTabLayout"
   },
   "moduleDependencies":{
 

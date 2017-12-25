@@ -10,7 +10,7 @@
       "type": "string",
       "required": true
     },
-    "gpsTrackerSimNumber":{
+    "gpsTrackerSimNumber": {
       "type": "string",
       "required": true
     },

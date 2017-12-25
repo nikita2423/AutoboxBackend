@@ -75,6 +75,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     arg: "filter", type: "Object"
                 },
                 {
+                    arg: "type", type: "string"
+                },
+                {
                     arg: "lastDate", type: "string"
                 }
             ],
@@ -98,6 +101,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
              },
              {
                  arg: "filter", type: "Object"
+             },
+             {
+                 arg: "type", type: "string"
              }
          ],
           returns:{
@@ -122,6 +128,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 },
                 {
                     arg: "filter", type: "Object"
+                },
+                {
+                    arg: "type", type: "string"
                 }
             ],
             returns:{
@@ -145,6 +154,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 },
                 {
                     arg: "filter", type: "Object"
+                },
+                {
+                    arg: "type", type: "string"
                 }
             ],
             returns:{
@@ -167,6 +179,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 },
                 {
                     arg: "filter", type: "Object"
+                },
+                {
+                    arg: "type", type: "string"
                 }
             ],
             returns:{
@@ -1068,7 +1083,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @param callback
      * @returns {*}
      */
-    const findAllBrands = function(ctx, filter, lastDate, callback){
+    const findAllBrands = function(ctx, filter, type, lastDate, callback){
         /*if(!filter.where.added.lt){
             filter.where.added.lt = new Date();
         }*/
@@ -1081,9 +1096,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                   filter.where = filter.where || {};
                   if(filter){
                       if(filter.where){
-                          if(!filter.where.status){
-                              filter.where.status = "active";
+                          if(type === "new"){
+                              if(!filter.where.status){
+                                  filter.where.status = "active";
+                              }
                           }
+
                       }
                   }
 
@@ -1124,7 +1142,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @param callback
      * @returns {*}
      */
-    const findAllModels = function(ctx, filter, callback){
+    const findAllModels = function(ctx, filter, type, callback){
         const request = ctx.req;
         let lastDate;
         const carIdList = [];
@@ -1135,8 +1153,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 filter.where = filter.where || {};
                 if(filter){
                     if(filter.where){
-                        if(!filter.where.status){
-                            filter.where.status = "active";
+                        if(type === "new"){
+                            if(!filter.where.status){
+                                filter.where.status = "active";
+                            }
                         }
                     }
                 }
@@ -1178,7 +1198,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @param callback
      * @returns {*}
      */
-    const findAllFuel = function(ctx, filter, callback){
+    const findAllFuel = function(ctx, filter, type, callback){
         const request = ctx.req;
         var lastDate = "";
         let uniqueFuelList = [];
@@ -1189,8 +1209,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 filter.where = filter.where || {};
                 if(filter){
                     if(filter.where){
-                        if(!filter.where.status){
-                            filter.where.status = "active";
+                        if(type === "new"){
+                            if(!filter.where.status){
+                                filter.where.status = "active";
+                            }
                         }
                     }
                 }
@@ -1224,7 +1246,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @param callback
      * @returns {*}
      */
-    const findAllGearbox = function(ctx, filter, callback){
+    const findAllGearbox = function(ctx, filter, type, callback){
         const request = ctx.req;
         let lastDate ;
         let uniqueGearBoxList = [];
@@ -1235,8 +1257,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 filter.where = filter.where || {};
                 if(filter){
                     if(filter.where){
-                        if(!filter.where.status){
-                            filter.where.status = "active";
+                        if(type === "new"){
+                            if(!filter.where.status){
+                                filter.where.status = "active";
+                            }
                         }
                     }
                 }
@@ -1269,7 +1293,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @param callback
      * @returns {*}
      */
-    const findAllTrim = function(ctx, filter, callback){
+    const findAllTrim = function(ctx, filter, type, callback){
         const request = ctx.req;
         let lastDate;
         const carIdList = [];
@@ -1280,8 +1304,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 filter.where = filter.where || {};
                 if(filter){
                     if(filter.where){
-                        if(!filter.where.status){
-                            filter.where.status = "active";
+                        if(type === "new"){
+                            if(!filter.where.status){
+                                filter.where.status = "active";
+                            }
                         }
                     }
                 }
@@ -1782,7 +1808,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             lt: lastDate
                         }
                     },
-                    include: ["brand", "area", "city"]
+                    include: ["brand", "areas", "cities"]
                 })
                     .then(function(workshopList){
                         if(workshopList){
@@ -1831,7 +1857,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             lt: lastDate
                         }
                     },
-                    include:["area", "city"]
+                    include:["areas", "cities"]
                 })
                     .then(function(showroomList){
                         if(showroomList){
@@ -2624,13 +2650,13 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             include: [{
                                 relation: "showroom",
                                 scope: {
-                                    include: ["area", "city"]
+                                    include: ["areas", "cities"]
                                 }
                             },
                                 {
                                     relation: "workshop",
                                     scope: {
-                                        include: ["area", "city"]
+                                        include: ["areas", "cities"]
                                     }
                                 },
                                 {
@@ -2649,13 +2675,13 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 include: [{
                                     relation: "showroom",
                                     scope: {
-                                        include: ["area", "city"]
+                                        include: ["areas", "cities"]
                                     }
                                 },
                                     {
                                         relation: "workshop",
                                         scope: {
-                                            include: ["area", "city"]
+                                            include: ["areas", "cities"]
                                         }
                                     },
                                     {

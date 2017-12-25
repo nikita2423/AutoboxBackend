@@ -8,6 +8,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     var init = function(){
         storeTrackDealerVehicleMethod();
+        getAllTestVehiclesMethod();
+        getTestVehicleLocationMethod();
 
     };
 
@@ -27,7 +29,106 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
 
+    const getAllTestVehiclesMethod = function(){
+        const DealerVehicle = databaseObj.DealerVehicle;
+        DealerVehicle.getAllTestVehicles = getAllTestVehicles;
+        DealerVehicle.remoteMethod('getAllTestVehicles', {
+            accepts:[
+                {
+                    arg: "dealerId", type: "string"
+                }
+            ],
+            returns: {
+                arg: "dealerVehicleList", type: ["DealerVehicle"], root : true
+            }
+        });
+    };
 
+    const getTestVehicleLocationMethod = function(){
+        const DealerVehicle = databaseObj.DealerVehicle;
+        DealerVehicle.getTestVehicleLocation = getTestVehicleLocation;
+        DealerVehicle.remoteMethod('getTestVehicleLocation', {
+            accepts: [
+                {
+                    arg: "dealerId", type: "string"
+                },
+                {
+                    arg: "serialNumber", type: "string"
+                }
+            ],
+            returns: {
+                arg: "trackVehicle", type: "TrackDealerVehicle", root : true
+            }
+
+        });
+    };
+
+    const getTestVehicleLocation = function(dealerId, serialNumber, callback){
+        const DealerVehicle = databaseObj.DealerVehicle;
+        const TrackDealerVehicle = databaseObj.TrackDealerVehicle;
+        DealerVehicle.findOne({
+            where: {
+                serialNumber : serialNumber,
+                dealerId : dealerId
+            }
+        })
+            .then(function(dealerVehicle){
+                if(dealerVehicle){
+                    return TrackDealerVehicle.findOne({
+                        where : {
+                            deviceIMEI : serialNumber
+                        },
+                        order:["added DESC"]
+                    });
+                }
+            })
+            .then(function(trackDealerVehicle){
+                if(trackDealerVehicle){
+                    callback(null, trackDealerVehicle);
+                } else{
+                    callback(null, {});
+                }
+            })
+            .catch(function(error){
+                callback(error);
+            });
+    };
+
+
+    const getAllTestVehicles = function(dealerId, callback){
+        const DealerVehicle = databaseObj.DealerVehicle;
+        DealerVehicle.find({
+            where: {
+                dealerId : dealerId
+            },
+            include: [{
+                relation: "brand",
+                scope: {
+                    fields: ["name"]
+                }
+            },
+                {
+                    relation: "carModel",
+                    scope: {
+                        fields: ["name"]
+                    }
+                }]
+        })
+            .then(function(dealerVehicleList){
+                if(dealerVehicleList){
+                    if(dealerVehicleList.length){
+                        callback(null, dealerVehicleList);
+                    } else{
+                        callback(null, []);
+                    }
+                } else{
+                    callback(null, []);
+                }
+            })
+            .catch(function(error){
+                callback(error);
+            });
+    };
 
     const storeTrackDealerVehicle = function(trackDealerVehicleObj, callback){
         if(!trackDealerVehicleObj){

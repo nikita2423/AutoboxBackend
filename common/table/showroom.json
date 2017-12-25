@@ -133,16 +133,6 @@
       "search": "date",
       "date": true
     },
-    "area_name": {
-      "label": "Area",
-      "search": "text"
-    },
-    "area_pincode": {
-      "display": false
-    },
-    "area_added": {
-      "display": false
-    },
     "brand_name": {
       "label": "Brand",
       "search": "text"
@@ -154,17 +144,6 @@
       "display": false
     },
     "brand_image": {
-      "display": false
-    },
-    "city_added": {
-      "display": false
-    },
-    "city_name": {
-      "label": "City",
-      "search": "text",
-      "display": false
-    },
-    "city_status": {
       "display": false
     },
     "dealer_firstName":{

@@ -5,8 +5,7 @@
         "added": "DESC"
       },
       "beforeLoad":{
-        "currentBrandId": "$user.brandId",
-        "cityId": "$user.cityId"
+        "currentBrandId": "$user.brandId"
       },
       "edit":{
         "disableWhen": {
@@ -331,8 +330,11 @@
       "display": false
     },
     "city_name": {
-      "display": true,
       "label": "City",
+      "position": 17,
+      "style":{
+        "width": "130px"
+      },
       "search": "text"
     },
     "city_status": {

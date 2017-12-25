@@ -56,6 +56,22 @@
         }
       }
     },
+    "isInstalled": {
+      "type": "boolean",
+      "default": false
+    },
+    "isContactSynced": {
+      "type": "boolean",
+      "default": false
+    },
+    "shareAppCount": {
+      "type": "number",
+      "default": 0
+    },
+    "earnedPoints": {
+      "type": "number",
+      "default": 0
+    },
     "cityName": {
       "type": "string"
     },
@@ -405,7 +421,8 @@
         "saveCustomer",
         "onCompletePurchase",
         "setGpsNotificationStatus",
-        "setOfferNotificationStatus"
+        "setOfferNotificationStatus",
+        "incrementPoints"
       ]
     }
   ],

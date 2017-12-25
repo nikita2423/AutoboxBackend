@@ -3,8 +3,8 @@
 angular.module($snaphy.getModuleName())
 
 //Controller for dealerPanelControl ..
-.controller('dealerPanelControl', ['$scope', 'HelperService', 'LoginServices', 'InitTableService', '$rootScope', "$timeout", '$state',
-    function($scope, HelperService, LoginServices, InitTableService, $rootScope, $timeout, $state) {
+.controller('dealerPanelControl', ['$scope', 'HelperService', 'LoginServices', 'InitTableService', '$rootScope', "$timeout", '$state', '$http',
+    function($scope, HelperService, LoginServices, InitTableService, $rootScope, $timeout, $state, $http) {
         //Checking if default templating feature is enabled..
         var defaultTemplate = $snaphy.loadSettings('dealerPanel', "defaultTemplate");
         $snaphy.setDefaultTemplate(defaultTemplate);
@@ -58,6 +58,16 @@ angular.module($snaphy.getModuleName())
 
         $scope.initMapView = function(){
             $scope.settings.tabs.trackVehicle.initMap();
+        };
+
+        $scope.getVehicleLocation = function(dealerId, serialNumber){
+            $scope.settings.tabs.trackVehicle.getLocation(dealerId, serialNumber);
+        };
+
+
+        $scope.initTestVehicle = function(){
+            $scope.settings.tabs.trackVehicle.getAllVehicle();
+           // $scope.settings.tabs.trackVehicle.getTestVehicles();
         };
 
 

@@ -1084,7 +1084,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             id : gpsPacketDataId
         };
         return JSON.stringify(message);
-    }
+    };
 
     const sendNotification = function(app, message, id, from, callback){
         //push.push(app, message, id, from, callback);

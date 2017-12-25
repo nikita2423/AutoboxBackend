@@ -1273,15 +1273,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         return JSON.stringify(message);
     };
 
-    var customerMessageFormat = function(to, eventType, title, customerMessageId){
-        var message = {
-            to : to,
-            type : eventType,
-            title : title,
-            id : customerMessageId
-        };
-        return JSON.stringify(message);
-    };
+
 
 
 
