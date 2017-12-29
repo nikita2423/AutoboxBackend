@@ -199,9 +199,7 @@
             "reject": [],
             "fields": {
               "allow": [],
-              "reject": [
-                "Dealer"
-              ]
+              "reject": []
             }
           },
           "options": [
@@ -226,9 +224,7 @@
             "reject": [],
             "fields": {
               "allow": [],
-              "reject": [
-                "Dealer"
-              ]
+              "reject": []
             }
           },
           "options": [
@@ -346,7 +342,17 @@
         "create": false,
         "id": "AddBrand",
         "hide": false,
-        "label": "Add Old Trade Car Brand"
+        "label": "Add Old Trade Car Brand",
+        "acl": {
+          "relations": {
+            "accept": [],
+            "reject": [
+              "Dealer"
+            ]
+          },
+          "accept": [],
+          "reject": []
+        }
       }
     },
     "carModel": {
@@ -361,7 +367,17 @@
         "create": false,
         "id": "AddCarModel",
         "hide": false,
-        "label": "Add Old Trade Car Model"
+        "label": "Add Old Trade Car Model",
+        "acl": {
+          "relations": {
+            "accept": [],
+            "reject": [
+              "Dealer"
+            ]
+          },
+          "accept": [],
+          "reject": []
+        }
       }
     },
     "customer": {
@@ -376,7 +392,15 @@
         "create": false,
         "id": "AddCustomer",
         "hide": false,
-        "label": "Add Customer"
+        "label": "Add Customer",
+        "acl": {
+          "relations": {
+            "accept": [],
+            "reject": []
+          },
+          "accept": [],
+          "reject": []
+        }
       }
     },
     "dealer": {
@@ -440,7 +464,15 @@
         "create": false,
         "id": "vehicleInfo",
         "hide": false,
-        "label": "Add Vehicle"
+        "label": "Add Vehicle",
+        "acl": {
+          "allow": [],
+          "reject": [],
+          "relations": {
+            "allow": [],
+            "reject": []
+          }
+        }
       }
     },
     "trim": {
@@ -455,7 +487,17 @@
         "create": false,
         "id": "vehicleVariant",
         "hide": false,
-        "label": "Add Variant"
+        "label": "Add Variant",
+        "acl": {
+          "allow": [],
+          "reject": [],
+          "relations": {
+            "allow": [],
+            "reject": [
+              "Dealer"
+            ]
+          }
+        }
       }
     }
   },

@@ -1,6 +1,11 @@
 {
   "settings": {
-    "create": true
+    "create": true,
+    "tables": {
+      "beforeLoad": {
+        "dealerId": "$user.id"
+      }
+    }
   },
   "widgets": [
     {

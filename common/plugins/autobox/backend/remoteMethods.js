@@ -2955,7 +2955,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       {
                           relation: "workshop",
                           scope: {
-                              include: ["area", "city"]
+                              include: ["areas", "cities"]
                           }
                       },
                       {
@@ -2964,7 +2964,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       {
                           relation: "showroom",
                           scope: {
-                              include: ["area", "city"]
+                              include: ["areas", "cities"]
                           }
                       }];
 

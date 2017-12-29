@@ -24,7 +24,12 @@
     },
     "city_name": {
       "label": "City",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "City",
+      "foreignKey": "cityId",
+      "propertyName": "name"
     },
     "city_status":{
       "display": false
@@ -39,9 +44,13 @@
       "display": false
     },
     "country_name": {
-      "display": false,
       "label": "Country",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Country",
+      "foreignKey": "countryId",
+      "propertyName": "name"
     }
   }
 }

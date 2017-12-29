@@ -33,7 +33,12 @@
     },
     "brand_name": {
       "label": "Brand",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Brand",
+      "foreignKey": "brandId",
+      "propertyName": "name"
     },
     "brand_added": {
       "display": false
@@ -46,7 +51,12 @@
     },
     "carModel_name": {
       "label": "Model",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "CarModel",
+      "foreignKey": "carModelId",
+      "propertyName": "name"
     },
     "carModel_added": {
       "display": false
@@ -65,14 +75,24 @@
     },
     "fuel_name": {
       "label": "Fuel",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Fuel",
+      "foreignKey": "fuelId",
+      "propertyName": "name"
     },
     "fuel_status": {
       "display": false
     },
     "gearBox_name": {
       "label": "GearBox",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "GearBox",
+      "foreignKey": "gearBoxId",
+      "propertyName": "name"
     },
     "gearBox_status": {
       "display": false

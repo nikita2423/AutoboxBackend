@@ -47,8 +47,12 @@
     },
     "customer_phoneNumber": {
       "label": "Customer Contact",
-      "search": "text",
-      "display": true
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "phoneNumber"
     },
     "customer_added": {
       "display": false

@@ -15,41 +15,6 @@ module.exports = (Showroom, server, helper) =>
     const STATUS = ["active", "inactive"];
     const {validate} = require("../helper/usefullMethods");
 
-
-  /*  Showroom.observe("after save" ,function (ctx, next) {
-        const instance = ctx.instance || ctx.data;
-
-        if (ctx.isNewInstance) {
-            if (instance.cityId && instance.brandId && instance.areaId) {
-                //Create dealer panel..
-                const Dealer = server.models["Dealer"];
-                Dealer.findOne({
-                    where:{
-                        cityId: instance.cityId,
-                        brandId: instance.brandId,
-                        areaId: instance.areaId
-                    }
-                })
-                    .then(function (dealerObj) {
-                        return dealerObj.updateAttributes({
-                            showroomId: instance.id
-                        });
-                    })
-                    .then(function () {
-                        next();
-                    })
-                    .catch(function (error) {
-                       next(error);
-                    });
-            }else{
-                next();
-            }
-        }else{
-            next();
-        }
-
-    });*/
-
     Showroom.observe("before save", function(ctx, next){
         const instance = ctx.instance || ctx.data;
         const currentInstance = ctx.currentInstance;
@@ -131,26 +96,31 @@ module.exports = (Showroom, server, helper) =>
 
     });
 
- /*   Showroom.observe("after save", function(ctx, next){
+   /* Showroom.observe("after save", function(ctx, next){
         const instance = ctx.instance || ctx.data;
         const Dealer = server.models['Dealer'];
-        if(instance.dealerId){
-            Dealer.findById(instance.dealerId)
-                .then(function(dealer){
-                    if(dealer){
-                        if(instance.id){
-                            return dealer.updateAttribute("showroomId", instance.id);
+        if(instance){
+            if(instance.dealerId){
+                Dealer.findById(instance.dealerId)
+                    .then(function(dealer){
+                        if(dealer){
+                            if(instance.id){
+                                return dealer.updateAttribute("showroomId", instance.id);
+                            }
                         }
-                    }
-                })
-                .then(function(dealer){
-                    next();
-                })
-                .catch(function(error){
-                    next(error);
-                });
+                    })
+                    .then(function(dealer){
+                        next();
+                    })
+                    .catch(function(error){
+                        next(error);
+                    });
+            }else{
+                next();
+            }
+        }else{
+            next();
         }
-
     });*/
 
 

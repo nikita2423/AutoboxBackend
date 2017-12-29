@@ -25,6 +25,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const sellVehicleMethods = require("./sellVehicleMethods")(server, databaseObj, helper, packageObj);
     const batteryMethods = require("./batteryMethods")(server, databaseObj, helper, packageObj);
     const planTypeMethods = require("./planTypeMethods")(server, databaseObj, helper, packageObj);
+    const nightLockMethods = require("./nightLockMethods")(server, databaseObj, helper, packageObj);
     var speakeasy          = require("speakeasy");
     var moment             = require("moment");
     const SendOtp          = require('sendotp');
@@ -48,6 +49,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         sellVehicleMethods.init();
         batteryMethods.init();
         planTypeMethods.init();
+        nightLockMethods.init();
 	};
 
 
@@ -66,8 +68,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 					}
 				}
 			}
-
-            getAuthorisedRoles(req)
+			getAuthorisedRoles(req)
 				.then(function (roles) {
 					const promiseList = [];
                     if(customerQuoteList){
@@ -105,8 +106,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 												customerQuoteInstance.soldViaAutobox = "yes";
                                                 customerQuoteInstance[packageObj.EDIT_BUTTON] = packageObj.disableButton.enable;
 											} else{
-												//customerQuoteInstance.soldViaAutobox = "no";
-                                                customerQuoteInstance[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
+												customerQuoteInstance.soldViaAutobox = "no";
+                                                //customerQuoteInstance[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
 											}
                                             customerQuoteList.splice(index, 1, customerQuoteInstance);
 										})
@@ -151,21 +152,32 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         //Check if this car is already sold by autobox or not..
                         if(customerQuote.soldViaAutobox === packageObj.soldViaAutobox.yes){
                             //Now check if the. current dealer has sold the car..
-							if(customerQuote.dealerId.toString() === userId.toString()){
-								//Current dealer has sold the car...allow to dealer to display the customer info..
-								//Display all the information..of customer in this case..
-								//Do nothing here..
-							}else{
+							if(customerQuote.dealerId){
+                                if(customerQuote.dealerId.toString() === userId.toString()){
+                                    //Current dealer has sold the car...allow to dealer to display the customer info..
+                                    //Display all the information..of customer in this case..
+                                    //Do nothing here..
+                                }else{
+                                    deleteCustomerQuoteBasicDetails(customerQuote);
+                                    //if some other dealer has sold the car.. then..
+                                    //Display a dummy no button.. and disable all functionality..
+                                    customerQuote.soldViaAutobox = packageObj.soldViaAutobox.no;
+                                    customerQuote.gpsTracker     = packageObj.soldViaAutobox.no;
+                                    customerQuote.dashCamera     = packageObj.soldViaAutobox.no;
+                                    customerQuote[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
+                                    customerQuote[packageObj.REPLY_BUTTON] = packageObj.disableButton.disable;
+                                }
+							} else{
                                 deleteCustomerQuoteBasicDetails(customerQuote);
-								//if some other dealer has sold the car.. then..
-								//Display a dummy no button.. and disable all functionality..
+                                //if some other dealer has sold the car.. then..
+                                //Display a dummy no button.. and disable all functionality..
                                 customerQuote.soldViaAutobox = packageObj.soldViaAutobox.no;
                                 customerQuote.gpsTracker     = packageObj.soldViaAutobox.no;
                                 customerQuote.dashCamera     = packageObj.soldViaAutobox.no;
-								customerQuote[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
-								customerQuote[packageObj.REPLY_BUTTON] = packageObj.disableButton.disable;
+                                customerQuote[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
+                                customerQuote[packageObj.REPLY_BUTTON] = packageObj.disableButton.disable;
 							}
-                            resolve(customerQuote);
+							resolve(customerQuote);
                         }else{
                             const waitingTimeLimit = moment(customerQuote.added).add(packageObj.WAITING_TIME, "hours");
                             if(!moment().isAfter(waitingTimeLimit)){
@@ -184,6 +196,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                             customerQuote[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
                                         }else{
                                             //Do nothing here..
+
                                         }
                                     })
                                     .then(function () {
@@ -211,6 +224,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                             customerQuote[packageObj.REPLY_BUTTON] = packageObj.disableButton.disable;
 										}else{
 											//Do nothing here..
+                                            customerQuote[packageObj.EDIT_BUTTON] = packageObj.disableButton.enable;
 										}
                                     })
 									.then(function () {

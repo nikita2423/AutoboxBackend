@@ -25,12 +25,21 @@
     },
     "customer_firstName": {
       "label": "Customer First Name",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "firstName"
     },
     "customer_lastName": {
       "label": "Customer Last Name",
+      "search": "related",
+      "type": "text",
       "display": true,
-      "search": "text"
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "lastName"
     },
     "customer_profilePic": {
       "display": false
@@ -45,9 +54,13 @@
       "display": false
     },
     "customer_phoneNumber": {
-      "display": true,
       "label": "Customer Contact",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "phoneNumber"
     },
     "customer_sosStatus": {
       "display": false

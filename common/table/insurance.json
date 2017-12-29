@@ -34,9 +34,13 @@
       "search": "text"
     },
     "vehicleInfo_vehicleModel": {
-      "display": true,
       "label": "Vehicle",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "VehicleInfo",
+      "foreignKey": "vehicleInfoId",
+      "propertyName": "vehicleModel"
     },
     "vehicleInfo_vehicleType": {
       "display": false

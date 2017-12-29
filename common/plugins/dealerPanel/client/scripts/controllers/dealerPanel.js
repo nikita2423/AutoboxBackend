@@ -17,11 +17,15 @@ angular.module($snaphy.getModuleName())
         //showroom initializer..
         $scope.initShowRoom = function () {
             //fetch data from js
+            $scope.settings.tabs.manageShowroomProfile.data = {};
+            $scope.settings.tabs.manageShowroomProfile.form = {};
         };
 
         //workshop initializer
         $scope.initWorkshop = function() {
             //do something here
+            $scope.settings.tabs.manageWorkshopProfile.data = {};
+            $scope.settings.tabs.manageWorkshopProfile.form = {};
         };
 
         

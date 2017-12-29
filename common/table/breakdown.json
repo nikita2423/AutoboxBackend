@@ -48,8 +48,13 @@
       "display": false
     },
     "city_name": {
-      "search" : "text",
-      "label": "City"
+      "label": "City",
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "City",
+      "foreignKey": "cityId",
+      "propertyName": "name"
     },
     "city_added": {
       "display": false
@@ -62,7 +67,12 @@
     },
     "breakdownCategory_name": {
       "label": "Category",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "BreakdownCategory",
+      "foreignKey": "breakdownCategoryId",
+      "propertyName": "name"
     },
     "breakdownCategory_added": {
       "display": false

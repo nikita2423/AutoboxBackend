@@ -34,8 +34,13 @@
       "display": false
     },
     "city_name": {
-      "search": "text",
-      "label": "City"
+      "label": "City",
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "City",
+      "foreignKey": "cityId",
+      "propertyName": "name"
     },
     "area_added": {
      "display": false
@@ -53,7 +58,12 @@
     },
     "emergencyCategory_name": {
       "label": "Category",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "EmergencyCategory",
+      "foreignKey": "emergencyCategoryId",
+      "propertyName": "name"
     }
   }
 }

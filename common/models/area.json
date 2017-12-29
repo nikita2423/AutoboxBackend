@@ -63,6 +63,16 @@
         "hide": false,
         "label": "Add City"
       }
+    },
+    "workshops": {
+      "type": "hasAndBelongsToMany",
+      "model": "Workshop",
+      "foreignKey": ""
+    },
+    "showrooms": {
+      "type": "hasAndBelongsToMany",
+      "model": "Showroom",
+      "foreignKey": ""
     }
   },
   "acls": [],

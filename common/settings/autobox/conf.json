@@ -33,7 +33,7 @@
   "workshop": {
     "subject_service_booking": "New Service Booking Arrived!"
   },
-  "WAITING_TIME": 36,
+  "WAITING_TIME":  12,
   "DEALER_ROLE": "Dealer",
   "soldViaAutobox":{
     "yes": "yes",

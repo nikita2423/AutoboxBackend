@@ -495,7 +495,7 @@ angular.module($snaphy.getModuleName())
                                         function(testVehicle){
                                             console.log("Test Vehicle", testVehicle);
                                             var options = {
-                                                center: new google.maps.LatLng(28.574525, 77.389321),
+                                                center: new google.maps.LatLng(testVehicle.latitude, testVehicle.longitude),
                                                 zoom: 11,
                                                 disableDefaultUI: true
                                             };
@@ -504,7 +504,7 @@ angular.module($snaphy.getModuleName())
                                             );
                                             var marker = new google.maps.Marker({
                                                 map: this.map,
-                                                position: new google.maps.LatLng(28.574525, 77.389321)
+                                                position: new google.maps.LatLng(testVehicle.latitude, testVehicle.longitude)
                                             });
                                         }, function(error){
                                             console.log(error);
@@ -551,10 +551,10 @@ angular.module($snaphy.getModuleName())
                                 formModel.brandId = settings.config.employee.brandId;
                                 DetailViewResource.saveForm(formSchema, formData, formModel)
                                     .then(function (data) {
-
+                                        console.log("Saved Workshop Data", data);
                                     })
                                     .catch(function (error) {
-
+                                        console.error("Saved Workshop Data", error);
                                     });
                             },
                             getWorkshopData: getWorkshopData,
@@ -675,6 +675,7 @@ angular.module($snaphy.getModuleName())
                         },
                         manageShowroomProfile: {
                             load: function () {
+                                //this.form = {};
                                 changeTab(settings.tabs.manageShowroomProfile);
                             },
                             data: {},
@@ -687,14 +688,14 @@ angular.module($snaphy.getModuleName())
                                     }
                                 });*/
                             },
-                            saveForm: function (formSchema, formData, formModel) {
+                            saveForm: function (formSchema, formData, formModel, goBack, modelId) {
                                 formModel.brandId = settings.config.employee.brandId;
-                                DetailViewResource.saveForm(formSchema, formData, formModel)
+                                DetailViewResource.saveForm(formSchema, this.form, formModel)
                                     .then(function (data) {
-
+                                        console.log("Saved Showroom Data", data);
                                     })
                                     .catch(function (error) {
-
+                                        console.error("Saved Showroom data", error);
                                     });
                             },
                             relationDetail: {
@@ -1160,6 +1161,34 @@ angular.module($snaphy.getModuleName())
                 return newSchema;
             };
 
+            var modifyShowroomSchema = function(schema) {
+                var newSchema = angular.copy(schema);
+                for (var key in newSchema.container) {
+                    if (newSchema.container.hasOwnProperty(key)) {
+                        if (newSchema.container[key].schema) {
+                            if (newSchema.container[key].schema.length) {
+                                newSchema.container[key].schema.forEach(function (obj) {
+
+                                    if (obj.templateOptions) {
+                                        if(obj.templateOptions.id === "AddDealer" || obj.templateOptions.id === "AddBrand"){
+                                            obj.templateOptions.disabled = true;
+                                            obj.templateOptions.readonly = true;
+                                            obj.templateOptions.readOnly = true;
+                                        }
+                                    }
+
+                                    if(obj.type === "repeatSection"){
+                                        obj.templateOptions.readonly = true;
+                                        obj.templateOptions.disabled = true;
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+                return newSchema;
+            }
+
 
 
             var modifySchema = function (schema_) {
@@ -1171,19 +1200,26 @@ angular.module($snaphy.getModuleName())
                             if (newSchema.container[key].schema.length) {
                                 newSchema.container[key].schema.forEach(function (obj) {
                                     if(obj.type === "singleFileUpload"){
-                                        if (obj.templateOptions) {
+                                        /*if (obj.templateOptions) {
                                             obj.templateOptions.showUploadButton =  false;
                                             obj.templateOptions.showRemoveButton =  false;
-                                        }
+                                        }*/
                                     }
 
                                     if (obj.templateOptions) {
-                                        obj.templateOptions.disabled = true;
+                                        if(obj.templateOptions.id === "AddDealer" || obj.templateOptions.id === "AddBrand"){
+                                            obj.templateOptions.disabled = true;
+                                            obj.templateOptions.readonly = true;
+                                            obj.templateOptions.readOnly = true;
+                                        }
+                                    }
+
+                                    if(obj.type === "repeatSection"){
                                         obj.templateOptions.readonly = true;
-                                        obj.templateOptions.readOnly = true;
+                                        obj.templateOptions.disabled = true;
                                     }
                                     if (obj.type === "objectValue") {
-                                        if (obj.templateOptions) {
+                                      /*  if (obj.templateOptions) {
                                             if (obj.templateOptions.fields) {
                                                 obj.templateOptions.fields.forEach(function (nested_obj) {
                                                     if (nested_obj.templateOptions) {
@@ -1191,7 +1227,7 @@ angular.module($snaphy.getModuleName())
                                                     }
                                                 });
                                             }
-                                        }
+                                        }*/
 
                                     }
                                 });
@@ -1218,12 +1254,15 @@ angular.module($snaphy.getModuleName())
 
                         }
                     }, function (quoteReply) {
-                        //angular.copy(settings.get().tabs.quoteReply.data, quoteReply);
                         angular.copy(quoteReply, settings.get().tabs.quoteReply.data);
-                        //console.log("Display data", settings.get().tabs.quoteReply.data);
                         settings.get().tabs.quoteReply.isDataLoaded = true;
                         resolve(quoteReply);
+
+                            //console.log("Display data", settings.get().tabs.quoteReply.data);
+                        //angular.copy(settings.get().tabs.quoteReply.data, quoteReply);
+
                     }, function (error) {
+                        console.error("Quote Reply", error);
                         settings.get().tabs.quoteReply.isDataLoaded = true;
                         reject(error);
                     });
@@ -1449,10 +1488,12 @@ angular.module($snaphy.getModuleName())
                                     brandId: user.brandId,
                                     dealerId: user.id
                                 },
-                                include: ["cities", "areas", "brand"]
+                                include: ["cities", "areas", "brand", "dealer"]
                             }
                         }, function (data) {
                             //Copy data..
+                            delete data.$promise;
+                            delete data.$resolved;
                             angular.copy(data, settings.get().tabs.manageShowroomProfile.data);
                             if (settings.get().tabs.manageShowroomProfile.data) {
                                 if (settings.get().tabs.manageShowroomProfile.data.timings) {
@@ -1486,9 +1527,11 @@ angular.module($snaphy.getModuleName())
                                     brandId: user.brandId,
                                     dealerId: user.id
                                 },
-                                include: ["cities", "areas", "brand"]
+                                include: ["cities", "areas", "brand", "dealer"]
                             }
                         }, function (data) {
+                            delete data.$promise;
+                            delete data.$resolved;
                             angular.copy(data, settings.get().tabs.manageWorkshopProfile.data);
                             if (settings.get().tabs.manageWorkshopProfile.data) {
                                 if (settings.get().tabs.manageWorkshopProfile.data.timings) {

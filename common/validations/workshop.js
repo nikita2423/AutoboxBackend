@@ -95,22 +95,30 @@ module.exports = (Workshop, server, helper) =>
 
     });
 
-    Workshop.observe("after save", function(ctx, next){
+   /* Workshop.observe("after save", function(ctx, next){
         const instance = ctx.instance || ctx.data;
         const Dealer = server.models['Dealer'];
-        Dealer.findById(instance.dealerId)
-            .then(function(dealer){
-                if(dealer){
-                    return dealer.updateAttribute("workshopId", instance.id);
-                }
-            })
-            .then(function(dealer){
+        if(instance){
+            if(instance.dealerId){
+                Dealer.findById(instance.dealerId)
+                    .then(function(dealer){
+                        if(dealer){
+                            return dealer.updateAttribute("workshopId", instance.id);
+                        }
+                    })
+                    .then(function(dealer){
+                        next();
+                    })
+                    .catch(function(error){
+                        next(error);
+                    });
+            } else{
                 next();
-            })
-            .catch(function(error){
-                next(error);
-            });
-    });
+            }
+        } else{
+            next();
+        }
+    });*/
 
     function toTitleCase(str)
     {

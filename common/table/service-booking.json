@@ -34,7 +34,12 @@
     },
     "serviceType_name": {
       "label": "Service Type",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "ServiceType",
+      "foreignKey": "serviceTypeId",
+      "propertyName": "name"
     },
     "serviceType_status": {
       "display": false
@@ -44,7 +49,12 @@
     },
     "workshop_dealershipName": {
       "label": "Workshop",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Workshop",
+      "foreignKey": "workshopId",
+      "propertyName": "dealershipName"
     },
     "workshop_added": {
       "display": false
@@ -81,7 +91,12 @@
     },
     "customer_firstName": {
       "label": "Customer",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "firstName"
     },
     "customer_lastName": {
       "display": false
@@ -91,8 +106,12 @@
     },
     "customer_phoneNumber": {
       "label": "Customer Contact",
-      "search": "text",
-      "display": true
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "phoneNumber"
     },
     "customer_status": {
       "display": false

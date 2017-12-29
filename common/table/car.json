@@ -33,29 +33,38 @@
     },
     "brandName": {
       "label": "Brand",
-      "search": "text"
+      "search": "text",
+      "display": false
     },
     "carModelName": {
       "label": "Model",
-      "search": "text"
+      "search": "text",
+      "display": false
     },
     "fuelName": {
       "label": "Fuel",
-      "search": "text"
+      "search": "text",
+      "display": false
     },
     "gearBoxName": {
       "label": "GearBox",
-      "search": "text"
+      "search": "text",
+      "display": false
     },
     "variantName": {
       "label": "Variant",
-      "search": "text"
+      "search": "text",
+      "display": false
     },
     "brand_name": {
       "label": "Brand",
-      "search": "text",
-      "display": false
-      },
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Brand",
+      "foreignKey": "brandId",
+      "propertyName": "name"
+    },
     "brand_image": {
       "display": false
     },
@@ -67,8 +76,12 @@
     },
     "carModel_name": {
       "label": "Model",
-      "search": "text",
-      "display": false
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "CarModel",
+      "foreignKey": "carModelId",
+      "propertyName": "name"
     },
     "carModel_image": {
       "display": false
@@ -87,16 +100,24 @@
     },
     "fuel_name": {
       "label": "Fuel",
-      "search": "text",
-      "display": false
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Fuel",
+      "foreignKey": "fuelId",
+      "propertyName": "name"
     },
     "fuel_status": {
       "display": false
     },
     "gearBox_name": {
       "label": "GearBox",
-      "search": "text",
-      "display": false
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "GearBox",
+      "foreignKey": "gearBoxId",
+      "propertyName": "name"
     },
     "gearBox_added": {
       "display": false
@@ -106,8 +127,12 @@
     },
     "trim_name": {
       "label": "Variant",
-      "search": "text",
-      "display": false
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Trim",
+      "foreignKey": "trimId",
+      "propertyName": "name"
     },
     "trim_added":{
       "display":false

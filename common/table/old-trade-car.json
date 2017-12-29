@@ -26,21 +26,36 @@
     },
     "city_name": {
       "label": "City",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "City",
+      "foreignKey": "cityId",
+      "propertyName": "name"
     },
     "city_status": {
       "display": false
     },
     "customer_firstName": {
       "label": "Customer",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "firstName"
     },
     "customer_lastName": {
       "display" : false
     },
     "customer_email": {
       "label": "Email",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "email"
     },
     "customer_username": {
       "display": false
@@ -71,7 +86,12 @@
     },
     "carModel_name":{
       "label": "Model",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "CarModel",
+      "foreignKey": "carModelId",
+      "propertyName": "name"
     },
     "carModel_added": {
       "display": false
@@ -90,7 +110,12 @@
     },
     "brand_name": {
       "label": "Brand",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Brand",
+      "foreignKey": "brandId",
+      "propertyName": "name"
     },
     "brand_status": {
       "display": false
@@ -103,7 +128,12 @@
     },
     "trim_name": {
       "label": "Variant",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Trim",
+      "foreignKey": "trimId",
+      "propertyName": "name"
     },
     "trim_status": {
       "display": false

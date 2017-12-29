@@ -42,9 +42,13 @@
       "display": false
     },
     "city_name": {
-      "display": true,
       "label": "City",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "City",
+      "foreignKey": "cityId",
+      "propertyName": "name"
     },
     "city_status": {
       "display": false

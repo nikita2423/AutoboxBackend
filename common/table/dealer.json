@@ -68,7 +68,12 @@
     },
     "brand_name": {
       "label": "Brand",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Brand",
+      "foreignKey": "brandId",
+      "propertyName": "name"
     },
     "brand_status": {
       "display" : false
@@ -81,7 +86,12 @@
     },
     "showroom_name": {
       "label": "Showroom",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Showroom",
+      "foreignKey": "showroomId",
+      "propertyName": "name"
     },
     "showroom_status": {
       "display": false

@@ -119,7 +119,12 @@
     },
     "brand_name": {
       "label": "Brand",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Brand",
+      "foreignKey": "brandId",
+      "propertyName": "name"
     },
     "brand_status": {
       "display": false
@@ -144,7 +149,12 @@
     },
     "dealer_email": {
       "label": "Dealer",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Dealer",
+      "foreignKey": "dealerId",
+      "propertyName": "email"
     },
     "dealer_noOfVehicleSold": {
       "display": false

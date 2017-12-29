@@ -4,6 +4,8 @@
       "sort":{
         "added": "DESC"
       },
+      "beforeTableLoad": "beforeTableLoad",
+      "resetWhenBroadCast": "TableLoaded",
       "beforeLoad":{
         "currentBrandId": "$user.brandId"
       },
@@ -94,7 +96,12 @@
       "style":{
         "width": "130px"
       },
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "phoneNumber"
     },
     "customer_profilePic": {
       "display": false
@@ -117,7 +124,12 @@
       "style":{
         "width": "70px"
       },
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "VehicleInfo",
+      "foreignKey": "vehicleInfoId",
+      "propertyName": "vehicleModel"
     },
     "vehicleInfo_fuelType": {
       "label": "Fuel Type",
@@ -125,7 +137,12 @@
       "style":{
         "width": "60px"
       },
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "VehicleInfo",
+      "foreignKey": "vehicleInfoId",
+      "propertyName": "fuelType"
     },
     "vehicleInfo_vehicleTrim": {
       "label": "Trim",
@@ -133,7 +150,12 @@
       "style":{
         "width": "70px"
       },
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "VehicleInfo",
+      "foreignKey": "vehicleInfoId",
+      "propertyName": "vehicleTrim"
     },
     "vehicleInfo_vehicleGearbox": {
       "label": "Gearbox",
@@ -141,7 +163,12 @@
       "style":{
         "width": "80px"
       },
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "VehicleInfo",
+      "foreignKey": "vehicleInfoId",
+      "propertyName": "vehicleGearbox"
     },
     "vehicleInfo_vehicleColor":{
       "label": "Color",
@@ -149,7 +176,12 @@
       "style":{
         "width": "70px"
       },
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "VehicleInfo",
+      "foreignKey": "vehicleInfoId",
+      "propertyName": "vehicleColor"
     },
     "ownershipType": {
       "position": 7,
@@ -335,7 +367,12 @@
       "style":{
         "width": "130px"
       },
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "City",
+      "foreignKey": "cityId",
+      "propertyName": "name"
     },
     "city_status": {
       "display": false

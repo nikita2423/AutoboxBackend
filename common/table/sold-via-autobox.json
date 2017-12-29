@@ -31,9 +31,13 @@
       "display": false
     },
     "vehicleInfo_vehicleModel": {
-      "display": true,
       "label": "Vehicle",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "VehicleInfo",
+      "foreignKey": "vehicleInfoId",
+      "propertyName": "vehicleModel"
     },
     "vehicleInfo_fuelType": {
       "display": false
@@ -61,7 +65,12 @@
     },
     "dealer_email": {
       "label": "Dealer",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Dealer",
+      "foreignKey": "dealerId",
+      "propertyName": "email"
     },
     "dealer_firstName": {
       "display": false
@@ -80,7 +89,12 @@
     },
     "customer_firstName": {
       "label": "Customer",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "firstName"
     },
     "customer_lastName": {
       "display": false
@@ -97,7 +111,11 @@
     "customer_phoneNumber": {
       "display": true,
       "label": "Contact",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "phoneNumber"
     },
     "customer_email": {
       "display": false

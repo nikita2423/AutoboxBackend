@@ -40,7 +40,12 @@
     },
     "customer_firstName": {
       "label": "Customer",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "firstName"
     },
     "customer_lastName": {
       "display": false

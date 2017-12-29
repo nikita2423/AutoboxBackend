@@ -35,7 +35,12 @@
     },
     "customer_firstName": {
       "label": "Customer",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Customer",
+      "foreignKey": "customerId",
+      "propertyName": "firstName"
     },
     "customer_lastName": {
       "display": false
@@ -69,8 +74,12 @@
     },
     "vehicleDetail_registrationNumber": {
       "label": "Registered Number",
-      "search": "text",
-      "display": true
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "VehicleDetail",
+      "foreignKey": "vehicleDetailId",
+      "propertyName": "registrationNumber"
     },
     "vehicleDetail_registeredName": {
       "display": false

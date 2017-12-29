@@ -51,6 +51,16 @@
   },
   "validations": [],
   "relations": {
+    "showrooms": {
+      "type": "hasAndBelongsToMany",
+      "model": "Showroom",
+      "foreignKey": ""
+    },
+    "workshops": {
+      "type": "hasAndBelongsToMany",
+      "model": "Workshop",
+      "foreignKey": ""
+    }
   },
   "acls": [],
   "methods": {}

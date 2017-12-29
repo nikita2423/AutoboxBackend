@@ -1,0 +1,89 @@
+{
+  "name": "NightLock",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "deviceIMEI": {
+      "type": "string"
+    },
+    "modelName": {
+      "type": "string"
+    },
+    "customerName": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "active",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Status of Car",
+          "id": "brandStatus",
+          "priority": 6,
+          "options": [
+            "active",
+            "inactive"
+          ]
+        }
+      }
+    },
+    "timings": {
+      "type": "object",
+      "required": true,
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "type": "input",
+              "key": "startTime",
+              "templateOptions": {
+                "type": "time",
+                "label": "Start Timing",
+                "id": "start",
+                "inline": "true",
+                "colSize": "col-md-2"
+              }
+            },
+            {
+              "type": "input",
+              "key": "endTime",
+              "templateOptions": {
+                "type": "time",
+                "label": "End Timing",
+                "id": "end",
+                "inline": "true",
+                "colSize": "col-md-2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "days": {
+      "type": [
+        "string"
+      ]
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    },
+    "vehicleDetail": {
+      "type": "belongsTo",
+      "model": "VehicleDetail",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

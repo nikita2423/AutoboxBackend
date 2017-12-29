@@ -135,7 +135,12 @@
     },
     "brand_name": {
       "label": "Brand",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Brand",
+      "foreignKey": "brandId",
+      "propertyName": "name"
     },
     "brand_status": {
       "display": false
@@ -148,7 +153,12 @@
     },
     "dealer_firstName":{
       "label": "Dealer",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Dealer",
+      "foreignKey": "dealerId",
+      "propertyName": "firstName"
     },
     "dealer_lastName": {
       "display": false
@@ -164,11 +174,21 @@
     },
     "dealer_email": {
       "label": "Email",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Dealer",
+      "foreignKey": "dealerId",
+      "propertyName": "email"
     },
     "dealer_contact": {
       "label": "Contact",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Dealer",
+      "foreignKey": "dealerId",
+      "propertyName": "contact"
     },
     "dealer_firstName": {
       "display": false
@@ -184,7 +204,12 @@
     },
     "dealer_email": {
       "label": "Dealer",
-      "search": "text"
+      "search": "related",
+      "type": "text",
+      "display": true,
+      "relatedModel": "Dealer",
+      "foreignKey": "dealerId",
+      "propertyName": "email"
     },
     "dealer_noOfVehicleSold": {
       "display": false
