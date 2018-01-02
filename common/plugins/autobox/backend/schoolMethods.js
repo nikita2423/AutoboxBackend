@@ -564,6 +564,131 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
     const sendBusVicinityNotification = function(){
+        const GpsPacketData = databaseObj.GpsPacketData;
+        let trackBusVehicleInstance;
+        GpsPacketData.observe("after save", function(ctx, next){
+            const instance = ctx.instance;
+            const gpsPacketdataObj = instance.toJSON();
+            let promises = [];
+            let gpsLatLang;
+            if(ctx.isNewInstance && moment().hour()>=6 && moment().hour()<=12){
+                process.nextTick(function(){
+                    databaseObj.BusModel.findOne({
+                        where: {
+                            deviceIMEI : gpsPacketdataObj.deviceIMEI
+                        }
+                    })
+                        .then(function(busModel){
+                            if(busModel){
+                                return databaseObj.TrackBusVehicle.find({
+                                    where: {
+                                        busModelId : busModel.id
+                                    }
+                                })
+                            }
+                        })
+                        .then(function(trackBusVehicleList){
+                            if(trackBusVehicleList){
+                                if(trackBusVehicleList.length){
+                                    const gpsLatitude = gpsPacketdataObj.latitude;
+                                    const gpsLongitude = gpsPacketdataObj.longitude;
+                                    gpsLatLang = [gpsLatitude, gpsLongitude];
+                                    trackBusVehicleList.forEach(function(trackBusVehicle){
+                                        if(trackBusVehicle){
+                                            trackBusVehicleInstance = trackBusVehicle;
+                                            promises.push(function(callback){
+                                                databaseObj.TrackBusVehicle.findOne({
+                                                    where: {
+                                                        homeLocation: {
+                                                            near: gpsLatLang,
+                                                            maxDistance: 1,
+                                                            unit: 'kilometers'
+                                                        }
+                                                    }
+                                                })
+                                                    .then(function(trackBusVehicle){
+                                                        if(trackBusVehicle){
+                                                            if(trackBusVehicleInstance.busNotification === "normal"){
+                                                                //Check for coming or going bus
+                                                                return databaseObj.GpsPacketData.find({
+                                                                    where: {
+                                                                        deviceIMEI : trackBusVehicle.deviceIMEI
+                                                                    },
+                                                                    limit: 2,
+                                                                    order: ["added DESC"]
+                                                                })
+                                                            }
+                                                        } else{
+                                                            return trackBusVehicleInstance.updateAttribute("busNotification", "normal");
+                                                        }
+                                                    })
+                                                    .then(function(gpsPacketDataList){
+                                                        if(gpsPacketDataList){
+                                                            if(gpsPacketDataList.length){
+                                                                if(getDistance(gpsPacketDataList[0].latitude, gpsPacketDataList[0].longitude, trackBusVehicle.homeLocation["lat"], trackBusVehicle.homeLocation["lng"]) > 1){
+                                                                    //Throw Notification
+                                                                    const to = trackBusVehicle.homeAddress;
+                                                                    const type = "BusVicinity";
+                                                                    const title = "Bus in Vicinity";
+                                                                    const instanceId = trackBusVehicle.id;
+                                                                    const from = packageObj.companyName;
+                                                                    var message = busVicinityNotificationFormat(to, type, title, instanceId);
+                                                                    if(trackBusVehicle.customerId && trackBusVehicle.gpsBusNotification["busVicinity"] === "on"){
+                                                                        sendNotification(server, message, trackBusVehicle.customerId, from, function(error){
+                                                                            if(error){
+                                                                                server.logger.error(error);
+                                                                            } else{
+                                                                                server.logger.info("Bus In Vicinity send Successfully");
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                    server.logger.info("Bus is coming towards your home location");
+                                                                    return trackBusVehicleInstance.updateAttribute("busNotification", "busVicinity");
+                                                                } else{
+                                                                    //Bus going away from home location
+                                                                    server.logger.info("Bus is going away from your home location");
+                                                                    return trackBusVehicleInstance.updateAttribute("busNotification", "normal");
+                                                                }
+                                                            } else{
+                                                                return trackBusVehicleInstance.updateAttribute("busNotification", "normal");
+                                                            }
+                                                        } else{
+                                                            return trackBusVehicleInstance.updateAttribute("busNotification", "normal");
+                                                        }
+                                                    })
+                                                    .then(function(trackBusVehicle){
+                                                        callback(null);
+                                                    })
+                                                    .catch(function(error){
+                                                        callback(error);
+                                                    })
+                                            })
+
+                                        }
+                                    });
+
+                                    async.series(promises, function(error){
+                                        if(error){
+                                            server.logger.error(error);
+                                        } else{
+                                            server.logger.info("Bus Vicinity for all bus send successfully");
+                                        }
+                                    })
+                                }
+                            }
+                        })
+                        .catch(function(error){
+                            server.logger.error(error);
+                        });
+                })
+            } else{
+                server.logger.info("Not able to send bus notification as time is not between 6 and 10");
+            }
+            next();
+        })
+    };
+
+/*    const sendBusVicinityNotification = function(){
       const GpsPacketData = databaseObj.GpsPacketData;
       let trackBusVehicleInstance;
       GpsPacketData.observe("after save", function(ctx, next){
@@ -660,7 +785,22 @@ module.exports = function( server, databaseObj, helper, packageObj) {
           }
           next();
       })
+    };*/
+
+    var getDistance = function(lat1, lon1, lat2, lon2){
+        var R = 6371; // Radius of the earth in km
+        var dLat = deg2rad(lat2-lat1);  // deg2rad below
+        var dLon = deg2rad(lon2-lon1);
+        var a =
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+            Math.sin(dLon/2) * Math.sin(dLon/2)
+        ;
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        var d = R * c; // Distance in km
+        return d;
     };
+
 
     var busVicinityNotificationFormat = function(to, eventType, title, id){
         var message = {
