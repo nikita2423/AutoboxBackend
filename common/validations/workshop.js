@@ -95,7 +95,7 @@ module.exports = (Workshop, server, helper) =>
 
     });
 
-   /* Workshop.observe("after save", function(ctx, next){
+    Workshop.observe("after save", function(ctx, next){
         const instance = ctx.instance || ctx.data;
         const Dealer = server.models['Dealer'];
         if(instance){
@@ -118,7 +118,7 @@ module.exports = (Workshop, server, helper) =>
         } else{
             next();
         }
-    });*/
+    });
 
     function toTitleCase(str)
     {

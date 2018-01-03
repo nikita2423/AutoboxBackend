@@ -190,6 +190,16 @@
         "hide": false,
         "label": "Add Brand"
       }
+    },
+    "showroom": {
+      "type": "belongsTo",
+      "model": "Showroom",
+      "foreignKey": ""
+    },
+    "workshop": {
+      "type": "belongsTo",
+      "model": "Workshop",
+      "foreignKey": ""
     }
   },
   "acls": [

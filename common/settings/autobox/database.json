@@ -51,5 +51,6 @@
   "VehicleInfo": "VehicleInfo",
   "SellVehicle": "SellVehicle",
   "Battery": "Battery",
-  "NightLock": "NightLock"
+  "NightLock": "NightLock",
+  "GeoFenceVehicle": "GeoFenceVehicle"
 }

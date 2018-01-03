@@ -11,6 +11,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     var init = function(){
         createNightLockMethod();
+        fetchNightLockDataMethod();
         sendNightLockNotification();
     };
 
@@ -45,7 +46,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     const createNightLock = function(ctx, nightLockObj, type, callback){
         const request = ctx.req;
-        if(!nightLockObj){
+        if(!nightLockObj || !type){
             callback(new Error("Invalid Arguments"));
         } else{
             if(request.accessToken){
@@ -92,15 +93,81 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 callback(error);
                             });
                     } else if(type === "delete"){
-                        NightLock.updateAttribute("status", "inactive")
+                        NightLock.findById(nightLockObj.id)
+                            .then(function(nightLock){
+                                if(nightLock){
+                                    return nightLock.updateAttribute("status", "inactive");
+                                }
+                            })
                             .then(function(nightLock){
                                 if(nightLock){
                                     callback(null, {response:"success"});
+                                } else{
+                                    callback(null, {});
                                 }
                             })
                             .catch(function(error){
                                 callback(error);
                             });
+                    }
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
+
+    const fetchNightLockDataMethod = function(){
+        const NightLock = databaseObj.NightLock;
+        NightLock.fetchNightLockData = fetchNightLockData;
+        NightLock.remoteMethod("fetchNightLockData", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "deviceIMEI", type: "string"
+                }
+            ],
+            returns: {
+                arg: "nightLockObject", type: "NightLock", root : true
+            }
+        });
+    };
+
+    const fetchNightLockData = function(ctx, deviceIMEI, callback){
+        const request = ctx.req;
+        if(!deviceIMEI){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request){
+                if(request.accessToken){
+                    if(request.accessToken.userId){
+                        const customerId = request.accessToken.userId;
+                        const NightLock = databaseObj.NightLock;
+                        NightLock.findOne({
+                            where: {
+                                deviceIMEI : deviceIMEI,
+                                customerId : customerId
+                            }
+                        })
+                            .then(function(nightLock){
+                                if(nightLock){
+
+                                }
+                                callback(null, nightLock);
+                            })
+                            .catch(function(error){
+                                callback(error);
+                            });
+                    } else{
+                        callback(new Error("User not valid"));
                     }
                 } else{
                     callback(new Error("User not valid"));

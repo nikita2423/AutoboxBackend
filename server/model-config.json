@@ -339,5 +339,9 @@
   "NightLock": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "GeoFenceVehicle": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

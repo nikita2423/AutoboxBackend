@@ -75,9 +75,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     arg: "filter", type: "Object"
                 },
                 {
-                    arg: "type", type: "string"
-                },
-                {
                     arg: "lastDate", type: "string"
                 }
             ],
@@ -101,9 +98,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
              },
              {
                  arg: "filter", type: "Object"
-             },
-             {
-                 arg: "type", type: "string"
              }
          ],
           returns:{
@@ -128,9 +122,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 },
                 {
                     arg: "filter", type: "Object"
-                },
-                {
-                    arg: "type", type: "string"
                 }
             ],
             returns:{
@@ -154,9 +145,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 },
                 {
                     arg: "filter", type: "Object"
-                },
-                {
-                    arg: "type", type: "string"
                 }
             ],
             returns:{
@@ -179,9 +167,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 },
                 {
                     arg: "filter", type: "Object"
-                },
-                {
-                    arg: "type", type: "string"
                 }
             ],
             returns:{
@@ -1083,7 +1068,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @param callback
      * @returns {*}
      */
-    const findAllBrands = function(ctx, filter, type, lastDate, callback){
+    const findAllBrands = function(ctx, filter, lastDate, callback){
         /*if(!filter.where.added.lt){
             filter.where.added.lt = new Date();
         }*/
@@ -1094,16 +1079,15 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                   const Brand = databaseObj.Brand;
                   filter = filter || {};
                   filter.where = filter.where || {};
-                  if(filter){
+                  /*if(filter){
                       if(filter.where){
                           if(type === "new"){
                               if(!filter.where.status){
                                   filter.where.status = "active";
                               }
                           }
-
                       }
-                  }
+                  }*/
 
                   if(!filter.order){
                       filter.order = ['trending DESC'];
@@ -1142,7 +1126,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @param callback
      * @returns {*}
      */
-    const findAllModels = function(ctx, filter, type, callback){
+    const findAllModels = function(ctx, filter, callback){
         const request = ctx.req;
         let lastDate;
         const carIdList = [];
@@ -1151,7 +1135,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 const CarModel = databaseObj.CarModel;
                 filter = filter || {};
                 filter.where = filter.where || {};
-                if(filter){
+                /*if(filter){
                     if(filter.where){
                         if(type === "new"){
                             if(!filter.where.status){
@@ -1159,7 +1143,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             }
                         }
                     }
-                }
+                }*/
                 if(filter.where.added){
                     if(!filter.where.added.lt){
                         filter.where.added.lt = new Date();
@@ -1198,7 +1182,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @param callback
      * @returns {*}
      */
-    const findAllFuel = function(ctx, filter, type, callback){
+    const findAllFuel = function(ctx, filter, callback){
         const request = ctx.req;
         var lastDate = "";
         let uniqueFuelList = [];
@@ -1207,7 +1191,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 const Car = databaseObj.Car;
                 filter = filter || {};
                 filter.where = filter.where || {};
-                if(filter){
+             /*   if(filter){
                     if(filter.where){
                         if(type === "new"){
                             if(!filter.where.status){
@@ -1215,7 +1199,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             }
                         }
                     }
-                }
+                }*/
                 //filter.fields.id = true;
                 filter.include = ["fuel"];
                 Car.find(filter)
@@ -1246,7 +1230,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @param callback
      * @returns {*}
      */
-    const findAllGearbox = function(ctx, filter, type, callback){
+    const findAllGearbox = function(ctx, filter, callback){
         const request = ctx.req;
         let lastDate ;
         let uniqueGearBoxList = [];
@@ -1255,7 +1239,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 const Car = databaseObj.Car;
                 filter = filter || {};
                 filter.where = filter.where || {};
-                if(filter){
+               /* if(filter){
                     if(filter.where){
                         if(type === "new"){
                             if(!filter.where.status){
@@ -1263,7 +1247,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             }
                         }
                     }
-                }
+                }*/
                filter.include = ["gearBox"];
                 Car.find(filter)
                     .then(function(carList) {
@@ -1293,7 +1277,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      * @param callback
      * @returns {*}
      */
-    const findAllTrim = function(ctx, filter, type, callback){
+    const findAllTrim = function(ctx, filter, callback){
         const request = ctx.req;
         let lastDate;
         const carIdList = [];
@@ -1302,7 +1286,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 const Car = databaseObj.Car;
                 filter = filter || {};
                 filter.where = filter.where || {};
-                if(filter){
+                /*if(filter){
                     if(filter.where){
                         if(type === "new"){
                             if(!filter.where.status){
@@ -1310,7 +1294,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             }
                         }
                     }
-                }
+                }*/
                 if(!filter.order){
                     filter.order = "added DESC";
                 }
@@ -1329,7 +1313,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 lastDate = car.added;
                             }
                         }
-
                         callback(null, {
                             carList: carList,
                             cursor: lastDate

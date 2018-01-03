@@ -96,7 +96,7 @@ module.exports = (Showroom, server, helper) =>
 
     });
 
-   /* Showroom.observe("after save", function(ctx, next){
+    Showroom.observe("after save", function(ctx, next){
         const instance = ctx.instance || ctx.data;
         const Dealer = server.models['Dealer'];
         if(instance){
@@ -121,7 +121,7 @@ module.exports = (Showroom, server, helper) =>
         }else{
             next();
         }
-    });*/
+    });
 
 
     function toTitleCase(str)
