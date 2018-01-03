@@ -192,6 +192,7 @@
         "priority": 2,
         "search": true,
         "type": "smartSelect",
+        "onSelect": "onCarBrandSelected",
         "create": false,
         "id": "AddBrand",
         "hide": false,
@@ -213,6 +214,8 @@
         "create": false,
         "id": "AddModel",
         "hide": false,
+        "loadWhen": "brandHasBeenLoaded",
+        "onSelect": "onCarModelSelected",
         "inline": true,
         "colSize": "col-xs-6",
         "label": "Add Model"
@@ -264,6 +267,7 @@
         "priority": 2,
         "search": true,
         "type": "smartSelect",
+        "loadWhen": "modelHasBeenLoaded",
         "create": false,
         "id": "AddTrim",
         "hide": false,
@@ -275,20 +279,7 @@
     "dealer": {
       "type": "belongsTo",
       "model": "Dealer",
-      "foreignKey": "",
-      "templateOptions": {
-        "btnText": "Add Dealer",
-        "searchProp": "email",
-        "priority": 2,
-        "search": true,
-        "type": "smartSelect",
-        "create": false,
-        "id": "AddDealer",
-        "hide": false,
-        "inline": true,
-        "colSize": "col-xs-6",
-        "label": "Add Dealer"
-      }
+      "foreignKey": ""
     }
   },
   "acls": [],
