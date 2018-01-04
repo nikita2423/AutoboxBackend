@@ -105,9 +105,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             to.push("vikram.dangi@hotmail.com");
                             emailPlugin.adminEmail.buyBattery(from, to, subject, batteryObj, function (err, send) {
                                 if(err){
-                                    console.log(err);
+                                    //console.log(err);
                                 } else{
-                                    console.log("Email send Successfully for Battery to admin");
+                                    //console.log("Email send Successfully for Battery to admin");
                                 }
                             });
                         })

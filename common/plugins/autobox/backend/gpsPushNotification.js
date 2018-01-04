@@ -117,10 +117,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                    })
                                                    .then(function(gpsNotification){
                                                        callback(null);
-                                                       server.logger.info("Default Notification created");
+                                                      // server.logger.info("Default Notification created");
                                                    })
                                                    .catch(function(error){
-                                                       server.logger.error("Error in default Notification");
+                                                      // server.logger.error("Error in default Notification");
                                                        callback(error);
                                                    });
                                            });
@@ -128,16 +128,16 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                     });
                                     async.series(promises, function(error){
                                         if(error){
-                                            server.logger.error("Error in sending notification for gps default packet");
+                                           // server.logger.error("Error in sending notification for gps default packet");
                                         } else{
-                                             server.logger.info("Notification for gps default packet Send Successfully");
+                                             //server.logger.info("Notification for gps default packet Send Successfully");
                                         }
                                     });
                                 }
                             }
                         })
                         .catch(function(error){
-                            server.logger.error("Error in sending notification", error);
+                           // server.logger.error("Error in sending notification", error);
                         });
                 });
             }
@@ -264,7 +264,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                             console.log(error);
                                                                             callback(error);
                                                                         } else{
-                                                                            console.log("Notification for gps has been send successfully");
+                                                                            //console.log("Notification for gps has been send successfully");
                                                                             return databaseObj.GpsNotification.create({
                                                                                 message: title,
                                                                                 deviceIMEI : gpsPacketDataObj.deviceIMEI,
@@ -292,7 +292,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                         if(error){
                                             server.logger.error(error);
                                         } else{
-                                           server.logger.info("Hard Acceleration");
+                                           //server.logger.info("Hard Acceleration");
                                         }
                                     });
                                 }
@@ -381,7 +381,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                             console.error(error);
                                                                             callback(error);
                                                                         } else{
-                                                                            console.log("Notification for Low Battery send successfully");
+                                                                           // console.log("Notification for Low Battery send successfully");
                                                                             return databaseObj.GpsNotification.create({
                                                                                 message: title,
                                                                                 deviceIMEI : gpsPacketDataObj.deviceIMEI,
@@ -409,7 +409,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                         if(error){
                                             server.logger.error(error);
                                         } else{
-                                            server.logger.info("Notification for Low Battery send successfully to all customers")
+                                            //server.logger.info("Notification for Low Battery send successfully to all customers")
                                         }
                                     })
                                 }
@@ -483,7 +483,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                            console.log(error);
                                                                            callback(error);
                                                                        } else{
-                                                                           console.log("Notification for engine status send successfully");
+                                                                           //console.log("Notification for engine status send successfully");
                                                                            return databaseObj.GpsNotification.create({
                                                                                message: title,
                                                                                deviceIMEI : gpsPacketDataObj.deviceIMEI,
@@ -530,7 +530,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                         if(error){
                                             server.logger.error(error);
                                         } else{
-                                            server.logger.info("Notification for engine status send successfully to all customers");
+                                            //server.logger.info("Notification for engine status send successfully to all customers");
                                         }
                                     })
                                 }
@@ -619,7 +619,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                             console.log(error);
                                                                             callback(error);
                                                                         } else{
-                                                                            console.log("Notification for gps Device send successfully");
+                                                                            //console.log("Notification for gps Device send successfully");
                                                                             return databaseObj.GpsNotification.create({
                                                                                 message: title,
                                                                                 deviceIMEI : gpsPacketDataObj.deviceIMEI,
@@ -645,7 +645,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                         if(error){
                                             server.logger.error(error);
                                         } else{
-                                            server.logger.info("Notification for gps Device send successfully to all customers");
+                                            //server.logger.info("Notification for gps Device send successfully to all customers");
                                         }
                                     })
                                 }
@@ -734,7 +734,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                             console.log(error);
                                                                             callback(error);
                                                                         } else{
-                                                                            console.log("Notification for Over Speed send Successfully");
+                                                                           // console.log("Notification for Over Speed send Successfully");
                                                                             return databaseObj.GpsNotification.create({
                                                                                 message: title,
                                                                                 deviceIMEI : gpsPacketDataObj.deviceIMEI,
@@ -760,7 +760,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                         if(error){
                                             server.logger.error(error);
                                         } else{
-                                            server.logger.info("Notification for Over Speed send Successfully to all Customers");
+                                            //server.logger.info("Notification for Over Speed send Successfully to all Customers");
                                         }
                                     })
                                 }
@@ -850,7 +850,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                                server.logger.error(error);
                                                                                 callback(error);
                                                                             } else{
-                                                                                server.logger.info("Car Towing Notification send Successfully");
+                                                                              //  server.logger.info("Car Towing Notification send Successfully");
                                                                                 return databaseObj.GpsNotification.create({
                                                                                     message: title,
                                                                                     deviceIMEI : gpsPacketDataObj.deviceIMEI,
@@ -878,7 +878,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                         if(error){
                                             server.logger.error(error);
                                         } else{
-                                            server.logger.info("Car Towing Notification send Successfully to all customers");
+                                            //server.logger.info("Car Towing Notification send Successfully to all customers");
                                         }
                                     })
                                 }
@@ -969,7 +969,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                                 server.logger.error(error);
                                                                                 callback(error);
                                                                             } else{
-                                                                                server.logger.info("Accident Detection Notification send Successfully");
+                                                                               // server.logger.info("Accident Detection Notification send Successfully");
                                                                                 return databaseObj.GpsNotification.create({
                                                                                     message: title,
                                                                                     deviceIMEI : gpsPacketDataObj.deviceIMEI,
@@ -997,7 +997,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                         if(error){
                                             server.logger.error(error);
                                         } else{
-                                            server.logger.info("Accident Detection Notification send Successfully to all customers");
+                                            //server.logger.info("Accident Detection Notification send Successfully to all customers");
                                         }
                                     })
                                 }

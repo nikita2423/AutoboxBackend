@@ -298,9 +298,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                     if(chauffeurObj.driverId){
                         sendNotification(server, message, chauffeurObj.driverId, from, function(error){
                             if(error){
-                                console.error(error);
+                               // console.error(error);
                             } else{
-                                console.log("Chauffeur Request Notification send successfully");
+                               // console.log("Chauffeur Request Notification send successfully");
                             }
                         });
                     }
@@ -343,11 +343,11 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                               if(chaffeur.customerId){
                                   sendNotification(server, message, chaffeur.customerId, from, function(error){
                                       if(error){
-                                          console.log(error);
+                                         // console.log(error);
                                           callback(error);
                                       } else{
                                           callback(null, {response: "success"});
-                                          console.log("Reply for chauffeur notification send successfully");
+                                         // console.log("Reply for chauffeur notification send successfully");
                                       }
                                   });
                               }
