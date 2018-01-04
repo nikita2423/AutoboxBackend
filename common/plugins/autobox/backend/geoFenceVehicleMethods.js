@@ -63,7 +63,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             registerNumber : geoFenceObj.registerNumber,
                             customerId : customerId,
                             vehicleDetailId : geoFenceObj.vehicleDetailId,
-                            status : "active"
+                            status : "active",
+                            homeLocationAddress : geoFenceObj.homeLocationAddress
                         })
                             .then(function(geoFenceVehicle){
                                 callback(null, {response: "success"});
@@ -83,7 +84,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             id : geoFenceObj.id,
                             added: geoFenceObj.added,
                             updated: geoFenceObj.updated,
-                            status : "active"
+                            status : "active",
+                            homeLocationAddress : geoFenceObj.homeLocationAddress
                         })
                             .then(function(geoFenceVehicle){
                                 callback(null, {response:"success"});

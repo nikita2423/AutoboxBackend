@@ -64,6 +64,9 @@
         }
       }
     },
+    "homeLocationAddress": {
+      "type": "string"
+    },
     "added": {
       "type": "date",
       "required": false,
