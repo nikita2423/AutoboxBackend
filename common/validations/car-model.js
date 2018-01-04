@@ -5,6 +5,7 @@ module.exports = (Carmodel, server, helper) =>
 {
     //Carmodel.validatesUniquenessOf('name');
     Carmodel.validatesUniquenessOf('modelNumber');
+    Carmodel.validatesUniquenessOf('name');
     const {
         isLength,
         trim

@@ -5,6 +5,7 @@ module.exports = ( Brand, server, helper) =>
 {
     //Brand.validatesUniquenessOf('name');
     Brand.validatesUniquenessOf('brandNumber');
+    Brand.validatesUniquenessOf('name');
     const {
         isLength,
         trim
