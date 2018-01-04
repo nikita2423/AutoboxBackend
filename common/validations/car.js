@@ -30,18 +30,6 @@ module.exports = (Car, server, helper) =>
         if(!validate(instance, currentInstance, 'brandId')){
             return next(new Error("Brand is required"));
         }
-
-       /* var where = {};
-        if(instance.brandId && instance.carModelId && instance.fuelId && instance.gearBoxId && instance.trimId){
-            Car.find({
-                where: {
-                    brandId : instance.brandId,
-                    carModelId : instance.carModelId,
-                    fuelId : instance.
-                }
-            })
-        }*/
-
         if(instance.brandId){
             const Brand = server.models["Brand"];
             const CarModel = server.models["CarModel"];
