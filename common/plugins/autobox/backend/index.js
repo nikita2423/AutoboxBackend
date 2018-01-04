@@ -26,6 +26,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const batteryMethods = require("./batteryMethods")(server, databaseObj, helper, packageObj);
     const planTypeMethods = require("./planTypeMethods")(server, databaseObj, helper, packageObj);
     const nightLockMethods = require("./nightLockMethods")(server, databaseObj, helper, packageObj);
+    const geoFenceVehicleMethods = require("./geoFenceVehicleMethods")(server, databaseObj, helper, packageObj);
     var speakeasy          = require("speakeasy");
     var moment             = require("moment");
     const SendOtp          = require('sendotp');
@@ -50,6 +51,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         batteryMethods.init();
         planTypeMethods.init();
         nightLockMethods.init();
+        geoFenceVehicleMethods.init();
 	};
 
 
