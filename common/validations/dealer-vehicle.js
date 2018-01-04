@@ -17,6 +17,21 @@ module.exports = function(Dealervehicle, server, helper) {
             return next(new Error("Brand is required"));
         }
 
+        if(!validate(instance, currentInstance, 'carModelId')){
+            return next(new Error("Car Model is required"));
+        }
+
+        if(!validate(instance, currentInstance, 'serialNumber')){
+            return next(new Error("Serial Number is required"));
+        }
+
+        if(!validate(instance, currentInstance, 'registerNumber')){
+            return next(new Error("Register Number is required"));
+        }
+
+        if(!validate(instance, currentInstance, 'deviceIMEI')){
+            return next(new Error("Device IMEI is required"));
+        }
         if(instance.brandId){
             const Brand = server.models["Brand"];
             const CarModel = server.models["CarModel"];

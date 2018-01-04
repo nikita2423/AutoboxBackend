@@ -496,7 +496,7 @@ angular.module($snaphy.getModuleName())
                                             console.log("Test Vehicle", testVehicle);
                                             var options = {
                                                 center: new google.maps.LatLng(testVehicle.latitude, testVehicle.longitude),
-                                                zoom: 11,
+                                                zoom: 18,
                                                 disableDefaultUI: true
                                             };
                                             this.map = new google.maps.Map(
