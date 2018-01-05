@@ -28,10 +28,10 @@ module.exports = (Customerquote, server, helper) =>
         }
     });
 
-    Customerquote.beforeRemote('**', function(ctx, data, next){
+   /* Customerquote.beforeRemote('**', function(ctx, data, next){
         next();
     });
-
+*/
 
 
    Customerquote.observe("before save", function(ctx,next){
@@ -46,14 +46,14 @@ module.exports = (Customerquote, server, helper) =>
            instance.updated = new Date();
        }
 
-       const request = ctx.req;
+     /*  const request = ctx.req;
        if(request){
            if(request.accessToken){
                if(request.accessToken.userId){
                    dealerId = request.accessToken.userId;
                }
            }
-       }
+       }*/
 
        if(instance.quoteType === "q"){
            if(instance.ownershipType){
@@ -86,7 +86,7 @@ module.exports = (Customerquote, server, helper) =>
            return next(new Error("Customer is required"));
        }
 
-       if(instance.soldViaAutobox){
+   /*    if(instance.soldViaAutobox){
            if(instance.soldViaAutobox === "yes"){
                const SoldViaAutobox = server.models["SoldViaAutobox"];
                if(instance.vehicleInfoId && instance.customerId && dealerId){
@@ -111,9 +111,9 @@ module.exports = (Customerquote, server, helper) =>
            }
        } else{
            next();
-       }
+       }*/
 
-      // next();
+       next();
    });
 
  /*  var sendNotificationAfterVehiclePurchase = function(){
