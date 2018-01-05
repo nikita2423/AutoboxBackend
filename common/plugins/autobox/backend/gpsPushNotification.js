@@ -236,7 +236,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                             if(gpsPacketDataObj.eventType === packageObj.gps.harsh_braking){
                                                                 eventType = "Harsh Brake";
                                                                 title = "Harsh Brake has been applied";
-                                                                const message = brakeAccelerationMessageFormat(customerName, eventType, title, instanceId);
+                                                                const message = brakeAccelerationMessageFormat(customerName, eventType, title, instanceId, gpsPacketDataObj.deviceIMEI);
                                                                 if(customer.id && gpsTrackerInfo.gpsTrackerNotification["hardBraking"] === "on"){
                                                                     sendNotification(server, message, customer.id, pushFrom, function(error){
                                                                         if(error){
@@ -257,7 +257,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                             } else if(gpsPacketDataObj.eventType === packageObj.gps.harsh_acceleration){
                                                                 eventType = "Harsh Acceleration";
                                                                 title = "Harsh Acceleration has been applied";
-                                                                const message = brakeAccelerationMessageFormat(customerName, eventType, title, instanceId);
+                                                                const message = brakeAccelerationMessageFormat(customerName, eventType, title, instanceId, gpsPacketDataObj.deviceIMEI);
                                                                 if(customer.id && gpsTrackerInfo.gpsTrackerNotification["hardAcceleration"] === "on"){
                                                                     sendNotification(server, message, customer.id, pushFrom, function(error){
                                                                         if(error){
@@ -374,7 +374,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                 //send push notification
                                                                 eventType = "Low Internal Battery";
                                                                 title = "Less than 35% Battery left";
-                                                                var message = lowBatteryGpsMessage(customerName, eventType, title, instanceId);
+                                                                var message = lowBatteryGpsMessage(customerName, eventType, title, instanceId, gpsPacketDataObj.deviceIMEI);
                                                                 if(customerInstance.id){
                                                                     sendNotification(server, message, customerInstance.id, pushFrom, function(error){
                                                                         if(error){
@@ -476,7 +476,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                            if(gpsPacketDataObj.eventType === packageObj.gps.ignition_on){
                                                                eventType = "Ignition On";
                                                                title = "Engine has started";
-                                                               var message = engineStatusMessageFormat(customerName, eventType, title, instanceId);
+                                                               var message = engineStatusMessageFormat(customerName, eventType, title, instanceId, gpsPacketDataObj.deviceIMEI);
                                                                if(customer.id && customerInstance.gpsTrackerNotification["engineOn"] === "on"){
                                                                    sendNotification(server, message, customer.id, pushFrom, function(error){
                                                                        if(error){
@@ -496,7 +496,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                            } else if(gpsPacketDataObj.eventType === packageObj.gps.ignition_off){
                                                                eventType = "Ignition Off";
                                                                title = "Engine has stopped";
-                                                               var message = engineStatusMessageFormat(customerName, eventType, title, instanceId);
+                                                               var message = engineStatusMessageFormat(customerName, eventType, title, instanceId, gpsPacketDataObj.deviceIMEI);
                                                                if(customer.id  && customerInstance.gpsTrackerNotification["engineOff"] === "on"){
                                                                    sendNotification(server, message, customer.id, pushFrom, function(error){
                                                                        if(error){
@@ -612,7 +612,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                 //send Notification
                                                                 eventType = "GPS Status";
                                                                 title = "Device has been disconnected";
-                                                                var message = gpsDeviceStatusMessage(customerName, eventType, title, gpsPacketDataObj.id);
+                                                                var message = gpsDeviceStatusMessage(customerName, eventType, title, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
                                                                 if(customerInstance.id && gpsTrackerInfo.gpsTrackerNotification["gpsDisconnect"] === "on"){
                                                                     sendNotification(server, message, customerInstance.id, pushFrom, function(error){
                                                                         if(error){
@@ -727,7 +727,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                         if(gpsPacketData){
                                                             if(gpsPacketData[1].isOverSpeedStarted === false){
                                                                 //send Notification
-                                                                var message = overSpeedMessageFormat(customerName, eventType, title, gpsPacketDataObj.id);
+                                                                var message = overSpeedMessageFormat(customerName, eventType, title, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
                                                                 if(customerInstance.id && gpsTrackerInfo.gpsTrackerNotification["overSpeeding"] === "on"){
                                                                     sendNotification(server, message, customerInstance.id, pushFrom, function(error){
                                                                         if(error){
@@ -843,7 +843,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                     //send Notification
                                                                     title = "We suspect your vehicle is being towed";
                                                                     eventType = "Vehicle Towed";
-                                                                    var message = vehicleTowingMessageFormat(customerName, eventType, title, gpsPacketDataObj.id);
+                                                                    var message = vehicleTowingMessageFormat(customerName, eventType, title, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
                                                                     if(customerInstance.id && gpsTrackerInfo.gpsTrackerNotification["vehicleTowing"] === "on"){
                                                                         sendNotification(server, message, customerInstance.id, pushFrom, function(error){
                                                                             if(error){
@@ -962,7 +962,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                     //send Notification
                                                                     title = "We suspect of accident occured of your vehicle";
                                                                     eventType = "Accident Detection";
-                                                                    var message = accidentDetectionMessageFormat(customerName, eventType, title, gpsPacketDataObj.id);
+                                                                    var message = accidentDetectionMessageFormat(customerName, eventType, title, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
                                                                     if(customerInstance.id && gpsTrackerInfo.gpsTrackerNotification["accidentDetection"] === "on"){
                                                                         sendNotification(server, message, customerInstance.id, pushFrom, function(error){
                                                                             if(error){
@@ -1016,72 +1016,79 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
 
 
-    var brakeAccelerationMessageFormat = function(to, eventType, title, gpsPacketDataId){
+    var brakeAccelerationMessageFormat = function(to, eventType, title, gpsPacketDataId, deviceIMEI){
         var message = {
             to : to,
             type : eventType,
             title : title,
-            id : gpsPacketDataId
-        }
-        return JSON.stringify(message);
-    };
-
-    var lowBatteryGpsMessage = function(to, eventType, title, gpsPacketDataId){
-        var message = {
-            to : to,
-            type : eventType,
-            title : title,
-            id : gpsPacketDataId
-        }
-        return JSON.stringify(message);
-    };
-
-    var engineStatusMessageFormat = function(to, eventType, title, gpsPacketDataId){
-        var message = {
-            to : to,
-            type : eventType,
-            title : title,
-            id : gpsPacketDataId
-        }
-        return JSON.stringify(message);
-    };
-
-    var gpsDeviceStatusMessage = function(to, eventType, title, gpsPacketDataId){
-        var message = {
-            to : to,
-            type : eventType,
-            title : title,
-            id : gpsPacketDataId
-        }
-        return JSON.stringify(message);
-    };
-
-    var overSpeedMessageFormat = function(to, eventType, title, gpsPacketDataId){
-        var message = {
-            to : to,
-            type : eventType,
-            title : title,
-            id : gpsPacketDataId
-        }
-        return JSON.stringify(message);
-    };
-
-    var vehicleTowingMessageFormat = function(to, eventType, title, gpsPacketDataId){
-        var message = {
-            to : to,
-            type : eventType,
-            title : title,
-            id : gpsPacketDataId
+            id : gpsPacketDataId,
+            deviceIMEI : deviceIMEI
         };
         return JSON.stringify(message);
     };
 
-    var accidentDetectionMessageFormat = function(to, eventType, title, gpsPacketDataId){
+    var lowBatteryGpsMessage = function(to, eventType, title, gpsPacketDataId, deviceIMEI){
         var message = {
             to : to,
             type : eventType,
             title : title,
-            id : gpsPacketDataId
+            id : gpsPacketDataId,
+            deviceIMEI : deviceIMEI
+        };
+        return JSON.stringify(message);
+    };
+
+    var engineStatusMessageFormat = function(to, eventType, title, gpsPacketDataId, deviceIMEI){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            id : gpsPacketDataId,
+            deviceIMEI : deviceIMEI
+        };
+        return JSON.stringify(message);
+    };
+
+    var gpsDeviceStatusMessage = function(to, eventType, title, gpsPacketDataId, deviceIMEI){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            id : gpsPacketDataId,
+            deviceIMEI : deviceIMEI
+        };
+        return JSON.stringify(message);
+    };
+
+    var overSpeedMessageFormat = function(to, eventType, title, gpsPacketDataId, deviceIMEI){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            id : gpsPacketDataId,
+            deviceIMEI : deviceIMEI
+        }
+        return JSON.stringify(message);
+    };
+
+    var vehicleTowingMessageFormat = function(to, eventType, title, gpsPacketDataId, deviceIMEI){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            id : gpsPacketDataId,
+            deviceIMEI : deviceIMEI
+        };
+        return JSON.stringify(message);
+    };
+
+    var accidentDetectionMessageFormat = function(to, eventType, title, gpsPacketDataId, deviceIMEI){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            id : gpsPacketDataId,
+            deviceIMEI : deviceIMEI
         };
         return JSON.stringify(message);
     };

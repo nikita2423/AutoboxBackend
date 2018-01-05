@@ -10,6 +10,7 @@ module.exports = (Customerquote, server, helper) =>
     const autoboxPlugin = helper.loadPlugin("autobox");
     const OWNERSHIPTYPE = ["ind", "cor"];
     const QUOTETYPE     = ["q", "t"];
+    let dealerId = "";
 
     /*Override the custmer quote method for Hiding the Mobile number*/
     Customerquote.afterRemote("find", function (ctx, data, next) {
@@ -27,6 +28,10 @@ module.exports = (Customerquote, server, helper) =>
         }
     });
 
+    Customerquote.beforeRemote('**', function(ctx, data, next){
+        next();
+    });
+
 
 
    Customerquote.observe("before save", function(ctx,next){
@@ -39,6 +44,15 @@ module.exports = (Customerquote, server, helper) =>
            instance.quoteNumber = Math.floor(100000000 + Math.random() * 900000000);
        }else{
            instance.updated = new Date();
+       }
+
+       const request = ctx.req;
+       if(request){
+           if(request.accessToken){
+               if(request.accessToken.userId){
+                   dealerId = request.accessToken.userId;
+               }
+           }
        }
 
        if(instance.quoteType === "q"){
@@ -58,6 +72,8 @@ module.exports = (Customerquote, server, helper) =>
            }
        }
 
+
+
        if(!validate(instance, currentInstance, "vehicleInfoId")){
            return next(new Error("Vehicle Info is required"));
        }
@@ -66,13 +82,38 @@ module.exports = (Customerquote, server, helper) =>
                return next(new Error("Register City is required"));
            }
        }
-
-
        if(!validate(instance, currentInstance, "customerId")){
            return next(new Error("Customer is required"));
        }
 
-       next();
+       if(instance.soldViaAutobox){
+           if(instance.soldViaAutobox === "yes"){
+               const SoldViaAutobox = server.models["SoldViaAutobox"];
+               if(instance.vehicleInfoId && instance.customerId && dealerId){
+                   SoldViaAutobox.create({
+                       type: "car",
+                       vehicleInfoId : instance.vehicleInfoId,
+                       customerId : instance.customerId,
+                       customerQuoteId : instance.id,
+                       dealerId : dealerId
+                   })
+                       .then(function(soldViaAutobox){
+                           next();
+                       })
+                       .catch(function(error){
+                           return next(error);
+                       });
+               } else{
+                   next();
+               }
+           } else{
+               next();
+           }
+       } else{
+           next();
+       }
+
+      // next();
    });
 
  /*  var sendNotificationAfterVehiclePurchase = function(){
