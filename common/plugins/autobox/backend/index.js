@@ -106,10 +106,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 										.then(function(soldViaAutobox){
 											if(soldViaAutobox){
 												customerQuoteInstance.soldViaAutobox = "yes";
-                                                customerQuoteInstance[packageObj.EDIT_BUTTON] = packageObj.disableButton.enable;
+                                                customerQuoteInstance[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
 											} else{
 												customerQuoteInstance.soldViaAutobox = "no";
-                                                //customerQuoteInstance[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
+                                                customerQuoteInstance[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
 											}
                                             customerQuoteList.splice(index, 1, customerQuoteInstance);
 										})
@@ -262,7 +262,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 delete customerQuote.customer.phoneNumber;
                 delete customerQuote.customer.referralCode;
                 delete customerQuote.customer.referralCount;
-                delete customerQuote.customer.sosStatus;
                 delete customerQuote.customer.googleRefreshToken;
                 delete customerQuote.customer.email;
 			}

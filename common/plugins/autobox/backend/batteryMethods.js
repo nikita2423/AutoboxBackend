@@ -114,7 +114,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         .catch(function(error){
                             console.log(error);
                         });
-                })
+                });
             }
             next();
         })

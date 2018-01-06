@@ -17,6 +17,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         sendChauffeurMessageNotificationMethod();
         cancelChauffeurMethod();
         checkChauffeurStatusMethod();
+        getChauffeurETAMethod();
     };
 
 
@@ -643,6 +644,64 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         } else{
             callback(new Error("User not valid"));
         }
+    };
+
+    const getChauffeurETAMethod = function(){
+        const Chauffeur = databaseObj.Chauffeur;
+        Chauffeur.getChauffeurETA = getChauffeurETA;
+        Chauffeur.remoteMethod("getChauffeurETA", {
+            accepts:[
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: 'deviceIMEI', type: "string"
+                }
+            ],
+            returns:{
+                arg: "location", type: "GpsPacketData", root: true
+            }
+        });
+    };
+
+    const getChauffeurETA = function(ctx, deviceIMEI, callback){
+      const request = ctx.req;
+      if(!deviceIMEI){
+          callback(new Error("Invalid Arguments"));
+      } else{
+          if(request){
+              if(request.accessToken){
+                  if(request.accessToken.userId){
+                      const GpsPacketData = databaseObj.GpsPacketData;
+                      GpsPacketData.findOne({
+                          where: {
+                              deviceIMEI : deviceIMEI
+                          },
+                          order: ["added DESC"],
+                          fields: ["latitude", "longitude"]
+                      })
+                          .then(function(gpsPacketData){
+                              if(gpsPacketData){
+                                  callback(null, gpsPacketData);
+                              }
+                          })
+                          .catch(function(error){
+                              callback(error);
+                          })
+                  } else{
+                      callback(new Error("User not valid"));
+                  }
+              } else{
+                  callback(new Error("User not valid"));
+              }
+          } else{
+              callback(new Error("User not valid"));
+          }
+      }
     };
 
 

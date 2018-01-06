@@ -1918,6 +1918,18 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                            if(showroom){
                                dealerId = showroom.dealerId;
                                const SoldViaAutobox = databaseObj.SoldViaAutobox;
+                               return SoldViaAutobox.findOne({
+                                   where: {
+                                       dealerId : dealerId,
+                                       customerQuoteId : customerQuoteId,
+                                       customerId: customerId
+                                   }
+                               });
+
+                           }
+                       })
+                       .then(function(soldViaAutobox){
+                           if(!soldViaAutobox){
                                return SoldViaAutobox.create({
                                    dealerId : dealerId,
                                    customerQuoteId : customerQuoteId,

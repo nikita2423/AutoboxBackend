@@ -93,24 +93,28 @@ module.exports = (Customerquote, server, helper) =>
            return next(new Error("Customer is required"));
        }
 
-      // if(instance.)
-       if(instance.soldViaAutobox){
-           if(instance.soldViaAutobox === "yes"){
-               const SoldViaAutobox = server.models["SoldViaAutobox"];
-               if(instance.vehicleInfoId && instance.customerId && dealerId){
-                   SoldViaAutobox.create({
-                       type: "car",
-                       vehicleInfoId : instance.vehicleInfoId,
-                       customerId : instance.customerId,
-                       customerQuoteId : instance.id,
-                       dealerId : dealerId
-                   })
-                       .then(function(soldViaAutobox){
-                           next();
+       if(!instance.isSoldViaAutobox){
+           if(instance.soldViaAutobox){
+               if(instance.soldViaAutobox === "yes"){
+                   const SoldViaAutobox = server.models["SoldViaAutobox"];
+                   if(instance.vehicleInfoId && instance.customerId && dealerId){
+                       instance.isSoldViaAutobox = true;
+                       instance.dealerId = dealerId;
+                       SoldViaAutobox.create({
+                           type: "car",
+                           vehicleInfoId : instance.vehicleInfoId,
+                           customerQuoteId : instance.id,
+                           dealerId : dealerId
                        })
-                       .catch(function(error){
-                           return next(error);
-                       });
+                           .then(function(soldViaAutobox){
+                               next();
+                           })
+                           .catch(function(error){
+                               return next(error);
+                           });
+                   } else{
+                       next();
+                   }
                } else{
                    next();
                }

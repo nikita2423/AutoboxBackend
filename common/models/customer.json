@@ -161,7 +161,6 @@
     },
     "sosStatus": {
       "type": "string",
-      "required": true,
       "default": "incomplete",
       "template": {
         "type": "selectString",
