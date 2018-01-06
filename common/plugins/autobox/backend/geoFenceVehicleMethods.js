@@ -198,7 +198,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let promises = [];
             if(ctx.isNewInstance){
                 process.nextTick(function(){
-                    databaseObj.GpsFenceVehicle.find({
+                    databaseObj.GeoFenceVehicle.find({
                         where: {
                             deviceIMEI : gpsPacketDataObj.deviceIMEI
                         }
