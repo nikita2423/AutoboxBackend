@@ -279,7 +279,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                         if(error){
                                             server.logger.error(error);
                                         } else{
-                                            server.logger.info("Notification for stolen car send successfully to all customers");
+                                          //  server.logger.info("Notification for stolen car send successfully to all customers");
                                         }
                                     });
                                 }

@@ -226,7 +226,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                 Customer.findById(gpsTrackerInfo.customerId)
                                                     .then(function(customer){
                                                         if(customer){
-                                                            console.log("customerIdList",customer.id);
+                                                           // console.log("customerIdList",customer.id);
                                                             customerInstance = customer;
                                                             customerName = customer.firstName;
                                                             var lastName = customer.lastName? customer.lastName : "";
@@ -353,7 +353,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                 Customer.findById(gpsTrackerInfo.customerId)
                                                     .then(function(customer){
                                                         if(customer){
-                                                            console.log("customerIdList",customer.id);
+                                                            //console.log("customerIdList",customer.id);
                                                             customerInstance = customer;
                                                             customerName = customer.firstName;
                                                             var lastName = customer.lastName? customer.lastName : "";
@@ -591,7 +591,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                 Customer.findById(gpsTrackerInfo.customerId)
                                                     .then(function(customer){
                                                         if(customer){
-                                                            console.log("customerIdList",customer.id);
+                                                          //  console.log("customerIdList",customer.id);
                                                             customerInstance = customer;
                                                             customerName = customer.firstName;
                                                             var lastName = customer.lastName? customer.lastName : "";
@@ -706,7 +706,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                 Customer.findById(gpsTrackerInfo.customerId)
                                                     .then(function(customer){
                                                         if(customer){
-                                                            console.log("customerIdList",customer.id);
+                                                           // console.log("customerIdList",customer.id);
                                                             customerInstance = customer;
                                                             customerName = customer.firstName;
                                                             var lastName = customer.lastName? customer.lastName : "";
@@ -821,7 +821,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                 Customer.findById(gpsTrackerInfo.customerId)
                                                     .then(function(customer){
                                                         if(customer){
-                                                            console.log("customerIdList",customer.id);
+                                                            //console.log("customerIdList",customer.id);
                                                             customerInstance = customer;
                                                             customerName = customer.firstName;
                                                             var lastName = customer.lastName? customer.lastName : "";
@@ -940,7 +940,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                 Customer.findById(gpsTrackerInfo.customerId)
                                                     .then(function(customer){
                                                         if(customer){
-                                                            console.log("customerIdList",customer.id);
+                                                            //console.log("customerIdList",customer.id);
                                                             customerInstance = customer;
                                                             customerName = customer.firstName;
                                                             var lastName = customer.lastName? customer.lastName : "";

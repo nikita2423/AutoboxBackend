@@ -287,6 +287,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         return d;
     };
 
+    var deg2rad = function(deg){
+        return deg * (Math.PI/180)
+    };
+
     var geoFenceMessageFormat = function(to, eventType, title, gpsPacketDataId){
         var message = {
             to : to,
