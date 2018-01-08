@@ -1943,7 +1943,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                        })
                        .then(function(customerQuote){
                            if(customerQuote){
-                               return customerQuote.updateAttribute("dealerId", dealerId);
+                               return customerQuote.updateAttributes({
+                                   dealerId : dealerId,
+                                   soldViaAutobox: "yes",
+                                   isSoldViaAutobox: true
+                               });
+                               //return customerQuote.updateAttribute("dealerId", dealerId);
                            }
                        })
                        .then(function(customerQuote){

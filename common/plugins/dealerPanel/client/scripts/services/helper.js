@@ -193,7 +193,8 @@ angular.module($snaphy.getModuleName())
                                             where: {
                                                 "cityId": "$user.cityId",
                                                 "currentBrandId": "$user.brandId",
-                                                "soldViaAutobox": "yes"
+                                                "soldViaAutobox": "yes",
+                                                "dealerId": "$user.id"
                                             },
                                             dateProp: 'added'
                                         }
