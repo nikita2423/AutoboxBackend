@@ -109,7 +109,16 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                 customerQuoteInstance[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
 											} else{
 												customerQuoteInstance.soldViaAutobox = "no";
-                                                customerQuoteInstance[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
+												if(customerQuoteInstance.customer){
+												    if(customerQuoteInstance.customer.phoneNumber){
+                                                        customerQuoteInstance[packageObj.EDIT_BUTTON] = packageObj.disableButton.enable;
+                                                    } else{
+                                                        customerQuoteInstance[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
+                                                    }
+                                                } else{
+                                                    customerQuoteInstance[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
+                                                }
+                                               // customerQuoteInstance[packageObj.EDIT_BUTTON] = packageObj.disableButton.disable;
 											}
                                             customerQuoteList.splice(index, 1, customerQuoteInstance);
 										})
