@@ -828,7 +828,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                             customerName = customerName + " " + lastName;
                                                             pushFrom = packageObj.companyName;
                                                             instanceId = gpsPacketDataObj.id;
-                                                            if(gpsPacketDataObj.ignitionStatus === "off" && gpsPacketDataObj.speed > 5){
+                                                            if(gpsPacketDataObj.ignitionStatus === "off" && gpsPacketDataObj.speed > 15){
                                                                 return GpsPacketData.find({
                                                                     limit:2,
                                                                     order: ["added DESC"]
