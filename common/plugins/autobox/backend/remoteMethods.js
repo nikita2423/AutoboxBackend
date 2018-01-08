@@ -1886,6 +1886,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 if(request.accessToken.userId){
                    const customerId = request.accessToken.userId;
                    const CustomerQuote = databaseObj.CustomerQuote;
+                   const SoldViaAutobox = databaseObj.SoldViaAutobox;
                    CustomerQuote.findById(customerQuoteId)
                        .then(function(customerQuote){
                            if(customerQuote){
@@ -1917,7 +1918,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                        .then(function(showroom){
                            if(showroom){
                                dealerId = showroom.dealerId;
-                               const SoldViaAutobox = databaseObj.SoldViaAutobox;
+
                                return SoldViaAutobox.findOne({
                                    where: {
                                        dealerId : dealerId,
