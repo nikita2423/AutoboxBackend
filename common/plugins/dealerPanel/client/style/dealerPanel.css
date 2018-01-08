@@ -23,7 +23,6 @@
 .dateDashboard {
     margin-top: 4px;
     width: 400px !important;
-
 }
 
 
@@ -248,7 +247,7 @@ h3 img {
 /**--------------------MAP DESIGN CLASSS FOR FILENAME ------ **/
 
 #map {
-    height: 400px;
+    height: 600px;
     margin: 20px 0;
     border-radius: 5px;
     border: 1px solid silver;
