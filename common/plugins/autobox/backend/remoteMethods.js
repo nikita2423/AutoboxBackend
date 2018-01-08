@@ -3359,6 +3359,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         },
                         status: "active"
                     },
+                    order: ["added DESC"],
                     include: [{
                         relation: "offer",
                         scope: {

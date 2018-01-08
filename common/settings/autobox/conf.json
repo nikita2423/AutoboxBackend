@@ -19,9 +19,9 @@
   },
   "medicalEmail1": "ist@murgency.com",
   "medicalEmail2": "marketing@murgency.com",
-  "tradeSpecificBrandEmail1": "vikram.dangi@hotmail.com",
-  "tradeSpecificBrandEmail2": "vikram.dangi@hotmail.com",
-  "tradeNormalBrandEmail": "vikram.dangi@hotmail.com",
+  "tradeSpecificBrandEmail1": "sales@autoboxapp.in",
+  "tradeSpecificBrandEmail2": "sales@autoboxapp.in",
+  "tradeNormalBrandEmail": "sales@autoboxapp.in",
   "admin": {
     "subject_add_old_vehicle": "New Old Trade Car Arrived",
     "sell_vehicle_subject": "New Sell Vehicle Request Arrived",

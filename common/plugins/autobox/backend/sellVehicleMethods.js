@@ -111,7 +111,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             const subject = packageObj.admin.sell_vehicle_subject;
                             const to = [];
                             const from = packageObj.from;
-                            to.push("vikram.dangi@hotmail.com");
+                            to.push("sales@autoboxapp.in");
                             emailPlugin.adminEmail.sellvehicle(from, to, subject, sellVehicleObj, function (err, send) {
                                 if(err){
                                     console.log(err);
