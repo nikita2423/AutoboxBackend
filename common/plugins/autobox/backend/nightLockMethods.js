@@ -243,7 +243,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                         eventType = "Car Stolen";
                                                                         title = "Car is suspected to be stolen";
                                                                         var message = nightLockMessageFormat(customerName, eventType, title, instanceId);
-                                                                        if(customer.id){
+                                                                        if(customer.id && gpsTrackerInfo.gpsTrackerNotification["vehicleTowing"] === "on"){
                                                                             sendNotification(server, message, customer.id, pushFrom, function(error){
                                                                                 if(error){
                                                                                     console.log(error);

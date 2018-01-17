@@ -34,15 +34,15 @@
     "transports": [
       {
         "type": "SMTP",
-        "host": "smtp.zoho.com",
+        "host": "smtp.gmail.com",
         "aliases": [
-          "Zoho Mail"
+          "Google Mail"
         ],
         "secure": true,
         "port": 465,
         "auth": {
-          "user": "test@snaphy.com",
-          "pass": "snaphy2017"
+          "user": "info@autoboxapp.in",
+          "pass": "Netgear007"
         }
       }
     ]

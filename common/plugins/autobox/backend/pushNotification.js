@@ -299,10 +299,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                            oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.mitsubishi ||
                            oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.skoda ||
                            oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.volkswagen){
-                           to.push(packageObj.tradeSpecificBrandEmail1);
-                           to.push(packageObj.tradeSpecificBrandEmail2);
+                           to.push("sales@autoboxapp.in");
+                           //to.push(packageObj.tradeSpecificBrandEmail2);
                        } else{
-                           to.push(packageObj.tradeNormalBrandEmail);
+                           to.push("sales@autoboxapp.in");
                            console.log("Required brand not present");
                        }
 
@@ -781,6 +781,17 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             if(brand){
                                 brandInstance = brand;
                                 customerQuoteObj.brand = brand;
+                                const subject = packageObj.dealer.subject_customer_quote;
+                                const to = [];
+                                const from = packageObj.from;
+                                to.push("sales@autoboxapp.in");
+                                emailPlugin.adminEmail.quoteGeneratedForDealer(from, to, subject, customerQuoteObj, function (err, send) {
+                                    if(err){
+                                        console.log(err);
+                                    } else{
+                                        console.log("Email send Successfully for Customer Quote to dealer");
+                                    }
+                                });
                                 sendEmailToAllDealer(server, databaseObj, packageObj, brandInstance, cityInstance, customerQuoteObj);
                             }
                         })

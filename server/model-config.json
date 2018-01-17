@@ -343,5 +343,13 @@
   "GeoFenceVehicle": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "ReferralCode": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "PreBookVehicle": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

@@ -67,6 +67,12 @@
         "label": "Buy Battery",
         "templatePath": "../../plugins/autobox/backend/email/admin/buy_battery.ejs",
         "display": false
+      },
+      "preVehicleBooking": {
+        "name": "preVehicleBooking",
+        "label": "Pre Book Vehicle",
+        "templatePath": "../../plugins/autobox/backend/email/admin/pre_book_vehicle.ejs",
+        "display": false
       }
     }
   }],

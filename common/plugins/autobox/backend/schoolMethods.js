@@ -19,7 +19,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         fetchBusLocationMethod();
         fetchBusNotificationStatusMethod();
         updateBusNotificationMethod();
-        sendBusVicinityNotification();
+        //sendBusVicinityNotification();
 
     };
 

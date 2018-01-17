@@ -1,0 +1,41 @@
+{
+  "name": "PreBookVehicle",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "customerName": {
+      "type": "string"
+    },
+    "added": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "updated": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    },
+    "vehicleInfo": {
+      "type": "belongsTo",
+      "model": "VehicleInfo",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

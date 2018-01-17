@@ -25,7 +25,8 @@
   "admin": {
     "subject_add_old_vehicle": "New Old Trade Car Arrived",
     "sell_vehicle_subject": "New Sell Vehicle Request Arrived",
-    "battery_request_subject": "New Battery Request Arrived"
+    "battery_request_subject": "New Battery Request Arrived",
+    "pre_book_vehicle_request": "New Vehicle Booking Arrived"
   },
   "dealer": {
     "subject_customer_quote": "AutoBox - New Quote Request Arrived !"
@@ -80,5 +81,6 @@
     "skoda": "Skoda",
     "volkswagen": "Volkswagen"
   },
-  "new_install_point": 10
+  "new_install_point": 10,
+  "referral_code_points": 10
 }

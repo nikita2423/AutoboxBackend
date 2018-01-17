@@ -11,6 +11,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         incrementShareAppCountMethod();
         syncContactMethod();
         incrementPointsMethod();
+        verifyReferralCodeMethod();
+        incrementReferralCodePointMethod();
 
     };
 
@@ -264,6 +266,157 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         } else{
             callback(new Error("User not valid"));
         }
+    };
+
+
+    const verifyReferralCodeMethod = function(){
+        const ReferralCode = databaseObj.ReferralCode;
+        ReferralCode.verifyReferralCode = verifyReferralCode;
+        ReferralCode.remoteMethod("verifyReferralCode", {
+            accepts:[
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "referralCode", type: "string"
+                }
+            ],
+            returns: {
+                arg: "response", type: "object", root:true
+            }
+        });
+    };
+
+
+    const verifyReferralCode = function(ctx, referralCode, callback){
+        const request = ctx.req;
+        if(!referralCode){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request){
+                if(request.accessToken){
+                    if(request.accessToken.userId){
+                        const userId = request.accessToken.userId;
+                        const ReferralCode = databaseObj.ReferralCode;
+                        ReferralCode.findOne({
+                            where: {
+                                code : referralCode
+                            }
+                        })
+                            .then(function(referralCode){
+                                if(referralCode){
+                                    callback(null, {response: "found"});
+                                } else{
+                                    callback(null, {response: "notFound"});
+                                }
+                            })
+                            .catch(function(error){
+                                callback(error);
+                            });
+                    } else{
+                        callback(new Error("User not valid"));
+                    }
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
+
+
+    const incrementReferralCodePointMethod = function(){
+      const ReferralCode = databaseObj.ReferralCode;
+      ReferralCode.incrementReferralCodePoint = incrementReferralCodePoint;
+      ReferralCode.remoteMethod("incrementReferralCodePoint", {
+          accepts: [
+              {
+                  arg: 'ctx',
+                  type: 'object',
+                  http: {
+                      source: 'context'
+                  }
+              },
+              {
+                  arg: "referralCode", type: "string"
+              }
+          ],
+          returns: {
+              arg: "response", type: "object", root : true
+          }
+      });
+    };
+
+
+    const incrementReferralCodePoint = function(ctx, referralCode, callback){
+      const request = ctx.req;
+      if(!referralCode){
+          callback(new Error("Invalid Arguments"));
+      } else{
+          if(request){
+              if(request.accessToken){
+                  if(request.accessToken.userId){
+                      const userId = request.accessToken.userId;
+                      const ReferralCode = databaseObj.ReferralCode;
+                      const Customer = databaseObj.Customer;
+                      ReferralCode.findOne({
+                          where: {
+                              code : referralCode
+                          }
+                      })
+                          .then(function(referralCode){
+                              if(referralCode){
+                                  if(referralCode.codeCount){
+                                      referralCode.codeCount ++;
+                                      return referralCode.updateAttribute("codeCount", referralCode.codeCount);
+                                  }
+                              }
+                          })
+                          .then(function(referralCode){
+                              if(referralCode){
+                                  if(referralCode.customerId){
+                                      return Customer.findById(referralCode.customerId);
+                                  }
+                              }
+                          })
+                          .then(function(customer){
+                              if(customer){
+                                  if(customer.earnedPoints){
+                                      customer.earnedPoints = customer.earnedPoints + packageObj.referral_code_points;
+                                      return customer.updateAttribute("earnedPoints", customer.earnedPoints);
+                                  }
+                              }
+                          })
+                          .then(function(customer){
+                              return Customer.findById(userId);
+                          })
+                          .then(function(customer){
+                              if(customer.earnedPoints){
+                                  customer.earnedPoints = customer.earnedPoints + packageObj.referral_code_points;
+                                  return customer.updateAttribute("earnedPoints", customer.earnedPoints);
+                              }
+                          })
+                          .then(function(customer){
+                              callback(null, {response: "success"});
+                          })
+                          .catch(function(error){
+                              callback(error);
+                          });
+                  } else{
+                      callback(new Error("User not valid"));
+                  }
+              } else{
+                  callback(new Error("User not valid"));
+              }
+          } else{
+              callback(new Error("User not valid"));
+          }
+      }
     };
 
     const sendNotification = function(app, message, id, from, callback){

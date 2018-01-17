@@ -397,14 +397,69 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         if(codeValidates){
         	//create Access Token..
             //console.log("success");
-			createAccessToken(phoneNumber,callback);
-
-
-		} else{
+			createAccessToken1(phoneNumber,callback);
+        } else{
         	//console.log("Token not matches");
         	callback(new Error("Code not matches"));
 		}
 	};
+
+	const createAccessToken1 = function(phoneNumber, callback){
+	    const Customer = databaseObj.Customer;
+	    const ReferralCode = databaseObj.ReferralCode;
+	    let customerInstance;
+	    Customer.findOne({
+            where:{
+                phoneNumber: phoneNumber
+            }
+        })
+            .then(function(customer){
+                if(!customer){
+                    return Customer.create({
+                        phoneNumber : phoneNumber
+                    });
+                } else{
+                    return customer.updateAttribute("phoneNumber", phoneNumber);
+                }
+            })
+            .then(function(customer){
+                if(customer){
+                    customerInstance = customer;
+                    if(!customer.referralCode){
+                        const referralCode = voucher_codes.generate({
+                            length: 6,
+                            count : 1
+                        });
+                        return ReferralCode.create({
+                            code : referralCode,
+                            customerId : customer.id
+                        });
+                    } else{
+                        //Do Nothing...
+                    }
+                }
+            })
+            .then(function(referralCode){
+                if(referralCode){
+                    return customerInstance.updateAttribute("referralCode", referralCode.code);
+                }
+            })
+            .then(function(){
+                return customerInstance.createAccessToken(31536000);
+            })
+            .then(function(token){
+                if(token) {
+                    token.__data.user = customerInstance;
+                    //console.log("myToken", token);
+                    callback(null, token);
+                }else{
+                    callback(null,{});
+                }
+            })
+            .catch(function(error){
+                callback(error);
+            });
+    };
 
 
 	const createAccessToken = function(phoneNumber, callback){

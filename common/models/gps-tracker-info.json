@@ -82,6 +82,11 @@
               "key": "accidentDetection",
               "type": "input",
               "default": "on"
+            },
+            {
+              "key": "nightLock",
+              "type": "input",
+              "default": "off"
             }
           ]
         }

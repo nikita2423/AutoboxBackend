@@ -844,7 +844,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                     title = "We suspect your vehicle is being towed";
                                                                     eventType = "Vehicle Towed";
                                                                     var message = vehicleTowingMessageFormat(customerName, eventType, title, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
-                                                                    if(customerInstance.id && gpsTrackerInfo.gpsTrackerNotification["vehicleTowing"] === "on"){
+                                                                    if(customerInstance.id && gpsTrackerInfo.gpsTrackerNotification["nightLock"] === "on"){
                                                                         sendNotification(server, message, customerInstance.id, pushFrom, function(error){
                                                                             if(error){
                                                                                server.logger.error(error);
