@@ -42,6 +42,8 @@
     "Trim",
     "VehicleDetail",
     "Workshop",
+    "PreBookVehicleBrand",
+    "PreBookVehicleModel",
     "SnaphyAcl"
   ],
   "services": {},

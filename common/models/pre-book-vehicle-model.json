@@ -1,0 +1,77 @@
+{
+  "name": "PreBookVehicleModel",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Model",
+          "id": "modelName"
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "template": {
+        "type": "selectString",
+        "templateOptions": {
+          "label": "Status of Brand",
+          "id": "brandStatus",
+          "priority": 6,
+          "options": [
+            "active",
+            "inactive"
+          ]
+        }
+      }
+    },
+    "image": {
+      "type": "object",
+      "required": false,
+      "template": {
+        "type": "singleFileUpload",
+        "templateOptions": {
+          "label": "Add Model Image",
+          "containerName": "autoboxsnaphy",
+          "containerModel": "Container",
+          "bind": true,
+          "fileDataSource": "Image",
+          "onImageUpdate": {
+            "deletePrevious": true
+          }
+        }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "preBookVehicleBrand": {
+      "type": "belongsTo",
+      "model": "PreBookVehicleBrand",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Brand",
+        "searchProp": "name",
+        "priority": 2,
+        "search": true,
+        "create": false,
+        "type": "smartSelect",
+        "id": "AddBrand",
+        "hide": false,
+        "label": "Add Brand"
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

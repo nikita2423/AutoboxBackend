@@ -1,16 +1,22 @@
 {
-  "name": "PreBookVehicle",
+  "name": "PreBookVehicleBrand",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "brandName": {
-      "type": "string"
-    },
-    "modelName": {
-      "type": "string"
+    "name": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Enter Brand",
+          "id": "brandName"
+        }
+      }
     },
     "added": {
       "type": "date",
@@ -41,21 +47,27 @@
           ]
         }
       }
+    },
+    "image": {
+      "type": "object",
+      "required": false,
+      "template": {
+        "type": "singleFileUpload",
+        "templateOptions": {
+          "label": "Add Brand Image",
+          "containerName": "autoboxsnaphy",
+          "containerModel": "Container",
+          "bind": true,
+          "fileDataSource": "Image",
+          "onImageUpdate": {
+            "deletePrevious": true
+          }
+        }
+      }
     }
   },
   "validations": [],
-  "relations": {
-    "preBookVehicleBrand": {
-      "type": "belongsTo",
-      "model": "PreBookVehicleBrand",
-      "foreignKey": ""
-    },
-    "preBookVehicleModel": {
-      "type": "belongsTo",
-      "model": "PreBookVehicleModel",
-      "foreignKey": ""
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }

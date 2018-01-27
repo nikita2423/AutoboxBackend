@@ -14,9 +14,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
 
     const createPreVehicleBookingMethod = function(){
-        const PreBookVehicle = databaseObj.PreBookVehicle;
-        PreBookVehicle.createPreVehicleBooking = createPreVehicleBooking;
-        PreBookVehicle.remoteMethod("createPreVehicleBooking", {
+        const PreVehicleBooking = databaseObj.PreVehicleBooking;
+        PreVehicleBooking.createPreVehicleBooking = createPreVehicleBooking;
+        PreVehicleBooking.remoteMethod("createPreVehicleBooking", {
            accepts:[
                {
                    arg: 'ctx',
@@ -24,9 +24,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                    http: {
                        source: 'context'
                    }
-               },
-               {
-                   arg: "vehicleInfoObj", type: "object"
                },
                {
                    arg: "preBookVehicleObj", type: "object"
@@ -38,44 +35,24 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         });
     };
 
-    const createPreVehicleBooking = function(ctx, vehicleInfoObj, preBookVehicleObj, callback){
+    const createPreVehicleBooking = function(ctx, preBookVehicleObj, callback){
         const request = ctx.req;
-        if(!vehicleInfoObj && !preBookVehicleObj){
+        if(!preBookVehicleObj){
             callback(new Error("Invalid Arguments"));
         } else{
             if(request){
                 if(request.accessToken){
                     if(request.accessToken.userId){
                         const customerId = request.accessToken.userId;
-                        const PreBookVehicle = databaseObj.PreBookVehicle;
-                        const VehicleInfo = databaseObj.VehicleInfo;
-                        VehicleInfo.create({
-                            colorId : vehicleInfoObj.colorId,
-                            brandId: vehicleInfoObj.brandId,
-                            carModelId: vehicleInfoObj.carModelId,
-                            trimId: vehicleInfoObj.trimId,
-                            customerId: customerId,
-                            gearBoxId: vehicleInfoObj.gearBoxId,
-                            fuelId: vehicleInfoObj.fuelId,
-                            vehicleModel: vehicleInfoObj.vehicleModel,
-                            vehicleType: "car",
-                            fuelType: vehicleInfoObj.fuelType,
-                            vehicleTrim: vehicleInfoObj.vehicleTrim,
-                            vehicleBrand: vehicleInfoObj.vehicleBrand,
-                            vehicleGearbox : vehicleInfoObj.vehicleGearbox,
-                            vehicleColor: vehicleInfoObj.vehicleColor
+                        const PreVehicleBooking = databaseObj.PreVehicleBooking;
+                        PreVehicleBooking.create({
+                            brandName : preBookVehicleObj.brandName,
+                            modelName : preBookVehicleObj.modelName,
+                            preBookVehicleModelId : preBookVehicleObj.preBookVehicleModelId,
+                            customerId : customerId
                         })
-                            .then(function(vehicleInfo){
-                                if(vehicleInfo){
-                                    return PreBookVehicle.create({
-                                        customerName: preBookVehicleObj.customerName,
-                                        vehicleInfoId : vehicleInfo.id,
-                                        customerId : customerId
-                                    });
-                                }
-                            })
-                            .then(function(preBookVehicle){
-                                if(preBookVehicle){
+                            .then(function(preVehicleBooking){
+                                if(preVehicleBooking){
                                     callback(null, {response: "success"});
                                 }
                             })
@@ -83,34 +60,28 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 callback(error);
                             });
                     } else{
-                        callback(new Error("User not valid"));
+                        callback(new Error("Invalid User"));
                     }
                 } else{
-                    callback(new Error("user not valid"));
+                    callback(new Error("Invalid User"));
                 }
             } else{
-                callback(new Error("user not valid"));
+                callback(new Error("Invalid User"));
             }
         }
     };
 
     const sendPreVehicleBookingEmail = function(){
-        const PreBookVehicle = databaseObj.PreBookVehicle;
-        PreBookVehicle.observe("after save", function(ctx, next){
+        const PreVehicleBooking = databaseObj.PreVehicleBooking;
+        PreVehicleBooking.observe("after save", function(ctx, next){
             const instance = ctx.instance;
-            const preBookVehicleObj = instance.toJSON();
+            const preVehicleBookingObj = instance.toJSON();
             if(ctx.isNewInstance){
                process.nextTick(function(){
-                   databaseObj.Customer.findById(preBookVehicleObj.customerId)
+                   databaseObj.Customer.findById(preVehicleBookingObj.customerId)
                        .then(function(customer){
                            if(customer){
-                               preBookVehicleObj.customer = customer;
-                               return databaseObj.VehicleInfo.findById(preBookVehicleObj.vehicleInfoId);
-                           }
-                       })
-                       .then(function(vehicleInfo){
-                           if(vehicleInfo){
-                               preBookVehicleObj.vehicleInfo = vehicleInfo;
+                               preVehicleBookingObj.customer = customer;
                            }
                        })
                        .then(function(){
@@ -119,11 +90,11 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                            const to = [];
                            const from = packageObj.from;
                            to.push("sales@autoboxapp.in");
-                           emailPlugin.adminEmail.preVehicleBooking(from, to, subject, preBookVehicleObj, function (err, send) {
+                           emailPlugin.adminEmail.preVehicleBooking(from, to, subject, preVehicleBookingObj, function (err, send) {
                                if(err){
-                                   //console.log(err);
+                                   console.log(err);
                                } else{
-                                   //console.log("Email send Successfully for Battery to admin");
+                                   console.log("Email send Successfully for Booking Vehicle to admin");
                                }
                            });
                        })

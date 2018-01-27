@@ -53,5 +53,8 @@
   "Battery": "Battery",
   "NightLock": "NightLock",
   "GeoFenceVehicle": "GeoFenceVehicle",
-  "PreBookVehicle": "PreBookVehicle"
+  "PreBookVehicle": "PreBookVehicle",
+  "PreBookVehicleBrand": "PreBookVehicleBrand",
+  "PreBookVehicleModel": "PreBookVehicleModel",
+  "PreVehicleBooking": "PreVehicleBooking"
 }

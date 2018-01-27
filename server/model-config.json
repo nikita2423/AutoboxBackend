@@ -351,5 +351,17 @@
   "PreBookVehicle": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "PreBookVehicleBrand": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "PreBookVehicleModel": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "PreVehicleBooking": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }
