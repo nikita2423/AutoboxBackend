@@ -29,7 +29,9 @@ module.exports = function(Gpstrackerinfo, server, helper) {
                 vehicleTowing : "on",
                 overSpeeding: "on",
                 accidentDetection: "on",
-                nightLock: "off"
+                nightLock: "off",
+                engineOff: "on",
+                engineOn: "on"
             };
         }
 

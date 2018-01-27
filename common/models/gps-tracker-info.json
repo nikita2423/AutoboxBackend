@@ -87,6 +87,16 @@
               "key": "nightLock",
               "type": "input",
               "default": "off"
+            },
+            {
+              "key": "engineOff",
+              "type": "input",
+              "default": "on"
+            },
+            {
+              "key": "engineOn",
+              "type": "input",
+              "default": "on"
             }
           ]
         }
