@@ -33,7 +33,7 @@ module.exports = (Offer, server, helper) =>
         }
 
         if(instance.title){
-            instance.title = _.capitalize(trim(instance.title));
+         //   instance.title = _.capitalize(trim(instance.title));
             const check = isLength(instance.title, {min:1, max:200});
             if(!check){
                 return next(new Error("Title length should be between 3 to 200"));
@@ -41,7 +41,7 @@ module.exports = (Offer, server, helper) =>
         }
 
         if(instance.description){
-            instance.description = _.capitalize(trim(instance.description));
+          //  instance.description = _.capitalize(trim(instance.description));
             const check = isLength(instance.title, {min:3, max:1000});
             if(!check){
                 return next(new Error("Description length should be between 3 to 1000"));
