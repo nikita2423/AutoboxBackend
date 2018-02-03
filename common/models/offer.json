@@ -25,7 +25,7 @@
       "template": {
         "type": "input",
         "templateOptions": {
-          "type": "text",
+          "type": "textArea",
           "priority": 3,
           "label": "Enter description",
           "id": "offerDescription"

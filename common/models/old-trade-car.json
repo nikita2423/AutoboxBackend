@@ -24,6 +24,9 @@
     },
     "miles": {
       "type": "number"
+    },
+    "variantName": {
+      "type": "string"
     }
   },
   "validations": [],

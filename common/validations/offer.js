@@ -36,7 +36,7 @@ module.exports = (Offer, server, helper) =>
          //   instance.title = _.capitalize(trim(instance.title));
             const check = isLength(instance.title, {min:1, max:200});
             if(!check){
-                return next(new Error("Title length should be between 3 to 200"));
+                return next(new Error("Title length should be between 3 to 500"));
             }
         }
 

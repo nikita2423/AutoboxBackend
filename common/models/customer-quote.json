@@ -314,6 +314,9 @@
         }
       }
     },
+    "oldTradeVariantName": {
+      "type": "string"
+    },
     "added": {
       "type": "date",
       "required": true,

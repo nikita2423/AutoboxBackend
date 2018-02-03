@@ -9,7 +9,7 @@
       "description": {
         "required": true,
         "minlength": "3",
-        "maxlength": "100"
+        "maxlength": "1000"
       },
       "expiredOn": {
         "required": true,
@@ -30,7 +30,7 @@
         "minlength": "Minimum length permitted is 3",
         "maxlength": "Maximum length permitted is 500"
       },
-      "subject": {
+      "description": {
         "required": "Description is required",
         "minlength": "Minimum length permitted is 3",
         "maxlength": "Maximum length permitted is 1000"
