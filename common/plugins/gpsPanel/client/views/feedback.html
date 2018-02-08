@@ -1,0 +1,22 @@
+<div style="color: #fff;" ng-init="init();" id="dealerFeedback" class="block block-themed block-transparent remove-margin-b">
+    <div ng-if="settings.config.isUserLoaded">
+        <div class="block-header bg-primary-dark">
+            <h3 class="block-title">FEEDBACK</h3>
+        </div>
+        <form  name="getActiveTabSettings().form">
+            <div style="color:#646464; text-align: center; width:100% !important;" class="col-md-12">
+                <textarea ng-if="getActiveTabSettings().config.display" required class="textAreaStyle col-md-12" id="feedbackTextArea" rows="8" ng-model="getActiveTabSettings().data" placeholder="Write Feedback"></textarea>
+                <div style="margin-top: 20px;" ng-if="!getActiveTabSettings().config.display" class="h4">{{getActiveTabSettings().config.message}}</div>
+            </div>
+        </form>
+
+        <div ng-if="getActiveTabSettings().config.display" class="col-md-12" style="margin-top:10px;">
+            <button
+                    style="color: #fff;float:right" class="btn btn-sm bg-primary-dark"
+                    ng-click="settings.tabs.feedback.sendFeedback(getActiveTabSettings().data)">
+                SEND FEEDBACK
+            </button>
+        </div>
+    </div>
+</div>
+

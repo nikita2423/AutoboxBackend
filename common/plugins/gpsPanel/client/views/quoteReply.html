@@ -1,0 +1,18 @@
+<div ng-init="init();quoteReplyInit();">
+
+    <div  ng-if="settings.tabs.quoteReply.schema && settings.tabs.quoteReply.isDataLoaded" class="block-content block-content-narrow">
+        <form name="settings.tabs.quoteReply.form" ng-validate="settings.tabs.quoteReply.schema.validations" novalidate  class="form-horizontal">
+            <!--Add container class and style related to this..-->
+            <div ng-class="container.class" ng-style="container.style" ng-repeat="container in settings.tabs.quoteReply.schema.container">
+                <formly-form  model="settings.tabs.quoteReply.data" fields="container.schema" ></formly-form>
+            </div>
+        </form>
+    </div><!--block-content-->
+    <!-- ng disabled removed as now ng-disabled="!enableButton(settings.form)" -->
+    <div ng-if="settings.tabs.quoteReply.isDataLoaded && !settings.tabs.quoteReply.data.id" class="modal-footer">
+        <button style="color: #fff;" class="btn btn-sm bg-primary-dark"
+                ng-click="settings.tabs.quoteReply.saveForm(settings.tabs.quoteReply.schema, settings.tabs.quoteReply.form,  settings.tabs.quoteReply.data, true, '#customerQuoteReply')">
+                SEND
+        </button>
+    </div>
+</div>

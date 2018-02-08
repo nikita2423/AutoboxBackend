@@ -1,0 +1,19 @@
+<div ng-init="init();">
+    <div  ng-if="settings.tabs.dealerVehicle.schema" class="block-content block-content-narrow">
+        <form name="settings.tabs.dealerVehicle.form" ng-validate="settings.tabs.dealerVehicle.schema.validations" novalidate  class="form-horizontal">
+            <!--Add container class and style related to this..-->
+            <div ng-class="container.class" ng-style="container.style" ng-repeat="container in settings.tabs.dealerVehicle.schema.container">
+                <formly-form  model="settings.tabs.dealerVehicle.data" fields="container.schema" ></formly-form>
+            </div>
+        </form>
+    </div><!--block-content-->
+    <!-- ng disabled removed as now ng-disabled="!enableButton(settings.form)" -->
+    <div class="modal-footer">
+        <button style="color: #fff;" class="btn btn-sm bg-primary-dark" ui-sref="addDealerVehicle"
+                ng-click="getActiveTabSettings().saveForm(getActiveTabSettings().schema, getActiveTabSettings().form,  getActiveTabSettings().data, true, getActiveTabSettings().config.tableId)">
+            SAVE
+        </button>
+    </div>
+
+
+</div>
