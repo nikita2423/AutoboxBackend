@@ -1,0 +1,19 @@
+{
+  "css": {
+    "/gps/style/gpsLogin.css": "gpsLoginCss"
+  },
+  "js": {
+    "/gps/scripts/routes/gpsLogin.js": "gpsLoginRoute",
+    "/gps/scripts/controllers/gpsLogin.js": "gpsLoginController"
+  },
+  "moduleDependencies":{
+
+  },
+  "settings": ["/gps/admin-panel-setting.js"],
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [],
+    "footerHook":[]
+  }
+}

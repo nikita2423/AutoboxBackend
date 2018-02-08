@@ -1,0 +1,16 @@
+{
+  "name": "gpsPanel",
+  "description": "This plugin handles all gpsPanel logic",
+  "routeExposure": "/gpsPanel",
+  "activate": true,
+  "load":{
+    "gpsPanel": true,
+    "dealerPanel": false,
+    "root": false,
+    "school":false
+  },
+  "from": "Autobox <info@autoboxapp.in>",
+  "loadDatabases":[
+  ],
+  "pluginDependencies": {}
+}

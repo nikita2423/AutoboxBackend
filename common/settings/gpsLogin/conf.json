@@ -1,0 +1,19 @@
+{
+  "name": "gpsLogin",
+  "description": "To handle the dealer login",
+  "routeExposure": "/gpsLogin",
+  "activate": true,
+  "load":{
+    "gpsPanel": true,
+    "dealerPanel": false,
+    "root": false,
+    "school":false
+  },
+  "roles":{
+    "serviceLoggedUser": "Dealer"
+  },
+  "pluginDependencies": {
+    "dashboard": "^2.0.0",
+    "JqueryValidate": "^2.0.0"
+  }
+}

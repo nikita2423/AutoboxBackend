@@ -1,0 +1,7 @@
+{
+  "name": "gpsPanel",
+  "description": "This plugin handles all gpsPanel logic",
+  "routeExposure": "/gps",
+  "activate": true,
+  "pluginDependencies": {}
+}

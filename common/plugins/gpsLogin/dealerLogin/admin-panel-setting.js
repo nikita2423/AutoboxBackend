@@ -11,4 +11,4 @@ var settings = {
 
 
 //Now adding settings to the main index file..
-$snaphy.addSettings('dealerPanel', settings);
+$snaphy.addSettings('gpsLogin', settings);

@@ -6,7 +6,7 @@
 /*$snaphy*/
 //This is the setting file of the plugin..TO be configured according to the user needs..
 var settings = {
-  "defaultTemplate": false,
+  "defaultTemplate": true,
   "loginName": "Autobox",
   "loginTitle": "Welcome Dealer, please login.",
   "registerTitle": "Please fill the following details to register.",
@@ -19,6 +19,7 @@ var settings = {
   "adminRole": 'admin',
   "employeeRole": "dealer"
 };
+
 
 //Now adding settings to the main index file..
 $snaphy.addSettings('login', settings);

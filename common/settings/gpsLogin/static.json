@@ -1,0 +1,29 @@
+{
+  "css": {
+    "/gpsLogin/style/gpsLogin.css": "gpsLoginCss"
+  },
+  "js": {
+    "/gpsLogin/scripts/routes/gpsLogin.js": "gpsLoginRoute",
+    "/gpsLogin/scripts/controllers/login.js": "gpsLoginController",
+    "/gpsLogin/scripts/directives/gpsLogin.js": "gpsLoginDirective",
+    "/gpsLogin/scripts/services/gpsLogin.js": "gpsLoginService"
+  },
+  "moduleDependencies":{
+    "/static/bower_components/angular-permission/dist/angular-permission.js": "permission"
+  },
+  "settings": ["/gpsLogin/admin-panel-setting.js"],
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [
+      {
+        "path":"views/headerHook.html",
+        "acl":{
+          "allow":[],
+          "reject":[]
+        }
+      }
+    ],
+    "footerHook":[]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "css": {
+    "/gpsPanel/style/gpsPanel.css": "gpsPanelCss"
+  },
+  "js": {
+    "gpsPanel/scripts/routes/gpsPanel.js": "gpsPanelRoute",
+    "gpsPanel/scripts/controllers/gpsPanel.js": "gpsPanelController"
+  },
+  "moduleDependencies":{
+
+  },
+  "settings": ["/gpsPanel/admin-panel-setting.js"],
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [],
+    "footerHook":[]
+  }
+}

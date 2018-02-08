@@ -1,0 +1,18 @@
+{
+  "name": "dealerLogin",
+  "version": "2.0.0",
+  "main": "backend",
+  "description": "To handle the dealer login",
+  "author": "Nikita Mittal",
+  "authorEmail": "nikita@snaphy.com",
+  "dependencies": {
+  },
+  "optionalDependencies": {},
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "devDependencies": {
+
+  }
+}

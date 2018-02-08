@@ -55,6 +55,25 @@
           "class": []
         }
       }
+    },
+    {
+      "routeExposure": "/gps",
+      "state": "gpsPanel",
+      "activate": true,
+      "settings":{
+        "main":{
+          "class":["main-container"]
+        },
+        "header":{
+          "display": true
+        },
+        "asidebar":{
+          "display": false
+        },
+        "container":{
+          "class": []
+        }
+      }
     }
   ]
 }

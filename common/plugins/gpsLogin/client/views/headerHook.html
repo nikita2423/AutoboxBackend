@@ -1,0 +1,20 @@
+<!-- Header Navigation Right -->
+<ul   class="nav-header pull-right">
+    <li>
+        <div class="btn-group">
+            <button class="btn btn-default  dropdown-toggle" data-toggle="dropdown" type="button">
+                Hi, <span ng-bind="user.firstName"> </span> <span ng-bind="user.lastName"></span>
+                <i class="si si-user"></i>
+                <span class="caret"></span>
+
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li class="dropdown-header">Actions</li>
+                <li>
+                    <snaphy-logout></snaphy-logout>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>
+<!-- END Header Navigation Right -->

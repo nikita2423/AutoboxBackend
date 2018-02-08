@@ -5,6 +5,7 @@
   "activate": true,
   "load":{
     "dealerPanel": true,
+    "gpsPanel": false,
     "root": false,
     "school":false
   },

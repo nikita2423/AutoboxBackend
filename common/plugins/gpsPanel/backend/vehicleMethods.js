@@ -10,7 +10,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     var init = function(){
         findAllDealerVehicleMethod();
-        orderGpsTrackerEmail();
+        // orderGpsTrackerEmail();
         getAllTestVehiclesMethod();
     };
 
@@ -95,42 +95,42 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             });
     };
 
-    const orderGpsTrackerEmail = function(){
-        const OrderGpsTracker = databaseObj.OrderGpsTracker;
-        OrderGpsTracker.observe("after save", function(ctx, next){
-            const instance = ctx.instance;
-            const orderGpsTrackerOBj = instance.toJSON();
-            if(ctx.isNewInstance){
-                process.nextTick(function(){
-                    databaseObj.Dealer.findById(orderGpsTrackerOBj.dealerId)
-                        .then(function(dealer){
-                            if(dealer){
-                                orderGpsTrackerOBj.dealer = dealer;
-                            }
-                        })
-                        .then(function(){
-                            //send email
-                            const subject = "New GPS Trackers Order Arrived";
-                            const to = [];
-                            const from = packageObj.from;
-                            to.push("vikram.dangi@hotmail.com");
-                            to.push("info@autoboxapp.in");
-                            emailPlugin.adminEmail.orderingGpsTracker(from, to, subject, orderGpsTrackerOBj, function (err, send) {
-                                if(err){
-                                    server.logger.error(err);
-                                } else{
-                                    server.logger.info("Email send Successfully for Ordering Gps Tracker");
-                                }
-                            });
-                        })
-                        .catch(function(error){
-                            server.logger.error(error);
-                        });
-                });
-            }
-            next();
-        });
-    };
+    // const orderGpsTrackerEmail = function(){
+    //     const OrderGpsTracker = databaseObj.OrderGpsTracker;
+    //     OrderGpsTracker.observe("after save", function(ctx, next){
+    //         const instance = ctx.instance;
+    //         const orderGpsTrackerOBj = instance.toJSON();
+    //         if(ctx.isNewInstance){
+    //             process.nextTick(function(){
+    //                 databaseObj.Dealer.findById(orderGpsTrackerOBj.dealerId)
+    //                     .then(function(dealer){
+    //                         if(dealer){
+    //                             orderGpsTrackerOBj.dealer = dealer;
+    //                         }
+    //                     })
+    //                     .then(function(){
+    //                         //send email
+    //                         const subject = "New GPS Trackers Order Arrived";
+    //                         const to = [];
+    //                         const from = packageObj.from;
+    //                         to.push("vikram.dangi@hotmail.com");
+    //                         to.push("info@autoboxapp.in");
+    //                         emailPlugin.adminEmail.orderingGpsTracker(from, to, subject, orderGpsTrackerOBj, function (err, send) {
+    //                             if(err){
+    //                                 server.logger.error(err);
+    //                             } else{
+    //                                 server.logger.info("Email send Successfully for Ordering Gps Tracker");
+    //                             }
+    //                         });
+    //                     })
+    //                     .catch(function(error){
+    //                         server.logger.error(error);
+    //                     });
+    //             });
+    //         }
+    //         next();
+    //     });
+    // };
 
 
 

@@ -3,62 +3,62 @@
 angular.module($snaphy.getModuleName())
 
 //Controller for dealerPanelControl ..
-.controller('dealerPanelControl', ['$scope', 'HelperService', 'LoginServices', 'InitTableService', '$rootScope', "$timeout", '$state', '$http',
+.controller('gpsPanelControl', ['$scope', 'HelperService', 'LoginServices', 'InitTableService', '$rootScope', "$timeout", '$state', '$http',
     function($scope, HelperService, LoginServices, InitTableService, $rootScope, $timeout, $state, $http) {
         //Checking if default templating feature is enabled..
         var defaultTemplate = $snaphy.loadSettings('dealerPanel', "defaultTemplate");
         $snaphy.setDefaultTemplate(defaultTemplate);
         //Use Database.getDb(pluginName, PluginDatabaseName) to get the Database Resource.
-        $rootScope.settings                 = HelperService.settings.get();
+        $rootScope.settings             = HelperService.settings.get();
         $scope.getActiveTabSettings     = HelperService.getActiveTabSettings;
         $scope.setCurrentState          = HelperService.setCurrentState;
 
 
-        //showroom initializer..
-        $scope.initShowRoom = function () {
-            //fetch data from js
-            $scope.settings.tabs.manageShowroomProfile.data = {};
-            $scope.settings.tabs.manageShowroomProfile.form = {};
-        };
+        // //showroom initializer..
+        // $scope.initShowRoom = function () {
+        //     //fetch data from js
+        //     $scope.settings.tabs.manageShowroomProfile.data = {};
+        //     $scope.settings.tabs.manageShowroomProfile.form = {};
+        // };
 
-        //workshop initializer
-        $scope.initWorkshop = function() {
-            //do something here
-            $scope.settings.tabs.manageWorkshopProfile.data = {};
-            $scope.settings.tabs.manageWorkshopProfile.form = {};
-        };
+        // //workshop initializer
+        // $scope.initWorkshop = function() {
+        //     //do something here
+        //     $scope.settings.tabs.manageWorkshopProfile.data = {};
+        //     $scope.settings.tabs.manageWorkshopProfile.form = {};
+        // };
 
         
-        $scope.quoteReplyInit = function () {
-            $scope.settings.tabs.quoteReply.data = {};
-            $scope.settings.tabs.quoteReply.form = {};
-            $scope.settings.tabs.quoteReply.config.dealerId = "";
-            $scope.settings.tabs.quoteReply.config.customerQuoteId = "";
+        // $scope.quoteReplyInit = function () {
+        //     $scope.settings.tabs.quoteReply.data = {};
+        //     $scope.settings.tabs.quoteReply.form = {};
+        //     $scope.settings.tabs.quoteReply.config.dealerId = "";
+        //     $scope.settings.tabs.quoteReply.config.customerQuoteId = "";
 
-            $scope.settings.tabs.quoteReply.config.customerQuoteId = $state.params.customerQuoteId;
-            $scope.settings.tabs.quoteReply.config.dealerId = $state.params.dealerId;
-            $scope.settings.tabs.quoteReply.displayData($scope.settings.tabs.quoteReply.config.customerQuoteId, $scope.settings.tabs.quoteReply.config.dealerId);
-        };
+        //     $scope.settings.tabs.quoteReply.config.customerQuoteId = $state.params.customerQuoteId;
+        //     $scope.settings.tabs.quoteReply.config.dealerId = $state.params.dealerId;
+        //     $scope.settings.tabs.quoteReply.displayData($scope.settings.tabs.quoteReply.config.customerQuoteId, $scope.settings.tabs.quoteReply.config.dealerId);
+        // };
 
-        $scope.replyCustomerMessageInit = function() {
-            // dealerId: null,  customerMessageId: null, status: null, replyMessage: null
-            $scope.settings.tabs.replyCustomerMessage.data = {
-                id: $state.params.customerMessageId,
-                status:  $state.params.status,
-                replyMessage: $state.params.replyMessage,
-                customerId: $state.params.customerId,
-                dealerId: $state.params.dealerId,
-                customerQuoteId: $state.params.customerQuoteId
-            };
-            $scope.settings.tabs.replyCustomerMessage.form = {};
-            $scope.settings.tabs.replyCustomerMessage.config.dealerId = "";
-            $scope.settings.tabs.replyCustomerMessage.config.customerMessageId = "";
+        // $scope.replyCustomerMessageInit = function() {
+        //     // dealerId: null,  customerMessageId: null, status: null, replyMessage: null
+        //     $scope.settings.tabs.replyCustomerMessage.data = {
+        //         id: $state.params.customerMessageId,
+        //         status:  $state.params.status,
+        //         replyMessage: $state.params.replyMessage,
+        //         customerId: $state.params.customerId,
+        //         dealerId: $state.params.dealerId,
+        //         customerQuoteId: $state.params.customerQuoteId
+        //     };
+        //     $scope.settings.tabs.replyCustomerMessage.form = {};
+        //     $scope.settings.tabs.replyCustomerMessage.config.dealerId = "";
+        //     $scope.settings.tabs.replyCustomerMessage.config.customerMessageId = "";
 
-            $scope.settings.tabs.replyCustomerMessage.config.customerMessageId = $state.params.customerMessageId;
-            $scope.settings.tabs.replyCustomerMessage.config.dealerId = $state.params.dealerId;
-            //Fetch the data from backend..first..
-            $scope.settings.tabs.replyCustomerMessage.initialize();
-        };
+        //     $scope.settings.tabs.replyCustomerMessage.config.customerMessageId = $state.params.customerMessageId;
+        //     $scope.settings.tabs.replyCustomerMessage.config.dealerId = $state.params.dealerId;
+        //     //Fetch the data from backend..first..
+        //     $scope.settings.tabs.replyCustomerMessage.initialize();
+        // };
 
         $scope.initMapView = function(){
             $scope.settings.tabs.trackVehicle.initMap();
