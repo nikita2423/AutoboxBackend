@@ -5,6 +5,7 @@
   "load":{
     "root":true,
     "dealerPanel": false,
+    "gpsPanel": false,
     "school":false
   },
   "loadDatabases": [

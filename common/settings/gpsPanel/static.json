@@ -3,17 +3,44 @@
     "/gpsPanel/style/gpsPanel.css": "gpsPanelCss"
   },
   "js": {
-    "gpsPanel/scripts/routes/gpsPanel.js": "gpsPanelRoute",
-    "gpsPanel/scripts/controllers/gpsPanel.js": "gpsPanelController"
+    "/gpsPanel/scripts/routes/gpsPanel.js": "gpsPanelRoute",
+    "/gpsPanel/scripts/controllers/gpsPanel.js": "gpsPanelController",
+    "/gpsPanel/scripts/directives/gpsPanel.js": "gpsPanelDirectives",
+    "/gpsPanel/scripts/services/helper.js": "HelperServices",
+    "/gpsPanel/style/gpsPanel.css": "gpsPanelCss",
+    "https://maps.googleapis.com/maps/api/js?key=AIzaSyCOUOXq77G1ArjLRa-M1_dmq3-N5uCf00U": "GoogleMapAPI",
+    "/gpsPanel/scripts/gpspanel.run.js": "GpsPanelBootFile"
   },
-  "moduleDependencies":{
-
-  },
-  "settings": ["/gpsPanel/admin-panel-setting.js"],
+  "moduleDependencies": {},
+  "settings": [
+    "/gpsPanel/admin-panel-setting.js"
+  ],
   "bodystructure": {
     "asidebarHook": [],
-    "sidebarHook": [],
-    "headerHook": [],
-    "footerHook":[]
+    "sidebarHook": [
+      {
+        "path": "views/sideBarHook.html",
+        "acl": {
+          "allow": [],
+          "reject": [
+            "admin",
+            "Admin"
+          ]
+        }
+      }
+    ],
+    "headerHook": [
+      {
+        "path": "views/header-hooks.html",
+        "acl": {
+          "allow": [],
+          "reject": [
+            "admin",
+            "Admin"
+          ]
+        }
+      }
+    ],
+    "footerHook": []
   }
 }

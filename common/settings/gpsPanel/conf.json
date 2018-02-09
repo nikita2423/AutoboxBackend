@@ -3,14 +3,24 @@
   "description": "This plugin handles all gpsPanel logic",
   "routeExposure": "/gpsPanel",
   "activate": true,
-  "load":{
+  "load": {
     "gpsPanel": true,
     "dealerPanel": false,
     "root": false,
-    "school":false
+    "school": false
   },
   "from": "Autobox <info@autoboxapp.in>",
-  "loadDatabases":[
+  "loadDatabases": [
+    "Dealer",
+    "Showroom",
+    "Workshop",
+    "CustomerQuote",
+    "QuoteReply",
+    "Feedback",
+    "CustomerMessage",
+    "DealerVehicle",
+    "TrackDealerVehicle",
+    "OrderGpsTracker"
   ],
   "pluginDependencies": {}
 }

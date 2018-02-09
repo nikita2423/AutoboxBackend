@@ -6,6 +6,7 @@
     "/gpsLogin/scripts/routes/gpsLogin.js": "gpsLoginRoute",
     "/gpsLogin/scripts/controllers/login.js": "gpsLoginController",
     "/gpsLogin/scripts/directives/gpsLogin.js": "gpsLoginDirective",
+    "/dealerLogin/scripts/controllers/register.js": "gpsRegisterController",
     "/gpsLogin/scripts/services/gpsLogin.js": "gpsLoginService"
   },
   "moduleDependencies":{

@@ -1,3 +1,12 @@
 {
-    "DealerVehicle": "DealerVehicle"
+    "Workshop":"Workshop",
+    "Showroom": "Showroom",
+    "Dealer": "Dealer",
+    "QuoteReply": "QuoteReply",
+    "Feedback": "Feedback",
+    "CustomerMessage": "CustomerMessage",
+    "CustomerQuote": "CustomerQuote",
+    "DealerVehicle": "DealerVehicle",
+    "TrackDealerVehicle": "TrackDealerVehicle",
+    "OrderGpsTracker": "OrderGpsTracker"
 }

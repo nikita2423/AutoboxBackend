@@ -5,7 +5,8 @@
   "activate": true,
   "load":{
     "root": false,
-    "dealer": false,
+    "dealerPanel": false,
+    "gpsPanel": false,
     "school": true
   },
   "routeExposure": "/schoolLogin",

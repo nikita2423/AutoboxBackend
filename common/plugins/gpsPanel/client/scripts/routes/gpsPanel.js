@@ -15,24 +15,24 @@ angular.module($snaphy.getModuleName())
 
       $stateProvider
         //Provide routes in this way..
-        .state('dashboard', {
-          url: '/gpsPanel',
-          templateUrl: '/gpsPanel/views/dashboard.html',
-          controller: 'gpsPanelControl',
-            //Only allow anonym users here
-            data: {
-                permissions: {
-                    only: [employeeRole],
-                    redirectTo: loginState
-                }
-            }
-        })
+        // .state('dashboard', {
+        //   url: '/gpsPanel',
+        //   templateUrl: '/gpsPanel/views/dashboard.html',
+        //   controller: 'gpsPanelControl',
+        //     //Only allow anonym users here
+        //     data: {
+        //         permissions: {
+        //             only: [employeeRole],
+        //             redirectTo: loginState
+        //         }
+        //     }
+        // })
 
-        // //Provide routes in this way..
+        //Provide routes in this way..
         // .state('monthlyReports', {
         //   url: '/monthlyReports',
-        //   templateUrl: '/dealerPanel/views/dashboard.html',
-        //   controller: 'dealerPanelControl',
+        //   templateUrl: '/gpsPanel/views/dashboard.html',
+        //   controller: 'gpsPanelControl',
         //     //Only allow anonym users here
         //     data: {
         //         permissions: {
@@ -43,11 +43,11 @@ angular.module($snaphy.getModuleName())
         // })
 
 
-        // //Provide routes in this way..
+        //Provide routes in this way..
         // .state('soldViaAutobox', {
         //   url: '/soldViaAutobox',
-        //   templateUrl: '/dealerPanel/views/dashboard.html',
-        //   controller: 'dealerPanelControl',
+        //   templateUrl: '/gpsPanel/views/dashboard.html',
+        //   controller: 'gpsPanelControl',
         //     //Only allow anonym users here
         //     data: {
         //         permissions: {
@@ -60,8 +60,8 @@ angular.module($snaphy.getModuleName())
         // //Provide routes in this way..
         // .state('customerCallMessage', {
         //     url: '/customerCallMessage',
-        //     templateUrl: '/dealerPanel/views/customerCallMessage.html',
-        //     controller: 'dealerPanelControl',
+        //     templateUrl: '/gpsPanel/views/customerCallMessage.html',
+        //     controller: 'gpsPanelControl',
         //       //Only allow anonym users here
         //       data: {
         //           permissions: {
@@ -74,8 +74,8 @@ angular.module($snaphy.getModuleName())
         //   //Provide routes in this way..
         // .state('manageWorkshopProfile', {
         //     url: '/manageWorkshopProfile',
-        //     templateUrl: '/dealerPanel/views/manageProfile.html',
-        //     controller: 'dealerPanelControl',
+        //     templateUrl: '/gpsPanel/views/manageProfile.html',
+        //     controller: 'gpsPanelControl',
         //       //Only allow anonym users here
         //       data: {
         //           permissions: {
@@ -88,8 +88,8 @@ angular.module($snaphy.getModuleName())
         //   //Provide routes in this way..
         // .state('manageShowroomProfile', {
         //     url: '/manageShowroomProfile',
-        //     templateUrl: '/dealerPanel/views/showroom.html',
-        //     controller: 'dealerPanelControl',
+        //     templateUrl: '/gpsPanel/views/showroom.html',
+        //     controller: 'gpsPanelControl',
         //       //Only allow anonym users here
         //       data: {
         //           permissions: {
@@ -102,8 +102,8 @@ angular.module($snaphy.getModuleName())
         //   //Provide routes in this way..
         // .state('orderGPSTracker', {
         //     url: '/orderGPSTracker',
-        //     templateUrl: '/dealerPanel/views/orderPanel.html',
-        //     controller: 'dealerPanelControl',
+        //     templateUrl: '/gpsPanel/views/orderPanel.html',
+        //     controller: 'gpsPanelControl',
         //       //Only allow anonym users here
         //       data: {
         //           permissions: {
@@ -116,8 +116,8 @@ angular.module($snaphy.getModuleName())
         //   //Provide routes in this way..
         // .state('orderDashCamera', {
         //     url: '/orderDashCamera',
-        //     templateUrl: '/dealerPanel/views/orderPanel.html',
-        //     controller: 'dealerPanelControl',
+        //     templateUrl: '/gpsPanel/views/orderPanel.html',
+        //     controller: 'gpsPanelControl',
         //       //Only allow anonym users here
         //       data: {
         //           permissions: {
@@ -129,8 +129,8 @@ angular.module($snaphy.getModuleName())
           
         //   .state('feedback', {
         //     url: '/feedback',
-        //     templateUrl: '/dealerPanel/views/feedback.html',
-        //     controller: 'dealerPanelControl',
+        //     templateUrl: '/gpsPanel/views/feedback.html',
+        //     controller: 'gpsPanelControl',
         //       //Only allow anonym users here
         //       data: {
         //           permissions: {
@@ -141,8 +141,8 @@ angular.module($snaphy.getModuleName())
         //   })
 
         //   .state('dashboard.quoteReply', {
-        //     templateUrl: '/dealerPanel/views/quoteReply.html',
-        //     controller: 'dealerPanelControl',
+        //     templateUrl: '/gpsPanel/views/quoteReply.html',
+        //     controller: 'gpsPanelControl',
         //       params: { dealerId: null,  customerQuoteId: null},
         //       //Only allow anonym users here
         //       data: {
@@ -154,8 +154,8 @@ angular.module($snaphy.getModuleName())
         //   })
 
         //   .state('customerCallMessage.replyToCustomer', {
-        //      templateUrl: '/dealerPanel/views/replyCustomerMessage.html',
-        //       controller: 'dealerPanelControl',
+        //      templateUrl: '/gpsPanel/views/replyCustomerMessage.html',
+        //       controller: 'gpsPanelControl',
         //       params: { dealerId: null,  customerMessageId: null, status: null, replyMessage: null, customerId: null, customerQuoteId: null},
         //       data: {
         //          permissions: {
@@ -167,8 +167,8 @@ angular.module($snaphy.getModuleName())
 
           .state('addDealerVehicle', {
               url: '/addDealerVehicle',
-              templateUrl: '/dealerPanel/views/addVehicle.html',
-              controller: 'dealerPanelControl',
+              templateUrl: '/gpsPanel/views/addVehicle.html',
+              controller: 'gpsPanelControl',
               data: {
                   permissions: {
                       only: [employeeRole],
@@ -179,8 +179,8 @@ angular.module($snaphy.getModuleName())
 
           .state('dealerVehicle', {
               url:'/addDealerVehicle/add',
-              templateUrl: '/dealerPanel/views/dealerVehicle.html',
-              controller: 'dealerPanelControl',
+              templateUrl: '/gpsPanel/views/dealerVehicle.html',
+              controller: 'gpsPanelControl',
               //Only allow anonym users here
               data: {
                   permissions: {
@@ -192,8 +192,8 @@ angular.module($snaphy.getModuleName())
 
           .state('trackVehicle', {
               url: '/trackVehicle',
-              templateUrl: '/dealerPanel/views/trackVehicle.html',
-              controller: 'dealerPanelControl',
+              templateUrl: '/gpsPanel/views/trackVehicle.html',
+              controller: 'gpsPanelControl',
               //Only allow anonym users here
               data: {
                   permissions: {

@@ -1,4 +1,4 @@
-(function(){'use strict';})();
+(function () { 'use strict'; })();
 /*jslint browser: true*/
 /*global $, jQuery, $snaphy, angular, browser, console*/
 
@@ -8,18 +8,18 @@
  */
 var redirectOtherWise = $snaphy.loadSettings('login', 'onLoginRedirectState');
 var notPermittedState = $snaphy.loadSettings('login', '403ErrorPageState');
-var loginState        = $snaphy.loadSettings('login', "loginState");
-var registerState     = $snaphy.loadSettings('login', "registerState");
-var forgotPassState   = $snaphy.loadSettings('login', "forgotPassState");
-var adminRole         = $snaphy.loadSettings('login', "adminRole");
-var employeeRole      = $snaphy.loadSettings('login', "employeeRole");
+var loginState = $snaphy.loadSettings('login', "loginState");
+var registerState = $snaphy.loadSettings('login', "registerState");
+var forgotPassState = $snaphy.loadSettings('login', "forgotPassState");
+var adminRole = $snaphy.loadSettings('login', "adminRole");
+var employeeRole = $snaphy.loadSettings('login', "employeeRole");
 
 angular.module($snaphy.getModuleName())
 
-/**
- Employee Role
- */
-    .run(['Permission', 'LoginServices', '$q', '$rootScope', function (Permission, LoginServices,  $q, $rootScope)  {
+    /**
+     Employee Role
+     */
+    .run(['Permission', 'LoginServices', '$q', '$rootScope', function (Permission, LoginServices, $q, $rootScope) {
 
         LoginServices.addUserDetail.get()
             .then(function (user) {
@@ -34,9 +34,9 @@ angular.module($snaphy.getModuleName())
         Permission.defineRole(employeeRole, function (stateParams) {
             //using promise..
             var deferred = $q.defer();
-            LoginServices.authenticatePage(function(){
+            LoginServices.authenticatePage(function () {
                 deferred.resolve();
-            },function(){
+            }, function () {
                 console.log('Failure getting authorization');
                 deferred.reject();
             });
@@ -64,7 +64,7 @@ angular.module($snaphy.getModuleName())
 
 
             //https://github.com/Narzerus/angular-permission
-            $urlRouterProvider.otherwise( function($injector) {
+            $urlRouterProvider.otherwise(function ($injector) {
                 var $state = $injector.get("$state");
                 $state.go(redirectOtherWise);
             });
@@ -72,7 +72,7 @@ angular.module($snaphy.getModuleName())
 
 
             $stateProvider
-            //Provide routes in this way..
+                //Provide routes in this way..
                 .state(loginState, {
                     url: '/login',
                     templateUrl: '/dealerLogin/views/login.html',
@@ -87,19 +87,19 @@ angular.module($snaphy.getModuleName())
                 })
 
 
-                 //Provide routes in this way..
-                 .state(registerState, {
-                 url: '/register',
-                 templateUrl: '/dealerLogin/views/register.html',
-                 controller: 'registerControl',
-                 //Only allow anonym users here
-                 data: {
-                 permissions: {
-                 only: [adminRole],
-                 redirectTo: notPermittedState
-                 }
-                 }
-                 })
+                //Provide routes in this way..
+                .state(registerState, {
+                    url: '/register',
+                    templateUrl: '/dealerLogin/views/register.html',
+                    controller: 'registerControl',
+                    //Only allow anonym users here
+                    data: {
+                        permissions: {
+                            only: [adminRole],
+                            redirectTo: notPermittedState
+                        }
+                    }
+                })
 
 
                 //Provide routes in this way..

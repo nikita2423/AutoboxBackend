@@ -9,7 +9,7 @@ angular.module($snaphy.getModuleName())
         var defaultTemplate = $snaphy.loadSettings('dealerPanel', "defaultTemplate");
         $snaphy.setDefaultTemplate(defaultTemplate);
         //Use Database.getDb(pluginName, PluginDatabaseName) to get the Database Resource.
-        $rootScope.settings                 = HelperService.settings.get();
+        $rootScope.settings             = HelperService.settings.get();
         $scope.getActiveTabSettings     = HelperService.getActiveTabSettings;
         $scope.setCurrentState          = HelperService.setCurrentState;
 

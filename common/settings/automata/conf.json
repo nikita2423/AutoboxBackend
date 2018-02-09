@@ -6,7 +6,8 @@
   "load":{
     "root": true,
     "dealerPanel": true,
-    "school": true
+    "school": true,
+    "gpsPanel": true
   },
   "routeExposure": "/automata",
   "pluginDependencies": {
