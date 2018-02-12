@@ -55,7 +55,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         rateDealerExperienceMethod();
         findAllQuoteMessageMethod();
         updateSosDataMethod();
-
+        updateVehicleDetailMethod();
 
     };
 
@@ -1051,12 +1051,49 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 },
                 {
                     arg: "sosObj", type: "object"
-                },
+                }
             ],
             returns: {
                 arg: "sosObj", type: "Sos", root: true
             }
         })
+    };
+
+    const updateVehicleDetailMethod = function(){
+        const VehicleDetail = databaseObj.VehicleDetail;
+        VehicleDetail.updateVehicleDetail = updateVehicleDetail;
+        VehicleDetail.remoteMethod('updateVehicleDetail', {
+            accepts:[
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "vehicleDetailObj", type: "object"
+                }
+            ],
+            returns: {
+                arg: "vehicleDetailObj", type: "VehicleDetail", root : true
+            }
+        })
+    };
+
+
+    const updateVehicleDetail = function(ctx, vehicleDetailObj, callback){
+        const request = ctx.req;
+        const VehicleDetail = databaseObj.VehicleDetail;
+        VehicleDetail.upsert(vehicleDetailObj)
+            .then(function(vehicleDetail){
+                if(vehicleDetail){
+                    callback(null, vehicleDetail);
+                }
+            })
+            .catch(function(error){
+                callback(error);
+            })
     };
 
 

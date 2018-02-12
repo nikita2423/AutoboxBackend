@@ -1,16 +1,16 @@
 
-<div class="container" ng-init="init(); initMapView();initTestVehicle();">
+<div class="container gpsContainer" ng-init="init(); initMapView();initTestVehicle();">
 
 
     <div class="row" style="margin-top: 10px;margin-right: 100px" >
-        <div class="col-md-2 col-lg-2 col-xs-6" ng-repeat="vehicleInstance in settings.tabs.trackVehicle.data">
+        <div class="col-md-2 col-lg-2 col-xs-6" style="padding: 3px !important;" ng-repeat="vehicleInstance in settings.tabs.trackVehicle.data">
             <div
                     ng-if="$first"
                     ng-init="vehicleInstance.selectVehicle()"
                     ng-class="{'label-primary': vehicleInstance.isSelected, 'onVehicleSelected': vehicleInstance.isSelected}"
                     class="thumbnail"
                     ng-click="vehicleInstance.selectVehicle()">
-                        <h4>{{vehicleInstance.getVehicle().serialNumber}}</h4>
+                        <h4>{{vehicleInstance.getVehicle().modelName}}</h4>
                         <h5>{{vehicleInstance.getVehicle().registerNumber}}</h5>
             </div>
             <div
@@ -18,7 +18,7 @@
                     ng-class="{'label-primary': vehicleInstance.isSelected, 'onVehicleSelected': vehicleInstance.isSelected}"
                     class="thumbnail"
                     ng-click="vehicleInstance.selectVehicle()">
-                <h4>{{vehicleInstance.getVehicle().serialNumber}}</h4>
+                <h4>{{vehicleInstance.getVehicle().modelName}}</h4>
                 <h5>{{vehicleInstance.getVehicle().registerNumber}}</h5>
             </div>
         </div>

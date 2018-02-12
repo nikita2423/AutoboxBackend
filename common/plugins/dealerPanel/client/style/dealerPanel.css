@@ -9,9 +9,13 @@
 }
 
 #main-container {
-    padding-bottom: 30px;
+    padding-bottom: 0px;
     padding-top: 35px !important;
     background-color: #FFF !important;
+}
+
+.gpsContainer {
+    padding: 0px !important;
 }
 
 .labelDashboard {
@@ -221,6 +225,7 @@ header > ul > li > button {
 .thumbnail{
     text-align: center;
     cursor: pointer;
+    margin-bottom: 1px !important;
 }
 
 
@@ -247,11 +252,18 @@ h3 img {
 /**--------------------MAP DESIGN CLASSS FOR FILENAME ------ **/
 
 #map {
-    height: 600px;
-    margin: 20px 0;
+    min-height: 600px;
+    margin: 0px;
+
+  /*  margin: 20px 0;
     border-radius: 5px;
-    border: 1px solid silver;
+    border: 1px solid silver;*/
 }
+
+#page-footer{
+    padding: 0px;
+}
+
 
 
 

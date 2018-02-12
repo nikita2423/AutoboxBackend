@@ -538,7 +538,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const onVehicleAddNotification = function(){
         const VehicleDetail = databaseObj.VehicleDetail;
         VehicleDetail.observe("after save", function(ctx, next){
-            const instance = ctx.instance;
+            const instance = ctx.instance || ctx.data;
             const vehicleDetailObj = instance.toJSON();
             if(ctx.isNewInstance){
               process.nextTick(function(){
