@@ -136,14 +136,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         } else{
             const DealerVehicle = databaseObj.DealerVehicle;
             const TrackDealerVehicle = databaseObj.TrackDealerVehicle;
-            console.log("TrackVehicleSerialNumber", trackDealerVehicleObj.deviceIMEI);
+            //console.log("TrackVehicleSerialNumber", trackDealerVehicleObj.deviceIMEI);
             DealerVehicle.findOne({
                 where: {
                     serialNumber : trackDealerVehicleObj.deviceIMEI
                 }
             })
                 .then(function(dealerVehicle){
-                    console.log("DealerVehicle", dealerVehicle);
+                    //console.log("DealerVehicle", dealerVehicle);
                     if(dealerVehicle){
                         return TrackDealerVehicle.create({
                             deviceIMEI : trackDealerVehicleObj.deviceIMEI,
