@@ -138,7 +138,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             const TrackDealerVehicle = databaseObj.TrackDealerVehicle;
             DealerVehicle.findOne({
                 where: {
-                    deviceIMEI : trackDealerVehicleObj.deviceIMEI
+                    serialNumber : trackDealerVehicleObj.deviceIMEI
                 }
             })
                 .then(function(dealerVehicle){
