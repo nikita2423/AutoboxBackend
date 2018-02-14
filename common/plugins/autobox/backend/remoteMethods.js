@@ -1828,6 +1828,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             lt: lastDate
                         }
                     },
+                    order: "added DESC",
                     include: ["brand", "areas", "cities"]
                 })
                     .then(function(workshopList){
