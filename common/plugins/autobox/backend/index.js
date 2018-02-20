@@ -28,6 +28,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const nightLockMethods = require("./nightLockMethods")(server, databaseObj, helper, packageObj);
     const geoFenceVehicleMethods = require("./geoFenceVehicleMethods")(server, databaseObj, helper, packageObj);
     const preBookVehicleMethods = require("./preBookVehicleMethods")(server, databaseObj, helper, packageObj);
+    const buyTyreMethods = require("./buyTyreMethods")(server, databaseObj, helper, packageObj);
     var speakeasy          = require("speakeasy");
     var moment             = require("moment");
     const SendOtp          = require('sendotp');
@@ -54,6 +55,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         nightLockMethods.init();
         geoFenceVehicleMethods.init();
         preBookVehicleMethods.init();
+        buyTyreMethods.init();
 	};
 
 

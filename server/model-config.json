@@ -363,5 +363,13 @@
   "PreVehicleBooking": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "Tyre": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "BuyTyre": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

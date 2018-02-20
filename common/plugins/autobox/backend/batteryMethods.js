@@ -118,7 +118,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
             next();
         })
-    }
+    };
 
     return {
         init: init
