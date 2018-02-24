@@ -2014,6 +2014,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                        })
                        .catch(function(error){
                            callback(error);
+                           console.log(error);
                        })
                 } else{
                     callback(new Error("User not valid"));
@@ -2092,6 +2093,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                       })
                       .catch(function(error){
                           callback(error);
+                          console.log(error);
                       })
               } else{
                   callback(new Error("User not valid"));

@@ -73,6 +73,12 @@
         "label": "Pre Book Vehicle",
         "templatePath": "../../plugins/autobox/backend/email/admin/pre_book_vehicle.ejs",
         "display": false
+      },
+      "buyTyreEmail": {
+        "name": "buyTyre",
+        "label": "Buy Tyre",
+        "templatePath": "../../plugins/autobox/backend/email/admin/buy_tyre.ejs",
+        "display": false
       }
     }
   }],

@@ -41,4 +41,6 @@ angular.module($snaphy.getModuleName())
             $rootScope.$broadcast("modelHasBeenLoaded", args_);
         });
 
+
+
     }]);

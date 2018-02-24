@@ -299,7 +299,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                            oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.mitsubishi ||
                            oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.skoda ||
                            oldTradeVehicleObj.brand.name === packageObj.oldTradeBrand.volkswagen){
-                           to.push("sales@autoboxapp.in");
+                           to.push("sitaram.ankilla@truebil.com");
                            //to.push(packageObj.tradeSpecificBrandEmail2);
                        } else{
                            to.push("sales@autoboxapp.in");

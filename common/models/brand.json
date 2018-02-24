@@ -73,6 +73,18 @@
     "updated": {
       "type": "date",
       "defaultFn": "now"
+    },
+    "roadAssistanceNumber": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Road Assistance Number",
+          "id": "roadAssistanceNumber"
+        }
+      }
     }
   },
   "validations": [],

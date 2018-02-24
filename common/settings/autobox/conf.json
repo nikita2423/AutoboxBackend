@@ -26,7 +26,8 @@
     "subject_add_old_vehicle": "New Old Trade Car Arrived",
     "sell_vehicle_subject": "New Sell Vehicle Request Arrived",
     "battery_request_subject": "New Battery Request Arrived",
-    "pre_book_vehicle_request": "New Vehicle Booking Arrived"
+    "pre_book_vehicle_request": "New Vehicle Booking Arrived",
+    "tyre_request_subject": "New Tyre Request Arrived"
   },
   "dealer": {
     "subject_customer_quote": "AutoBox - New Quote Request Arrived !"

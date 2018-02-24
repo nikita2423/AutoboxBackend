@@ -5,8 +5,12 @@
 
 module.exports = function( server, databaseObj, helper, packageObj) {
 
+    const process = require("process");
+    const emailPlugin = helper.loadPlugin("email");
+
     var init = function(){
         buyTyreMethod();
+        sendBuyTyreEmailToAdmin();
     };
 
     const buyTyreMethod = function(){
@@ -74,6 +78,47 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
         }
     };
+
+
+    const sendBuyTyreEmailToAdmin = function(){
+        const BuyTyre = databaseObj.BuyTyre;
+        BuyTyre.observe("after save", function(ctx, next){
+            if(ctx.isNewInstance){
+                const instance = ctx.instance;
+                const buyTyreObj = instance.toJSON();
+                process.nextTick(function(){
+                    databaseObj.Customer.findById(buyTyreObj.customerId)
+                        .then(function(customer){
+                            buyTyreObj.customer = customer;
+                            return databaseObj.VehicleInfo.findById(buyTyreObj.vehicleInfoId);
+                        })
+                        .then(function(vehicleInfo){
+                            if(vehicleInfo){
+                                buyTyreObj.vehicleInfo = vehicleInfo;
+                            }
+                        })
+                        .then(function(){
+                            const subject = packageObj.admin.tyre_request_subject;
+                            const to = [];
+                            const from = packageObj.from;
+                            to.push("sales@autoboxapp.in");
+                            to.push("info@autoboxapp.in");
+                            emailPlugin.adminEmail.buyTyreEmail(from, to, subject, buyTyreObj, function (err, send) {
+                                if(err){
+                                    console.log(err);
+                                } else{
+                                    console.log("Email send Successfully for Tyre to admin");
+                                }
+                            });
+                        })
+                        .catch(function(error){
+                            console.log(error);
+                        });
+                });
+            }
+            next();
+        });
+    }
 
     return {
         init: init
