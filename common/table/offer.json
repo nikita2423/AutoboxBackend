@@ -74,6 +74,9 @@
     "brand_name": {
       "display": false
     },
+    "brand_roadAssistanceNumber": {
+      "display": false
+    },
     "brand_status": {
       "display": false
     },

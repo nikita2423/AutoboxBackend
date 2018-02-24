@@ -81,6 +81,9 @@
     "brand_image": {
       "display": false
     },
+    "brand_roadAssistanceNumber": {
+      "display": false
+    },
     "showroom_added": {
       "display": false
     },

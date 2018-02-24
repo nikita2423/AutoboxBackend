@@ -123,6 +123,9 @@
     "brand_added": {
       "display": false
     },
+    "brand_roadAssistanceNumber": {
+      "display": false
+    },
     "trim_added": {
       "display": false
     },

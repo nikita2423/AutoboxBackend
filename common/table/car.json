@@ -74,6 +74,9 @@
     "brand_added": {
       "display": false
     },
+    "brand_roadAssistanceNumber": {
+      "display": false
+    },
     "carModel_name": {
       "label": "Model",
       "search": "related",

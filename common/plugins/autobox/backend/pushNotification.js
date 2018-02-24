@@ -837,7 +837,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             skip: skip,
             limit : limit,
             where : {
-                cityId: cityId,
                 brandId: brandId
             }
         };
