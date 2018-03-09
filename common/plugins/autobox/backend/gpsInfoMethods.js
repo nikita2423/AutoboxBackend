@@ -5,6 +5,8 @@
 module.exports = function( server, databaseObj, helper, packageObj) {
 
     const async = require("async");
+    const process = require("process");
+    const send = helper.loadPlugin("smsService");
 
     var init = function(){
         createGpsPacketDataMethod();
@@ -17,7 +19,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         fetchGpsNotificationDataMethod();
         updateGpsNotificationDataMethod();
         resetGpsTrackerInfoPinMethod();
-
+        findGpsPacketDataMethod();
+        sendGpsActivationSms();
     };
 
     const createGpsPacketDataMethod = function(){
@@ -247,6 +250,28 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             ],
             returns: {
                 arg: 'response', type: 'object', root : true
+            }
+        });
+    };
+
+    const findGpsPacketDataMethod = function(){
+        const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+        GpsTrackerInfo.findGpsPacketData = findGpsPacketData;
+        GpsTrackerInfo.remoteMethod('findGpsPacketData', {
+            accepts:[
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "deviceIMEI", type: "string"
+                }
+            ],
+            returns:{
+                arg:'response', type: 'object', root:true
             }
         });
     };
@@ -818,6 +843,66 @@ module.exports = function( server, databaseObj, helper, packageObj) {
    };
 
 
+   const findGpsPacketData = function(ctx, deviceIMEI, callback){
+       const request = ctx.req;
+       const GpsPacketData = databaseObj.GpsPacketData;
+       if(!deviceIMEI){
+           callback(new Error("Invalid Arguments"));
+       } else{
+           if(request){
+               if(request.accessToken){
+                   if(request.accessToken.userId){
+                       GpsPacketData.findOne({
+                           where: {
+                               deviceIMEI : deviceIMEI
+                           }
+                       })
+                           .then(function(gpsPacketData){
+                               if(gpsPacketData){
+                                   callback(null, {response:"present"});
+                               } else{
+                                   callback(null, {response: "notpresent"});
+                               }
+                           })
+                           .catch(function(error){
+                               callback(error);
+                           })
+                   } else{
+                       callback(new Error("User not valid"));
+                   }
+               } else{
+                   callback(new Error("User not valid"));
+               }
+           } else{
+               callback(new Error("User not valid"));
+           }
+       }
+   };
+
+
+   const sendGpsActivationSms = function(){
+       const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+       GpsTrackerInfo.observe("after save", function(ctx, next){
+           if(ctx.isNewInstance){
+               const instance = ctx.instance || ctx.data;
+               const gpsTrackerObj = instance.toJSON();
+               process.nextTick(function(){
+                   const serialNumber = gpsTrackerObj.deviceIMEI;
+                   const simNumber = gpsTrackerObj.gpsTrackerSimNumber;
+                   const message = "set$" + serialNumber + "@aquilla123#CFG_GPRS:www,,,13.250.171.3,1337*"
+                   send.send(message, simNumber, function(error){
+                       if(error){
+                           logger.error(error);
+                       } else{
+                           logger.info("Gps Request send successfully");
+                       }
+                   })
+               })
+           }
+           next();
+
+       })
+   };
 
 
 

@@ -46,6 +46,13 @@
       "required": true,
       "defaultFn": "now"
     },
+    "overSpeedingLimit": {
+      "type": "string"
+    },
+    "gpsActivated": {
+      "type": "string",
+      "default": "notactivated"
+    },
     "gpsTrackerNotification": {
       "type": "object",
       "required": false,
@@ -95,6 +102,11 @@
             },
             {
               "key": "engineOn",
+              "type": "input",
+              "default": "on"
+            },
+            {
+              "key": "geoFence",
               "type": "input",
               "default": "on"
             }

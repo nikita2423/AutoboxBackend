@@ -2916,8 +2916,17 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                               filter.customerId = customerId;
                           }
                       }
-
-                      filter.include = ["workshop", "serviceType"];
+                      filter.include = [
+                          {
+                              relation: "workshop",
+                              scope: {
+                                  include: ["areas"]
+                              }
+                          },
+                          {
+                              relation: "serviceType"
+                          }
+                      ]
                   }
 
                   const ServiceHistory = databaseObj.ServiceHistory;

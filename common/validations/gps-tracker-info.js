@@ -31,10 +31,10 @@ module.exports = function(Gpstrackerinfo, server, helper) {
                 accidentDetection: "on",
                 nightLock: "off",
                 engineOff: "on",
-                engineOn: "on"
+                engineOn: "on",
+                geoFence: "on"
             };
         }
-
 
         next();
 
