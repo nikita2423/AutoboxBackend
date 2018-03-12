@@ -890,7 +890,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                process.nextTick(function(){
                    const serialNumber = gpsTrackerObj.deviceIMEI;
                    const simNumber = "+91" + gpsTrackerObj.gpsTrackerSimNumber;
-                   const message = "set$" + serialNumber + "@aquilla123#CFG_GPRS:www,,,13.250.171.3,1337*"
+                   const message = "set$" + serialNumber + "@aquilla123%23CFG_GPRS:www,,,13.250.171.3,1337*"
                    send.send(message, simNumber, function(error){
                        if(error){
                            server.logger.error(error);
@@ -938,7 +938,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                  if(request.accessToken.userId){
                      const serialNumber = gpsTrackerInfo.deviceIMEI;
                      const simNumber = "+91" + gpsTrackerInfo.gpsTrackerSimNumber;
-                     const message = "set$" + serialNumber + "@aquilla123#CFG_GPRS:www,,,13.250.171.3,1337*"
+                     const message = "set$" + serialNumber + "@aquilla123%23CFG_GPRS:www,,,13.250.171.3,1337*"
                      send.send(message, simNumber, function(error){
                          if(error){
                              server.logger.error(error);
