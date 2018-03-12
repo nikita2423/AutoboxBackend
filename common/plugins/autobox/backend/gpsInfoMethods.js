@@ -21,6 +21,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         resetGpsTrackerInfoPinMethod();
         findGpsPacketDataMethod();
         sendGpsActivationSms();
+        resendGpsActivationSmsMethod();
     };
 
     const createGpsPacketDataMethod = function(){
@@ -888,13 +889,13 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                const gpsTrackerObj = instance.toJSON();
                process.nextTick(function(){
                    const serialNumber = gpsTrackerObj.deviceIMEI;
-                   const simNumber = gpsTrackerObj.gpsTrackerSimNumber;
+                   const simNumber = "+91" + gpsTrackerObj.gpsTrackerSimNumber;
                    const message = "set$" + serialNumber + "@aquilla123#CFG_GPRS:www,,,13.250.171.3,1337*"
                    send.send(message, simNumber, function(error){
                        if(error){
-                           logger.error(error);
+                           server.logger.error(error);
                        } else{
-                           logger.info("Gps Request send successfully");
+                           server.logger.info("Gps Request send successfully");
                        }
                    })
                })
@@ -902,6 +903,61 @@ module.exports = function( server, databaseObj, helper, packageObj) {
            next();
 
        })
+   };
+
+   const resendGpsActivationSmsMethod = function(){
+       const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+       GpsTrackerInfo.resendGpsActivationSms = resendGpsActivationSms;
+       GpsTrackerInfo.remoteMethod('resendGpsActivationSms', {
+           accepts:[
+               {
+                   arg: 'ctx',
+                   type: 'object',
+                   http: {
+                       source: 'context'
+                   }
+               },
+               {
+                   arg: 'gpsTrackerInfoObj', type:'object'
+               }
+           ],
+           returns:{
+               arg: "response", type: "object", root: true
+           }
+       });
+   };
+
+
+   const resendGpsActivationSms = function(ctx, gpsTrackerInfo, callback){
+     const request = ctx.req;
+     if(!gpsTrackerInfo){
+         callback(new Error("Invalid Arguments"));
+     } else{
+         if(request){
+             if(request.accessToken){
+                 if(request.accessToken.userId){
+                     const serialNumber = gpsTrackerInfo.deviceIMEI;
+                     const simNumber = "+91" + gpsTrackerInfo.gpsTrackerSimNumber;
+                     const message = "set$" + serialNumber + "@aquilla123#CFG_GPRS:www,,,13.250.171.3,1337*"
+                     send.send(message, simNumber, function(error){
+                         if(error){
+                             server.logger.error(error);
+                             callback(error);
+                         } else{
+                             server.logger.info("Gps Request send successfully");
+                             callback(null, {response:"success"});
+                         }
+                     })
+                 } else{
+                     callback(new Error("User not valid"));
+                 }
+             } else{
+                 callback(new Error("User not valid"));
+             }
+         } else{
+             callback(new Error("User not valid"));
+         }
+     }
    };
 
 
