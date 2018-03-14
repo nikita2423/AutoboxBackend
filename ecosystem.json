@@ -19,7 +19,7 @@
       "ref"  : "origin/master",
       "repo" : "git@bitbucket.org:autobox217/autoboxbackend.git",
       "path" : "/home/ubuntu/production",
-      "post-deploy" : "git submodule update --init --recursive; git submodule init; git submodule update; npm install;  sudo apt-get install imageMagick; pm2 startOrRestart ecosystem.json --env production"
+      "post-deploy" : "git submodule update --init --recursive; git submodule init; git submodule update; npm install;  sudo apt-get install imagemagick; pm2 startOrRestart ecosystem.json --env production"
     }
   }
 }
