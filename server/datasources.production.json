@@ -10,7 +10,7 @@
     "connector": "loopback-component-storage"
   },
   "mongodb": {
-    "host": "127.0.0.1",
+    "host": "52.221.154.147",
     "port": 27017,
     "database": "autobox",
     "password": "autobox_admin_2017",
