@@ -50,4 +50,7 @@
 [submodule "common/plugin/fileUpload"]
 	path = common/plugin/fileUpload
 	url = https://github.com/snaphy-plugin-2/fileUpload.git
+[submodule "common/plugin/pushService"]
+	path = common/plugin/pushService
+	url = https://github.com/snaphy-plugin-2/pushService.git
 
