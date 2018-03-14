@@ -79,6 +79,12 @@
         "label": "Buy Tyre",
         "templatePath": "../../plugins/autobox/backend/email/admin/buy_tyre.ejs",
         "display": false
+      },
+      "insuranceRenewalEmail": {
+        "name": "insuranceRenewalEmail",
+        "label": "Insurance Renewal",
+        "templatePath": "../../plugins/autobox/backend/email/admin/insurance_renewal.ejs",
+        "display": false
       }
     }
   }],

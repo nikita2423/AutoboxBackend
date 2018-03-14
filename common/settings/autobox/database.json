@@ -30,6 +30,8 @@
   "GpsPacketData": "GpsPacketData",
   "GpsTrackerInfo": "GpsTrackerInfo",
   "Insurance": "Insurance",
+  "InsuranceRenewal": "InsuranceRenewal",
+  "InsuranceRenewalConfirmation": "InsuranceRenewalConfirmation",
   "Offer": "Offer",
   "OfferQuery": "OfferQuery",
   "OldTradeCar": "OldTradeCar",

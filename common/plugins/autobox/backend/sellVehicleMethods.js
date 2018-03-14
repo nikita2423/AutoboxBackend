@@ -11,6 +11,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     var init = function(){
         sellYourVehicleMethod();
         sendSellVehicleEmailToAdminMethod();
+        createInsuranceRenewalMethod();
+        createInsuranceRenewalConfirmationMethod();
+        sendInsuranceConfirmationEmail();
     };
 
 
@@ -39,6 +42,58 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         });
     };
 
+    const createInsuranceRenewalMethod = function(){
+        const InsuranceRenewal = databaseObj.InsuranceRenewal;
+        InsuranceRenewal.createInsuranceRenewal = createInsuranceRenewal;
+        InsuranceRenewal.remoteMethod("createInsuranceRenewal", {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "insuranceRenewalObj", type:"object"
+                }
+            ],
+            returns: {
+                arg: "insuranceRenewalObj", type: "InsuranceRenewal", root: true
+            }
+        });
+    };
+
+    const createInsuranceRenewalConfirmationMethod = function(){
+        const InsuranceRenewalConfirmation = databaseObj.InsuranceRenewalConfirmation;
+        InsuranceRenewalConfirmation.createInsuranceRenewalConfirmation = createInsuranceRenewalConfirmation;
+        InsuranceRenewalConfirmation.remoteMethod("createInsuranceRenewalConfirmation", {
+            accepts:[
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "insuranceRenewalId", type: "string"
+                }
+            ],
+            returns: {
+                arg: "response", type: "object", root: true
+            }
+        });
+
+    };
+
+    /**
+     * Use to send the request for sell vehicle..
+     * @param ctx
+     * @param vehicleInfoObj
+     * @param sellVehicleObj
+     * @param callback
+     */
     const sellYourVehicle = function(ctx, vehicleInfoObj, sellVehicleObj, callback){
         const request = ctx.req;
         let vehicleInfoInstance;
@@ -128,6 +183,133 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             next();
         });
     };
+
+    /**
+     * Use to create Insurance Renewal for vehicle
+     * @param ctx
+     * @param insuranceRenewalObj
+     * @param callback
+     */
+    const createInsuranceRenewal = function(ctx, insuranceRenewalObj, callback){
+        const request = ctx.req;
+        const InsuranceRenewal = databaseObj.InsuranceRenewal;
+        if(!insuranceRenewalObj){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request){
+                if(request.accessToken){
+                    if(request.accessToken.userId){
+                        const customerId = request.accessToken.userId;
+                        InsuranceRenewal.create({
+                            yearOfPurchase : insuranceRenewalObj.yearOfPurchase,
+                            typeOfInsurance : insuranceRenewalObj.typeOfInsurance,
+                            noClaimBonus : insuranceRenewalObj.noClaimBonus,
+                            carModelId : insuranceRenewalObj.carModelId,
+                            vehicleDetailId : insuranceRenewalObj.vehicleDetailId,
+                            customerId : customerId,
+                            modelName : insuranceRenewalObj.modelName
+                        })
+                            .then(function(insuranceRenewal){
+                                if(insuranceRenewal){
+                                    callback(null, insuranceRenewal);
+                                }
+                            })
+                            .catch(function(error){
+                                callback(error);
+                            });
+                    } else{
+                        callback(new Error("User not valid"));
+                    }
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
+
+    /**
+     * Use to send the request for insurance renewal confirmation
+     * @param ctx
+     * @param insuranceRenewalId
+     * @param callback
+     */
+    const createInsuranceRenewalConfirmation = function(ctx, insuranceRenewalId, callback){
+        const request = ctx.req;
+        if(!insuranceRenewalId){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request){
+                if(request.accessToken){
+                    if(request.accessToken.userId){
+                        const customerId = request.accessToken.userId;
+                        const InsuranceRenewalConfirmation = databaseObj.InsuranceRenewalConfirmation;
+                        InsuranceRenewalConfirmation.create({
+                            insuranceRenewalId : insuranceRenewalId,
+                            customerId : customerId
+                        })
+                            .then(function(insuranceRenewalConfirmation){
+                                if(insuranceRenewalConfirmation){
+                                    //send Email
+                                    callback(null, insuranceRenewalConfirmation);
+                                }
+                            })
+                            .catch(function(error){
+                                callback(error);
+                            });
+                    } else{
+                        callback(new Error("User not valid"));
+                    }
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
+
+
+    const sendInsuranceConfirmationEmail = function(){
+        const InsuranceRenewalConfirmation = databaseObj.InsuranceRenewalConfirmation;
+        InsuranceRenewalConfirmation.observe("before save", function(ctx, next){
+            if(ctx.isNewInstance){
+                const instance = ctx.instance || ctx.data;
+                const insuranceRenewalConfirmObj = instance.toJSON();
+                process.nextTick(function(){
+                    databaseObj.InsuranceRenewal.findById(insuranceRenewalConfirmObj.insuranceRenewalId)
+                        .then(function(insuranceRenewal){
+                            if(insuranceRenewal){
+                                insuranceRenewalConfirmObj.insuranceRenewal = insuranceRenewal;
+                            }
+                            return databaseObj.Customer.findById(insuranceRenewalConfirmObj.customerId);
+                        })
+                        .then(function(customer){
+                            if(customer){
+                                insuranceRenewalConfirmObj.customer = customer;
+                            }
+                        })
+                        .then(function(){
+                            const subject = packageObj.admin.insurance_renewal_request_arrived;
+                            const to = [];
+                            const from = packageObj.from;
+                            to.push("sales@autoboxapp.in");
+                            emailPlugin.adminEmail.insuranceRenewalEmail(from, to, subject, insuranceRenewalConfirmObj, function (err, send) {
+                                if(err){
+                                    console.log(err);
+                                } else{
+                                    console.log("Email send Successfully for Insurance Renewal to admin");
+                                }
+                            });
+                        });
+                });
+            }
+            next();
+        });
+    };
+
+
 
     return {
         init: init

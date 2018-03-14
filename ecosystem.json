@@ -14,7 +14,7 @@
   "deploy" : {
     "production" : {
       "user" : "ubuntu",
-      "host" : "52.221.154.147",
+      "host" : "13.250.171.3",
       "key"  : "credentials/autobox.pem",
       "ref"  : "origin/master",
       "repo" : "git@bitbucket.org:autobox217/autoboxbackend.git",

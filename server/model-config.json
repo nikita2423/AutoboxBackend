@@ -371,5 +371,13 @@
   "BuyTyre": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "InsuranceRenewal": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "InsuranceRenewalConfirmation": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

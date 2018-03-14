@@ -1,0 +1,42 @@
+{
+  "name": "InsuranceRenewal",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "yearOfPurchase": {
+      "type": "string"
+    },
+    "typeOfInsurance": {
+      "type": "string"
+    },
+    "noClaimBonus": {
+      "type": "string"
+    },
+    "modelName": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "carModel": {
+      "type": "belongsTo",
+      "model": "CarModel",
+      "foreignKey": ""
+    },
+    "vehicleDetail": {
+      "type": "belongsTo",
+      "model": "VehicleDetail",
+      "foreignKey": ""
+    },
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
