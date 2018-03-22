@@ -127,6 +127,9 @@
           }
         }
       }
+    },
+    "yearOfPurchase":{
+      "type": "number"
     }
   },
   "validations": [],

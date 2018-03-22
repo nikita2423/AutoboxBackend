@@ -56,6 +56,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         findAllQuoteMessageMethod();
         updateSosDataMethod();
         updateVehicleDetailMethod();
+        fetchShowroomForCityMethod();
+        fetchWorkshopForCityMethod();
 
     };
 
@@ -2003,6 +2005,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                    vehicleInfoId : vehicleInfoId,
                                    insuranceId: insuranceId,
                                    status: "active",
+                                   yearOfPurchase : vehicleDetailObj.yearOfPurchase,
                                    vehicleType: "new"
                                });
                            }
@@ -2081,6 +2084,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                   customerId: customerId,
                                   vehicleInfoId : vehicleInfoId,
                                   insuranceId : insuranceId,
+                                  yearOfPurchase : vehicleDetailObj.yearOfPurchase,
                                   status: "active",
                                   vehicleType: "existing"
                               })
@@ -3582,6 +3586,195 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
         }
     };
+
+
+    const fetchShowroomForCityMethod = function(){
+        const Showroom = databaseObj.Showroom;
+        Showroom.fetchShowroomForCity = fetchShowroomForCity;
+        Showroom.remoteMethod("fetchShowroomForCity", {
+            accepts:[
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: 'brandId', type:"string"
+                },
+                {
+                    arg: 'cityId', type: "string"
+                },
+                {
+                    arg: 'limit', type: 'number'
+                },
+                {
+                    arg: 'skip', type: 'number'
+                }
+            ],
+            returns:{
+                arg: 'showroomList', type:['Showroom'], root : true
+            }
+        })
+    };
+
+    /**
+     * Fetching Showroom According to city
+     * @param ctx
+     * @param brandId
+     * @param cityId
+     * @param limit
+     * @param skip
+     * @param callback
+     */
+    const fetchShowroomForCity = function(ctx, brandId, cityId, limit, skip, callback){
+        const request = ctx.req;
+        const City = databaseObj.City;
+        if(!brandId || !cityId){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request){
+                if(request.accessToken){
+                    if(request.accessToken.userId){
+                        City.find({
+                            where: {
+                                id : cityId
+                            },
+                            include:{
+                                relation: 'showrooms',
+                                scope:{
+                                    where:{
+                                        brandId: brandId
+                                    },
+                                    include:['areas', 'brand']
+                                }
+                            }
+                        })
+                            .then(function(city){
+                                if(city){
+                                    if(city.length){
+                                        if(city[0].showrooms()){
+                                            if(city[0].showrooms().length){
+                                                callback(null, city[0].showrooms());
+                                            } else{
+                                                callback(null,[]);
+                                            }
+                                        } else{
+                                            callback(null,[]);
+                                        }
+                                    } else{
+                                        callback(null,[]);
+                                    }
+                                } else{
+                                    callback(null,[]);
+                                }
+                            })
+                            .catch(function(error){
+                                callback(error);
+                            })
+                    } else{
+                        callback(new Error("User not valid"));
+                    }
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
+
+    const fetchWorkshopForCityMethod = function(){
+        const Workshop = databaseObj.Workshop;
+        Workshop.fetchWorkshopForCity = fetchWorkshopForCity;
+        Workshop.remoteMethod('fetchWorkshopForCity', {
+            accepts:[
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: 'brandId', type:"string"
+                },
+                {
+                    arg: 'cityId', type: "string"
+                },
+                {
+                    arg: 'limit', type: 'number'
+                },
+                {
+                    arg: 'skip', type: 'number'
+                }
+            ],
+            returns:{
+                arg: 'workshopList', type:['Workshop'], root : true
+            }
+        })
+    };
+
+
+    const fetchWorkshopForCity = function(ctx, brandId, cityId, limit, skip, callback){
+        const request = ctx.req;
+        const City = databaseObj.City;
+        if(!brandId || !cityId){
+            callback(new Error("Invalid Arguments"));
+        } else{
+            if(request){
+                if(request.accessToken){
+                    if(request.accessToken.userId){
+                        City.find({
+                            where: {
+                                id : cityId
+                            },
+                            include:{
+                                relation: 'workshops',
+                                scope:{
+                                    where:{
+                                        brandId: brandId
+                                    },
+                                    include:['areas', 'brand']
+                                }
+                            }
+                        })
+                            .then(function(city){
+                                if(city){
+                                    if(city.length){
+                                        if(city[0].workshops()){
+                                            if(city[0].workshops().length){
+                                                callback(null, city[0].workshops());
+                                            } else{
+                                                callback(null,[]);
+                                            }
+                                        } else{
+                                            callback(null,[]);
+                                        }
+                                    } else{
+                                        callback(null,[]);
+                                    }
+                                } else{
+                                    callback(null,[]);
+                                }
+                            })
+                            .catch(function(error){
+                                callback(error);
+                            })
+                    } else{
+                        callback(new Error("User not valid"));
+                    }
+                } else{
+                    callback(new Error("User not valid"));
+                }
+            } else{
+                callback(new Error("User not valid"));
+            }
+        }
+    };
+
+
 
 
     return {

@@ -16,6 +16,9 @@
       "type": "string",
       "default": "active"
     },
+    "modelName": {
+      "type": "string"
+    },
     "added": {
       "type": "date",
       "required": true,

@@ -22,6 +22,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         findGpsPacketDataMethod();
         sendGpsActivationSms();
         resendGpsActivationSmsMethod();
+        findAllGpsTrackerMethod();
     };
 
     const createGpsPacketDataMethod = function(){
@@ -295,92 +296,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 });
         }
     };
-  /*  const createGpsPacketData = function(gpsPacketDataObj, callback){
-        const GpsPacketData = databaseObj.GpsPacketData;
-        const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
-        let resultGpsPacketData;
-        resultGpsPacketData = gpsPacketDataObj;
-        let promises = [];
-        GpsTrackerInfo.find({
-            where: {
-                deviceIMEI : gpsPacketDataObj.deviceIMEI
-            }
-        })
-            .then(function(gpsTrackerInfoList){
-                if(gpsTrackerInfoList){
-                    if(gpsTrackerInfoList.length){
-                        gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
-                           // console.log("create customerId", gpsTrackerInfo.customerId);
-                            const customerId = gpsTrackerInfo.customerId;
-                            //var gpsPacketDataObj_ = gpsPacketDataObj;
-                            //console.log("gpsInfoObj", resultGpsPacketData);
-                            if(resultGpsPacketData){
-                                if(!resultGpsPacketData.customerId){
-                                    resultGpsPacketData.customerId = customerId;
-                                } else{
-                                    resultGpsPacketData.customerId = customerId;
-                                }
-                            }
-                            console.log("create customerId", gpsTrackerInfo.customerId);
-                            promises.push(function(callback){
-                                GpsPacketData.create({
-                                    clientId: gpsPacketDataObj.clientId,
-                                    deviceIMEI: gpsPacketDataObj.deviceIMEI,
-                                    eventCode : gpsPacketDataObj.eventCode,
-                                    isStoredPacket : gpsPacketDataObj.isStoredPacket,
-                                    eventType : gpsPacketDataObj.eventType,
-                                    latlng: [gpsPacketDataObj.latitude, gpsPacketDataObj.longitude],
-                                    eventDate : gpsPacketDataObj.eventDate,
-                                    gpsStatus : gpsPacketDataObj.gpsStatus,
-                                    gmsSignal : gpsPacketDataObj.gmsSignal,
-                                    speed : gpsPacketDataObj.speed,
-                                    accumulatedDistance : gpsPacketDataObj.accumulatedDistance,
-                                    courseInDegree : gpsPacketDataObj.courseInDegree,
-                                    satelliteConnected : gpsPacketDataObj.satelliteConnected,
-                                    hdop : gpsPacketDataObj.hdop,
-                                    voltageEquivalent : gpsPacketDataObj.voltageEquivalent,
-                                    digitalInput1 : gpsPacketDataObj.digitalInput1,
-                                    caseStatus : gpsPacketDataObj.caseStatus,
-                                    isOverSpeedStarted : gpsPacketDataObj.isOverSpeedStarted,
-                                    isOverSpeedEnded : gpsPacketDataObj.isOverSpeedEnded,
-                                    immobilizerVoilationAlert : gpsPacketDataObj.immobilizerVoilationAlert,
-                                    batteryStatus : gpsPacketDataObj.batteryStatus,
-                                    digitalInput2 : gpsPacketDataObj.digitalInput2,
-                                    ignitionStatus: gpsPacketDataObj.ignitionStatus,
-                                    internalBatteryLowAlert: gpsPacketDataObj.internalBatteryLowAlert,
-                                    anglePollingBit : gpsPacketDataObj.anglePollingBit,
-                                    digitalOutput1Status : gpsPacketDataObj.digitalOutput1Status,
-                                    isHarshAccelerationDetected : gpsPacketDataObj.isHarshAccelerationDetected,
-                                    isHarshBrakingDetected: gpsPacketDataObj.isHarshBrakingDetected,
-                                    externalBatteryVoltage: gpsPacketDataObj.externalBatteryVoltage,
-                                    internalBatteryVoltage : gpsPacketDataObj.internalBatteryVoltage,
-                                    gpsPacketId : gpsPacketDataObj.gpsPacketId,
-                                    customerId : customerId
-                                })
-                                    .then(function(gpsPacketData){
-                                        callback(null);
-                                    })
-                                    .catch(function(error){
-                                        callback(error);
-                                    });
-                            });
-                        });
-                        async.series(promises, function(error){
-                            if(error){
-                               callback(error);
-                            } else{
-                                callback(null, {response: "success"});
-                                console.log("Notification send Successfully");
-                            }
-                        });
-                    }
-                }
-            })
-            .catch(function(error){
-                callback(error);
-            });
 
-    };*/
 
    const saveGpsTrackerInfo = function(ctx, gpsTrackerInfoObj, callback){
      const request = ctx.req;
@@ -964,6 +880,90 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      }
    };
 
+    /**
+     * To find all Gps Tracker associated with particular customer
+     */
+   const findAllGpsTrackerMethod = function(){
+       const Customer = databaseObj.Customer;
+       Customer.findAllGpsTracker = findAllGpsTracker;
+       Customer.remoteMethod("findAllGpsTracker", {
+           accepts:[
+               {
+                   arg: 'ctx',
+                   type: 'object',
+                   http: {
+                       source: 'context'
+                   }
+               }
+           ],
+           returns:{
+               arg: 'trackerList', type:"object", root : true
+           }
+       })
+   };
+
+
+   const findAllGpsTracker = function(ctx, callback){
+     const request = ctx.req;
+     let vehicleTrackerList = [];
+     let busTrackerList = [];
+     if(request){
+         if(request.accessToken){
+             if(request.accessToken.userId){
+                 const customerId = request.accessToken.userId;
+                 const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+                 const TrackBusVehicle = databaseObj.TrackBusVehicle;
+                 GpsTrackerInfo.find({
+                     where: {
+                         customerId : customerId,
+                         status: "active"
+                     }
+                 })
+                     .then(function(gpsTrackerList){
+                         if(gpsTrackerList){
+                             if(gpsTrackerList.length){
+                                 vehicleTrackerList.push(gpsTrackerList);
+                             }
+                         }
+                         return TrackBusVehicle.find({
+                             where: {
+                                 customerId : customerId,
+                                 status: "active"
+                             },
+                             include: [{
+                                 relation: "busModel",
+                                 scope: {
+                                     include: ["school"]
+                                 }
+                             }]
+                         })
+                     })
+                     .then(function(busVehicleList){
+                         if(busVehicleList){
+                             if(busVehicleList.length){
+                                 busTrackerList.push(busVehicleList);
+                             }
+                         }
+                     })
+                     .then(function(){
+                         callback(null, {
+                             vehicleTracker: vehicleTrackerList,
+                             busTracker : busTrackerList
+                         })
+                     })
+                     .catch(function(error){
+                         callback(error);
+                     })
+             } else{
+                 callback(new Error("User not valid"));
+             }
+         } else{
+             callback(new Error("User not valid"));
+         }
+     } else{
+         callback(new Error("User not valid"));
+     }
+   };
 
 
 
