@@ -332,7 +332,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                              registrationNumber : gpsTrackerInfoObj.registrationNumber,
                                              gpsTrackerSimNumber : gpsTrackerInfoObj.gpsTrackerSimNumber,
                                              modelName : gpsTrackerInfoObj.modelName,
-                                             status : gpsTrackerInfoInstance.status,
+                                             status : gpsTrackerInfoObj.status,
                                              added: gpsTrackerInfoInstance.added,
                                              updated: gpsTrackerInfoInstance.updated,
                                              customerId: gpsTrackerInfoInstance.customerId,
