@@ -224,8 +224,20 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                     .then(function(customer){
                                                         if(customer){
                                                             customerInstance = customer;
-                                                            customerName = customer.firstName;
-                                                            var lastName = customer.lastName? customer.lastName : "";
+                                                            return databaseObj.GpsTrackerInfo.findOne({
+                                                                where: {
+                                                                    customerId : customer.id,
+                                                                    status : "active"
+                                                                }
+                                                            });
+
+
+                                                        }
+                                                    })
+                                                    .then(function(gpsTrackerInfo){
+                                                        if(gpsTrackerInfo){
+                                                            customerName = customerInstance.firstName;
+                                                            var lastName = customerInstance.lastName? customerInstance.lastName : "";
                                                             customerName = customerName + " " + lastName;
                                                             pushFrom = packageObj.companyName;
                                                             instanceId = gpsPacketDataObj.id;
@@ -237,14 +249,13 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                             dayList.push(day);
                                                                         }
                                                                     });
-                                                                    if(nightLockInstance.timings["startTime"]<= moment().hour() && nightLockInstance.timings["endTime"] >= moment().hour() &&
-                                                                        dayList.indexOf(moment().format("E")) === 0){
+                                                                    if(nightLockInstance.timings["startTime"]<= moment().hour() && nightLockInstance.timings["endTime"] >= moment().hour()){
                                                                         //Throw stolen notification
                                                                         eventType = "Car Stolen";
                                                                         title = "Car is suspected to be stolen";
                                                                         var message = nightLockMessageFormat(customerName, eventType, title, instanceId);
-                                                                        if(customer.id && gpsTrackerInfo.gpsTrackerNotification["vehicleTowing"] === "on"){
-                                                                            sendNotification(server, message, customer.id, pushFrom, function(error){
+                                                                        if(customerInstance.id && gpsTrackerInfo.gpsTrackerNotification["nightLock"] === "on"){
+                                                                            sendNotification(server, message, customerInstance.id, pushFrom, function(error){
                                                                                 if(error){
                                                                                     console.log(error);
                                                                                     callback(error);
@@ -254,7 +265,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                                         message: title,
                                                                                         deviceIMEI : gpsPacketDataObj.deviceIMEI,
                                                                                         status: "active",
-                                                                                        customerId: customer.id
+                                                                                        customerId: customerInstance.id
                                                                                     });
                                                                                 }
                                                                             });
@@ -262,7 +273,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                     }
                                                                 }
                                                             }
-
                                                         }
                                                     })
                                                     .then(function(gpsNotification){
