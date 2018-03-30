@@ -23,6 +23,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         sendGpsActivationSms();
         resendGpsActivationSmsMethod();
         findAllGpsTrackerMethod();
+        sendOverSpeedMessageMethod();
     };
 
     const createGpsPacketDataMethod = function(){
@@ -964,6 +965,45 @@ module.exports = function( server, databaseObj, helper, packageObj) {
          callback(new Error("User not valid"));
      }
    };
+
+   const sendOverSpeedMessageMethod = function(){
+       const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+       GpsTrackerInfo.sendOverSpeedMessage = sendOverSpeedMessage;
+       GpsTrackerInfo.remoteMethod('sendOverSpeedMessage', {
+           accepts:[
+               {
+                 arg: 'gpsTrackerObj', type: 'object'
+               }
+           ],
+           returns:{
+               arg: 'response', type: 'object', root : true
+           }
+       });
+   };
+
+
+   const sendOverSpeedMessage = function(gpsTrackerObj, callback){
+       if(!gpsTrackerObj){
+           callback(new Error("Invalid Arguments"));
+       } else{
+           const serialNumber = gpsTrackerObj.deviceIMEI;
+           const simNumber = "+91" + gpsTrackerObj.gpsTrackerSimNumber;
+           const overSpeedLimit = gpsTrackerObj.overSpeedingLimit;
+           const message = "set$" + serialNumber + packageObj.overSpeedLimit + overSpeedLimit + ",6S*" ;
+           send.send(message, simNumber, function(error){
+               if(error){
+                   server.logger.error(error);
+                   callback(error);
+               } else{
+                   server.logger.info("OverspeedLimit send successfully");
+                   callback(null, {response:"success"});
+               }
+           })
+          /* #set$<SerialNumber/IMEI>@<Password>#CFG_OS:<Over Speed
+           Limit>,<Duration in seconds>S**/
+
+       }
+   }
 
 
 
