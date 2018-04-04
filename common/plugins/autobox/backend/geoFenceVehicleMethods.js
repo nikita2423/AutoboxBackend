@@ -14,7 +14,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     var init = function(){
         createGeoFenceMethod();
         fetchGeoFenceDataMethod();
-
+        //sendGeoFenceNotification_();
         //sendGeoFenceNotification();
     };
 
@@ -216,35 +216,36 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                         .then(function(customer){
                                                             if(customer){
                                                                 //Check for car is still in geo fence set by user or not...
-                                                                if(getDistance(gpsPacketDataObj.latitude, gpsPacketDataObj.longitude, gpsFenceVehicle.homeLocation["lat"], gpsFenceVehicle.homeLocation["lng"]) > gpsFenceVehicle.kilometers){
-                                                                    //throw notification
-                                                                    customerInstance = customer;
-                                                                    customerName = customer.firstName;
-                                                                    var lastName = customer.lastName? customer.lastName : "";
-                                                                    customerName = customerName + " " + lastName;
-                                                                    pushFrom = packageObj.companyName;
-                                                                    instanceId = gpsPacketDataObj.id;
-                                                                    eventType = "Geo Fence";
-                                                                    title = "Car is suspected to be moving out of geo fencing";
-                                                                    var message = geoFenceMessageFormat(customerName, eventType, title, instanceId);
-                                                                    if(customer.id){
-                                                                        sendNotification(server, message, customer.id, pushFrom, function(error){
-                                                                            if(error){
-                                                                                console.log(error);
-                                                                               // callback(error);
-                                                                            } else{
-                                                                                console.log("Notification for geo fencing send successfully");
-                                                                                return databaseObj.GpsNotification.create({
-                                                                                    message: title,
-                                                                                    deviceIMEI : gpsPacketDataObj.deviceIMEI,
-                                                                                    status: "active",
-                                                                                    customerId: customer.id
-                                                                                });
-                                                                            }
-                                                                        });
+                                                                if(gpsFenceVehicle.homeLocation){
+                                                                    if(getDistance(gpsPacketDataObj.latitude, gpsPacketDataObj.longitude, gpsFenceVehicle.homeLocation["lat"], gpsFenceVehicle.homeLocation["lng"]) > gpsFenceVehicle.kilometers){
+                                                                        //throw notification
+                                                                        customerInstance = customer;
+                                                                        customerName = customer.firstName;
+                                                                        var lastName = customer.lastName? customer.lastName : "";
+                                                                        customerName = customerName + " " + lastName;
+                                                                        pushFrom = packageObj.companyName;
+                                                                        instanceId = gpsPacketDataObj.id;
+                                                                        eventType = "Geo Fence";
+                                                                        title = "Car is suspected to be moving out of geo fencing";
+                                                                        var message = geoFenceMessageFormat(customerName, eventType, title, instanceId);
+                                                                        if(customer.id){
+                                                                            sendNotification(server, message, customer.id, pushFrom, function(error){
+                                                                                if(error){
+                                                                                    console.log(error);
+                                                                                    // callback(error);
+                                                                                } else{
+                                                                                    console.log("Notification for geo fencing send successfully");
+                                                                                    return databaseObj.GpsNotification.create({
+                                                                                        message: title,
+                                                                                        deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                                        status: "active",
+                                                                                        customerId: customer.id
+                                                                                    });
+                                                                                }
+                                                                            });
+                                                                        }
                                                                     }
                                                                 }
-
                                                             }
                                                         })
                                                         .then(function(){
@@ -258,6 +259,133 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                         }
                                     });
 
+                                    return Promise.all(promises);
+                                }
+                            }
+                        })
+                        .then(function(){
+                            server.logger.info("Geo Fencing Notification send to all customers");
+                        })
+                        .catch(function(error){
+                            server.logger.error(error);
+                        })
+                });
+            }
+            next();
+        });
+    };
+
+    const sendGeoFenceNotification_ = function(){
+        const GpsPacketData = databaseObj.GpsPacketData;
+        GpsPacketData.observe("after save", function(ctx, next){
+            const instance = ctx.instance;
+            const gpsPacketDataObj = instance.toJSON();
+            let customerName;
+            let eventType;
+            let title;
+            let pushFrom;
+            let instanceId;
+            let customerInstance;
+            let gpsFenceInstance;
+            let promises = [];
+            if(ctx.isNewInstance){
+                process.nextTick(function(){
+                    databaseObj.GeoFenceVehicle.find({
+                        where: {
+                            deviceIMEI : gpsPacketDataObj.deviceIMEI
+                        }
+                    })
+                        .then(function(gpsFenceVehicleList){
+                            if(gpsFenceVehicleList){
+                                if(gpsFenceVehicleList.length){
+                                    gpsFenceVehicleList.forEach(function(gpsFenceVehicle){
+                                        if(gpsFenceVehicle){
+                                            if(gpsFenceVehicle.customerId){
+                                                gpsFenceInstance = gpsFenceVehicle;
+                                                promises.push(
+                                                    databaseObj.Customer.findById(gpsFenceVehicle.customerId)
+                                                        .then(function(customer){
+                                                            if(customer){
+                                                                customerInstance = customer;
+                                                                //Check for car is still in geo fence set by user or not...
+                                                                if(gpsFenceVehicle.homeLocation){
+                                                                    if(getDistance(gpsPacketDataObj.latitude, gpsPacketDataObj.longitude, gpsFenceVehicle.homeLocation["lat"], gpsFenceVehicle.homeLocation["lng"]) > gpsFenceVehicle.kilometers){
+                                                                        if(gpsFenceVehicle.isNotification){
+                                                                            if(gpsPacketDataObj.ignitionStatus === "on" && gpsPacketDataObj.speed > 0){
+                                                                                return GpsPacketData.findOne({
+                                                                                    order:['added DESC'],
+                                                                                    where: {
+                                                                                        deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                                        ignitionStatus : 'on',
+                                                                                        speed:{
+                                                                                            gt : 0
+                                                                                        },
+                                                                                        added: {
+                                                                                            gt:moment().subtract(1, 'minute').toDate()
+                                                                                        }
+                                                                                    }
+                                                                                });
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        })
+                                                        .then(function(gpsPacketData){
+                                                            if(gpsPacketData){
+                                                                if(getDistance(gpsPacketData.latitude, gpsPacketData.longitude, gpsFenceVehicle.homeLocation["lat"], gpsFenceVehicle.homeLocation["lng"]) > gpsFenceVehicle.kilometers){
+                                                                    //coming inward
+                                                                } else{
+                                                                    //going outward
+                                                                    customerName = customer.firstName;
+                                                                    var lastName = customer.lastName? customer.lastName : "";
+                                                                    customerName = customerName + " " + lastName;
+                                                                    pushFrom = packageObj.companyName;
+                                                                    instanceId = gpsPacketDataObj.id;
+                                                                    eventType = "Geo Fence";
+                                                                    title = "Car is suspected to be moving out of geo fencing";
+                                                                    var message = geoFenceMessageFormat(customerName, eventType, title, instanceId);
+                                                                    if(customer.id){
+                                                                        sendNotification(server, message, customer.id, pushFrom, function(error){
+                                                                            if(error){
+                                                                                console.log(error);
+                                                                                // callback(error);
+                                                                            } else{
+                                                                                console.log("Notification for geo fencing send successfully");
+                                                                                return databaseObj.GpsNotification.create({
+                                                                                    message: title,
+                                                                                    deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                                    status: "active",
+                                                                                    customerId: customer.id
+                                                                                });
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                }
+                                                            }
+                                                        })
+                                                        .then(function(gpsNotification){
+                                                            if(gpsNotification){
+                                                                //disable notification
+                                                                gpsFenceVehicle.isNotification = false;
+
+                                                            } else{
+                                                                //enable notification
+                                                                gpsFenceVehicle.isNotification = true
+                                                            }
+                                                            return gpsFenceVehicle.save();
+                                                        })
+                                                        .then(function(){
+                                                            console.log("Geo Fence Complete");
+                                                        })
+                                                        .catch(function(error){
+                                                            // callback(error);
+                                                            console.error(error);
+                                                        })
+                                                );
+                                            }
+                                        }
+                                    });
                                     return Promise.all(promises);
                                 }
                             }

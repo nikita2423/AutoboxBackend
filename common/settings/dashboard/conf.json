@@ -20,6 +20,7 @@
     "Color",
     "Car",
     "Breakdown",
+    "GeoFenceVehicle",
     "BreakdownCategory",
     "BusModel",
     "City",

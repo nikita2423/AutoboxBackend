@@ -35,6 +35,10 @@
         }
       }
     },
+    "isNotification":{
+      "type": "boolean",
+      "default": true
+    },
     "homeLocation": {
       "type": "geopoint",
       "required": true,
