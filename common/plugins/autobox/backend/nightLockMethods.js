@@ -82,7 +82,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                             vehicleDetailId : nightLockObj.vehicleDetailId,
                             customerId : customerId,
                             id : nightLockObj.id,
-                            status: "active"
+                            status: "active",
+                            added : nightLockObj.added,
+                            updated: nightLockObj.updated
                         })
                             .then(function(nightLock){
                                 if(nightLock){
