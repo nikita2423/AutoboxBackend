@@ -19,7 +19,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         TrackDealerVehicle.remoteMethod('storeTrackDealerVehicle', {
             accepts: [
                 {
-                    arg: "trackDealerVehicleObj", type: "object"
+                    arg: "storeTrackDealerVehicle", type: "object"
                 }
             ],
             returns: {
