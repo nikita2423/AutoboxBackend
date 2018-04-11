@@ -7,7 +7,7 @@
     "root": false,
     "dealerPanel": false,
     "gpsPanel": false,
-    "school": true
+    "schoolPanel": true
   },
   "routeExposure": "/schoolLogin",
   "adminRole": "admin",

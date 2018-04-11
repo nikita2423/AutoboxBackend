@@ -1,0 +1,50 @@
+{
+  "name": "Student",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "rollNumber": {
+      "type": "string"
+    },
+    "rfidSerialNumber": {
+      "type": "string"
+    },
+    "emergencyContactNumber": {
+      "type": "string"
+    },
+    "bloodGroup": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "pickUpBusId": {
+      "type": "string"
+    },
+    "pickUpLocation": {
+      "type": "string"
+    },
+    "isDropSame": {
+      "type": "boolean"
+    },
+    "dropOffBusId": {
+      "type": "string"
+    },
+    "dropOffLocation": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

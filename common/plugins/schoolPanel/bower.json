@@ -1,5 +1,5 @@
 {
-  "name": "dealerPanel",
+  "name": "schoolPanel",
   "version": "1.0.0",
   "dependencies": {
   
@@ -8,5 +8,5 @@
     
   },
   "appPath": "client",
-  "moduleName": "dealerPanel"
+  "moduleName": "schoolPanel"
 }

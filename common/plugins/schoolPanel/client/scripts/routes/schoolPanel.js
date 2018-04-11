@@ -1,11 +1,7 @@
 'use strict';
 /*jslint browser: true*/
 /*global $, jQuery, $snaphy, angular*/
-
 var loginState  = $snaphy.loadSettings('login', "loginState");
-
-
-
 angular.module($snaphy.getModuleName())
   //Routes are defined using ui.routes 
   .config(['$locationProvider', '$stateProvider', '$urlRouterProvider',
@@ -19,15 +15,12 @@ angular.module($snaphy.getModuleName())
           url: '/schoolPanel',
           templateUrl: '/schoolPanel/views/dashboard.html',
           controller: 'schoolPanelControl',
-            //Only allow anonym users here
             data: {
                 permissions: {
                     only: [employeeRole],
                     redirectTo: loginState
                 }
             }
-        })
-
-
+        });
 
     }]); //config

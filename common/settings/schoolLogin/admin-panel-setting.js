@@ -17,7 +17,7 @@ var settings = {
   "registerState": "register",
   "forgotPassState": "forgotPass",
   "adminRole": 'admin',
-  "employeeRole": "employee",
+  "employeeRole": "school",
 "logout_event_name": "LOGOUT_EVENT",
 "login_event_name": "LOGIN_EVENT",
   //Accept username as login or email

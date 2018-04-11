@@ -73,6 +73,155 @@
     "updated": {
       "type": "date",
       "defaultFn": "now"
+    },
+    "address": {
+      "type": "string"
+    },
+    "latlong": {
+      "type": "geopoint",
+      "required": true,
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "type": "input",
+              "key": "lat",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter latitude",
+                "id": "latitude",
+                "inline": "true",
+                "colSize": "col-md-4",
+                "priority": 10
+              }
+            },
+            {
+              "type": "input",
+              "key": "lng",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter longitude",
+                "id": "longitude",
+                "inline": "true",
+                "colSize": "col-md-4",
+                "priority": 10
+              }
+            }
+          ]
+        }
+      }
+    },
+    "emergencyContact1": {
+      "type": "object",
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "type": "input",
+              "key": "name",
+              "templateOptions": {
+                "type": "text",
+                "label": "Emergency Contact 1",
+                "id": "name1"
+              }
+            },
+            {
+              "type": "input",
+              "key": "mobileNumber",
+              "templateOptions": {
+                "type": "text",
+                "label": "Mobile Number",
+                "id": "mobileNumber1"
+              }
+            },
+            {
+              "type": "input",
+              "key": "email",
+              "templateOptions": {
+                "type": "text",
+                "label": "Email",
+                "id": "email1"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "emergencyContact2": {
+      "type": "object",
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "type": "input",
+              "key": "name",
+              "templateOptions": {
+                "type": "text",
+                "label": "Emergency Contact 2",
+                "id": "name2"
+              }
+            },
+            {
+              "type": "input",
+              "key": "mobileNumber",
+              "templateOptions": {
+                "type": "text",
+                "label": "Mobile Number",
+                "id": "mobileNumber2"
+              }
+            },
+            {
+              "type": "input",
+              "key": "email",
+              "templateOptions": {
+                "type": "text",
+                "label": "Email",
+                "id": "email2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "emergencyContact3": {
+      "type": "object",
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "type": "input",
+              "key": "name",
+              "templateOptions": {
+                "type": "text",
+                "label": "Emergency Contact 3",
+                "id": "name3"
+              }
+            },
+            {
+              "type": "input",
+              "key": "mobileNumber",
+              "templateOptions": {
+                "type": "text",
+                "label": "Mobile Number",
+                "id": "mobileNumber3"
+              }
+            },
+            {
+              "type": "input",
+              "key": "email",
+              "templateOptions": {
+                "type": "text",
+                "label": "Email",
+                "id": "email3"
+              }
+            }
+          ]
+        }
+      }
     }
   },
   "validations": [],
@@ -119,7 +268,7 @@
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "DENY"
+      "permission": "ALLOW"
     },
     {
       "accessType": "*",

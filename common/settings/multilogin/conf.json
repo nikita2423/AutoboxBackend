@@ -7,7 +7,7 @@
   "load":{
     "root": false,
     "dealerPanel": false,
-    "school":false
+    "schoolPanel":false
   },
   "config":{
     "google":{

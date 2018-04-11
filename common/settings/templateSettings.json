@@ -39,7 +39,7 @@
     },
     {
       "routeExposure": "/school",
-      "state": "school",
+      "state": "schoolPanel",
       "activate": true,
       "settings":{
         "main":{

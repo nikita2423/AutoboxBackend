@@ -1,0 +1,7 @@
+{
+  "name": "schoolLogin",
+  "description": "Handle all school login logic",
+  "routeExposure": "/schoolLogin",
+  "activate": true,
+  "pluginDependencies": {}
+}

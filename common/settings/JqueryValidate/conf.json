@@ -8,7 +8,7 @@
     "root": true,
     "dealerPanel": true,
     "gpsPanel": true,
-    "school": true
+    "schoolPanel": true
   },
   "pluginDepedencies": {}
 }

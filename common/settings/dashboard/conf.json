@@ -6,7 +6,7 @@
     "root":true,
     "dealerPanel": false,
     "gpsPanel": false,
-    "school":false
+    "schoolPanel":false
   },
   "loadDatabases": [
     "Employee",

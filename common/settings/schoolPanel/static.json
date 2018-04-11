@@ -4,10 +4,7 @@
   },
   "js": {
     "/schoolPanel/scripts/routes/schoolPanel.js": "schoolPanelRoute",
-    "/schoolPanel/scripts/controllers/schoolPanel.js": "schoolPanelController",
-    "/schoolPanel/scripts/directives/schoolPanel.js": "schoolPanelDirectives",
-    "/schoolPanel/scripts/services/helper.js": "HelperServices",
-    "/schoolPanel/style/schoolPanel.css": "schoolPanelCss"
+    "/schoolPanel/scripts/controllers/schoolPanel.js": "schoolPanelController"
   },
   "moduleDependencies":{
 
@@ -24,15 +21,7 @@
         }
       }
     ],
-    "headerHook": [
-      {
-        "path":"views/header-hooks.html",
-        "acl":{
-          "allow":[],
-          "reject":["admin", "Admin", "Dealer"]
-        }
-      }
-    ],
+    "headerHook": [],
     "footerHook":[]
   }
 }

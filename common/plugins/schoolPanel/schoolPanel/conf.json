@@ -1,7 +1,7 @@
 {
-  "name": "dealerPanel",
-  "description": "This plugin handles all dealer logic",
-  "routeExposure": "/dealer",
+  "name": "schoolPanel",
+  "description": "To Handle all school logic.",
+  "routeExposure": "/schoolPanel",
   "activate": true,
   "pluginDependencies": {}
 }

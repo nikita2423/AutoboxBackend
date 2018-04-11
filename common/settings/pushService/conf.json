@@ -7,7 +7,7 @@
   "load":{
     "root": true,
     "dealerPanel": false,
-    "school":false
+    "schoolPanel":false
   },
   "PUSH_SERVICE_ID": "autobox-snaphy-push-application",
   "USER_ID": "strongloop",

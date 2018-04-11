@@ -5,7 +5,6 @@
   "js": {
     "/schoolLogin/scripts/controllers/login.js": "loginControl",
     "/schoolLogin/scripts/services/schoolLogin.js": "loginService",
-    "/schoolLogin/scripts/controllers/forgotPass.js": "forgotPassControl",
     "/schoolLogin/scripts/controllers/register.js": "registerControl",
     "/schoolLogin/scripts/routes/schoolLogin.js": "loginRoute",
     "/schoolLogin/scripts/directives/schoolLogin.js": "loginDirectives"
@@ -17,15 +16,7 @@
   "bodystructure": {
     "asidebarHook": [],
     "sidebarHook": [],
-    "headerHook": [
-      {
-        "path": "views/headerHook.html",
-        "acl": {
-          "allow": [],
-          "reject": []
-        }
-      }
-    ],
+    "headerHook": [],
     "footerHook": []
   }
 }
