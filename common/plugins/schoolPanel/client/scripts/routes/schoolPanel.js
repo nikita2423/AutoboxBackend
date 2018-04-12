@@ -21,6 +21,90 @@ angular.module($snaphy.getModuleName())
                     redirectTo: loginState
                 }
             }
-        });
+        })
+
+        /**
+         * Route to open school profile
+         */
+          .state('schoolProfile', {
+          url: '/schoolProfile',
+          templateUrl: '/schoolPanel/views/schoolProfile.html',
+          controller: 'schoolPanelControl',
+          data: {
+              permissions: {
+                  only: [employeeRole],
+                  redirectTo: loginState
+              }
+          }
+      })
+
+          /**
+           * Add Student route..
+           */
+          .state('addStudent', {
+              url: '/addStudent',
+              templateUrl: '/schoolPanel/views/addStudent.html',
+              controller: 'schoolPanelControl',
+              data: {
+                  permissions: {
+                      only: [employeeRole],
+                      redirectTo: loginState
+                  }
+              }
+          })
+
+
+          .state('addBus', {
+              url: '/addBus',
+              templateUrl: '/schoolPanel/views/addBus.html',
+              controller: 'schoolPanelControl',
+              data: {
+                  permissions: {
+                      only: [employeeRole],
+                      redirectTo: loginState
+                  }
+              }
+          })
+
+          .state('busList', {
+              url: '/busList',
+              templateUrl: '/schoolPanel/views/busList.html',
+              controller: 'schoolPanelControl',
+              data: {
+                  permissions: {
+                      only: [employeeRole],
+                      redirectTo: loginState
+                  }
+              }
+          })
+
+          .state('busHistory', {
+              url: '/busHistory',
+              templateUrl: '/schoolPanel/views/busHistory.html',
+              controller: 'schoolPanelControl',
+              data: {
+                  permissions: {
+                      only: [employeeRole],
+                      redirectTo: loginState
+                  }
+              }
+          })
+
+          .state('query', {
+              url: '/query',
+              templateUrl: '/schoolPanel/views/query.html',
+              controller: 'schoolPanelControl',
+              data: {
+                  permissions: {
+                      only: [employeeRole],
+                      redirectTo: loginState
+                  }
+              }
+          });
+
+
+
+
+
 
     }]); //config

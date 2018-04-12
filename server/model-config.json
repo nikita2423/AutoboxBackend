@@ -383,5 +383,9 @@
   "Student": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "BusNotification": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

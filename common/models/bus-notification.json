@@ -1,0 +1,32 @@
+{
+  "name": "BusNotification",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "location": {
+      "type": "string"
+    },
+    "notification": {
+      "type": "string"
+    },
+    "busNumber": {
+      "type": "string"
+    },
+    "time": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "busModel": {
+      "type": "belongsTo",
+      "model": "BusModel",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

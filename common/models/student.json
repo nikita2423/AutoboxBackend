@@ -7,25 +7,88 @@
   },
   "properties": {
     "firstName": {
-      "type": "string"
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Student First Name",
+          "id": "firstName"
+        }
+      }
     },
     "lastName": {
-      "type": "string"
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Student Last Name",
+          "id": "lastName"
+        }
+      }
     },
     "rollNumber": {
-      "type": "string"
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Student Roll Number",
+          "id": "rollNumber"
+        }
+      }
     },
     "rfidSerialNumber": {
-      "type": "string"
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "RFID Serial Number",
+          "id": "rfidSerialNumber"
+        }
+      }
     },
     "emergencyContactNumber": {
-      "type": "string"
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Emergency Contact Number",
+          "id": "emergencyContactNumber"
+        }
+      }
     },
     "bloodGroup": {
-      "type": "string"
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Student Blood Group",
+          "id": "bloodGroup"
+        }
+      }
     },
     "address": {
-      "type": "string"
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Address",
+          "id": "address"
+        }
+      }
     },
     "pickUpBusId": {
       "type": "string"
