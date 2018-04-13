@@ -268,7 +268,7 @@
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "ALLOW"
+      "permission": "DENY"
     },
     {
       "accessType": "*",
@@ -292,7 +292,21 @@
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
+      "principalId": "School",
+      "permission": "ALLOW",
+      "property": "find"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
       "principalId": "staff",
+      "permission": "ALLOW",
+      "property": "findById"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "School",
       "permission": "ALLOW",
       "property": "findById"
     },
@@ -311,13 +325,7 @@
     },
     {
       "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "getSchema"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$everyone",
+      "principalId": "admin",
       "permission": "ALLOW",
       "property": "getAbsoluteSchema"
     },
@@ -329,7 +337,7 @@
     },
     {
       "principalType": "ROLE",
-      "principalId": "$everyone",
+      "principalId": "$admin",
       "permission": "ALLOW",
       "property": "save"
     },
@@ -338,6 +346,13 @@
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "login"
     },
     {
       "accessType": "EXECUTE",
