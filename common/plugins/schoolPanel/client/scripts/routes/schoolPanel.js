@@ -13,7 +13,7 @@ angular.module($snaphy.getModuleName())
         //Provide routes in this way..
         .state('dashboard', {
           url: '/schoolPanel',
-          templateUrl: '/schoolPanel/views/dashboard.html',
+          templateUrl: '/schoolPanel/views/studentList.html',
           controller: 'schoolPanelControl',
             data: {
                 permissions: {
@@ -53,7 +53,9 @@ angular.module($snaphy.getModuleName())
               }
           })
 
-
+          /**
+           * Add Bus Route
+           */
           .state('addBus', {
               url: '/addBus',
               templateUrl: '/schoolPanel/views/addBus.html',
@@ -66,6 +68,10 @@ angular.module($snaphy.getModuleName())
               }
           })
 
+
+          /**
+           * All Buses belongs to school Route
+           */
           .state('busList', {
               url: '/busList',
               templateUrl: '/schoolPanel/views/busList.html',
@@ -78,6 +84,10 @@ angular.module($snaphy.getModuleName())
               }
           })
 
+
+          /**
+           * Bus Notification History Route
+           */
           .state('busHistory', {
               url: '/busHistory',
               templateUrl: '/schoolPanel/views/busHistory.html',
@@ -90,6 +100,10 @@ angular.module($snaphy.getModuleName())
               }
           })
 
+
+          /**
+           * Query to Autobox route
+           */
           .state('query', {
               url: '/query',
               templateUrl: '/schoolPanel/views/query.html',

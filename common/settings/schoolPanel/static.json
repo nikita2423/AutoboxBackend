@@ -17,7 +17,7 @@
         "path":"views/sideBarHook.html",
         "acl":{
           "allow":[],
-          "reject":["admin", "Admin", "Dealer"]
+          "reject":["admin", "Admin"]
         }
       }
     ],

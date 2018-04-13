@@ -11,5 +11,7 @@
     "schoolPanel":true
   },
   "loadDatabases":[
+    "School",
+    "Student"
     ]
 }
