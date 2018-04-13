@@ -130,7 +130,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                             customerName = "";
                                                         }*/
                                                        // var lastName = customer.lastName? customer.lastName : "";
-                                                        customerName = customerName + " " + lastName;
+                                                        //customerName = customerName + " " + lastName;
                                                         var pushFrom = packageObj.companyName;
                                                         if(gpsPacketDataObj.id){
                                                             const instanceId = gpsPacketDataObj.id;
