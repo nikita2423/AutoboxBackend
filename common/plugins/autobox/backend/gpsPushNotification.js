@@ -124,12 +124,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                 Customer.findById(gpsTrackerInfo.customerId)
                                                     .then(function(customer){
                                                         customerInstance = customer;
-                                                        if(customer.firstName){
+                                                      /*  if(customer.firstName){
                                                             customerName = customer.firstName;
                                                         } else{
                                                             customerName = "";
-                                                        }
-                                                        var lastName = customer.lastName? customer.lastName : "";
+                                                        }*/
+                                                       // var lastName = customer.lastName? customer.lastName : "";
                                                         customerName = customerName + " " + lastName;
                                                         var pushFrom = packageObj.companyName;
                                                         if(gpsPacketDataObj.id){
