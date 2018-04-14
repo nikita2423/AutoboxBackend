@@ -218,7 +218,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                         eventType = "Ignition Off";
                                                                         title = "Engine has stopped";
                                                                         modelName = gpsTrackerInfo.modelName;
-                                                                        server.logger.info("gps id", gpsPacketDataObj);
+                                                                       // server.logger.info("gps id", gpsPacketDataObj);
                                                                         const message = engineStatusMessageFormat(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
                                                                         if(customer.id  && customerInstance.gpsTrackerNotification["engineOff"] === "on"){
                                                                             sendNotification(server, message, customer.id, pushFrom, function(error){
