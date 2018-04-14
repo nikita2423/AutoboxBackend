@@ -125,13 +125,13 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                     .then(function(customer){
                                                         if(customer){
                                                             customerInstance = customer;
-                                                            /*  if(customer.firstName){
+                                                              if(customer.firstName){
                                                              customerName = customer.firstName;
                                                              } else{
                                                              customerName = "";
-                                                             }*/
-                                                            // var lastName = customer.lastName? customer.lastName : "";
-                                                            //customerName = customerName + " " + lastName;
+                                                             }
+                                                             var lastName = customer.lastName? customer.lastName : "";
+                                                             customerName = customerName + " " + lastName;
                                                             var pushFrom = packageObj.companyName;
                                                             if(gpsPacketDataObj.id){
                                                                 const instanceId = gpsPacketDataObj.id;
@@ -143,7 +143,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                                 eventType = "Harsh Brake";
                                                                                 title = "Harsh Brake has been applied";
                                                                                 modelName = gpsTrackerInfo.modelName;
-                                                                                const message = brakeAccelerationMessageFormat(customerName, eventType, title, modelName, instanceId, gpsPacketDataObj.deviceIMEI);
+                                                                                const message = brakeAccelerationMessageFormat(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
                                                                                 if(customer.id && gpsTrackerInfo.gpsTrackerNotification["hardBraking"] === "on"){
                                                                                     sendNotification(server, message, customer.id, pushFrom, function(error){
                                                                                         if(error){
@@ -170,7 +170,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                         eventType = "Harsh Acceleration";
                                                                         title = "Harsh Acceleration has been applied";
                                                                         modelName = gpsTrackerInfo.modelName;
-                                                                        const message = brakeAccelerationMessageFormat(customerName, eventType, title, modelName, instanceId, gpsPacketDataObj.deviceIMEI);
+                                                                        const message = brakeAccelerationMessageFormat(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
                                                                         if(customer.id && gpsTrackerInfo.gpsTrackerNotification["hardAcceleration"] === "on"){
                                                                             sendNotification(server, message, customer.id, pushFrom, function(error){
                                                                                 if(error){
@@ -196,7 +196,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                         eventType = "Ignition On";
                                                                         title = "Engine has started";
                                                                         modelName = gpsTrackerInfo.modelName;
-                                                                        const message = engineStatusMessageFormat(customerName, eventType, title, modelName, instanceId, gpsPacketDataObj.deviceIMEI);
+                                                                        const message = engineStatusMessageFormat(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
                                                                         if(customer.id && customerInstance.gpsTrackerNotification["engineOn"] === "on"){
                                                                             sendNotification(server, message, customer.id, pushFrom, function(error){
                                                                                 if(error){
@@ -218,7 +218,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                         eventType = "Ignition Off";
                                                                         title = "Engine has stopped";
                                                                         modelName = gpsTrackerInfo.modelName;
-                                                                        const message = engineStatusMessageFormat(customerName, eventType, title, modelName, instanceId, gpsPacketDataObj.deviceIMEI);
+                                                                        server.logger.info("gps id", gpsPacketDataObj);
+                                                                        const message = engineStatusMessageFormat(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
                                                                         if(customer.id  && customerInstance.gpsTrackerNotification["engineOff"] === "on"){
                                                                             sendNotification(server, message, customer.id, pushFrom, function(error){
                                                                                 if(error){
