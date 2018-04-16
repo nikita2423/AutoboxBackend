@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<div ng-init="init();" class="block block-themed block-transparent remove-margin-b" style="margin-left:10px;">
+    <div ng-if="settings.config.isUserLoaded">
+        <div class="dataClass" ng-init="relationDetail = settings.tabs.busList.relationDetail;" >
+            <div ng-if="relationDetail">
+                <div style="padding-top: 0px !important;" ng-include="'detailView/views/tableView.html'"></div>
+            </div>
+        </div>
+    </div>
+</div>

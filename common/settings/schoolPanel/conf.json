@@ -13,6 +13,7 @@
   "loadDatabases":[
     "School",
     "Student",
-    "Bus"
+    "BusModel",
+    "SchoolQuery"
     ]
 }

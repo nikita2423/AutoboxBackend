@@ -29,15 +29,19 @@ angular.module($snaphy.getModuleName())
                         tableInstance.getCache().settings.totalNumberOfRows = 15;
                         $scope.relationDetail = $rootScope.settings.tabs[$rootScope.settings.config.currentActiveTab].relationDetail;
                     }
+                    if($rootScope.settings.config.currentActiveTab === "schoolProfile"){
+                        return $scope.getActiveTabSettings().getSchoolData(userObj);
+                    }
                 })
                 .then(function () {
-                    //show room data loaded..
+                    //school data loaded;
 
                 })
                 .catch(function (error) {
                     console.error(error);
                 });
         };
+
     }//controller function..
 
 

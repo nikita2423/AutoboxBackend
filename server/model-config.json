@@ -387,5 +387,9 @@
   "BusNotification": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "SchoolQuery": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

@@ -131,7 +131,6 @@ angular.module($snaphy.getModuleName())
                             },
                             data: {},
                             title: "Dashboard",
-                            isMonthlyReports: false,
                             //Contains the current model detail..
                             relationDetail: {
                                 "relationName": "student",
@@ -162,7 +161,10 @@ angular.module($snaphy.getModuleName())
                                 changeTab(settings.tabs.schoolProfile);
                             },
                             data: {},
+                            form: {},
                             title : "School",
+                            schema: window.STATIC_DATA.schema.School,
+                            getSchoolData : getSchoolData,
                             relationDetail: {
                                 "relationName": "schoolProfile",
                                 "modelName": "School",
@@ -172,7 +174,6 @@ angular.module($snaphy.getModuleName())
                                     showHeader: false,
                                     delete: false
                                 },
-                                schema: window.STATIC_DATA.schema.School,
                                 beforeSaveHook: [
                                     //Here data going to be saved..
                                     function (data) {
@@ -183,7 +184,8 @@ angular.module($snaphy.getModuleName())
                             config: {
                                 stateName: "schoolProfile",
                                 stateOptions: {},
-                                active: false
+                                active: false,
+                                tableId: "SchoolForm"
                             }
                         },
                         addStudent: {
@@ -191,7 +193,9 @@ angular.module($snaphy.getModuleName())
                                 changeTab(settings.tabs.addStudent);
                             },
                             data: {},
+                            form: {},
                             title: "Add Student",
+                            schema: window.STATIC_DATA.schema.Student,
                             relationDetail: {
                                 "relationName": "addStudent",
                                 "modelName": "Student",
@@ -201,7 +205,7 @@ angular.module($snaphy.getModuleName())
                                     showHeader: false,
                                     delete: false
                                 },
-                                schema: window.STATIC_DATA.schema.Student,
+
                                 beforeSaveHook: [
                                     //Here data going to be saved..
                                     function (data) {
@@ -220,17 +224,18 @@ angular.module($snaphy.getModuleName())
                                 changeTab(settings.tabs.addBus);
                             },
                             data: {},
+                            form: {},
+                            schema: window.STATIC_DATA.schema.BusModel,
                             title : "Add Bus",
                             relationDetail: {
-                                "relationDetail": "addBus",
-                                "modelName": "Bus",
+                                "relationName": "addBus",
+                                "modelName": "BusModel",
                                 "action": {
                                     create: false,
-                                    edit: false,
                                     showHeader: false,
                                     delete: false
                                 },
-                                schema: window.STATIC_DATA.schema.Bus,
+
                                 beforeSaveHook: [
                                     //Here data going to be saved..
                                     function (data) {
@@ -250,16 +255,16 @@ angular.module($snaphy.getModuleName())
                             },
                             data: {},
                             title : "Bus List",
+                            schema: window.STATIC_DATA.schema.BusModel,
                             relationDetail: {
-                                "relationDetail": "busList",
-                                "modelName": "Bus",
+                                "relationName": "busList",
+                                "modelName": "BusModel",
                                 "action": {
                                     create: false,
-                                    edit: false,
                                     showHeader: false,
                                     delete: false
                                 },
-                                schema: window.STATIC_DATA.schema.Bus,
+
                                 beforeSaveHook: [
                                     //Here data going to be saved..
                                     function (data) {
@@ -277,20 +282,124 @@ angular.module($snaphy.getModuleName())
                             load : function(){
                                 changeTab(settings.tabs.queries);
                             },
-                            data: {},
+                            data: "",
+                            form: {},
+                            display: true,
                             title : "Queries to Autobox",
+                            schema: window.STATIC_DATA.schema.SchoolQuery,
+                            sendQuery : sendQuery,
                             relationDetail: {
+                                "relationName": "queryToAutobox",
+                                "modelName": "SchoolQuery",
+                                "action": {
+                                    create: false,
+                                    showHeader: false,
+                                    delete: false
+                                },
 
+                                beforeSaveHook: [
+                                    //Here data going to be saved..
+                                    function (data) {
+
+                                    }
+                                ]
                             },
                             config: {
                                 stateName: "query",
                                 stateOptions: {},
-                                active: false
+                                active: false,
+                                display: true,
+                                message: "Our representative will contact you shortly regarding requested query.."
                             }
                         }
                     }
                 };
                 return settings;
+            };
+
+
+            var sendQuery = function(){
+                var SchoolQuery = Database.getDb("schoolPanel", "SchoolQuery");
+                var message = angular.copy(settings.get().tabs.queries.data);
+                startLoadingBar("#query");
+                //Clear the data..
+                settings.get().tabs.queries.data = "";
+                if(message && settings.get().config.employee.id){
+                    SchoolQuery.create({
+                        query: message,
+                        schoolName :  settings.get().config.employee.school.name,
+                        schoolId: settings.get().config.employee.id
+                    }, function () {
+                        stopLoadingBar("#query");
+                        settings.get().tabs.queries.config.display = false;
+                        SnaphyTemplate.notify({
+                            message: "Feedback send Successfully",
+                            type: 'success',
+                            icon: 'fa fa-check',
+                            align: 'right'
+                        });
+                    }, function () {
+                        stopLoadingBar("#query");
+                        settings.get().tabs.queries.data = message;
+                        SnaphyTemplate.notify({
+                            message: "Something went wrong! Please try again later",
+                            type: 'danger',
+                            icon: 'fa fa-times',
+                            align: 'right'
+
+                        });
+                    });
+                }else{
+                    stopLoadingBar("#query");
+                    settings.get().tabs.queries.data = message;
+                    SnaphyTemplate.notify({
+                        message: "Message cannot be blank",
+                        type: 'danger',
+                        icon: 'fa fa-times',
+                        align: 'right'
+
+                    });
+                }
+            }
+
+            /**
+             * Get the school Data..
+             * @param user
+             * @returns {*}
+             */
+            var getSchoolData = function(user){
+                return $q(function(resolve, reject){
+                    var school = Database.getDb("schoolPanel", "School");
+                    school.findOne({
+                        filter: {
+                            where: {
+                                id: user.id
+                            }
+                        }
+                    }, function(data){
+                        delete data.$promise;
+                        delete data.$resolved;
+                        angular.copy(data, settings.get().tabs.schoolProfile.data);
+                        resolve(data);
+                    }, function(error){
+                        reject(error);
+                    });
+                });
+            };
+
+            var startLoadingBar = function (id) {
+                $timeout(function() {
+                    //Now hide remove the refresh widget..
+                    $(id).addClass('block-opt-refresh');
+                }, 200);
+            };
+
+
+            var stopLoadingBar = function (id) {
+                $timeout(function() {
+                    //Now hide remove the refresh widget..
+                    $(id).removeClass('block-opt-refresh');
+                }, 200);
             };
 
 

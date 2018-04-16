@@ -1,6 +1,7 @@
 {
   "School": "School",
-  "Bus": "Bus",
+  "BusModel": "BusModel",
   "Student": "Student",
-  "BusNotification": "BusNotification"
+  "BusNotification": "BusNotification",
+  "SchoolQuery": "SchoolQuery"
 }
