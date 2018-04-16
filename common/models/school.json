@@ -165,9 +165,7 @@
               "templateOptions": {
                 "type": "text",
                 "label": "Emergency Contact 1",
-                "id": "name1",
-                "inline": "true",
-                "colSize": "col-md-4"
+                "id": "name1"
               }
             },
             {
@@ -378,7 +376,7 @@
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "staff",
+      "principalId": "School",
       "permission": "ALLOW",
       "property": "findById"
     },
@@ -387,7 +385,7 @@
       "principalType": "ROLE",
       "principalId": "School",
       "permission": "ALLOW",
-      "property": "findById"
+      "property": "findOne"
     },
     {
       "accessType": "EXECUTE",

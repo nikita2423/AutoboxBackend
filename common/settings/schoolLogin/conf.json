@@ -9,6 +9,9 @@
     "gpsPanel": false,
     "schoolPanel": true
   },
+  "roles":{
+    "serviceLoggedUser": "School"
+  },
   "routeExposure": "/schoolLogin",
   "adminRole": "admin",
   "pluginDependencies": {
