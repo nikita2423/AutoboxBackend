@@ -1,4 +1,7 @@
 <div ng-init="init();" class="block block-themed block-transparent remove-margin-b" style="margin-left:10px;">
+    <div class="col-md-12" style="margin-top:10px;margin-bottom: 10px;">
+        <button ui-sref="addBus"  class="emailButtonStyle" type="submit" >Add New Bus</button>
+    </div>
     <div ng-if="settings.config.isUserLoaded">
         <div class="dataClass" ng-init="relationDetail = settings.tabs.busList.relationDetail;" >
             <div ng-if="relationDetail">

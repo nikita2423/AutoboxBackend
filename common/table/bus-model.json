@@ -1,5 +1,69 @@
 {
-  "tables": {
+  "settings": {
+    "tables":{
+      "beforeTableLoad": "beforeTableLoad",
+      "resetWhenBroadCast": "TableLoaded",
+      "beforeLoad":{
+        "schoolId": "$user.id"
+      }
+    }
 
+  },
+  "tables": {
+    "registrationNumber": {
+      "label": "Bus Number",
+      "search": "text"
+    },
+    "gpsMobileNumber": {
+      "label": "GPS Mobile No",
+      "search": "text"
+    },
+    "deviceIMEI": {
+      "label": "GPS IMEI NO",
+      "search": "text"
+    },
+    "gpsCode": {
+      "label": "GPS Code",
+      "search": "text"
+    },
+    "added": {
+      "display": true,
+      "search": "date",
+      "date": true,
+      "label": "Added"
+    },
+    "busNumber": {
+      "display": false
+    },
+    "driverName": {
+      "display": false
+    },
+    "driverContact": {
+      "display": false
+    },
+    "school_name": {
+      "display": false
+    },
+    "school_email": {
+      "display": false
+    },
+    "school_username": {
+      "display": false
+    },
+    "school_added": {
+      "display": false
+    },
+    "school_latlong": {
+      "display": false
+    },
+    "school_emergencyContact1": {
+      "display": false
+    },
+    "school_emergencyContact2": {
+      "display": false
+    },
+    "school_emergencyContact3": {
+      "display": false
+    }
   }
 }

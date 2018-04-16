@@ -17,8 +17,9 @@
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Enter name",
+          "label": "School Name",
           "id": "schoolName"
+
         }
       }
     },
@@ -31,7 +32,17 @@
           "type": "email",
           "label": "Enter School Email",
           "id": "schoolEmail",
-          "priority": 7
+          "priority": 7,
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "School"
+              ]
+            }
+          }
         }
       }
     },
@@ -43,7 +54,17 @@
           "type": "text",
           "priority": 3,
           "label": "Enter Username",
-          "id": "username"
+          "id": "username",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "School"
+              ]
+            }
+          }
         }
       }
     },
@@ -58,7 +79,17 @@
           "priority": 7,
           "inline": true,
           "colSize": "col-xs-6",
-          "id": "password"
+          "id": "password",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "School"
+              ]
+            }
+          }
         }
       }
     },
@@ -75,7 +106,17 @@
       "defaultFn": "now"
     },
     "address": {
-      "type": "string"
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "School Address",
+          "id": "address"
+
+        }
+      }
     },
     "latlong": {
       "type": "geopoint",
@@ -124,7 +165,9 @@
               "templateOptions": {
                 "type": "text",
                 "label": "Emergency Contact 1",
-                "id": "name1"
+                "id": "name1",
+                "inline": "true",
+                "colSize": "col-md-4"
               }
             },
             {
@@ -133,6 +176,8 @@
               "templateOptions": {
                 "type": "text",
                 "label": "Mobile Number",
+                "inline": "true",
+                "colSize": "col-md-4",
                 "id": "mobileNumber1"
               }
             },
@@ -142,6 +187,8 @@
               "templateOptions": {
                 "type": "text",
                 "label": "Email",
+                "inline": "true",
+                "colSize": "col-md-4",
                 "id": "email1"
               }
             }
@@ -161,6 +208,8 @@
               "templateOptions": {
                 "type": "text",
                 "label": "Emergency Contact 2",
+                "inline": "true",
+                "colSize": "col-md-4",
                 "id": "name2"
               }
             },
@@ -170,6 +219,8 @@
               "templateOptions": {
                 "type": "text",
                 "label": "Mobile Number",
+                "inline": "true",
+                "colSize": "col-md-4",
                 "id": "mobileNumber2"
               }
             },
@@ -179,6 +230,8 @@
               "templateOptions": {
                 "type": "text",
                 "label": "Email",
+                "inline": "true",
+                "colSize": "col-md-4",
                 "id": "email2"
               }
             }
@@ -198,6 +251,8 @@
               "templateOptions": {
                 "type": "text",
                 "label": "Emergency Contact 3",
+                "inline": "true",
+                "colSize": "col-md-4",
                 "id": "name3"
               }
             },
@@ -207,6 +262,8 @@
               "templateOptions": {
                 "type": "text",
                 "label": "Mobile Number",
+                "inline": "true",
+                "colSize": "col-md-4",
                 "id": "mobileNumber3"
               }
             },
@@ -216,6 +273,8 @@
               "templateOptions": {
                 "type": "text",
                 "label": "Email",
+                "inline": "true",
+                "colSize": "col-md-4",
                 "id": "email3"
               }
             }
@@ -241,7 +300,17 @@
         "hide": false,
         "inline": true,
         "colSize": "col-xs-6",
-        "label": "Add Area"
+        "label": "Add Area",
+        "acl": {
+          "allow": [],
+          "reject": [],
+          "relations": {
+            "allow": [],
+            "reject": [
+              "School"
+            ]
+          }
+        }
       }
     },
     "city": {
@@ -259,7 +328,17 @@
         "inline": true,
         "colSize": "col-xs-6",
         "hide": false,
-        "label": "Add City"
+        "label": "Add City",
+        "acl": {
+          "allow": [],
+          "reject": [],
+          "relations": {
+            "allow": [],
+            "reject": [
+              "School"
+            ]
+          }
+        }
       }
     }
   },

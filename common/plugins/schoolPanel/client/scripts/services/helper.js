@@ -181,6 +181,15 @@ angular.module($snaphy.getModuleName())
                                     }
                                 ]
                             },
+                            saveForm: function (formSchema, formData, formModel) {
+                                DetailViewResource.saveForm(formSchema, formData, formModel)
+                                    .then(function (data) {
+                                        console.log("School Data Updated Successfully", data);
+                                    })
+                                    .catch(function (error) {
+                                        console.error("Saved Workshop Data", error);
+                                    });
+                            },
                             config: {
                                 stateName: "schoolProfile",
                                 stateOptions: {},
@@ -200,7 +209,6 @@ angular.module($snaphy.getModuleName())
                                 "relationName": "addStudent",
                                 "modelName": "Student",
                                 "action": {
-                                    create: false,
                                     edit: false,
                                     showHeader: false,
                                     delete: false
@@ -213,10 +221,22 @@ angular.module($snaphy.getModuleName())
                                     }
                                 ]
                             },
+                            saveForm: function (formSchema, formData, formModel) {
+                                formModel.schoolId = settings.config.employee.id;
+                                DetailViewResource.saveForm(formSchema, formData, formModel)
+                                    .then(function (data) {
+                                        console.log("Student add successfully");
+
+                                    })
+                                    .catch(function (error) {
+                                        console.error(error);
+                                    });
+                            },
                             config: {
                                 stateName: "addStudent",
                                 stateOptions: {},
-                                active: false
+                                active: false,
+                                tableId : "StudentForm"
                             }
                         },
                         addBus: {
@@ -231,7 +251,6 @@ angular.module($snaphy.getModuleName())
                                 "relationName": "addBus",
                                 "modelName": "BusModel",
                                 "action": {
-                                    create: false,
                                     showHeader: false,
                                     delete: false
                                 },
@@ -243,10 +262,23 @@ angular.module($snaphy.getModuleName())
                                     }
                                 ]
                             },
+                            saveForm: function (formSchema, formData, formModel) {
+                                formModel.schoolId = settings.config.employee.id;
+                                DetailViewResource.saveForm(formSchema, formData, formModel)
+                                    .then(function (data) {
+                                        console.log("Bus add successfully");
+
+                                    })
+                                    .catch(function (error) {
+                                        console.error(error);
+
+                                    });
+                            },
                             config: {
                                 stateName: "addBus",
                                 stateOptions: {},
-                                active: false
+                                active: false,
+                                tableId: "BusModelForm"
                             }
                         },
                         busList: {

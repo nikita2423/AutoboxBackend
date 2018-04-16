@@ -6,6 +6,30 @@
     "validateUpsert": true
   },
   "properties": {
+    "rfidSerialNumber": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "RFID Serial Number",
+          "id": "rfidSerialNumber"
+        }
+      }
+    },
+    "rollNumber": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Student Roll Number",
+          "id": "rollNumber"
+        }
+      }
+    },
     "firstName": {
       "type": "string",
       "template": {
@@ -30,30 +54,6 @@
         }
       }
     },
-    "rollNumber": {
-      "type": "string",
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "text",
-          "priority": 3,
-          "label": "Student Roll Number",
-          "id": "rollNumber"
-        }
-      }
-    },
-    "rfidSerialNumber": {
-      "type": "string",
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "text",
-          "priority": 3,
-          "label": "RFID Serial Number",
-          "id": "rfidSerialNumber"
-        }
-      }
-    },
     "emergencyContactNumber": {
       "type": "string",
       "template": {
@@ -63,18 +63,6 @@
           "priority": 3,
           "label": "Emergency Contact Number",
           "id": "emergencyContactNumber"
-        }
-      }
-    },
-    "bloodGroup": {
-      "type": "string",
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "text",
-          "priority": 3,
-          "label": "Student Blood Group",
-          "id": "bloodGroup"
         }
       }
     },
@@ -90,10 +78,67 @@
         }
       }
     },
-    "pickUpBusId": {
-      "type": "string"
+    "bloodGroup": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Student Blood Group",
+          "id": "bloodGroup"
+        }
+      }
+    },
+    "pickUpBusNumber": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Pick Up Bus Number",
+          "id": "pickUpBusNumberId"
+        }
+      }
     },
     "pickUpLocation": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Pick Up Bus Location",
+          "id": "pickUpBusLocationId"
+        }
+      }
+    },
+    "dropOffBusNumber": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Drop Off Bus Number",
+          "id": "dropOffBusNumberId"
+        }
+      }
+    },
+    "dropOffLocation": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Drop Off Bus Location",
+          "id": "dropOffLocation"
+        }
+      }
+    },
+    "pickUpBusId": {
       "type": "string"
     },
     "isDropSame": {
@@ -101,13 +146,16 @@
     },
     "dropOffBusId": {
       "type": "string"
-    },
-    "dropOffLocation": {
-      "type": "string"
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "school": {
+      "type": "belongsTo",
+      "model": "School",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

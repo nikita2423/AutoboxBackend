@@ -6,15 +6,29 @@
     "validateUpsert": true
   },
   "properties": {
-    "busNumber": {
+    "registrationNumber": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Registration Number",
+          "id": "registrationNumber"
+        }
+      }
+    },
+
+    "gpsMobileNumber": {
       "type": "string",
       "template": {
         "type": "input",
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Enter Bus Number",
-          "id": "busNumber"
+          "label": "GPS Mobile Number",
+          "id": "gpsMobileNumber"
         }
       }
     },
@@ -44,16 +58,23 @@
         }
       }
     },
-    "registrationNumber": {
+    "added": {
+      "type": "date",
+      "required": false,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "busNumber": {
       "type": "string",
-      "required": true,
       "template": {
         "type": "input",
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Registration Number",
-          "id": "registrationNumber"
+          "label": "Enter Bus Number",
+          "id": "busNumber"
         }
       }
     },
@@ -105,14 +126,7 @@
         }
       }
     },
-    "added": {
-      "type": "date",
-      "required": false,
-      "defaultFn": "now",
-      "template": {
-        "type": "dummy"
-      }
-    },
+
     "updated": {
       "type": "date",
       "defaultFn": "now"
