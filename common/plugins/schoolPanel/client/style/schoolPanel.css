@@ -1,1 +1,274 @@
 /*This is a sample css page*/
+@font-face {
+    font-family: "tt1018m";
+    src: url(../fonts/tt1018m_.ttf);
+}
+
+
+.block-content{
+    padding-top: 0 !important;
+}
+
+#main-container {
+    padding-bottom: 0px;
+    padding-top: 35px !important;
+    background-color: #FFF !important;
+}
+
+.gpsContainer {
+    padding: 0px !important;
+}
+
+.labelDashboard {
+    padding: 0px !important;
+    margin-left: 10px !important;
+    margin-top: 12px !important;
+}
+
+.dateDashboard {
+    margin-top: 4px;
+    width: 400px !important;
+}
+
+
+.header-navbar-fixed #header-navbar {
+    min-height: 30px;
+    padding: 0px;
+    padding-left: 15px;
+}
+
+.hidden-xs hidden-sm  {
+    display: none;
+}
+
+.companyName {
+    font-family: tt1018m;
+    color: #FFF;
+    opacity: 0.7;
+    font-size: 25px;
+    text-align: center;
+    font-weight: 300;
+}
+
+.header {
+    height: 50px;
+    background-color: #333;
+    width: 100%;
+    color: #FFF;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.textboxStyle {
+    border: none;
+    border-bottom: thin solid #333;
+    background: transparent;
+    margin-top: 20px;
+    width: 90%;
+}
+
+.buttonStyle {
+    border: none;
+    background: #333;
+    float: right;
+    color: white;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 20px;
+}
+
+.emailButtonStyle {
+    border: none;
+    background: #333;
+    float: right;
+    color: #FFF;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 10px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.textAreaStyle {
+    width: 100%;
+    margin-top: 15px;
+    padding: 20px;
+}
+
+.navHeaderText {
+    margin-top: 7px !important;
+}
+
+.inputContainer {
+    margin-top: 50px;
+}
+
+/* Table Style */
+
+
+.table>thead:first-child>tr:first-child>th {
+    padding:  0px !important;
+    font-size: 10px !important;
+    text-align: center;
+    background: #E9E9E9;
+    height: 30px;
+}
+
+.table>tbody>tr>td {
+    font-size: 12px !important;
+    text-align: center;
+    padding:  0px !important;
+    padding: 4px !important;
+}
+
+.select2-container--default .select2-results>.select2-results__options {
+    font-size: 9px;
+    text-transform: uppercase;
+}
+
+.select2-selection__rendered {
+    display: none !important;
+}
+
+.select2-container .select2-selection--single {
+    height: 25px;
+}
+
+
+@media screen and (min-width: 768px){
+    .content {
+        padding: 0px 0px 0px !important;
+    }
+
+    .block-content {
+        padding: 0px 0px 0px !important;
+    }
+}
+/* Table Style */
+
+/** Widgets **/
+
+a.block {
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-left: 5px;
+}
+
+td.bg-gray-lighter.border-r {
+    display: none !important;
+}
+
+span.h2  {
+    display: none;
+}
+
+.h2.font-w700.ng-binding {
+    font-size: 18px;
+    padding-top: 5px;
+}
+
+.h6.text-muted.text-uppercase.push-5-t.ng-binding {
+    font-size: 10px;
+    text-transform: capitalize;
+    color: black;
+    padding-bottom: 6px;
+}
+
+.col-sm-4.col-lg-2.ng-scope.ng-isolate-scope {
+    max-width: 150px !important;
+    padding: 0px !important;
+}
+
+.row {
+    margin-left: 1px !important;
+}
+
+header > ul > li > button {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+#header-navbar {
+    padding-left: 0px !important;
+}
+
+.nav-header>li {
+    margin-right: 5px !important;
+}
+
+.nav-header > li > div > button {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+/** Widgets **/
+
+.formly-field-singleFileUpload > div {
+    height: 40px !important;
+}
+
+.label {
+    text-transform: uppercase !important;
+    font-size: 8px !important;
+}
+
+.modal-footer {
+    border: none !important;
+}
+
+.widgetBackground {
+    background-color: #EEE;
+    padding-bottom: 5px;
+}
+
+.thumbnail{
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 1px !important;
+}
+
+
+
+
+.mapDiv{
+    margin-bottom: 150px;
+}
+
+.slimScrollDiv {
+    overflow-y: auto !important;
+    overflow: auto;
+}
+
+#sidebar-scroll {
+    overflow: auto !important;
+    overflow-y: auto !important;
+}
+
+h3 img {
+    max-height: 50px;
+}
+
+/**--------------------MAP DESIGN CLASSS FOR FILENAME ------ **/
+
+#map {
+    min-height: 600px;
+    margin: 0px;
+
+    /*  margin: 20px 0;
+      border-radius: 5px;
+      border: 1px solid silver;*/
+}
+
+#page-footer{
+    padding: 0px;
+}
+
+
+
+
+/**  ------------------------END MAP DESIGN ------------------**/
+.onVehicleSelected {
+    color: #ffffff;
+}
