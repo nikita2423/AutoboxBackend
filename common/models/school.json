@@ -402,6 +402,13 @@
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
+      "principalId": "School",
+      "permission": "ALLOW",
+      "property": "save"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
       "principalId": "staff",
       "permission": "ALLOW",
       "property": "findOne"
