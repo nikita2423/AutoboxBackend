@@ -114,7 +114,8 @@ angular.module($snaphy.getModuleName())
                       redirectTo: loginState
                   }
               }
-          });
+          })
+
 
 
 

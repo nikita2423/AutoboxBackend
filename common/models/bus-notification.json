@@ -6,17 +6,59 @@
     "validateUpsert": true
   },
   "properties": {
-    "location": {
-      "type": "string"
+    "added": {
+      "type": "date",
+      "required": false,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
     },
     "notification": {
-      "type": "string"
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Notification",
+          "id": "notification"
+        }
+      }
+    },
+
+    "time": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Time",
+          "id": "time"
+        }
+      }
+    },
+    "location": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Location",
+          "id": "location"
+        }
+      }
     },
     "busNumber": {
       "type": "string"
     },
-    "time": {
-      "type": "string"
+
+    "updated": {
+      "type": "date",
+      "defaultFn": "now"
     }
   },
   "validations": [],

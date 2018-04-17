@@ -343,6 +343,35 @@ angular.module($snaphy.getModuleName())
                                 display: true,
                                 message: "Our representative will contact you shortly regarding requested query.."
                             }
+                        },
+                        busNotification: {
+                            load : function(){
+                                changeTab(settings.tabs.queries);
+                            },
+                            data: "",
+                            title : "Bus Notification",
+                            schema: window.STATIC_DATA.schema.BusNotification,
+                            relationDetail: {
+                                "relationName": "busNotification",
+                                "modelName": "BusNotification",
+                                "action": {
+                                    create: false,
+                                    showHeader: false,
+                                    delete: false
+                                },
+
+                                beforeSaveHook: [
+                                    //Here data going to be saved..
+                                    function (data) {
+
+                                    }
+                                ]
+                            },
+                            config: {
+                                stateName: "busHistory",
+                                stateOptions: {},
+                                active: false
+                            }
                         }
                     }
                 };

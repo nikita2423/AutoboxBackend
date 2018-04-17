@@ -14,7 +14,10 @@
           "type": "text",
           "priority": 3,
           "label": "RFID Serial Number",
-          "id": "rfidSerialNumber"
+          "id": "rfidSerialNumber",
+          "box": "bloodGroupContainer",
+          "inline": "true",
+          "colSize": "col-md-4"
         }
       }
     },
@@ -26,7 +29,10 @@
           "type": "text",
           "priority": 3,
           "label": "Student Roll Number",
-          "id": "rollNumber"
+          "id": "rollNumber",
+          "box": "studentInfoContainer",
+          "inline": "true",
+          "colSize": "col-md-4"
         }
       }
     },
@@ -38,7 +44,10 @@
           "type": "text",
           "priority": 3,
           "label": "Student First Name",
-          "id": "firstName"
+          "id": "firstName",
+          "box": "studentInfoContainer",
+          "inline": "true",
+          "colSize": "col-md-4"
         }
       }
     },
@@ -50,7 +59,10 @@
           "type": "text",
           "priority": 3,
           "label": "Student Last Name",
-          "id": "lastName"
+          "id": "lastName",
+          "box": "studentInfoContainer",
+          "inline": "true",
+          "colSize": "col-md-4"
         }
       }
     },
@@ -62,7 +74,10 @@
           "type": "text",
           "priority": 3,
           "label": "Emergency Contact Number",
-          "id": "emergencyContactNumber"
+          "id": "emergencyContactNumber",
+          "box": "bloodGroupContainer",
+          "inline": "true",
+          "colSize": "col-md-4"
         }
       }
     },
@@ -74,7 +89,10 @@
           "type": "text",
           "priority": 3,
           "label": "Address",
-          "id": "address"
+          "id": "address",
+          "box": "addressContainer",
+          "inline": "true",
+          "colSize": "col-md-12"
         }
       }
     },
@@ -86,7 +104,10 @@
           "type": "text",
           "priority": 3,
           "label": "Student Blood Group",
-          "id": "bloodGroup"
+          "id": "bloodGroup",
+          "box": "bloodGroupContainer",
+          "inline": "true",
+          "colSize": "col-md-4"
         }
       }
     },
@@ -98,7 +119,10 @@
           "type": "text",
           "priority": 3,
           "label": "Pick Up Bus Number",
-          "id": "pickUpBusNumberId"
+          "id": "pickUpBusNumberId",
+          "box": "pickUpContainer",
+          "inline": "true",
+          "colSize": "col-md-12"
         }
       }
     },
@@ -110,7 +134,10 @@
           "type": "text",
           "priority": 3,
           "label": "Pick Up Bus Location",
-          "id": "pickUpBusLocationId"
+          "id": "pickUpBusLocationId",
+          "box": "pickUpContainer",
+          "inline": "true",
+          "colSize": "col-md-12"
         }
       }
     },
@@ -122,7 +149,10 @@
           "type": "text",
           "priority": 3,
           "label": "Drop Off Bus Number",
-          "id": "dropOffBusNumberId"
+          "id": "dropOffBusNumberId",
+          "box": "pickUpContainer",
+          "inline": "true",
+          "colSize": "col-md-12"
         }
       }
     },
@@ -134,7 +164,10 @@
           "type": "text",
           "priority": 3,
           "label": "Drop Off Bus Location",
-          "id": "dropOffLocation"
+          "id": "dropOffLocation",
+          "box": "pickUpContainer",
+          "inline": "true",
+          "colSize": "col-md-12"
         }
       }
     },

@@ -1,0 +1,23 @@
+{
+  "tables": {
+    "added": {
+      "label": "Date",
+      "search": "date",
+      "date": true,
+      "display": true
+    },
+    "notification": {
+      "label": "Notification",
+      "search": "text",
+      "display": true
+    },
+    "time": {
+      "label": "Time",
+      "display": true
+    },
+    "location": {
+      "label": "Location",
+      "display": true
+    }
+  }
+}

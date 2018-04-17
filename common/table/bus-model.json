@@ -1,4 +1,30 @@
 {
+  "box": {
+    "infoContainer": {
+      "priority":1,
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    },
+    "codeContainer": {
+      "priority": 2,
+      "style": {
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    },
+    "timingContainer": {
+      "priority": 3,
+      "style": {
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    }
+  },
   "settings": {
     "tables":{
       "beforeTableLoad": "beforeTableLoad",
@@ -39,6 +65,12 @@
       "display": false
     },
     "driverContact": {
+      "display": false
+    },
+    "schoolArrivingTime": {
+      "display": false
+    },
+    "schoolLeavingTime": {
       "display": false
     },
     "school_name": {

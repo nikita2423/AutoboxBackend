@@ -15,7 +15,10 @@
           "type": "text",
           "priority": 3,
           "label": "Registration Number",
-          "id": "registrationNumber"
+          "id": "registrationNumber",
+          "box": "infoContainer",
+          "inline": "true",
+          "colSize": "col-md-4"
         }
       }
     },
@@ -28,7 +31,10 @@
           "type": "text",
           "priority": 3,
           "label": "GPS Mobile Number",
-          "id": "gpsMobileNumber"
+          "id": "gpsMobileNumber",
+          "box": "infoContainer",
+          "inline": "true",
+          "colSize": "col-md-4"
         }
       }
     },
@@ -40,8 +46,11 @@
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Device IMEI",
-          "id": "deviceIMEI"
+          "label": "GPS IMEI NUMBER",
+          "id": "deviceIMEI",
+          "box": "infoContainer",
+          "inline": "true",
+          "colSize": "col-md-4"
         }
       }
     },
@@ -53,8 +62,37 @@
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Enter Gps Code",
-          "id": "gpsCode"
+          "label": "GPS Code",
+          "id": "gpsCode",
+          "box": "codeContainer"
+        }
+      }
+    },
+    "schoolArrivingTime": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "time",
+          "priority": 3,
+          "label": "What time the bus reach school in the morning?",
+          "id": "schoolArrivingTime",
+          "box": "timingContainer"
+        }
+      }
+    },
+    "schoolLeavingTime": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "time",
+          "priority": 3,
+          "label": "What time the bus leave school in the afternoon?",
+          "id": "schoolLeavingTime",
+          "box": "timingContainer"
         }
       }
     },
@@ -74,7 +112,17 @@
           "type": "text",
           "priority": 3,
           "label": "Enter Bus Number",
-          "id": "busNumber"
+          "id": "busNumber",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "School"
+              ]
+            }
+          }
         }
       }
     },
@@ -86,17 +134,36 @@
           "type": "text",
           "priority": 3,
           "label": "Driver Name",
-          "id": "driverName"
+          "id": "driverName",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "School"
+              ]
+            }
+          }
         }
       }
     },
     "driverContact": {
       "type": "object",
-      "required": true,
       "template": {
         "type": "objectValue",
         "templateOptions": {
           "priority": 13,
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "School"
+              ]
+            }
+          },
           "fields": [
             {
               "key": "contact1",
@@ -145,7 +212,17 @@
         "type": "smartSelect",
         "readOnly": false,
         "id": "AddSchool",
-        "label": "School"
+        "label": "School",
+        "acl": {
+          "allow": [],
+          "reject": [],
+          "relations": {
+            "allow": [],
+            "reject": [
+              "School"
+            ]
+          }
+        }
       }
     }
   },
