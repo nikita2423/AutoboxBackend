@@ -74,7 +74,7 @@
       "template": {
         "type": "input",
         "templateOptions": {
-          "type": "password",
+          "type": "text",
           "label": "Enter Password",
           "priority": 7,
           "inline": true,

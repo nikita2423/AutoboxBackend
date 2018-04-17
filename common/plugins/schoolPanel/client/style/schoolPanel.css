@@ -91,6 +91,17 @@
     font-weight: bold;
 }
 
+.logoutButtonStyle {
+    float: right;
+    color: #333;
+    font-size: 10px;
+    font-weight: bold;
+    background: #FFF;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 10px;
+}
+
 .textAreaStyle {
     width: 100%;
     margin-top: 15px;

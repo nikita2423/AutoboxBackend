@@ -373,6 +373,9 @@ angular.module($snaphy.getModuleName())
                                 active: false
                             }
                         }
+                    },
+                    logout: {
+                        logout : logout
                     }
                 };
                 return settings;
@@ -500,8 +503,7 @@ angular.module($snaphy.getModuleName())
                 //Constructor to be called in each controller...
                 initialize: initialize,
                 setCurrentState: setCurrentState,
-                getActiveTabSettings: getActiveTabSettings,
-                logout : logout
+                getActiveTabSettings: getActiveTabSettings
 
             };
         }]);
