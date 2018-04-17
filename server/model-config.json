@@ -379,5 +379,17 @@
   "InsuranceRenewalConfirmation": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "Student": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "BusNotification": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "SchoolQuery": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

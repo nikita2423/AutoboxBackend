@@ -2,8 +2,8 @@
   "name": "schoolPanel",
   "version": "2.0.0",
   "main": "backend",
-  "description": "This plugin handles all dealer logic",
-  "author": "Nikita Mittal",
+  "description": "To Handle all school logic.",
+  "author": "Nikita ",
   "authorEmail": "nikita@snaphy.com",
   "dependencies": {
   },

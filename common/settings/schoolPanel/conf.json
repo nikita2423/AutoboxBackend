@@ -1,16 +1,19 @@
 {
   "name": "schoolPanel",
-  "description": "This plugin handles all school logic",
+  "description": "To Handle all school logic.",
   "routeExposure": "/schoolPanel",
   "activate": true,
+  "pluginDependencies": {},
   "load":{
     "dealerPanel": false,
     "gpsPanel": false,
     "root": false,
-    "school":true
+    "schoolPanel":true
   },
   "loadDatabases":[
-
-  ],
-  "pluginDependencies": {}
+    "School",
+    "Student",
+    "BusModel",
+    "SchoolQuery"
+    ]
 }

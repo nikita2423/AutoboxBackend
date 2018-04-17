@@ -128,7 +128,7 @@
         }
       }
     },
-    "yearOfPurchase":{
+    "yearOfPurchase": {
       "type": "number"
     }
   },

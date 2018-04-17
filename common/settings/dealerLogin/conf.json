@@ -7,7 +7,7 @@
     "dealerPanel": true,
     "gpsPanel": false,
     "root": false,
-    "school":false
+    "schoolPanel":false
   },
   "roles":{
     "serviceLoggedUser": "Dealer"

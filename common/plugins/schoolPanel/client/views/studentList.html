@@ -1,0 +1,13 @@
+<div ng-init="init();" class="block block-themed block-transparent remove-margin-b" style="margin-left:10px;">
+    <div class="col-md-12" style="margin-top:10px;margin-bottom: 10px;">
+        <button ui-sref="addStudent"  class="emailButtonStyle" type="submit" >Add New Student</button>
+    </div>
+    <div ng-if="settings.config.isUserLoaded">
+
+        <div class="dataClass" ng-init="relationDetail = settings.tabs.dashboard.relationDetail;" >
+            <div ng-if="relationDetail">
+                <div style="padding-top: 0px !important;" ng-include="'detailView/views/tableView.html'"></div>
+            </div>
+        </div>
+    </div>
+</div>

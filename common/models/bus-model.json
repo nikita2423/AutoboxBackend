@@ -6,15 +6,35 @@
     "validateUpsert": true
   },
   "properties": {
-    "busNumber": {
+    "registrationNumber": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Registration Number",
+          "id": "registrationNumber",
+          "box": "infoContainer",
+          "inline": "true",
+          "colSize": "col-md-4"
+        }
+      }
+    },
+
+    "gpsMobileNumber": {
       "type": "string",
       "template": {
         "type": "input",
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Enter Bus Number",
-          "id": "busNumber"
+          "label": "GPS Mobile Number",
+          "id": "gpsMobileNumber",
+          "box": "infoContainer",
+          "inline": "true",
+          "colSize": "col-md-4"
         }
       }
     },
@@ -26,8 +46,11 @@
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Device IMEI",
-          "id": "deviceIMEI"
+          "label": "GPS IMEI NUMBER",
+          "id": "deviceIMEI",
+          "box": "infoContainer",
+          "inline": "true",
+          "colSize": "col-md-4"
         }
       }
     },
@@ -39,21 +62,67 @@
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Enter Gps Code",
-          "id": "gpsCode"
+          "label": "GPS Code",
+          "id": "gpsCode",
+          "box": "codeContainer"
         }
       }
     },
-    "registrationNumber": {
+    "schoolArrivingTime": {
       "type": "string",
       "required": true,
       "template": {
         "type": "input",
         "templateOptions": {
+          "type": "time",
+          "priority": 3,
+          "label": "What time the bus reach school in the morning?",
+          "id": "schoolArrivingTime",
+          "box": "timingContainer"
+        }
+      }
+    },
+    "schoolLeavingTime": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "time",
+          "priority": 3,
+          "label": "What time the bus leave school in the afternoon?",
+          "id": "schoolLeavingTime",
+          "box": "timingContainer"
+        }
+      }
+    },
+    "added": {
+      "type": "date",
+      "required": false,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "busNumber": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Registration Number",
-          "id": "registrationNumber"
+          "label": "Enter Bus Number",
+          "id": "busNumber",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "School"
+              ]
+            }
+          }
         }
       }
     },
@@ -65,17 +134,36 @@
           "type": "text",
           "priority": 3,
           "label": "Driver Name",
-          "id": "driverName"
+          "id": "driverName",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "School"
+              ]
+            }
+          }
         }
       }
     },
     "driverContact": {
       "type": "object",
-      "required": true,
       "template": {
         "type": "objectValue",
         "templateOptions": {
           "priority": 13,
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "School"
+              ]
+            }
+          },
           "fields": [
             {
               "key": "contact1",
@@ -105,14 +193,7 @@
         }
       }
     },
-    "added": {
-      "type": "date",
-      "required": false,
-      "defaultFn": "now",
-      "template": {
-        "type": "dummy"
-      }
-    },
+
     "updated": {
       "type": "date",
       "defaultFn": "now"
@@ -131,7 +212,17 @@
         "type": "smartSelect",
         "readOnly": false,
         "id": "AddSchool",
-        "label": "School"
+        "label": "School",
+        "acl": {
+          "allow": [],
+          "reject": [],
+          "relations": {
+            "allow": [],
+            "reject": [
+              "School"
+            ]
+          }
+        }
       }
     }
   },

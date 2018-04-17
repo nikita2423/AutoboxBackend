@@ -7,7 +7,10 @@
     "root": false,
     "dealerPanel": false,
     "gpsPanel": false,
-    "school": true
+    "schoolPanel": true
+  },
+  "roles":{
+    "serviceLoggedUser": "School"
   },
   "routeExposure": "/schoolLogin",
   "adminRole": "admin",

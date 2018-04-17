@@ -5,8 +5,8 @@
   "activate": true,
   "load":{
     "root": true,
-    "dealer": false,
-    "school": false
+    "dealerPanel": false,
+    "schoolPanel": false
   },
   "routeExposure": "/aboutUs",
   "pluginDependencies": {

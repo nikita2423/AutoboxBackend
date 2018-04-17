@@ -17,8 +17,9 @@
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Enter name",
+          "label": "School Name",
           "id": "schoolName"
+
         }
       }
     },
@@ -31,7 +32,17 @@
           "type": "email",
           "label": "Enter School Email",
           "id": "schoolEmail",
-          "priority": 7
+          "priority": 7,
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "School"
+              ]
+            }
+          }
         }
       }
     },
@@ -43,7 +54,17 @@
           "type": "text",
           "priority": 3,
           "label": "Enter Username",
-          "id": "username"
+          "id": "username",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "School"
+              ]
+            }
+          }
         }
       }
     },
@@ -58,7 +79,17 @@
           "priority": 7,
           "inline": true,
           "colSize": "col-xs-6",
-          "id": "password"
+          "id": "password",
+          "acl": {
+            "allow": [],
+            "reject": [],
+            "fields": {
+              "allow": [],
+              "reject": [
+                "School"
+              ]
+            }
+          }
         }
       }
     },
@@ -73,6 +104,193 @@
     "updated": {
       "type": "date",
       "defaultFn": "now"
+    },
+    "address": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "School Address",
+          "id": "address"
+
+        }
+      }
+    },
+    "latlong": {
+      "type": "geopoint",
+      "required": true,
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "type": "input",
+              "key": "lat",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter latitude",
+                "id": "latitude",
+                "inline": "true",
+                "colSize": "col-md-4",
+                "priority": 10
+              }
+            },
+            {
+              "type": "input",
+              "key": "lng",
+              "templateOptions": {
+                "type": "text",
+                "label": "Enter longitude",
+                "id": "longitude",
+                "inline": "true",
+                "colSize": "col-md-8",
+                "priority": 10
+              }
+            }
+          ]
+        }
+      }
+    },
+    "emergencyContact1": {
+      "type": "object",
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "type": "input",
+              "key": "name",
+              "templateOptions": {
+                "type": "text",
+                "label": "Emergency Contact 1",
+                "id": "name1",
+                "box": "emergencyContactContainer1",
+                "inline": "true",
+                "colSize": "col-md-4"
+
+              }
+            },
+            {
+              "type": "input",
+              "key": "mobileNumber",
+              "templateOptions": {
+                "type": "text",
+                "label": "Mobile Number",
+                "box": "emergencyContactContainer1",
+                "inline": "true",
+                "colSize": "col-md-4",
+                "id": "mobileNumber1"
+              }
+            },
+            {
+              "type": "input",
+              "key": "email",
+              "templateOptions": {
+                "type": "text",
+                "label": "Email",
+                "box": "emergencyContactContainer1",
+                "inline": "true",
+                "colSize": "col-md-4",
+                "id": "email1"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "emergencyContact2": {
+      "type": "object",
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "type": "input",
+              "key": "name",
+              "templateOptions": {
+                "type": "text",
+                "label": "Emergency Contact 2",
+                "box": "emergencyContactContainer2",
+                "inline": "true",
+                "colSize": "col-md-4",
+                "id": "name2"
+              }
+            },
+            {
+              "type": "input",
+              "key": "mobileNumber",
+              "templateOptions": {
+                "type": "text",
+                "label": "Mobile Number",
+                "box": "emergencyContactContainer2",
+                "inline": "true",
+                "colSize": "col-md-4",
+                "id": "mobileNumber2"
+              }
+            },
+            {
+              "type": "input",
+              "key": "email",
+              "templateOptions": {
+                "type": "text",
+                "label": "Email",
+                "box": "emergencyContactContainer2",
+                "inline": "true",
+                "colSize": "col-md-4",
+                "id": "email2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "emergencyContact3": {
+      "type": "object",
+      "template": {
+        "type": "objectValue",
+        "templateOptions": {
+          "fields": [
+            {
+              "type": "input",
+              "key": "name",
+              "templateOptions": {
+                "type": "text",
+                "label": "Emergency Contact 3",
+                "box": "emergencyContactContainer3",
+                "inline": "true",
+                "colSize": "col-md-4",
+                "id": "name3"
+              }
+            },
+            {
+              "type": "input",
+              "key": "mobileNumber",
+              "templateOptions": {
+                "type": "text",
+                "label": "Mobile Number",
+                "box": "emergencyContactContainer3",
+                "inline": "true",
+                "colSize": "col-md-4",
+                "id": "mobileNumber3"
+              }
+            },
+            {
+              "type": "input",
+              "key": "email",
+              "templateOptions": {
+                "type": "text",
+                "label": "Email",
+                "box": "emergencyContactContainer3",
+                "inline": "true",
+                "colSize": "col-md-4",
+                "id": "email3"
+              }
+            }
+          ]
+        }
+      }
     }
   },
   "validations": [],
@@ -92,7 +310,17 @@
         "hide": false,
         "inline": true,
         "colSize": "col-xs-6",
-        "label": "Add Area"
+        "label": "Add Area",
+        "acl": {
+          "allow": [],
+          "reject": [],
+          "relations": {
+            "allow": [],
+            "reject": [
+              "School"
+            ]
+          }
+        }
       }
     },
     "city": {
@@ -110,7 +338,17 @@
         "inline": true,
         "colSize": "col-xs-6",
         "hide": false,
-        "label": "Add City"
+        "label": "Add City",
+        "acl": {
+          "allow": [],
+          "reject": [],
+          "relations": {
+            "allow": [],
+            "reject": [
+              "School"
+            ]
+          }
+        }
       }
     }
   },
@@ -143,9 +381,30 @@
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "staff",
+      "principalId": "School",
+      "permission": "ALLOW",
+      "property": "find"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "School",
       "permission": "ALLOW",
       "property": "findById"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "School",
+      "permission": "ALLOW",
+      "property": "findOne"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "School",
+      "permission": "ALLOW",
+      "property": "save"
     },
     {
       "accessType": "EXECUTE",
@@ -162,13 +421,7 @@
     },
     {
       "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "getSchema"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "$everyone",
+      "principalId": "admin",
       "permission": "ALLOW",
       "property": "getAbsoluteSchema"
     },
@@ -180,7 +433,7 @@
     },
     {
       "principalType": "ROLE",
-      "principalId": "$everyone",
+      "principalId": "$admin",
       "permission": "ALLOW",
       "property": "save"
     },
@@ -189,6 +442,13 @@
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "login"
     },
     {
       "accessType": "EXECUTE",

@@ -1,3 +1,7 @@
 {
-
+  "School": "School",
+  "BusModel": "BusModel",
+  "Student": "Student",
+  "BusNotification": "BusNotification",
+  "SchoolQuery": "SchoolQuery"
 }

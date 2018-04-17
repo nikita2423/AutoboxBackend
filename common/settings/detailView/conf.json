@@ -6,7 +6,7 @@
   "load":{
     "root": true,
     "dealerPanel": true,
-    "school": true,
+    "schoolPanel": true,
     "gpsPanel": true
   },
   "pluginDependencies": {

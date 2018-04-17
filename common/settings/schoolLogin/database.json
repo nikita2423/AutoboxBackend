@@ -1,4 +1,5 @@
 {
-  "User": "Employee",
+  "User": "School",
+  "Role": "Role",
   "SnaphyACL": "SnaphyAcl"
 }

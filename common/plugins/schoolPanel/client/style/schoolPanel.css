@@ -1,3 +1,4 @@
+/*This is a sample css page*/
 @font-face {
     font-family: "tt1018m";
     src: url(../fonts/tt1018m_.ttf);
@@ -9,9 +10,13 @@
 }
 
 #main-container {
-    padding-bottom: 30px;
+    padding-bottom: 0px;
     padding-top: 35px !important;
     background-color: #FFF !important;
+}
+
+.gpsContainer {
+    padding: 0px !important;
 }
 
 .labelDashboard {
@@ -23,7 +28,6 @@
 .dateDashboard {
     margin-top: 4px;
     width: 400px !important;
-
 }
 
 
@@ -106,7 +110,7 @@
 
 .table>thead:first-child>tr:first-child>th {
     padding:  0px !important;
-    font-size: 10px !important;
+    font-size: 9px !important;
     text-align: center;
     background: #E9E9E9;
     height: 30px;
@@ -219,6 +223,19 @@ header > ul > li > button {
     padding-bottom: 5px;
 }
 
+.thumbnail{
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 1px !important;
+}
+
+
+
+
+.mapDiv{
+    margin-bottom: 150px;
+}
+
 .slimScrollDiv {
     overflow-y: auto !important;
     overflow: auto;
@@ -227,4 +244,31 @@ header > ul > li > button {
 #sidebar-scroll {
     overflow: auto !important;
     overflow-y: auto !important;
+}
+
+h3 img {
+    max-height: 50px;
+}
+
+/**--------------------MAP DESIGN CLASSS FOR FILENAME ------ **/
+
+#map {
+    min-height: 600px;
+    margin: 0px;
+
+    /*  margin: 20px 0;
+      border-radius: 5px;
+      border: 1px solid silver;*/
+}
+
+#page-footer{
+    padding: 0px;
+}
+
+
+
+
+/**  ------------------------END MAP DESIGN ------------------**/
+.onVehicleSelected {
+    color: #ffffff;
 }

@@ -11,7 +11,7 @@
         "path":"views/sidebarHook.html",
         "acl":{
           "allow":[],
-          "reject":["Dealer"]
+          "reject":["Dealer", "School"]
         }
       }
   ],

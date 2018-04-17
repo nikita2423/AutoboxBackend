@@ -1,0 +1,82 @@
+{
+  "box": {
+    "studentInfoContainer": {
+      "priority":1,
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    },
+    "bloodGroupContainer": {
+      "priority":2,
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    },
+    "addressContainer": {
+      "priority":3,
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    },
+    "pickUpContainer": {
+      "priority":4,
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    }
+  },
+  "tables":{
+    "rfidSerialNumber": {
+      "label": "RFID No",
+      "search": "text"
+    },
+    "rollNumber": {
+      "label": "Roll No",
+      "search": "text"
+    },
+    "firstName": {
+      "label": "Name",
+      "search": "text"
+    },
+    "lastName": {
+      "label": "Surname",
+      "search": "text"
+    },
+    "emergencyContactNumber": {
+      "label": "Emergency Conatct No",
+      "search": "text"
+    },
+    "address": {
+      "label": "Address",
+      "search": "text"
+    },
+    "bloodGroup": {
+      "label": "Blood Group",
+      "search": "text"
+    },
+    "pickUpBusNumber": {
+      "label": "Pickup Bus No",
+      "search": "text"
+    },
+    "pickUpLocation": {
+      "label": "Pickup Bus Location",
+      "search": "text"
+    },
+    "dropOffBusNumber": {
+      "label": "Dropoff Bus No",
+      "search": "text"
+    },
+    "dropOffLocation": {
+      "label": "Dropoff Bus Location",
+      "search": "text"
+    }
+  }
+}

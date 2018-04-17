@@ -1,0 +1,38 @@
+{
+  "name": "SchoolQuery",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "added": {
+      "type": "date",
+      "required": false,
+      "defaultFn": "now",
+      "template": {
+        "type": "dummy"
+      }
+    },
+    "updated": {
+      "type": "date",
+      "defaultFn": "now"
+    },
+    "query": {
+      "type": "string"
+    },
+    "schoolName": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "school": {
+      "type": "belongsTo",
+      "model": "School",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

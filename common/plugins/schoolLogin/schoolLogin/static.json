@@ -1,0 +1,19 @@
+{
+  "css": {
+    "/schoolLogin/style/schoolLogin.css": "schoolLoginCss"
+  },
+  "js": {
+    "/schoolLogin/scripts/routes/schoolLogin.js": "schoolLoginRoute",
+    "/schoolLogin/scripts/controllers/schoolLogin.js": "schoolLoginController"
+  },
+  "moduleDependencies":{
+
+  },
+  "settings": ["/schoolLogin/admin-panel-setting.js"],
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [],
+    "footerHook":[]
+  }
+}

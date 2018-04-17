@@ -1,0 +1,25 @@
+<div ng-init="init();">
+    <div class="block block-themed block-transparent remove-margin-b">
+        <div class="block-header bg-primary-dark">
+            <h3  class="block-title" style="text-transform: uppercase;" ng-bind="getActiveTabSettings().title"></h3>
+        </div>
+        <div  ng-if="settings.tabs.addBus.schema" class="block-content block-content-narrow"style="margin-left:15px;margin-top: 10px;">
+            <form name="settings.tabs.addBus.form" ng-validate="settings.tabs.addBus.schema.validations" novalidate class="form-horizontal">
+                <!--Add container class and style related to this..-->
+                <div ng-class="container.class" ng-style="container.style" ng-repeat="container in settings.tabs.addBus.schema.container">
+                    <formly-form  model="settings.tabs.addBus.data" fields="container.schema" ></formly-form>
+                </div>
+            </form>
+        </div><!--block-content-->
+    </div>
+
+    <!-- ng disabled removed as now ng-disabled="!enableButton(settings.form)" -->
+    <div class="modal-footer">
+        <button style="color: #fff;" class="btn btn-sm bg-primary-dark" ui-sref="busList"
+                ng-click="getActiveTabSettings().saveForm(getActiveTabSettings().schema, getActiveTabSettings().form,  getActiveTabSettings().data, true, getActiveTabSettings().config.tableId)">
+            SAVE
+        </button>
+    </div>
+
+
+</div>

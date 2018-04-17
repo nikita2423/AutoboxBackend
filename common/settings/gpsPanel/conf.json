@@ -7,7 +7,7 @@
     "gpsPanel": true,
     "dealerPanel": false,
     "root": false,
-    "school": false
+    "schoolPanel": false
   },
   "from": "Autobox <info@autoboxapp.in>",
   "loadDatabases": [

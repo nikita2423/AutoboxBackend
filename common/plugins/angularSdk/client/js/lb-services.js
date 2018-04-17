@@ -7078,6 +7078,46 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.Customer#findAllGpsTracker
+             * @methodOf lbServices.Customer
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `ctx` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Customer` object.)
+             * </em>
+             */
+            "findAllGpsTracker": {
+              url: urlBase + "/Customers/findAllGpsTracker",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
              * @name lbServices.Customer#setGpsNotificationStatus
              * @methodOf lbServices.Customer
              *
@@ -7688,6 +7728,18 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use BuyTyre.customer() instead.
             "::get::BuyTyre::customer": {
               url: urlBase + "/BuyTyres/:id/customer",
+              method: "GET",
+            },
+
+            // INTERNAL. Use InsuranceRenewal.customer() instead.
+            "::get::InsuranceRenewal::customer": {
+              url: urlBase + "/InsuranceRenewals/:id/customer",
+              method: "GET",
+            },
+
+            // INTERNAL. Use InsuranceRenewalConfirmation.customer() instead.
+            "::get::InsuranceRenewalConfirmation::customer": {
+              url: urlBase + "/InsuranceRenewalConfirmations/:id/customer",
               method: "GET",
             },
 
@@ -9707,48 +9759,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.AdminEmail#sendMail
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending text mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `html` – `{string=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "sendMail": {
-              url: urlBase + "/adminEmails/sendMail",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#successfulRegistrationForCustomer
+             * @name lbServices.AdminEmail#buyTyreEmail
              * @methodOf lbServices.AdminEmail
              *
              * @description
@@ -9782,14 +9793,14 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              *  - `info` – `{string=}` -
              */
-            "successfulRegistrationForCustomer": {
-              url: urlBase + "/adminEmails/successfulRegistrationForCustomer",
+            "buyTyreEmail": {
+              url: urlBase + "/adminEmails/buyTyreEmail",
               method: "POST",
             },
 
             /**
              * @ngdoc method
-             * @name lbServices.AdminEmail#onCompletePurchaseForCustomer
+             * @name lbServices.AdminEmail#insuranceRenewalEmail
              * @methodOf lbServices.AdminEmail
              *
              * @description
@@ -9823,336 +9834,8 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              *  - `info` – `{string=}` -
              */
-            "onCompletePurchaseForCustomer": {
-              url: urlBase + "/adminEmails/onCompletePurchaseForCustomer",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#onOldTradeCarAdded
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "onOldTradeCarAdded": {
-              url: urlBase + "/adminEmails/onOldTradeCarAdded",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#quoteGeneratedForDealer
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "quoteGeneratedForDealer": {
-              url: urlBase + "/adminEmails/quoteGeneratedForDealer",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#serviceBookingWorkshop
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "serviceBookingWorkshop": {
-              url: urlBase + "/adminEmails/serviceBookingWorkshop",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#sosMedical
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "sosMedical": {
-              url: urlBase + "/adminEmails/sosMedical",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#orderingGpsTracker
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "orderingGpsTracker": {
-              url: urlBase + "/adminEmails/orderingGpsTracker",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#sellvehicle
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "sellvehicle": {
-              url: urlBase + "/adminEmails/sellvehicle",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#buyBattery
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "buyBattery": {
-              url: urlBase + "/adminEmails/buyBattery",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#preVehicleBooking
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "preVehicleBooking": {
-              url: urlBase + "/adminEmails/preVehicleBooking",
+            "insuranceRenewalEmail": {
+              url: urlBase + "/adminEmails/insuranceRenewalEmail",
               method: "POST",
             },
 
@@ -10609,48 +10292,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.AdminEmail#sendMail
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending text mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `html` – `{string=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "sendMail": {
-              url: urlBase + "/adminEmails/sendMail",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#successfulRegistrationForCustomer
+             * @name lbServices.AdminEmail#buyTyreEmail
              * @methodOf lbServices.AdminEmail
              *
              * @description
@@ -10684,14 +10326,14 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              *  - `info` – `{string=}` -
              */
-            "successfulRegistrationForCustomer": {
-              url: urlBase + "/adminEmails/successfulRegistrationForCustomer",
+            "buyTyreEmail": {
+              url: urlBase + "/adminEmails/buyTyreEmail",
               method: "POST",
             },
 
             /**
              * @ngdoc method
-             * @name lbServices.AdminEmail#onCompletePurchaseForCustomer
+             * @name lbServices.AdminEmail#insuranceRenewalEmail
              * @methodOf lbServices.AdminEmail
              *
              * @description
@@ -10725,787 +10367,8 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              *  - `info` – `{string=}` -
              */
-            "onCompletePurchaseForCustomer": {
-              url: urlBase + "/adminEmails/onCompletePurchaseForCustomer",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#onOldTradeCarAdded
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "onOldTradeCarAdded": {
-              url: urlBase + "/adminEmails/onOldTradeCarAdded",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#quoteGeneratedForDealer
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "quoteGeneratedForDealer": {
-              url: urlBase + "/adminEmails/quoteGeneratedForDealer",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#serviceBookingWorkshop
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "serviceBookingWorkshop": {
-              url: urlBase + "/adminEmails/serviceBookingWorkshop",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#sosMedical
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "sosMedical": {
-              url: urlBase + "/adminEmails/sosMedical",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#orderingGpsTracker
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "orderingGpsTracker": {
-              url: urlBase + "/adminEmails/orderingGpsTracker",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#sellvehicle
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "sellvehicle": {
-              url: urlBase + "/adminEmails/sellvehicle",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#buyBattery
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "buyBattery": {
-              url: urlBase + "/adminEmails/buyBattery",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#preVehicleBooking
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "preVehicleBooking": {
-              url: urlBase + "/adminEmails/preVehicleBooking",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#sendMail
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending text mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `html` – `{string=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "sendMail": {
-              url: urlBase + "/adminEmails/sendMail",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#successfulRegistrationForCustomer
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "successfulRegistrationForCustomer": {
-              url: urlBase + "/adminEmails/successfulRegistrationForCustomer",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#onCompletePurchaseForCustomer
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "onCompletePurchaseForCustomer": {
-              url: urlBase + "/adminEmails/onCompletePurchaseForCustomer",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#onOldTradeCarAdded
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "onOldTradeCarAdded": {
-              url: urlBase + "/adminEmails/onOldTradeCarAdded",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#quoteGeneratedForDealer
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "quoteGeneratedForDealer": {
-              url: urlBase + "/adminEmails/quoteGeneratedForDealer",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#serviceBookingWorkshop
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "serviceBookingWorkshop": {
-              url: urlBase + "/adminEmails/serviceBookingWorkshop",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#sosMedical
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "sosMedical": {
-              url: urlBase + "/adminEmails/sosMedical",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#orderingGpsTracker
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "orderingGpsTracker": {
-              url: urlBase + "/adminEmails/orderingGpsTracker",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#sellvehicle
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "sellvehicle": {
-              url: urlBase + "/adminEmails/sellvehicle",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#buyBattery
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "buyBattery": {
-              url: urlBase + "/adminEmails/buyBattery",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.AdminEmail#preVehicleBooking
-             * @methodOf lbServices.AdminEmail
-             *
-             * @description
-             *
-             * Remote method for sending mail from the frontend.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `to` – `{*=}` -
-             *
-             *  - `subject` – `{string=}` -
-             *
-             *  - `templateOptions` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `info` – `{string=}` -
-             */
-            "preVehicleBooking": {
-              url: urlBase + "/adminEmails/preVehicleBooking",
+            "insuranceRenewalEmail": {
+              url: urlBase + "/adminEmails/insuranceRenewalEmail",
               method: "POST",
             },
 
@@ -11962,6 +10825,88 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.AdminEmail#buyTyreEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "buyTyreEmail": {
+              url: urlBase + "/adminEmails/buyTyreEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#insuranceRenewalEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "insuranceRenewalEmail": {
+              url: urlBase + "/adminEmails/insuranceRenewalEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
              * @name lbServices.AdminEmail#sendMail
              * @methodOf lbServices.AdminEmail
              *
@@ -12413,6 +11358,88 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.AdminEmail#buyTyreEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "buyTyreEmail": {
+              url: urlBase + "/adminEmails/buyTyreEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#insuranceRenewalEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "insuranceRenewalEmail": {
+              url: urlBase + "/adminEmails/insuranceRenewalEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
              * @name lbServices.AdminEmail#sendMail
              * @methodOf lbServices.AdminEmail
              *
@@ -12859,6 +11886,2753 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "preVehicleBooking": {
               url: urlBase + "/adminEmails/preVehicleBooking",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#buyTyreEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "buyTyreEmail": {
+              url: urlBase + "/adminEmails/buyTyreEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#insuranceRenewalEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "insuranceRenewalEmail": {
+              url: urlBase + "/adminEmails/insuranceRenewalEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#sendMail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending text mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `html` – `{string=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "sendMail": {
+              url: urlBase + "/adminEmails/sendMail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#successfulRegistrationForCustomer
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "successfulRegistrationForCustomer": {
+              url: urlBase + "/adminEmails/successfulRegistrationForCustomer",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#onCompletePurchaseForCustomer
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "onCompletePurchaseForCustomer": {
+              url: urlBase + "/adminEmails/onCompletePurchaseForCustomer",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#onOldTradeCarAdded
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "onOldTradeCarAdded": {
+              url: urlBase + "/adminEmails/onOldTradeCarAdded",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#quoteGeneratedForDealer
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "quoteGeneratedForDealer": {
+              url: urlBase + "/adminEmails/quoteGeneratedForDealer",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#serviceBookingWorkshop
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "serviceBookingWorkshop": {
+              url: urlBase + "/adminEmails/serviceBookingWorkshop",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#sosMedical
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "sosMedical": {
+              url: urlBase + "/adminEmails/sosMedical",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#orderingGpsTracker
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "orderingGpsTracker": {
+              url: urlBase + "/adminEmails/orderingGpsTracker",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#sellvehicle
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "sellvehicle": {
+              url: urlBase + "/adminEmails/sellvehicle",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#buyBattery
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "buyBattery": {
+              url: urlBase + "/adminEmails/buyBattery",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#preVehicleBooking
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "preVehicleBooking": {
+              url: urlBase + "/adminEmails/preVehicleBooking",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#buyTyreEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "buyTyreEmail": {
+              url: urlBase + "/adminEmails/buyTyreEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#insuranceRenewalEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "insuranceRenewalEmail": {
+              url: urlBase + "/adminEmails/insuranceRenewalEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#sendMail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending text mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `html` – `{string=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "sendMail": {
+              url: urlBase + "/adminEmails/sendMail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#successfulRegistrationForCustomer
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "successfulRegistrationForCustomer": {
+              url: urlBase + "/adminEmails/successfulRegistrationForCustomer",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#onCompletePurchaseForCustomer
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "onCompletePurchaseForCustomer": {
+              url: urlBase + "/adminEmails/onCompletePurchaseForCustomer",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#onOldTradeCarAdded
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "onOldTradeCarAdded": {
+              url: urlBase + "/adminEmails/onOldTradeCarAdded",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#quoteGeneratedForDealer
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "quoteGeneratedForDealer": {
+              url: urlBase + "/adminEmails/quoteGeneratedForDealer",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#serviceBookingWorkshop
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "serviceBookingWorkshop": {
+              url: urlBase + "/adminEmails/serviceBookingWorkshop",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#sosMedical
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "sosMedical": {
+              url: urlBase + "/adminEmails/sosMedical",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#orderingGpsTracker
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "orderingGpsTracker": {
+              url: urlBase + "/adminEmails/orderingGpsTracker",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#sellvehicle
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "sellvehicle": {
+              url: urlBase + "/adminEmails/sellvehicle",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#buyBattery
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "buyBattery": {
+              url: urlBase + "/adminEmails/buyBattery",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#preVehicleBooking
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "preVehicleBooking": {
+              url: urlBase + "/adminEmails/preVehicleBooking",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#buyTyreEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "buyTyreEmail": {
+              url: urlBase + "/adminEmails/buyTyreEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#insuranceRenewalEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "insuranceRenewalEmail": {
+              url: urlBase + "/adminEmails/insuranceRenewalEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#sendMail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending text mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `html` – `{string=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "sendMail": {
+              url: urlBase + "/adminEmails/sendMail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#successfulRegistrationForCustomer
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "successfulRegistrationForCustomer": {
+              url: urlBase + "/adminEmails/successfulRegistrationForCustomer",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#onCompletePurchaseForCustomer
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "onCompletePurchaseForCustomer": {
+              url: urlBase + "/adminEmails/onCompletePurchaseForCustomer",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#onOldTradeCarAdded
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "onOldTradeCarAdded": {
+              url: urlBase + "/adminEmails/onOldTradeCarAdded",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#quoteGeneratedForDealer
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "quoteGeneratedForDealer": {
+              url: urlBase + "/adminEmails/quoteGeneratedForDealer",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#serviceBookingWorkshop
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "serviceBookingWorkshop": {
+              url: urlBase + "/adminEmails/serviceBookingWorkshop",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#sosMedical
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "sosMedical": {
+              url: urlBase + "/adminEmails/sosMedical",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#orderingGpsTracker
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "orderingGpsTracker": {
+              url: urlBase + "/adminEmails/orderingGpsTracker",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#sellvehicle
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "sellvehicle": {
+              url: urlBase + "/adminEmails/sellvehicle",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#buyBattery
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "buyBattery": {
+              url: urlBase + "/adminEmails/buyBattery",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#preVehicleBooking
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "preVehicleBooking": {
+              url: urlBase + "/adminEmails/preVehicleBooking",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#buyTyreEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "buyTyreEmail": {
+              url: urlBase + "/adminEmails/buyTyreEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#insuranceRenewalEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "insuranceRenewalEmail": {
+              url: urlBase + "/adminEmails/insuranceRenewalEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#sendMail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending text mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `html` – `{string=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "sendMail": {
+              url: urlBase + "/adminEmails/sendMail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#successfulRegistrationForCustomer
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "successfulRegistrationForCustomer": {
+              url: urlBase + "/adminEmails/successfulRegistrationForCustomer",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#onCompletePurchaseForCustomer
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "onCompletePurchaseForCustomer": {
+              url: urlBase + "/adminEmails/onCompletePurchaseForCustomer",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#onOldTradeCarAdded
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "onOldTradeCarAdded": {
+              url: urlBase + "/adminEmails/onOldTradeCarAdded",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#quoteGeneratedForDealer
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "quoteGeneratedForDealer": {
+              url: urlBase + "/adminEmails/quoteGeneratedForDealer",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#serviceBookingWorkshop
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "serviceBookingWorkshop": {
+              url: urlBase + "/adminEmails/serviceBookingWorkshop",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#sosMedical
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "sosMedical": {
+              url: urlBase + "/adminEmails/sosMedical",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#orderingGpsTracker
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "orderingGpsTracker": {
+              url: urlBase + "/adminEmails/orderingGpsTracker",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#sellvehicle
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "sellvehicle": {
+              url: urlBase + "/adminEmails/sellvehicle",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#buyBattery
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "buyBattery": {
+              url: urlBase + "/adminEmails/buyBattery",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#preVehicleBooking
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "preVehicleBooking": {
+              url: urlBase + "/adminEmails/preVehicleBooking",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#buyTyreEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "buyTyreEmail": {
+              url: urlBase + "/adminEmails/buyTyreEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#insuranceRenewalEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "insuranceRenewalEmail": {
+              url: urlBase + "/adminEmails/insuranceRenewalEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#sendMail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending text mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `html` – `{string=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "sendMail": {
+              url: urlBase + "/adminEmails/sendMail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#successfulRegistrationForCustomer
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "successfulRegistrationForCustomer": {
+              url: urlBase + "/adminEmails/successfulRegistrationForCustomer",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#onCompletePurchaseForCustomer
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "onCompletePurchaseForCustomer": {
+              url: urlBase + "/adminEmails/onCompletePurchaseForCustomer",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#onOldTradeCarAdded
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "onOldTradeCarAdded": {
+              url: urlBase + "/adminEmails/onOldTradeCarAdded",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#quoteGeneratedForDealer
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "quoteGeneratedForDealer": {
+              url: urlBase + "/adminEmails/quoteGeneratedForDealer",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#serviceBookingWorkshop
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "serviceBookingWorkshop": {
+              url: urlBase + "/adminEmails/serviceBookingWorkshop",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#sosMedical
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "sosMedical": {
+              url: urlBase + "/adminEmails/sosMedical",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#orderingGpsTracker
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "orderingGpsTracker": {
+              url: urlBase + "/adminEmails/orderingGpsTracker",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#sellvehicle
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "sellvehicle": {
+              url: urlBase + "/adminEmails/sellvehicle",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#buyBattery
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "buyBattery": {
+              url: urlBase + "/adminEmails/buyBattery",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#preVehicleBooking
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "preVehicleBooking": {
+              url: urlBase + "/adminEmails/preVehicleBooking",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#buyTyreEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "buyTyreEmail": {
+              url: urlBase + "/adminEmails/buyTyreEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#insuranceRenewalEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "insuranceRenewalEmail": {
+              url: urlBase + "/adminEmails/insuranceRenewalEmail",
               method: "POST",
             },
 
@@ -13428,6 +15202,88 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.AdminEmail#buyTyreEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "buyTyreEmail": {
+              url: urlBase + "/adminEmails/buyTyreEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#insuranceRenewalEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "insuranceRenewalEmail": {
+              url: urlBase + "/adminEmails/insuranceRenewalEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
              * @name lbServices.AdminEmail#getDetailSchema
              * @methodOf lbServices.AdminEmail
              *
@@ -13953,6 +15809,88 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.AdminEmail#buyTyreEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "buyTyreEmail": {
+              url: urlBase + "/adminEmails/buyTyreEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#insuranceRenewalEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "insuranceRenewalEmail": {
+              url: urlBase + "/adminEmails/insuranceRenewalEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
              * @name lbServices.AdminEmail#getMailSchema
              * @methodOf lbServices.AdminEmail
              *
@@ -14436,6 +16374,88 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "preVehicleBooking": {
               url: urlBase + "/adminEmails/preVehicleBooking",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#buyTyreEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "buyTyreEmail": {
+              url: urlBase + "/adminEmails/buyTyreEmail",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.AdminEmail#insuranceRenewalEmail
+             * @methodOf lbServices.AdminEmail
+             *
+             * @description
+             *
+             * Remote method for sending mail from the frontend.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `to` – `{*=}` -
+             *
+             *  - `subject` – `{string=}` -
+             *
+             *  - `templateOptions` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `info` – `{string=}` -
+             */
+            "insuranceRenewalEmail": {
+              url: urlBase + "/adminEmails/insuranceRenewalEmail",
               method: "POST",
             },
           }
@@ -22940,6 +24960,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use DealerVehicle.carModel() instead.
             "::get::DealerVehicle::carModel": {
               url: urlBase + "/DealerVehicles/:id/carModel",
+              method: "GET",
+            },
+
+            // INTERNAL. Use InsuranceRenewal.carModel() instead.
+            "::get::InsuranceRenewal::carModel": {
+              url: urlBase + "/InsuranceRenewals/:id/carModel",
               method: "GET",
             },
           }
@@ -34139,6 +36165,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/GeoFenceVehicles/:id/vehicleDetail",
               method: "GET",
             },
+
+            // INTERNAL. Use InsuranceRenewal.vehicleDetail() instead.
+            "::get::InsuranceRenewal::vehicleDetail": {
+              url: urlBase + "/InsuranceRenewals/:id/vehicleDetail",
+              method: "GET",
+            },
           }
         );
 
@@ -36166,6 +38198,55 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "fetchWorkshopForBrand": {
               url: urlBase + "/Workshops/fetchWorkshopForBrand",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Workshop#fetchWorkshopForCity
+             * @methodOf lbServices.Workshop
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `ctx` – `{object=}` -
+             *
+             *  - `brandId` – `{string=}` -
+             *
+             *  - `cityId` – `{string=}` -
+             *
+             *  - `limit` – `{number=}` -
+             *
+             *  - `skip` – `{number=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Workshop` object.)
+             * </em>
+             */
+            "fetchWorkshopForCity": {
+              isArray: true,
+              url: urlBase + "/Workshops/fetchWorkshopForCity",
               method: "POST",
             },
 
@@ -38416,6 +40497,55 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "fetchShowroomForBrand": {
               url: urlBase + "/Showrooms/fetchShowroomForBrand",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Showroom#fetchShowroomForCity
+             * @methodOf lbServices.Showroom
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `ctx` – `{object=}` -
+             *
+             *  - `brandId` – `{string=}` -
+             *
+             *  - `cityId` – `{string=}` -
+             *
+             *  - `limit` – `{number=}` -
+             *
+             *  - `skip` – `{number=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Showroom` object.)
+             * </em>
+             */
+            "fetchShowroomForCity": {
+              isArray: true,
+              url: urlBase + "/Showrooms/fetchShowroomForCity",
               method: "POST",
             },
 
@@ -69322,6 +71452,130 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.GpsTrackerInfo#findGpsPacketData
+             * @methodOf lbServices.GpsTrackerInfo
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `ctx` – `{object=}` -
+             *
+             *  - `deviceIMEI` – `{string=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `GpsTrackerInfo` object.)
+             * </em>
+             */
+            "findGpsPacketData": {
+              url: urlBase + "/GpsTrackerInfos/findGpsPacketData",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.GpsTrackerInfo#resendGpsActivationSms
+             * @methodOf lbServices.GpsTrackerInfo
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `ctx` – `{object=}` -
+             *
+             *  - `gpsTrackerInfoObj` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `GpsTrackerInfo` object.)
+             * </em>
+             */
+            "resendGpsActivationSms": {
+              url: urlBase + "/GpsTrackerInfos/resendGpsActivationSms",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.GpsTrackerInfo#sendOverSpeedMessage
+             * @methodOf lbServices.GpsTrackerInfo
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `gpsTrackerObj` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `GpsTrackerInfo` object.)
+             * </em>
+             */
+            "sendOverSpeedMessage": {
+              url: urlBase + "/GpsTrackerInfos/sendOverSpeedMessage",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
              * @name lbServices.GpsTrackerInfo#getSchema
              * @methodOf lbServices.GpsTrackerInfo
              *
@@ -74295,6 +76549,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use SchoolQuery.school() instead.
+            "::get::SchoolQuery::school": {
+              url: urlBase + "/SchoolQueries/:id/school",
+              method: "GET",
+            },
+
             /**
              * @ngdoc method
              * @name lbServices.School#getCurrent
@@ -77029,6 +79289,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use TrackBusVehicle.busModel() instead.
             "::get::TrackBusVehicle::busModel": {
               url: urlBase + "/TrackBusVehicles/:id/busModel",
+              method: "GET",
+            },
+
+            // INTERNAL. Use BusNotification.busModel() instead.
+            "::get::BusNotification::busModel": {
+              url: urlBase + "/BusNotifications/:id/busModel",
               method: "GET",
             },
           }
@@ -94042,6 +96308,4300 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.vehicleInfo = function() {
           var TargetResource = $injector.get("VehicleInfo");
           var action = TargetResource["::get::BuyTyre::vehicleInfo"];
+          return action.apply(R, arguments);
+        };
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.InsuranceRenewal
+ * @header lbServices.InsuranceRenewal
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `InsuranceRenewal` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "InsuranceRenewal",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/InsuranceRenewals/:id",
+          { 'id': '@id' },
+          {
+
+            // INTERNAL. Use InsuranceRenewal.carModel() instead.
+            "prototype$__get__carModel": {
+              url: urlBase + "/InsuranceRenewals/:id/carModel",
+              method: "GET",
+            },
+
+            // INTERNAL. Use InsuranceRenewal.vehicleDetail() instead.
+            "prototype$__get__vehicleDetail": {
+              url: urlBase + "/InsuranceRenewals/:id/vehicleDetail",
+              method: "GET",
+            },
+
+            // INTERNAL. Use InsuranceRenewal.customer() instead.
+            "prototype$__get__customer": {
+              url: urlBase + "/InsuranceRenewals/:id/customer",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#create
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewal` object.)
+             * </em>
+             */
+            "create": {
+              url: urlBase + "/InsuranceRenewals",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#createMany
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewal` object.)
+             * </em>
+             */
+            "createMany": {
+              isArray: true,
+              url: urlBase + "/InsuranceRenewals",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#upsert
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewal` object.)
+             * </em>
+             */
+            "upsert": {
+              url: urlBase + "/InsuranceRenewals",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#exists
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/InsuranceRenewals/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#findById
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Find a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewal` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/InsuranceRenewals/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#find
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewal` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/InsuranceRenewals",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#findOne
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewal` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/InsuranceRenewals/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#updateAll
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+            "updateAll": {
+              url: urlBase + "/InsuranceRenewals/update",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#deleteById
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewal` object.)
+             * </em>
+             */
+            "deleteById": {
+              url: urlBase + "/InsuranceRenewals/:id",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#count
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/InsuranceRenewals/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#prototype$updateAttributes
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Update attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewal` object.)
+             * </em>
+             */
+            "prototype$updateAttributes": {
+              url: urlBase + "/InsuranceRenewals/:id",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#createChangeStream
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Create a change stream.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `changes` – `{ReadableStream=}` -
+             */
+            "createChangeStream": {
+              url: urlBase + "/InsuranceRenewals/change-stream",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#createInsuranceRenewal
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `ctx` – `{object=}` -
+             *
+             *  - `insuranceRenewalObj` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewal` object.)
+             * </em>
+             */
+            "createInsuranceRenewal": {
+              url: urlBase + "/InsuranceRenewals/createInsuranceRenewal",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#getSchema
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Send the schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getSchema": {
+              url: urlBase + "/InsuranceRenewals/getSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#getAbsoluteSchema
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Send the absolute schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getAbsoluteSchema": {
+              url: urlBase + "/InsuranceRenewals/getAbsoluteSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#save
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Remote method for saving data with its depedencies
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `schema` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `data` – `{object=}` -
+             */
+            "save": {
+              url: urlBase + "/InsuranceRenewals/save",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#getDetailSchema
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Get the detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getDetailSchema": {
+              url: urlBase + "/InsuranceRenewals/getDetailSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#getModelRelationSchema
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Get the relation detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getModelRelationSchema": {
+              url: urlBase + "/InsuranceRenewals/getModelRelationSchema",
+              method: "POST",
+            },
+
+            // INTERNAL. Use InsuranceRenewalConfirmation.insuranceRenewal() instead.
+            "::get::InsuranceRenewalConfirmation::insuranceRenewal": {
+              url: urlBase + "/InsuranceRenewalConfirmations/:id/insuranceRenewal",
+              method: "GET",
+            },
+          }
+        );
+
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#updateOrCreate
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewal` object.)
+             * </em>
+             */
+        R["updateOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#update
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+        R["update"] = R["updateAll"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#destroyById
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewal` object.)
+             * </em>
+             */
+        R["destroyById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#removeById
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewal` object.)
+             * </em>
+             */
+        R["removeById"] = R["deleteById"];
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.InsuranceRenewal#modelName
+        * @propertyOf lbServices.InsuranceRenewal
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `InsuranceRenewal`.
+        */
+        R.modelName = "InsuranceRenewal";
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#carModel
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Fetches belongsTo relation carModel.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CarModel` object.)
+             * </em>
+             */
+        R.carModel = function() {
+          var TargetResource = $injector.get("CarModel");
+          var action = TargetResource["::get::InsuranceRenewal::carModel"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#vehicleDetail
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Fetches belongsTo relation vehicleDetail.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleDetail` object.)
+             * </em>
+             */
+        R.vehicleDetail = function() {
+          var TargetResource = $injector.get("VehicleDetail");
+          var action = TargetResource["::get::InsuranceRenewal::vehicleDetail"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewal#customer
+             * @methodOf lbServices.InsuranceRenewal
+             *
+             * @description
+             *
+             * Fetches belongsTo relation customer.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Customer` object.)
+             * </em>
+             */
+        R.customer = function() {
+          var TargetResource = $injector.get("Customer");
+          var action = TargetResource["::get::InsuranceRenewal::customer"];
+          return action.apply(R, arguments);
+        };
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.InsuranceRenewalConfirmation
+ * @header lbServices.InsuranceRenewalConfirmation
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `InsuranceRenewalConfirmation` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "InsuranceRenewalConfirmation",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/InsuranceRenewalConfirmations/:id",
+          { 'id': '@id' },
+          {
+
+            // INTERNAL. Use InsuranceRenewalConfirmation.customer() instead.
+            "prototype$__get__customer": {
+              url: urlBase + "/InsuranceRenewalConfirmations/:id/customer",
+              method: "GET",
+            },
+
+            // INTERNAL. Use InsuranceRenewalConfirmation.insuranceRenewal() instead.
+            "prototype$__get__insuranceRenewal": {
+              url: urlBase + "/InsuranceRenewalConfirmations/:id/insuranceRenewal",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#create
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewalConfirmation` object.)
+             * </em>
+             */
+            "create": {
+              url: urlBase + "/InsuranceRenewalConfirmations",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#createMany
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewalConfirmation` object.)
+             * </em>
+             */
+            "createMany": {
+              isArray: true,
+              url: urlBase + "/InsuranceRenewalConfirmations",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#upsert
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewalConfirmation` object.)
+             * </em>
+             */
+            "upsert": {
+              url: urlBase + "/InsuranceRenewalConfirmations",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#exists
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/InsuranceRenewalConfirmations/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#findById
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Find a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewalConfirmation` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/InsuranceRenewalConfirmations/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#find
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewalConfirmation` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/InsuranceRenewalConfirmations",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#findOne
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewalConfirmation` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/InsuranceRenewalConfirmations/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#updateAll
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+            "updateAll": {
+              url: urlBase + "/InsuranceRenewalConfirmations/update",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#deleteById
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewalConfirmation` object.)
+             * </em>
+             */
+            "deleteById": {
+              url: urlBase + "/InsuranceRenewalConfirmations/:id",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#count
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/InsuranceRenewalConfirmations/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#prototype$updateAttributes
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Update attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewalConfirmation` object.)
+             * </em>
+             */
+            "prototype$updateAttributes": {
+              url: urlBase + "/InsuranceRenewalConfirmations/:id",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#createChangeStream
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Create a change stream.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `changes` – `{ReadableStream=}` -
+             */
+            "createChangeStream": {
+              url: urlBase + "/InsuranceRenewalConfirmations/change-stream",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#createInsuranceRenewalConfirmation
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `ctx` – `{object=}` -
+             *
+             *  - `insuranceRenewalId` – `{string=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewalConfirmation` object.)
+             * </em>
+             */
+            "createInsuranceRenewalConfirmation": {
+              url: urlBase + "/InsuranceRenewalConfirmations/createInsuranceRenewalConfirmation",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#getSchema
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Send the schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getSchema": {
+              url: urlBase + "/InsuranceRenewalConfirmations/getSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#getAbsoluteSchema
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Send the absolute schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getAbsoluteSchema": {
+              url: urlBase + "/InsuranceRenewalConfirmations/getAbsoluteSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#save
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Remote method for saving data with its depedencies
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `schema` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `data` – `{object=}` -
+             */
+            "save": {
+              url: urlBase + "/InsuranceRenewalConfirmations/save",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#getDetailSchema
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Get the detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getDetailSchema": {
+              url: urlBase + "/InsuranceRenewalConfirmations/getDetailSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#getModelRelationSchema
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Get the relation detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getModelRelationSchema": {
+              url: urlBase + "/InsuranceRenewalConfirmations/getModelRelationSchema",
+              method: "POST",
+            },
+          }
+        );
+
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#updateOrCreate
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewalConfirmation` object.)
+             * </em>
+             */
+        R["updateOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#update
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+        R["update"] = R["updateAll"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#destroyById
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewalConfirmation` object.)
+             * </em>
+             */
+        R["destroyById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#removeById
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewalConfirmation` object.)
+             * </em>
+             */
+        R["removeById"] = R["deleteById"];
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.InsuranceRenewalConfirmation#modelName
+        * @propertyOf lbServices.InsuranceRenewalConfirmation
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `InsuranceRenewalConfirmation`.
+        */
+        R.modelName = "InsuranceRenewalConfirmation";
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#customer
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Fetches belongsTo relation customer.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Customer` object.)
+             * </em>
+             */
+        R.customer = function() {
+          var TargetResource = $injector.get("Customer");
+          var action = TargetResource["::get::InsuranceRenewalConfirmation::customer"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InsuranceRenewalConfirmation#insuranceRenewal
+             * @methodOf lbServices.InsuranceRenewalConfirmation
+             *
+             * @description
+             *
+             * Fetches belongsTo relation insuranceRenewal.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `InsuranceRenewal` object.)
+             * </em>
+             */
+        R.insuranceRenewal = function() {
+          var TargetResource = $injector.get("InsuranceRenewal");
+          var action = TargetResource["::get::InsuranceRenewalConfirmation::insuranceRenewal"];
+          return action.apply(R, arguments);
+        };
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.Student
+ * @header lbServices.Student
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `Student` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "Student",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/Students/:id",
+          { 'id': '@id' },
+          {
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#create
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Student` object.)
+             * </em>
+             */
+            "create": {
+              url: urlBase + "/Students",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#createMany
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Student` object.)
+             * </em>
+             */
+            "createMany": {
+              isArray: true,
+              url: urlBase + "/Students",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#upsert
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Student` object.)
+             * </em>
+             */
+            "upsert": {
+              url: urlBase + "/Students",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#exists
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/Students/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#findById
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Find a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Student` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/Students/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#find
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Student` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/Students",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#findOne
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Student` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/Students/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#updateAll
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+            "updateAll": {
+              url: urlBase + "/Students/update",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#deleteById
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Student` object.)
+             * </em>
+             */
+            "deleteById": {
+              url: urlBase + "/Students/:id",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#count
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/Students/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#prototype$updateAttributes
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Update attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Student` object.)
+             * </em>
+             */
+            "prototype$updateAttributes": {
+              url: urlBase + "/Students/:id",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#createChangeStream
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Create a change stream.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `changes` – `{ReadableStream=}` -
+             */
+            "createChangeStream": {
+              url: urlBase + "/Students/change-stream",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#getSchema
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Send the schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getSchema": {
+              url: urlBase + "/Students/getSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#getAbsoluteSchema
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Send the absolute schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getAbsoluteSchema": {
+              url: urlBase + "/Students/getAbsoluteSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#save
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Remote method for saving data with its depedencies
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `schema` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `data` – `{object=}` -
+             */
+            "save": {
+              url: urlBase + "/Students/save",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#getDetailSchema
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Get the detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getDetailSchema": {
+              url: urlBase + "/Students/getDetailSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#getModelRelationSchema
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Get the relation detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getModelRelationSchema": {
+              url: urlBase + "/Students/getModelRelationSchema",
+              method: "POST",
+            },
+          }
+        );
+
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#updateOrCreate
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Student` object.)
+             * </em>
+             */
+        R["updateOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#update
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+        R["update"] = R["updateAll"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#destroyById
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Student` object.)
+             * </em>
+             */
+        R["destroyById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Student#removeById
+             * @methodOf lbServices.Student
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Student` object.)
+             * </em>
+             */
+        R["removeById"] = R["deleteById"];
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.Student#modelName
+        * @propertyOf lbServices.Student
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `Student`.
+        */
+        R.modelName = "Student";
+
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.BusNotification
+ * @header lbServices.BusNotification
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `BusNotification` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "BusNotification",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/BusNotifications/:id",
+          { 'id': '@id' },
+          {
+
+            // INTERNAL. Use BusNotification.busModel() instead.
+            "prototype$__get__busModel": {
+              url: urlBase + "/BusNotifications/:id/busModel",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#create
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusNotification` object.)
+             * </em>
+             */
+            "create": {
+              url: urlBase + "/BusNotifications",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#createMany
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusNotification` object.)
+             * </em>
+             */
+            "createMany": {
+              isArray: true,
+              url: urlBase + "/BusNotifications",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#upsert
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusNotification` object.)
+             * </em>
+             */
+            "upsert": {
+              url: urlBase + "/BusNotifications",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#exists
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/BusNotifications/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#findById
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Find a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusNotification` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/BusNotifications/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#find
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusNotification` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/BusNotifications",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#findOne
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusNotification` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/BusNotifications/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#updateAll
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+            "updateAll": {
+              url: urlBase + "/BusNotifications/update",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#deleteById
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusNotification` object.)
+             * </em>
+             */
+            "deleteById": {
+              url: urlBase + "/BusNotifications/:id",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#count
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/BusNotifications/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#prototype$updateAttributes
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Update attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusNotification` object.)
+             * </em>
+             */
+            "prototype$updateAttributes": {
+              url: urlBase + "/BusNotifications/:id",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#createChangeStream
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Create a change stream.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `changes` – `{ReadableStream=}` -
+             */
+            "createChangeStream": {
+              url: urlBase + "/BusNotifications/change-stream",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#getSchema
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Send the schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getSchema": {
+              url: urlBase + "/BusNotifications/getSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#getAbsoluteSchema
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Send the absolute schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getAbsoluteSchema": {
+              url: urlBase + "/BusNotifications/getAbsoluteSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#save
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Remote method for saving data with its depedencies
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `schema` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `data` – `{object=}` -
+             */
+            "save": {
+              url: urlBase + "/BusNotifications/save",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#getDetailSchema
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Get the detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getDetailSchema": {
+              url: urlBase + "/BusNotifications/getDetailSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#getModelRelationSchema
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Get the relation detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getModelRelationSchema": {
+              url: urlBase + "/BusNotifications/getModelRelationSchema",
+              method: "POST",
+            },
+          }
+        );
+
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#updateOrCreate
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusNotification` object.)
+             * </em>
+             */
+        R["updateOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#update
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+        R["update"] = R["updateAll"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#destroyById
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusNotification` object.)
+             * </em>
+             */
+        R["destroyById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#removeById
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusNotification` object.)
+             * </em>
+             */
+        R["removeById"] = R["deleteById"];
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.BusNotification#modelName
+        * @propertyOf lbServices.BusNotification
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `BusNotification`.
+        */
+        R.modelName = "BusNotification";
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.BusNotification#busModel
+             * @methodOf lbServices.BusNotification
+             *
+             * @description
+             *
+             * Fetches belongsTo relation busModel.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `BusModel` object.)
+             * </em>
+             */
+        R.busModel = function() {
+          var TargetResource = $injector.get("BusModel");
+          var action = TargetResource["::get::BusNotification::busModel"];
+          return action.apply(R, arguments);
+        };
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.SchoolQuery
+ * @header lbServices.SchoolQuery
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `SchoolQuery` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "SchoolQuery",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/SchoolQueries/:id",
+          { 'id': '@id' },
+          {
+
+            // INTERNAL. Use SchoolQuery.school() instead.
+            "prototype$__get__school": {
+              url: urlBase + "/SchoolQueries/:id/school",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#create
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SchoolQuery` object.)
+             * </em>
+             */
+            "create": {
+              url: urlBase + "/SchoolQueries",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#createMany
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SchoolQuery` object.)
+             * </em>
+             */
+            "createMany": {
+              isArray: true,
+              url: urlBase + "/SchoolQueries",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#upsert
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SchoolQuery` object.)
+             * </em>
+             */
+            "upsert": {
+              url: urlBase + "/SchoolQueries",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#exists
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/SchoolQueries/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#findById
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Find a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SchoolQuery` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/SchoolQueries/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#find
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SchoolQuery` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/SchoolQueries",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#findOne
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SchoolQuery` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/SchoolQueries/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#updateAll
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+            "updateAll": {
+              url: urlBase + "/SchoolQueries/update",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#deleteById
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SchoolQuery` object.)
+             * </em>
+             */
+            "deleteById": {
+              url: urlBase + "/SchoolQueries/:id",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#count
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/SchoolQueries/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#prototype$updateAttributes
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Update attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SchoolQuery` object.)
+             * </em>
+             */
+            "prototype$updateAttributes": {
+              url: urlBase + "/SchoolQueries/:id",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#createChangeStream
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Create a change stream.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `changes` – `{ReadableStream=}` -
+             */
+            "createChangeStream": {
+              url: urlBase + "/SchoolQueries/change-stream",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#getSchema
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Send the schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getSchema": {
+              url: urlBase + "/SchoolQueries/getSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#getAbsoluteSchema
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Send the absolute schema of the model requested.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getAbsoluteSchema": {
+              url: urlBase + "/SchoolQueries/getAbsoluteSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#save
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Remote method for saving data with its depedencies
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `data` – `{object=}` -
+             *
+             *  - `schema` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `data` – `{object=}` -
+             */
+            "save": {
+              url: urlBase + "/SchoolQueries/save",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#getDetailSchema
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Get the detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getDetailSchema": {
+              url: urlBase + "/SchoolQueries/getDetailSchema",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#getModelRelationSchema
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Get the relation detail schema for a particular model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method does not accept any data. Supply an empty object.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `schema` – `{object=}` -
+             */
+            "getModelRelationSchema": {
+              url: urlBase + "/SchoolQueries/getModelRelationSchema",
+              method: "POST",
+            },
+          }
+        );
+
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#updateOrCreate
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Update an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SchoolQuery` object.)
+             * </em>
+             */
+        R["updateOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#update
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Update instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+        R["update"] = R["updateAll"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#destroyById
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SchoolQuery` object.)
+             * </em>
+             */
+        R["destroyById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#removeById
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Delete a model instance by id from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `SchoolQuery` object.)
+             * </em>
+             */
+        R["removeById"] = R["deleteById"];
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.SchoolQuery#modelName
+        * @propertyOf lbServices.SchoolQuery
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `SchoolQuery`.
+        */
+        R.modelName = "SchoolQuery";
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.SchoolQuery#school
+             * @methodOf lbServices.SchoolQuery
+             *
+             * @description
+             *
+             * Fetches belongsTo relation school.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `School` object.)
+             * </em>
+             */
+        R.school = function() {
+          var TargetResource = $injector.get("School");
+          var action = TargetResource["::get::SchoolQuery::school"];
           return action.apply(R, arguments);
         };
 

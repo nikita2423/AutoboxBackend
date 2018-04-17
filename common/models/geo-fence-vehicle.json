@@ -35,7 +35,7 @@
         }
       }
     },
-    "isNotification":{
+    "isNotification": {
       "type": "boolean",
       "default": true
     },
