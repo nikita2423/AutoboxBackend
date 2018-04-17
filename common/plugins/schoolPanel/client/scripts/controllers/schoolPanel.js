@@ -11,6 +11,7 @@ angular.module($snaphy.getModuleName())
         $rootScope.settings             = HelperService.settings.get();
         $scope.getActiveTabSettings     = HelperService.getActiveTabSettings;
         $scope.setCurrentState          = HelperService.setCurrentState;
+        $scope.logout                   = HelperService.logout;
         //Use Database.getDb(pluginName, PluginDatabaseName) to get the Database Resource.
         $scope.init = function(){
             var userObj;
@@ -40,6 +41,15 @@ angular.module($snaphy.getModuleName())
                 .catch(function (error) {
                     console.error(error);
                 });
+        };
+
+
+        $scope.initAddBus = function(){
+            $scope.settings.tabs.addBus.data = {};
+        };
+
+        $scope.initAddStudent = function(){
+            $scope.settings.tabs.addStudent.data = {};
         };
 
     }//controller function..

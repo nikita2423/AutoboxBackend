@@ -378,6 +378,10 @@ angular.module($snaphy.getModuleName())
                 return settings;
             };
 
+            var logout = function(){
+                LoginServices.logout();
+            }
+
 
             var sendQuery = function(){
                 var SchoolQuery = Database.getDb("schoolPanel", "SchoolQuery");
@@ -496,7 +500,8 @@ angular.module($snaphy.getModuleName())
                 //Constructor to be called in each controller...
                 initialize: initialize,
                 setCurrentState: setCurrentState,
-                getActiveTabSettings: getActiveTabSettings
+                getActiveTabSettings: getActiveTabSettings,
+                logout : logout
 
             };
         }]);
