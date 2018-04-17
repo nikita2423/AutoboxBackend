@@ -138,7 +138,8 @@ angular.module($snaphy.getModuleName())
                                 "action": {
                                     create: false,
                                     showHeader: false,
-                                    delete: false
+                                    delete: false,
+                                    customColumn: false
                                 },
 
                                 beforeSaveHook: [
@@ -294,7 +295,11 @@ angular.module($snaphy.getModuleName())
                                 "action": {
                                     create: false,
                                     showHeader: false,
-                                    delete: false
+                                    delete: false,
+                                    customColumn: true,
+                                    customColumnName: "Bus Notification History",
+                                    imageSource: "../schoolPanel/images/bus_history.png",
+                                    state: "busHistory"
                                 },
 
                                 beforeSaveHook: [
@@ -348,8 +353,9 @@ angular.module($snaphy.getModuleName())
                             load : function(){
                                 changeTab(settings.tabs.queries);
                             },
-                            data: "",
+                            data: {},
                             title : "Bus Notification",
+                            busNumberData : "",
                             schema: window.STATIC_DATA.schema.BusNotification,
                             relationDetail: {
                                 "relationName": "busNotification",
@@ -357,7 +363,8 @@ angular.module($snaphy.getModuleName())
                                 "action": {
                                     create: false,
                                     showHeader: false,
-                                    delete: false
+                                    delete: false,
+                                    customColumn: false
                                 },
 
                                 beforeSaveHook: [
@@ -367,10 +374,12 @@ angular.module($snaphy.getModuleName())
                                     }
                                 ]
                             },
+                            displayData : displayData,
                             config: {
                                 stateName: "busHistory",
                                 stateOptions: {},
-                                active: false
+                                active: false,
+                                busModelId : ""
                             }
                         }
                     },
@@ -381,11 +390,38 @@ angular.module($snaphy.getModuleName())
                 return settings;
             };
 
+
+            var displayData = function(busModelId){
+                return $q(function(resolve, reject){
+                    var BusModel = Database.getDb("schoolPanel", "BusModel");
+                    var BusNotification = Database.getDb("schoolPanel", "BusNotification");
+                    BusModel.findOne({
+                        filter: {
+                            where : {
+                                id : busModelId
+                            }
+                        }
+                    }, function(data){
+                        if(data){
+                            settings.get().tabs.busNotification.busNumberData = data.busNumber;
+                        }
+                        resolve(data);
+                    }, function(error){
+                        reject(error);
+                    });
+                });
+            };
+
+            /**
+             * Logout Function..
+             */
             var logout = function(){
                 LoginServices.logout();
-            }
+            };
 
-
+            /**
+             * Send Query to Autobox..
+             */
             var sendQuery = function(){
                 var SchoolQuery = Database.getDb("schoolPanel", "SchoolQuery");
                 var message = angular.copy(settings.get().tabs.queries.data);
@@ -428,7 +464,7 @@ angular.module($snaphy.getModuleName())
 
                     });
                 }
-            }
+            };
 
             /**
              * Get the school Data..

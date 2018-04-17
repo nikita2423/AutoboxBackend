@@ -92,6 +92,7 @@ angular.module($snaphy.getModuleName())
               url: '/busHistory',
               templateUrl: '/schoolPanel/views/busHistory.html',
               controller: 'schoolPanelControl',
+              params: {busModelId : null},
               data: {
                   permissions: {
                       only: [employeeRole],
@@ -114,7 +115,7 @@ angular.module($snaphy.getModuleName())
                       redirectTo: loginState
                   }
               }
-          })
+          });
 
 
 

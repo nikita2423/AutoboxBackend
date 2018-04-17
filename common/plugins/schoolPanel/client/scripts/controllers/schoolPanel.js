@@ -3,15 +3,14 @@
 angular.module($snaphy.getModuleName())
 
 //Controller for schoolPanelControl ..
-.controller('schoolPanelControl', ['$scope', 'HelperService', '$stateParams', 'Database', '$rootScope', 'InitTableService', '$timeout',
-    function($scope, HelperService, $stateParams, Database, $rootScope, InitTableService, $timeout) {
+.controller('schoolPanelControl', ['$scope', 'HelperService', '$stateParams', 'Database', '$rootScope', 'InitTableService', '$timeout', '$state',
+    function($scope, HelperService, $stateParams, Database, $rootScope, InitTableService, $timeout, $state) {
         //Checking if default templating feature is enabled..
         var defaultTemplate = $snaphy.loadSettings('schoolPanel', "defaultTemplate");
         $snaphy.setDefaultTemplate(defaultTemplate);
         $rootScope.settings             = HelperService.settings.get();
         $scope.getActiveTabSettings     = HelperService.getActiveTabSettings;
         $scope.setCurrentState          = HelperService.setCurrentState;
-        $scope.logout                   = HelperService.logout;
         //Use Database.getDb(pluginName, PluginDatabaseName) to get the Database Resource.
         $scope.init = function(){
             var userObj;
@@ -50,6 +49,11 @@ angular.module($snaphy.getModuleName())
 
         $scope.initAddStudent = function(){
             $scope.settings.tabs.addStudent.data = {};
+        };
+
+        $scope.initBusHistory = function(){
+            $scope.settings.tabs.busNotification.config.busModelId = $state.params.busModelId;
+            $scope.settings.tabs.busNotification.displayData( $scope.settings.tabs.busNotification.config.busModelId);
         };
 
     }//controller function..

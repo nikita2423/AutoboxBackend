@@ -1,6 +1,6 @@
-<div ng-init="init();" class="block block-themed block-transparent remove-margin-b" style="margin-left:10px;">
+<div ng-init="init(); initBusHistory();" class="block block-themed block-transparent remove-margin-b" style="margin-left:10px;">
     <div class="col-md-12" style="margin-top:10px; margin-bottom: 10px;">
-        <span  style="font-weight:bold;font-size:16px;margin-top:2px;">BUS NO. 23</span>
+        <span  style="font-weight:bold;font-size:16px;margin-top:2px;">{{settings.tabs.busNotification.busNumberData}}</span>
     </div>
     <div ng-if="settings.config.isUserLoaded">
         <div class="dataClass" ng-init="relationDetail = settings.tabs.busNotification.relationDetail;" >
