@@ -37,6 +37,14 @@
   },
   "widgets":[],
   "tables":{
-
+    "added": {
+      "date": true
+    },
+    "serviceStartDate": {
+      "date": true
+    },
+    "serviceEndDate": {
+      "date": true
+    }
   }
 }

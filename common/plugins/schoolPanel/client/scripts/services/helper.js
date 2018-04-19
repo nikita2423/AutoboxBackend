@@ -164,7 +164,7 @@ angular.module($snaphy.getModuleName())
                             data: {},
                             form: {},
                             title : "School",
-                            schema: window.STATIC_DATA.schema.School,
+                            schema: loadSchoolSchema(window.STATIC_DATA.schema.School),
                             getSchoolData : getSchoolData,
                             relationDetail: {
                                 "relationName": "schoolProfile",
@@ -296,7 +296,7 @@ angular.module($snaphy.getModuleName())
                                     create: false,
                                     showHeader: false,
                                     delete: false,
-                                    customColumn: true,
+                                    customColumn: false,
                                     customColumnName: "Bus Notification History",
                                     imageSource: "../schoolPanel/images/bus_history.png",
                                     state: "busHistory"
@@ -429,6 +429,40 @@ angular.module($snaphy.getModuleName())
                 });
             };
 
+
+            var loadSchoolSchema = function(schema_){
+                var schema = schema_;
+                var newSchema = angular.copy(schema);
+                for (var key in newSchema.container) {
+                    if (newSchema.container.hasOwnProperty(key)) {
+                        if (newSchema.container[key].schema) {
+                            if (newSchema.container[key].schema.length) {
+                                newSchema.container[key].schema.forEach(function (obj) {
+                                    if (obj.type !== "objectValue") {
+                                        if(obj.templateOptions){
+                                            obj.templateOptions.disabled = true;
+                                        }
+                                    } else{
+                                        if(obj.key === 'latlong'){
+                                          if (obj.templateOptions) {
+                                             if (obj.templateOptions.fields) {
+                                             obj.templateOptions.fields.forEach(function (nested_obj) {
+                                             if (nested_obj.templateOptions) {
+                                             nested_obj.templateOptions.disabled = true;
+                                             }
+                                             });
+                                             }
+                                         }
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+                return newSchema;
+            };
+
             /**
              * Logout Function..
              */
@@ -501,7 +535,15 @@ angular.module($snaphy.getModuleName())
                         delete data.$promise;
                         delete data.$resolved;
                         angular.copy(data, settings.get().tabs.schoolProfile.data);
-                        resolve(data);
+                        if (settings.get().tabs.schoolProfile.data) {
+                            if(settings.get().tabs.schoolProfile.data.serviceStartDate){
+                                settings.get().tabs.schoolProfile.data.serviceStartDate = moment.utc(settings.get().tabs.schoolProfile.data.serviceStartDate).toDate();
+                            }
+                            if(settings.get().tabs.schoolProfile.data.serviceEndDate){
+                                settings.get().tabs.schoolProfile.data.serviceEndDate = moment.utc(settings.get().tabs.schoolProfile.data.serviceEndDate).toDate();
+                            }
+                        }
+                        resolve(settings.get().tabs.schoolProfile.data);
                     }, function(error){
                         reject(error);
                     });
