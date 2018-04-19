@@ -387,6 +387,17 @@ angular.module($snaphy.getModuleName())
                                 label: "Select Month"
 
                             }
+                        },
+                        importStudent: {
+                            load : function(){
+                                changeTab(settings.tabs.importStudent);
+                            },
+                            data : {},
+                            config: {
+                                stateName: "importStudent",
+                                stateOptions: {},
+                                active: false
+                            }
                         }
                     },
                     logout: {

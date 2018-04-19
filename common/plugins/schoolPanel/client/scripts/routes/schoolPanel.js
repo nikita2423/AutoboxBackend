@@ -115,6 +115,21 @@ angular.module($snaphy.getModuleName())
                       redirectTo: loginState
                   }
               }
+          })
+
+          /**
+           * Import Student Data..
+           */
+          .state('importStudent', {
+              url: '/importStudent',
+              templateUrl: '../dataImport/views/dataImport.html',
+              controller: 'dataImportControl',
+              data: {
+                  permissions: {
+                      only: [employeeRole],
+                      redirectTo: loginState
+                  }
+              }
           });
 
 

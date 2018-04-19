@@ -5,6 +5,7 @@
   "js": {
     "/schoolPanel/scripts/routes/schoolPanel.js": "schoolPanelRoute",
     "/schoolPanel/scripts/controllers/schoolPanel.js": "schoolPanelController",
+    "/schoolPanel/scripts/controllers/dataImport.js": "dataImportController",
     "/schoolPanel/scripts/services/helper.js": "schoolPanelService",
     "/schoolPanel/scripts/directives/schoolPanel.js": "schoolPanelDirective",
     "/schoolPanel/scripts/filters/schoolPanel.js": "schoolPanelFilters"

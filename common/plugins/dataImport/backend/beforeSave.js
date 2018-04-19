@@ -487,6 +487,39 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 			}
 
         },
+
+        addSchoolId: function(sheetRowObj, callback){
+		    const School = server.models['School'];
+		    const Student = server.models['Student'];
+		    if(sheetRowObj.Student){
+		        if(sheetRowObj.Student.data){
+		            if(sheetRowObj.Student.data.schoolName){
+                        School.findOne({
+                            where: {
+                                name : sheetRowObj.Student.data.schoolName
+                            }
+                        })
+                            .then(function(school){
+                                if(school){
+                                    sheetRowObj.Student.data.schoolId = school.id;
+                                }
+                            })
+                            .then(function(){
+                                callback(null);
+                            })
+                            .catch(function(error){
+                                callback(error);
+                            })
+                    } else{
+		                callback(new Error("School not present"));
+                    }
+                } else{
+		            callback(new Error("Student Data not present"));
+                }
+            } else{
+		        callback(new Error("Student sheet not present"));
+            }
+        },
         /**
          *
          * @param sheetRowObj

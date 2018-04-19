@@ -7,7 +7,7 @@
   "load":{
     "root":true,
     "dealer": false,
-    "school":false
+    "schoolPanel":false
   },
   "constants":{
     "sheetColNumber": "sheetColNumber"
@@ -694,6 +694,68 @@
               "modelProperty": "name"
             }
           ]
+        }
+      ]
+    },
+    "student": {
+      "structure": [
+        {
+          "model": "Student",
+          "properties": [
+            {
+              "sheetColName": "Student General Register Number",
+              "modelProperty": "rollNumber"
+            },
+            {
+              "sheetColName": "RFID Number",
+              "modelProperty": "rfidSerialNumber"
+            },
+            {
+              "sheetColName": "Date Of Issue",
+              "modelProperty": "issuedOn"
+            },
+            {
+              "sheetColName": "Name of Student",
+              "modelProperty": "name"
+            },
+            {
+              "sheetColName": "Standard",
+              "modelProperty": "standard"
+            },
+            {
+              "sheetColName": "Blood Group",
+              "modelProperty": "bloodGroup"
+            },
+            {
+              "sheetColName": "Address",
+              "modelProperty": "address"
+            },
+            {
+              "sheetColName": "Emergency Contact Number",
+              "modelProperty": "emergencyContactNumber"
+            },
+            {
+              "sheetColName": "Assigned Pick-up Bus Number",
+              "modelProperty": "pickUpBusNumber"
+            },
+            {
+              "sheetColName": "Assigned Pick-up Location",
+              "modelProperty": "pickUpLocation"
+            },
+            {
+              "sheetColName": "Assigned Drop-off Bus Number",
+              "modelProperty": "dropOffBusNumber"
+            },
+            {
+              "sheetColName": "Assigned Drop-off Location",
+              "modelProperty": "dropOffLocation"
+            },
+            {
+              "sheetColName": "School Name",
+              "modelProperty": "schoolName"
+            }
+          ],
+          "beforeSave": ["addSchoolId"]
         }
       ]
     }
