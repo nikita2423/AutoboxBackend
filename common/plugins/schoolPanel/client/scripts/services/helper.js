@@ -379,7 +379,12 @@ angular.module($snaphy.getModuleName())
                                 stateName: "busHistory",
                                 stateOptions: {},
                                 active: false,
-                                busModelId : ""
+                                busModelId : "",
+                                dateClass: ["col-md-3", "clearfix", "dateDashboard"],
+                                labelClass: ["col-md-1", "labelDashboard"],
+                                columnName: "added",
+                                modelSetting: {},
+                                label: "Filter by Date"
                             }
                         }
                     },

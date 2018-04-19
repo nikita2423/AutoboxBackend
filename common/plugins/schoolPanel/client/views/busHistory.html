@@ -1,7 +1,25 @@
 <div ng-init="init(); initBusHistory();" class="block block-themed block-transparent remove-margin-b" style="margin-left:10px;">
     <div class="col-md-12" style="margin-top:10px; margin-bottom: 10px;">
-        <span  style="font-weight:bold;font-size:16px;margin-top:2px;">{{settings.tabs.busNotification.busNumberData}}</span>
+        <span  style="font-weight:bold;font-size:16px;margin-top:2px;">Bus No. 1</span>
+        <div
+                ng-init="tableInstance = tableViewInit(relationDetail, relationType);"
+                class="col-md-4" style="background-color: #ffffff; float: right">
+            <div class="col-md-8" style="margin-top: -7px;margin-left: 7px;background-color: #ffffff; float: right">
+                <dealer-filter-date
+                        label-class="settings.tabs.dashboard.config.labelClass"
+                        date-class="settings.tabs.dashboard.config.dateClass"
+                        column-name="{{settings.tabs.dashboard.config.columnName}}"
+                        model-settings="settings.tabs.dashboard.config.modelSetting"
+                        parent-scope="tableInstance"
+                        label="{{settings.tabs.dashboard.config.label}}">
+                </dealer-filter-date>
+                <!--<div class="form-group">
+                    <button ng-click="tableInstance.resetAll()" class="btn btn-minw btn-default pull-right" type="button" style="margin-right:5px;margin-bottom:5px;margin-top:-5px;">Reset</button>
+                </div>-->
+            </div>
+        </div>
     </div>
+
     <div ng-if="settings.config.isUserLoaded">
         <div class="dataClass" ng-init="relationDetail = settings.tabs.busNotification.relationDetail;" >
             <div ng-if="relationDetail">
