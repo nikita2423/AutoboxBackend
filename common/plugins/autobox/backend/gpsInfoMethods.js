@@ -152,6 +152,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                 },
                 {
                     arg: "limit", type: "number"
+                },
+                {
+                    arg: "currentDate", type: "string"
                 }
             ],
             returns: {
@@ -492,7 +495,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
      }
    };
 
-   const findAllGpsNotification = function(ctx, lastDate, deviceIMEI, limit, callback){
+   const findAllGpsNotification = function(ctx, lastDate, deviceIMEI, limit, currentDate, callback){
        lastDate = !lastDate ? new Date():new Date(lastDate);
        const request = ctx.req;
        if(!deviceIMEI && !limit){
@@ -502,13 +505,15 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                if(request.accessToken.userId){
                    const customerId = request.accessToken.userId;
                    const GpsNotification = databaseObj.GpsNotification;
+                   const fromDate =  moment(currentDate, "DD/MM/YYYY").subtract(1, 'month').toDate();
+
                    GpsNotification.find({
                        limit: limit,
                        where: {
                            deviceIMEI : deviceIMEI,
-                           added: {
-                               lt : lastDate
-                           },
+                           and:[
+                               {added:{lt:lastDate}}, {added:{gt: fromDate}}
+                           ],
                            customerId : customerId
                        },
                        order: "added DESC"
