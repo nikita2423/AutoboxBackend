@@ -7,6 +7,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     const async = require("async");
     const process = require("process");
     const send = helper.loadPlugin("smsService");
+    const moment = require("moment");
 
     var init = function(){
         createGpsPacketDataMethod();
