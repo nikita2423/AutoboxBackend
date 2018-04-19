@@ -44,9 +44,6 @@
 [submodule "common/plugins/aboutUs"]
 	path = common/plugins/aboutUs
 	url = https://github.com/snaphy-plugin-2/aboutus-plugin.git
-[submodule "common/plugins/detailView"]
-	path = common/plugins/detailView
-	url = https://github.com/snaphy-plugin-2/detailView.git
 [submodule "common/plugins/fileUpload"]
 	path = common/plugins/fileUpload
 	url = https://github.com/snaphy-plugin-2/fileUpload.git
