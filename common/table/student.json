@@ -33,6 +33,16 @@
       "class":["col-md-12", "clearfix"]
     }
   },
+  "settings": {
+    "tables":{
+      "beforeTableLoad": "beforeTableLoad",
+      "resetWhenBroadCast": "TableLoaded",
+      "beforeLoad":{
+        "schoolId": "$user.id"
+      }
+    }
+
+  },
   "tables":{
     "rfidSerialNumber": {
       "label": "RFID No",

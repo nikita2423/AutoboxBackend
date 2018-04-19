@@ -13,6 +13,8 @@ module.exports = function(Student, server, helper) {
             instance.updated = new Date();
         }
 
+
+
         next();
     });
 };
