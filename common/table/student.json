@@ -39,15 +39,11 @@
       "search": "text"
     },
     "rollNumber": {
-      "label": "Roll No",
+      "label": "GR No",
       "search": "text"
     },
-    "firstName": {
+    "name": {
       "label": "Name",
-      "search": "text"
-    },
-    "lastName": {
-      "label": "Surname",
       "search": "text"
     },
     "emergencyContactNumber": {
@@ -61,6 +57,12 @@
     "bloodGroup": {
       "label": "Blood Group",
       "search": "text"
+    },
+    "standard": {
+      "display": false
+    },
+    "issuedOn": {
+      "display": false
     },
     "pickUpBusNumber": {
       "label": "Pickup Bus No",

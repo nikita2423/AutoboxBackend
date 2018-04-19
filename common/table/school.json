@@ -1,14 +1,14 @@
 {
   "box": {
-    "emergencyContactContainer1": {
-      "priority":1,
+    "serviceContainer": {
+      "priority": 1,
       "style":{
         "padding-top": "20px",
         "margin-bottom": "10px"
       },
       "class":["col-md-12", "clearfix"]
     },
-    "emergencyContactContainer2": {
+    "emergencyContactContainer1": {
       "priority":2,
       "style":{
         "padding-top": "20px",
@@ -16,8 +16,16 @@
       },
       "class":["col-md-12", "clearfix"]
     },
-    "emergencyContactContainer3": {
+    "emergencyContactContainer2": {
       "priority":3,
+      "style":{
+        "padding-top": "20px",
+        "margin-bottom": "10px"
+      },
+      "class":["col-md-12", "clearfix"]
+    },
+    "emergencyContactContainer3": {
+      "priority":4,
       "style":{
         "padding-top": "20px"
       },

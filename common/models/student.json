@@ -6,21 +6,6 @@
     "validateUpsert": true
   },
   "properties": {
-    "rfidSerialNumber": {
-      "type": "string",
-      "template": {
-        "type": "input",
-        "templateOptions": {
-          "type": "text",
-          "priority": 3,
-          "label": "RFID Serial Number",
-          "id": "rfidSerialNumber",
-          "box": "bloodGroupContainer",
-          "inline": "true",
-          "colSize": "col-md-4"
-        }
-      }
-    },
     "rollNumber": {
       "type": "string",
       "template": {
@@ -28,7 +13,7 @@
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Student Roll Number",
+          "label": "General Register Number",
           "id": "rollNumber",
           "box": "studentInfoContainer",
           "inline": "true",
@@ -36,63 +21,80 @@
         }
       }
     },
-    "firstName": {
+    "rfidSerialNumber": {
       "type": "string",
       "template": {
         "type": "input",
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Student First Name",
-          "id": "firstName",
+          "label": "RFID Number",
+          "id": "rfidSerialNumber",
           "box": "studentInfoContainer",
           "inline": "true",
           "colSize": "col-md-4"
         }
       }
     },
-    "lastName": {
+    "issuedOn": {
       "type": "string",
       "template": {
         "type": "input",
         "templateOptions": {
-          "type": "text",
+          "type": "date",
           "priority": 3,
-          "label": "Student Last Name",
-          "id": "lastName",
+          "label": "Date Of Issue",
+          "id": "issuedOn",
           "box": "studentInfoContainer",
           "inline": "true",
           "colSize": "col-md-4"
         }
       }
     },
-    "emergencyContactNumber": {
+    "name": {
       "type": "string",
       "template": {
         "type": "input",
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Emergency Contact Number",
-          "id": "emergencyContactNumber",
+          "label": "Name Of Student",
+          "id": "name",
           "box": "bloodGroupContainer",
           "inline": "true",
           "colSize": "col-md-4"
         }
       }
     },
-    "address": {
+    "standard": {
       "type": "string",
       "template": {
-        "type": "input",
+        "type": "selectString",
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Address",
-          "id": "address",
-          "box": "addressContainer",
+          "label": "Standard",
+          "id": "firstName",
+          "box": "bloodGroupContainer",
           "inline": "true",
-          "colSize": "col-md-12"
+          "colSize": "col-md-4",
+          "options": [
+            "Nursery",
+            "LKG",
+            "KG",
+            "I STD",
+            "II STD",
+            "III STD",
+            "IV STD",
+            "V STD",
+            "VI STD",
+            "VII STD",
+            "VIII STD",
+            "IX STD",
+            "X STD",
+            "XI STD",
+            "XII STD"
+          ]
         }
       }
     },
@@ -111,6 +113,38 @@
         }
       }
     },
+    "address": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Address",
+          "id": "address",
+          "box": "addressContainer",
+          "inline": "true",
+          "colSize": "col-md-8"
+        }
+      }
+    },
+
+    "emergencyContactNumber": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "priority": 3,
+          "label": "Emergency Contact Number",
+          "id": "emergencyContactNumber",
+          "box": "addressContainer",
+          "inline": "true",
+          "colSize": "col-md-4"
+        }
+      }
+    },
+
     "pickUpBusNumber": {
       "type": "string",
       "template": {
@@ -118,7 +152,7 @@
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Pick Up Bus Number",
+          "label": "Assigned Pick-up Bus Number",
           "id": "pickUpBusNumberId",
           "box": "pickUpContainer",
           "inline": "true",
@@ -133,8 +167,8 @@
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Pick Up Bus Location",
-          "id": "pickUpBusLocationId",
+          "label": "Assigned Pick-up Location",
+          "id": "pickUpLocation",
           "box": "pickUpContainer",
           "inline": "true",
           "colSize": "col-md-12"
@@ -148,7 +182,7 @@
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Drop Off Bus Number",
+          "label": "Assigned Drop-off Bus Number",
           "id": "dropOffBusNumberId",
           "box": "pickUpContainer",
           "inline": "true",
@@ -163,7 +197,7 @@
         "templateOptions": {
           "type": "text",
           "priority": 3,
-          "label": "Drop Off Bus Location",
+          "label": "Assigned Drop-off Location",
           "id": "dropOffLocation",
           "box": "pickUpContainer",
           "inline": "true",

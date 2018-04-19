@@ -384,7 +384,8 @@ angular.module($snaphy.getModuleName())
                                 labelClass: ["col-md-1", "labelDashboard"],
                                 columnName: "added",
                                 modelSetting: {},
-                                label: "Filter by Date"
+                                label: "Select Month"
+
                             }
                         }
                     },

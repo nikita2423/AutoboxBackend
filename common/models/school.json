@@ -114,7 +114,6 @@
           "priority": 3,
           "label": "School Address",
           "id": "address"
-
         }
       }
     },
@@ -150,6 +149,36 @@
               }
             }
           ]
+        }
+      }
+    },
+    "serviceStartDate": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "date",
+          "priority": 3,
+          "label": "Service Start Date",
+          "id": "serviceStartDate",
+          "box": "serviceContainer",
+          "inline": true,
+          "colSize": "col-md-4"
+        }
+      }
+    },
+    "serviceEndDate": {
+      "type": "string",
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "date",
+          "priority": 3,
+          "label": "Service End Date",
+          "id": "serviceEndDate",
+          "box": "serviceContainer",
+          "inline": true,
+          "colSize": "col-md-4"
         }
       }
     },
