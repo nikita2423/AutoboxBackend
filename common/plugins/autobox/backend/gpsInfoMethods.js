@@ -13,7 +13,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         createGpsTrackerInfoMethod();
         findAllGpsInfoMethod();
         deleteGpsInfoMethod();
-        fetchGpsInfoDetailsMethod();
+        //fetchGpsInfoDetailsMethod();
         findAllGpsNotificationMethod();
         findAllGpsPacketDataInfoMethod();
         fetchGpsNotificationDataMethod();
