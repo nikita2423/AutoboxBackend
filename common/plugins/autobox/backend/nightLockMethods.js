@@ -275,6 +275,29 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                                 }
                                                                             });
                                                                         }
+                                                                    } else{
+                                                                        //send engine status notification..
+                                                                        eventType = "Ignition On";
+                                                                        title = "Engine has started";
+                                                                        modelName = gpsTrackerInfo.modelName;
+                                                                        const message = engineStatusMessageFormat(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
+                                                                        if(customer.id && gpsTrackerInfo.gpsTrackerNotification["engineOn"] === "on"){
+                                                                            sendNotification(server, message, customer.id, pushFrom, function(error){
+                                                                                if(error){
+                                                                                    console.log(error);
+                                                                                    callback(error);
+                                                                                } else{
+                                                                                    //console.log("Notification for engine status send successfully");
+                                                                                    return databaseObj.GpsNotification.create({
+                                                                                        message: title,
+                                                                                        deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                                        status: "active",
+                                                                                        customerId: customer.id,
+                                                                                        modelName: gpsTrackerInfo.modelName
+                                                                                    });
+                                                                                }
+                                                                            });
+                                                                        }
                                                                     }
                                                                 }
                                                             }

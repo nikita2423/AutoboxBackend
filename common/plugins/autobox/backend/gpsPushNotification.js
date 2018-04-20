@@ -192,7 +192,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                         return sendGpsBatteryLowNotification(eventType, title, modelName, customer, gpsTrackerInfo, pushFrom, gpsPacketDataObj, customerName);
 
                                                                     } else if(gpsPacketDataObj.eventType === packageObj.gps.ignition_on){
-                                                                        eventType = "Ignition On";
+                                                                        /*eventType = "Ignition On";
                                                                         title = "Engine has started";
                                                                         modelName = gpsTrackerInfo.modelName;
                                                                         const message = engineStatusMessageFormat(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
@@ -212,7 +212,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                                     });
                                                                                 }
                                                                             });
-                                                                        }
+                                                                        }*/
                                                                     } else if(gpsPacketDataObj.eventType === packageObj.gps.ignition_off){
                                                                         eventType = "Ignition Off";
                                                                         title = "Engine has stopped";
