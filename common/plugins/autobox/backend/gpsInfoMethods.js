@@ -366,6 +366,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                        })
                        .catch(function(error){
                            callback(error);
+                           console.error(error);
                        });
                } else{
                    callback(new Error("User not valid"));
