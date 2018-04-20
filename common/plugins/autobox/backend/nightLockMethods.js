@@ -182,7 +182,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
     const sendNightLockNotification = function(){
         const GpsPacketData = databaseObj.GpsPacketData;
+        console.log("Night Lock after save");
         GpsPacketData.observe("after save", function(ctx, next){
+
             const instance = ctx.instance;
             const gpsPacketDataObj = instance.toJSON();
             let customerName;
