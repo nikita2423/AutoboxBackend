@@ -196,7 +196,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                         title = "Engine has started";
                                                                         modelName = gpsTrackerInfo.modelName;
                                                                         const message = engineStatusMessageFormat(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
-                                                                        if(customer.id && customerInstance.gpsTrackerNotification["engineOn"] === "on"){
+                                                                        if(customer.id && gpsTrackerInfo.gpsTrackerNotification["engineOn"] === "on"){
                                                                             sendNotification(server, message, customer.id, pushFrom, function(error){
                                                                                 if(error){
                                                                                     console.log(error);
@@ -219,7 +219,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                         modelName = gpsTrackerInfo.modelName;
                                                                         // server.logger.info("gps id", gpsPacketDataObj);
                                                                         const message = engineStatusMessageFormat(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
-                                                                        if(customer.id  && customerInstance.gpsTrackerNotification["engineOff"] === "on"){
+                                                                        if(customer.id  && gpsTrackerInfo.gpsTrackerNotification["engineOff"] === "on"){
                                                                             sendNotification(server, message, customer.id, pushFrom, function(error){
                                                                                 if(error){
                                                                                     console.log(error);
