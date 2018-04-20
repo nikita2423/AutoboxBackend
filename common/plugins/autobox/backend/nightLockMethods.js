@@ -196,6 +196,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let promises = [];
             let customerIdList = [];
             let nightLockInstance;
+            let modelName;
             if(ctx.isNewInstance){
                 process.nextTick(function(){
                     databaseObj.NightLock.find({
@@ -258,7 +259,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                         //Throw stolen notification
                                                                         eventType = "CarStolen";
                                                                         title = "Car is suspected to be stolen";
-                                                                        var message = nightLockMessageFormat(customerName, eventType, title, instanceId);
+                                                                        modelName = gpsTrackerInfo.modelName;
+                                                                        var message = nightLockMessageFormat(customerName, eventType, title, modelName, instanceId, gpsTrackerInfo.deviceIMEI);
                                                                         if(customerInstance.id && gpsTrackerInfo.gpsTrackerNotification["nightLock"] === "on"){
                                                                             sendNotification(server, message, customerInstance.id, pushFrom, function(error){
                                                                                 if(error){
@@ -270,7 +272,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                                         message: title,
                                                                                         deviceIMEI : gpsPacketDataObj.deviceIMEI,
                                                                                         status: "active",
-                                                                                        customerId: customerInstance.id
+                                                                                        customerId: customerInstance.id,
+                                                                                        modelName: gpsTrackerInfo.modelName
                                                                                     });
                                                                                 }
                                                                             });
@@ -281,8 +284,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                         title = "Engine has started";
                                                                         modelName = gpsTrackerInfo.modelName;
                                                                         const message = engineStatusMessageFormat(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
-                                                                        if(customer.id && gpsTrackerInfo.gpsTrackerNotification["engineOn"] === "on"){
-                                                                            sendNotification(server, message, customer.id, pushFrom, function(error){
+                                                                        if(customerInstance.id && gpsTrackerInfo.gpsTrackerNotification["engineOn"] === "on"){
+                                                                            sendNotification(server, message, customerInstance.id, pushFrom, function(error){
                                                                                 if(error){
                                                                                     console.log(error);
                                                                                     callback(error);
@@ -292,7 +295,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                                         message: title,
                                                                                         deviceIMEI : gpsPacketDataObj.deviceIMEI,
                                                                                         status: "active",
-                                                                                        customerId: customer.id,
+                                                                                        customerId: customerInstance.id,
                                                                                         modelName: gpsTrackerInfo.modelName
                                                                                     });
                                                                                 }
@@ -334,15 +337,30 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
 
-    var nightLockMessageFormat = function(to, eventType, title, gpsPacketDataId){
+    var nightLockMessageFormat = function(to, eventType, title, modeName, gpsPacketDataId, deviceIMEI){
         var message = {
             to : to,
             type : eventType,
             title : title,
-            id : gpsPacketDataId
+            modeName : modelName,
+            id : gpsPacketDataId,
+            deviceIMEI : deviceIMEI
         };
         return JSON.stringify(message);
     };
+
+    var engineStatusMessageFormat = function(to, eventType, title, modelName, gpsPacketDataId, deviceIMEI){
+        var message = {
+            to : to,
+            type : eventType,
+            title : title,
+            modeName : modelName,
+            id : gpsPacketDataId,
+            deviceIMEI : deviceIMEI
+        };
+        return JSON.stringify(message);
+    };
+
 
     const sendNotification = function(app, message, id, from, callback){
         //push.push(app, message, id, from, callback);
