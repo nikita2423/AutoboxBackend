@@ -12,7 +12,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     var init = function(){
         //gpsTestNotification();
         setGpsNotificationStatusMethod();
-        //sendGpsNotification();
+        sendGpsNotification();
         /*sendHardBrakingAccelerationNotification_();
          sendGpsBatteryLowNotification_();
          sendEngineStatusNotification_();
@@ -80,6 +80,440 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
         }
     };
+
+    const sendGpsNotification = function(){
+        const GpsPacketData = server.models["GpsPacketData"];
+        GpsPacketData.observe("after save", function(ctx, next){
+            const instance = ctx.instance;
+            const gpsPacketDataObj = instance.toJSON();
+            let customerName;
+            let customerInstance;
+            let eventType;
+            let title;
+            let modelName;
+            let customerIdList = [];
+            let gpsTrackerInfoDataList = [];
+            var promises = [];
+            if(ctx.isNewInstance){
+                process.nextTick(function(){
+                    databaseObj.GpsTrackerInfo.find({
+                        where: {
+                            deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                            status :"active"
+                        }
+                    })
+                        .then(function(gpsTrackerInfoList){
+                            if(gpsTrackerInfoList){
+                                if(gpsTrackerInfoList.length){
+                                    gpsTrackerInfoList.forEach(function(gpsTrackerInfo){
+                                        if(gpsTrackerInfo){
+                                            gpsTrackerInfoDataList.push(gpsTrackerInfo);
+                                        }
+                                    });
+                                }
+                            }
+                        })
+                        .then(function(){
+                            if(gpsTrackerInfoDataList){
+                                if(gpsTrackerInfoDataList.length){
+                                    gpsTrackerInfoDataList.forEach(function(gpsTrackerInfo){
+                                        if(gpsTrackerInfo){
+                                            const Customer = databaseObj.Customer;
+                                            promises.push(function(callback){
+                                                Customer.findById(gpsTrackerInfo.customerId)
+                                                    .then(function(customer){
+                                                        if(customer){
+                                                            customerInstance = customer;
+                                                            if(customer.firstName){
+                                                                customerName = customer.firstName;
+                                                            } else{
+                                                                customerName = "";
+                                                            }
+                                                            var lastName = customer.lastName? customer.lastName : "";
+                                                            customerName = customerName + " " + lastName;
+                                                            var pushFrom = packageObj.companyName;
+                                                            if(gpsPacketDataObj.id){
+                                                                const instanceId = gpsPacketDataObj.id;
+                                                                if(gpsPacketDataObj.eventType){
+                                                                    if(gpsPacketDataObj.eventType === packageObj.gps.harsh_braking){
+                                                                        if(gpsPacketDataObj.ignitionStatus){
+                                                                            if(gpsPacketDataObj.ignitionStatus === "on"){
+                                                                                //Harsh Braking
+                                                                                eventType = "Harsh Brake";
+                                                                                title = "Harsh Brake has been applied";
+                                                                                modelName = gpsTrackerInfo.modelName;
+                                                                                const message = brakeAccelerationMessageFormat(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
+                                                                                if(customer.id && gpsTrackerInfo.gpsTrackerNotification["hardBraking"] === "on"){
+                                                                                    sendNotification(server, message, customer.id, pushFrom, function(error){
+                                                                                        if(error){
+                                                                                            //console.log(error);
+                                                                                            server.logger.error(error);
+                                                                                            callback(error);
+                                                                                        } else{
+                                                                                            server.logger.info("Notification for gps has been send successfully");
+                                                                                            return databaseObj.GpsNotification.create({
+                                                                                                message: title,
+                                                                                                deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                                                status: "active",
+                                                                                                customerId: customer.id
+                                                                                            });
+                                                                                        }
+                                                                                    });
+                                                                                }
+                                                                            } else{
+                                                                                //Accident Detection
+                                                                                return sendAccidentDetectionNotification(eventType, title, modelName, customer, gpsTrackerInfo, pushFrom, gpsPacketDataObj, customerName);
+                                                                            }
+                                                                        }
+                                                                    } else if(gpsPacketDataObj.eventType === packageObj.gps.harsh_acceleration){
+                                                                        eventType = "Harsh Acceleration";
+                                                                        title = "Harsh Acceleration has been applied";
+                                                                        modelName = gpsTrackerInfo.modelName;
+                                                                        const message = brakeAccelerationMessageFormat(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
+                                                                        if(customer.id && gpsTrackerInfo.gpsTrackerNotification["hardAcceleration"] === "on"){
+                                                                            sendNotification(server, message, customer.id, pushFrom, function(error){
+                                                                                if(error){
+                                                                                    console.log(error);
+                                                                                    callback(error);
+                                                                                } else{
+                                                                                    //console.log("Notification for gps has been send successfully");
+                                                                                    return databaseObj.GpsNotification.create({
+                                                                                        message: title,
+                                                                                        deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                                        status: "active",
+                                                                                        customerId: customer.id,
+                                                                                        modelName: gpsTrackerInfo.modelName
+                                                                                    });
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                    } else if(gpsPacketDataObj.eventType === packageObj.gps.internal_battery_low){
+                                                                        //Low Battery Alert
+                                                                        return sendGpsBatteryLowNotification(eventType, title, modelName, customer, gpsTrackerInfo, pushFrom, gpsPacketDataObj, customerName);
+
+                                                                    } else if(gpsPacketDataObj.eventType === packageObj.gps.ignition_on){
+                                                                        eventType = "Ignition On";
+                                                                        title = "Engine has started";
+                                                                        modelName = gpsTrackerInfo.modelName;
+                                                                        const message = engineStatusMessageFormat(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
+                                                                        if(customer.id && customerInstance.gpsTrackerNotification["engineOn"] === "on"){
+                                                                            sendNotification(server, message, customer.id, pushFrom, function(error){
+                                                                                if(error){
+                                                                                    console.log(error);
+                                                                                    callback(error);
+                                                                                } else{
+                                                                                    //console.log("Notification for engine status send successfully");
+                                                                                    return databaseObj.GpsNotification.create({
+                                                                                        message: title,
+                                                                                        deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                                        status: "active",
+                                                                                        customerId: customer.id,
+                                                                                        modelName: gpsTrackerInfo.modelName
+                                                                                    });
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                    } else if(gpsPacketDataObj.eventType === packageObj.gps.ignition_off){
+                                                                        eventType = "Ignition Off";
+                                                                        title = "Engine has stopped";
+                                                                        modelName = gpsTrackerInfo.modelName;
+                                                                        // server.logger.info("gps id", gpsPacketDataObj);
+                                                                        const message = engineStatusMessageFormat(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
+                                                                        if(customer.id  && customerInstance.gpsTrackerNotification["engineOff"] === "on"){
+                                                                            sendNotification(server, message, customer.id, pushFrom, function(error){
+                                                                                if(error){
+                                                                                    console.log(error);
+                                                                                    callback(error);
+                                                                                } else{
+                                                                                    console.log("Notification for engine status send successfully");
+                                                                                    return databaseObj.GpsNotification.create({
+                                                                                        message: title,
+                                                                                        deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                                        status: "active",
+                                                                                        customerId: customer.id,
+                                                                                        modelName: gpsTrackerInfo.modelName
+                                                                                    });
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                    } else if(gpsPacketDataObj.eventType === packageObj.gps.over_speed_started && gpsPacketDataObj.ignitionStatus === "on"){
+                                                                        //Over Speed Notification..
+                                                                        eventType = "Over Speed";
+                                                                        title = "Over Speed Started";
+                                                                        modelName = gpsTrackerInfo.modelName;
+                                                                        return sendOverSpeedNotification(eventType, title, modelName, customer, gpsTrackerInfo, pushFrom, gpsPacketDataObj, customerName);
+
+                                                                    } else if(gpsPacketDataObj.batteryStatus !== "vehicle"){
+                                                                        //Device disconnected Notification..
+                                                                        return sendGpsDeviceStatusNotification(eventType, title, modelName, customer, gpsTrackerInfo, pushFrom, gpsPacketDataObj, customerName);
+
+                                                                    } else if(gpsPacketDataObj.ignitionStatus === "off" && gpsPacketDataObj.speed > 15){
+                                                                        //Vehicle Towing Notification..
+                                                                        return sendVehicleTowingNotification(eventType, title, modelName, customer, gpsTrackerInfo, pushFrom, gpsPacketDataObj, customerName);
+
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+
+                                                    })
+                                                    .then(function(gpsNotification){
+                                                        callback(null);
+                                                    })
+                                                    .catch(function(error){
+                                                        callback(error);
+                                                    });
+                                            });
+                                        }
+                                    });
+                                }
+                            }
+
+                            async.series(promises, function (error) {
+                                if(error){
+                                    server.logger.error(error);
+                                } else{
+                                    //server.logger.info("Hard Acceleration");
+                                }
+                            });
+                        })
+                        .catch(function(error){
+                            server.logger.error(error);
+                        });
+                });
+            }
+
+            next();
+        });
+    };
+
+    const sendAccidentDetectionNotification = function(eventType, title, modelName, customer, gpsTrackerInfo, pushFrom, gpsPacketDataObj, customerName){
+        return new Promise(function(resolve, reject){
+            const GpsPacketData = databaseObj.GpsPacketData;
+            GpsPacketData.find({
+                limit:2,
+                order: ["added DESC"]
+            })
+                .then(function(gpsPacketDataList){
+                    if(gpsPacketDataList){
+                        if(gpsPacketDataList.length){
+                            if(gpsPacketDataList[1].eventType !== packageObj.gps.harsh_braking){
+                                //send Notification
+                                title = "We suspect of accident occured of your vehicle";
+                                eventType = "Accident Detection";
+                                modelName = gpsTrackerInfo.modelName;
+                                var message = accidentDetectionMessageFormat(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
+                                if(customer.id && gpsTrackerInfo.gpsTrackerNotification["accidentDetection"] === "on"){
+                                    sendNotification(server, message, customer.id, pushFrom, function(error){
+                                        if(error){
+                                            server.logger.error(error);
+                                            reject(error);
+                                        } else{
+                                            // server.logger.info("Accident Detection Notification send Successfully");
+                                            return databaseObj.GpsNotification.create({
+                                                message: title,
+                                                deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                status: "active",
+                                                customerId: customer.id,
+                                                modelName: gpsTrackerInfo.modelName
+                                            });
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    }
+                })
+                .then(function(gpsNotification){
+                    resolve();
+                })
+                .catch(function(error){
+                    reject(error);
+                });
+
+        });
+    };
+
+    const sendGpsBatteryLowNotification = function(eventType, title, modelName, customer, gpsTrackerInfo, pushFrom, gpsPacketDataObj, customerName){
+        return new Promise(function(resolve, reject){
+            const GpsPacketData = databaseObj.GpsPacketData;
+            GpsPacketData.find({
+                limit : 2,
+                order: ["added DESC"]
+            })
+                .then(function(gpsPacketData){
+                    if(gpsPacketData){
+                        if(gpsPacketData[1].internalBatteryLowAlert === false){
+                            //send push notification
+                            eventType = "Low Internal Battery";
+                            title = "Less than 35% Battery left";
+                            modelName = gpsTrackerInfo.modelName;
+                            var message = lowBatteryGpsMessage(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
+                            if(customer.id){
+                                sendNotification(server, message, customer.id, pushFrom, function(error){
+                                    if(error){
+                                        console.error(error);
+                                        reject(error);
+                                    } else{
+                                        // console.log("Notification for Low Battery send successfully");
+                                        return databaseObj.GpsNotification.create({
+                                            message: title,
+                                            deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                            status: "active",
+                                            customerId: customer.id,
+                                            modelName: gpsTrackerInfo.modelName
+                                        });
+                                    }
+                                });
+                            }
+
+                        }
+                    }
+                })
+                .then(function(gpsPacketData){
+                    resolve();
+                })
+                .catch(function(error){
+                    reject(error);
+                });
+        });
+    };
+
+
+    const sendOverSpeedNotification = function(eventType, title, modelName, customer, gpsTrackerInfo, pushFrom, gpsPacketDataObj, customerName){
+        return new Promise(function(resolve, reject){
+            const GpsPacketData = databaseObj.GpsPacketData;
+            GpsPacketData.find({
+                limit : 2,
+                order: ["added DESC"]
+            })
+                .then(function(gpsPacketData){
+                    if(gpsPacketData){
+                        if(gpsPacketData[1].isOverSpeedStarted === false){
+                            //send Notification
+                            var message = overSpeedMessageFormat(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
+                            if(customer.id && gpsTrackerInfo.gpsTrackerNotification["overSpeeding"] === "on"){
+                                sendNotification(server, message, customer.id, pushFrom, function(error){
+                                    if(error){
+                                        console.log(error);
+                                        reject(error);
+                                    } else{
+                                        // console.log("Notification for Over Speed send Successfully");
+                                        return databaseObj.GpsNotification.create({
+                                            message: title,
+                                            deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                            status: "active",
+                                            customerId: customer.id,
+                                            modelName: gpsTrackerInfo.modelName
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    }
+                })
+                .then(function(gpsNotification){
+                    resolve();
+                })
+                .catch(function(error){
+                    reject(error);
+                });
+
+        });
+    };
+
+    const sendGpsDeviceStatusNotification = function(eventType, title, modelName, customer, gpsTrackerInfo, pushFrom, gpsPacketDataObj, customerName){
+        return new Promise(function(resolve, reject){
+            const GpsPacketData = databaseObj.GpsPacketData;
+            GpsPacketData.find({
+                limit : 2,
+                order: ["added DESC"]
+            })
+                .then(function(gpsPacketData){
+                    if(gpsPacketData){
+                        if(gpsPacketData[1].batteryStatus === "vehicle"){
+                            //send Notification
+                            eventType = "GPS Status";
+                            title = "Device has been disconnected";
+                            modelName = gpsTrackerInfo.modelName;
+                            var message = gpsDeviceStatusMessage(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
+                            if(customer.id && gpsTrackerInfo.gpsTrackerNotification["gpsDisconnect"] === "on"){
+                                sendNotification(server, message, customer.id, pushFrom, function(error){
+                                    if(error){
+                                        console.log(error);
+                                        reject(error);
+                                    } else{
+                                        //console.log("Notification for gps Device send successfully");
+                                        return databaseObj.GpsNotification.create({
+                                            message: title,
+                                            deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                            status: "active",
+                                            customerId: customer.id,
+                                            modelName: gpsTrackerInfo.modelName
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    }
+                })
+                .then(function(gpsNotification){
+                    resolve();
+                })
+                .catch(function(error){
+                    reject(error);
+                });
+
+        });
+    };
+
+    const sendVehicleTowingNotification = function(eventType, title, modelName, customer, gpsTrackerInfo, pushFrom, gpsPacketDataObj, customerName){
+        return new Promise(function(resolve, reject){
+            const GpsPacketData = databaseObj.GpsPacketData;
+            GpsPacketData.find({
+                limit : 2,
+                order: ['added DESC']
+            })
+                .then(function(gpsPacketDataList){
+                    if(gpsPacketDataList){
+                        if(gpsPacketDataList.length){
+                            if(gpsPacketDataList[1].speed === 0){
+                                //send Notification
+                                title = "We suspect your vehicle is being towed";
+                                eventType = "Vehicle Towed";
+                                modelName = gpsTrackerInfo.modelName;
+                                var message = vehicleTowingMessageFormat(customerName, eventType, title, modelName, gpsPacketDataObj.id, gpsPacketDataObj.deviceIMEI);
+                                if(customer.id && gpsTrackerInfo.gpsTrackerNotification["nightLock"] === "on"){
+                                    sendNotification(server, message, customer.id, pushFrom, function(error){
+                                        if(error){
+                                            server.logger.error(error);
+                                            reject(error);
+                                        } else{
+                                            //  server.logger.info("Car Towing Notification send Successfully");
+                                            return databaseObj.GpsNotification.create({
+                                                message: title,
+                                                deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                status: "active",
+                                                customerId: customer.id,
+                                                modelName: gpsTrackerInfo.modelName
+                                            });
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    }
+                })
+                .then(function(gpsNotification){
+                    resolve();
+                })
+                .catch(function(error){
+                    reject(error);
+                });
+        });
+    };
+
+
 
 
 
