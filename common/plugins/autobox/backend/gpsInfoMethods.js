@@ -12,6 +12,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     var init = function(){
         createGpsPacketDataMethod();
         createGpsTrackerInfoMethod();
+        createGpsTrackerInfoMethod_();
         findAllGpsInfoMethod();
         deleteGpsInfoMethod();
         //fetchGpsInfoDetailsMethod();
@@ -63,6 +64,30 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             }
         });
     };
+
+    const createGpsTrackerInfoMethod_ = function(){
+        const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+        GpsTrackerInfo.saveGpsTrackerInfo_ = saveGpsTrackerInfo_;
+        GpsTrackerInfo.remoteMethod('saveGpsTrackerInfo_', {
+            accepts: [
+                {
+                    arg: 'ctx',
+                    type: 'object',
+                    http: {
+                        source: 'context'
+                    }
+                },
+                {
+                    arg: "gpsTrackerInfoObj", type: "object"
+                }
+            ],
+            returns: {
+                arg: "data", type: "object", root: true
+            }
+        });
+    };
+
+
 
     const findAllGpsInfoMethod = function(){
         const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
@@ -302,7 +327,54 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         }
     };
 
-
+   const saveGpsTrackerInfo_ = function(ctx, gpsTrackerInfoObj, callback){
+       const request = ctx.req;
+       if(!gpsTrackerInfoObj){
+           callback(new Error("Invalid Arguments"));
+       } else{
+           if(request.accessToken){
+               if(request.accessToken.userId){
+                   const customerId = request.accessToken.userId;
+                   const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
+                   GpsTrackerInfo.find({
+                       where: {
+                           deviceIMEI: gpsTrackerInfoObj.deviceIMEI,
+                           customerId : customerId
+                       }
+                   })
+                       .then(function(gpsTrackerInfo){
+                           if(gpsTrackerInfo){
+                               //update the gpsInfo
+                               return gpsTrackerInfo.updateAttributes(gpsTrackerInfoObj);
+                           } else{
+                               //create
+                               return GpsTrackerInfo.create({
+                                   deviceIMEI : gpsTrackerInfoObj.deviceIMEI,
+                                   registrationNumber : gpsTrackerInfoObj.registrationNumber,
+                                   gpsTrackerSimNumber : gpsTrackerInfoObj.gpsTrackerSimNumber,
+                                   modelName : gpsTrackerInfoObj.modelName,
+                                   customerId : customerId
+                               });
+                           }
+                       })
+                       .then(function(gpsTrackerInfo){
+                           if(gpsTrackerInfo){
+                               callback(null, {response: "success"});
+                           } else{
+                               callback(null, {response: "failure"});
+                           }
+                       })
+                       .catch(function(error){
+                           callback(error);
+                       });
+               } else{
+                   callback(new Error("User not valid"));
+               }
+           } else{
+               callback(new Error("User not valid"));
+           }
+       }
+   }
    const saveGpsTrackerInfo = function(ctx, gpsTrackerInfoObj, callback){
      const request = ctx.req;
      if(!gpsTrackerInfoObj){
