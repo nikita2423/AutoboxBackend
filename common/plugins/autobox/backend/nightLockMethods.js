@@ -253,9 +253,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                             dayList.push(day);
                                                                         }
                                                                     });
+                                                                    console.log("Day List", dayList);
                                                                     if(nightLockInstance.timings["startTime"]<= moment().hour() && nightLockInstance.timings["endTime"] >= moment().hour()){
                                                                         //Throw stolen notification
-                                                                        eventType = "Car Stolen";
+                                                                        eventType = "CarStolen";
                                                                         title = "Car is suspected to be stolen";
                                                                         var message = nightLockMessageFormat(customerName, eventType, title, instanceId);
                                                                         if(customerInstance.id && gpsTrackerInfo.gpsTrackerNotification["nightLock"] === "on"){
@@ -280,6 +281,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                         }
                                                     })
                                                     .then(function(gpsNotification){
+                                                        console.log("Notification for night lock send successfully");
                                                         callback(null);
                                                     })
                                                     .catch(function(error){
