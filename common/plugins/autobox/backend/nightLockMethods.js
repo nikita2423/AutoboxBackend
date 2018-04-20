@@ -205,6 +205,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         }
                     })
                         .then(function(nightLockList){
+                            console.log("NightLock List", nightLockList);
                             if(nightLockList){
                                 if(nightLockList.length){
                                     nightLockList.forEach(function(nightLock){
@@ -220,6 +221,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         })
                         .then(function(){
                             if(customerIdList){
+                                console.log("Customer List", customerIdList);
                                 if(customerIdList.length){
                                     customerIdList.forEach(function(customerId){
                                         if(customerId){
