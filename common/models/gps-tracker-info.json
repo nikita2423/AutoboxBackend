@@ -43,7 +43,6 @@
     },
     "updated": {
       "type": "date",
-      "required": true,
       "defaultFn": "now"
     },
     "overSpeedingLimit": {
