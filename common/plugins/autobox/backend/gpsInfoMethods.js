@@ -336,7 +336,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                if(request.accessToken.userId){
                    const customerId = request.accessToken.userId;
                    const GpsTrackerInfo = databaseObj.GpsTrackerInfo;
-                   GpsTrackerInfo.find({
+                   GpsTrackerInfo.findOne({
                        where: {
                            deviceIMEI: gpsTrackerInfoObj.deviceIMEI,
                            customerId : customerId
