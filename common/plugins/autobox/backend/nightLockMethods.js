@@ -337,12 +337,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
     };
 
 
-    var nightLockMessageFormat = function(to, eventType, title, modeName, gpsPacketDataId, deviceIMEI){
+    var nightLockMessageFormat = function(to, eventType, title, modelName, gpsPacketDataId, deviceIMEI){
         var message = {
             to : to,
             type : eventType,
             title : title,
-            modeName : modelName,
+            modelName : modelName,
             id : gpsPacketDataId,
             deviceIMEI : deviceIMEI
         };
