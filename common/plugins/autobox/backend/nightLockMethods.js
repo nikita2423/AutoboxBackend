@@ -205,7 +205,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         }
                     })
                         .then(function(nightLockList){
-                            console.log("NightLock List", nightLockList);
+
                             if(nightLockList){
                                 if(nightLockList.length){
                                     nightLockList.forEach(function(nightLock){
@@ -221,7 +221,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         })
                         .then(function(){
                             if(customerIdList){
-                                console.log("Customer List", customerIdList);
+
                                 if(customerIdList.length){
                                     customerIdList.forEach(function(customerId){
                                         if(customerId){
@@ -230,6 +230,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                 Customer.findById(customerId)
                                                     .then(function(customer){
                                                         if(customer){
+                                                            console.log("Customer ", customer);
                                                             customerInstance = customer;
                                                             return databaseObj.GpsTrackerInfo.findOne({
                                                                 where: {
@@ -243,11 +244,13 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                     })
                                                     .then(function(gpsTrackerInfo){
                                                         if(gpsTrackerInfo){
+                                                            console.log("Gps Tracker Info", gpsTrackerInfo);
                                                             customerName = customerInstance.firstName;
                                                             var lastName = customerInstance.lastName? customerInstance.lastName : "";
                                                             customerName = customerName + " " + lastName;
                                                             pushFrom = packageObj.companyName;
                                                             instanceId = gpsPacketDataObj.id;
+
                                                             if(gpsPacketDataObj.eventType === packageObj.gps.ignition_on){
                                                                 if(nightLockInstance){
                                                                     const dayList = [];
@@ -259,6 +262,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                     console.log("Day List", dayList);
                                                                     if(nightLockInstance.timings["startTime"]<= moment().hour() && nightLockInstance.timings["endTime"] >= moment().hour()){
                                                                         //Throw stolen notification
+                                                                        console.log("Inside Night Lock", gpsTrackerInfo.gpsTrackerNotification["nightLock"]);
                                                                         eventType = "CarStolen";
                                                                         title = "Car is suspected to be stolen";
                                                                         modelName = gpsTrackerInfo.modelName;
@@ -314,6 +318,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                     })
                                                     .catch(function(error){
                                                         callback(error);
+                                                        console.log(error);
                                                     });
                                             })
                                         }
