@@ -348,12 +348,15 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                         })
                                                         .then(function(gpsPacketData){
                                                             if(gpsPacketData){
+                                                                console.log("GeoFence Packet Data", gpsPacketData);
                                                                 if(getDistance(gpsPacketData.latitude, gpsPacketData.longitude, gpsFenceVehicle.homeLocation["lat"], gpsFenceVehicle.homeLocation["lng"]) > gpsFenceVehicle.kilometers){
                                                                     //coming inward
+                                                                    console.log("inward");
                                                                     gpsFenceVehicle.isGeoFenced = true;
                                                                     return gpsFenceVehicle.save();
                                                                 } else{
                                                                     //going outward
+                                                                    console.log("outward")
                                                                     customerName = customerInstance.firstName;
                                                                     var lastName = customerInstance.lastName? customerInstance.lastName : "";
                                                                     customerName = customerName + " " + lastName;
