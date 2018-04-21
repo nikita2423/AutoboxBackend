@@ -351,10 +351,11 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                         })
                                                         .then(function(gpsPacketDataList){
                                                             if(gpsPacketDataList){
+                                                                console.log("Gps PacketData List", gpsPacketDataList);
                                                                 if(gpsPacketDataList.length){
                                                                     if(gpsPacketDataList.length === 2){
                                                                         const gpsPacketData = gpsPacketDataList[1];
-                                                                        //console.log("GeoFence Packet Data", gpsPacketData);
+                                                                        console.log("GeoFence Packet Data", gpsPacketData);
                                                                         if(getDistance(gpsPacketData.latitude, gpsPacketData.longitude, gpsFenceVehicle.homeLocation["lat"], gpsFenceVehicle.homeLocation["lng"]) > gpsFenceVehicle.kilometers){
                                                                             //coming inward
                                                                             console.log("inward");
@@ -422,8 +423,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                             return gpsFenceVehicle.save();
                                                         })
                                                         .then(function(geoFenceVehicle){
-                                                           // console.log("Final GeoFenceVehicle", geoFenceVehicle);
-                                                            console.log("Geo Fence Complete");
+                                                            console.log("Final GeoFenceVehicle", geoFenceVehicle);
+                                                            //console.log("Geo Fence Complete");
                                                         })
                                                         .catch(function(error){
                                                             // callback(error);
