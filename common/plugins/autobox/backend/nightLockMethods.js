@@ -205,7 +205,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         }
                     })
                         .then(function(nightLockList){
-
                             if(nightLockList){
                                 if(nightLockList.length){
                                     nightLockList.forEach(function(nightLock){

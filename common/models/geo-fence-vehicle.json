@@ -39,6 +39,10 @@
       "type": "boolean",
       "default": true
     },
+    "isGeoFenced": {
+      "type": "boolean",
+      "default": false
+    },
     "homeLocation": {
       "type": "geopoint",
       "required": true,
