@@ -384,12 +384,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                         .then(function(geoFenceVehicle){
                                                             if(geoFenceVehicle){
                                                                 gpsFenceVehicle = geoFenceVehicle;
-                                                                return databaseObj.GpsNotification.create({
-                                                                    message: title,
-                                                                    deviceIMEI : gpsPacketDataObj.deviceIMEI,
-                                                                    status: "active",
-                                                                    customerId: customer.id
-                                                                });
+                                                                if(!gpsFenceVehicle.isGeoFenced && gpsTrackerInfoInstance.gpsTrackerNotification["geoFence"] === "on"){
+                                                                    return databaseObj.GpsNotification.create({
+                                                                        message: title,
+                                                                        deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                        status: "active",
+                                                                        customerId: customerInstance.id
+                                                                    });
+                                                                }
                                                             }
                                                         })
                                                         .then(function(gpsNotification){
