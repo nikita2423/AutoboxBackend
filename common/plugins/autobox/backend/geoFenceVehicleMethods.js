@@ -336,7 +336,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                                             gt : 0
                                                                                         },
                                                                                         added: {
-                                                                                            gt:moment().subtract(1, 'minute').toDate()
+                                                                                            gt:moment().subtract(2, 'minute').toDate()
                                                                                         }
                                                                                     }
                                                                                 });
@@ -350,7 +350,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                         })
                                                         .then(function(gpsPacketDataList){
                                                             if(gpsPacketDataList){
-                                                                console.log("GpsPacketListData", gpsPacketDataList);
                                                                 if(gpsPacketDataList.length){
                                                                     if(gpsPacketDataList.length === 2){
                                                                         const gpsPacketData = gpsPacketDataList[1];
@@ -421,7 +420,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                             return gpsFenceVehicle.save();
                                                         })
                                                         .then(function(geoFenceVehicle){
-                                                            //console.log("Final GeoFenceVehicle", geoFenceVehicle);
+                                                            console.log("Final GeoFenceVehicle", geoFenceVehicle);
                                                             console.log("Geo Fence Complete");
                                                         })
                                                         .catch(function(error){
