@@ -257,8 +257,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                             dayList.push(parseInt(day));
                                                                         }
                                                                     });
-                                                                    console.log("Day List", dayList);
-                                                                    console.log("Day List Data", moment().day().toString());
                                                                     if(nightLockInstance.timings["startTime"]<= moment().hour() && nightLockInstance.timings["endTime"] >= moment().hour() && dayList.indexOf(moment().day()) !== -1){
                                                                         //Throw stolen notification
                                                                         eventType = "CarStolen";
@@ -294,7 +292,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                                     console.log(error);
                                                                                     callback(error);
                                                                                 } else{
-                                                                                    //console.log("Notification for engine status send successfully");
+                                                                                    console.log("Notification for engine status send successfully");
                                                                                     return databaseObj.GpsNotification.create({
                                                                                         message: title,
                                                                                         deviceIMEI : gpsPacketDataObj.deviceIMEI,
@@ -311,7 +309,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                         }
                                                     })
                                                     .then(function(gpsNotification){
-                                                        console.log("Notification for night lock send successfully");
+                                                        //console.log("Notification for night lock send successfully");
                                                         callback(null);
                                                     })
                                                     .catch(function(error){
