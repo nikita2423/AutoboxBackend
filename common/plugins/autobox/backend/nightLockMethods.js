@@ -221,7 +221,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                         })
                         .then(function(){
                             if(customerIdList){
-
                                 if(customerIdList.length){
                                     customerIdList.forEach(function(customerId){
                                         if(customerId){
@@ -259,9 +258,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                         }
                                                                     });
                                                                     console.log("Day List", dayList);
-                                                                    if(nightLockInstance.timings["startTime"]<= moment().hour() && nightLockInstance.timings["endTime"] >= moment().hour()){
+                                                                    if(nightLockInstance.timings["startTime"]<= moment().hour() && nightLockInstance.timings["endTime"] >= moment().hour() && dayList.indexOf(moment().day()) !== -1){
                                                                         //Throw stolen notification
-                                                                        console.log("Inside Night Lock", gpsTrackerInfo.gpsTrackerNotification["nightLock"]);
                                                                         eventType = "CarStolen";
                                                                         title = "Car is suspected to be stolen";
                                                                         modelName = gpsTrackerInfo.modelName;
