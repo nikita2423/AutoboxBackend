@@ -370,7 +370,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                             title = "Car is suspected to be moving out of geo fencing";
                                                                             var message = geoFenceMessageFormat(customerName, eventType, title, instanceId);
                                                                             if(customerInstance.id && gpsTrackerInfoInstance.gpsTrackerNotification["geoFence"] === "on"){
-                                                                                sendNotification(server, message, customer.id, pushFrom, function(error){
+                                                                                sendNotification(server, message, customerInstance.id, pushFrom, function(error){
                                                                                     if(error){
                                                                                         console.log(error);
                                                                                         // callback(error);
