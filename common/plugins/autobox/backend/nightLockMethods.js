@@ -254,7 +254,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                     const dayList = [];
                                                                     nightLockInstance.days.forEach(function(day){
                                                                         if(day){
-                                                                            dayList.push(day);
+                                                                            dayList.push(parseInt(day));
                                                                         }
                                                                     });
                                                                     console.log("Day List", dayList);
