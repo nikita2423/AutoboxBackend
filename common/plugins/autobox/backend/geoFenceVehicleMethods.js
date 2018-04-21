@@ -301,6 +301,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 if(gpsFenceVehicleList.length){
                                     gpsFenceVehicleList.forEach(function(gpsFenceVehicle){
                                         if(gpsFenceVehicle){
+                                            console.log("GeoFenceVehicle", gpsFenceVehicle);
                                             if(gpsFenceVehicle.customerId){
                                                 gpsFenceInstance = gpsFenceVehicle;
                                                 promises.push(
@@ -418,7 +419,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                             }
                                                             return gpsFenceVehicle.save();
                                                         })
-                                                        .then(function(){
+                                                        .then(function(geoFenceVehicle){
+                                                            console.log("Final GeoFenceVehicle", geoFenceVehicle);
                                                             console.log("Geo Fence Complete");
                                                         })
                                                         .catch(function(error){
