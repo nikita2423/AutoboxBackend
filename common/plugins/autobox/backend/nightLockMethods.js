@@ -244,6 +244,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                     })
                                                     .then(function(gpsTrackerInfo){
                                                         if(gpsTrackerInfo){
+                                                            console.log("GPSTrackerInfo", gpsTrackerInfo);
                                                             customerName = customerInstance.firstName;
                                                             var lastName = customerInstance.lastName? customerInstance.lastName : "";
                                                             customerName = customerName + " " + lastName;
