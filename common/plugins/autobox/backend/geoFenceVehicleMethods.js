@@ -289,6 +289,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
             let gpsFenceInstance;
             let promises = [];
             let gpsTrackerInfoInstance;
+            let modelName;
             if(ctx.isNewInstance){
                 process.nextTick(function(){
                     databaseObj.GeoFenceVehicle.find({
@@ -301,7 +302,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                 if(gpsFenceVehicleList.length){
                                     gpsFenceVehicleList.forEach(function(gpsFenceVehicle){
                                         if(gpsFenceVehicle){
-                                            console.log("GeoFenceVehicle", gpsFenceVehicle);
+                                            //console.log("GeoFenceVehicle", gpsFenceVehicle);
                                             if(gpsFenceVehicle.customerId){
                                                 gpsFenceInstance = gpsFenceVehicle;
                                                 promises.push(
@@ -353,7 +354,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                 if(gpsPacketDataList.length){
                                                                     if(gpsPacketDataList.length === 2){
                                                                         const gpsPacketData = gpsPacketDataList[1];
-                                                                        console.log("GeoFence Packet Data", gpsPacketData);
+                                                                        //console.log("GeoFence Packet Data", gpsPacketData);
                                                                         if(getDistance(gpsPacketData.latitude, gpsPacketData.longitude, gpsFenceVehicle.homeLocation["lat"], gpsFenceVehicle.homeLocation["lng"]) > gpsFenceVehicle.kilometers){
                                                                             //coming inward
                                                                             console.log("inward");
@@ -368,8 +369,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                             pushFrom = packageObj.companyName;
                                                                             instanceId = gpsPacketDataObj.id;
                                                                             eventType = "Geo Fence";
-                                                                            title = "Car is suspected to be moving out of geo fencing";
-                                                                            var message = geoFenceMessageFormat(customerName, eventType, title, instanceId);
+                                                                            title = "Car is suspected to be moving out of geo fence";
+                                                                            modelName = gpsTrackerInfoInstance.modelName;
+                                                                            var message = geoFenceMessageFormat(customerName, eventType, title, modelName, instanceId, gpsPacketDataObj.deviceIMEI);
                                                                             if(customerInstance.id && gpsTrackerInfoInstance.gpsTrackerNotification["geoFence"] === "on"){
                                                                                 sendNotification(server, message, customerInstance.id, pushFrom, function(error){
                                                                                     if(error){
@@ -420,7 +422,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                             return gpsFenceVehicle.save();
                                                         })
                                                         .then(function(geoFenceVehicle){
-                                                            console.log("Final GeoFenceVehicle", geoFenceVehicle);
+                                                           // console.log("Final GeoFenceVehicle", geoFenceVehicle);
                                                             console.log("Geo Fence Complete");
                                                         })
                                                         .catch(function(error){
@@ -465,12 +467,14 @@ module.exports = function( server, databaseObj, helper, packageObj) {
         return deg * (Math.PI/180)
     };
 
-    var geoFenceMessageFormat = function(to, eventType, title, gpsPacketDataId){
+    var geoFenceMessageFormat = function(to, eventType, title, modelName, gpsPacketDataId, deviceIMEI){
         var message = {
             to : to,
             type : eventType,
             title : title,
-            id : gpsPacketDataId
+            modelName : modelName,
+            id : gpsPacketDataId,
+            deviceIMEI : deviceIMEI
         };
         return JSON.stringify(message);
     };
