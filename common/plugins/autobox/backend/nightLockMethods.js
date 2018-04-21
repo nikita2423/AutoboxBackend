@@ -230,12 +230,12 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                 Customer.findById(customerId)
                                                     .then(function(customer){
                                                         if(customer){
-                                                            console.log("Customer ", customer);
                                                             customerInstance = customer;
                                                             return databaseObj.GpsTrackerInfo.findOne({
                                                                 where: {
                                                                     customerId : customer.id,
-                                                                    status : "active"
+                                                                    status : "active",
+                                                                    deviceIMEI : gpsPacketDataObj.deviceIMEI
                                                                 }
                                                             });
 
@@ -244,7 +244,6 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                     })
                                                     .then(function(gpsTrackerInfo){
                                                         if(gpsTrackerInfo){
-                                                            console.log("GPSTrackerInfo", gpsTrackerInfo);
                                                             customerName = customerInstance.firstName;
                                                             var lastName = customerInstance.lastName? customerInstance.lastName : "";
                                                             customerName = customerName + " " + lastName;
