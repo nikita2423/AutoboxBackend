@@ -258,7 +258,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                         }
                                                                     });
                                                                     console.log("Day List", dayList);
-                                                                    console.log("Day List Data", moment().day());
+                                                                    console.log("Day List Data", moment().day().toString());
                                                                     if(nightLockInstance.timings["startTime"]<= moment().hour() && nightLockInstance.timings["endTime"] >= moment().hour() && dayList.indexOf(moment().day()) !== -1){
                                                                         //Throw stolen notification
                                                                         eventType = "CarStolen";
