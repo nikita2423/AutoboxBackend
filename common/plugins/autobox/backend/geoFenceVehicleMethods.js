@@ -325,7 +325,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                 //Check for car is still in geo fence set by user or not...
                                                                 if(gpsFenceVehicle.homeLocation){
                                                                     if(getDistance(gpsPacketDataObj.latitude, gpsPacketDataObj.longitude, gpsFenceVehicle.homeLocation["lat"], gpsFenceVehicle.homeLocation["lng"]) > gpsFenceVehicle.kilometers){
-                                                                        if(gpsFenceVehicle.isNotification){
+                                                                       // if(gpsFenceVehicle.isNotification){
                                                                             if(gpsPacketDataObj.ignitionStatus === "on" && gpsPacketDataObj.speed > 0){
                                                                                 return GpsPacketData.find({
                                                                                     order:['added DESC'],
@@ -342,7 +342,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                                     }
                                                                                 });
                                                                             }
-                                                                        }
+                                                                       // }
                                                                     } else{
 
                                                                     }
@@ -359,8 +359,8 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                         if(getDistance(gpsPacketData.latitude, gpsPacketData.longitude, gpsFenceVehicle.homeLocation["lat"], gpsFenceVehicle.homeLocation["lng"]) > gpsFenceVehicle.kilometers){
                                                                             //coming inward
                                                                             console.log("inward");
-                                                                            gpsFenceVehicle.isGeoFenced = true;
-                                                                            return gpsFenceVehicle.save();
+                                                                            /*gpsFenceVehicle.isGeoFenced = true;
+                                                                            return gpsFenceVehicle.save();*/
                                                                         } else{
                                                                             //going outward
                                                                             console.log("outward");
@@ -380,14 +380,20 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                                         // callback(error);
                                                                                     } else{
                                                                                         console.log("Notification for geo fencing send successfully");
-                                                                                        gpsFenceVehicle.isGeoFenced = false;
-                                                                                        return gpsFenceVehicle.save();
+                                                                                        return databaseObj.GpsNotification.create({
+                                                                                            message: title,
+                                                                                            deviceIMEI : gpsPacketDataObj.deviceIMEI,
+                                                                                            status: "active",
+                                                                                            customerId: customerInstance.id
+                                                                                        });
+                                                                                      /*  gpsFenceVehicle.isGeoFenced = false;
+                                                                                        return gpsFenceVehicle.save();*/
 
                                                                                     }
                                                                                 });
                                                                             } else{
-                                                                                gpsFenceVehicle.isGeoFenced = false;
-                                                                                return gpsFenceVehicle.save();
+                                                                                /*gpsFenceVehicle.isGeoFenced = false;
+                                                                                return gpsFenceVehicle.save();*/
                                                                             }
                                                                         }
                                                                     }
@@ -395,7 +401,7 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 
                                                             }
                                                         })
-                                                        .then(function(geoFenceVehicle){
+                                                       /* .then(function(geoFenceVehicle){
                                                             if(geoFenceVehicle){
                                                                 gpsFenceVehicle = geoFenceVehicle;
                                                                 if(!gpsFenceVehicle.isGeoFenced && gpsTrackerInfoInstance.gpsTrackerNotification["geoFence"] === "on"){
@@ -407,9 +413,9 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                     });
                                                                 }
                                                             }
-                                                        })
+                                                        })*/
                                                         .then(function(gpsNotification){
-                                                            if(gpsNotification){
+                                                           /* if(gpsNotification){
                                                                 //disable notification
                                                                 gpsFenceVehicle.isNotification = false;
 
@@ -420,10 +426,10 @@ module.exports = function( server, databaseObj, helper, packageObj) {
                                                                 //enable notification
                                                                 gpsFenceVehicle.isNotification = true
                                                             }
-                                                            return gpsFenceVehicle.save();
+                                                            return gpsFenceVehicle.save();*/
                                                         })
-                                                        .then(function(geoFenceVehicle){
-                                                            console.log("Final GeoFenceVehicle", geoFenceVehicle);
+                                                        .then(function(){
+                                                            //console.log("Final GeoFenceVehicle", geoFenceVehicle);
                                                             //console.log("Geo Fence Complete");
                                                         })
                                                         .catch(function(error){
